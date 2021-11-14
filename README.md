@@ -13,6 +13,8 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 ## installation
 You need `node.js 16` to run this project, if you don't want to install `node.js 16` then there is a npm package that can help you.
 
+You can clone this project for download.
+
 ### packages
 - canvas => version `^2.8.0`
 - discord.js => version `^13.2.0`
