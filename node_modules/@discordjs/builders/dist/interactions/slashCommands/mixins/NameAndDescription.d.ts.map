@@ -1,1 +1,0 @@
-{"version":3,"file":"NameAndDescription.d.ts","sourceRoot":"/","sources":["interactions/slashCommands/mixins/NameAndDescription.ts"],"names":[],"mappings":"AAEA,qBAAa,wBAAwB;IACpC,SAAgB,IAAI,EAAG,MAAM,CAAC;IAC9B,SAAgB,WAAW,EAAG,MAAM,CAAC;IAErC;;;OAGG;IACI,OAAO,CAAC,IAAI,EAAE,MAAM;IAS3B;;;OAGG;IACI,cAAc,CAAC,WAAW,EAAE,MAAM;CAQzC"}
