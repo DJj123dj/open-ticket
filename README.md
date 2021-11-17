@@ -34,6 +34,24 @@ you can run `node index.js` but i would recommend you to use `npm start`
 
 if there are any errors, you can open an issue on github.
 
+### config (required)
+- `server_name` => the name from your server.
+- `server_logo`=> the logo from your server.
+- `bot_name`=> the bot's name.
+- `main_color`=> the color used in all embeds.
+- `auth_token`=> the bot's token (Discord Developer Portal)
+- `botperms_role`=> the id from a role that can run admin commands with the bot.
+- `ticket_msg/ticket_channel` => the channel where you are gonna put the !ticket msg.
+- `ticket_system/ticket_category` => the category for tickets.
+- `ticket_system/member_role` => this role doesn't have access to tickets 
+(WARNING: @everyone does have access to tickets, so make sure all members have a member role!).
+- `ticket_system/transcript_channel` => the channel for transcripts.
+
+### intents
+In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
+- `SERVER MEMBERS INTENT`
+- `MESSAGE CONTENT INTENT`
+
 ## credits
 the package contains a license, there are also credits in the bot. It is forbidden to extract these licenses and credits from it!
 
