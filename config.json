@@ -5,13 +5,17 @@
     "main_color":"#fffff",
     "auth_token":"the bot's auth token",
     "botperms_role":"the id from a role that can do anything with the bot",
+    "prefix":"!",
 
-    "ticket_msg":{
-        "ticket_channel":"id of the channel with the !ticket msg"
-    },
     "ticket_system":{
+        "ticket_channel":"id of the channel with the !ticket msg",
+
+        "enable_category":false,
         "ticket_category":"the id of a category for the tickets",
+
         "member_role":"this role doesn't have access to tickets (WARNING: @everyone does have access to tickets, so make sure all members have a member role!)",
-        "transcript_channel":"the channel for transcripts (REQUIRED,or else the bot will crash)"
+
+        "enable_transcript":false,
+        "transcript_channel":"the channel for transcripts"
     }
 }

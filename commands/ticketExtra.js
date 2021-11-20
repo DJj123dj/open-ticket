@@ -11,7 +11,7 @@ var stringDecoder = require('./ticketSystem').stringDecoder
 module.exports = () => {
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == "!solli"){
+        if (args[0] == config.prefix+"solli"){
             var SolliMsg = new discord.MessageEmbed()
                 .setColor(config.main_color)
                 .setDescription("**Hier is de informatie die wij nodig hebben voor een sollicitatie**\n\n**naam:** Je echte naam.\n**leeftijd:** Je leeftijd.\n**discord naam:** Je discord naam + tag (bv:Wumpus#0001).\n**minecraft naam:** Je minecraft naam.\n**waarom wil je staff worden:** De reden waarom je staff wilt worden.\n**+ punten:** Je plus punten.\n**- punten:** Je min punten.\n**Jou of iemand anders:** Waarom zouden we jou aan moeten nemen en niet een andere sollicitant?\n**ervaring:** Wat is je ervaring met MT servers?\n**andere server:** Ben je op dit moment staff op een andere server?\n**online:** Hoeveel uur per dag/week kan je online zijn?\n**functie:** Voor welke functie solliciteert u?")
@@ -23,10 +23,10 @@ module.exports = () => {
 
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == "!ticket" && (args[1] == undefined ||args[1] == "" ||args[1] == null)){
+        if (args[0] == config.prefix+"ticket" && (args[1] == undefined ||args[1] == "" ||args[1] == null)){
             var TicketHelpMsg = new discord.MessageEmbed()
                 .setColor(config.main_color)
-                .setDescription("**Ga naar <#"+config.ticket_msg.ticket_channel+"> om een ticket te maken!**\n\n`!ticket msg` ➜ _Maak een ticket reageer bericht (staff only)._\n`!ticket rename` ➜ _Rename een ticket (geen spaties)._\n`!ticket close` ➜ _Close een ticket._\n`!ticket add <user>` ➜ _Voeg een speler toe aan het ticket._\n`!ticket remove <user>` ➜ _Verwijder een speler van het ticket._\n`!partner` ➜ _De informatie voor partners._\n`!solli` ➜ _De informatie voor solliciteren._")
+                .setDescription("**Ga naar <#"+config.ticket_system.ticket_channel+"> om een ticket te maken!**\n\n`!ticket msg` ➜ _Maak een ticket reageer bericht (staff only)._\n`!ticket rename` ➜ _Rename een ticket (geen spaties)._\n`!ticket close` ➜ _Close een ticket._\n`!ticket add <user>` ➜ _Voeg een speler toe aan het ticket._\n`!ticket remove <user>` ➜ _Verwijder een speler van het ticket._\n`!partner` ➜ _De informatie voor partners._\n`!solli` ➜ _De informatie voor solliciteren._")
                 .setTitle("Ticket commands")
                 .setFooter(stringDecoder+name)
 
@@ -36,7 +36,7 @@ module.exports = () => {
 
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == "!partner"){
+        if (args[0] == config.prefix+"partner"){
             var PartnerMsg = new discord.MessageEmbed()
                 .setColor(config.main_color)
                 .setDescription("**Hier zijn de doelen die je moet hebben voor een partnership**\n\n**server:** De naam van je server.\n**beschrijving:** Waar gaat je server over?\n**members:** Het aantal members in je server.\n**invite:** Een oneindige invite.\n\n_als wij dit goedkeuren, kan je je 'invite bericht' plaatsen._")
@@ -48,7 +48,7 @@ module.exports = () => {
 
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == "!ticket" && args[1] == "close"){
+        if (args[0] == config.prefix+"ticket" && args[1] == "close"){
             
             msg.channel.messages.fetchPinned().then(msglist => {
                 var firstmsg = msglist.last()
@@ -74,7 +74,7 @@ module.exports = () => {
 
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == "!ticket" && args[1] == "rename"){
+        if (args[0] == config.prefix+"ticket" && args[1] == "rename"){
 
             if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
                 msg.channel.send({content:"Je hebt geen permissions voor deze command!"})
@@ -96,7 +96,7 @@ module.exports = () => {
 
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == "!ticket" && args[1] == "add"){
+        if (args[0] == config.prefix+"ticket" && args[1] == "add"){
 
             if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
                 msg.channel.send({content:"Je hebt geen permissions voor deze command!"})
@@ -126,7 +126,7 @@ module.exports = () => {
 
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == "!ticket" && args[1] == "remove"){
+        if (args[0] == config.prefix+"ticket" && args[1] == "remove"){
 
             if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
                 msg.channel.send({content:"Je hebt geen permissions voor deze command!"})

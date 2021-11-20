@@ -52,8 +52,10 @@ module.exports = () => {
                 }else if (interaction.customId == "newTicketPartner"){
                    var ticketName = "partner-"+ticketNumber
                 }
-
+                
+                if (config.ticket_system.enable_category){
                 var Category = config.ticket_system.ticket_category
+                }else{var Category = null}
 
                     interaction.guild.channels.create(ticketName,{
                         type:"GUILD_TEXT",
@@ -174,6 +176,7 @@ module.exports = () => {
                 }
                 
 
+            if (config.ticket_system.enable_transcript){
                 var transcript = transcriptArray.reverse().join("\n")
                 transcriptStorage.setItem(interaction.channel.id,transcript)
 
@@ -191,7 +194,7 @@ module.exports = () => {
                     .setDescription(splittedTranscript[0])
                     .setFooter("ticket gesloten door "+interaction.member.user.username)
 
-            if (transcript.length > 4000){
+                if (transcript.length > 4000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(config.main_color)
                     .setAuthor(interaction.channel.name + " - ticket gemaakt door "+getuserNAME)
@@ -207,7 +210,7 @@ module.exports = () => {
         
                 client.channels.cache.find(ch => ch.id == config.ticket_system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2,transcriptEmbed3]})
 
-            }else if (transcript.length > 2000){
+                }else if (transcript.length > 2000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(config.main_color)
                     .setAuthor(interaction.channel.name + " - ticket gemaakt door "+getuserNAME)
@@ -216,8 +219,9 @@ module.exports = () => {
                     .setFooter("ticket gesloten door "+interaction.member.user.username)
 
                 client.channels.cache.find(ch => ch.id == config.ticket_system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2]})
-            }else{
+                }else{
                 client.channels.cache.find(ch => ch.id == config.ticket_system.transcript_channel).send({embeds:[transcriptEmbed]})
+                }
             }
 
                 
