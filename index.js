@@ -6,7 +6,7 @@ exports.client = client
 
 client.on('ready',() => {
     console.log('ready')
-    client.user.setActivity("HighMT",{type:"PLAYING"})
+    client.user.setActivity(config.status.text,{type:config.status.type})
 })
 
 var storage = require('./storage/storage')
