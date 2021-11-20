@@ -41,11 +41,14 @@ if there are any errors, you can open an issue on github.
 - `main_color`=> the color used in all embeds.
 - `auth_token`=> the bot's token (Discord Developer Portal)
 - `botperms_role`=> the id from a role that can run admin commands with the bot.
-- `ticket_msg/ticket_channel` => the channel where you are gonna put the !ticket msg.
+- `prefix`=> the bot's prefix.
+- `ticket_system/ticket_channel` => the channel where you are gonna put the !ticket msg.
 - `ticket_system/ticket_category` => the category for tickets.
 - `ticket_system/member_role` => this role doesn't have access to tickets 
 (WARNING: @everyone does have access to tickets, so make sure all members have a member role!).
 - `ticket_system/transcript_channel` => the channel for transcripts.
+- `ticket_system/enable_transcripts` => enable transcripts.
+- `ticket_system/enable_category` => enable tickets in category.
 
 ### intents & permissions
 In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
@@ -57,6 +60,6 @@ The bot needs `ADMINISTRATOR` permissions to work the best.
 ## credits
 the package contains a license, there are also credits in the bot. It is forbidden to extract these licenses and credits from it!
 
-_v1.1.0_
+_v1.1.1_
 
 © 2021 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.com/invite/26vT9wt3n3)
