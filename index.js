@@ -24,5 +24,8 @@ ticketSystem()
 var ticketExtra = require("./commands/ticketExtra")
 ticketExtra()
 
+var database = require('./commands/database')
+database()
+
 
 client.login(config.auth_token)

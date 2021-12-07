@@ -7,9 +7,6 @@ const ticketStorage = bot.TicketStorage
 const userTicketStorage = bot.userTicketStorage
 const transcriptStorage = bot.transcriptStorage
 
-var stringDecoder = "Created By "
-exports.stringDecoder = stringDecoder
-
 module.exports = () => {
 
     var closeButton = new discord.MessageActionRow()
@@ -18,7 +15,7 @@ module.exports = () => {
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Sluit Ticket")
+            .setLabel("Close Ticket")
             .setEmoji("❌")
         )
 
@@ -28,16 +25,16 @@ module.exports = () => {
             return
         }
         
-        if (interaction.customId == "newTicketVraag"||interaction.customId == "newTicketSolli"||interaction.customId == "newTicketPartner"){
+        if (interaction.customId == "newTicket1"||interaction.customId == "newTicket2"||interaction.customId == "newTicket3"||interaction.customId == "newTicket4"){
             
             interaction.deferUpdate()
 
             if (ticketStorage.getItem(interaction.member.id) == null ||ticketStorage.getItem(interaction.member.id) == "false"){
 
                 try{
-                    interaction.member.send("**Je ticket is aangemaakt!**")
+                    interaction.member.send("**You created a ticket in our server!**")
                 }
-                catch{console.log("cant send DM to member")}
+                catch{console.log("can't send DM to member || member doesn't allow dm's")}
                 
 
                 
@@ -45,12 +42,14 @@ module.exports = () => {
 
                 var ticketNumber = interaction.member.user.username
 
-                if (interaction.customId == "newTicketVraag"){
-                    var ticketName = "vraag-"+ticketNumber
-                }else if (interaction.customId == "newTicketSolli"){
-                    var ticketName = "solli-"+ticketNumber
-                }else if (interaction.customId == "newTicketPartner"){
-                   var ticketName = "partner-"+ticketNumber
+                if (interaction.customId == "newTicket1"){
+                    var ticketName = config.options.ticket1.channel_prefix+ticketNumber
+                }else if (interaction.customId == "newTicket2"){
+                    var ticketName = config.options.ticket2.channel_prefix+ticketNumber
+                }else if (interaction.customId == "newTicket3"){
+                   var ticketName = config.options.ticket3.channel_prefix+ticketNumber
+                }else if (interaction.customId == "newTicket4"){
+                    var ticketName = config.options.ticket4.channel_prefix+ticketNumber
                 }
                 
                 if (config.ticket_system.enable_category){
@@ -72,7 +71,7 @@ module.exports = () => {
                                 allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
                             },
                             {
-                                id:config.ticket_system.member_role,
+                                id:config.system.member_role,
                                 type:"role",
                                 deny:["VIEW_CHANNEL"]
                             }
@@ -84,13 +83,7 @@ module.exports = () => {
                         var ticketEmbed = new discord.MessageEmbed()
                             .setColor(config.main_color)
 
-                            if (interaction.customId == "newTicketVraag"){
-                                ticketEmbed.setDescription("**Ticket gemaakt:**\nJe hebt gekozen voor **overige vragen**, zeg alvast maar je vraag, onze staffleden komen u zo helpen.\n\n_Klik op knop hieronder om dit ticket te sluiten_")
-                            }else if (interaction.customId == "newTicketSolli"){
-                                ticketEmbed.setDescription("**Ticket gemaakt:**\nJe hebt gekozen voor **sollicitatie**, neem maar tijd om u sollicitatie brief voor te bereiden. Met de `!solli` command kan je zien wat je allemaal moet zeggen.\n\n_Klik op knop hieronder om dit ticket te sluiten_")
-                            }else if (interaction.customId == "newTicketPartner"){
-                                ticketEmbed.setDescription("**Ticket gemaakt:**\nJe hebt gekozen voor **partner**, neem maar tijd om u partner brief voor te bereiden. Met de `!partner` command kan je zien wat de vereisen zijn.\n\n_Klik op knop hieronder om dit ticket te sluiten_")
-                            }
+                            ticketEmbed.setDescription("You created a ticket!\n\n_Click on the close button below to close this ticket_")
                     
                         tChannel.send({content:"<@"+interaction.member.id+"> <@&"+config.botperms_role+">",embeds:[ticketEmbed],components:[closeButton]}).then(firstmsg => {
                             firstmsg.pin()
@@ -101,9 +94,9 @@ module.exports = () => {
 
             }else{
                 try {
-                    interaction.member.send("**Je hebt al een ticket open!**")
+                    interaction.member.send("**You have already created a ticket!**")
                 }
-                catch{console.log("cant send DM to member")}
+                catch{console.log("can't send DM to member || member doesn't allow dm's")}
                 
                 
             }
@@ -170,13 +163,13 @@ module.exports = () => {
                 var getuserID = userTicketStorage.getItem(interaction.channel.id)
                 var getusernameStep1 = client.users.cache.find(u => u.id === getuserID)
                 if (getusernameStep1 == null || getusernameStep1 == undefined || getusernameStep1 == false || getusernameStep1 == ""){
-                    var getuserNAME = ":user niet in database:"
+                    var getuserNAME = ":usernotfound:"
                 }else {
                     var getuserNAME = getusernameStep1.username
                 }
                 
 
-            if (config.ticket_system.enable_transcript){
+            if (config.system.enable_transcript){
                 var transcript = transcriptArray.reverse().join("\n")
                 transcriptStorage.setItem(interaction.channel.id,transcript)
 
@@ -189,38 +182,38 @@ module.exports = () => {
                 }
                 var transcriptEmbed = new discord.MessageEmbed()
                     .setColor(config.main_color)
-                    .setAuthor(interaction.channel.name + " - ticket gemaakt door "+getuserNAME)
-                    .setTitle("Er is een nieuw transcript!")
+                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setTitle("There is a new transcript!")
                     .setDescription(splittedTranscript[0])
-                    .setFooter("ticket gesloten door "+interaction.member.user.username)
+                    .setFooter("ticket closed by "+interaction.member.user.username)
 
                 if (transcript.length > 4000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(config.main_color)
-                    .setAuthor(interaction.channel.name + " - ticket gemaakt door "+getuserNAME)
-                    .setTitle("Deel 2 van het transcript")
+                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setTitle("transcript #2")
                     .setDescription(splittedTranscript[1])
-                    .setFooter("ticket gesloten door "+interaction.member.user.username)
+                    .setFooter("ticket closed by "+interaction.member.user.username)
                 var transcriptEmbed3 = new discord.MessageEmbed()
                     .setColor(config.main_color)
-                    .setAuthor(interaction.channel.name + " - ticket gemaakt door "+getuserNAME)
-                    .setTitle("Deel 3 van het transcript")
+                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setTitle("transcript #3")
                     .setDescription(splittedTranscript[1])
-                    .setFooter("ticket gesloten door "+interaction.member.user.username)
+                    .setFooter("ticket closed by "+interaction.member.user.username)
         
-                client.channels.cache.find(ch => ch.id == config.ticket_system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2,transcriptEmbed3]})
+                client.channels.cache.find(ch => ch.id == config.system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2,transcriptEmbed3]})
 
                 }else if (transcript.length > 2000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(config.main_color)
-                    .setAuthor(interaction.channel.name + " - ticket gemaakt door "+getuserNAME)
-                    .setTitle("Deel 2 van het transcript")
+                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setTitle("transcript #2")
                     .setDescription(splittedTranscript[1])
-                    .setFooter("ticket gesloten door "+interaction.member.user.username)
+                    .setFooter("ticket closed by "+interaction.member.user.username)
 
-                client.channels.cache.find(ch => ch.id == config.ticket_system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2]})
+                client.channels.cache.find(ch => ch.id == config.system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2]})
                 }else{
-                client.channels.cache.find(ch => ch.id == config.ticket_system.transcript_channel).send({embeds:[transcriptEmbed]})
+                client.channels.cache.find(ch => ch.id == config.system.transcript_channel).send({embeds:[transcriptEmbed]})
                 }
             }
 
@@ -232,9 +225,9 @@ module.exports = () => {
                 ticketStorage.setItem(getuserID,"false")
 
                 try {
-                    interaction.member.send("**Je ticket is gesloten door "+interaction.member.user.username+"!**")
+                    interaction.member.send("**your ticket is closed by "+interaction.member.user.username+"!**")
                 }
-                catch{console.log("cant send DM to member")}
+                catch{console.log("can't send DM to member || member doesn't allow dm's")}
             })
         
             

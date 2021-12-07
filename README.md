@@ -1,7 +1,7 @@
 # open-ticket
-This is an open-source discord ticket bot, you can configure it and it comes with cool features like a transcript.
+This is an open-source discord ticket bot, you can configure it and it comes with cool features like transcripts & custom options!
 
-(WARNING: the bot's language is Dutch, there will be an English version soon!)
+<img src="logo.png" alt="Open Ticket logo" style="height: 300px; width:300px;"/>
 
 ## features
 - discord interaction buttons
@@ -9,6 +9,8 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - add/remove users from ticket
 - custom colors & name
 - has tickets for questions, partners & job applications
+- uses discord.js 13
+- configure your own ticket options
 
 ## installation
 You need `node.js 16` to run this project, if you don't want to install `node.js 16` then there is a npm package that can help you.
@@ -43,16 +45,22 @@ if there are any errors, you can open an issue on github.
 - `botperms_role`=> the id from a role that can run admin commands with the bot.
 - `prefix`=> the bot's prefix.
 
-- `ticket_system/ticket_channel` => the channel where you are gonna put the !ticket msg.
-- `ticket_system/ticket_category` => the category for tickets.
-- `ticket_system/member_role` => this role doesn't have access to tickets 
-(WARNING: @everyone does have access to tickets, so make sure all members have a member role!).
-- `ticket_system/transcript_channel` => the channel for transcripts.
-- `ticket_system/enable_transcripts` => enable transcripts.
-- `ticket_system/enable_category` => enable tickets in category.
-
 - `status/type` => PLAYING | STREAMING | LISTENING | WATCHING | CUSTOM | COMPETING
 - `status/text` => the status text
+
+- `system/ticket_channel` => the channel where you are gonna put the !ticket msg.
+- `system/ticket_category` => the category for tickets.
+- `system/member_role` => this role doesn't have access to tickets 
+(WARNING: @everyone does have access to tickets, so make sure all members have a member role!).
+- `system/transcript_channel` => the channel for transcripts.
+- `system/enable_transcripts` => enable transcripts.
+- `system/enable_category` => enable tickets in category.
+
+- `options/ticket.../enabled` => set this option ON or OFF.
+- `options/ticket.../icon` => set an emoji for this ticket option.
+- `options/ticket.../description` => set a description for this ticket option.
+- `options/ticket.../name` => set a name for this ticket option.
+- `options/ticket.../channel_prefix` => this will be the prefix for channel names (empty is disabled!)
 
 ### intents & permissions
 In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
@@ -62,8 +70,8 @@ In the discord developer portal in the "bot" panel you will find 3 switches unde
 The bot needs `ADMINISTRATOR` permissions to work the best.
 
 ## credits
-the package contains a license, there are also credits in the bot. It is forbidden to extract these licenses and credits from it!
+Please don't remove the credits from the bot 😊.
 
-_v1.1.2_
+_v1.2.0_
 
-© 2021 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.com/invite/26vT9wt3n3)
+© 2021 - DJdj Development | [website](https://www.dj-dj.be)

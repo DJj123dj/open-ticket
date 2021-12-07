@@ -12,7 +12,7 @@
         "text":"!ticket"
     },
 
-    "ticket_system":{
+    "system":{
         "ticket_channel":"id of the channel with the !ticket msg",
 
         "enable_category":false,
@@ -22,5 +22,36 @@
 
         "enable_transcript":false,
         "transcript_channel":"the channel for transcripts"
+    },
+
+    "options":{
+        "ticket1":{
+            "enabled":true,
+            "icon":"🎫",
+            "description":"Create a general ticket.",
+            "name":"Ticket",
+            "channel_prefix":"ticket-"
+        },
+        "ticket2":{
+            "enabled":false,
+            "icon":"💼",
+            "description":"Do you want to apply? Then click here!",
+            "name":"Apply",
+            "channel_prefix":"apply-"
+        },
+        "ticket3":{
+            "enabled":false,
+            "icon":"❓",
+            "description":"Click here if you have a question about the server.",
+            "name":"Question",
+            "channel_prefix":"question-"
+        },
+        "ticket4":{
+            "enabled":false,
+            "icon":"🛒",
+            "description":"Buy something in our shop.",
+            "name":"Shop",
+            "channel_prefix":"shop-"
+        }
     }
 }
