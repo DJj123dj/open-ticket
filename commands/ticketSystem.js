@@ -52,8 +52,8 @@ module.exports = () => {
                     var ticketName = config.options.ticket4.channel_prefix+ticketNumber
                 }
                 
-                if (config.ticket_system.enable_category){
-                var Category = config.ticket_system.ticket_category
+                if (config.system.enable_category){
+                var Category = config.system.ticket_category
                 }else{var Category = null}
 
                     interaction.guild.channels.create(ticketName,{

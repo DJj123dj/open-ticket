@@ -6,6 +6,8 @@
     "auth_token":"the bot's auth token",
     "botperms_role":"the id from a role that can do anything with the bot",
     "prefix":"!",
+
+    "credits_please-do-not-remove":true,
     
     "status":{
         "type":"PLAYING | STREAMING | LISTENING | WATCHING | CUSTOM | COMPETING",

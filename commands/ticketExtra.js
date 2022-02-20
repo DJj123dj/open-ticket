@@ -11,9 +11,14 @@ module.exports = () => {
         if (args[0] == config.prefix+"ticket" && (args[1] == undefined ||args[1] == "" ||args[1] == null)){
             var TicketHelpMsg = new discord.MessageEmbed()
                 .setColor(config.main_color)
-                .setDescription("**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n`!ticket msg` ➜ _Admin command._\n`!ticket rename` ➜ _Rename a ticket (no spaces)._\n`!ticket close` ➜ _Close a ticket._\n`!ticket add <user>` ➜ _Add a user to the ticket._\n`!ticket remove <user>` ➜ _Remove a user from the ticket._")
                 .setTitle("Ticket commands")
-                .setFooter("OpenTicket by DJdj Development | view on github")
+
+            const prefix = config.prefix
+            TicketHelpMsg.setDescription("**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n`"+prefix+"ticket msg` ➜ _Admin command._\n`"+prefix+"ticket rename` ➜ _Rename a ticket (no spaces)._\n`"+prefix+"ticket close` ➜ _Close a ticket._\n`"+prefix+"ticket add <user>` ➜ _Add a user to the ticket._\n`"+prefix+"ticket remove <user>` ➜ _Remove a user from the ticket._\n`"+prefix+"resetdatabase` ➜ _Steps to reset the database._")
+
+            if (config['credits_please-do-not-remove']){
+                TicketHelpMsg.setFooter("OpenTicket by DJdj Development | view on github for source code")
+            }
 
             msg.channel.send({embeds:[TicketHelpMsg]})
         }
