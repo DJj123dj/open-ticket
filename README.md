@@ -80,6 +80,6 @@ The bot needs `ADMINISTRATOR` permissions to work the best.
 ## credits
 Please don't remove the credits from the bot 😊.
 
-_v1.2.1_
+_v1.2.2_
 
 © 2021 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.com/invite/26vT9wt3n3)

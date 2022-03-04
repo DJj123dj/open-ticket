@@ -5,7 +5,7 @@ const config = require("../config.json")
 
 
 module.exports = () => {
-    client.on("message",(msg) => {
+    client.on("messageCreate",(msg) => {
         var args = msg.content.split(" ")
         if (args[0] == config.prefix+"resetdatabase"){
             if (msg.author.id == client.application.owner.id){

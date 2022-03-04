@@ -56,13 +56,13 @@ module.exports = () => {
             }
 
             var categorylist = ""
-            if (config.options.ticket1.enabled){categorylist = "\n\n"+categorylist+config.options.ticket1.icon+": **"+config.options.ticket1.name+"**\n"+config.options.ticket1.description}
+            if (config.options.ticket1.enabled){categorylist = categorylist+"\n"+config.options.ticket1.icon+": **"+config.options.ticket1.name+"**\n"+config.options.ticket1.description}
 
-            if (config.options.ticket2.enabled){categorylist = "\n\n"+categorylist+config.options.ticket2.icon+": **"+config.options.ticket2.name+"**\n"+config.options.ticket2.description}
+            if (config.options.ticket2.enabled){categorylist = categorylist+"\n\n"+config.options.ticket2.icon+": **"+config.options.ticket2.name+"**\n"+config.options.ticket2.description}
 
-            if (config.options.ticket3.enabled){categorylist = "\n\n"+categorylist+config.options.ticket3.icon+": **"+config.options.ticket3.name+"**\n"+config.options.ticket3.description}
+            if (config.options.ticket3.enabled){categorylist = categorylist+"\n\n"+config.options.ticket3.icon+": **"+config.options.ticket3.name+"**\n"+config.options.ticket3.description}
 
-            if (config.options.ticket4.enabled){categorylist = "\n\n"+categorylist+config.options.ticket4.icon+": **"+config.options.ticket4.name+"**\n"+config.options.ticket4.description}
+            if (config.options.ticket4.enabled){categorylist = categorylist+"\n\n"+config.options.ticket4.icon+": **"+config.options.ticket4.name+"**\n"+config.options.ticket4.description}
                 
                 
                 
