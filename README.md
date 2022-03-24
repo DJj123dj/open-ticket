@@ -8,8 +8,6 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 
 <img src="logo.png" alt="Open Ticket logo" style="height: 300px; width:300px;"/>
 
-## packages
-
 ## features
 - discord interaction buttons
 - transcripts
