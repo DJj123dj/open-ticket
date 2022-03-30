@@ -16,8 +16,8 @@ module.exports = () => {
             const prefix = config.prefix
             TicketHelpMsg.setDescription("**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n`"+prefix+"ticket msg` ➜ _Admin command._\n`"+prefix+"ticket rename` ➜ _Rename a ticket (no spaces)._\n`"+prefix+"ticket close` ➜ _Close a ticket._\n`"+prefix+"ticket add <user>` ➜ _Add a user to the ticket._\n`"+prefix+"ticket remove <user>` ➜ _Remove a user from the ticket._\n`"+prefix+"resetdatabase` ➜ _Steps to reset the database._")
 
-            if (config['credits_please-do-not-remove']){
-                TicketHelpMsg.setFooter("OpenTicket by DJdj Development | view on github for source code")
+            if (config.credits){
+                TicketHelpMsg.setFooter("Open-Ticket by DJdj Development | view on github for source code")
             }
 
             msg.channel.send({embeds:[TicketHelpMsg]})
@@ -35,7 +35,7 @@ module.exports = () => {
                     msg.channel.send({content:"I didn't find the close button!"})
                 }
                 if (firstmsg.author.id != client.user.id){
-                    msg.channel.send({content:"You aren't in a ticket!"})
+                    msg.channel.send({content:"You are not in a ticket!"})
                     return
                 }
                 var CloseMsg = new discord.MessageEmbed()
@@ -55,7 +55,7 @@ module.exports = () => {
         if (args[0] == config.prefix+"ticket" && args[1] == "rename"){
 
             if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
-                msg.channel.send({content:"You don't have permissions for this command!"})
+                msg.channel.send({content:config.messages.general.nopermissions})
                 return
             }
 
@@ -71,7 +71,7 @@ module.exports = () => {
                         rmsg.channel.setName(name)
                     })
                 }else{
-                    msg.channel.send({content:"You aren't in a ticket!"})
+                    msg.channel.send({content:"You are not in a ticket!"})
                 }
             })
         }
@@ -82,13 +82,13 @@ module.exports = () => {
         if (args[0] == config.prefix+"ticket" && args[1] == "add"){
 
             if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
-                msg.channel.send({content:"You don't have permissions for this command!"})
+                msg.channel.send({content:config.messages.general.nopermissions})
                 return
             }
 
             msg.channel.messages.fetch().then(msglist => {
                 if (msglist.last().author.id != client.user.id){
-                    msg.channel.send({content:"You aren't in a ticket!"})
+                    msg.channel.send({content:"You are not in a ticket!"})
                     return
                 }
 
@@ -112,7 +112,7 @@ module.exports = () => {
         if (args[0] == config.prefix+"ticket" && args[1] == "remove"){
 
             if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
-                msg.channel.send({content:"You don't have permissions for this command!"})
+                msg.channel.send({content:config.messages.general.nopermissions})
                 return
             }
 
