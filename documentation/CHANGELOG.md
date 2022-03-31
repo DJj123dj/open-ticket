@@ -1,5 +1,18 @@
 # changelog
 
+## v1.3.1
+### added:
+- Q&A in the README.md
+- v1.4.0 announcement
+### fixed
+- a bug that happend when you created too much tickets
+- deprecation warnings (setAuthor & setFooter)
+- the logo in README.md is smaller now
+- markdown files relocated
+- fixed a bug that some messages appeared in Dutch
+### removed
+- nothing
+
 ## v1.3.0
 ### added:
 - now its possible to create 6 tickets instead of 4

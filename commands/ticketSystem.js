@@ -110,7 +110,7 @@ module.exports = () => {
                     }else{ticketEmbed.setColor(config.main_color)}
 
                     if (config.layout.ticketEmbed.footerEnabled){
-                        ticketEmbed.setFooter(config.layout.ticketEmbed.footer)
+                        ticketEmbed.setFooter({text:"config.layout.ticketEmbed.footer"})
                     }
                     if (config.layout.ticketEmbed.thumbnailEnabled){
                         ticketEmbed.setThumbnail(config.layout.ticketEmbed.thumbnailURL)
@@ -227,16 +227,16 @@ module.exports = () => {
                 }
                 var transcriptEmbed = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("There is a new transcript!")
                     .setDescription(splittedTranscript[0])
-                    .setFooter("ticket closed by "+interaction.member.user.username)
+                    .setFooter({text:"ticket closed by "+interaction.member.user.username})
                     .setThumbnail(transcriptThumbnail)
 
                 if (transcript.length > 4000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("transcript #2")
                     .setDescription(splittedTranscript[1])
                     .setFooter("ticket closed by "+interaction.member.user.username)
@@ -244,10 +244,10 @@ module.exports = () => {
 
                 var transcriptEmbed3 = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("transcript #3")
                     .setDescription(splittedTranscript[1])
-                    .setFooter("ticket closed by "+interaction.member.user.username)
+                    .setFooter({text:"ticket closed by "+interaction.member.user.username})
                     .setThumbnail(transcriptThumbnail)
         
                 client.channels.cache.find(ch => ch.id == config.system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2,transcriptEmbed3]})
@@ -255,10 +255,10 @@ module.exports = () => {
                 }else if (transcript.length > 2000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor(interaction.channel.name + " - ticket created by "+getuserNAME)
+                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("transcript #2")
                     .setDescription(splittedTranscript[1])
-                    .setFooter("ticket closed by "+interaction.member.user.username)
+                    .setFooter({text:"ticket closed by "+interaction.member.user.username})
                     .setThumbnail(transcriptThumbnail)
 
                 client.channels.cache.find(ch => ch.id == config.system.transcript_channel).send({embeds:[transcriptEmbed,transcriptEmbed2]})

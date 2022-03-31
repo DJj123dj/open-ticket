@@ -1,6 +1,6 @@
 # config file
 [![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3) 
-[![version](https://img.shields.io/badge/version-1.3.0%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.3.0) 
+[![version](https://img.shields.io/badge/version-1.3.1%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.3.1) 
 [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages) 
 [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE)
 
@@ -64,4 +64,4 @@ I didn't know that open-tickets was going to be so much used. I will be creating
 
 If you have an idea for new updates you can always say it in my discord server!
 
-open-tickets v1.3.0
+open-tickets v1.3.1

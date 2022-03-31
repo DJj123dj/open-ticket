@@ -17,7 +17,7 @@ module.exports = () => {
             TicketHelpMsg.setDescription("**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n`"+prefix+"ticket msg` ➜ _Admin command._\n`"+prefix+"ticket rename` ➜ _Rename a ticket (no spaces)._\n`"+prefix+"ticket close` ➜ _Close a ticket._\n`"+prefix+"ticket add <user>` ➜ _Add a user to the ticket._\n`"+prefix+"ticket remove <user>` ➜ _Remove a user from the ticket._\n`"+prefix+"resetdatabase` ➜ _Steps to reset the database._")
 
             if (config.credits){
-                TicketHelpMsg.setFooter("Open-Ticket by DJdj Development | view on github for source code")
+                TicketHelpMsg.setFooter({text:"Open-Ticket by DJdj Development | view on github for source code"})
             }
 
             msg.channel.send({embeds:[TicketHelpMsg]})
@@ -67,7 +67,7 @@ module.exports = () => {
             var name = args[2]
             msg.channel.messages.fetchPinned().then(msglist => {
                 if (msglist.last().author.id == client.user.id){
-                    msg.channel.send({content:"De naam is veranderd!"}).then(rmsg => {
+                    msg.channel.send({content:"The name from the ticket is changed!"}).then(rmsg => {
                         rmsg.channel.setName(name)
                     })
                 }else{

@@ -12,7 +12,9 @@ module.exports = () => {
                 return
             }
 
+            var currentTicketButtons = 0
             var ticketButton = new discord.MessageActionRow()
+            var ticketButton2 = new discord.MessageActionRow()
 
             const getColor = (color) => {
                 if (color.toLowerCase() == "red"){
@@ -31,8 +33,16 @@ module.exports = () => {
             }
 
             if (config.options.ticket1.enabled){
+                if (currentTicketButtons < 4){
+                    var localTicketButton = ticketButton
+                }else{
+                    var localTicketButton = ticketButton2
+                }
+
+                currentTicketButtons = currentTicketButtons + 1
+
                 if (config.options.ticket1.isURL == false){
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setCustomId("newTicket1")
                             .setDisabled(false)
@@ -40,7 +50,7 @@ module.exports = () => {
                             .setEmoji(config.options.ticket1.icon)
                     )
                 }else{
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setDisabled(false)
                             .setStyle("LINK")
@@ -51,8 +61,16 @@ module.exports = () => {
             }
 
             if (config.options.ticket2.enabled){
+                if (currentTicketButtons < 4){
+                    var localTicketButton = ticketButton
+                }else{
+                    var localTicketButton = ticketButton2
+                }
+
+                currentTicketButtons = currentTicketButtons + 1
+
                 if (config.options.ticket2.isURL == false){
-                ticketButton.addComponents(
+                localTicketButton.addComponents(
                     new discord.MessageButton()
                         .setCustomId("newTicket2")
                         .setDisabled(false)
@@ -60,7 +78,7 @@ module.exports = () => {
                         .setEmoji(config.options.ticket2.icon)
                 )
                 }else{
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setDisabled(false)
                             .setStyle("LINK")
@@ -71,8 +89,16 @@ module.exports = () => {
             }
 
             if (config.options.ticket3.enabled){
+                if (currentTicketButtons < 4){
+                    var localTicketButton = ticketButton
+                }else{
+                    var localTicketButton = ticketButton2
+                }
+
+                currentTicketButtons = currentTicketButtons + 1
+
                 if (config.options.ticket3.isURL == false){
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setCustomId("newTicket3")
                             .setDisabled(false)
@@ -80,7 +106,7 @@ module.exports = () => {
                             .setEmoji(config.options.ticket3.icon)
                     )
                     }else{
-                        ticketButton.addComponents(
+                        localTicketButton.addComponents(
                             new discord.MessageButton()
                                 .setDisabled(false)
                                 .setStyle("LINK")
@@ -91,8 +117,16 @@ module.exports = () => {
             }
 
             if (config.options.ticket4.enabled){
+                if (currentTicketButtons < 4){
+                    var localTicketButton = ticketButton
+                }else{
+                    var localTicketButton = ticketButton2
+                }
+
+                currentTicketButtons = currentTicketButtons + 1
+
                 if (config.options.ticket4.isURL == false){
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setCustomId("newTicket4")
                             .setDisabled(false)
@@ -100,7 +134,7 @@ module.exports = () => {
                             .setEmoji(config.options.ticket4.icon)
                     )
                     }else{
-                        ticketButton.addComponents(
+                        localTicketButton.addComponents(
                             new discord.MessageButton()
                                 .setDisabled(false)
                                 .setStyle("LINK")
@@ -111,8 +145,16 @@ module.exports = () => {
             }
 
             if (config.options.ticket5.enabled){
+                if (currentTicketButtons < 4){
+                    var localTicketButton = ticketButton
+                }else{
+                    var localTicketButton = ticketButton2
+                }
+
+                currentTicketButtons = currentTicketButtons + 1
+
                 if (config.options.ticket5.isURL == false){
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setCustomId("newTicket5")
                             .setDisabled(false)
@@ -120,7 +162,7 @@ module.exports = () => {
                             .setEmoji(config.options.ticket5.icon)
                     )
                     }else{
-                        ticketButton.addComponents(
+                        localTicketButton.addComponents(
                             new discord.MessageButton()
                                 .setDisabled(false)
                                 .setStyle("LINK")
@@ -131,8 +173,16 @@ module.exports = () => {
             }
 
             if (config.options.ticket6.enabled){
+                if (currentTicketButtons < 4){
+                    var localTicketButton = ticketButton
+                }else{
+                    var localTicketButton = ticketButton2
+                }
+
+                currentTicketButtons = currentTicketButtons + 1
+
                 if (config.options.ticket6.isURL == false){
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setCustomId("newTicket6")
                             .setDisabled(false)
@@ -140,7 +190,7 @@ module.exports = () => {
                             .setEmoji(config.options.ticket6.icon)
                     )
                 }else{
-                    ticketButton.addComponents(
+                    localTicketButton.addComponents(
                         new discord.MessageButton()
                             .setDisabled(false)
                             .setStyle("LINK")
@@ -171,7 +221,7 @@ module.exports = () => {
             }else{ticketEmbed.setColor(config.main_color)}
 
             if (config.layout.ticketMsg.footerEnabled){
-                ticketEmbed.setFooter(config.layout.ticketMsg.footer)
+                ticketEmbed.setFooter({text:config.layout.ticketMsg.footer})
             }
             if (config.layout.ticketMsg.thumbnailEnabled){
                 ticketEmbed.setThumbnail(config.layout.ticketMsg.thumbnailURL)
@@ -180,8 +230,11 @@ module.exports = () => {
             ticketEmbed.setDescription("**Create a ticket:**\nClick one of the buttons below to create a ticket.\n\n__choose a category:__"+categorylist+"\n\n**watch out:**_You can only create "+config.system.max_allowed_tickets+" ticket(s) at a time!_")
             
             
-        
-            msg.channel.send({embeds:[ticketEmbed],components:[ticketButton]})
+            if (currentTicketButtons <= 4){
+                var embedComponents = [ticketButton]
+            }else{var embedComponents = [ticketButton,ticketButton2]}
+
+            msg.channel.send({embeds:[ticketEmbed],components:embedComponents})
             
             
         }
