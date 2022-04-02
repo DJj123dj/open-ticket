@@ -1,15 +1,15 @@
 {
-    "server_name":"Ticket Bot",
-    "server_logo":"https://www.example.com/another-example/yourlogo.png",
     "bot_name":"Wumpus",
     "main_color":"#fffff",
     "auth_token":"the bot's auth token",
     "botperms_role":"the id from an admin role (they can do admin things with the bot)",
     "prefix":"!",
+    "logs":true,
 
     "credits":true,
     "status":{
-        "type":"PLAYING | STREAMING | LISTENING | WATCHING | CUSTOM | COMPETING",
+        "enabled":true,
+        "type":"PLAYING | LISTENING | WATCHING | CUSTOM",
         "text":"!ticket"
     },
 

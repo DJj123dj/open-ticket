@@ -1,6 +1,6 @@
 # open-ticket
 [![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3) 
-[![version](https://img.shields.io/badge/version-1.3.1%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.3.1) 
+[![version](https://img.shields.io/badge/version-1.3.2%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.3.2) 
 [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages) 
 [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
 
@@ -31,7 +31,7 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 You can clone or download this project.
 
 ### packages
-- canvas => version `latest`
+- chalk => version `latest`
 - discord.js => version `latest`
 - express => version `latest`
 - node-localstorage => version `latest`
@@ -61,7 +61,7 @@ Hello everyone, soon open-ticket v1.4.0 will be launched, it contains a lot of n
 
 ## information
 
-_v1.3.1_
+_v1.3.2_
 
 changelog: [click here](./documentation/CHANGELOG.md)
 

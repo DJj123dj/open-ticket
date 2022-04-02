@@ -1,5 +1,23 @@
 # changelog
 
+## v1.3.2
+### added:
+- an alias for !resetdatabase: !resetdb
+- you need the "chalk" library now!
+- checker.js
+- "enabled" option for status
+- better console logs
+- enable logs option to config
+### fixed
+- a bug that crashed the bot on using the command !resetdatabase
+- "member_role" in config is optional but not recommended
+- fixed crash on startup
+- fixed bug where the bot crashes by using transcripts
+- changed package.json
+### removed
+- "canvas" library is not longer required
+- removed "server_icon" & "server_name" from config
+
 ## v1.3.1
 ### added:
 - Q&A in the README.md

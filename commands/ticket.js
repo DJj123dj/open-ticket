@@ -59,7 +59,6 @@ module.exports = () => {
                     )
                 }
             }
-
             if (config.options.ticket2.enabled){
                 if (currentTicketButtons < 4){
                     var localTicketButton = ticketButton
@@ -236,7 +235,8 @@ module.exports = () => {
 
             msg.channel.send({embeds:[ticketEmbed],components:embedComponents})
             
-            
+            if (config.logs){console.log("[command] "+config.prefix+"ticket msg (user:"+msg.author.username+")")}
+            if (config.logs){console.log("[system] created ticket message")}
         }
     })
 }

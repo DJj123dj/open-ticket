@@ -14,13 +14,14 @@ module.exports = () => {
                 .setTitle("Ticket commands")
 
             const prefix = config.prefix
-            TicketHelpMsg.setDescription("**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n`"+prefix+"ticket msg` ➜ _Admin command._\n`"+prefix+"ticket rename` ➜ _Rename a ticket (no spaces)._\n`"+prefix+"ticket close` ➜ _Close a ticket._\n`"+prefix+"ticket add <user>` ➜ _Add a user to the ticket._\n`"+prefix+"ticket remove <user>` ➜ _Remove a user from the ticket._\n`"+prefix+"resetdatabase` ➜ _Steps to reset the database._")
+            TicketHelpMsg.setDescription("**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n`"+prefix+"ticket msg` ➜ _Admin command._\n`"+prefix+"ticket rename` ➜ _Rename a ticket (no spaces)._\n`"+prefix+"ticket close` ➜ _Close a ticket._\n`"+prefix+"ticket add <user>` ➜ _Add a user to the ticket._\n`"+prefix+"ticket remove <user>` ➜ _Remove a user from the ticket._\n`"+prefix+"resetdatabase` ➜ _Steps to reset the database._\n`"+prefix+"resetdb` ➜ _Also database stuff._")
 
             if (config.credits){
                 TicketHelpMsg.setFooter({text:"Open-Ticket by DJdj Development | view on github for source code"})
             }
 
             msg.channel.send({embeds:[TicketHelpMsg]})
+            if (config.logs){console.log("[command] "+config.prefix+"ticket help (user:"+msg.author.username+")")}
         }
     })
 
@@ -43,7 +44,8 @@ module.exports = () => {
                 .setDescription("Click [here]("+firstmsg.url+") to close this ticket.")
                 .setTitle("Close this ticket:")
 
-            msg.channel.send({embeds:[CloseMsg]})
+                msg.channel.send({embeds:[CloseMsg]})
+                if (config.logs){console.log("[command] "+config.prefix+"ticket close (user:"+msg.author.username+")")}
             })
             
             
@@ -65,15 +67,18 @@ module.exports = () => {
             }
 
             var name = args[2]
+            var oldname = msg.channel.name
             msg.channel.messages.fetchPinned().then(msglist => {
                 if (msglist.last().author.id == client.user.id){
                     msg.channel.send({content:"The name from the ticket is changed!"}).then(rmsg => {
                         rmsg.channel.setName(name)
+                        if (config.logs){console.log("[system] renamed a ticket (name:"+oldname+",newname:"+name+")")}
                     })
                 }else{
                     msg.channel.send({content:"You are not in a ticket!"})
                 }
             })
+            if (config.logs){console.log("[command] "+config.prefix+"ticket rename (user:"+msg.author.username+")")}
         }
     })
 
@@ -102,8 +107,11 @@ module.exports = () => {
                 }
                 
                 msg.channel.permissionOverwrites.create(user.id, { VIEW_CHANNEL:true, ADD_REACTIONS:true,ATTACH_FILES:true, EMBED_LINKS:true, SEND_MESSAGES:true})
+                if (config.logs){console.log("[system] added user to ticket (name:"+user.username+",ticket:"+msg.channel.name+")")}
 
             })
+            var loguser = msg.mentions.users.first()
+            if (config.logs){console.log("[command] "+config.prefix+"ticket add "+loguser.username+" (user:"+msg.author.username+")")}
         }
     })
 
@@ -132,8 +140,12 @@ module.exports = () => {
                 }
                 
                 msg.channel.permissionOverwrites.delete(user.id)
+                if (config.logs){console.log("[system] removed user from ticket (name:"+user.username+",ticket:"+msg.channel.name+")")}
 
             })
+
+            var loguser = msg.mentions.users.first()
+            if (config.logs){console.log("[command] "+config.prefix+"ticket remove "+loguser.username+" (user:"+msg.author.username+")")}
         }
     })
 }

@@ -47,22 +47,30 @@ module.exports = () => {
                 //set ticketName
                 if (interaction.customId == "newTicket1"){
                     var ticketName = config.options.ticket1.channel_prefix+ticketNumber
+                    var logsname = config.options.ticket1.name
                 }else if (interaction.customId == "newTicket2"){
                     var ticketName = config.options.ticket2.channel_prefix+ticketNumber
+                    var logsname = config.options.ticket2.name
                 }else if (interaction.customId == "newTicket3"){
                    var ticketName = config.options.ticket3.channel_prefix+ticketNumber
+                   var logsname = config.options.ticket3.name
                 }else if (interaction.customId == "newTicket4"){
                     var ticketName = config.options.ticket4.channel_prefix+ticketNumber
+                    var logsname = config.options.ticket4.name
                 }else if (interaction.customId == "newTicket5"){
                     var ticketName = config.options.ticket5.channel_prefix+ticketNumber
+                    var logsname = config.options.ticket5.name
                 }else if (interaction.customId == "newTicket6"){
                     var ticketName = config.options.ticket6.channel_prefix+ticketNumber
+                    var logsname = config.options.ticket6.name
                 }
                 
                 //set category
                 if (config.system.enable_category){
                 var Category = config.system.ticket_category
                 }else{var Category = null}
+
+                var permissionsArray = []
 
                 //set everyone allowed
                 if (config.system['has@everyoneaccess']){
@@ -72,34 +80,35 @@ module.exports = () => {
                     var everyoneAllowPerms = []
                     var everyoneDenyPerms = ["VIEW_CHANNEL"]
                 }
+                permissionsArray.push({
+                    id:interaction.member.id,
+                    type:"member",
+                    allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
+                })
+                permissionsArray.push({
+                    id:config.botperms_role,
+                    type:"role",
+                    allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
+                })
+                permissionsArray.push({
+                    id:interaction.guild.id,
+                    type:"role",
+                    allow:everyoneAllowPerms,
+                    deny:everyoneDenyPerms
+                })
+                if (config.system.member_role == "" || config.system.member_role == " " || config.system.member_role == "false" || config.system.member_role == "null" || config.system.member_role == "0"){
+                    permissionsArray.push({
+                        id:config.system.member_role,
+                        type:"role",
+                        deny:["VIEW_CHANNEL"]
+                    })
+                }
 
                 //create the channel
                 interaction.guild.channels.create(ticketName,{
                     type:"GUILD_TEXT",
                     parent:Category,
-                    permissionOverwrites:[
-                        {
-                            id:interaction.member.id,
-                            type:"member",
-                            allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
-                        },
-                        {
-                            id:config.botperms_role,
-                            type:"role",
-                            allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
-                        },
-                        {
-                            id:config.system.member_role,
-                            type:"role",
-                            deny:["VIEW_CHANNEL"]
-                        },
-                        {
-                            id:interaction.guild.id,
-                            type:"role",
-                            allow:everyoneAllowPerms,
-                            deny:everyoneDenyPerms
-                        }
-                    ]
+                    permissionOverwrites:permissionsArray
                 }).then(tChannel => {
                     userTicketStorage.setItem(tChannel.id,interaction.member.id)
                     
@@ -121,6 +130,7 @@ module.exports = () => {
                     tChannel.send({content:"<@"+interaction.member.id+"> <@&"+config.botperms_role+">",embeds:[ticketEmbed],components:[closeButton]}).then(firstmsg => {
                         firstmsg.pin()
                     })
+                    if (config.logs){console.log("[system] created a new ticket (name:"+logsname+",user:"+interaction.user.username+")")}
                 })
 
 
@@ -227,7 +237,7 @@ module.exports = () => {
                 }
                 var transcriptEmbed = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
+                    .setAuthor({name:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("There is a new transcript!")
                     .setDescription(splittedTranscript[0])
                     .setFooter({text:"ticket closed by "+interaction.member.user.username})
@@ -236,7 +246,7 @@ module.exports = () => {
                 if (transcript.length > 4000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
+                    .setAuthor({name:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("transcript #2")
                     .setDescription(splittedTranscript[1])
                     .setFooter("ticket closed by "+interaction.member.user.username)
@@ -244,7 +254,7 @@ module.exports = () => {
 
                 var transcriptEmbed3 = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
+                    .setAuthor({name:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("transcript #3")
                     .setDescription(splittedTranscript[1])
                     .setFooter({text:"ticket closed by "+interaction.member.user.username})
@@ -255,7 +265,7 @@ module.exports = () => {
                 }else if (transcript.length > 2000){
                 var transcriptEmbed2 = new discord.MessageEmbed()
                     .setColor(transcriptColor)
-                    .setAuthor({text:interaction.channel.name + " - ticket created by "+getuserNAME})
+                    .setAuthor({name:interaction.channel.name + " - ticket created by "+getuserNAME})
                     .setTitle("transcript #2")
                     .setDescription(splittedTranscript[1])
                     .setFooter({text:"ticket closed by "+interaction.member.user.username})
@@ -270,6 +280,8 @@ module.exports = () => {
                 
 
                 interaction.channel.delete()
+                if (config.logs){console.log("[system] closed a ticket (name:"+interaction.channel.name+",user:"+interaction.user.username+")")}
+                
 
                 
                 ticketStorage.setItem(getuserID,Number(ticketStorage.getItem(getuserID)) - 1)

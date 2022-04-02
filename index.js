@@ -4,9 +4,15 @@ const intents = discord.Intents
 const client = new discord.Client({intents:[intents.FLAGS.GUILDS,intents.FLAGS.GUILD_MESSAGES,intents.FLAGS.GUILD_MEMBERS]})
 exports.client = client
 
-client.on('ready',() => {
-    console.log('ready')
-    client.user.setActivity(config.status.text,{type:config.status.type})
+require("./checker")()
+
+client.on('ready',async () => {
+    const chalk = await (await import("chalk")).default
+    console.log(chalk.green("open-ticket ready!"))
+    if (config.logs){chalk.white("\n\nlogs:\n============")}
+    if (config.status.enabled){
+        client.user.setActivity(config.status.text,{type:config.status.type})
+    }
 })
 
 var storage = require('./storage/storage')
