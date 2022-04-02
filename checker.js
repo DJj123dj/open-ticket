@@ -75,7 +75,7 @@ module.exports = async () => {
     if (config.system.enable_category == true && config.system.ticket_category.includes(" ")){
         createError("invalid category id | 'system/ticket_category' is not a valid category id!")
     }
-    if (config.system.enable_category && config.system.ticket_category > 20 || config.system.ticket_category < 16){
+    if (config.system.enable_category && config.system.ticket_category.length > 20 || config.system.ticket_category.length < 16){
         createError("invalid category id | 'system/ticket_category' is not a valid category id!")
     }
 
