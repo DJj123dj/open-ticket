@@ -1,6 +1,12 @@
+# WARNING: this is a pre-version
+The version above is unstable so if you find bugs, please report them in the discord server
+
+[click here for a stable version](https://www.github.com/DJj123dj/open-ticket/releases/tab/v1.3.2)
+
+
 # open-ticket
 [![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3) 
-[![version](https://img.shields.io/badge/version-1.3.2%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.3.2) 
+[![version](https://img.shields.io/badge/version-1.4.0%20unstable-red.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.4.0) 
 [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages) 
 [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
 
@@ -8,12 +14,14 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 
 <img src="logo.png" alt="Open Ticket logo" style="height: 200px; width:200px;"/>
 
-[![announcement](https://img.shields.io/badge/new%20announcement!-open--ticket%20v1.4.0-red.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/discussions/3)
-
-[![q&a](https://img.shields.io/badge/Q&A-click%20here-blue.svg?style=flat-square)](./documentation/Q&A.md) 
+[![q&a](https://img.shields.io/badge/Q&A-click%20here-blue.svg?style=flat-square)](./TEMPDOCS.md) 
 
 ## features
 - discord interaction buttons
+- slash & text commands
+- close or delete tickets
+- translation possible
+- dynamic database system
 - transcripts
 - add/remove users from ticket
 - custom colors & name
@@ -45,7 +53,7 @@ if there are any errors, you can open an **issue on github** or **contact me in 
 
 ### config
 Our config documentation is moved to another file:
-[click here to view](./documentation/CONFIG.md)
+[click here to view](./TEMPDOCS.md)
 
 ### intents & permissions
 In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
@@ -55,14 +63,10 @@ In the discord developer portal in the "bot" panel you will find 3 switches unde
 To work the best, the bot needs `ADMINISTRATOR` permissions.
 You can also configure your own permissions
 
-## v1.4.0 announcement
-Hello everyone, soon open-ticket v1.4.0 will be launched, it contains a lot of new features. You can view them below.
-[click here to view the announcement](https://github.com/DJj123dj/open-ticket/discussions/3)
-
 ## information
 
-_v1.3.2_
+_v1.4.0 unstable_
 
-changelog: [click here](./documentation/CHANGELOG.md)
+changelog: [click here](./TEMPDOCS.md)
 
 © 2022 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.com/invite/26vT9wt3n3)

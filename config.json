@@ -1,132 +1,94 @@
 {
     "bot_name":"Wumpus",
     "main_color":"#fffff",
-    "auth_token":"the bot's auth token",
-    "botperms_role":"the id from an admin role (they can do admin things with the bot)",
-    "prefix":"!",
+    "server_id":"935983011281903676",
+    "auth_token":"OTU4MjkwNjExMzMxNTM4OTc1.YkLLrQ.J9yfO7LgXplNahXv7xQNNvKG6fY",
+    "main_adminroles":["936153662668034058"],
+    "prefix":"!ticket ",
     "logs":true,
+    "languagefile":"english.json (currently not working)",
 
     "credits":true,
     "status":{
         "enabled":true,
-        "type":"PLAYING | LISTENING | WATCHING | CUSTOM",
+        "type":"PLAYING",
         "text":"!ticket"
     },
 
     "system":{
-        "ticket_channel":"id of the channel with the !ticket msg",
-        "max_allowed_tickets":5,
+        "ticket_channel":"968899402020306994",
+        "max_allowed_tickets":3,
         "enable_DM_Messages":true,
 
-        "enable_category":false,
-        "ticket_category":"the id of a category for the tickets",
-
         "has@everyoneaccess":false,
-        "member_role":"this role doesn't have access to tickets",
+        "member_role":"936153574650544180",
 
-        "enable_transcript":false,
-        "transcript_channel":"the channel for transcripts"
+        "enable_transcript":true,
+        "enable_DM_transcript":true,
+        "transcript_channel":"968899606912061490"
     },
 
-    "messages":{
-        "general":{
-            "nopermissions":"**You don't have permissions to run this command!**"
-        },
-        "dm":{
-            "alreadyCreated":"**You currently have as many open tickets as the maximum allowed!**",
-            "newTicket":"You created a new ticket in our server, the staff will come and help you soon!",
-            "closeTicket":"**Your ticket is closed!**"
-        },
-        "ticket":{
-            "newTicketEmbed":"You created a ticket!\n\n_Click on the close button below to close this ticket_"
-        }
-    },
-
-    "layout":{
-        "transcripts":{
-            "customColorEnabled":false,
-            "customColor":"#ffffff",
-            "thumbnailEnabled":false,
-            "thumbnailURL":"https://www.example.com/path/to/image.png"
-        },
-        "ticketMsg":{
-            "customColorEnabled":false,
-            "customColor":"#ffffff",
-            "footerEnabled":false,
-            "footer":"We are using open-tickets from DJj123dj",
-            "thumbnailEnabled":false,
-            "thumbnailURL":"https://www.example.com/path/to/image.png"
-        },
-        "ticketEmbed":{
-            "customColorEnabled":false,
-            "customColor":"#ffffff",
-            "footerEnabled":false,
-            "footer":"This is embed in the start of a ticket.",
-            "thumbnailEnabled":false,
-            "thumbnailURL":"https://www.example.com/path/to/image.png"
-        }
-    },
-
-    "options":{
-        "ticket1":{
-            "enabled":true,
-            "icon":"🎫",
-            "description":"Create a general ticket.",
-            "name":"Ticket",
-            "channel_prefix":"ticket-",
-            "color":"red | green | blue | gray | none",
-            "isURL":false,
-            "url":"https://www.example.com/a/random/path/to/a/website"
-        },
-        "ticket2":{
-            "enabled":false,
-            "icon":"💼",
-            "description":"Do you want to apply? Then click here!",
-            "name":"Apply",
-            "channel_prefix":"apply-",
-            "color":"red | green | blue | gray | none",
-            "isURL":false,
-            "url":"https://www.example.com/a/random/path/to/a/website"
-        },
-        "ticket3":{
-            "enabled":false,
-            "icon":"❓",
-            "description":"Click here if you have a question about the server.",
+    "options":[
+        {
+            "id":"general",
             "name":"Question",
-            "channel_prefix":"question-",
-            "color":"red | green | blue | gray | none",
-            "isURL":false,
-            "url":"https://www.example.com/a/random/path/to/a/website"
+            "description":"Create this ticket if you have a question.",
+            "icon":"🎫",
+            "label":"question",
+            "type":"ticket",
+
+            "color":"gray",
+            "adminroles":["936153350704091167"],
+            "channelprefix":"question-",
+            "category":"935983011281903678",
+            "message":"You created a ticket!",
+            "enableDMMessage":true
+            
         },
-        "ticket4":{
-            "enabled":false,
-            "icon":"🛒",
-            "description":"Buy something in our shop.",
-            "name":"Shop",
-            "channel_prefix":"shop-",
-            "color":"red | green | blue | gray | none",
-            "isURL":false,
-            "url":"https://www.example.com/a/random/path/to/a/website"
-        },
-        "ticket5":{
-            "enabled":false,
-            "icon":"😄",
-            "description":"hello",
-            "name":"AnotherTicket",
-            "channel_prefix":"prefix-",
-            "color":"red | green | blue | gray | none",
-            "isURL":false,
-            "url":"https://www.example.com/a/random/path/to/a/website"
-        },
-        "ticket6":{
-            "enabled":false,
-            "icon":"😄",
-            "description":"hello",
-            "name":"AnotherTicket",
-            "channel_prefix":"prefix-",
-            "color":"red | green | blue | gray | none",
-            "isURL":false,
-            "url":"https://www.example.com/a/random/path/to/a/website"
+        {
+            "id":"apply",
+            "name":"Apply",
+            "description":"Create this ticket if you want to apply.",
+            "icon":"💼",
+            "label":"apply",
+            "type":"ticket",
+
+            "color":"green",
+            "adminroles":["936153350704091167"],
+            "channelprefix":"apply-",
+            "category":"935983011281903678",
+            "message":"You created a ticket!",
+            "enableDMMessage":true
+            
         }
-    }
+    ],
+
+    "messages":[
+        {
+            "id":"1",
+            "name":"Choose Your Ticket",
+            "description":"You can click one of the buttons below!\nYou can also customize all the embeds now!",
+            "enableFooter":true,
+            "footer":"Open Ticket v1.4.0 beta - sneakpeak",
+            "enableThumbnail":false,
+            "thumbnail":"https://www.example.com/catmemes/cat.png",
+            "color":"#0075e9",
+            "options":["general","apply"],
+            "enableTicketExplaination":true,
+            "enableMaxTicketsWarning":true
+        },
+        {
+            "id":"5",
+            "name":"sodfjiqdosmifj",
+            "description":"Youoidjfddiddjfmqoisdjf  so customize all the embeds now!",
+            "enableFooter":true,
+            "footer":"Open Tiiiieakpeak",
+            "enableThumbnail":false,
+            "thumbnail":"https://www.example.com/catmemes/cat.png",
+            "color":"#0075e9",
+            "options":["apply"],
+            "enableTicketExplaination":true,
+            "enableMaxTicketsWarning":true
+        }
+    ]
 }

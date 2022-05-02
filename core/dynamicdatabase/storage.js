@@ -1,3 +1,7 @@
+/** =============================
+ ** NOT READY YET
+ ** must be dynamic
+ ** =============================*/
 const LocalStorage = require("node-localstorage")
 
 const ticketStorage = new LocalStorage.LocalStorage("./storage/tickets")

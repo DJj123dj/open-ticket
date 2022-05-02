@@ -1,6 +1,10 @@
+/** =============================
+ ** NOT READY YET
+ ** =============================*/
+
 module.exports = async () => {
     const chalk = await (await import("chalk")).default
-    const config = require("./config.json")
+    const config = require("../config.json")
     var errorList = []
     var isError = false
     var warnList = []

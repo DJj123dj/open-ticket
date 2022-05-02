@@ -3,28 +3,11 @@ const bot = require('../index')
 const client = bot.client
 const config = require("../config.json")
 
-
+//=============================
+// NOT READY YET
+//=============================
 
 module.exports = () => {
-    client.on("messageCreate",msg => {
-        var args = msg.content.split(" ")
-        if (args[0] == config.prefix+"ticket" && (args[1] == undefined ||args[1] == "" ||args[1] == null)){
-            var TicketHelpMsg = new discord.MessageEmbed()
-                .setColor(config.main_color)
-                .setTitle("Ticket commands")
-
-            const prefix = config.prefix
-            TicketHelpMsg.setDescription("**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n`"+prefix+"ticket msg` ➜ _Admin command._\n`"+prefix+"ticket rename` ➜ _Rename a ticket (no spaces)._\n`"+prefix+"ticket close` ➜ _Close a ticket._\n`"+prefix+"ticket add <user>` ➜ _Add a user to the ticket._\n`"+prefix+"ticket remove <user>` ➜ _Remove a user from the ticket._\n`"+prefix+"resetdatabase` ➜ _Steps to reset the database._\n`"+prefix+"resetdb` ➜ _Also database stuff._")
-
-            if (config.credits){
-                TicketHelpMsg.setFooter({text:"Open-Ticket by DJdj Development | view on github for source code"})
-            }
-
-            msg.channel.send({embeds:[TicketHelpMsg]})
-            if (config.logs){console.log("[command] "+config.prefix+"ticket help (user:"+msg.author.username+")")}
-        }
-    })
-
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
         if (args[0] == config.prefix+"ticket" && args[1] == "close"){
