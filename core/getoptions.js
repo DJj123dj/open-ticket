@@ -1,4 +1,5 @@
-const config = require("../config.json")
+const bot = require("../index")
+const config = bot.config
 
 /**
  * @param {Number} index

@@ -1,4 +1,5 @@
-const config = require("../../config.json")
+const bot = require("../../index")
+const config = bot.config
 exports.getTicketMessage = (input) => {
     var returned = config.messages.find(a => a.id == input)
     if (returned){

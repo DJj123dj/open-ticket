@@ -9,7 +9,7 @@ client.setMaxListeners(20)
 const isDev = true
 //!!!!!!!!!!!
 
-if (isDev){const config = require('./devConfig.json')}else{const config = require('./config.json')}
+if (isDev){var config = require('./devConfig.json')}else{var config = require('./config.json')}
 exports.config = config
 
 client.on('ready',async () => {

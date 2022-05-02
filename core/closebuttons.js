@@ -1,7 +1,7 @@
 const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
-const config = require("../config.json")
+const config = bot.config
 
 
 module.exports = () => {

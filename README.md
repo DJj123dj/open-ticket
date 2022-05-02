@@ -1,7 +1,7 @@
 # WARNING: this is a pre-version
 The version above is unstable so if you find bugs, please report them in the discord server
 
-[click here for a stable version](https://www.github.com/DJj123dj/open-ticket/releases/tab/v1.3.2)
+[click here for a stable version](https://www.github.com/DJj123dj/open-ticket/releases/tab/v1.3.2a)
 
 
 # open-ticket
