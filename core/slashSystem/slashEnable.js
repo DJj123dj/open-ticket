@@ -24,14 +24,16 @@ module.exports = async () => {
 
     var readystats = 0
 
+    process.stdout.write("[status] there are "+chalk.blue("0 out of 9")+" commands ready! (this can take up to 40 seconds)")
     setInterval(() => {
-        console.log("[status] there are "+chalk.blue(readystats+" out of 9")+" commands ready! (this can take some time)")
+        process.stdout.cursorTo(0)
+        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 9")+" commands ready! (this can take up to 40 seconds)")
         if (readystats >= 9){
-            console.log(chalk.green("ready!"))
-            console.log(chalk.blue("you can now start the bot with 'npm start'!"))
+            console.log(chalk.green("\nready!"))
+            console.log(chalk.bgBlue("you can now start the bot with 'npm start'!"))
             process.exit(1)
         }
-    },1000)
+    },100)
 
     //create a ticket (/new or /ticket)
     client.application.commands.create({
