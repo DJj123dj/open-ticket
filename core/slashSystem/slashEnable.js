@@ -13,7 +13,6 @@ module.exports = async () => {
     var choices = []
     ids.forEach((id) => {
         const option = getoptions.getOptionsById(id)
-        console.log(option.id)
         choices.push({name:option.name,value:option.id})
     })
 
@@ -26,8 +25,8 @@ module.exports = async () => {
     var readystats = 0
 
     setInterval(() => {
-        console.log("[status] there are "+chalk.blue(readystats+" out of 8")+" commands ready! (this can take some time)")
-        if (readystats >= 8){
+        console.log("[status] there are "+chalk.blue(readystats+" out of 9")+" commands ready! (this can take some time)")
+        if (readystats >= 9){
             console.log(chalk.green("ready!"))
             console.log(chalk.blue("you can now start the bot with 'npm start'!"))
             process.exit(1)
@@ -153,6 +152,24 @@ module.exports = async () => {
                 type:"USER",
                 name:"user",
                 description:"The user to remove.",
+                required:true
+            }
+        ]
+    },sid).then(() => {
+        readystats++
+    })
+
+    //rename
+    client.application.commands.create({
+        name:"rename",
+        description:"Rename this ticket.",
+        defaultPermission:true,
+        type:"CHAT_INPUT",
+        options:[
+            {
+                type:"STRING",
+                name:"name",
+                description:"The new name (without prefix).",
                 required:true
             }
         ]

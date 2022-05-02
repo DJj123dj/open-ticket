@@ -10,33 +10,6 @@ const config = bot.config
 module.exports = () => {
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
-        if (args[0] == config.prefix+"ticket" && args[1] == "close"){
-            
-            msg.channel.messages.fetchPinned().then(msglist => {
-                var firstmsg = msglist.last()
-
-                if (firstmsg == undefined){
-                    msg.channel.send({content:"I didn't find the close button!"})
-                }
-                if (firstmsg.author.id != client.user.id){
-                    msg.channel.send({content:"You are not in a ticket!"})
-                    return
-                }
-                var CloseMsg = new discord.MessageEmbed()
-                .setColor(config.main_color)
-                .setDescription("Click [here]("+firstmsg.url+") to close this ticket.")
-                .setTitle("Close this ticket:")
-
-                msg.channel.send({embeds:[CloseMsg]})
-                if (config.logs){console.log("[command] "+config.prefix+"ticket close (user:"+msg.author.username+")")}
-            })
-            
-            
-        }
-    })
-
-    client.on("messageCreate",msg => {
-        var args = msg.content.split(" ")
         if (args[0] == config.prefix+"ticket" && args[1] == "rename"){
 
             if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){

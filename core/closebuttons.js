@@ -126,6 +126,36 @@ module.exports = () => {
         require("./ticketCloser").closeTicket(interaction,prefix,"close")
     })
 
+    client.on("interactionCreate",interaction => {
+        if (!interaction.isButton()) return
+        if (interaction.customId != "closeTicketTrue1") return
+        
+        interaction.deferUpdate()
+        const closedButtonDisabled = new discord.MessageActionRow()
+            .addComponents([
+                new discord.MessageButton()
+                    .setCustomId("closeTicketTrue1")
+                    .setDisabled(true)
+                    .setStyle("SECONDARY")
+                    .setEmoji("🔒")
+            ])
+        interaction.message.edit({components:[closedButtonDisabled]})
+
+        /**
+         * @type {String}
+         */
+        const name = interaction.channel.name
+        var prefix = ""
+        const tickets = config.options
+        tickets.forEach((ticket) => {
+            if (name.startsWith(ticket.channelprefix)){
+                prefix = ticket.channelprefix
+            }
+        })
+
+        require("./ticketCloser").closeTicket(interaction,prefix,"close")
+    })
+
 
     //NORMAL DELETE
     client.on("interactionCreate",interaction => {
