@@ -1,10 +1,16 @@
 const discord = require('discord.js')
-const config = require('./config.json')
 const intents = discord.Intents
 const client = new discord.Client({intents:[intents.FLAGS.GUILDS,intents.FLAGS.GUILD_MESSAGES,intents.FLAGS.GUILD_MEMBERS],partials:["CHANNEL"]})
 exports.client = client
 
 client.setMaxListeners(20)
+
+//change to FALSE on release
+const isDev = true
+//!!!!!!!!!!!
+
+if (isDev){const config = require('./devConfig.json')}else{const config = require('./config.json')}
+exports.config = config
 
 client.on('ready',async () => {
     const chalk = await (await import("chalk")).default
