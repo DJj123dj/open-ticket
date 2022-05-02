@@ -25,7 +25,7 @@ module.exports = () => {
             .setDisabled(false)
             .setStyle("DANGER")
             .setLabel("Delete Ticket")
-            .setEmoji("❌")
+            .setEmoji("✖️")
         )
     
     //ticket button click / create ticket

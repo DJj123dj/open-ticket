@@ -67,7 +67,7 @@ module.exports = () => {
             .setDisabled(false)
             .setStyle("DANGER")
             .setLabel("Delete Ticket")
-            .setEmoji("❌")
+            .setEmoji("✖️")
         )
     var closeRowClosed = new discord.MessageActionRow()
         .addComponents(
@@ -76,7 +76,7 @@ module.exports = () => {
             .setDisabled(false)
             .setStyle("DANGER")
             .setLabel("Delete Ticket")
-            .setEmoji("❌")
+            .setEmoji("✖️")
         )
         .addComponents(
             new discord.MessageButton()

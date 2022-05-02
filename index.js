@@ -68,9 +68,9 @@ if (process.argv[2] != "slash"){
 
 }
 
-process.on('unhandledRejection',async (error) => {
-    const chalk = await (await import("chalk")).default
-    console.log(chalk.red("ERROR: ")+error)
-})
+//process.on('unhandledRejection',async (error) => {
+//    const chalk = await (await import("chalk")).default
+//    console.log(chalk.red("ERROR: ")+error)
+//})
 
 client.login(config.auth_token)

@@ -14,6 +14,7 @@ const transcriptStorage = bot.transcriptStorage
  * @param {"delete"|"close"|"deletenotranscript"} mode
  */
 exports.closeTicket = async (interaction,prefix,mode) => {
+    const chalk = await (await import("chalk")).default
     const channelmessages = await interaction.channel.messages.fetch()
 
     channelmessages.sweep((msgSweep) => {
@@ -28,6 +29,10 @@ exports.closeTicket = async (interaction,prefix,mode) => {
 
     var getuserID = userTicketStorage.getItem(interaction.channel.id)
     var getusernameStep1 = client.users.cache.find(u => u.id === getuserID)
+
+    if (!getusernameStep1){
+        console.log(chalk.red("[database error]"),"something went wrong when getting the data in the database.\nNo panic, this error fixes itself!")
+    }
 
     var enableTranscript = true
 
@@ -61,7 +66,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setDisabled(false)
                 .setStyle("DANGER")
                 .setLabel("Delete Ticket")
-                .setEmoji("❌")
+                .setEmoji("✖️")
             )
             .addComponents(
                 new discord.MessageButton()
