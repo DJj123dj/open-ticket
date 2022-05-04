@@ -8,7 +8,6 @@ client.setMaxListeners(20)
 //change to FALSE on release
 const isDev = true
 //!!!!!!!!!!!
-//test for discord webhook
 
 if (isDev){
     try {
