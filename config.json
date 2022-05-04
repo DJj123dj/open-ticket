@@ -46,18 +46,27 @@
             
         },
         {
-            "id":"apply",
-            "name":"Apply",
-            "description":"Create this ticket if you want to apply.",
-            "icon":"💼",
-            "label":"apply",
-            "type":"ticket",
+            "id":"website",
+            "name":"Website",
+            "description":"Go to our website.",
+            "icon":"✅",
+            "label":"click here",
+            "type":"website",
 
-            "color":"green",
-            "adminroles":["role id"],
-            "channelprefix":"apply-",
-            "category":"category id",
-            "message":"You created a ticket!",
+            "url":"https://www.dj-dj.be"
+            
+        },
+        {
+            "id":"role",
+            "name":"Verify",
+            "description":"Click here to get the verify role.",
+            "icon":"👮🏼",
+            "label":"get a role",
+            "type":"role",
+
+            "color":"red",
+            "roles":["discord role id"],
+            "mode":"add&remove|remove|add",
             "enableDMMessage":true
             
         }
