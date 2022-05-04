@@ -61,6 +61,8 @@ if (process.argv[2] != "slash"){
     require("./commands/close")()
     require("./commands/delete")()
     require("./commands/rename")()
+    require("./commands/add")()
+    require("./commands/remove")()
 
     //core
     require('./core/ticketOpener')()

@@ -8,68 +8,6 @@ const config = bot.config
 //=============================
 
 module.exports = () => {
-    client.on("messageCreate",msg => {
-        var args = msg.content.split(" ")
-        if (args[0] == config.prefix+"ticket" && args[1] == "rename"){
-
-            if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
-                msg.channel.send({content:config.messages.general.nopermissions})
-                return
-            }
-
-            if (args[2] == null || args[2] == undefined || args[2] == "" || args[2] == false){
-                msg.channel.send({content:"Not enough parameters!"})
-                return
-            }
-
-            var name = args[2]
-            var oldname = msg.channel.name
-            msg.channel.messages.fetchPinned().then(msglist => {
-                if (msglist.last().author.id == client.user.id){
-                    msg.channel.send({content:"The name from the ticket is changed!"}).then(rmsg => {
-                        rmsg.channel.setName(name)
-                        if (config.logs){console.log("[system] renamed a ticket (name:"+oldname+",newname:"+name+")")}
-                    })
-                }else{
-                    msg.channel.send({content:"You are not in a ticket!"})
-                }
-            })
-            if (config.logs){console.log("[command] "+config.prefix+"ticket rename (user:"+msg.author.username+")")}
-        }
-    })
-
-    client.on("messageCreate",msg => {
-        var args = msg.content.split(" ")
-        if (args[0] == config.prefix+"ticket" && args[1] == "add"){
-
-            if (msg.member.roles.cache.has(config.botperms_role) == false && msg.author.id != "779742674932072469"){
-                msg.channel.send({content:config.messages.general.nopermissions})
-                return
-            }
-
-            msg.channel.messages.fetch().then(msglist => {
-                if (msglist.last().author.id != client.user.id){
-                    msg.channel.send({content:"You are not in a ticket!"})
-                    return
-                }
-
-                if (args[2] == null || args[2] == undefined || args[2] == "" || args[2] == false){
-                    msg.channel.send({content:"Not enough parameters!"})
-                    return
-                }
-                var user = msg.mentions.users.first()
-                if (!user){
-                    return
-                }
-                
-                msg.channel.permissionOverwrites.create(user.id, { VIEW_CHANNEL:true, ADD_REACTIONS:true,ATTACH_FILES:true, EMBED_LINKS:true, SEND_MESSAGES:true})
-                if (config.logs){console.log("[system] added user to ticket (name:"+user.username+",ticket:"+msg.channel.name+")")}
-
-            })
-            var loguser = msg.mentions.users.first()
-            if (config.logs){console.log("[command] "+config.prefix+"ticket add "+loguser.username+" (user:"+msg.author.username+")")}
-        }
-    })
 
     client.on("messageCreate",msg => {
         var args = msg.content.split(" ")
