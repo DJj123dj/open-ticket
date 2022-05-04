@@ -5,10 +5,7 @@ The version above is unstable so if you find bugs, please report them in the dis
 
 
 # open-ticket
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3) 
-[![version](https://img.shields.io/badge/version-1.4.0%20unstable-red.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.4.0) 
-[![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages) 
-[![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-1.4.0%20unstable-red.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v1.4.0)  [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages)  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
 
 This is an open-source discord ticket bot, you can configure it and it comes with cool features like transcripts & custom options!
 
