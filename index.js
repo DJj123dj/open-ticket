@@ -50,10 +50,7 @@ client.on('ready',async () => {
 
 if (process.argv[2] != "slash"){
     var storage = require('./core/dynamicdatabase/storage')
-    exports.TicketStorage = storage.ticketStorage
-    exports.userTicketStorage = storage.userTicketStorage
-    exports.transcriptStorage = storage.transcriptStorage
-    exports.ticketNumberStorage = storage.ticketNumberStorage
+    exports.storage = storage
 
     //commands
     require('./commands/ticket')()

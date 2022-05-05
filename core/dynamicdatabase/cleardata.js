@@ -24,7 +24,7 @@ ask()
 const runClear = async () => {
     const chalk = await (await import("chalk")).default
     console.log(chalk.blue("You can get a node.js warning below, just ignore that, it's not important!"))
-    const dataPaths = ["./storage/tickets","./storage/transcripts","./storage/userTickets"]
+    const dataPaths = ["./storage/dynamicDB"]
 
     var index = 0
 
@@ -32,20 +32,20 @@ const runClear = async () => {
         try {
         fs.rmdirSync(path,{recursive:true,force:true})
         }catch{
-            console.log(path,"doesn't exist")
+            //console.log(path,"doesn't exist")
         }
         setTimeout(() => {
             try{
             fs.mkdirSync(path)
             }catch{
-                console.log(path,"already exists")
+                //console.log(path,"already exists")
             }
             index++
         },500)
     })
 
     setInterval(() => {
-        if (index >= 3){
+        if (index >= 1){
             console.log(chalk.bgGreen("All local data is cleared!"))
             process.exit(1)
         }

@@ -3,9 +3,7 @@ const bot = require('../index')
 const client = bot.client
 const config = bot.config
 
-const ticketStorage = bot.TicketStorage
-const userTicketStorage = bot.userTicketStorage
-const transcriptStorage = bot.transcriptStorage
+const storage = bot.storage
 
 /**
  * 
@@ -27,11 +25,17 @@ exports.closeTicket = async (interaction,prefix,mode) => {
     const ticketuserarray = interaction.channel.name
     const ticketusername = ticketuserarray.split(prefix)[1]
 
-    var getuserID = userTicketStorage.getItem(interaction.channel.id)
-    var getusernameStep1 = client.users.cache.find(u => u.id === getuserID)
+    var getuserID = storage.get("userTicketStorage",interaction.channel.id)
+    try {
+        var getusernameStep1 = client.users.cache.find(u => u.id === getuserID)
+        var isDatabaseError = false
+    }catch{
+        var isDatabaseError = true
+    }
 
     if (!getusernameStep1){
         console.log(chalk.red("[database error]"),"something went wrong when getting the data in the database.\nNo panic, this error fixes itself!")
+        var isDatabaseError = true
     }
 
     var enableTranscript = true
@@ -40,10 +44,10 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         interaction.channel.delete()
         if (config.logs){console.log("[system] deleted a ticket (name:"+interaction.channel.name+",user:"+interaction.user.username+")")}
 
-        ticketStorage.setItem(getuserID,Number(ticketStorage.getItem(getuserID)) - 1)
+        if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
     }else if (mode == "close"){
         var permissionArray = []
-        permissionArray.push({
+        if (!isDatabaseError) permissionArray.push({
             id:getusernameStep1.id,
             type:"member",
             allow:["VIEW_CHANNEL"],
@@ -86,7 +90,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         interaction.channel.delete()
         if (config.logs){console.log("[system] deleted a ticket (name:"+interaction.channel.name+",user:"+interaction.user.username+")")}
 
-        ticketStorage.setItem(getuserID,Number(ticketStorage.getItem(getuserID)) - 1)
+        if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
     }
 
     if (enableTranscript == true && mode != "deletenotranscript"){
@@ -95,12 +99,6 @@ exports.closeTicket = async (interaction,prefix,mode) => {
             var fileattachment = await require("./transcript").createTranscript(channelmessages)
 
             if (fileattachment == false){console.log("[transcript] internal error: no transcript is created!");return}
-        }
-
-        if (getusernameStep1 == null || getusernameStep1 == undefined || getusernameStep1 == false || getusernameStep1 == ""){
-            var getuserNAME = ":usernotfound:"
-        }else {
-            var getuserNAME = getusernameStep1.username
         }
                     
         if (config.system.enable_transcript){
@@ -124,7 +122,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setDescription("You can find the transcript in the text file above!")
                 .setFooter({text:"ticket: "+ticketuserarray})
             
-            getusernameStep1.send({
+                if (!isDatabaseError) getusernameStep1.send({
                 embeds:[transcriptEmbed],
                 files:[fileattachment]
             })

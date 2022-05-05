@@ -4,10 +4,7 @@ const client = bot.client
 const config = bot.config
 
 const getconfigoptions = require("./getoptions")
-
-const ticketStorage = bot.TicketStorage
-const userTicketStorage = bot.userTicketStorage
-const transcriptStorage = bot.transcriptStorage
+const storage = bot.storage
 
 module.exports = () => {
     var closeButton = new discord.MessageActionRow()
@@ -47,7 +44,7 @@ module.exports = () => {
             //ticketoptions from config
             const currentTicketOptions = getconfigoptions.getOptionsById(customId)
 
-            if (ticketStorage.getItem(interaction.member.id) == null || ticketStorage.getItem(interaction.member.id) == "false"|| Number(ticketStorage.getItem(interaction.member.id)) < config.system.max_allowed_tickets){
+            if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
 
                 try{
                     if (config.system.enable_DM_Messages){
@@ -59,7 +56,7 @@ module.exports = () => {
                 
 
                 //update storage
-                ticketStorage.setItem(interaction.member.id,Number(ticketStorage.getItem(interaction.member.id))+1)
+                storage.set("ticketStorage",interaction.member.id,Number(storage.get("ticketStorage",interaction.member.id))+1)
                 var ticketNumber = interaction.member.user.username
 
                 //set ticketName
@@ -139,7 +136,7 @@ module.exports = () => {
                     permissionOverwrites:permissionsArray
                     
                 }).then((ticketChannel) => {
-                    userTicketStorage.setItem(ticketChannel.id,interaction.member.id)
+                    storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
                     
                     var ticketEmbed = new discord.MessageEmbed()
                         .setColor(config.main_color)
