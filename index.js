@@ -65,6 +65,7 @@ if (process.argv[2] != "slash"){
     require('./core/ticketOpener')()
     require("./core/ticketCloser").runThis()
     require("./core/closebuttons")()
+    require("./core/reactionRoles")()
 
     /**
      * We need:

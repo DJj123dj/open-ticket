@@ -11,7 +11,7 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 
 <img src="logo.png" alt="Open Ticket logo" style="height: 200px; width:200px;"/>
 
-[![q&a](https://img.shields.io/badge/Q&A-click%20here-blue.svg?style=flat-square)](./TEMPDOCS.md) 
+[![q&a](https://img.shields.io/badge/Q&A-click%20here-blue.svg?style=flat-square)](https://www.github.com/DJj123dj/open-ticket/wiki/q&a) 
 
 ## features
 - discord interaction buttons
@@ -27,8 +27,8 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - uses discord.js 13
 - configure your own ticket options
 - remove credits if you want
-- up to 6 tickets at the same time
-- change all bot messages
+- unlimited tickets at the same time
+- localisation in +5 languages (soon™)
 
 ## installation
 **You need `node.js 16` to run this project!**
@@ -50,7 +50,7 @@ if there are any errors, you can open an **issue on github** or **contact me in 
 
 ### config
 Our config documentation is moved to another file:
-[click here to view](./TEMPDOCS.md)
+[click here to view](https://www.github.com/DJj123dj/open-ticket/wiki/config-v2.0.0)
 
 ### intents & permissions
 In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
@@ -64,6 +64,6 @@ You can also configure your own permissions
 
 _v2.0.0 unstable_
 
-changelog: [click here](./TEMPDOCS.md)
+changelog: [click here](https://www.github.com/DJj123dj/open-ticket/wiki/Changelog)
 
 © 2022 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.com/invite/26vT9wt3n3)
