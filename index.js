@@ -1,4 +1,5 @@
 const discord = require('discord.js')
+const fs = require('fs')
 const intents = discord.Intents
 const client = new discord.Client({intents:[intents.FLAGS.GUILDS,intents.FLAGS.GUILD_MESSAGES,intents.FLAGS.GUILD_MEMBERS],partials:["CHANNEL"]})
 exports.client = client
@@ -6,7 +7,7 @@ exports.client = client
 client.setMaxListeners(20)
 
 //change to FALSE on release
-const isDev = true
+const isDev = false
 //!!!!!!!!!!!
 
 if (isDev){
@@ -45,8 +46,7 @@ client.on('ready',async () => {
     }
 })
 
-//checker.js must stand HERE
-//before the "if slash"
+require("./core/checker").checker()
 
 if (process.argv[2] != "slash"){
     var storage = require('./core/dynamicdatabase/storage')
@@ -74,9 +74,52 @@ if (process.argv[2] != "slash"){
 
 }
 
-process.on('unhandledRejection',async (error) => {
-    const chalk = await (await import("chalk")).default
-    console.log(chalk.red("ERROR: ")+error)
-})
+
+//=====================================================================
+//=====================================================================
+//ERROR DEBUG MODE: turn not on exept when you know what you are doing!
+var errorDebugMode = false
+//ERROR DEBUG MODE: turn not on exept when you know what you are doing!
+//=====================================================================
+//=====================================================================
+
+
+
+if (!errorDebugMode){
+    process.on("uncaughtException",async (error,origin) => {
+        const chalk = await (await import("chalk")).default
+        console.log(chalk.red("\nOPEN TICKET ERROR: ")+error+"\n"+chalk.green("\nCreate a ticket in our support server for more information!\nIf you do this, you might help us to avoid a future bug!\n"))
+    })
+}
+if (errorDebugMode) {
+    const debugLog = (debugString) => {
+        const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
+        fs.writeFileSync("./openticketdebug.txt",content+"\nDEBUG: "+debugString)
+    }
+    const errorLog = (errorString,stack) => {
+        const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
+        fs.writeFileSync("./openticketdebug.txt",content+"\nERROR: "+errorString+" STACK: "+stack)
+    }
+
+    client.on("debug", async (message) => {
+        if (message.startsWith("Provided token:")){
+            debugLog("Provided token: ***********bot token is invisible**************...")
+            return
+        }
+        debugLog(message)
+    });
+
+    const asyncfunction = async () => {
+        const chalk = await (await import("chalk")).default
+        console.log("\n\nopen-ticket debug:\n"+chalk.bgYellow("ENTERING DEBUG MODE:"))
+    }
+    asyncfunction()
+
+    process.on("uncaughtException",async (error,origin) => {
+        const chalk = await (await import("chalk")).default
+        console.log(chalk.red("\nMAIN ERROR: ")+"this error is saved in the debug file!")
+        errorLog(error.name+": "+error.message+" | origin: "+origin,error.stack)
+    })
+}
 
 client.login(config.auth_token)

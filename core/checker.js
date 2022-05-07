@@ -1,8 +1,4 @@
-/** =============================
- ** NOT READY YET
- ** =============================*/
-
-module.exports = async () => {
+exports.checker = async () => {
     const chalk = await (await import("chalk")).default
     const config = require("../config.json")
     var errorList = []
@@ -11,179 +7,275 @@ module.exports = async () => {
     var isWarn = false
     const createError = (message) => {
         isError = true
-        errorList.push("open-ticket ERROR: "+message)
+        errorList.push("open-ticket CONFIG ERROR: "+message)
     }
     const createWarn = (message) => {
         isWarn = true
-        warnList.push("open-ticket WARNING: "+message)
+        warnList.push("open-ticket CONFIG WARNING: "+message)
+    }
+
+    //validators
+    /**@param {"userid"|"roleid"|"channelid"|"serverid"|"categoryid"} mode @param {String} value @param {String} path */
+    const checkDiscord = (mode,value,path) => {
+        if (mode == "userid"){
+            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                createError("'"+path+"' | this user id is invalid")
+            }
+        }else if (mode == "channelid"){
+            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                createError("'"+path+"' | this channel id is invalid")
+            }
+        }else if (mode == "roleid"){
+            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                createError("'"+path+"' | this role id is invalid")
+            }
+        }else if (mode == "serverid"){
+            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                createError("'"+path+"' | this server id is invalid")
+            }
+        }else if (mode == "categoryid"){
+            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                createError("'"+path+"' | this category id is invalid")
+            }
+        }
+    }
+    /**@param {String} value */
+    const checkToken = (value) => {
+        if (value.includes(" ") || value.length < 40 || value.length > 70){
+            createError("'auth_token' | your token is invalid")
+        }
+    }
+
+    /**@param {String} value @param {String} path */
+    const checkColor = (value,path) => {
+        if (!/^#[a-f0-9]{6}$/.test(value)){
+            createError("'"+path+"' | invalid color!")
+        }
+    }
+
+    /**@param {String} value @param {String} path @param {Number} minLength @param {Number} maxLength @param {String} name */
+    const checkString = (value,minLength,maxLength,path,name) => {
+        if (value.length < minLength){
+            createError("'"+path+"' | "+name+" is too short!")
+        }else if (value.length > maxLength){
+            createError("'"+path+"' | "+name+" is too long!")
+        }
+    }
+
+    /**@param {"userid"|"roleid"|"channelid"|"serverid"} mode @param {String[]} arrayValue @param {String} path */
+    const checkDiscordArray = (mode,arrayValue,path) => {
+        if (mode == "userid"){
+            arrayValue.forEach((value,index) => {
+                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                    createError("'"+path+":"+index+"' | this user id is invalid")
+                }
+            })
+        }else if (mode == "channelid"){
+            arrayValue.forEach((value,index) => {
+                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                    createError("'"+path+":"+index+"' | this channel id is invalid")
+                }
+            })
+        }else if (mode == "roleid"){
+            arrayValue.forEach((value,index) => {
+                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                    createError("'"+path+":"+index+"' | this role id is invalid")
+                }
+            })
+        }else if (mode == "serverid"){
+            arrayValue.forEach((value,index) => {
+                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                    createError("'"+path+":"+index+"' | this server id is invalid")
+                }
+            })
+        }
+    }
+    /**@param {String} value @param {"string"|"boolean"|"number"} type */
+    const checkType = (value,type,path) => {
+        if (type == "boolean"){
+            if (typeof value != "boolean"){
+                createError("'"+path+"' | invalid type, this must be a boolean!")
+            }
+        }else if (type == "number"){
+            if (typeof value != "number"){
+                createError("'"+path+"' | invalid type, this must be a number!")
+            }
+        }else if (type == "string"){
+            if (typeof value != "string"){
+                createError("'"+path+"' | invalid type, this must be a string!")
+            }
+        }
+    }
+
+    const checkButtonColor = (value,path) => {
+        if (value != "none" && value != "grey" && value != "gray" && value != "black" && value != "red" && value != "green" && value != "blue" && value != "blurple"){
+            createError("'"+path+"' | invalid color, it must be one of these: none, gray, red, green, blue!")
+        }
+    }
+
+    const getButtonClass = require("./utils/getButton").rawButtonData
+    /**@param {getButtonClass} option */
+    const checkOption = (option,path) => {
+
+        //id
+        checkType(option.id,"string",path+"/id")
+        if (option.id.includes(" ")){
+            createError("'"+path+"/id' | option id can't contain space characters!")
+        }
+        if (option.id.length > 20){
+            createError("'"+path+"/id' | option id max lenght is 20")
+        }
+        
+        //name
+        checkType(option.name,"string",path+"/name")
+        if (option.name.length > 100){
+            createWarn("'"+path+"/name' | if your name is too long it maybe doesn't look so good!")
+        }
+
+        //description
+        checkType(option.description,"string",path+"/description")
+
+        //icon
+        const emojiRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi;
+        if (option.icon.length > 0){
+
+            const isEmoji = emojiRegex.test(option.icon)
+
+            if (isEmoji == false){
+                createError("'"+path+"/icon' | invalid emoji or custom discord emoji")
+            }
+        }
+        checkType(option.icon,"string",path+"/icon")
+
+        //label
+        checkType(option.label,"string",path+"/label")
+        if (option.label.length < 1 && option.icon.length < 1){
+            createError("'"+path+"' | you need at least one of these: label, icon!")
+        }
+
+        //type
+        checkType(option.type,"string",path+"/type")
+        if (option.type != "ticket" && option.type != "website" && option.type != "role"){
+            createError("'"+path+"/type' | the type must be one of these: ticket, website, role!")
+        }
+        /**@type {"ticket"|"website"|"role"} */
+        const type = option.type
+
+        if (type == "ticket"){
+            //color
+            checkType(option.color,"string",path+"/color")
+            checkButtonColor(option.color,path+"/color")
+
+            //adminroles
+            checkDiscordArray("roleid",option.adminroles,path+"/adminroles")
+            
+            //channelprefix
+            checkType(option.channelprefix,"string",path+"/channelprefix")
+            if (option.channelprefix.includes(" ")){
+                createWarn("'"+path+"/channelprefix' | this prefix can't contain spaces!")
+            }
+
+            //category
+            checkType(option.category,"string",path+"/category")
+            checkDiscord("categoryid",option.category,path+"/category")
+
+            //message
+            checkType(option.message,"string",path+"/message")
+
+            //enableDMmessage
+            checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+        }else if (type == "website"){
+            //url
+            checkType(option.url,"string",path+"/url")
+            if (option.url.includes(" ")){
+                createWarn("'"+path+"/url' | a url can't contain spaces")
+            }
+            if (option.url.length < 1){
+                createError("'"+path+"/url' | you have no url in this button")
+            }
+            if (!option.url.startsWith("https://") && !option.url.startsWith("http://") && !option.url.startsWith("discord://")){
+                createWarn("'"+path+"/url' | your url doesn't start with https or http!")
+            }
+            if (option.url.startsWith("http://")){
+                createWarn("'"+path+"/url' | your url is not a HTTPS link! discord maybe blocks this url!")
+            }
+        }else if (type == "role"){
+            //color
+            checkType(option.color,"string",path+"/color")
+            checkButtonColor(option.color,path+"/color")
+
+            //roles
+            checkDiscordArray("roleid",option.roles,path+"/roles")
+
+            //mode
+            checkType(option.mode,"string",path+"/mode")
+            if (option.mode != "add&remove" && option.mode != "add" && option.mode != "remove"){
+                createError("'"+path+"/mode' | mode must be one of these: add, remove, add&remove")
+            }
+
+            //enableDMmessage
+            checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+        }
     }
 
     //checker
+    var configArray = ["bot_name","main_color","server_id","auth_token","main_adminroles","prefix","logs","languagefile","credits","status","system","options","messages"]
+    configArray.forEach((item) => {
+        if (config[item] == undefined){
+            throw new Error("\n\nMAIN ERROR: the item '"+item+"' doesn't exist in config.json")
+        }
+    })
 
-    //token
-    if (config.auth_token.includes(" ")){
-        createError("invalid token | there are spaces in your token!")
-    }
-    if (config.auth_token.length < 40){
-        createError("invalid token | length not correct!")
-    }
 
-    //color
-    if (!config.main_color.startsWith("#")){
-        createError("color not detected | 'main_color' doesn't start with a '#'!")
-    }
-    if (config.main_color.length > 7 || config.main_color.length < 7){
-        createError("color not detected | 'main_color' is not a valid hex color!")
-    }
 
-    //admin
-    if (config.botperms_role.includes(" ")){
-        createError("invalid role id | 'botperms_role' is not a valid role id!")
-    }
-    if (config.botperms_role.length > 20|| config.botperms_role.length < 16){
-        createError("invalid role id | 'botperms_role' is not a valid role id!")
-    }
+    checkType(config.bot_name,"string","bot_name")
+    checkColor(config.main_color,"main_color")
+    checkDiscord("serverid",config.server_id,"server_id")
+    checkToken(config.auth_token)
+    checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
+    checkString(config.prefix,1,15,"prefix","prefix")
+    checkType(config.logs,"boolean","logs")
+    //languagefile (comming soon)
 
-    //prefix
-    if (config.prefix == ""){
-        createError("no prefix | 'prefix' is empty!")
-    }
-    if (config.prefix.length > 3){
-        createWarn("long prefix | your prefix is a little bit long!")
-    }
 
-    //status
-    if (config.status.enabled && (config.status.type != "PLAYING" && config.status.type != "LISTENING" && config.status.type != "WATCHING" && config.status.type != "CUSTOM")){
-        createError("status error | 'status/type' is invalid!")
-    }
-    if (config.status.enabled && config.status.text.length < 1){
-        createError("status error | 'status/text' must be at least 1 character long!")
-    }
-
-    //ticketchannel
-    if (config.system.ticket_channel.includes(" ")){
-        createWarn("invalid channel id | 'system/ticket_channel' is not a valid channel id!")
-    }
-    if (config.system.ticket_channel.length < 1){
-        createWarn("no ticket channel | 'system/ticket_channel' is empty")
-    }else if (config.system.ticket_channel.length > 20|| config.system.ticket_channel.length < 16){
-        createWarn("invalid channel id | 'system/ticket_channel' is not a valid channel id!")
-    }
-
-    //maxticket
-    if (config.system.max_allowed_tickets < 1){
-        createWarn("no tickets | if 'system/max_allowed_tickets' is under 1 you can't create any ticket")
-    }
-
-    //category
-    if (config.system.enable_category == true && config.system.ticket_category.includes(" ")){
-        createError("invalid category id | 'system/ticket_category' is not a valid category id!")
-    }
-    if (config.system.enable_category && config.system.ticket_category.length > 20 || config.system.ticket_category.length < 16){
-        createError("invalid category id | 'system/ticket_category' is not a valid category id!")
-    }
-
-    //everyoneaccess
-    if (config.system["has@everyoneaccess"] == true){
-        createWarn("access | everyone has access to the tickets!")
-    }
-
-    //memberrole
-    if (config.system.member_role.includes(" ")){
-        createError("invalid role id | 'system/member_role' is not a valid role id!")
-    }
-    if (config.system.member_role.length > 20){
-        createError("invalid role id | 'system/member_role' is not a valid role id!")
-    }
-    if (config.system.member_role == "" || config.system.member_role == " " || config.system.member_role == "false" || config.system.member_role == "null" || config.system.member_role == "0"){
-        createWarn("no member role | 'system/member_role' is not valid so technically everyone can view a ticket!")
-    }
-
-    //transcript
-    if (config.system.enable_transcript && config.system.transcript_channel.includes(" ")){
-        createError("invalid channel id | 'system/transcript_channel' is not a valid channel id!")
-    }
-    if (config.system.enable_transcript && config.system.transcript_channel.length > 20 || config.system.transcript_channel.length < 16){
-        createError("invalid channel id | 'system/transcript_channel' is not a valid channel id!")
-    }
-
-    //messages
-    if (config.messages.general.nopermissions.length < 1){
-        createError("no message | 'messages/general/nopermissions' is empty!")
-    }
-    if (config.messages.ticket.newTicketEmbed.length < 1){
-        createError("no message | 'messages/ticket/newTicketEmbed' is empty!")
-    }
-    if (config.messages.dm.alreadyCreated.length < 1){
-        createError("no message | 'messages/dm/alreadyCreated' is empty!")
-    }
-    if (config.messages.dm.newTicket.length < 1){
-        createError("no message | 'messages/dm/newTicket' is empty!")
-    }
-    if (config.messages.dm.closeTicket.length < 1){
-        createError("no message | 'messages/dm/closeTicket' is empty!")
-    }
-
-    //layout
-    const checkLayout = (layout,layoutname,color,footer,thumbnail) => {
-        if (color){
-            if (!layout.customColor.startsWith("#")){
-                createError("color not detected | 'layout/"+layoutname+"/customColor' doesn't start with a '#'!")
+    checkType(config.credits,"boolean","credits")
+    //status:
+        checkType(config.status.enabled,"boolean","status/enabled")
+        if (config.status.enabled){
+            if (config.status.type != "PLAYING" && config.status.type != "LISTENING" && config.status.type != "WATCHING"){
+                createError("'status/type' | not a valid status type!")
             }
-            if (layout.customColor.length > 7 || layout.customColor.length < 7){
-                createError("color not detected | 'layout/"+layoutname+"/customColor' is not a valid hex color!")
+            if (config.status.text.length < 1 || config.status.text.length > 40){
+                createError("'status/text' | text too long or short!")
             }
         }
-        if (footer){
-            if (layout.footer.length < 1){
-                createError("no footer | 'layout/"+layoutname+"/footer' doesn't have a footer!")
-            }
-        }
-        if (thumbnail){
-            if (!layout.thumbnailURL.startsWith("https://") && !layout.thumbnailURL.startsWith("http://")){
-                createError("thumbnail | the thumbnail url in 'layout/"+layoutname+"/thumbnailURL' is not a valid url!")
-            }
-        }
-    }
-    checkLayout(config.layout.ticketEmbed,"ticketEmbed",config.layout.ticketEmbed.customColorEnabled,config.layout.ticketEmbed.footerEnabled,config.layout.ticketEmbed.thumbnailEnabled)
-    checkLayout(config.layout.ticketMsg,"ticketMsg",config.layout.ticketMsg.customColorEnabled,config.layout.ticketMsg.footerEnabled,config.layout.ticketMsg.thumbnailEnabled)
-    checkLayout(config.layout.transcripts,"transcripts",config.layout.transcripts.customColorEnabled,false,config.layout.transcripts.thumbnailEnabled)
 
-    const checkOption = (ticket,ticketname,enabled,urlmode) => {
-        if (enabled){
-            if (ticket.icon.length > 0){
-                const emojiRegex = /\p{Emoji}/u
-                const isEmoji = emojiRegex.test(ticket.icon)
-                if (isEmoji == false){
-                    createWarn("invalid emoji | 'options/"+ticketname+"/icon' is not a valid emoji (code can be wrong)")
-                }
+    
+    //system:
+        if (config.system.ticket_channel){
+            if (config.system.ticket_channel.length < 16 || config.system.ticket_channel.length > 20 || !/^\d+$/.test(config.system.ticket_channel)){
+                createError("'system/ticket_channel' | this channel id is invalid")
             }
-            if (ticket.description.length < 1){
-                createWarn("no description | 'options/"+ticketname+"/description' is empty")
-            }
-            if (ticket.name.length < 1){
-                createWarn("no description | 'options/"+ticketname+"/name' is empty")
-            }
-            if (ticket.channel_prefix.length < 1){
-                createWarn("no description | 'options/"+ticketname+"/channel_prefix' is empty")
-            }
-            if (ticket.isURL == true && ticket.color != "red" && ticket.color != "blue" && ticket.color != "green" && ticket.color != "gray" && ticket.color != "none"){
-                createWarn("invalid button color | 'options/"+ticketname+"/color' must be one of (red,green,blue,gray,none)")
-            }
-
-            if (urlmode && (!ticket.url.startsWith("https://") && !ticket.url.startsWith("http://"))){
-                createError("url invalid | the url in 'options/"+ticketname+"/url' is not a valid url!")
-            }
+        }else createWarn("'"+path+"' | you have no ticket channel selected!")
+        checkType(config.system.max_allowed_tickets,"number","system/max_allowed_tickets")
+        checkType(config.system.enable_DM_Messages,"boolean","system/enable_DM_Messages")
+        checkType(config.system["has@everyoneaccess"],"boolean","system/has@everyoneaccess")
+        if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
+            checkDiscord("roleid",config.system.member_role,"system/member_role")
         }
-        return
-    }
+        checkType(config.system.enable_transcript,"boolean","system/enable_transcript")
+        checkType(config.system.enable_DM_transcript,"boolean","system/enable_DM_transcript")
+        if (config.system.enable_transcript){
+            checkDiscord("channelid",config.system.transcript_channel,"system/transcript_channel")
+        }
 
-    checkOption(config.options.ticket1,"ticket1",config.options.ticket1.enabled,config.options.ticket1.isURL)
-    checkOption(config.options.ticket2,"ticket2",config.options.ticket2.enabled,config.options.ticket2.isURL)
-    checkOption(config.options.ticket3,"ticket3",config.options.ticket3.enabled,config.options.ticket3.isURL)
-    checkOption(config.options.ticket4,"ticket4",config.options.ticket4.enabled,config.options.ticket4.isURL)
-    checkOption(config.options.ticket5,"ticket5",config.options.ticket5.enabled,config.options.ticket5.isURL)
-    checkOption(config.options.ticket6,"ticket6",config.options.ticket6.enabled,config.options.ticket6.isURL)
+    //options
+
+    config.options.forEach((option,index) => {
+        checkOption(option,"options/"+index)
+    })
+
+    
 
     //the end
     if (errorList.length > 0 || warnList.length > 0){
@@ -216,3 +308,5 @@ module.exports = async () => {
     }
 
 }
+
+this.checker()
