@@ -1,9 +1,3 @@
-# WARNING: this is a pre-version
-The version above is unstable so if you find bugs, please report them in the discord server
-
-[click here for a stable version](https://www.github.com/DJj123dj/open-ticket/releases/tab/v1.3.2a)
-
-
 # open-ticket
 [![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-2.0.0%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v2.0.0)  [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages)  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
 
