@@ -1,11 +1,14 @@
 {
   "name": "open-ticket",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "description": "This is an open-source discord ticket bot, you can configure it and it comes with cool features like a transcript.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "slashEnable": "node index.js slash enable",
+    "slashDisable": "node index.js slash disable",
+    "cleardata": "node ./core/dynamicdatabase/cleardata.js"
   },
   "author": "DJdj Development",
   "license": "ISC",
