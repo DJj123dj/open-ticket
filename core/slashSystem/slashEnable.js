@@ -13,7 +13,9 @@ module.exports = async () => {
     var choices = []
     ids.forEach((id) => {
         const option = getoptions.getOptionsById(id)
-        choices.push({name:option.name,value:option.id})
+        if (option.type == "ticket"){
+            choices.push({name:option.name,value:option.id})
+        }
     })
 
     /**@type {[{name:String,value:String}]} */

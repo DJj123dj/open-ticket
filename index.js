@@ -6,9 +6,13 @@ exports.client = client
 
 client.setMaxListeners(20)
 
-//change to FALSE on release
-const isDev = false
-//!!!!!!!!!!!
+if (process.argv[2]){
+    if (process.argv[2].endsWith("d")){
+        var isDev = true
+        console.log("starting in dev mode...")
+    }else{var isDev = false}
+}else{var isDev = false}
+
 
 if (isDev){
     try {
@@ -22,12 +26,14 @@ exports.config = config
 
 client.on('ready',async () => {
     const chalk = await (await import("chalk")).default
-    if (process.argv[2] != "slash"){
+    if (!process.argv[2].startsWith("slash")){
         console.log(chalk.green("open-ticket ready!"))
         if (config.logs){console.log(chalk.white("\n\nlogs:\n============"))}
         if (config.status.enabled){
             client.user.setActivity(config.status.text,{type:config.status.type})
         }
+
+        await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
     }else{
         console.log(chalk.red("STARTING IN ")+chalk.blue("SLASH MODE")+chalk.red("..."))
         console.log("logs:\n================")
@@ -46,9 +52,11 @@ client.on('ready',async () => {
     }
 })
 
-require("./core/checker").checker()
+if (!isDev){
+    require("./core/checker").checker()
+}
 
-if (process.argv[2] != "slash"){
+if (process.argv[2] && !process.argv[2].startsWith("slash")){
     var storage = require('./core/dynamicdatabase/storage')
     exports.storage = storage
 
@@ -66,11 +74,6 @@ if (process.argv[2] != "slash"){
     require("./core/ticketCloser").runThis()
     require("./core/closebuttons")()
     require("./core/reactionRoles")()
-
-    /**
-     * We need:
-     * - checker.js
-     */
 
 }
 

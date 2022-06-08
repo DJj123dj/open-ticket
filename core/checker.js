@@ -47,9 +47,18 @@ exports.checker = async () => {
     }
 
     /**@param {String} value @param {String} path */
-    const checkColor = (value,path) => {
-        if (!/^#[a-f0-9]{6}$/.test(value)){
-            createError("'"+path+"' | invalid color!")
+    const checkHexColor = (value,path) => {
+        if (!/^#[a-fA-F0-9]{3,6}$/.test(value)){
+            if (value.length < 4) return createError("'"+path+"' | hex color too short! (example: #123abc)")
+            if (value.length > 7) return createError("'"+path+"' | hex color too long! (example: #123abc)")
+            createError("'"+path+"' | invalid color! (example: #123abc)")
+        }
+    }
+
+    /**@param {String} value @param {String} path */
+    const checkEmbedColor = (value,path) => {
+        if (!['DEFAULT','WHITE','AQUA','GREEN','BLUE','YELLOW','PURPLE','LUMINOUS_VIVID_PINK','FUCHSIA','GOLD','ORANGE','RED','GREY','DARKER_GREY','NAVY','DARK_AQUA','DARK_GREEN','DARK_BLUE','DARK_PURPLE','DARK_VIVID_PINK','DARK_GOLD','DARK_ORANGE','DARK_RED','DARK_GREY','LIGHT_GREY','DARK_NAVY','BLURPLE','GREYPLE','DARK_BUT_NOT_BLACK','NOT_QUITE_BLACK','RANDOM'].includes(value)){
+            return createError("'"+path+"' | invalid color, must be a hex code or default color (more info in the wiki)")
         }
     }
 
@@ -229,7 +238,11 @@ exports.checker = async () => {
 
 
     checkType(config.bot_name,"string","bot_name")
-    checkColor(config.main_color,"main_color")
+    if (config.main_color.startsWith("#")){
+        checkHexColor(config.main_color,"main_color")
+    }else{
+        checkEmbedColor(config.main_color,"main_color")
+    }
     checkDiscord("serverid",config.server_id,"server_id")
     checkToken(config.auth_token)
     checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")

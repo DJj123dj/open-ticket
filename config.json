@@ -1,6 +1,6 @@
 {
     "bot_name":"Wumpus",
-    "main_color":"#fffff",
+    "main_color":"#ffffff",
     "server_id":"server id (for slash cmds)",
     "auth_token":"auth token",
     "main_adminroles":["discord role id"],
@@ -78,10 +78,10 @@
             "name":"Choose Your Ticket",
             "description":"You can click one of the buttons below!\nYou can also customize all the embeds now!",
             "enableFooter":true,
-            "footer":"Open Ticket v2.0.0 beta - sneakpeak",
+            "footer":"Open Ticket v2.1.0 - I'm a footer!",
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",
-            "color":"#0075e9",
+            "color":"#ffffff",
             "options":["general","apply"],
             "enableTicketExplaination":true,
             "enableMaxTicketsWarning":true

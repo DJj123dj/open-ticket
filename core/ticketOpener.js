@@ -34,15 +34,17 @@ module.exports = () => {
         }else return
         
         if (getconfigoptions.getTicketValues("id").includes(customId)){
-            
+
+            //ticketoptions from config
+            const currentTicketOptions = getconfigoptions.getOptionsById(customId)
+
+            if (currentTicketOptions == false || currentTicketOptions.type != "ticket") return interaction.reply({content:"This button is not a ticket!"})
+
             if (interaction.isButton()){
                 interaction.deferUpdate()
             }else if (interaction.isCommand()){
                 interaction.reply({content:"Your ticket is created!"})
             }
-
-            //ticketoptions from config
-            const currentTicketOptions = getconfigoptions.getOptionsById(customId)
 
             if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
 
@@ -139,6 +141,7 @@ module.exports = () => {
                     storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
                     
                     var ticketEmbed = new discord.MessageEmbed()
+                        //.setColor(config.main_color)
                         .setColor(config.main_color)
                         .setTitle("You created a ticket!")
                         .setDescription("The staff will help you soon!\n\n*Click on the button below to close the ticket!*")
