@@ -11,10 +11,7 @@ module.exports = () => {
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                msg.channel.send({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
@@ -25,7 +22,7 @@ module.exports = () => {
                     .setEmoji("🔒")
             ])
 
-            msg.channel.send({content:"**Click on the button below to close this ticket!**",components:[closebutton]})
+            msg.channel.send({embeds:[bot.errorLog.success("Close this ticket!","You can close this ticket by clicking on the button below!")],components:[closebutton]})
 
             console.log("[system] closed a ticket via command")
             
@@ -41,10 +38,7 @@ module.exports = () => {
        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                interaction.reply({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
@@ -55,7 +49,7 @@ module.exports = () => {
                     .setEmoji("🔒")
             ])
 
-            interaction.reply({content:"**Click on the button below to close this ticket!**",components:[closebutton]})
+            interaction.reply({embeds:[bot.errorLog.success("Close this ticket!","You can close this ticket by clicking on the button below!")],components:[closebutton]})
 
             console.log("[system] closed a ticket via command")
             

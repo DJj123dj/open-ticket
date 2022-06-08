@@ -50,7 +50,7 @@ module.exports = async () => {
         }
             
         }catch{
-            interaction.reply({ephemeral:true,content:"Something went wrong! Contact the owner of this bot for more information"})
+            interaction.replyinteraction.channel.send({embeds:[bot.errorLog.serverError("Something went wrong!**\nPlease try again another time!")]})
         }
     })
 }

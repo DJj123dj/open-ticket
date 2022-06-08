@@ -7,24 +7,19 @@ module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"remove")) return
         var user = msg.mentions.users.first()
-        if (!user){
-            return msg.channel.send({content:"**There is no user to remove:**\nuse: `"+config.prefix+"remove <user>`"})
-        }
+        if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage("Missing Argument `<user>`:\n`"+config.prefix+"remove <user>`")]})
 
         if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR")){
-            return msg.channel.send({content:"You have no permissions to remove someone from the channel!\nYou need the `ADMINISTRATOR` or `MANAGE_CHANNELS` permission"})
+            return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
         }
 
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                msg.channel.send({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
             msg.channel.permissionOverwrites.delete(user.id)
-            msg.channel.send({content:"Deleted "+user.tag+" from the ticket"})
+            msg.channel.send({embeds:[bot.errorLog.success("User removed!",user.tag+" is removed from this ticket")]})
             if (config.logs){console.log("[system] deleted user from ticket (name:"+user.username+",ticket:"+msg.channel.name+")")}
 
             var loguser = msg.mentions.users.first()
@@ -37,23 +32,22 @@ module.exports = () => {
         if (!interaction.isCommand()) return
         if (interaction.commandName != "remove") return
         const user = interaction.options.getUser("user")
-        const member = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
 
-        if (!member.permissions.has("MANAGE_CHANNELS") && !member.permissions.has("ADMINISTRATOR")){
-            return interaction.reply({content:"You have no permissions to remove someone from the channel!\nYou need the `ADMINISTRATOR` or `MANAGE_CHANNELS` permission"})
-        }
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return interaction.guild.members.cache.find((m) => m.id == interaction.member.id).roles.cache.has(item)}) == false && permsmember.permissions.has("ADMINISTRATOR")){
+                interaction.reply({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        
 
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                interaction.reply({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
 
             interaction.channel.permissionOverwrites.delete(user.id)
-            interaction.reply({content:"Deleted "+user.tag+" from the ticket"})
+            interaction.reply({embeds:[bot.errorLog.success("User removed!",user.tag+" is removed from this ticket")]})
             if (config.logs){console.log("[system] removed user from ticket (name:"+user.username+",ticket:"+interaction.channel.name+")")}
 
             var loguser = user

@@ -23,6 +23,7 @@ if (isDev){
     }
 }else{var config = require('./config.json')}
 exports.config = config
+exports.errorLog = require("./core/errorLogSystem")
 
 client.on('ready',async () => {
     const chalk = await (await import("chalk")).default

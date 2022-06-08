@@ -147,7 +147,7 @@ exports.runThis = () => {
 
         if (fileattachment == false){
             console.log("[transcript] internal error: no transcript is created!")
-            interaction.channel.send({content:"**Something went wrong while making the transcript!**\nPlease try again another time!"})
+            interaction.channel.send({embeds:[bot.errorLog.serverError("Something went wrong while making the transcript!**\nPlease try again another time!")]})
             return
         }
 
