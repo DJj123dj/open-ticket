@@ -87,6 +87,7 @@ exports.rawButtonData = class {
         this.channelprefix = ""
         this.category = ""
         this.message = ""
+        this.ticketmessage = ""
         
     }
 }

@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -24,7 +25,7 @@ module.exports = () => {
 
             msg.channel.send({embeds:[bot.errorLog.success("Close this ticket!","You can close this ticket by clicking on the button below!")],components:[closebutton]})
 
-            console.log("[system] closed a ticket via command")
+            log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
             
         })
         
@@ -51,7 +52,7 @@ module.exports = () => {
 
             interaction.reply({embeds:[bot.errorLog.success("Close this ticket!","You can close this ticket by clicking on the button below!")],components:[closebutton]})
 
-            console.log("[system] closed a ticket via command")
+            log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
             
         })
     })

@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 module.exports = () => {
     const helpEmbed = new discord.MessageEmbed()
@@ -22,7 +23,7 @@ module.exports = () => {
         if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove")  && !args[1].startsWith("rename")){
 
             msg.channel.send({embeds:[helpEmbed]})
-            if (config.logs){console.log("[command] "+config.prefix+"ticket help (user:"+msg.author.username+")")}
+            log("command","someone used the 'help' command",[{key:"user",value:msg.author.tag}])
         }
     })
 
@@ -31,5 +32,6 @@ module.exports = () => {
         if (interaction.commandName != "help") return
 
         interaction.reply({embeds:[helpEmbed]})
+        log("command","someone used the 'help' command",[{key:"user",value:interaction.user.tag}])
     })
 }

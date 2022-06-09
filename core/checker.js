@@ -132,13 +132,15 @@ exports.checker = async () => {
             createError("'"+path+"/id' | option id can't contain space characters!")
         }
         if (option.id.length > 20){
-            createError("'"+path+"/id' | option id max lenght is 20")
+            createError("'"+path+"/id' | option id max lenght is 20!")
         }
         
         //name
         checkType(option.name,"string",path+"/name")
         if (option.name.length > 100){
             createWarn("'"+path+"/name' | if your name is too long it maybe doesn't look so good!")
+        }else if (option.name.length < 1){
+            createError("'"+path+"/name' | there is no name!")
         }
 
         //description
@@ -193,6 +195,10 @@ exports.checker = async () => {
 
             //enableDMmessage
             checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+
+            //ticketmessage
+            checkType(option.ticketmessage,"string",path+"/ticketmessage")
+
         }else if (type == "website"){
             //url
             checkType(option.url,"string",path+"/url")
@@ -247,7 +253,6 @@ exports.checker = async () => {
     checkToken(config.auth_token)
     checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
     checkString(config.prefix,1,15,"prefix","prefix")
-    checkType(config.logs,"boolean","logs")
     //languagefile (comming soon)
 
 

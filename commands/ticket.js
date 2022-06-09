@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 /** =============================
  ** NOT READY YET
@@ -16,7 +17,7 @@ module.exports = () => {
 
 
     client.on("messageCreate", msg => {
-        if (msg.content.startsWith(config.prefix+"msg")){
+        if (msg.content.startsWith(config.prefix+"msg"||config.prefix+"message")){
             if (config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
                 msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
                 return
@@ -32,8 +33,7 @@ module.exports = () => {
             
             msg.channel.send({embeds:[embed],components:componentRows})
             
-            if (config.logs){console.log("[command] "+config.prefix+"ticket msg (user:"+msg.author.username+")")}
-            if (config.logs){console.log("[system] created ticket message")}
+            log("command","someone used the 'msg' command",[{key:"user",value:msg.author.tag},{key:"id",value:id}])
         }
     })
 
@@ -56,8 +56,7 @@ module.exports = () => {
             interaction.reply({content:"The embed is in the message below!"})
             interaction.channel.send({embeds:[embed],components:componentRows})
             
-            if (config.logs){console.log("[command] "+config.prefix+"ticket msg (user:"+interaction.member.user.username+")")}
-            if (config.logs){console.log("[system] created ticket message")}
+            log("command","someone used the 'msg' command",[{key:"user",value:interaction.user.tag},{key:"id",value:id}])
         
     })
 }

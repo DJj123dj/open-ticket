@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -20,10 +21,10 @@ module.exports = () => {
 
             msg.channel.permissionOverwrites.create(user.id, { VIEW_CHANNEL:true, ADD_REACTIONS:true,ATTACH_FILES:true, EMBED_LINKS:true, SEND_MESSAGES:true})
             msg.channel.send({embeds:[bot.errorLog.success("User Added!",user.tag+" is added to this ticket")]})
-            if (config.logs){console.log("[system] added user to ticket (name:"+user.username+",ticket:"+msg.channel.name+")")}
 
             var loguser = msg.mentions.users.first()
-            if (config.logs){console.log("[command] "+config.prefix+"add "+loguser.username+" (user:"+msg.author.username+")")}
+            log("command","someone used the 'add' command",[{key:"user",value:msg.author.tag}])
+            log("system","user added to ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"added_user",value:loguser.tag}])
         })
         
     })
@@ -47,10 +48,10 @@ module.exports = () => {
 
             interaction.channel.permissionOverwrites.create(user.id, { VIEW_CHANNEL:true, ADD_REACTIONS:true,ATTACH_FILES:true, EMBED_LINKS:true, SEND_MESSAGES:true})
             interaction.reply({embeds:[bot.errorLog.success("User Added!",user.tag+" is added to this ticket")]})
-            if (config.logs){console.log("[system] added user to ticket (name:"+user.username+",ticket:"+interaction.channel.name+")")}
 
             var loguser = user
-            if (config.logs){console.log("[command] "+config.prefix+"add "+loguser.username+" (user:"+interaction.user.username+")")}
+            log("command","someone used the 'add' command",[{key:"user",value:interaction.user.tag}])
+            log("system","user added to ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"added_user",value:loguser.tag}])
         })
 
        

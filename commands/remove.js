@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -20,10 +21,11 @@ module.exports = () => {
 
             msg.channel.permissionOverwrites.delete(user.id)
             msg.channel.send({embeds:[bot.errorLog.success("User removed!",user.tag+" is removed from this ticket")]})
-            if (config.logs){console.log("[system] deleted user from ticket (name:"+user.username+",ticket:"+msg.channel.name+")")}
 
             var loguser = msg.mentions.users.first()
-            if (config.logs){console.log("[command] "+config.prefix+"remove "+loguser.username+" (user:"+msg.author.username+")")}
+            
+            log("command","someone used the 'remove' command",[{key:"user",value:msg.author.tag}])
+            log("system","user removed from ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"removed_user",value:loguser.tag}])
         })
         
     })
@@ -48,10 +50,11 @@ module.exports = () => {
 
             interaction.channel.permissionOverwrites.delete(user.id)
             interaction.reply({embeds:[bot.errorLog.success("User removed!",user.tag+" is removed from this ticket")]})
-            if (config.logs){console.log("[system] removed user from ticket (name:"+user.username+",ticket:"+interaction.channel.name+")")}
 
             var loguser = user
-            if (config.logs){console.log("[command] "+config.prefix+"remove "+loguser.username+" (user:"+interaction.user.username+")")}
+            
+            log("command","someone used the 'remove' command",[{key:"user",value:interaction.user.tag}])
+            log("system","user removed from ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"removed_user",value:loguser.tag}])
         })
 
        

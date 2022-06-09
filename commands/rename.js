@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -35,7 +36,8 @@ module.exports = () => {
             msg.channel.setName(prefix+newname)
             msg.channel.send({embeds:[bot.errorLog.success("The name has changed!","Warning: you can only change the channel name 2 times per minute!\n(this is due discord rate limits)")]})
 
-            console.log("[system] renamed a ticket via command")
+            log("command","someone used the 'rename' command",[{key:"user",value:msg.author.tag}])
+            log("system","ticket renamed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
             
         })
         
@@ -72,7 +74,8 @@ module.exports = () => {
             interaction.channel.setName(prefix+newname)
             interaction.reply({embeds:[bot.errorLog.success("The name has changed!","Warning: you can only change the channel name 2 times per minute!\n(this is due discord rate limits)")]})
 
-            console.log("[system] renamed a ticket via command")
+            log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
+            log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
             
         })
     })

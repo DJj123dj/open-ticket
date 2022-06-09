@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 const storage = bot.storage
 
@@ -42,7 +43,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
 
     if (mode == "delete"){
         interaction.channel.delete()
-        if (config.logs){console.log("[system] deleted a ticket (name:"+interaction.channel.name+",user:"+interaction.user.username+")")}
+        log("system","deleted a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
     }else if (mode == "close"){
@@ -85,10 +86,13 @@ exports.closeTicket = async (interaction,prefix,mode) => {
             .setTitle("Closed this ticket!")
             .setDescription("Only admins can now talk in this ticket!\n\n*Click on the button below to delete this ticket*")
         interaction.channel.send({embeds:[embed],components:[closeButtonRow]})
+
+        log("system","closed a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
+
     }else if (mode == "deletenotranscript"){
         enableTranscript = false
         interaction.channel.delete()
-        if (config.logs){console.log("[system] deleted a ticket (name:"+interaction.channel.name+",user:"+interaction.user.username+")")}
+        log("system","deleted a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
     }
@@ -98,7 +102,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         if (config.system.enable_transcript || config.system.enable_DM_transcript){
             var fileattachment = await require("./transcript").createTranscript(channelmessages)
 
-            if (fileattachment == false){console.log("[transcript] internal error: no transcript is created!");return}
+            if (fileattachment == false){log("system","internal error: transcript is not created!");return}
         }
                     
         if (config.system.enable_transcript){
@@ -146,7 +150,7 @@ exports.runThis = () => {
         var fileattachment = await require("./transcript").createTranscript(channelmessages)
 
         if (fileattachment == false){
-            console.log("[transcript] internal error: no transcript is created!")
+            log("system","internal error: transcript is not created!")
             interaction.channel.send({embeds:[bot.errorLog.serverError("Something went wrong while making the transcript!**\nPlease try again another time!")]})
             return
         }

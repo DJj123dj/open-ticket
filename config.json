@@ -5,7 +5,6 @@
     "auth_token":"auth token",
     "main_adminroles":["discord role id"],
     "prefix":"!ticket ",
-    "logs":true,
     "languagefile":"english.json (currently not working)",
 
     "credits":true,
@@ -42,7 +41,8 @@
             "channelprefix":"question-",
             "category":"category id",
             "message":"You created a ticket!",
-            "enableDMMessage":true
+            "enableDMMessage":true,
+            "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*"
             
         },
         {

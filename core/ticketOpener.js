@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
 
 const getconfigoptions = require("./getoptions")
 const storage = bot.storage
@@ -32,28 +33,36 @@ module.exports = () => {
         }else if (interaction.isButton()){
             var customId = interaction.customId
         }else return
+
+        if (interaction.customId.startsWith("newT")){
+            const optionid = interaction.customId.split("newT")[1]
+            if (!optionid){
+                interaction.reply({embeds:[bot.errorLog.serverError("This ticket doesn't exist anymore!")]})
+                return
+            }
+        }
         
         if (getconfigoptions.getTicketValues("id").includes(customId)){
 
             //ticketoptions from config
             const currentTicketOptions = getconfigoptions.getOptionsById(customId)
 
-            if (currentTicketOptions == false || currentTicketOptions.type != "ticket") return interaction.reply({content:"This button is not a ticket!"})
+            if (currentTicketOptions == false || currentTicketOptions.type != "ticket") return interaction.reply({embeds:[bot.errorLog.serverError("This option is not a ticket but another type!")]})
 
             if (interaction.isButton()){
                 interaction.deferUpdate()
             }else if (interaction.isCommand()){
-                interaction.reply({content:"Your ticket is created!"})
+                interaction.reply({embeds:[bot.errorLog.success("Ticket Created!","Your ticket is created, you can detect it by a ping!")]})
             }
 
             if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
 
                 try{
                     if (config.system.enable_DM_Messages){
-                        interaction.member.send({content:currentTicketOptions.message})
+                        interaction.member.send({embeds:[bot.errorLog.custom("New Ticket!",currentTicketOptions.message,":ticket:",config.main_color)]})
                     }
                 }
-                catch{console.log("[system] can't send DM to member, member doesn't allow dm's")}
+                catch{log("system","can't send DM to member, member doesn't allow dm's")}
                 
                 
 
@@ -141,28 +150,28 @@ module.exports = () => {
                     storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
                     
                     var ticketEmbed = new discord.MessageEmbed()
-                        //.setColor(config.main_color)
                         .setColor(config.main_color)
-                        .setTitle("You created a ticket!")
-                        .setDescription("The staff will help you soon!\n\n*Click on the button below to close the ticket!*")
+                        .setTitle(currentTicketOptions.name)
+                    if (currentTicketOptions.ticketmessage.length > 0) ticketEmbed.setDescription(currentTicketOptions.ticketmessage)
                 
                     ticketChannel.send({
-                        content:"<@"+interaction.member.id+"> @everyone",
+                        content:"<@"+interaction.member.id+"> @here",
                         embeds:[ticketEmbed],
                         components:[closeButton]
                     
                     }).then(firstmsg => {
                         firstmsg.pin()
                     })
-                    if (config.logs){console.log("[system] created a new ticket (name:"+logsname+",user:"+interaction.user.username+")")}
+                    
+                    log("system","created new ticket",[{key:"ticket",value:ticketName},{key:"user",value:interaction.user.tag}])
                 })
             }else{
                 try {
                     if (config.system.enable_DM_Messages){
-                        interaction.member.send("you already have the maximum number of tickets allowed!")
+                        interaction.member.send({embeds:[bot.errorLog.warning("Max amount reached!","You reached the maximum number of tickets allowed!\nSo you can't create a new one!")]})
                     }
                 }
-                catch{console.log("[system] can't send DM to member, member doesn't allow dm's")}
+                catch{log("system","can't send DM to member, member doesn't allow dm's")}
                 
                 
             }

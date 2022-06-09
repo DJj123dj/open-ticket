@@ -30,7 +30,7 @@ exports.createTranscript = async (messagecollection) => {
         const filebuff = Buffer.from(filestring,"utf-8")
         return new discord.MessageAttachment(filebuff,"transcript.txt")
     }catch(err){
-        console.log(err)
+        console.log("[error] "+err)
         return false
     }
 }

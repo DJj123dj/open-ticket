@@ -24,15 +24,21 @@ if (isDev){
 }else{var config = require('./config.json')}
 exports.config = config
 exports.errorLog = require("./core/errorLogSystem")
+const log = this.errorLog.log
 
 client.on('ready',async () => {
     const chalk = await (await import("chalk")).default
+
     if (!process.argv[2].startsWith("slash")){
-        console.log(chalk.green("open-ticket ready!"))
-        if (config.logs){console.log(chalk.white("\n\nlogs:\n============"))}
+        console.log(chalk.red("WELCOME TO OPEN TICKET!"))
+        log("info","open ticket ready")
+
+        console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
             client.user.setActivity(config.status.text,{type:config.status.type})
         }
+
+        log("system","bot logged in!")
 
         await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
     }else{

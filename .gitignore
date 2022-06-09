@@ -9,3 +9,4 @@ devConfig5.json
 .DS_Store
 openticketdebug.txt
 developerChangelog.md
+storage/dynamicDB/
