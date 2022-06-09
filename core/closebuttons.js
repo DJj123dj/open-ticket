@@ -86,6 +86,32 @@ module.exports = () => {
             .setLabel("Send Transcript File")
             .setEmoji("📄")
         )
+        .addComponents(
+            new discord.MessageButton()
+            .setCustomId("reopenTicket")
+            .setDisabled(false)
+            .setStyle("SUCCESS")
+            .setLabel("Re-Open Ticket")
+            .setEmoji("✔")
+        )
+    
+    var closeRowDisabled = new discord.MessageActionRow()
+        .addComponents(
+            new discord.MessageButton()
+            .setCustomId("closeTicket")
+            .setDisabled(true)
+            .setStyle("SECONDARY")
+            .setLabel("Close Ticket")
+            .setEmoji("🔒")
+        )
+        .addComponents(
+            new discord.MessageButton()
+            .setCustomId("deleteTicket")
+            .setDisabled(true)
+            .setStyle("DANGER")
+            .setLabel("Delete Ticket")
+            .setEmoji("✖️")
+        )
 
 
     //NORMAL CLOSE
@@ -109,7 +135,7 @@ module.exports = () => {
         if (interaction.customId != "closeTicketTrue") return
         
         interaction.deferUpdate()
-        interaction.message.edit({components:[closeRowClosed]})
+        interaction.message.edit({components:[closeRowDisabled]})
 
         /**
          * @type {String}
@@ -140,6 +166,10 @@ module.exports = () => {
                     .setEmoji("🔒")
             ])
         interaction.message.edit({components:[closedButtonDisabled]})
+
+        interaction.channel.messages.fetchPinned().then((messages) => {
+            messages.first().edit({components:[closeRowDisabled]})
+        })
 
         /**
          * @type {String}

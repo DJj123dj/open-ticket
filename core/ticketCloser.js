@@ -81,10 +81,19 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setLabel("Send Transcript File")
                 .setEmoji("📄")
             )
+            .addComponents(
+                new discord.MessageButton()
+                .setCustomId("reopenTicket")
+                .setDisabled(false)
+                .setStyle("SUCCESS")
+                .setLabel("Re-Open Ticket")
+                .setEmoji("✔")
+            )
+            
         const embed = new discord.MessageEmbed()
             .setColor(config.main_color)
-            .setTitle("Closed this ticket!")
-            .setDescription("Only admins can now talk in this ticket!\n\n*Click on the button below to delete this ticket*")
+            .setTitle(":lock: Closed this ticket! :lock:")
+            .setDescription("Only admins can talk in this ticket now!\n\n*Click on the button below to delete this ticket or to re-open it!*")
         interaction.channel.send({embeds:[embed],components:[closeButtonRow]})
 
         log("system","closed a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
