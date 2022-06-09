@@ -97,5 +97,6 @@ module.exports = () => {
 
         interaction.message.edit({embeds:[embed],components:[closeRowNormal]})
 
+        log("system","re-opened a ticket",[{key:"ticket",value:interaction.channel.name},{key:"user",value:interaction.user.tag}])
     })
 }
