@@ -26,11 +26,11 @@ module.exports = async () => {
 
     var readystats = 0
 
-    process.stdout.write("[status] there are "+chalk.blue("0 out of 9")+" commands ready! (this can take up to 40 seconds)")
+    process.stdout.write("[status] there are "+chalk.blue("0 out of 10")+" commands ready! (this can take up to 40 seconds)")
     setInterval(() => {
         process.stdout.cursorTo(0)
         process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 9")+" commands ready! (this can take up to 40 seconds)")
-        if (readystats >= 9){
+        if (readystats >= 10){
             console.log(chalk.green("\nready!"))
             console.log(chalk.bgBlue("you can now start the bot with 'npm start'!"))
             process.exit(1)
@@ -177,6 +177,16 @@ module.exports = async () => {
                 required:true
             }
         ]
+    },sid).then(() => {
+        readystats++
+    })
+
+    //rename
+    client.application.commands.create({
+        name:"reopen",
+        description:"Reopen this ticket.",
+        defaultPermission:true,
+        type:"CHAT_INPUT"
     },sid).then(() => {
         readystats++
     })

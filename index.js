@@ -4,7 +4,7 @@ const intents = discord.Intents
 const client = new discord.Client({intents:[intents.FLAGS.GUILDS,intents.FLAGS.GUILD_MESSAGES,intents.FLAGS.GUILD_MEMBERS],partials:["CHANNEL"]})
 exports.client = client
 
-client.setMaxListeners(20)
+client.setMaxListeners(25)
 
 if (process.argv[2]){
     if (process.argv[2].endsWith("d")){
@@ -75,6 +75,7 @@ if (process.argv[2] && !process.argv[2].startsWith("slash")){
     require("./commands/rename")()
     require("./commands/add")()
     require("./commands/remove")()
+    require("./commands/reopen")()
 
     //core
     require('./core/ticketOpener')()
