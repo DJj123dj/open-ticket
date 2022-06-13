@@ -4,7 +4,7 @@ const intents = discord.Intents
 const client = new discord.Client({intents:[intents.FLAGS.GUILDS,intents.FLAGS.GUILD_MESSAGES,intents.FLAGS.GUILD_MEMBERS],partials:["CHANNEL"]})
 exports.client = client
 
-client.setMaxListeners(25)
+client.setMaxListeners(30)
 
 if (process.argv[2]){
     if (process.argv[2].endsWith("d")){
