@@ -143,7 +143,7 @@ module.exports = () => {
                 interaction.guild.channels.create(ticketName,{
                     type:"GUILD_TEXT",
                     parent:newTicketCategory,
-                    reason:"A new ticket was created",
+                    reason:"A new ticket is created",
                     permissionOverwrites:permissionsArray
                     
                 }).then((ticketChannel) => {
