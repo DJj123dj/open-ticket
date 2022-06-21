@@ -13,7 +13,7 @@ if (process.argv[2]){
     }else{var isDev = false}
 }else{var isDev = false}
 
-
+exports.developerMode = isDev
 if (isDev){
     try {
         var config = require('./devConfig.json')
@@ -25,6 +25,9 @@ if (isDev){
 exports.config = config
 exports.errorLog = require("./core/errorLogSystem")
 const log = this.errorLog.log
+
+const language = require("./core/languageManager").language
+exports.language = language
 
 client.on('ready',async () => {
     const chalk = await (await import("chalk")).default

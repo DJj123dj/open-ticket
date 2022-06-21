@@ -5,7 +5,7 @@
     "auth_token":"auth token",
     "main_adminroles":["discord role id"],
     "prefix":"!ticket ",
-    "languagefile":"english.json (currently not working)",
+    "languagefile":"english",
 
     "credits":true,
     "status":{

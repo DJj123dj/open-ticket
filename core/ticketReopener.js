@@ -3,7 +3,7 @@ const bot = require('../index')
 const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
-
+const l = bot.language
 const storage = bot.storage
 
 module.exports = () => {

@@ -3,6 +3,7 @@ const bot = require('../index')
 const client = bot.client
 const config = bot.config
 const getButton = require("./utils/getButton")
+const l = bot.language
 
 /**
  * 

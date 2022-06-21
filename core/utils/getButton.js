@@ -2,6 +2,7 @@ const discord = require("discord.js")
 const bot = require("../../index")
 const config = bot.config
 const getoptions = require("../getoptions")
+const l = bot.language
 
 /**@returns {"DANGER"|"SUCCESS"|"PRIMARY"|"SECONDARY"} */
 const getColor = (color) => {
