@@ -59,7 +59,7 @@ module.exports = () => {
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Close Ticket")
+            .setLabel(l.buttons.close)
             .setEmoji("🔒")
         )
         .addComponents(
@@ -67,7 +67,7 @@ module.exports = () => {
             .setCustomId("deleteTicket")
             .setDisabled(false)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
     var closeRowClosed = new discord.MessageActionRow()
@@ -76,7 +76,7 @@ module.exports = () => {
             .setCustomId("deleteTicket1")
             .setDisabled(false)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
         .addComponents(
@@ -84,7 +84,7 @@ module.exports = () => {
             .setCustomId("sendTranscript")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Send Transcript File")
+            .setLabel(l.buttons.sendTranscript)
             .setEmoji("📄")
         )
         .addComponents(
@@ -92,7 +92,7 @@ module.exports = () => {
             .setCustomId("reopenTicket")
             .setDisabled(false)
             .setStyle("SUCCESS")
-            .setLabel("Re-Open Ticket")
+            .setLabel(l.buttons.reopen)
             .setEmoji("✔")
         )
     
@@ -102,7 +102,7 @@ module.exports = () => {
             .setCustomId("closeTicket")
             .setDisabled(true)
             .setStyle("SECONDARY")
-            .setLabel("Close Ticket")
+            .setLabel(l.buttons.close)
             .setEmoji("🔒")
         )
         .addComponents(
@@ -110,7 +110,7 @@ module.exports = () => {
             .setCustomId("deleteTicket")
             .setDisabled(true)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
 

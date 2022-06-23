@@ -15,7 +15,7 @@ module.exports = () => {
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Close Ticket")
+            .setLabel(l.buttons.close)
             .setEmoji("🔒")
         )
         .addComponents(
@@ -23,7 +23,7 @@ module.exports = () => {
             .setCustomId("deleteTicket")
             .setDisabled(false)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
     
@@ -38,7 +38,7 @@ module.exports = () => {
         if (interaction.customId.startsWith("newT")){
             const optionid = interaction.customId.split("newT")[1]
             if (!optionid){
-                interaction.reply({embeds:[bot.errorLog.serverError("This ticket doesn't exist anymore!")]})
+                interaction.reply({embeds:[bot.errorLog.serverError(l.errors.ticketDoesntExist)]})
                 return
             }
         }
@@ -48,21 +48,19 @@ module.exports = () => {
             //ticketoptions from config
             const currentTicketOptions = getconfigoptions.getOptionsById(customId)
 
-            if (currentTicketOptions.type != "ticket") return interaction.reply({embeds:bot.errorLog.serverError("This option isn't a ticket!")})
-
-            if (currentTicketOptions == false || currentTicketOptions.type != "ticket") return interaction.reply({embeds:[bot.errorLog.serverError("This option is not a ticket but another type!")]})
+            if (currentTicketOptions == false || currentTicketOptions.type != "ticket") return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
 
             if (interaction.isButton()){
                 interaction.deferUpdate()
             }else if (interaction.isCommand()){
-                interaction.reply({embeds:[bot.errorLog.success("Ticket Created!","Your ticket is created, you can detect it by a ping!")]})
+                interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)]})
             }
 
             if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
 
                 try{
                     if (config.system.enable_DM_Messages){
-                        interaction.member.send({embeds:[bot.errorLog.custom("New Ticket!",currentTicketOptions.message,":ticket:",config.main_color)]})
+                        interaction.member.send({embeds:[bot.errorLog.custom(l.messages.newTicketDmTitle,currentTicketOptions.message,":ticket:",config.main_color)]})
                     }
                 }
                 catch{log("system","can't send DM to member, member doesn't allow dm's")}
@@ -171,7 +169,7 @@ module.exports = () => {
             }else{
                 try {
                     if (config.system.enable_DM_Messages){
-                        interaction.member.send({embeds:[bot.errorLog.warning("Max amount reached!","You reached the maximum number of tickets allowed!\nSo you can't create a new one!")]})
+                        interaction.member.send({embeds:[bot.errorLog.warning(l.errors.maxAmountTitle,l.errors.maxAmountDescription)]})
                     }
                 }
                 catch{log("system","can't send DM to member, member doesn't allow dm's")}

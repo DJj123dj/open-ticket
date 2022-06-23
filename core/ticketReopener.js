@@ -13,7 +13,7 @@ module.exports = () => {
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Close Ticket")
+            .setLabel(l.buttons.close)
             .setEmoji("🔒")
         )
         .addComponents(
@@ -21,7 +21,7 @@ module.exports = () => {
             .setCustomId("deleteTicket")
             .setDisabled(false)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
     
@@ -31,7 +31,7 @@ module.exports = () => {
             .setCustomId("deleteTicket1")
             .setDisabled(false)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
         .addComponents(
@@ -39,7 +39,7 @@ module.exports = () => {
             .setCustomId("sendTranscript")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Send Transcript File")
+            .setLabel(l.buttons.sendTranscript)
             .setEmoji("📄")
         )
         .addComponents(
@@ -47,7 +47,7 @@ module.exports = () => {
             .setCustomId("reopenTicket")
             .setDisabled(false)
             .setStyle("SUCCESS")
-            .setLabel("Re-Open Ticket")
+            .setLabel(l.buttons.reopen)
             .setEmoji("✔")
         )
     
@@ -119,8 +119,8 @@ module.exports = () => {
         
         const embed = new discord.MessageEmbed()
             .setColor(config.main_color)
-            .setTitle(":unlock: Re-Opened this ticket! :unlock:")
-            .setDescription("Feel free to talk again!")
+            .setTitle(":unlock: "+l.messages.reopenTitle+" :unlock:")
+            .setDescription(l.messages.reopenDescription)
 
         interaction.message.edit({embeds:[embed],components:[closeRowNormal]})
 
@@ -186,8 +186,8 @@ module.exports = () => {
         
         const embed = new discord.MessageEmbed()
             .setColor(config.main_color)
-            .setTitle(":unlock: Re-Opened this ticket! :unlock:")
-            .setDescription("Feel free to talk again!")
+            .setTitle(":unlock: "+l.messages.reopenTitle+" :unlock:")
+            .setDescription(l.messages.reopenDescription)
 
         interaction.message.edit({content:null,embeds:[embed],components:[closeRowNormal]})
 

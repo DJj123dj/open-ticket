@@ -19,10 +19,10 @@ const errorLog = async () => {
     console.log(chalk.red("Something went wrong when loading the language!")+"\nCheck the config file or create a ticket in our server!")
 }
 
-const successLog = async () => {
+const successLog = async (language) => {
     const chalk = await (await import("chalk")).default
 
-    console.log(chalk.green("loaded language file..."))
+    console.log(chalk.green("loaded language "+language+"..."))
 }
 
 if (!localLanguage){
@@ -33,5 +33,5 @@ if (!localLanguage){
     runError()
 }else{
     exports.language = localLanguage
-    successLog()
+    successLog(config.languagefile)
 }

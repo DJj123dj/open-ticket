@@ -18,7 +18,7 @@ module.exports = async () => {
         if (interaction.customId.startsWith("newR")){
             const optionid = interaction.customId.split("newR")[1]
             if (!optionid){
-                interaction.reply({embeds:[bot.errorLog.serverError("This role doesn't exist anymore!")]})
+                interaction.reply({embeds:[bot.errorLog.serverError(l.errors.roleDoesntExist)]})
                 return
             }
         }
@@ -56,7 +56,7 @@ module.exports = async () => {
         }
             
         }catch{
-            interaction.replyinteraction.channel.send({embeds:[bot.errorLog.serverError("Something went wrong!**\nPlease try again another time!")]})
+            interaction.replyinteraction.channel.send({embeds:[bot.errorLog.serverError(l.errors.somethingWentWrong)]})
         }
     })
 }

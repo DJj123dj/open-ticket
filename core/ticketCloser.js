@@ -70,7 +70,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setCustomId("deleteTicket1")
                 .setDisabled(false)
                 .setStyle("DANGER")
-                .setLabel("Delete Ticket")
+                .setLabel(l.buttons.delete)
                 .setEmoji("✖️")
             )
             .addComponents(
@@ -78,7 +78,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setCustomId("sendTranscript")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
-                .setLabel("Send Transcript File")
+                .setLabel(l.buttons.sendTranscript)
                 .setEmoji("📄")
             )
             .addComponents(
@@ -86,14 +86,14 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setCustomId("reopenTicket")
                 .setDisabled(false)
                 .setStyle("SUCCESS")
-                .setLabel("Re-Open Ticket")
+                .setLabel(l.buttons.reopen)
                 .setEmoji("✔")
             )
             
         const embed = new discord.MessageEmbed()
             .setColor(config.main_color)
-            .setTitle(":lock: Closed this ticket! :lock:")
-            .setDescription("Only admins can talk in this ticket now!\n\n*Click on the button below to delete this ticket or to re-open it!*")
+            .setTitle(":lock: "+l.messages.closedTitle+" :lock:")
+            .setDescription(l.messages.closedDescription)
         interaction.channel.send({embeds:[embed],components:[closeButtonRow]})
 
         log("system","closed a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
@@ -117,9 +117,9 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         if (config.system.enable_transcript){
             const transcriptEmbed = new discord.MessageEmbed()
                 .setColor(config.main_color)
-                .setTitle("A new transcript is here!")
+                .setTitle(l.messages.newTranscriptTitle)
                 .setAuthor({name:interaction.user.username,iconURL:interaction.user.displayAvatarURL({format:"png"})})
-                .setDescription("You can find the transcript in the text file above!")
+                .setDescription(l.messages.newTranscriptDescription)
                 .setFooter({text:"ticket: "+ticketuserarray})
             
             interaction.guild.channels.cache.find(c => c.id == config.system.transcript_channel).send({
@@ -131,8 +131,8 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         if (config.system.enable_DM_transcript){
             const transcriptEmbed = new discord.MessageEmbed()
                 .setColor(config.main_color)
-                .setTitle("Here is a transcript of your ticket!")
-                .setDescription("You can find the transcript in the text file above!")
+                .setTitle(l.messages.newTranscriptTitle)
+                .setDescription(l.messages.newTranscriptDescription)
                 .setFooter({text:"ticket: "+ticketuserarray})
             
                 if (!isDatabaseError) getusernameStep1.send({
@@ -160,10 +160,10 @@ exports.runThis = () => {
 
         if (fileattachment == false){
             log("system","internal error: transcript is not created!")
-            interaction.channel.send({embeds:[bot.errorLog.serverError("Something went wrong while making the transcript!**\nPlease try again another time!")]})
+            interaction.channel.send({embeds:[bot.errorLog.serverError(l.errors.somethingWentWrongTranscript)]})
             return
         }
 
-        interaction.channel.send({content:"**Here is the transcript:**",files:[fileattachment]})
+        interaction.channel.send({content:"**"+l.messages.hereIsTheTranscript+"**",files:[fileattachment]})
     })
 }

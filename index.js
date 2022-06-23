@@ -34,7 +34,7 @@ client.on('ready',async () => {
 
     if (!process.argv[2].startsWith("slash")){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
-        log("info","open ticket ready",[{key:"version",value:require("./package.json").version}])
+        log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
