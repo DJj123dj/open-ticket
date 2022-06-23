@@ -22,7 +22,7 @@ module.exports = () => {
 
             const id = msg.content.split(config.prefix+"msg")[1].substring(1) ? msg.content.split(config.prefix+"msg")[1].substring(1) : false
 
-            if (!id) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage("Missing Argument `<id>`:\n`"+config.prefix+"msg <id>`")]})
+            if (!id) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<id>`:\n`"+config.prefix+"msg <id>`")]})
             if (!msgIds.includes(id)) return msg.channel.send({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds)]})
 
 
@@ -50,7 +50,7 @@ module.exports = () => {
 
             const {embed,componentRows} = require("../core/ticketMessageEmbed").createEmbed(id)
             
-            interaction.reply({content:"The embed is in the message below!"})
+            interaction.reply({content:l.commands.ticketWarning})
             interaction.channel.send({embeds:[embed],components:componentRows})
             
             log("command","someone used the 'msg' command",[{key:"user",value:interaction.user.tag},{key:"id",value:id}])

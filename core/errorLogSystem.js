@@ -11,14 +11,14 @@ const embed = discord.MessageEmbed
 
 exports.noPermsMessage = new embed()
     .setColor("RED")
-    .setTitle(":x: No Permissions! :x:")
-    .setDescription("You don't have the correct roles to run this command!\nYou need the `ADMINISTRATOR` permission or be in the list of allowed roles!")
+    .setTitle(":x: "+l.errors.noPermsTitle+" :x:")
+    .setDescription(l.errors.noPermsDescription)
 
 /**@param {String} message */
 exports.invalidArgsMessage = (message) => {
     var x =  new embed()
         .setColor("RED")
-        .setTitle(":x: Invalid Arguments! :x:")
+        .setTitle(":x: "+l.errors.missingArgsTitle+" :x:")
         .setDescription(message)
 
     return x
@@ -28,7 +28,7 @@ exports.invalidArgsMessage = (message) => {
 exports.serverError = (message) => {
     var x = new embed()
         .setColor("ORANGE")
-        .setTitle(":warning: Bot Error! :warning:")
+        .setTitle(":warning: "+l.errors.boterror+" :warning:")
         .setDescription(message)
 
     return x
@@ -38,15 +38,15 @@ exports.serverError = (message) => {
 exports.invalidIdChooseFromList = (list) => {
     var x = new embed()
         .setColor("RED")
-        .setTitle(":x: Invalid ID :x:")
-        .setDescription("Choose one of the id's below:\n`"+list.join("`\n`")+"`")
+        .setTitle(":x: "+l.errors.chooseFromListTitle+" :x:")
+        .setDescription(l.errors.chooseFromListDescription+"\n`"+list.join("`\n`")+"`")
     return x
 }
 
 exports.notInATicket = new embed()
     .setColor("RED")
-    .setTitle(":x: You are not in a ticket! :x:")
-    .setDescription("This command doesn't work outside tickets!")
+    .setTitle(":x: "+l.errors.notInTicketTitle+" :x:")
+    .setDescription(l.errors.notInTicketDescription)
 
 
 /**@param {String} message @param {String} title */
@@ -79,6 +79,12 @@ exports.custom = (title,message,emoji,color) => {
     return x
 }
 
+const normalLog = (debugString) => {
+    const fs = require("fs")
+    const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
+    fs.writeFileSync("./openticketdebug.txt",content+"\nSYSTEM: "+debugString)
+}
+
 /**
  * 
  * @param {"system"|"command"|"info"} type 
@@ -104,4 +110,8 @@ exports.log = async (type,message,params) => {
     }else if (type == "system"){
         console.log(chalk.green("[system] ")+message+" "+chalk.yellow(parameters))
     }
+
+    const cd = new Date()
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+    normalLog("["+cd.getDate()+" "+months[cd.getMonth()-1]+" "+cd.getFullYear()+" - "+cd.getSeconds()+":"+cd.getMinutes()+":"+cd.getHours()+"] ["+type+"] "+message+" "+parameters)
 }

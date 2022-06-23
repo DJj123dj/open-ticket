@@ -14,6 +14,9 @@ if (process.argv[2]){
 }else{var isDev = false}
 
 exports.developerMode = isDev
+const language = require("./core/languageManager").language
+exports.language = language
+
 if (isDev){
     try {
         var config = require('./devConfig.json')
@@ -26,15 +29,12 @@ exports.config = config
 exports.errorLog = require("./core/errorLogSystem")
 const log = this.errorLog.log
 
-const language = require("./core/languageManager").language
-exports.language = language
-
 client.on('ready',async () => {
     const chalk = await (await import("chalk")).default
 
     if (!process.argv[2].startsWith("slash")){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
-        log("info","open ticket ready")
+        log("info","open ticket ready",[{key:"version",value:require("./package.json").version}])
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
@@ -89,52 +89,27 @@ if (process.argv[2] && !process.argv[2].startsWith("slash")){
 
 }
 
-
-//=====================================================================
-//=====================================================================
-//ERROR DEBUG MODE: turn not on exept when you know what you are doing!
-var errorDebugMode = false
-//ERROR DEBUG MODE: turn not on exept when you know what you are doing!
-//=====================================================================
-//=====================================================================
-
-
-
-if (!errorDebugMode){
-    process.on("uncaughtException",async (error,origin) => {
-        const chalk = await (await import("chalk")).default
-        console.log(chalk.red("\nOPEN TICKET ERROR: ")+error+"\n"+chalk.green("\nCreate a ticket in our support server for more information!\nIf you do this, you might help us to avoid a future bug!\n"))
-    })
+const debugLog = (debugString) => {
+    const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
+    fs.writeFileSync("./openticketdebug.txt",content+"\nDEBUG: "+debugString)
 }
-if (errorDebugMode) {
-    const debugLog = (debugString) => {
-        const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
-        fs.writeFileSync("./openticketdebug.txt",content+"\nDEBUG: "+debugString)
-    }
-    const errorLog = (errorString,stack) => {
-        const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
-        fs.writeFileSync("./openticketdebug.txt",content+"\nERROR: "+errorString+" STACK: "+stack)
-    }
-
-    client.on("debug", async (message) => {
-        if (message.startsWith("Provided token:")){
-            debugLog("Provided token: ***********bot token is invisible**************...")
-            return
-        }
-        debugLog(message)
-    });
-
-    const asyncfunction = async () => {
-        const chalk = await (await import("chalk")).default
-        console.log("\n\nopen-ticket debug:\n"+chalk.bgYellow("ENTERING DEBUG MODE:"))
-    }
-    asyncfunction()
-
-    process.on("uncaughtException",async (error,origin) => {
-        const chalk = await (await import("chalk")).default
-        console.log(chalk.red("\nMAIN ERROR: ")+"this error is saved in the debug file!")
-        errorLog(error.name+": "+error.message+" | origin: "+origin,error.stack)
-    })
+const errorLog = (errorString,stack) => {
+    const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
+    fs.writeFileSync("./openticketdebug.txt",content+"\nERROR: "+errorString+" STACK: "+stack)
 }
+
+client.on("debug", async (message) => {
+    if (message.startsWith("Provided token:")){
+        debugLog("Provided token: ***********bot token is invisible**************...")
+        return
+    }
+    debugLog(message)
+});
+
+process.on("uncaughtException",async (error,origin) => {
+    const chalk = await (await import("chalk")).default
+    console.log(chalk.red("\nOPEN TICKET ERROR: ")+error+"\n"+chalk.green("\nCreate a ticket in our support server for more information!\nIf you do this, you might help us to avoid a future bug!\n"))
+    errorLog(error.name+": "+error.message+" | origin: "+origin,error.stack)
+})
 
 client.login(config.auth_token)

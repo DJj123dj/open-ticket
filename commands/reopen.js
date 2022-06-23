@@ -23,7 +23,7 @@ module.exports = () => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
-            msg.channel.send({embeds:[bot.errorLog.success("Re-Open this ticket!","You can re-open this ticket by clicking on the button below!")],components:[reopenCommandBar]})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
 
             
             log("command","someone used the 'reopen' command",[{key:"user",value:msg.author.tag}])
@@ -40,7 +40,7 @@ module.exports = () => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
-            interaction.reply({embeds:[bot.errorLog.success("Re-Open this ticket!","You can re-open this ticket by clicking on the button below!")],components:[reopenCommandBar]})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
 
             
             log("command","someone used the 'reopen' command",[{key:"user",value:interaction.user.tag}])

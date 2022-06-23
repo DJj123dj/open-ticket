@@ -48,6 +48,8 @@ module.exports = () => {
             //ticketoptions from config
             const currentTicketOptions = getconfigoptions.getOptionsById(customId)
 
+            if (currentTicketOptions.type != "ticket") return interaction.reply({embeds:bot.errorLog.serverError("This option isn't a ticket!")})
+
             if (currentTicketOptions == false || currentTicketOptions.type != "ticket") return interaction.reply({embeds:[bot.errorLog.serverError("This option is not a ticket but another type!")]})
 
             if (interaction.isButton()){

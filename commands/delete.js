@@ -24,7 +24,7 @@ module.exports = () => {
                     .setEmoji("❌")
             ])
 
-            msg.channel.send({embeds:[bot.errorLog.success("Delete this ticket!","You can delete this ticket by clicking on the button below!")],components:[closebutton]})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
 
             log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
             
@@ -51,7 +51,7 @@ module.exports = () => {
                     .setEmoji("❌")
             ])
 
-            interaction.reply({embeds:[bot.errorLog.success("Delete this ticket!","You can delete this ticket by clicking on the button below!")],components:[closebutton]})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
 
             log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
             

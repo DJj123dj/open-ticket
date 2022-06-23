@@ -9,7 +9,7 @@ module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"remove")) return
         var user = msg.mentions.users.first()
-        if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage("Missing Argument `<user>`:\n`"+config.prefix+"remove <user>`")]})
+        if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<user>`:\n`"+config.prefix+"remove <user>`")]})
 
         if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR")){
             return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
@@ -21,7 +21,7 @@ module.exports = () => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
             msg.channel.permissionOverwrites.delete(user.id)
-            msg.channel.send({embeds:[bot.errorLog.success("User removed!",user.tag+" is removed from this ticket")]})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.userRemovedTitle,l.commands.userRemovedDescription.replace("{0}",user.tag))]})
 
             var loguser = msg.mentions.users.first()
             
@@ -50,7 +50,7 @@ module.exports = () => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
 
             interaction.channel.permissionOverwrites.delete(user.id)
-            interaction.reply({embeds:[bot.errorLog.success("User removed!",user.tag+" is removed from this ticket")]})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.userRemovedTitle,l.commands.userRemovedDescription.replace("{0}",user.tag))]})
 
             var loguser = user
             

@@ -181,7 +181,7 @@ module.exports = async () => {
         readystats++
     })
 
-    //rename
+    //reopen
     client.application.commands.create({
         name:"reopen",
         description:"Reopen this ticket.",

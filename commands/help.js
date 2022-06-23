@@ -8,11 +8,11 @@ const l = bot.language
 module.exports = () => {
     const helpEmbed = new discord.MessageEmbed()
         .setColor(config.main_color)
-        .setTitle("Help Menu:")
+        .setTitle(l.helpMenu.title)
 
     const prefix = config.prefix
-    const header = config.system.ticket_channel ? "**Go to <#"+config.system.ticket_channel+"> to create a ticket!**\n\n" : "**Run the command `/new` or `/ticket` to create a ticket!**\n\n"
-    helpEmbed.setDescription(header+"`"+prefix+"msg <id>` ➜ _Spawn an embed with buttons. (admin only)_\n\n`"+prefix+"rename <name>` ➜ _Rename a ticket. (no spaces)_\n`"+prefix+"close` ➜ _Close a ticket._\n`"+prefix+"delete` ➜ _Delete a ticket._\n`"+prefix+"reopen` ➜ _Re-Open a ticket after it was closed._\n\n`"+prefix+"add <user>` ➜ _Add a user to the ticket._\n`"+prefix+"remove <user>` ➜ _Remove a user from the ticket._`")
+    const header = config.system.ticket_channel ? l.helpMenu.header1.replace("{0}","<#"+config.system.ticket_channel+">") : l.helpMenu.header2
+    helpEmbed.setDescription(header+"`"+prefix+"msg <id>` ➜ _"+l.helpMenu.msgCmd+"_\n\n`"+prefix+"rename <name>` ➜ _"+l.helpMenu.renameCmd+"_\n`"+prefix+"close` ➜ _"+l.helpMenu.closeCmd+"_\n`"+prefix+"delete` ➜ _"+l.helpMenu.deleteCmd+"_\n`"+prefix+"reopen` ➜ _"+l.helpMenu.reopenCmd+"_\n\n`"+prefix+"add <user>` ➜ _"+l.helpMenu.addCmd+"_\n`"+prefix+"remove <user>` ➜ _"+l.helpMenu.removeCmd+"_`")
 
     if (config.credits) helpEmbed.setFooter({text:"Open-Ticket by DJdj Development | view on github for source code",iconURL:"https://raw.githubusercontent.com/DJj123dj/open-ticket/main/logo.png"})
 

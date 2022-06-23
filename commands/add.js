@@ -9,7 +9,7 @@ module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"add")) return
         var user = msg.mentions.users.first()
-        if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage("Missing Argument `<user>`:\n`"+config.prefix+"add <user>`")]})
+        if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<user>`:\n`"+config.prefix+"add <user>`")]})
 
         if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR")){
             return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
@@ -21,7 +21,7 @@ module.exports = () => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
             msg.channel.permissionOverwrites.create(user.id, { VIEW_CHANNEL:true, ADD_REACTIONS:true,ATTACH_FILES:true, EMBED_LINKS:true, SEND_MESSAGES:true})
-            msg.channel.send({embeds:[bot.errorLog.success("User Added!",user.tag+" is added to this ticket")]})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.userAddedTitle,l.commands.userAddedDescription.replace("{0}",user.tag))]})
 
             var loguser = msg.mentions.users.first()
             log("command","someone used the 'add' command",[{key:"user",value:msg.author.tag}])
@@ -48,7 +48,7 @@ module.exports = () => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
 
             interaction.channel.permissionOverwrites.create(user.id, { VIEW_CHANNEL:true, ADD_REACTIONS:true,ATTACH_FILES:true, EMBED_LINKS:true, SEND_MESSAGES:true})
-            interaction.reply({embeds:[bot.errorLog.success("User Added!",user.tag+" is added to this ticket")]})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.userAddedTitle,l.commands.userAddedDescription.replace("{0}",user.tag))]})
 
             var loguser = user
             log("command","someone used the 'add' command",[{key:"user",value:interaction.user.tag}])

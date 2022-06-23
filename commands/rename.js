@@ -21,7 +21,7 @@ module.exports = () => {
             
             var newname = msg.content.split(config.prefix+"rename")[1].substring(1)
 
-            if (!newname) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage("Missing Argument `<name>`:\n`"+config.prefix+"rename <name>`")]})
+            if (!newname) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<name>`:\n`"+config.prefix+"rename <name>`")]})
 
             var name = msg.channel.name
             var prefix = ""
@@ -35,7 +35,7 @@ module.exports = () => {
             if (!prefix) prefix = "noprefix-"
 
             msg.channel.setName(prefix+newname)
-            msg.channel.send({embeds:[bot.errorLog.success("The name has changed!","Warning: you can only change the channel name 2 times per minute!\n(this is due discord rate limits)")]})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.renameTitle,l.commands.renameWarning)]})
 
             log("command","someone used the 'rename' command",[{key:"user",value:msg.author.tag}])
             log("system","ticket renamed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
@@ -73,7 +73,7 @@ module.exports = () => {
             if (!prefix) prefix = "noprefix-"
 
             interaction.channel.setName(prefix+newname)
-            interaction.reply({embeds:[bot.errorLog.success("The name has changed!","Warning: you can only change the channel name 2 times per minute!\n(this is due discord rate limits)")]})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.renameTitle,l.commands.renameWarning)]})
 
             log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
             log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
