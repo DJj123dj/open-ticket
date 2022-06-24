@@ -1,0 +1,73 @@
+{
+    "errors":{
+        "missingArgsTitle":"Argumente invalide!",
+        "missingArgsDescription":"Argument lipsa",
+        "noPermsTitle":"Nu ai permisiunile necesare!",
+        "noPermsDescription":"Nu ai rolurile necesare!\nAi nevoie de permisiunea `ADMINISTRATOR` sau sa fii in lista rolurilor permise!",
+        "chooseFromListTitle":"ID invalid",
+        "chooseFromListDescription":"Alege unul dintre id-urile urmatoare:",
+        "boterror":"Eroare bot!",
+        "notInTicketTitle":"Nu esti intr-un ticket!",
+        "notInTicketDescription":"Aceasta comanda nu functioneaza in afara ticket-urilor!",
+        "ticketDoesntExist":"Acest ticket nu mai exista!",
+        "roleDoesntExist":"Acest rol nu mai exista",
+        "anotherOption":"Aceasta optiune nu este un ticket ci doar alt tip!",
+        "maxAmountTitle":"Limita a fost atinsa",
+        "maxAmountDescription":"Ai atins limita maxima de tickete\nNu mai poti creea altele!",
+        "somethingWentWrong":"**Ceva nu a mers bine :(**\nTe rugam sa incerci din nou mai tarziu",
+        "somethingWentWrongTranscript":"**Ceva nu a mers bine in timpul creerii copiei a ticket-ului!**\nTe rugam sa incerci din nou mai tarziu!"
+    }, 
+    "commands":{
+        "userAddedTitle":"Utilizator adaugat!",
+        "userAddedDescription":"{0} este adaugat la acest ticket!",
+        "userRemovedTitle":"Utilizator eliminat!",
+        "userRemovedDescription":"{0} este eliminat din acest ticket!",
+
+        "renameTitle":"Numele este schimbat!",
+        "renameWarning":"ATENTIE: poti schimba numele acestui ticket doar de 2 ori pe minut!\n(se datoreaza limitarii discord-ului)",
+
+        "closeTitle":"Inchide acest ticket",
+        "closeDescription":"Poti inchide acest ticket doar apasand butonul de mai jos!",
+        "deleteTitle":"Sterge acest ticket!",
+        "deleteDescription":"Poti sterge acest ticket doar apasand butonul de mai jos",
+        "reopenTitle":"Re-deschide acest ticket!",
+        "reopenDescription":"Poti redeschide acest ticket doar apasand butonul de mai jos!",
+
+        "ticketWarning":"Embed-ul se afla in mesajul de mai jos:",
+        "maxTicketWarning":"**ATENTIE:** _Poti creea doar {0} ticket-e odata!_"
+    },
+    "helpMenu":{
+        "title":"Meniu de ajutor:",
+        "header1":"**Deschide {0} pentru a creea un ticket!**\n\n",
+        "header2":"**Ruleaza comanda `/new` ori `/ticket` pentru a creea un ticket!**\n\n",
+
+        "msgCmd":"Afiseaza embed-ul cu tickete. (admins only)",
+        "renameCmd":"Redenumeste un ticket. (no spaces)",
+        "closeCmd":"Redenumeste un ticket ticket.",
+        "deleteCmd":"Sterge un ticket a ticket.",
+        "addCmd":"adauga un utilizator la ticket.",
+        "removeCmd":"Elimina un utilizator de la ticket.",
+        "reopenCmd":"Re-deschide un ticket dupa ce a fost inchis."
+    },
+    "buttons":{
+        "close":"Inchide Ticket-ul",
+        "delete":"Sterge Ticket-ul",
+        "reopen":"Re-deschide Ticket-ul",
+        "sendTranscript":"Trimite copia chat-ului ticket-ului"
+    },
+    "messages":{
+        "reopenTitle":"Ticket re-deschis",
+        "reopenDescription":"Simte-te comfortabil sa vorbesti din nou!",
+        "closedTitle":"Inchide acest ticket ticket!",
+        "closedDescription":"Doar administratorii pot vorbi in acest ticket de acum!\n\n*Apasa pe butonele de mai jos pentru a inchide/deschide ticket-ul!*",
+        "createdTitle":"Ticket Creat!",
+        "createdDescription":"Ticket-ul tau a fost creat, il poti vedea dupa mentionarea ta!",
+
+        "newTicketDmTitle":"Ticket Nou!",
+        "newTranscriptTitle":"O noua copie a ticket-ului este aici!",
+        "newTranscriptDescription":"Poti vedea copia ticket-ului in fisierul .txt de mai sus!",
+        "hereIsTheTranscript":"Aceasta este copia ticket-ului:",
+
+        "chooseCategory":"Alege o categorie:"
+    }
+}
