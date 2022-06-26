@@ -235,8 +235,17 @@ exports.checker = async () => {
         }
     }
 
-    //checker
-    var configArray = ["bot_name","main_color","server_id","auth_token","main_adminroles","prefix","logs","languagefile","credits","status","system","options","messages"]
+    const checkMessage = (input,path) => {
+
+    }
+
+    //--------------------------|
+    //--------------------------|
+    //checker => START HERE     |
+    //--------------------------|
+    //--------------------------|
+
+    var configArray = ["bot_name","main_color","server_id","auth_token","main_adminroles","prefix","languagefile","credits","status","system","options","messages"]
     configArray.forEach((item) => {
         if (config[item] == undefined){
             throw new Error("\n\nMAIN ERROR: the item '"+item+"' doesn't exist in config.json")
@@ -255,7 +264,12 @@ exports.checker = async () => {
     checkToken(config.auth_token)
     checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
     checkString(config.prefix,1,15,"prefix","prefix")
-    //languagefile (comming soon)
+    //languagefile
+    checkType(config.languagefile,"string","languagefile")
+    const lf = config.languagefile
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian")){
+        createError("'languagefile' | invalid language, more info in the wiki")
+    }
 
 
     checkType(config.credits,"boolean","credits")
@@ -283,6 +297,12 @@ exports.checker = async () => {
         if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
             checkDiscord("roleid",config.system.member_role,"system/member_role")
         }
+        checkType(config.system.closeMode,"string","system/closeMode")
+        if (!["normal","adminonly"].includes(config.system.closeMode)){
+            createError("'system/closeMode' | the close mode must be adminonly or normal")
+        }
+        console.log("hoi")
+
         checkType(config.system.enable_transcript,"boolean","system/enable_transcript")
         checkType(config.system.enable_DM_transcript,"boolean","system/enable_DM_transcript")
         if (config.system.enable_transcript){
