@@ -151,6 +151,7 @@ module.exports = () => {
                     storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
                     
                     var ticketEmbed = new discord.MessageEmbed()
+                        .setAuthor({name:interaction.user.id})
                         .setColor(config.main_color)
                         .setTitle(currentTicketOptions.name)
                     if (currentTicketOptions.ticketmessage.length > 0) ticketEmbed.setDescription(currentTicketOptions.ticketmessage)

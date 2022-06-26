@@ -15,9 +15,9 @@ module.exports = () => {
 
     client.on("messageCreate", msg => {
         if (msg.content.startsWith(config.prefix+"msg"||config.prefix+"message")){
-            if (config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-                msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-                return
+            
+            if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
+                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
             }
 
             const id = msg.content.split(config.prefix+"msg")[1].substring(1) ? msg.content.split(config.prefix+"msg")[1].substring(1) : false
@@ -38,11 +38,11 @@ module.exports = () => {
         if (!interaction.isCommand()) return
         if (interaction.commandName != "message") return
 
-            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return interaction.guild.members.cache.find((m) => m.id == interaction.member.id).roles.cache.has(item)}) == false && permsmember.permissions.has("ADMINISTRATOR")){
-                interaction.reply({embeds:[bot.errorLog.noPermsMessage]})
-                return
-            }
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
+            return
+        }
 
             const id = interaction.options.getString("id")
 

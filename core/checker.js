@@ -188,7 +188,9 @@ exports.checker = async () => {
 
             //category
             checkType(option.category,"string",path+"/category")
-            checkDiscord("categoryid",option.category,path+"/category")
+            if (option.category.length > 0){
+                checkDiscord("categoryid",option.category,path+"/category")
+            }
 
             //message
             checkType(option.message,"string",path+"/message")

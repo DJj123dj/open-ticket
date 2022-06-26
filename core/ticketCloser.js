@@ -15,6 +15,7 @@ const storage = bot.storage
 exports.closeTicket = async (interaction,prefix,mode) => {
     const chalk = await (await import("chalk")).default
     const channelmessages = await interaction.channel.messages.fetch()
+    const channel = interaction.channel
 
     channelmessages.sweep((msgSweep) => {
         return msgSweep.author.id == client.user.id
@@ -42,11 +43,46 @@ exports.closeTicket = async (interaction,prefix,mode) => {
     var enableTranscript = true
 
     if (mode == "delete"){
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        
         interaction.channel.delete()
         log("system","deleted a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
+
+        //getID & send DM
+        interaction.channel.messages.fetchPinned().then(msglist => {
+            var firstmsg = msglist.last()
+
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+
+            if (!firstmsg.embeds[0].author) return false
+            const id = firstmsg.embeds[0].author.name
+
+            if (!id) return false
+
+            try{
+                if (config.system.enable_DM_Messages){
+                    interaction.member.send({embeds:[bot.errorLog.custom(l.messages.deletedTicketDmTitle,l.messages.deletedTicketDmDescription,":ticket:",config.main_color)]})
+                }
+            }
+            catch{log("system","can't send DM to member, member doesn't allow dm's")}
+        })
+
     }else if (mode == "close"){
+
+        if (config.system.closeMode == "adminonly"){
+            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        }
+
         var permissionArray = []
         if (!isDatabaseError) permissionArray.push({
             id:getusernameStep1.id,
@@ -98,18 +134,62 @@ exports.closeTicket = async (interaction,prefix,mode) => {
 
         log("system","closed a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
+        //getID & send DM
+        interaction.channel.messages.fetchPinned().then(msglist => {
+            var firstmsg = msglist.last()
+
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+
+            const id = firstmsg.embeds[0].author.name
+
+            if (!id) return false
+
+            try{
+                if (config.system.enable_DM_Messages){
+                    interaction.member.send({embeds:[bot.errorLog.custom(l.messages.closedTicketDmTitle,l.messages.closedTicketDmDescription,":ticket:",config.main_color)]})
+                }
+            }
+            catch{log("system","can't send DM to member, member doesn't allow dm's")}
+        })
+
+
     }else if (mode == "deletenotranscript"){
+
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        
         enableTranscript = false
         interaction.channel.delete()
         log("system","deleted a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
+
+        //getID & send DM
+        interaction.channel.messages.fetchPinned().then(msglist => {
+            var firstmsg = msglist.last()
+
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+
+            const id = firstmsg.embeds[0].author.name
+
+            if (!id) return false
+
+            try{
+                if (config.system.enable_DM_Messages){
+                    interaction.member.send({embeds:[bot.errorLog.custom(l.messages.deletedTicketDmTitle,l.messages.deletedTicketDmDescription,":ticket:",config.main_color)]})
+                }
+            }
+            catch{log("system","can't send DM to member, member doesn't allow dm's")}
+        })
     }
 
     if (enableTranscript == true && mode != "deletenotranscript"){
 
         if (config.system.enable_transcript || config.system.enable_DM_transcript){
-            var fileattachment = await require("./transcript").createTranscript(channelmessages)
+            var fileattachment = await require("./transcript").createTranscript(channelmessages,channel)
 
             if (fileattachment == false){log("system","internal error: transcript is not created!");return}
         }
@@ -156,7 +236,7 @@ exports.runThis = () => {
             return msgSweep.author.id == client.user.id
         })
 
-        var fileattachment = await require("./transcript").createTranscript(channelmessages)
+        var fileattachment = await require("./transcript").createTranscript(channelmessages,interaction.channel)
 
         if (fileattachment == false){
             log("system","internal error: transcript is not created!")

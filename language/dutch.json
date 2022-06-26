@@ -30,7 +30,7 @@
         "closeDescription":"Je kan dit ticket sluiten door op de knop hier onder te duwen!",
         "deleteTitle":"Verwijder dit ticket!",
         "deleteDescription":"Je kan dit ticket verwijderen door op de knop hier onder te duwen!",
-        "reopenTitle":"Heropen dit ticket ticket!",
+        "reopenTitle":"Heropen dit ticket!",
         "reopenDescription":"Je kan dit ticket heropenen door op de knop hier onder te duwen!",
 
         "ticketWarning":"De embed is in het bericht hier onder!",
@@ -64,6 +64,12 @@
         "createdDescription":"Je ticket is gemaakt, je kan het detecteren bij een ping!",
 
         "newTicketDmTitle":"Nieuw Ticket!",
+        "closedTicketDmTitle":"Ticket Gesloten!",
+        "deletedTicketDmTitle":"Ticket Verwijderd!",
+        "closedTicketDmDescription":"Je ticket is gesloten!",
+        "deletedTicketDmDescription":"Je ticket is verwijderd!",
+        "reopenTicketDmTitle":"Ticket Heropend!",
+        "reopenTicketDmDescription":"Je ticket is heropend!",
         "newTranscriptTitle":"Een nieuw transcript is hier!",
         "newTranscriptDescription":"Je kan het transcript vinden in het bestand hierboven!",
         "hereIsTheTranscript":"Hier is het transcript:",

@@ -223,7 +223,23 @@ module.exports = () => {
         })
 
         interaction.channel.permissionOverwrites.set(permissionsArray)
+
+        //getID & send DM
+        interaction.channel.messages.fetchPinned().then(msglist => {
+            var firstmsg = msglist.last()
+
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+
+            const id = firstmsg.embeds[0].author.name
+
+            if (!id) return false
+
+            try{
+                if (config.system.enable_DM_Messages){
+                    interaction.member.send({embeds:[bot.errorLog.custom(l.messages.reopenTicketDmTitle,l.messages.reopenTicketDmDescription,":ticket:",config.main_color)]})
+                }
+            }
+            catch{log("system","can't send DM to member, member doesn't allow dm's")}
+        })
     })
-
-
 }

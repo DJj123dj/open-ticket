@@ -41,8 +41,8 @@
         "header1":"**Deschide {0} pentru a creea un ticket!**\n\n",
         "header2":"**Ruleaza comanda `/new` ori `/ticket` pentru a creea un ticket!**\n\n",
 
-        "msgCmd":"Afiseaza embed-ul cu tickete. (admins only)",
-        "renameCmd":"Redenumeste un ticket. (no spaces)",
+        "msgCmd":"Afiseaza embed-ul cu tickete. (doar administratorii)",
+        "renameCmd":"Redenumeste un ticket. (fara spatii)",
         "closeCmd":"Redenumeste un ticket ticket.",
         "deleteCmd":"Sterge un ticket a ticket.",
         "addCmd":"adauga un utilizator la ticket.",
@@ -64,6 +64,12 @@
         "createdDescription":"Ticket-ul tau a fost creat, il poti vedea dupa mentionarea ta!",
 
         "newTicketDmTitle":"Ticket Nou!",
+        "closedTicketDmTitle":"Ticket închis!",
+        "deletedTicketDmTitle":"Ticket șters!",
+        "closedTicketDmDescription":"Ticket-ul tau este închis!",
+        "deletedTicketDmDescription":"Ticket-ul tau este șters!",
+        "reopenTicketDmTitle":"Ticket Re-deschis!",
+        "reopenTicketDmDescription":"Ticket-ul tau este re-deschis!",
         "newTranscriptTitle":"O noua copie a ticket-ului este aici!",
         "newTranscriptDescription":"Poti vedea copia ticket-ului in fisierul .txt de mai sus!",
         "hereIsTheTranscript":"Aceasta este copia ticket-ului:",

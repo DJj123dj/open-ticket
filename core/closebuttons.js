@@ -136,6 +136,15 @@ module.exports = () => {
         if (interaction.customId != "closeTicketTrue") return
         
         interaction.deferUpdate()
+
+        if (config.system.closeMode == "adminonly"){
+            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        }
+        
         interaction.message.edit({components:[closeRowDisabled]})
 
         /**
@@ -158,6 +167,15 @@ module.exports = () => {
         if (interaction.customId != "closeTicketTrue1") return
         
         interaction.deferUpdate()
+
+        if (config.system.closeMode == "adminonly"){
+            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        }
+
         const closedButtonDisabled = new discord.MessageActionRow()
             .addComponents([
                 new discord.MessageButton()
@@ -210,6 +228,12 @@ module.exports = () => {
         
         interaction.deferUpdate()
 
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            return
+        }
+
         /**
          * @type {String}
          */
@@ -249,6 +273,12 @@ module.exports = () => {
         if (interaction.customId != "deleteTicketTrue1") return
         
         interaction.deferUpdate()
+
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            return
+        }
 
         /**
          * @type {String}
