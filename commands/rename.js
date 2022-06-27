@@ -2,6 +2,8 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
+const l = bot.language
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -10,17 +12,16 @@ module.exports = () => {
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                msg.channel.send({content:"You are not in a ticket!"})
-                return
-            }
-            
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
-            if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR")){
-                return msg.channel.send({content:"You have no permissions to change the channel name!\nYou need the `ADMINISTRATOR` or `MANAGE_CHANNELS` permission"})
+            if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
+                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
             }
             
             var newname = msg.content.split(config.prefix+"rename")[1].substring(1)
+
+            if (!newname) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<name>`:\n`"+config.prefix+"rename <name>`")]})
+
             var name = msg.channel.name
             var prefix = ""
             const tickets = config.options
@@ -33,9 +34,10 @@ module.exports = () => {
             if (!prefix) prefix = "noprefix-"
 
             msg.channel.setName(prefix+newname)
-            msg.channel.send({content:"**The name is changed!**\nWarning: you can only change the channel name 2 times per minute! (this is due discord rate limits)"})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.renameTitle,l.commands.renameWarning)]})
 
-            console.log("[system] renamed a ticket via command")
+            log("command","someone used the 'rename' command",[{key:"user",value:msg.author.tag}])
+            log("system","ticket renamed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
             
         })
         
@@ -49,14 +51,12 @@ module.exports = () => {
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                interaction.reply({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id)return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             
-            const member = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (!member.permissions.has("MANAGE_CHANNELS") && !member.permissions.has("ADMINISTRATOR")){
-                return interaction.reply({content:"You have no permissions to change the channel name!\nYou need the `ADMINISTRATOR` or `MANAGE_CHANNELS` permission"})
+            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
+                return
             }
             
             var newname = interaction.options.getString("name")
@@ -72,9 +72,10 @@ module.exports = () => {
             if (!prefix) prefix = "noprefix-"
 
             interaction.channel.setName(prefix+newname)
-            interaction.reply({content:"**The name is changed!**\nWarning: you can only change the channel name 2 times per minute! (this is due discord rate limits)"})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.renameTitle,l.commands.renameWarning)]})
 
-            console.log("[system] renamed a ticket via command")
+            log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
+            log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
             
         })
     })

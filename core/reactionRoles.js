@@ -2,7 +2,8 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
-
+const log = bot.errorLog.log
+const l = bot.language
 const storage = bot.storage
 
 module.exports = async () => {
@@ -14,12 +15,13 @@ module.exports = async () => {
 
         interaction.deferUpdate()
 
-        const optionid = interaction.customId.split("newR")[1]
-        if (!optionid){
-            interaction.reply({content:"This button doesn't exist anymore"})
-            return
+        if (interaction.customId.startsWith("newR")){
+            const optionid = interaction.customId.split("newR")[1]
+            if (!optionid){
+                interaction.reply({embeds:[bot.errorLog.serverError(l.errors.roleDoesntExist)]})
+                return
+            }
         }
-
         try {
 
         const option = require("./utils/getButton").getOption(optionid)
@@ -30,27 +32,31 @@ module.exports = async () => {
         if (mode == "add"){
             option.roles.forEach((role) => {
                 interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
-                console.log("[system] added role",role,"to",user.user.tag)
+
+                log("system","added role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
             })
         }else if (mode == "remove"){
             option.roles.forEach((role) => {
                 interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
-                console.log("[system] removed role",role,"from",user.user.tag)
+                
+                log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
             })
         }else if (mode == "add&remove"){
             option.roles.forEach((role) => {
                 if (interaction.guild.members.cache.find(u => u.id == user.id).roles.cache.has(role)){
                     interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
-                    console.log("[system] removed role",role,"from",user.user.tag)
+                    
+                    log("system","added role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
                 }else {
                     interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
-                    console.log("[system] added role",role,"to",user.user.tag)
+                    
+                    log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
                 }
             })
         }
             
         }catch{
-            interaction.reply({ephemeral:true,content:"Something went wrong! Contact the owner of this bot for more information"})
+            interaction.replyinteraction.channel.send({embeds:[bot.errorLog.serverError(l.errors.somethingWentWrong)]})
         }
     })
 }

@@ -3,7 +3,7 @@ const config = bot.config
 
 /**
  * @param {Number} index
- * @param {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDMMessage"} value 
+ * @param {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDMMessage"|"ticketmessage"} value 
  */
 exports.getTicketValue = (index,value) => {
     if (value == "id"){
@@ -29,7 +29,7 @@ exports.getRoleValue = (index,value) => {
 }
 
 /**
- * @param {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDMMessage"} value 
+ * @param {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDMMessage"|"ticketmessage"} value 
  */
  exports.getTicketValues = (value) => {
     var result = []
@@ -55,7 +55,7 @@ exports.getRoleValue = (index,value) => {
 }
 
 /**
- * @param {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"roles"|"mode"|"enableDMMessage"} value 
+ * @param {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"roles"|"mode"|"enableDMMessage""} value 
  */
 exports.getRoleValues = (value) => {
     var result = []
@@ -79,6 +79,7 @@ class TicketOptions {
         this.category = ""
         this.message = ""
         this.enableDMMessage = true
+        this.ticketmessage = ""
     }
 }
 /**
@@ -110,5 +111,6 @@ exports.exportedOptionClass = class {
         this.category = ""
         this.message = ""
         this.enableDMMessage = true
+        this.ticketmessage = ""
     }
 }

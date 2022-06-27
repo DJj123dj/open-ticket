@@ -23,14 +23,14 @@ ask()
 
 const runClear = async () => {
     const chalk = await (await import("chalk")).default
-    console.log(chalk.blue("You can get a node.js warning below, just ignore that, it's not important!"))
+    //console.log(chalk.blue("You can get a node.js warning below, just ignore that, it's not important!"))
     const dataPaths = ["./storage/dynamicDB"]
 
     var index = 0
 
     dataPaths.forEach((path) => {
         try {
-        fs.rmdirSync(path,{recursive:true,force:true})
+        fs.rmSync(path,{recursive:true,force:true})
         }catch{
             //console.log(path,"doesn't exist")
         }

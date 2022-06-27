@@ -3,6 +3,7 @@ const bot = require('../index')
 const client = bot.client
 const config = bot.config
 const getButton = require("./utils/getButton")
+const l = bot.language
 
 /**
  * 
@@ -39,7 +40,7 @@ exports.createEmbed = (id) => {
 
     var description = data.description
     if (data.enableTicketExplaination){
-        description = description+"\n\n__choose a category:__\n"
+        description = description+"\n\n__"+l.messages.chooseCategory+"__\n"
 
         var ticketExplainations = []
         buttonData.forEach((button) => {
@@ -51,7 +52,7 @@ exports.createEmbed = (id) => {
     }
 
     if (data.enableMaxTicketsWarning){
-        description = description+"\n\n**Warning:** _You can only create "+config.system.max_allowed_tickets+" ticket(s) at a time!_"
+        description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.max_allowed_tickets)
     }
 
     embed.setDescription(description)

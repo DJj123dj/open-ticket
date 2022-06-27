@@ -1,4 +1,13 @@
 node_modules/
 package-lock.json
 devConfig.json
+devConfig1.json
+devConfig2.json
+devConfig3.json
+devConfig4.json
+devConfig5.json
 .DS_Store
+openticketdebug.txt
+developerChangelog.md
+storage/dynamicDB/
+storage/.DS_Store

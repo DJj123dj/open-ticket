@@ -2,10 +2,8 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
-
-/** =============================
- ** NOT READY YET
- ** =============================*/
+const log = bot.errorLog.log
+const l = bot.language
 
 module.exports = () => {
     /**@type {String[]} */
@@ -16,24 +14,23 @@ module.exports = () => {
 
 
     client.on("messageCreate", msg => {
-        if (msg.content.startsWith(config.prefix+"msg")){
-            if (config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-                msg.channel.send({content:"You have no permission to run this command!"})
-                return
+        if (msg.content.startsWith(config.prefix+"msg"||config.prefix+"message")){
+            
+            if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
+                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
             }
 
             const id = msg.content.split(config.prefix+"msg")[1].substring(1) ? msg.content.split(config.prefix+"msg")[1].substring(1) : false
 
-            if (!id) return msg.channel.send({content:"**There is no id!**\nUse: `"+config.prefix+"msg <id>`"})
-            if (!msgIds.includes(id)) return msg.channel.send({content:"**Invalid id!**\nChoose from this list:\n_"+msgIds.join("_\n_")+"_"})
+            if (!id) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<id>`:\n`"+config.prefix+"msg <id>`")]})
+            if (!msgIds.includes(id)) return msg.channel.send({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds)]})
 
 
             const {embed,componentRows} = require("../core/ticketMessageEmbed").createEmbed(id)
             
             msg.channel.send({embeds:[embed],components:componentRows})
             
-            if (config.logs){console.log("[command] "+config.prefix+"ticket msg (user:"+msg.author.username+")")}
-            if (config.logs){console.log("[system] created ticket message")}
+            log("command","someone used the 'msg' command",[{key:"user",value:msg.author.tag},{key:"id",value:id}])
         }
     })
 
@@ -41,22 +38,22 @@ module.exports = () => {
         if (!interaction.isCommand()) return
         if (interaction.commandName != "message") return
 
-            if (config.main_adminroles.some((item)=>{return interaction.guild.members.cache.find((m) => m.id == interaction.member.id).roles.cache.has(item)}) == false){
-                interaction.reply({content:"You have no permission to run this command!"})
-                return
-            }
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
+            return
+        }
 
             const id = interaction.options.getString("id")
 
-            if (!msgIds.includes(id)) return interaction.reply({content:"**Invalid id!**\nChoose from this list:\n_"+msgIds.join("_\n_")+"_"})
+            if (!msgIds.includes(id)) return interaction.reply({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds)]})
 
             const {embed,componentRows} = require("../core/ticketMessageEmbed").createEmbed(id)
             
-            interaction.reply({content:"The embed is in the message below!"})
+            interaction.reply({content:l.commands.ticketWarning})
             interaction.channel.send({embeds:[embed],components:componentRows})
             
-            if (config.logs){console.log("[command] "+config.prefix+"ticket msg (user:"+interaction.member.user.username+")")}
-            if (config.logs){console.log("[system] created ticket message")}
+            log("command","someone used the 'msg' command",[{key:"user",value:interaction.user.tag},{key:"id",value:id}])
         
     })
 }

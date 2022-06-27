@@ -1,5 +1,7 @@
 const bot = require("../../index")
 const config = bot.config
+const l = bot.language
+
 exports.getTicketMessage = (input) => {
     var returned = config.messages.find(a => a.id == input)
     if (returned){

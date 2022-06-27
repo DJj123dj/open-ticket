@@ -2,6 +2,8 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
+const l = bot.language
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -11,10 +13,7 @@ module.exports = () => {
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                msg.channel.send({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
@@ -25,9 +24,9 @@ module.exports = () => {
                     .setEmoji("🔒")
             ])
 
-            msg.channel.send({content:"**Click on the button below to close this ticket!**",components:[closebutton]})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
 
-            console.log("[system] closed a ticket via command")
+            log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
             
         })
         
@@ -41,10 +40,7 @@ module.exports = () => {
        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                interaction.reply({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
@@ -55,9 +51,9 @@ module.exports = () => {
                     .setEmoji("🔒")
             ])
 
-            interaction.reply({content:"**Click on the button below to close this ticket!**",components:[closebutton]})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
 
-            console.log("[system] closed a ticket via command")
+            log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
             
         })
     })

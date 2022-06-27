@@ -2,19 +2,21 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const log = bot.errorLog.log
+const l = bot.language
 
 module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"delete")) return
 
+        if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
+            return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+        }
 
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                msg.channel.send({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
@@ -25,9 +27,9 @@ module.exports = () => {
                     .setEmoji("❌")
             ])
 
-            msg.channel.send({content:"**Click on the button below to delete this ticket!**",components:[closebutton]})
+            msg.channel.send({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
 
-            console.log("[system] deleted a ticket via command")
+            log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
             
         })
         
@@ -38,13 +40,16 @@ module.exports = () => {
         if (!interaction.isCommand()) return
         if (interaction.commandName != "delete") return
 
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
+                return
+            }
+
        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                interaction.reply({content:"You are not in a ticket!"})
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
@@ -55,9 +60,9 @@ module.exports = () => {
                     .setEmoji("❌")
             ])
 
-            interaction.reply({content:"**Click on the button below to delete this ticket!**",components:[closebutton]})
+            interaction.reply({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
 
-            console.log("[system] deleted a ticket via command")
+            log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
             
         })
     })

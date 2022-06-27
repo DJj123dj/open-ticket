@@ -47,9 +47,18 @@ exports.checker = async () => {
     }
 
     /**@param {String} value @param {String} path */
-    const checkColor = (value,path) => {
-        if (!/^#[a-f0-9]{6}$/.test(value)){
-            createError("'"+path+"' | invalid color!")
+    const checkHexColor = (value,path) => {
+        if (!/^#[a-fA-F0-9]{3,6}$/.test(value)){
+            if (value.length < 4) return createError("'"+path+"' | hex color too short! (example: #123abc)")
+            if (value.length > 7) return createError("'"+path+"' | hex color too long! (example: #123abc)")
+            createError("'"+path+"' | invalid color! (example: #123abc)")
+        }
+    }
+
+    /**@param {String} value @param {String} path */
+    const checkEmbedColor = (value,path) => {
+        if (!['DEFAULT','WHITE','AQUA','GREEN','BLUE','YELLOW','PURPLE','LUMINOUS_VIVID_PINK','FUCHSIA','GOLD','ORANGE','RED','GREY','DARKER_GREY','NAVY','DARK_AQUA','DARK_GREEN','DARK_BLUE','DARK_PURPLE','DARK_VIVID_PINK','DARK_GOLD','DARK_ORANGE','DARK_RED','DARK_GREY','LIGHT_GREY','DARK_NAVY','BLURPLE','GREYPLE','DARK_BUT_NOT_BLACK','NOT_QUITE_BLACK','RANDOM'].includes(value)){
+            return createError("'"+path+"' | invalid color, must be a hex code or default color (more info in the wiki)")
         }
     }
 
@@ -123,13 +132,15 @@ exports.checker = async () => {
             createError("'"+path+"/id' | option id can't contain space characters!")
         }
         if (option.id.length > 20){
-            createError("'"+path+"/id' | option id max lenght is 20")
+            createError("'"+path+"/id' | option id max lenght is 20!")
         }
         
         //name
         checkType(option.name,"string",path+"/name")
         if (option.name.length > 100){
             createWarn("'"+path+"/name' | if your name is too long it maybe doesn't look so good!")
+        }else if (option.name.length < 1){
+            createError("'"+path+"/name' | there is no name!")
         }
 
         //description
@@ -177,13 +188,19 @@ exports.checker = async () => {
 
             //category
             checkType(option.category,"string",path+"/category")
-            checkDiscord("categoryid",option.category,path+"/category")
+            if (option.category.length > 0){
+                checkDiscord("categoryid",option.category,path+"/category")
+            }
 
             //message
             checkType(option.message,"string",path+"/message")
 
             //enableDMmessage
             checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+
+            //ticketmessage
+            checkType(option.ticketmessage,"string",path+"/ticketmessage")
+
         }else if (type == "website"){
             //url
             checkType(option.url,"string",path+"/url")
@@ -218,8 +235,17 @@ exports.checker = async () => {
         }
     }
 
-    //checker
-    var configArray = ["bot_name","main_color","server_id","auth_token","main_adminroles","prefix","logs","languagefile","credits","status","system","options","messages"]
+    const checkMessage = (input,path) => {
+
+    }
+
+    //--------------------------|
+    //--------------------------|
+    //checker => START HERE     |
+    //--------------------------|
+    //--------------------------|
+
+    var configArray = ["bot_name","main_color","server_id","auth_token","main_adminroles","prefix","languagefile","credits","status","system","options","messages"]
     configArray.forEach((item) => {
         if (config[item] == undefined){
             throw new Error("\n\nMAIN ERROR: the item '"+item+"' doesn't exist in config.json")
@@ -229,13 +255,21 @@ exports.checker = async () => {
 
 
     checkType(config.bot_name,"string","bot_name")
-    checkColor(config.main_color,"main_color")
+    if (config.main_color.startsWith("#")){
+        checkHexColor(config.main_color,"main_color")
+    }else{
+        checkEmbedColor(config.main_color,"main_color")
+    }
     checkDiscord("serverid",config.server_id,"server_id")
     checkToken(config.auth_token)
     checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
     checkString(config.prefix,1,15,"prefix","prefix")
-    checkType(config.logs,"boolean","logs")
-    //languagefile (comming soon)
+    //languagefile
+    checkType(config.languagefile,"string","languagefile")
+    const lf = config.languagefile
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian")){
+        createError("'languagefile' | invalid language, more info in the wiki")
+    }
 
 
     checkType(config.credits,"boolean","credits")
@@ -263,6 +297,12 @@ exports.checker = async () => {
         if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
             checkDiscord("roleid",config.system.member_role,"system/member_role")
         }
+        checkType(config.system.closeMode,"string","system/closeMode")
+        if (!["normal","adminonly"].includes(config.system.closeMode)){
+            createError("'system/closeMode' | the close mode must be adminonly or normal")
+        }
+        console.log("hoi")
+
         checkType(config.system.enable_transcript,"boolean","system/enable_transcript")
         checkType(config.system.enable_DM_transcript,"boolean","system/enable_DM_transcript")
         if (config.system.enable_transcript){

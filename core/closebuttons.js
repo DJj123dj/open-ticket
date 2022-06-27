@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const bot = require('../index')
 const client = bot.client
 const config = bot.config
+const l = bot.language
 
 
 module.exports = () => {
@@ -58,7 +59,7 @@ module.exports = () => {
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Close Ticket")
+            .setLabel(l.buttons.close)
             .setEmoji("🔒")
         )
         .addComponents(
@@ -66,7 +67,7 @@ module.exports = () => {
             .setCustomId("deleteTicket")
             .setDisabled(false)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
     var closeRowClosed = new discord.MessageActionRow()
@@ -75,7 +76,7 @@ module.exports = () => {
             .setCustomId("deleteTicket1")
             .setDisabled(false)
             .setStyle("DANGER")
-            .setLabel("Delete Ticket")
+            .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
         .addComponents(
@@ -83,8 +84,34 @@ module.exports = () => {
             .setCustomId("sendTranscript")
             .setDisabled(false)
             .setStyle("SECONDARY")
-            .setLabel("Send Transcript File")
+            .setLabel(l.buttons.sendTranscript)
             .setEmoji("📄")
+        )
+        .addComponents(
+            new discord.MessageButton()
+            .setCustomId("reopenTicket")
+            .setDisabled(false)
+            .setStyle("SUCCESS")
+            .setLabel(l.buttons.reopen)
+            .setEmoji("✔")
+        )
+    
+    var closeRowDisabled = new discord.MessageActionRow()
+        .addComponents(
+            new discord.MessageButton()
+            .setCustomId("closeTicket")
+            .setDisabled(true)
+            .setStyle("SECONDARY")
+            .setLabel(l.buttons.close)
+            .setEmoji("🔒")
+        )
+        .addComponents(
+            new discord.MessageButton()
+            .setCustomId("deleteTicket")
+            .setDisabled(true)
+            .setStyle("DANGER")
+            .setLabel(l.buttons.delete)
+            .setEmoji("✖️")
         )
 
 
@@ -109,7 +136,16 @@ module.exports = () => {
         if (interaction.customId != "closeTicketTrue") return
         
         interaction.deferUpdate()
-        interaction.message.edit({components:[closeRowClosed]})
+
+        if (config.system.closeMode == "adminonly"){
+            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        }
+        
+        interaction.message.edit({components:[closeRowDisabled]})
 
         /**
          * @type {String}
@@ -131,6 +167,15 @@ module.exports = () => {
         if (interaction.customId != "closeTicketTrue1") return
         
         interaction.deferUpdate()
+
+        if (config.system.closeMode == "adminonly"){
+            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                return
+            }
+        }
+
         const closedButtonDisabled = new discord.MessageActionRow()
             .addComponents([
                 new discord.MessageButton()
@@ -140,6 +185,10 @@ module.exports = () => {
                     .setEmoji("🔒")
             ])
         interaction.message.edit({components:[closedButtonDisabled]})
+
+        interaction.channel.messages.fetchPinned().then((messages) => {
+            messages.first().edit({components:[closeRowDisabled]})
+        })
 
         /**
          * @type {String}
@@ -178,6 +227,12 @@ module.exports = () => {
         if (interaction.customId != "deleteTicketTrue") return
         
         interaction.deferUpdate()
+
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            return
+        }
 
         /**
          * @type {String}
@@ -218,6 +273,12 @@ module.exports = () => {
         if (interaction.customId != "deleteTicketTrue1") return
         
         interaction.deferUpdate()
+
+        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            return
+        }
 
         /**
          * @type {String}
