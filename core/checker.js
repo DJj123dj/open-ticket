@@ -301,7 +301,6 @@ exports.checker = async () => {
         if (!["normal","adminonly"].includes(config.system.closeMode)){
             createError("'system/closeMode' | the close mode must be adminonly or normal")
         }
-        console.log("hoi")
 
         checkType(config.system.enable_transcript,"boolean","system/enable_transcript")
         checkType(config.system.enable_DM_transcript,"boolean","system/enable_DM_transcript")
