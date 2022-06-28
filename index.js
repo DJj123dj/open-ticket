@@ -44,6 +44,21 @@ const log = this.errorLog.log
 client.on('ready',async () => {
     const chalk = await (await import("chalk")).default
 
+    if (!process.argv[2]){
+        console.log(chalk.red("WELCOME TO OPEN TICKET!"))
+        log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
+
+        console.log(chalk.blue("\n\nlogs:")+"\n============")
+        if (config.status.enabled){
+            client.user.setActivity(config.status.text,{type:config.status.type})
+        }
+
+        log("system","bot logged in!")
+
+        await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
+        return
+    }
+
     if (!process.argv[2].startsWith("slash")){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
         log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
