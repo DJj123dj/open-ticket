@@ -68,6 +68,8 @@
         "deletedTicketDmTitle":"Ticket Deleted!",
         "closedTicketDmDescription":"Your ticket is closed!",
         "deletedTicketDmDescription":"Your ticket is deleted!",
+        "reopenTicketDmTitle":"Ticket Re-opened!",
+        "reopenTicketDmDescription":"Your ticket is re-opened!",
         "newTranscriptTitle":"A new transcript is here!",
         "newTranscriptDescription":"You can find the transcript in the text file above!",
         "hereIsTheTranscript":"Here is the transcript:",

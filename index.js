@@ -93,7 +93,9 @@ if (!isDev){
     require("./core/checker").checker()
 }
 
-if (process.argv[2] && !process.argv[2].startsWith("slash")){
+if (process.argv[2] && process.argv[2].startsWith("slash")){
+    //do nothing
+}else{
     var storage = require('./core/dynamicdatabase/storage')
     exports.storage = storage
 
