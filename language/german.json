@@ -1,0 +1,79 @@
+{
+    "errors":{
+        "missingArgsTitle":"Ungültiges Argument!",
+        "missingArgsDescription":"Fehlendes Argument!",
+        "noPermsTitle":"Du hast keine Rechte!",
+        "noPermsDescription":"Sie haben nicht die richtigen Rollen, um diesen Befehl auszuführen!\nSie benötigen die `ADMINISTRATOR` Erlaubnis oder in der Liste der erlaubten Rollen sein!",
+        "chooseFromListTitle":"Ungültige ID",
+        "chooseFromListDescription":"Wählen Sie eine der folgenden ID:",
+        "boterror":"Bot Fehler!",
+        "notInTicketTitle":"Du bist ein kein Ticket!",
+        "notInTicketDescription":"Der Befehl funktioniert nicht außerhalb eines Tickets!",
+        "ticketDoesntExist":"Das Ticket Exisitert nicht mehr!",
+        "roleDoesntExist":"Die Rolle Exisitiert nicht mehr!",
+        "anotherOption":"Diese Option ist kein Ticket, sondern eine andere Art!",
+        "maxAmountTitle":"Das Limit wurde erreicht!",
+        "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neue erstellen.!",
+        "somethingWentWrong":"Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
+        "somethingWentWrongTranscript":"Bei der Erstellung der Transcript ist etwas schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
+    },
+    "commands":{
+        "userAddedTitle":"User geaddet!",
+        "userAddedDescription":"{0} wird zu diesem Ticket hinzugefügt!",
+        "userRemovedTitle":"User entfernt!",
+        "userRemovedDescription":"{0} wird aus diesem Ticket entfernt!",
+
+        "renameTitle":"Der Name wurde geändert!",
+        "renameWarning":"Achtung: Sie können den Kanalnamen nur 2 Mal pro Minute ändern!\n(dies ist auf die Begrenzung der Diskordrate zurückzuführen)",
+
+        "closeTitle":"Dieses Ticket schließen!",
+        "closeDescription":"Sie können dieses Ticket schließen, indem Sie auf die Schaltfläche unten klicken!",
+        "deleteTitle":"Löschen Sie dieses Ticket!",
+        "deleteDescription":"Sie können dieses Ticket löschen, indem Sie auf die Schaltfläche unten klicken!",
+        "reopenTitle":"Öffne dieses Ticket erneut!",
+        "reopenDescription":"Sie können dieses Ticket erneut öffnen, indem Sie auf die Schaltfläche unten klicken!",
+
+        "ticketWarning":"Die Einbettung befindet sich in der Nachricht unten!",
+        "maxTicketWarning":"**Warnung:** _Sie können nur {0} ticket(s) erstellen zu einer Zeit!_"
+    },
+    "helpMenu":{
+        "title":"Hilfe Menu:",
+        "header1":"**Gehe zu {0} um ein Ticket zu erstellen!**\n\n",
+        "header2":"**Führen Sie den Befehl `/new` oder `/ticket` um ein Ticket zu erstellen!**\n\n",
+
+        "msgCmd":"Eine Einbettung mit Schaltflächen erzeugen. (nur admins)",
+        "renameCmd":"Ein Ticket umbenennen. (keine Leerzeichen)",
+        "closeCmd":"Schließen Sie ein Ticket.",
+        "deleteCmd":"Ein Ticket löschen.",
+        "addCmd":"Fügen Sie dem Ticket einen Benutzer hinzu.",
+        "removeCmd":"Entfernen eines Benutzers aus dem Ticket.",
+        "reopenCmd":"Öffnen Sie ein Ticket erneut, nachdem es geschlossen wurde."
+    },
+    "buttons":{
+        "close":"Ticket schließen",
+        "delete":"Ticket löschen",
+        "reopen":"Ticket wieder öffnen",
+        "sendTranscript":"Transcript-Datei senden"
+    },
+    "messages":{
+        "reopenTitle":"Dieses Ticket wiedereröffnet!",
+        "reopenDescription":"Sie können gerne weiterreden!",
+        "closedTitle":"Dieses Ticket geschlossen!",
+        "closedDescription":"Nur Admins können jetzt in diesem Ticket sprechen!\n\n*Klicken Sie auf die Schaltfläche unten, um dieses Ticket zu löschen oder erneut zu öffnen!*",
+        "createdTitle":"Ticket erstellt!",
+        "createdDescription":"Ihr Ticket ist erstellt, Sie können es durch einen Ping erkennen!",
+
+        "newTicketDmTitle":"Neues Ticket!",
+        "closedTicketDmTitle":"Ticket schließen!",
+        "deletedTicketDmTitle":"Ticket löschen!",
+        "closedTicketDmDescription":"Ihr Ticket ist geschlossen!",
+        "deletedTicketDmDescription":"Ihr Ticket ist gelöscht!",
+        "reopenTicketDmTitle":"Ticket neu Eröffnen!",
+        "reopenTicketDmDescription":"Dein Ticket ist Neu eröffnet!",
+        "newTranscriptTitle":"Eine neue Transscript finden Sie hier!",
+        "newTranscriptDescription":"Die Abschrift finden Sie in der obigen Textdatei!",
+        "hereIsTheTranscript":"Hier ist das Transscript:",
+
+        "chooseCategory":"Wähle eine Kategorie:"
+    }
+}

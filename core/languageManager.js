@@ -9,7 +9,7 @@ var localLanguage = require("../language/english.json")
 if (config.languagefile.startsWith("custom")) localLanguage = require("../language/custom.json")
 else if (config.languagefile.startsWith("dutch")) localLanguage = require("../language/dutch.json")
 else if (config.languagefile.startsWith("english")) localLanguage = require("../language/english.json")
-else if (config.languagefile.startsWith("deutsch")) localLanguage = require("../language/deutsch.json")
+else if (config.languagefile.startsWith("german")) localLanguage = require("../language/german.json")
 else if (config.languagefile.startsWith("french")) localLanguage = require("../language/french.json")
 else if (config.languagefile.startsWith("romanian")) localLanguage = require("../language/romanian.json")
 
