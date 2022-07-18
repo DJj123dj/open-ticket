@@ -20,6 +20,12 @@ module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix)) return
         var args = msg.content.split(config.prefix)
+        
+        if (!args[1]){
+            msg.channel.send({embeds:[helpEmbed]})
+            log("command","someone used the 'help' command",[{key:"user",value:msg.author.tag}])
+            return
+        }
 
         if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove") && !args[1].startsWith("rename") && !args[1].startsWith("reopen")){
 

@@ -12,6 +12,7 @@ else if (config.languagefile.startsWith("english")) localLanguage = require("../
 else if (config.languagefile.startsWith("german")) localLanguage = require("../language/german.json")
 else if (config.languagefile.startsWith("french")) localLanguage = require("../language/french.json")
 else if (config.languagefile.startsWith("romanian")) localLanguage = require("../language/romanian.json")
+else if (config.languagefile.startsWith("arabic")) localLanguage = require("../language/arabic.json")
 
 const errorLog = async () => {
     const chalk = await (await import("chalk")).default

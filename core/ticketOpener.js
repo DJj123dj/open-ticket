@@ -35,11 +35,13 @@ module.exports = () => {
             var customId = interaction.customId
         }else return
 
-        if (interaction.customId.startsWith("newT")){
-            const optionid = interaction.customId.split("newT")[1]
-            if (!optionid){
-                interaction.reply({embeds:[bot.errorLog.serverError(l.errors.ticketDoesntExist)]})
-                return
+        if (interaction.isButton()){
+            if (interaction.customId.startsWith("newT")){
+                const optionid = interaction.customId.split("newT")[1]
+                if (!optionid){
+                    interaction.reply({embeds:[bot.errorLog.serverError(l.errors.ticketDoesntExist)]})
+                    return
+                }
             }
         }
         
