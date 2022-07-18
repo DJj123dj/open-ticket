@@ -1,0 +1,79 @@
+{
+    "errors":{
+        "missingArgsTitle":"حجج باطلة",
+        "missingArgsDescription":"حجة مفقودة",
+        "noPermsTitle":"ليس لديك إذن",
+        "noPermsDescription":"ليس لديك إذن لاستخدام هذا\nأنت بحاجة إلى إذن "ADMINISTRATOR" أو أن تكون في قائمة الأدوار المسموح بها!",
+        "chooseFromListTitle":"بطاقة التعريف غير صالحة",
+        "chooseFromListDescription":"اختر أحد المعرفات أدناه:",
+        "boterror":"مشكلة في الروبوت",
+        "notInTicketTitle":"أنت لست في تذكرة!",
+        "notInTicketDescription":"هذا الأمر لا يعمل خارج التذاكر!",
+        "ticketDoesntExist":"هذه التذكرة لم تعد موجودة!",
+        "roleDoesntExist":"هذا الدور لم يعد موجودًا!",
+        "anotherOption":"هذا الخيار ليس تذكرة بل نوع آخر!",
+        "maxAmountTitle":"بلغ الحد الأقصى!",
+        "maxAmountDescription":"لقد وصلت إلى الحد الأقصى لعدد التذاكر المسموح بها!\nلذلك لا يمكنك إنشاء واحدة جديدة!",
+        "somethingWentWrong":"هناك خطأ ما!**\nالرجاء المحاولة مرة أخرى!",
+        "somethingWentWrongTranscript":"حدث خطأ ما أثناء كتابة النص!**\nالرجاء المحاولة مرة أخرى!"
+    },
+    "commands":{
+        "userAddedTitle":"تمت إضافة المستخدم!",
+        "userAddedDescription":"{0} يضاف إلى هذه التذكرة!",
+        "userRemovedTitle":"تمت إزالة المستخدم!",
+        "userRemovedDescription":"{0} تمت إزالته من هذه التذكرة!",
+
+        "renameTitle":"تم تغيير الاسم!",
+        "renameWarning":"تحذير: يمكنك فقط تغيير اسم القناة مرتين في الدقيقة!\n(هذا يرجع إلى حدود معدل الخلاف)",
+
+        "closeTitle":"أغلق هذه التذكرة!",
+        "closeDescription":"يمكنك إغلاق هذه التذكرة بالضغط على الزر أدناه!",
+        "deleteTitle":"احذف هذه التذكرة!",
+        "deleteDescription":"يمكنك حذف هذه التذكرة بالضغط على الزر أدناه!",
+        "reopenTitle":"أعد فتح هذه التذكرة!",
+        "reopenDescription":"يمكنك إعادة فتح هذه التذكرة بالضغط على الزر أدناه!",
+
+        "ticketWarning":"التضمين في الرسالة أدناه!",
+        "maxTicketWarning":"**تحذير:** _يمكنك فقط إنشاء ملفات {0} تذكرة في كل مرة!_"
+    },
+    "helpMenu":{
+        "title":"قائمة التعليمات:",
+        "header1":"**اذهب إلى {0} لإنشاء تذكرة!**\n\n",
+        "header2":"**قم بتشغيل الأمر `/new` أو `/ticket` لإنشاء تذكرة!**\n\n",
+
+        "msgCmd":"تفرخ تضمين مع الأزرار. (المسؤولون فقط)",
+        "renameCmd":"إعادة تسمية تذكرة. (بدون مسافات)",
+        "closeCmd":"أغلق التذكرة.",
+        "deleteCmd":"حذف التذكرة.",
+        "addCmd":"أضف مستخدمًا إلى التذكرة.",
+        "removeCmd":"إزالة مستخدم من التذكرة.",
+        "reopenCmd":"أعد فتح التذكرة بعد إغلاقه."
+    },
+    "buttons":{
+        "close":"إغلاق التذكرة",
+        "delete":"حذف التذكرة",
+        "reopen":"إعادة فتح التذكرة",
+        "sendTranscript":"إرسال ملف النص"
+    },
+    "messages":{
+        "reopenTitle":"أعيد فتح هذه التذكرة!",
+        "reopenDescription":"لا تتردد في التحدث مرة أخرى!",
+        "closedTitle":"أغلقت هذه التذكرة!",
+        "closedDescription":"يمكن للمسؤولين فقط التحدث في هذه التذكرة الآن!\n\n*انقر فوق الزر أدناه لحذف هذه التذكرة أو إعادة فتحها!*",
+        "createdTitle":"تم إنشاء التذكرة!",
+        "createdDescription":"تم إنشاء تذكرتك ، يمكنك اكتشافها عن طريق ping",
+
+        "newTicketDmTitle":"تذكرة جديدة!",
+        "closedTicketDmTitle":"تم إغلاق التذكرة!",
+        "deletedTicketDmTitle":"تم حذف التذكرة!",
+        "closedTicketDmDescription":"تم إغلاق تذكرتك!",
+        "deletedTicketDmDescription":"تم حذف تذكرتك!",
+        "reopenTicketDmTitle":"أعيد فتح التذكرة!",
+        "reopenTicketDmDescription":"تم إعادة فتح تذكرتك!",
+        "newTranscriptTitle":"نسخة جديدة هنا!",
+        "newTranscriptDescription":"يمكنك العثور على النص في الملف النصي أعلاه!",
+        "hereIsTheTranscript":"هذا هو النص:",
+
+        "chooseCategory":"اختر فئة:"
+    }
+}

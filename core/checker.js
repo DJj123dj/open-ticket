@@ -267,7 +267,7 @@ exports.checker = async () => {
     //languagefile
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 
@@ -296,6 +296,8 @@ exports.checker = async () => {
         checkType(config.system["has@everyoneaccess"],"boolean","system/has@everyoneaccess")
         if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
             checkDiscord("roleid",config.system.member_role,"system/member_role")
+        }else{
+            createWarn("'system/member_role' | You don't have a member role, but it's recommended!")
         }
         checkType(config.system.closeMode,"string","system/closeMode")
         if (!["normal","adminonly"].includes(config.system.closeMode)){

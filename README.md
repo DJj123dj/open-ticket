@@ -1,8 +1,13 @@
-### large announcement:
-[![open moderation](./openmod.png)](https://www.dj-dj.be/projects/open-moderation)
+## We need translators!
+If you know a language that isn't already in open ticket and you can write json,
+then is this the job for you!
+
+make a ticket in our server to start!
+
+*if you translate, you will come in the credits*
 
 # open-ticket
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-2.1.2%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v2.1.2)  [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages)  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-2.2.0%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v2.2.0)  [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages)  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
 
 This is an open-source discord ticket bot, you can configure it and it comes with cool features like transcripts & custom options!
 
@@ -14,6 +19,7 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - DJ-Lite: for doing the administration
 - Sanke: for translation & new ideas
 - ExothDE: for translation
+- 1x1: for translation
 - Everyone that reported a bug
 
 ## features
@@ -35,11 +41,14 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 ## installation
 **You need `node.js 16` to run this project!**
 
+**At this moment you still need discord.js v13!**
+This will change soon!
+
 You can clone or download this project.
 
 ### packages
 - chalk => version `latest`
-- discord.js => version `latest`
+- discord.js => version `13.8.0`
 - express => version `latest`
 - node-localstorage => version `latest`
 
@@ -52,7 +61,7 @@ if there are any errors, you can open an **issue on github** or **contact me in 
 
 ### config
 Our config documentation is moved to another file:
-[click here to view](https://www.github.com/DJj123dj/open-ticket/wiki/config-v2.1.2)
+[click here to view](https://www.github.com/DJj123dj/open-ticket/wiki/config-v2.2.0)
 
 ### intents & permissions
 In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
@@ -64,8 +73,11 @@ You can also configure your own permissions
 
 ## information
 
-_v2.1.2 stable_
+_v2.2.0 stable_
 
 changelog: [click here](https://www.github.com/DJj123dj/open-ticket/wiki/Changelog)
 
 © 2022 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.com/invite/26vT9wt3n3)
+
+### large announcement:
+[![open moderation](./openmod.png)](https://www.dj-dj.be/projects/open-moderation)
