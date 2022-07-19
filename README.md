@@ -20,6 +20,7 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - Sanke: for translation & new ideas
 - ExothDE: for translation
 - 1x1: for translation
+- R0JO: for translation
 - Everyone that reported a bug
 
 ## features
@@ -48,7 +49,7 @@ You can clone or download this project.
 
 ### packages
 - chalk => version `latest`
-- discord.js => version `13.8.0`
+- discord.js => version `latest`
 - express => version `latest`
 - node-localstorage => version `latest`
 
