@@ -6,7 +6,7 @@ const log = bot.errorLog.log
 const l = bot.language
 
 module.exports = () => {
-    const helpEmbed = new discord.MessageEmbed()
+    const helpEmbed = new discord.EmbedBuilder()
         .setColor(config.main_color)
         .setTitle(l.helpMenu.title)
 

@@ -7,17 +7,18 @@ const l = bot.language
 const loadChalk = async () => {
     return await (await import("chalk")).default
 }
-const embed = discord.MessageEmbed
+const embed = discord.EmbedBuilder
+const c = discord.Colors
 
 exports.noPermsMessage = new embed()
-    .setColor("RED")
+    .setColor(c.Red)
     .setTitle(":x: "+l.errors.noPermsTitle+" :x:")
     .setDescription(l.errors.noPermsDescription)
 
 /**@param {String} message */
 exports.invalidArgsMessage = (message) => {
     var x =  new embed()
-        .setColor("RED")
+        .setColor(c.Red)
         .setTitle(":x: "+l.errors.missingArgsTitle+" :x:")
         .setDescription(message)
 
@@ -27,7 +28,7 @@ exports.invalidArgsMessage = (message) => {
 /**@param {String} message */
 exports.serverError = (message) => {
     var x = new embed()
-        .setColor("ORANGE")
+        .setColor(c.Orange)
         .setTitle(":warning: "+l.errors.boterror+" :warning:")
         .setDescription(message)
 
@@ -37,14 +38,14 @@ exports.serverError = (message) => {
 /**@param {String[]} list */
 exports.invalidIdChooseFromList = (list) => {
     var x = new embed()
-        .setColor("RED")
+        .setColor(c.Red)
         .setTitle(":x: "+l.errors.chooseFromListTitle+" :x:")
         .setDescription(l.errors.chooseFromListDescription+"\n`"+list.join("`\n`")+"`")
     return x
 }
 
 exports.notInATicket = new embed()
-    .setColor("RED")
+    .setColor(c.Red)
     .setTitle(":x: "+l.errors.notInTicketTitle+" :x:")
     .setDescription(l.errors.notInTicketDescription)
 
@@ -62,7 +63,7 @@ exports.success = (title,message) => {
 /**@param {String} message @param {String} title */
 exports.warning = (title,message) => {
     var x = new embed()
-        .setColor("ORANGE")
+        .setColor(c.Orange)
         .setTitle(":warning: "+title+" :warning:")
         .setDescription(message)
 

@@ -12,8 +12,18 @@
 
 const discord = require('discord.js')
 const fs = require('fs')
-const intents = discord.Intents
-const client = new discord.Client({intents:[intents.FLAGS.GUILDS,intents.FLAGS.GUILD_MESSAGES,intents.FLAGS.GUILD_MEMBERS],partials:["CHANNEL"]})
+const {GatewayIntentBits,Partials} = discord
+const client = new discord.Client({
+    intents:[
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.MessageContent
+    ],
+    partials:[Partials.Channel,Partials.Message]
+})
 exports.client = client
 
 client.setMaxListeners(30)

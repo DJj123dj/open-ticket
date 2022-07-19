@@ -8,7 +8,7 @@ const l = bot.language
 /**
  * 
  * @param {String} id the id from an open-ticket embed
- * @returns {{embed:discord.MessageEmbed,componentRows:discord.MessageActionRow[]}} discord embed
+ * @returns {{embed:discord.EmbedBuilder,componentRows:discord.MessageActionRow[]}} discord embed
  */
 
 
@@ -17,7 +17,7 @@ exports.createEmbed = (id) => {
     //-----------------------------------
     //general importing
     const data = require("./utils/getTicketMessages").getTicketMessage(id)
-    /**@type {discord.MessageButton[]}*/
+    /**@type {discord.ButtonBuilder[]}*/
     var buttons = []
     /**@type {getButton.rawButtonData[]} */
     var buttonData = []
@@ -32,7 +32,7 @@ exports.createEmbed = (id) => {
 
     //-----------------------------------
     //create the embed
-    const embed = new discord.MessageEmbed()
+    const embed = new discord.EmbedBuilder()
         .setColor(data.color)
         .setTitle(data.name)
     if (data.enableFooter) embed.setFooter({text:data.footer})
@@ -86,7 +86,7 @@ exports.createEmbed = (id) => {
 
     //return everything
     /**
-     * @type {{embed:discord.MessageEmbed,componentRows:discord.MessageActionRow[]}}
+     * @type {{embed:discord.EmbedBuilder,componentRows:discord.MessageActionRow[]}}
      */
     const returnedData = {embed:embed,componentRows:componentRows}
     return returnedData

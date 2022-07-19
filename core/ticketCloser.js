@@ -102,7 +102,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         //message
         var closeButtonRow = new discord.MessageActionRow()
             .addComponents(
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                 .setCustomId("deleteTicket1")
                 .setDisabled(false)
                 .setStyle("DANGER")
@@ -110,7 +110,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setEmoji("✖️")
             )
             .addComponents(
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                 .setCustomId("sendTranscript")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
@@ -118,7 +118,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setEmoji("📄")
             )
             .addComponents(
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                 .setCustomId("reopenTicket")
                 .setDisabled(false)
                 .setStyle("SUCCESS")
@@ -126,7 +126,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 .setEmoji("✔")
             )
             
-        const embed = new discord.MessageEmbed()
+        const embed = new discord.EmbedBuilder()
             .setColor(config.main_color)
             .setTitle(":lock: "+l.messages.closedTitle+" :lock:")
             .setDescription(l.messages.closedDescription)
@@ -195,7 +195,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         }
                     
         if (config.system.enable_transcript){
-            const transcriptEmbed = new discord.MessageEmbed()
+            const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
                 .setTitle(l.messages.newTranscriptTitle)
                 .setAuthor({name:interaction.user.username,iconURL:interaction.user.displayAvatarURL({format:"png"})})
@@ -209,7 +209,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         }
 
         if (config.system.enable_DM_transcript){
-            const transcriptEmbed = new discord.MessageEmbed()
+            const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
                 .setTitle(l.messages.newTranscriptTitle)
                 .setDescription(l.messages.newTranscriptDescription)

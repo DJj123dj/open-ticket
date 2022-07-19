@@ -9,7 +9,7 @@ const storage = bot.storage
 module.exports = () => {
     var closeRowNormal = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
@@ -17,7 +17,7 @@ module.exports = () => {
             .setEmoji("🔒")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("deleteTicket")
             .setDisabled(false)
             .setStyle("DANGER")
@@ -27,7 +27,7 @@ module.exports = () => {
     
     var closeRowClosed = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("deleteTicket1")
             .setDisabled(false)
             .setStyle("DANGER")
@@ -35,7 +35,7 @@ module.exports = () => {
             .setEmoji("✖️")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("sendTranscript")
             .setDisabled(false)
             .setStyle("SECONDARY")
@@ -43,7 +43,7 @@ module.exports = () => {
             .setEmoji("📄")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("reopenTicket")
             .setDisabled(false)
             .setStyle("SUCCESS")
@@ -53,14 +53,14 @@ module.exports = () => {
     
     var reopenBar = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("reopenTicketTrue")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
                 .setEmoji("✅")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("reopenTicketFalse")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
@@ -69,14 +69,14 @@ module.exports = () => {
     
     var reopenBar1 = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("reopenTicketTrue1")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
                 .setEmoji("✅")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("reopenTicketFalse1")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
@@ -85,7 +85,7 @@ module.exports = () => {
 
     var reopenCommandBar = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("reopenTicket1")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
@@ -117,7 +117,7 @@ module.exports = () => {
 
         interaction.deferUpdate()
         
-        const embed = new discord.MessageEmbed()
+        const embed = new discord.EmbedBuilder()
             .setColor(config.main_color)
             .setTitle(":unlock: "+l.messages.reopenTitle+" :unlock:")
             .setDescription(l.messages.reopenDescription)
@@ -184,7 +184,7 @@ module.exports = () => {
 
         interaction.deferUpdate()
         
-        const embed = new discord.MessageEmbed()
+        const embed = new discord.EmbedBuilder()
             .setColor(config.main_color)
             .setTitle(":unlock: "+l.messages.reopenTitle+" :unlock:")
             .setDescription(l.messages.reopenDescription)

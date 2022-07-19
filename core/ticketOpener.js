@@ -11,7 +11,7 @@ const storage = bot.storage
 module.exports = () => {
     var closeButton = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
@@ -19,7 +19,7 @@ module.exports = () => {
             .setEmoji("🔒")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("deleteTicket")
             .setDisabled(false)
             .setStyle("DANGER")
@@ -152,7 +152,7 @@ module.exports = () => {
                 }).then((ticketChannel) => {
                     storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
                     
-                    var ticketEmbed = new discord.MessageEmbed()
+                    var ticketEmbed = new discord.EmbedBuilder()
                         .setAuthor({name:interaction.user.id})
                         .setColor(config.main_color)
                         .setTitle(currentTicketOptions.name)

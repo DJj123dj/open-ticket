@@ -8,7 +8,7 @@ const l = bot.language
 module.exports = () => {
     var reopenCommandBar = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("reopenTicket1")
                 .setDisabled(false)
                 .setStyle("SECONDARY")

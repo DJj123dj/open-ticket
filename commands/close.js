@@ -17,7 +17,7 @@ module.exports = () => {
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                     .setCustomId("closeTicketTrue1")
                     .setDisabled(false)
                     .setStyle("SECONDARY")
@@ -44,7 +44,7 @@ module.exports = () => {
             
             const closebutton = new discord.MessageActionRow()
             .addComponents([
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                     .setCustomId("closeTicketTrue1")
                     .setDisabled(false)
                     .setStyle("SECONDARY")

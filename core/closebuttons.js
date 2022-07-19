@@ -9,14 +9,14 @@ module.exports = () => {
     //closebar
     var closeBar = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("closeTicketTrue")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
                 .setEmoji("✅")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("closeTicketFalse")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
@@ -24,14 +24,14 @@ module.exports = () => {
         )
     var deleteBar = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("deleteTicketTrue")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
                 .setEmoji("✅")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("deleteTicketFalse")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
@@ -39,14 +39,14 @@ module.exports = () => {
         )
     var deleteBar1 = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("deleteTicketTrue1")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
                 .setEmoji("✅")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
                 .setCustomId("deleteTicketFalse1")
                 .setDisabled(false)
                 .setStyle("SECONDARY")
@@ -55,7 +55,7 @@ module.exports = () => {
     //closebutton
     var closeRowNormal = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("closeTicket")
             .setDisabled(false)
             .setStyle("SECONDARY")
@@ -63,7 +63,7 @@ module.exports = () => {
             .setEmoji("🔒")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("deleteTicket")
             .setDisabled(false)
             .setStyle("DANGER")
@@ -72,7 +72,7 @@ module.exports = () => {
         )
     var closeRowClosed = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("deleteTicket1")
             .setDisabled(false)
             .setStyle("DANGER")
@@ -80,7 +80,7 @@ module.exports = () => {
             .setEmoji("✖️")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("sendTranscript")
             .setDisabled(false)
             .setStyle("SECONDARY")
@@ -88,7 +88,7 @@ module.exports = () => {
             .setEmoji("📄")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("reopenTicket")
             .setDisabled(false)
             .setStyle("SUCCESS")
@@ -98,7 +98,7 @@ module.exports = () => {
     
     var closeRowDisabled = new discord.MessageActionRow()
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("closeTicket")
             .setDisabled(true)
             .setStyle("SECONDARY")
@@ -106,7 +106,7 @@ module.exports = () => {
             .setEmoji("🔒")
         )
         .addComponents(
-            new discord.MessageButton()
+            new discord.ButtonBuilder()
             .setCustomId("deleteTicket")
             .setDisabled(true)
             .setStyle("DANGER")
@@ -178,7 +178,7 @@ module.exports = () => {
 
         const closedButtonDisabled = new discord.MessageActionRow()
             .addComponents([
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                     .setCustomId("closeTicketTrue1")
                     .setDisabled(true)
                     .setStyle("SECONDARY")

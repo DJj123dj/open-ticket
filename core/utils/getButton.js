@@ -29,13 +29,13 @@ exports.getOption = getOption
 /**
  * 
  * @param {String} id 
- * @returns {discord.MessageButton|false}
+ * @returns {discord.ButtonBuilder|false}
  */
 exports.getButton = (id) => {
     const option = getOption(id)
     if (!option) return false
     if (option.type == "ticket"){
-        var button = new discord.MessageButton()
+        var button = new discord.ButtonBuilder()
             .setCustomId("newT"+option.id)
             .setDisabled(false)
             .setStyle(getColor(option.color))
@@ -45,7 +45,7 @@ exports.getButton = (id) => {
         if (!option.label && !option.icon){button.setLabel("no label or emoji")}
 
     }else if (option.type == "website"){
-        var button = new discord.MessageButton()
+        var button = new discord.ButtonBuilder()
             .setDisabled(false)
             .setStyle("LINK")
             .setURL(option.url)
@@ -55,7 +55,7 @@ exports.getButton = (id) => {
         if (!option.label && !option.icon){button.setLabel("no label or emoji")}
 
     }else if (option.type == "role"){
-        var button = new discord.MessageButton()
+        var button = new discord.ButtonBuilder()
             .setCustomId("newR"+option.id)
             .setDisabled(false)
             .setStyle(getColor(option.color))
