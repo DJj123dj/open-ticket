@@ -18,12 +18,12 @@ module.exports = () => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             
-            const closebutton = new discord.MessageActionRow()
+            const closebutton = new discord.ActionRowBuilder()
             .addComponents([
                 new discord.ButtonBuilder()
                     .setCustomId("deleteTicketTrue")
                     .setDisabled(false)
-                    .setStyle("SECONDARY")
+                    .setStyle(discord.ButtonStyle.Secondary)
                     .setEmoji("❌")
             ])
 
@@ -37,7 +37,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "delete") return
 
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
@@ -51,12 +51,12 @@ module.exports = () => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             
-            const closebutton = new discord.MessageActionRow()
+            const closebutton = new discord.ActionRowBuilder()
             .addComponents([
                 new discord.ButtonBuilder()
                     .setCustomId("deleteTicketTrue")
                     .setDisabled(false)
-                    .setStyle("SECONDARY")
+                    .setStyle(discord.ButtonStyle.Secondary)
                     .setEmoji("❌")
             ])
 

@@ -9,12 +9,12 @@ const getconfigoptions = require("./getoptions")
 const storage = bot.storage
 
 module.exports = () => {
-    var closeButton = new discord.MessageActionRow()
+    var closeButton = new discord.ActionRowBuilder()
         .addComponents(
             new discord.ButtonBuilder()
             .setCustomId("closeTicket")
             .setDisabled(false)
-            .setStyle("SECONDARY")
+            .setStyle(discord.ButtonStyle.Secondary)
             .setLabel(l.buttons.close)
             .setEmoji("🔒")
         )
@@ -22,14 +22,14 @@ module.exports = () => {
             new discord.ButtonBuilder()
             .setCustomId("deleteTicket")
             .setDisabled(false)
-            .setStyle("DANGER")
+            .setStyle(discord.ButtonStyle.Danger)
             .setLabel(l.buttons.delete)
             .setEmoji("✖️")
         )
     
     //ticket button click / create ticket
     client.on("interactionCreate",(interaction) => {
-        if (interaction.isCommand() && (interaction.commandName == "new" || interaction.commandName == "ticket")){
+        if (interaction.isChatInputCommand() && (interaction.commandName == "new" || interaction.commandName == "ticket")){
             var customId = "newT"+interaction.options.getString("type")
         }else if (interaction.isButton()){
             var customId = interaction.customId
@@ -54,7 +54,7 @@ module.exports = () => {
 
             if (interaction.isButton()){
                 interaction.deferUpdate()
-            }else if (interaction.isCommand()){
+            }else if (interaction.isChatInputCommand()){
                 interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)]})
             }
 

@@ -35,7 +35,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "help") return
 
         interaction.reply({embeds:[helpEmbed]})

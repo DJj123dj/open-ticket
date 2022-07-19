@@ -100,12 +100,12 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         interaction.channel.permissionOverwrites.set(permissionArray)
 
         //message
-        var closeButtonRow = new discord.MessageActionRow()
+        var closeButtonRow = new discord.ActionRowBuilder()
             .addComponents(
                 new discord.ButtonBuilder()
                 .setCustomId("deleteTicket1")
                 .setDisabled(false)
-                .setStyle("DANGER")
+                .setStyle(discord.ButtonStyle.Danger)
                 .setLabel(l.buttons.delete)
                 .setEmoji("✖️")
             )
@@ -113,7 +113,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 new discord.ButtonBuilder()
                 .setCustomId("sendTranscript")
                 .setDisabled(false)
-                .setStyle("SECONDARY")
+                .setStyle(discord.ButtonStyle.Secondary)
                 .setLabel(l.buttons.sendTranscript)
                 .setEmoji("📄")
             )
@@ -121,7 +121,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 new discord.ButtonBuilder()
                 .setCustomId("reopenTicket")
                 .setDisabled(false)
-                .setStyle("SUCCESS")
+                .setStyle(discord.ButtonStyle.Success)
                 .setLabel(l.buttons.reopen)
                 .setEmoji("✔")
             )
@@ -185,6 +185,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
             catch{log("system","can't send DM to member, member doesn't allow dm's")}
         })
     }
+
 
     if (enableTranscript == true && mode != "deletenotranscript"){
 

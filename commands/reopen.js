@@ -6,12 +6,12 @@ const log = bot.errorLog.log
 const l = bot.language
 
 module.exports = () => {
-    var reopenCommandBar = new discord.MessageActionRow()
+    var reopenCommandBar = new discord.ActionRowBuilder()
         .addComponents(
             new discord.ButtonBuilder()
                 .setCustomId("reopenTicket1")
                 .setDisabled(false)
-                .setStyle("SECONDARY")
+                .setStyle(discord.ButtonStyle.Secondary)
                 .setEmoji("🔓")
         )
     
@@ -32,7 +32,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "reopen") return
 
         interaction.channel.messages.fetchPinned().then(msglist => {

@@ -6,19 +6,20 @@ const l = bot.language
 
 /**@returns {"DANGER"|"SUCCESS"|"PRIMARY"|"SECONDARY"} */
 const getColor = (color) => {
+    const b = discord.ButtonStyle
     if (color.toLowerCase() == "red"){
-        return "DANGER"
+        return b.Danger
     }else if (color.toLowerCase() == "green"){
-        return "SUCCESS"
+        return b.Success
     }else if (color.toLowerCase() == "blue" || color.toLowerCase() == "blurple"){
-        return "PRIMARY"
+        return b.Primary
     }else if (color.toLowerCase() == "black" || color.toLowerCase() == "gray" || color.toLowerCase() == "grey"){
-        return "SECONDARY"
+        return b.Secondary
     }else if (color == "DANGER" || color == "SECONDARY" || color == "SUCCESS" || color == "PRIMARY"){
         return color
     }else if (color.toLowerCase() == "none" || color.toLowerCase() == "false" || color.toLowerCase() == ""){
-        return "SECONDARY"
-    }else return "SECONDARY"
+        return b.Secondary
+    }else return b.Secondary
 }
 
 const getOption = (id) => {
@@ -47,7 +48,7 @@ exports.getButton = (id) => {
     }else if (option.type == "website"){
         var button = new discord.ButtonBuilder()
             .setDisabled(false)
-            .setStyle("LINK")
+            .setStyle(discord.ButtonStyle.Link)
             .setURL(option.url)
         
         if (option.label){button.setLabel(option.label)}

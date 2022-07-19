@@ -70,7 +70,7 @@ exports.createEmbed = (id) => {
 
     for (let i = AmountOfRows; i > 0; i--){
 
-        componentRows.push(new discord.MessageActionRow())
+        componentRows.push(new discord.ActionRowBuilder())
     }
 
     buttons.forEach((button,index) => {

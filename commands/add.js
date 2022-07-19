@@ -31,7 +31,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "add") return
         const user = interaction.options.getUser("user")
 
@@ -40,7 +40,6 @@ module.exports = () => {
                 interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
                 return
             }
-
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()

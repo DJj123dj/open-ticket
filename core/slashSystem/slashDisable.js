@@ -9,7 +9,7 @@ module.exports = async () => {
     
     console.log(chalk.red("\nINSTRUCTIONS:\n\n1: Run the command you want to delete in discord.\n2: You get the message 'This command is now deleted!'\n3: There is also a message in the console that says the command is deleted.\n4: reload your discord."))
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return console.log("this isn't a command!")
+        if (!interaction.isChatInputCommand()) return console.log("this isn't a command!")
 
         interaction.reply({content:"This command is now deleted!"})
 
