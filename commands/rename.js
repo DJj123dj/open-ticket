@@ -45,7 +45,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "rename") return
 
         interaction.channel.messages.fetchPinned().then(msglist => {

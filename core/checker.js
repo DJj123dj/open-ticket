@@ -252,14 +252,8 @@ exports.checker = async () => {
         }
     })
 
-
-
     checkType(config.bot_name,"string","bot_name")
-    if (config.main_color.startsWith("#")){
-        checkHexColor(config.main_color,"main_color")
-    }else{
-        checkEmbedColor(config.main_color,"main_color")
-    }
+    checkHexColor(config.main_color,"main_color")
     checkDiscord("serverid",config.server_id,"server_id")
     checkToken(config.auth_token)
     checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
@@ -267,7 +261,7 @@ exports.checker = async () => {
     //languagefile
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 

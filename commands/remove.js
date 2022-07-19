@@ -32,7 +32,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "remove") return
         const user = interaction.options.getUser("user")
 

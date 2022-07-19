@@ -15,12 +15,12 @@ module.exports = () => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             
-            const closebutton = new discord.MessageActionRow()
+            const closebutton = new discord.ActionRowBuilder()
             .addComponents([
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                     .setCustomId("closeTicketTrue1")
                     .setDisabled(false)
-                    .setStyle("SECONDARY")
+                    .setStyle(discord.ButtonStyle.Secondary)
                     .setEmoji("🔒")
             ])
 
@@ -34,7 +34,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "close") return
 
        interaction.channel.messages.fetchPinned().then(msglist => {
@@ -42,12 +42,12 @@ module.exports = () => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             
-            const closebutton = new discord.MessageActionRow()
+            const closebutton = new discord.ActionRowBuilder()
             .addComponents([
-                new discord.MessageButton()
+                new discord.ButtonBuilder()
                     .setCustomId("closeTicketTrue1")
                     .setDisabled(false)
-                    .setStyle("SECONDARY")
+                    .setStyle(discord.ButtonStyle.Secondary)
                     .setEmoji("🔒")
             ])
 

@@ -4,6 +4,9 @@ const client = require("../../index").client
 const config = bot.config
 const getoptions = require("../getoptions")
 
+const act = discord.ApplicationCommandType
+const acot = discord.ApplicationCommandOptionType
+
 module.exports = async () => {
     const chalk = (await import("chalk")).default
     const sid = config.server_id
@@ -42,10 +45,10 @@ module.exports = async () => {
         name:"ticket",
         description:"Create a ticket!",
         defaultPermission:true,
-        type:"CHAT_INPUT",
+        type:act.ChatInput,
         options:[
             {
-                type:"STRING",
+                type:acot.String,
                 name:"type",
                 description:"The type of ticket.",
                 required:true,
@@ -61,10 +64,10 @@ module.exports = async () => {
         name:"new",
         description:"Create a ticket!",
         defaultPermission:true,
-        type:"CHAT_INPUT",
+        type:act.ChatInput,
         options:[
             {
-                type:"STRING",
+                type:acot.String,
                 name:"type",
                 description:"The type of ticket.",
                 required:true,
@@ -81,7 +84,7 @@ module.exports = async () => {
         name:"help",
         description:"The help menu",
         defaultPermission:true,
-        type:"CHAT_INPUT"
+        type:act.ChatInput
     },sid).then(() => {
         readystats++
 
@@ -92,7 +95,7 @@ module.exports = async () => {
         name:"close",
         description:"Close the current ticket.",
         defaultPermission:true,
-        type:"CHAT_INPUT"
+        type:act.ChatInput
     },sid).then(() => {
         readystats++
     })
@@ -102,7 +105,7 @@ module.exports = async () => {
         name:"delete",
         description:"Delete the current ticket.",
         defaultPermission:true,
-        type:"CHAT_INPUT"
+        type:act.ChatInput
     },sid).then(() => {
         readystats++
     })
@@ -112,14 +115,15 @@ module.exports = async () => {
         name:"message",
         description:"Create a ticket message.",
         defaultPermission:true,
-        type:"CHAT_INPUT",
+        type:act.ChatInput,
         options:[
             {
-                type:"STRING",
+                type:acot.String,
                 name:"id",
                 description:"The message id.",
                 required:true,
-                choices:msgchoices
+                choices:msgchoices,
+                max_length:30
 
             }
         ]
@@ -132,10 +136,10 @@ module.exports = async () => {
         name:"add",
         description:"Add people to this ticket.",
         defaultPermission:true,
-        type:"CHAT_INPUT",
+        type:act.ChatInput,
         options:[
             {
-                type:"USER",
+                type:acot.User,
                 name:"user",
                 description:"The user to add.",
                 required:true
@@ -150,10 +154,10 @@ module.exports = async () => {
         name:"remove",
         description:"Remove people from this ticket.",
         defaultPermission:true,
-        type:"CHAT_INPUT",
+        type:act.ChatInput,
         options:[
             {
-                type:"USER",
+                type:acot.User,
                 name:"user",
                 description:"The user to remove.",
                 required:true
@@ -168,10 +172,10 @@ module.exports = async () => {
         name:"rename",
         description:"Rename this ticket.",
         defaultPermission:true,
-        type:"CHAT_INPUT",
+        type:act.ChatInput,
         options:[
             {
-                type:"STRING",
+                type:acot.String,
                 name:"name",
                 description:"The new name (without prefix).",
                 required:true
@@ -186,7 +190,7 @@ module.exports = async () => {
         name:"reopen",
         description:"Reopen this ticket.",
         defaultPermission:true,
-        type:"CHAT_INPUT"
+        type:act.ChatInput
     },sid).then(() => {
         readystats++
     })

@@ -35,7 +35,7 @@ module.exports = () => {
     })
 
     client.on("interactionCreate", (interaction) => {
-        if (!interaction.isCommand()) return
+        if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "message") return
 
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)

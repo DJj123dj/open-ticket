@@ -12,8 +12,18 @@
 
 const discord = require('discord.js')
 const fs = require('fs')
-const intents = discord.Intents
-const client = new discord.Client({intents:[intents.FLAGS.GUILDS,intents.FLAGS.GUILD_MESSAGES,intents.FLAGS.GUILD_MEMBERS],partials:["CHANNEL"]})
+const {GatewayIntentBits,Partials} = discord
+const client = new discord.Client({
+    intents:[
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.MessageContent
+    ],
+    partials:[Partials.Channel,Partials.Message]
+})
 exports.client = client
 
 client.setMaxListeners(30)
@@ -42,6 +52,20 @@ exports.errorLog = require("./core/errorLogSystem")
 const log = this.errorLog.log
 
 client.on('ready',async () => {
+    var statusSet = false
+    const setStatus = (type,text) => {
+        if (statusSet == true) return
+        const getTypeEnum = (text) => {
+            if (text.toLowerCase() == "playing") return discord.ActivityType.Playing
+            else if (text.toLowerCase() == "listening") return discord.ActivityType.Listening
+            else if (text.toLowerCase() == "watching") return discord.ActivityType.Watching
+            else return discord.ActivityType.Listening
+        }
+        client.user.setActivity(text,{type:getTypeEnum(type)})
+        statusSet = true
+        log("system","loaded status",[{key:"type",value:type},{key:"text",value:text}])
+    }
+
     const chalk = await (await import("chalk")).default
 
     if (!process.argv[2]){
@@ -50,7 +74,7 @@ client.on('ready',async () => {
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
-            client.user.setActivity(config.status.text,{type:config.status.type})
+            setStatus(config.status.type,config.status.text)
         }
 
         log("system","bot logged in!")
@@ -59,13 +83,19 @@ client.on('ready',async () => {
         return
     }
 
+    if (process.argv[2] == "d"){
+        if (config.status.enabled){
+            setStatus(config.status.type,config.status.text)
+        }
+    }
+
     if (!process.argv[2].startsWith("slash")){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
         log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
-            client.user.setActivity(config.status.text,{type:config.status.type})
+            setStatus(config.status.type,config.status.text)
         }
 
         log("system","bot logged in!")
