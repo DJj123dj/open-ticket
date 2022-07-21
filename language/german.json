@@ -74,6 +74,7 @@
         "newTranscriptDescription":"Die Abschrift finden Sie in der obigen Textdatei!",
         "hereIsTheTranscript":"Hier ist das Transscript:",
 
-        "chooseCategory":"Wähle eine Kategorie:"
+        "chooseCategory":"Wähle eine Kategorie:",
+        "gettingdeleted":"Ticket wird gelöscht..."
     }
 }

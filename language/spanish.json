@@ -74,6 +74,7 @@
         "newTranscriptDescription":"¡Puedes encontrar el transcript en el archivo de texto que se muestra arriba!",
         "hereIsTheTranscript":"Aquí está el transcript:",
 
-        "chooseCategory":"elije una categoría:"
+        "chooseCategory":"elije una categoría:",
+        "gettingdeleted":"El ticket se está viendo eliminado..."
     }
 }

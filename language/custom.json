@@ -74,6 +74,7 @@
         "newTranscriptDescription":"You can find the transcript in the text file above!",
         "hereIsTheTranscript":"Here is the transcript:",
 
-        "chooseCategory":"choose a category:"
+        "chooseCategory":"choose a category:",
+        "gettingdeleted":"Ticket is getting deleted..."
     }
 }

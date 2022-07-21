@@ -3,7 +3,7 @@
         "missingArgsTitle":"حجج باطلة",
         "missingArgsDescription":"حجة مفقودة",
         "noPermsTitle":"ليس لديك إذن",
-        "noPermsDescription":"ليس لديك إذن لاستخدام هذا\nأنت بحاجة إلى إذن "ADMINISTRATOR" أو أن تكون في قائمة الأدوار المسموح بها!",
+        "noPermsDescription":"ليس لديك إذن لاستخدام هذا\nأنت بحاجة إلى إذن 'ADMINISTRATOR' أو أن تكون في قائمة الأدوار المسموح بها!",
         "chooseFromListTitle":"بطاقة التعريف غير صالحة",
         "chooseFromListDescription":"اختر أحد المعرفات أدناه:",
         "boterror":"مشكلة في الروبوت",
@@ -74,6 +74,7 @@
         "newTranscriptDescription":"يمكنك العثور على النص في الملف النصي أعلاه!",
         "hereIsTheTranscript":"هذا هو النص:",
 
-        "chooseCategory":"اختر فئة:"
+        "chooseCategory":"اختر فئة:",
+        "gettingdeleted":"Ticket is getting deleted..."
     }
 }
