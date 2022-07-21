@@ -41,6 +41,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
     }
 
     var enableTranscript = true
+    var deleteRequired = false
 
     if (mode == "delete"){
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
@@ -48,8 +49,8 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
                 return
             }
-        
-        interaction.channel.delete()
+        deleteRequired = true
+        interaction.channel.send({content:"**"+l.messages.gettingdeleted+"**"})
         log("system","deleted a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
@@ -84,17 +85,19 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         }
 
         var permissionArray = []
+        const pfb = discord.PermissionFlagsBits
+
         if (!isDatabaseError) permissionArray.push({
-            id:getusernameStep1.id,
+            id:getusernameStep1,
             type:"member",
-            allow:["VIEW_CHANNEL"],
-            deny:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES"]
+            allow:[pfb.ViewChannel],
+            deny:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages]
         })
 
         permissionArray.push({
-            id:interaction.guild.id,
+            id:interaction.guild.roles.everyone,
             type:"role",
-            deny:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
+            deny:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
         })
 
         interaction.channel.permissionOverwrites.set(permissionArray)
@@ -162,7 +165,8 @@ exports.closeTicket = async (interaction,prefix,mode) => {
             }
         
         enableTranscript = false
-        interaction.channel.delete()
+        deleteRequired = true
+        interaction.channel.send({content:"**"+l.messages.gettingdeleted+"**"})
         log("system","deleted a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
@@ -221,6 +225,10 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 files:[fileattachment]
             })
         }
+    }
+
+    if (deleteRequired){
+        interaction.channel.delete()
     }
 }
 

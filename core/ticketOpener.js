@@ -44,6 +44,7 @@ module.exports = () => {
                 }
             }
         }
+
         
         if (getconfigoptions.getTicketValues("id").includes(customId)){
 
@@ -67,7 +68,6 @@ module.exports = () => {
                 }
                 catch{log("system","can't send DM to member, member doesn't allow dm's")}
                 
-                
 
                 //update storage
                 storage.set("ticketStorage",interaction.member.id,Number(storage.get("ticketStorage",interaction.member.id))+1)
@@ -85,17 +85,19 @@ module.exports = () => {
                 }
 
                 var permissionsArray = []
+                const pfb = discord.PermissionFlagsBits
+                const guild = client.guilds.cache.find(g => g.id == interaction.guild.id)
 
                 //set everyone allowed
                 if (config.system['has@everyoneaccess']){
-                    var everyoneAllowPerms = ["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
+                    var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
                     var everyoneDenyPerms = []
                 }else{
                     var everyoneAllowPerms = []
-                    var everyoneDenyPerms = ["VIEW_CHANNEL"]
+                    var everyoneDenyPerms = [pfb.ViewChannel]
                 }
                 permissionsArray.push({
-                    id:interaction.guild.id,
+                    id:interaction.guild.roles.everyone,
                     type:"role",
                     allow:everyoneAllowPerms,
                     deny:everyoneDenyPerms
@@ -103,18 +105,25 @@ module.exports = () => {
 
                 //add the user that created the ticket
                 permissionsArray.push({
-                    id:interaction.member.id,
+                    id:interaction.member.user,
                     type:"member",
-                    allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
                 })
 
                 //add main adminroles
-                config.main_adminroles.forEach((role) => {
-                    permissionsArray.push({
-                        id:role,
-                        type:"role",
-                        allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
-                    })
+                config.main_adminroles.forEach((role,index) => {
+                    try {
+                        const adminrole = guild.roles.cache.find(r => r.id == role)
+                        if (!adminrole) return
+
+                        permissionsArray.push({
+                            id:adminrole,
+                            type:"role",
+                            allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+                        })
+                    }catch{
+                        log("system","invalid role! At 'config.json => main_adminroles:"+index)
+                    }
                 })
 
                 //add ticket adminroles
@@ -122,29 +131,42 @@ module.exports = () => {
                  * @type {String[]}
                  */
                 const ticketadmin = currentTicketOptions.adminroles
-                ticketadmin.forEach((role) => {
+                ticketadmin.forEach((role,index) => {
                     if (!config.main_adminroles.includes(role)){
-                        permissionsArray.push({
-                            id:role,
-                            type:"role",
-                            allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
-                        })
+                        try {
+                            const adminrole = guild.roles.cache.find(r => r.id == role)
+                            if (!adminrole) return
+                        
+                            permissionsArray.push({
+                                id:adminrole,
+                                type:"role",
+                                allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+                            })
+                        }catch{
+                            log("system","invalid role! At 'config.json => options/ticket/...:"+index)
+                        }
                     }
                 })
 
                 //add member role
                 if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
-                    permissionsArray.push({
-                        id:config.system.member_role,
-                        type:"role",
-                        deny:["VIEW_CHANNEL"]
-                    })
+                    try {
+                        const userrole = guild.roles.cache.find(r => r.id == config.system.member_role)
+                        if (!userrole) return
+                        permissionsArray.push({
+                            id:userrole,
+                            type:"role",
+                            deny:[pfb.ViewChannel]
+                        })
+                    }catch{
+                        log("system","invalid role! At 'config.json => system/member_role")
+                    }
                 }
 
-
                 //create the channel
-                interaction.guild.channels.create(ticketName,{
-                    type:"GUILD_TEXT",
+                interaction.guild.channels.create({
+                    name:ticketName,
+                    type:discord.ChannelType.GuildText,
                     parent:newTicketCategory,
                     reason:"A new ticket is created",
                     permissionOverwrites:permissionsArray

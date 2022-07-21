@@ -74,6 +74,7 @@
         "newTranscriptDescription":"Poti vedea copia ticket-ului in fisierul .txt de mai sus!",
         "hereIsTheTranscript":"Aceasta este copia ticket-ului:",
 
-        "chooseCategory":"Alege o categorie:"
+        "chooseCategory":"Alege o categorie:",
+        "gettingdeleted":"Ticket-ul se sterge..."
     }
 }

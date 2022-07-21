@@ -39,7 +39,7 @@ const getUserInfo = (channel) => {
  * 
  * @param {discord.Message[]} messagecollection 
  * @param {discord.Channel} channel 
- * @returns new `discord.messageAttachment`
+ * @returns new `discord.attachmentBuilder`
  */
 
 exports.createTranscript = async (messagecollection,channel) => {
@@ -64,7 +64,7 @@ exports.createTranscript = async (messagecollection,channel) => {
         if (filearray.length < 2) filearray.push("transcript is empty")
         const filestring = filearray.join("\n")
         const filebuff = Buffer.from(filestring,"utf-8")
-        return new discord.MessageAttachment(filebuff,"transcript_"+ticketuserdata.ticketname+".txt")
+        return new discord.AttachmentBuilder(filebuff,{name:"transcript_"+ticketuserdata.ticketname+".txt",description:"An Open Ticket transcript"})
     }catch(err){
         console.log("[error] "+err)
         return false

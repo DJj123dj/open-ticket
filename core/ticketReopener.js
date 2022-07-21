@@ -111,6 +111,8 @@ module.exports = () => {
 
     })
 
+    const pfb = discord.PermissionFlagsBits
+
     client.on("interactionCreate",(interaction) => {
         if (!interaction.isButton()) return
         if (interaction.customId != "reopenTicketTrue") return
@@ -131,14 +133,14 @@ module.exports = () => {
 
         //set everyone allowed
         if (config.system['has@everyoneaccess']){
-            var everyoneAllowPerms = ["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
+            var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
             var everyoneDenyPerms = []
         }else{
             var everyoneAllowPerms = []
-            var everyoneDenyPerms = ["VIEW_CHANNEL"]
+            var everyoneDenyPerms = [pfb.ViewChannel]
         }
         permissionsArray.push({
-            id:interaction.guild.id,
+            id:interaction.guild.roles.everyone,
             type:"role",
             allow:everyoneAllowPerms,
             deny:everyoneDenyPerms
@@ -149,7 +151,7 @@ module.exports = () => {
                 permissionsArray.push({
                     id:p.id,
                     type:"member",
-                    allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"],
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
                     deny:[]
                 })
             }
@@ -198,14 +200,14 @@ module.exports = () => {
 
         //set everyone allowed
         if (config.system['has@everyoneaccess']){
-            var everyoneAllowPerms = ["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"]
+            var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
             var everyoneDenyPerms = []
         }else{
             var everyoneAllowPerms = []
-            var everyoneDenyPerms = ["VIEW_CHANNEL"]
+            var everyoneDenyPerms = [pfb.ViewChannel]
         }
         permissionsArray.push({
-            id:interaction.guild.id,
+            id:interaction.guild.roles.everyone,
             type:"role",
             allow:everyoneAllowPerms,
             deny:everyoneDenyPerms
@@ -216,7 +218,7 @@ module.exports = () => {
                 permissionsArray.push({
                     id:p.id,
                     type:"member",
-                    allow:["ADD_REACTIONS","ATTACH_FILES","EMBED_LINKS","SEND_MESSAGES","VIEW_CHANNEL"],
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
                     deny:[]
                 })
             }

@@ -68,6 +68,7 @@
         "newTranscriptDescription":"Vous pouvez trouver la transcription dans le fichier texte ci-dessus !",
         "hereIsTheTranscript":"Voici la transcription :",
 
-        "chooseCategory":"choisissez une catégorie:"
+        "chooseCategory":"choisissez une catégorie:",
+        "gettingdeleted":"Le ticket est en cours de suppression..."
     }
 }
