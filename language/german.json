@@ -14,7 +14,7 @@
         "anotherOption":"Diese Option ist kein Ticket, sondern eine andere Art!",
         "maxAmountTitle":"Das Limit wurde erreicht!",
         "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neue erstellen.!",
-        "somethingWentWrong":"Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
+        "somethingWentWrong":"**Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
         "somethingWentWrongTranscript":"Bei der Erstellung der Transcript ist etwas schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
     },
     "commands":{

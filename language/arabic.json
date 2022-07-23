@@ -14,8 +14,8 @@
         "anotherOption":"هذا الخيار ليس تذكرة بل نوع آخر!",
         "maxAmountTitle":"بلغ الحد الأقصى!",
         "maxAmountDescription":"لقد وصلت إلى الحد الأقصى لعدد التذاكر المسموح بها!\nلذلك لا يمكنك إنشاء واحدة جديدة!",
-        "somethingWentWrong":"هناك خطأ ما!**\nالرجاء المحاولة مرة أخرى!",
-        "somethingWentWrongTranscript":"حدث خطأ ما أثناء كتابة النص!**\nالرجاء المحاولة مرة أخرى!"
+        "somethingWentWrong":"**هناك خطأ ما!**\nالرجاء المحاولة مرة أخرى!",
+        "somethingWentWrongTranscript":"**حدث خطأ ما أثناء كتابة النص!**\nالرجاء المحاولة مرة أخرى!"
     },
     "commands":{
         "userAddedTitle":"تمت إضافة المستخدم!",
@@ -75,6 +75,6 @@
         "hereIsTheTranscript":"هذا هو النص:",
 
         "chooseCategory":"اختر فئة:",
-        "gettingdeleted":"Ticket is getting deleted..."
+        "gettingdeleted":"...يتم حذف التذكرة"
     }
 }

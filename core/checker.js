@@ -343,5 +343,3 @@ exports.checker = async () => {
     }
 
 }
-
-this.checker()

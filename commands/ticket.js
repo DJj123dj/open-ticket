@@ -17,7 +17,11 @@ module.exports = () => {
         if (msg.content.startsWith(config.prefix+"msg"||config.prefix+"message")){
             
             if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                try {
+                    return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
+                }catch{
+                    return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                }
             }
 
             const id = msg.content.split(config.prefix+"msg")[1].substring(1) ? msg.content.split(config.prefix+"msg")[1].substring(1) : false
