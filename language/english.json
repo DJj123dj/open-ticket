@@ -14,7 +14,7 @@
         "anotherOption":"This option is not a ticket but another type!",
         "maxAmountTitle":"Max amount reached!",
         "maxAmountDescription":"You reached the maximum number of tickets allowed!\nSo you can't create a new one!",
-        "somethingWentWrong":"Something went wrong!**\nPlease try again another time!",
+        "somethingWentWrong":"**Something went wrong!**\nPlease try again another time!",
         "somethingWentWrongTranscript":"Something went wrong while making the transcript!**\nPlease try again another time!"
     },
     "commands":{

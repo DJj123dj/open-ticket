@@ -10,7 +10,11 @@ module.exports = () => {
         if (!msg.content.startsWith(config.prefix+"delete")) return
 
         if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-            return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            try {
+                return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
+            }catch{
+                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            }
         }
 
         msg.channel.messages.fetchPinned().then(msglist => {

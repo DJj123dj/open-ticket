@@ -46,8 +46,11 @@ exports.closeTicket = async (interaction,prefix,mode) => {
     if (mode == "delete"){
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
             if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
-                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-                return
+                try {
+                    return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
+                }catch{
+                    return interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                }
             }
         deleteRequired = true
         interaction.channel.send({content:"**"+l.messages.gettingdeleted+"**"})
@@ -79,8 +82,11 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         if (config.system.closeMode == "adminonly"){
             const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
             if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
-                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-                return
+                try {
+                    return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
+                }catch{
+                    return interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                }
             }
         }
 
@@ -228,6 +234,10 @@ exports.closeTicket = async (interaction,prefix,mode) => {
     }
 
     if (deleteRequired){
+        const timer = () => {return new Promise((resolve,reject) => {
+            setTimeout(() => {resolve(true)},7000)
+        })}
+        await timer()
         interaction.channel.delete()
     }
 }

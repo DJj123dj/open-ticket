@@ -140,8 +140,11 @@ module.exports = () => {
         if (config.system.closeMode == "adminonly"){
             const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
             if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
-                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-                return
+                try {
+                    return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
+                }catch{
+                    return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                }
             }
         }
         
@@ -171,8 +174,11 @@ module.exports = () => {
         if (config.system.closeMode == "adminonly"){
             const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
             if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
-                interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-                return
+                try {
+                    return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
+                }catch{
+                    return interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+                }
             }
         }
 
@@ -230,8 +236,11 @@ module.exports = () => {
 
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
         if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
-            interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-            return
+            try {
+                return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
+            }catch{
+                return interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            }
         }
 
         /**
@@ -276,8 +285,11 @@ module.exports = () => {
 
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
         if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
-            interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-            return
+            try {
+                return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
+            }catch{
+                return interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
+            }
         }
 
         /**

@@ -14,7 +14,7 @@
         "anotherOption":"Cette option n'est pas un ticket mais un autre type !",
         "maxAmountTitle":"Montant max atteint !",
         "maxAmountDescription":"Vous avez atteint le nombre maximum de tickets autorisés !\nVous ne pouvez donc pas en créer un nouveau !",
-        "somethingWentWrong":"Une erreur s'est produite !**\nVeuillez réessayer une autre fois !",
+        "somethingWentWrong":"**Une erreur s'est produite !**\nVeuillez réessayer une autre fois !",
         "somethingWentWrongTranscript":"Une erreur s'est produite lors de la création de la transcription !**\nVeuillez réessayer une autre fois !"
     },
     "commands":{

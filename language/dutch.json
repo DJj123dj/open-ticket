@@ -14,7 +14,7 @@
         "anotherOption":"Deze optie is geen ticket maar een ander type!",
         "maxAmountTitle":"Max aantal bereikt!",
         "maxAmountDescription":"Je hebt het maximum aantal openstaande ticket bereikt!\nDus je kan er geen nieuwe maken!",
-        "somethingWentWrong":"Iets ging fout!**\nProbeer een andere keer opnieuw!",
+        "somethingWentWrong":"**Iets ging fout!**\nProbeer een andere keer opnieuw!",
         "somethingWentWrongTranscript":"Iets ging fout bij het maken van het transcript!**\nProbeer een andere keer opnieuw!"
     },
     "commands":{
