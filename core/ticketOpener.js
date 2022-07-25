@@ -178,6 +178,7 @@ module.exports = () => {
                         .setAuthor({name:interaction.user.id})
                         .setColor(config.main_color)
                         .setTitle(currentTicketOptions.name)
+                        .setFooter({text:"Ticket Type: "+currentTicketOptions.id})
                     if (currentTicketOptions.ticketmessage.length > 0) ticketEmbed.setDescription(currentTicketOptions.ticketmessage)
                 
                     ticketChannel.send({
@@ -190,6 +191,7 @@ module.exports = () => {
                     })
                     
                     log("system","created new ticket",[{key:"ticket",value:ticketName},{key:"user",value:interaction.user.tag}])
+                    require("./api/modules/events").onTicketOpen(interaction.user,ticketChannel,interaction.guild,new Date(),{name:ticketName,status:"open",ticketOptions:currentTicketOptions})
                 })
             }else{
                 try {

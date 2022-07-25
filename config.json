@@ -79,7 +79,7 @@
             "name":"Choose Your Ticket",
             "description":"You can click one of the buttons below!",
             "enableFooter":false,
-            "footer":"Open Ticket v2.3.2 - I'm a footer!",
+            "footer":"Open Ticket v2.4.0 - I'm a footer!",
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",
             "color":"#ffffff",
