@@ -45,7 +45,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
 
     if (mode == "delete"){
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
                 try {
                     return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
                 }catch{
@@ -86,7 +86,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
 
         if (config.system.closeMode == "adminonly"){
             const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
                 try {
                     return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
                 }catch{
@@ -175,7 +175,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
     }else if (mode == "deletenotranscript"){
 
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
                 interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
                 return
             }
