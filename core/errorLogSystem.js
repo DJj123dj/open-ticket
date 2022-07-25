@@ -112,7 +112,7 @@ exports.log = async (ptype,message,params) => {
     }else if (type == "system"){
         console.log(chalk.green("[system] ")+message+" "+chalk.yellow(parameters))
     }else if (type == "api"){
-        if (require("./api/base").enableApiLogs == true){
+        if (require("./api/modules/base").enableApiLogs == true){
             console.log(chalk.red("[api v"+require("./api/api.json").version+"] ")+message+" "+chalk.yellow(parameters))
         }
         type = "api v"+require("./api/api.json").version
