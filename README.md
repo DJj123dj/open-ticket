@@ -7,7 +7,7 @@ make a ticket in our server to start!
 *if you translate, you will come in the credits*
 
 # open-ticket
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-2.4.0%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v2.4.0)  [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages)  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-2.3.3%20stable-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v2.3.3)  [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages)  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
 
 This is an open-source discord ticket bot, you can configure it and it comes with cool features like transcripts & custom options!
 
@@ -62,7 +62,7 @@ if there are any errors, you can open an **issue on github** or **contact me in 
 
 ### config
 Our config documentation is moved to another file:
-[click here to view](https://www.github.com/DJj123dj/open-ticket/wiki/config-v2.4.0)
+[click here to view](https://www.github.com/DJj123dj/open-ticket/wiki/config-v2.3.3)
 
 ### intents & permissions
 In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
@@ -74,7 +74,7 @@ You can also configure your own permissions
 
 ## information
 
-_v2.4.0 stable_
+_v2.3.3 stable_
 
 changelog: [click here](https://www.github.com/DJj123dj/open-ticket/wiki/Changelog)
 
