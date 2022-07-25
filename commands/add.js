@@ -11,7 +11,7 @@ module.exports = () => {
         var user = msg.mentions.users.first()
         if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<user>`:\n`"+config.prefix+"add <user>`")]})
 
-        if (!msg.member.permissions.has("MANAGE_CHANNELS") && !msg.member.permissions.has("ADMINISTRATOR") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
+        if (!msg.member.permissions.has("ManageChannels") && !msg.member.permissions.has("Administrator") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
             try {
                 return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
             }catch{
@@ -40,7 +40,7 @@ module.exports = () => {
         const user = interaction.options.getUser("user")
 
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
                 interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
                 return
             }

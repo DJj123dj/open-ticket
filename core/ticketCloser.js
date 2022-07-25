@@ -45,7 +45,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
 
     if (mode == "delete"){
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
                 try {
                     return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
                 }catch{
@@ -53,16 +53,21 @@ exports.closeTicket = async (interaction,prefix,mode) => {
                 }
             }
         deleteRequired = true
-        interaction.channel.send({content:"**"+l.messages.gettingdeleted+"**"})
+        await interaction.channel.send({content:"**"+l.messages.gettingdeleted+"**"})
         log("system","deleted a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
 
         //getID & send DM
-        interaction.channel.messages.fetchPinned().then(msglist => {
+        await interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+
+            require("./api/modules/events").onTicketDelete(interaction.user,interaction.channel,interaction.guild,new Date(),{name:interaction.channel.name,status:"deleted",ticketOptions:ticketData})
 
             if (!firstmsg.embeds[0].author) return false
             const id = firstmsg.embeds[0].author.name
@@ -81,7 +86,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
 
         if (config.system.closeMode == "adminonly"){
             const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
                 try {
                     return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
                 }catch{
@@ -142,12 +147,17 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         interaction.channel.send({embeds:[embed],components:[closeButtonRow]})
 
         log("system","closed a ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name}])
+        
 
         //getID & send DM
-        interaction.channel.messages.fetchPinned().then(msglist => {
+        await interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+
+            require("./api/modules/events").onTicketClose(interaction.user,interaction.channel,interaction.guild,new Date(),{name:interaction.channel.name,status:"closed",ticketOptions:ticketData})
 
             const id = firstmsg.embeds[0].author.name
 
@@ -165,7 +175,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
     }else if (mode == "deletenotranscript"){
 
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
                 interaction.channel.send({embeds:[bot.errorLog.noPermsMessage]})
                 return
             }
@@ -178,10 +188,15 @@ exports.closeTicket = async (interaction,prefix,mode) => {
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
 
         //getID & send DM
-        interaction.channel.messages.fetchPinned().then(msglist => {
+        await interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+
+            require("./api/modules/events").onTicketDelete(interaction.user,interaction.channel,interaction.guild,new Date(),{name:interaction.channel.name,status:"deleted",ticketOptions:ticketData})
 
             const id = firstmsg.embeds[0].author.name
 
@@ -238,7 +253,7 @@ exports.closeTicket = async (interaction,prefix,mode) => {
             setTimeout(() => {resolve(true)},7000)
         })}
         await timer()
-        interaction.channel.delete()
+        await interaction.channel.delete()
     }
 }
 

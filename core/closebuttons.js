@@ -131,15 +131,20 @@ module.exports = () => {
         interaction.deferUpdate()
         interaction.message.edit({components:[closeRowNormal]})
     })
-    client.on("interactionCreate",interaction => {
+
+    var closeTicketButtonChecker = false
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "closeTicketTrue") return
         
         interaction.deferUpdate()
 
+        if (closeTicketButtonChecker == true) return
+        closeTicketButtonChecker = true
+
         if (config.system.closeMode == "adminonly"){
             const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
                 try {
                     return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
                 }catch{
@@ -162,18 +167,23 @@ module.exports = () => {
             }
         })
 
-        require("./ticketCloser").closeTicket(interaction,prefix,"close")
+        await require("./ticketCloser").closeTicket(interaction,prefix,"close")
+        closeTicketButtonChecker = false
     })
 
-    client.on("interactionCreate",interaction => {
+    var closeTicket1ButtonChecker = false
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "closeTicketTrue1") return
         
         interaction.deferUpdate()
 
+        if (closeTicket1ButtonChecker == true) return
+        closeTicket1ButtonChecker = true
+
         if (config.system.closeMode == "adminonly"){
             const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
                 try {
                     return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
                 }catch{
@@ -208,7 +218,8 @@ module.exports = () => {
             }
         })
 
-        require("./ticketCloser").closeTicket(interaction,prefix,"close")
+        await require("./ticketCloser").closeTicket(interaction,prefix,"close")
+        closeTicket1ButtonChecker = false
     })
 
 
@@ -228,14 +239,18 @@ module.exports = () => {
         interaction.deferUpdate()
         interaction.message.edit({components:[closeRowNormal]})
     })
-    client.on("interactionCreate",interaction => {
+    var deleteTicketButtonChecker = false
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "deleteTicketTrue") return
         
         interaction.deferUpdate()
 
+        if (deleteTicketButtonChecker == true) return
+        deleteTicketButtonChecker = true
+
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
             try {
                 return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
             }catch{
@@ -255,7 +270,8 @@ module.exports = () => {
             }
         })
 
-        require("./ticketCloser").closeTicket(interaction,prefix,"delete")
+        await require("./ticketCloser").closeTicket(interaction,prefix,"delete")
+        deleteTicketButtonChecker = false
     })
 
 
@@ -277,14 +293,19 @@ module.exports = () => {
         interaction.deferUpdate()
         interaction.message.edit({components:[closeRowClosed]})
     })
-    client.on("interactionCreate",interaction => {
+
+    var deleteTicket1ButtonChecker = false
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "deleteTicketTrue1") return
         
         interaction.deferUpdate()
 
+        if (deleteTicket1ButtonChecker == true) return
+        deleteTicket1ButtonChecker = true
+
         const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("ADMINISTRATOR") && !permsmember.permissions.has("MANAGE_GUILD")){
+        if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("MANAGE_GUILD")){
             try {
                 return interaction.member.send({embeds:[bot.errorLog.noPermsMessage]})
             }catch{
@@ -304,6 +325,7 @@ module.exports = () => {
             }
         })
 
-        require("./ticketCloser").closeTicket(interaction,prefix,"deletenotranscript")
+        await require("./ticketCloser").closeTicket(interaction,prefix,"deletenotranscript")
+        deleteTicket1ButtonChecker = false
     })
 }

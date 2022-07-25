@@ -88,11 +88,12 @@ const normalLog = (debugString) => {
 
 /**
  * 
- * @param {"system"|"command"|"info"} type 
+ * @param {"system"|"command"|"info"|"api"} type 
  * @param {String} message 
  * @param {[{key:String,value:String}]} params
  */
-exports.log = async (type,message,params) => {
+exports.log = async (ptype,message,params) => {
+    var type = ptype
     const chalk = await loadChalk()
     var paramstring = ""
     if (params){
@@ -110,6 +111,11 @@ exports.log = async (type,message,params) => {
         console.log(chalk.blue("[info] ")+message+" "+chalk.yellow(parameters))
     }else if (type == "system"){
         console.log(chalk.green("[system] ")+message+" "+chalk.yellow(parameters))
+    }else if (type == "api"){
+        if (require("./api/base").enableApiLogs == true){
+            console.log(chalk.red("[api v"+require("./api/api.json").version+"] ")+message+" "+chalk.yellow(parameters))
+        }
+        type = "api v"+require("./api/api.json").version
     }
 
     const cd = new Date()
