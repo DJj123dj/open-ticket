@@ -4,6 +4,7 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
+const permsChecker = require("../core/utils/permisssionChecker")
 
 module.exports = () => {
     var reopenCommandBar = new discord.ActionRowBuilder()
@@ -34,6 +35,8 @@ module.exports = () => {
     client.on("interactionCreate",(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "reopen") return
+
+        interaction.deferReply()
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()

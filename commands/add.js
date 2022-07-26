@@ -4,6 +4,7 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
+const permsChecker = require("../core/utils/permisssionChecker")
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -11,12 +12,9 @@ module.exports = () => {
         var user = msg.mentions.users.first()
         if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<user>`:\n`"+config.prefix+"add <user>`")]})
 
-        if (!msg.member.permissions.has("ManageChannels") && !msg.member.permissions.has("Administrator") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-            try {
-                return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
-            }catch{
-                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-            }
+        if (!msg.guild) return
+        if (!permsChecker.command(msg.author.id,msg.guild.id)){
+            permsChecker.sendUserNoPerms(msg.author)
         }
 
         msg.channel.messages.fetchPinned().then(msglist => {
@@ -39,11 +37,12 @@ module.exports = () => {
         if (interaction.commandName != "add") return
         const user = interaction.options.getUser("user")
 
-        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
-                interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
-                return
-            }
+        if (!interaction.guild) return
+        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+            permsChecker.sendUserNoPerms(interaction.user)
+        }
+
+        interaction.deferReply()
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()

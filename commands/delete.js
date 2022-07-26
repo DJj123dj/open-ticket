@@ -4,17 +4,15 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
+const permsChecker = require("../core/utils/permisssionChecker")
 
 module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"delete")) return
 
-        if (!msg.member.permissions.has("ManageChannels") && !msg.member.permissions.has("Administrator") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-            try {
-                return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
-            }catch{
-                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-            }
+        if (!msg.guild) return
+        if (!permsChecker.command(msg.author.id,msg.guild.id)){
+            permsChecker.sendUserNoPerms(msg.author)
         }
 
         msg.channel.messages.fetchPinned().then(msglist => {
@@ -44,11 +42,12 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "delete") return
 
-        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
-                interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
-                return
-            }
+        interaction.deferReply()
+
+        if (!interaction.guild) return
+        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+            permsChecker.sendUserNoPerms(interaction.user)
+        }
 
        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
