@@ -91,6 +91,3 @@ exports.createEmbed = (id) => {
     const returnedData = {embed:embed,componentRows:componentRows}
     return returnedData
 }
-
-
-this.createEmbed()
