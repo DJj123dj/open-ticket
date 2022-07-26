@@ -92,8 +92,8 @@ const normalLog = (debugString) => {
  * @param {String} message 
  * @param {[{key:String,value:String}]} params
  */
-exports.log = async (ptype,message,params) => {
-    var type = ptype
+exports.log = async (type,message,params) => {
+    var ptype = type
     const chalk = await loadChalk()
     var paramstring = ""
     if (params){
@@ -105,20 +105,20 @@ exports.log = async (ptype,message,params) => {
     }
     const parameters = params ? "("+paramstring+")" : " "
     
-    if (type == "command"){
+    if (ptype == "command"){
         console.log(chalk.green("[command] ")+message+" "+chalk.yellow(parameters))
-    }else if (type == "info"){
+    }else if (ptype == "info"){
         console.log(chalk.blue("[info] ")+message+" "+chalk.yellow(parameters))
-    }else if (type == "system"){
+    }else if (ptype == "system"){
         console.log(chalk.green("[system] ")+message+" "+chalk.yellow(parameters))
-    }else if (type == "api"){
+    }else if (ptype == "api"){
         if (require("./api/modules/base").enableApiLogs == true){
             console.log(chalk.red("[api v"+require("./api/api.json").version+"] ")+message+" "+chalk.yellow(parameters))
         }
-        type = "api v"+require("./api/api.json").version
+        ptype = "api v"+require("./api/api.json").version
     }
 
     const cd = new Date()
     const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-    normalLog("["+cd.getDate()+" "+months[cd.getMonth()-1]+" "+cd.getFullYear()+" - "+cd.getSeconds()+":"+cd.getMinutes()+":"+cd.getHours()+"] ["+type+"] "+message+" "+parameters)
+    normalLog("["+cd.getDate()+" "+months[cd.getMonth()-1]+" "+cd.getFullYear()+" - "+cd.getSeconds()+":"+cd.getMinutes()+":"+cd.getHours()+"] ["+ptype+"] "+message+" "+parameters)
 }

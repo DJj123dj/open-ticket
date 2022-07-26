@@ -117,6 +117,9 @@ client.on('ready',async () => {
             process.exit(1)
         }
     }
+
+    //load plugins
+    require("./core/api/pluginlauncher")()
 })
 
 if (!isDev){
