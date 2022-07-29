@@ -14,6 +14,8 @@ const storage = bot.storage
 //used when creating plugins!
 exports.enableApiLogs = false
 
+
+//DOESN'T WORK YET
 //this is used when embedding open ticket into another bot
 exports.embeddedMode = false
 exports.clientLocation = require("../../../index").client

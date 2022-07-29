@@ -137,6 +137,55 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
             deny:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
         })
 
+        //add main adminroles
+        config.main_adminroles.forEach((role,index) => {
+            try {
+                const adminrole = guild.roles.cache.find(r => r.id == role)
+                if (!adminrole) return
+
+                permissionArray.push({
+                    id:adminrole,
+                    type:"role",
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+                })
+            }catch{
+                log("system","invalid role! At 'config.json => main_adminroles:"+index)
+            }
+        })
+
+        //add ticket adminroles
+        await channel.messages.fetchPinned().then(msglist => {
+            var firstmsg = msglist.last()
+
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+
+            if (!ticketData) return
+
+            /**
+             * @type {String[]}
+             */
+            const ticketadmin = ticketData.adminroles
+            ticketadmin.forEach((role,index) => {
+                if (!config.main_adminroles.includes(role)){
+                    try {
+                        const adminrole = guild.roles.cache.find(r => r.id == role)
+                        if (!adminrole) return
+                    
+                        permissionArray.push({
+                            id:adminrole,
+                            type:"role",
+                            allow:[pfb.AddReactions,pfb.ViewChannel],
+                            deny:[pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages]
+                        })
+                    }catch{
+                        log("system","invalid role! At 'config.json => options/ticket/...:"+index)
+                    }
+                }
+            })
+        })
+
         channel.permissionOverwrites.set(permissionArray)
 
         //message

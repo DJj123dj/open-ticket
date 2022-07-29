@@ -6,6 +6,8 @@ const log = bot.errorLog.log
 const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
+const APIEvents = require("../core/api/modules/events")
+
 module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"close")) return
@@ -28,6 +30,7 @@ module.exports = () => {
             msg.channel.send({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
 
             log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
+            APIEvents.onCommand("close",true,msg.author,msg.channel,msg.guild,new Date())
             
         })
         
@@ -57,6 +60,7 @@ module.exports = () => {
             interaction.reply({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
 
             log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
+            APIEvents.onCommand("close",true,interaction.user,interaction.channel,interaction.guild,new Date())
             
         })
     })

@@ -6,6 +6,8 @@ const log = bot.errorLog.log
 const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
+const APIEvents = require("../core/api/modules/events")
+
 module.exports = () => {
     /**@type {String[]} */
     var msgIds = []
@@ -33,7 +35,8 @@ module.exports = () => {
             
             msg.channel.send({embeds:[embed],components:componentRows})
             
-            log("command","someone used the 'msg' command",[{key:"user",value:msg.author.tag},{key:"id",value:id}])
+            log("command","someone used the 'message' command",[{key:"user",value:msg.author.tag},{key:"id",value:id}])
+            APIEvents.onCommand("message",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         }
     })
 
@@ -56,7 +59,9 @@ module.exports = () => {
             interaction.reply({content:l.commands.ticketWarning})
             interaction.channel.send({embeds:[embed],components:componentRows})
             
-            log("command","someone used the 'msg' command",[{key:"user",value:interaction.user.tag},{key:"id",value:id}])
+            log("command","someone used the 'message' command",[{key:"user",value:interaction.user.tag},{key:"id",value:id}])
+
+            APIEvents.onCommand("message",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         
     })
 }

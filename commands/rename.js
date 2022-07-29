@@ -6,6 +6,8 @@ const log = bot.errorLog.log
 const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
+const APIEvents = require("../core/api/modules/events")
+
 module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"rename")) return
@@ -41,7 +43,7 @@ module.exports = () => {
 
             log("command","someone used the 'rename' command",[{key:"user",value:msg.author.tag}])
             log("system","ticket renamed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
-            
+            APIEvents.onCommand("rename",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         })
         
         
@@ -81,7 +83,8 @@ module.exports = () => {
 
             log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
             log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
-            
+
+            APIEvents.onCommand("rename",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         })
     })
 }

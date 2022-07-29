@@ -6,6 +6,8 @@ const log = bot.errorLog.log
 const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
+const APIEvents = require("../core/api/modules/events")
+
 module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"delete")) return
@@ -33,7 +35,7 @@ module.exports = () => {
             msg.channel.send({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
 
             log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
-            
+            APIEvents.onCommand("delete",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         })
         
         
@@ -68,6 +70,7 @@ module.exports = () => {
             interaction.reply({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
 
             log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
+            APIEvents.onCommand("delete",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
             
         })
     })

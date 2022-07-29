@@ -25,7 +25,7 @@ exports.checker = async () => {
             if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this channel id is invalid")
             }
-        }else if (mode == "roleid"){
+        }else if (mode == "roleid"){    
             if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this role id is invalid")
             }

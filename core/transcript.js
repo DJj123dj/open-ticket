@@ -45,7 +45,7 @@ const getUserInfo = (channel) => {
 exports.createTranscript = async (messagecollection,channel) => {
     const ticketuserdata = await getUserInfo(channel)
 
-    require("./api/modules/events").transcriptCreation(messagecollection,channel,channel.guild,new Date())
+    require("./api/modules/events").onTranscriptCreation(messagecollection,channel,channel.guild,new Date())
     try {
         const cd = new Date()
         const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]

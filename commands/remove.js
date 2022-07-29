@@ -6,6 +6,8 @@ const log = bot.errorLog.log
 const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
+const APIEvents = require("../core/api/modules/events")
+
 module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"remove")) return
@@ -32,6 +34,11 @@ module.exports = () => {
             
             log("command","someone used the 'remove' command",[{key:"user",value:msg.author.tag}])
             log("system","user removed from ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"removed_user",value:loguser.tag}])
+
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("../core/getoptions").getOptionsById("newT"+ticketId)
+            APIEvents.onTicketRemove(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
+            APIEvents.onCommand("remove",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         })
         
     })
@@ -61,6 +68,11 @@ module.exports = () => {
             
             log("command","someone used the 'remove' command",[{key:"user",value:interaction.user.tag}])
             log("system","user removed from ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"removed_user",value:loguser.tag}])
+
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("../core/getoptions").getOptionsById("newT"+ticketId)
+            APIEvents.onTicketRemove(interaction.user,loguser,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
+            APIEvents.onCommand("remove",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         })
 
        
