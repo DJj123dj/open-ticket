@@ -1,3 +1,46 @@
 {
-    "version":"1.0.0"
+    "version":"1.0.0",
+
+
+    "disclaimer":"DISABLE doesn't work yet! Below this message!",
+    "disable":{
+        "messages":{
+            "ticketCreated":false,
+            "ticketClosed":false,
+            "ticketDeleted":false,
+            "ticketReopened":false
+        },
+        "transcripts":{
+            "server":false,
+            "dm":false
+        },
+        "commands":{
+            "text":{
+                "help":false,
+                "msg":false,
+                "close":false,
+                "delete":false,
+                "reopen":false,
+                "new":false,
+                "add":false,
+                "remove":false,
+                "rename":false
+            },
+            "slash":{
+                "help":false,
+                "msg":false,
+                "close":false,
+                "delete":false,
+                "reopen":false,
+                "new":false,
+                "add":false,
+                "remove":false,
+                "rename":false
+            }
+        },
+        "checkerjs":{
+            "token":false,
+            "all":false
+        }
+    }
 }

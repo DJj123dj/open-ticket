@@ -92,6 +92,51 @@ module.exports = () => {
                 .setEmoji("🔓")
         )
 
+    /**
+     * 
+     * @param {discord.Guild} guild 
+     * @param {discord.TextBasedChannel} channel 
+     * @param {discord.User} user 
+     * @returns 
+     */
+     const reopenTicket = (guild,channel,user) => {
+        log("system","re-opened a ticket",[{key:"ticket",value:channel.name},{key:"user",value:user.tag}])
+
+        var permissionsArray = []
+
+        //set everyone allowed
+        if (config.system['has@everyoneaccess']){
+            var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+            var everyoneDenyPerms = []
+        }else{
+            var everyoneAllowPerms = []
+            var everyoneDenyPerms = [pfb.ViewChannel]
+        }
+        permissionsArray.push({
+            id:guild.roles.everyone,
+            type:"role",
+            allow:everyoneAllowPerms,
+            deny:everyoneDenyPerms
+        })
+
+        channel.permissionOverwrites.cache.forEach((p) => {
+            if (p.type == "member"){
+                permissionsArray.push({
+                    id:p.id,
+                    type:"member",
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
+                    deny:[]
+                })
+            }
+        })
+
+        channel.permissionOverwrites.set(permissionsArray)
+
+        require("./api/modules/events").onTicketReopen(user,channel,guild,new Date(),{name:channel.name,status:"reopened",ticketOptions:false})
+    }
+
+
+
     //NORMAL WAY
     client.on("interactionCreate",(interaction) => {
         if (!interaction.isButton()) return
@@ -126,38 +171,7 @@ module.exports = () => {
 
         interaction.message.edit({embeds:[embed],components:[closeRowNormal]})
 
-        log("system","re-opened a ticket",[{key:"ticket",value:interaction.channel.name},{key:"user",value:interaction.user.tag}])
-
-
-        var permissionsArray = []
-
-        //set everyone allowed
-        if (config.system['has@everyoneaccess']){
-            var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
-            var everyoneDenyPerms = []
-        }else{
-            var everyoneAllowPerms = []
-            var everyoneDenyPerms = [pfb.ViewChannel]
-        }
-        permissionsArray.push({
-            id:interaction.guild.roles.everyone,
-            type:"role",
-            allow:everyoneAllowPerms,
-            deny:everyoneDenyPerms
-        })
-
-        interaction.channel.permissionOverwrites.cache.forEach((p) => {
-            if (p.type == "member"){
-                permissionsArray.push({
-                    id:p.id,
-                    type:"member",
-                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
-                    deny:[]
-                })
-            }
-        })
-
-        interaction.channel.permissionOverwrites.set(permissionsArray)
+        reopenTicket(interaction.guild,interaction.channel,interaction.user)
     })
 
 
@@ -193,97 +207,6 @@ module.exports = () => {
 
         interaction.message.edit({content:null,embeds:[embed],components:[closeRowNormal]})
 
-        log("system","re-opened a ticket",[{key:"ticket",value:interaction.channel.name},{key:"user",value:interaction.user.tag}])
-
-
-        var permissionsArray = []
-
-        //set everyone allowed
-        if (config.system['has@everyoneaccess']){
-            var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
-            var everyoneDenyPerms = []
-        }else{
-            var everyoneAllowPerms = []
-            var everyoneDenyPerms = [pfb.ViewChannel]
-        }
-        permissionsArray.push({
-            id:interaction.guild.roles.everyone,
-            type:"role",
-            allow:everyoneAllowPerms,
-            deny:everyoneDenyPerms
-        })
-
-        interaction.channel.permissionOverwrites.cache.forEach((p) => {
-            if (p.type == "member"){
-                permissionsArray.push({
-                    id:p.id,
-                    type:"member",
-                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
-                    deny:[]
-                })
-            }
-        })
-
-        interaction.channel.permissionOverwrites.set(permissionsArray)
-
-        //getID & send DM
-        interaction.channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-
-            const id = firstmsg.embeds[0].author.name
-
-            if (!id) return false
-
-            try{
-                if (config.system.enable_DM_Messages){
-                    interaction.member.send({embeds:[bot.errorLog.custom(l.messages.reopenTicketDmTitle,l.messages.reopenTicketDmDescription,":ticket:",config.main_color)]})
-                }
-            }
-            catch{log("system","can't send DM to member, member doesn't allow dm's")}
-        })
+        reopenTicket(interaction.guild,interaction.channel,interaction.user)
     })
-
-    //DASHBOARD (comming soon!)
-    /**
-     * 
-     * @param {discord.Guild} guild 
-     * @param {discord.TextBasedChannel} channel 
-     * @param {discord.User} user 
-     * @returns 
-     */
-    const reopenTicket = (guild,channel,user) => {
-        log("system","re-opened a ticket",[{key:"ticket",value:channel.name},{key:"user",value:user.tag}])
-
-        var permissionsArray = []
-
-        //set everyone allowed
-        if (config.system['has@everyoneaccess']){
-            var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
-            var everyoneDenyPerms = []
-        }else{
-            var everyoneAllowPerms = []
-            var everyoneDenyPerms = [pfb.ViewChannel]
-        }
-        permissionsArray.push({
-            id:guild.roles.everyone,
-            type:"role",
-            allow:everyoneAllowPerms,
-            deny:everyoneDenyPerms
-        })
-
-        channel.permissionOverwrites.cache.forEach((p) => {
-            if (p.type == "member"){
-                permissionsArray.push({
-                    id:p.id,
-                    type:"member",
-                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
-                    deny:[]
-                })
-            }
-        })
-
-        channel.permissionOverwrites.set(permissionsArray)
-    }
 }

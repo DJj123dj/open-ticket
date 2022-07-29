@@ -18,47 +18,53 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 ### Thanks to these people:
 - DJ-Lite: for doing the administration
 - Sanke: for translation & new ideas
+- Everyone that reported a bug
+#### And our translators!
 - ExothDE: for translation
 - 1x1: for translation
 - R0JO: for translation
-- Everyone that reported a bug
+- t0miiis for translation
 
 ## features
-- discord buttons
+- discord interaction buttons
 - slash & text commands
 - close, delete & re-open tickets
-- translation (we are searching for translators!)
+- translation in 8 different languages
 - dynamic database system
-- advanced transcripts
+- transcripts
 - add/remove users from a ticket
-- large embed customisation
-- create custom ticket names, icons & colors
-- create url's & reaction roles!
-- uses discord.js v13
-- configure your own ticket options
-- remove credits if you want (don't do it please 😉)
-- unlimited tickets at the same time
+- custom colors & name for embeds
+- customise your ticket
+- create url buttons for websites
+- create reaction roles
+- build with discord.js v14
+- configure everything per ticket
+- remove credits if you want :(
+- unlimited tickets spread over multiple messages
+
+*comming soon:*
+- dashboard
+- view transcripts in dashboard
+- share transcripts
+- close with reason
+- more translation
 
 ## installation
 **You need `node.js 16` to run this project!**
-
-**At this moment you still need discord.js v13!**
-This will change soon!
-
-You can clone or download this project.
 
 ### packages
 - chalk => version `latest`
 - discord.js => version `latest`
 - express => version `latest`
 - node-localstorage => version `latest`
+- axios => version `latest`
 
 You can install all of them by running `npm install`
 
 ## running
 you can run `node index.js` but i would recommend you to use `npm start`
 
-if there are any errors, you can open an **issue on github** or **contact me in the discord server**.
+if there are any errors, you can open an **issue on github** or **contact me in our discord server**.
 
 ### config
 Our config documentation is moved to another file:
@@ -78,4 +84,4 @@ _v2.4.0 stable_
 
 changelog: [click here](https://www.github.com/DJj123dj/open-ticket/wiki/Changelog)
 
-© 2022 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.com/invite/26vT9wt3n3)
+© 2022 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.dj-dj.be) | [terms of service](https://www.dj-dj.be/terms)

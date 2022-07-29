@@ -20,6 +20,7 @@ module.exports = () => {
             if (!msg.guild) return
             if (!permsChecker.command(msg.author.id,msg.guild.id)){
                 permsChecker.sendUserNoPerms(msg.author)
+                return
             }
 
             const id = msg.content.split(config.prefix+"msg")[1].substring(1) ? msg.content.split(config.prefix+"msg")[1].substring(1) : false
@@ -43,6 +44,7 @@ module.exports = () => {
             if (!interaction.guild) return
             if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
                 permsChecker.sendUserNoPerms(interaction.user)
+                return
             }
 
             const id = interaction.options.getString("id")

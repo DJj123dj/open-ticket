@@ -41,7 +41,7 @@ exports.checker = async () => {
     }
     /**@param {String} value */
     const checkToken = (value) => {
-        if (value.includes(" ") || value.length < 40 || value.length > 70){
+        if (value.includes(" ") || value.length < 40 || value.length > 90){
             createError("'auth_token' | your token is invalid")
         }
     }
@@ -309,6 +309,28 @@ exports.checker = async () => {
     config.options.forEach((option,index) => {
         checkOption(option,"options/"+index)
     })
+
+
+    //discord check
+    /**
+    const discord = require("discord.js")
+    const {GatewayIntentBits,Partials} = discord
+    const client = new discord.Client({
+        intents:[
+            GatewayIntentBits.DirectMessages,
+            GatewayIntentBits.GuildInvites,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.MessageContent
+        ],
+        partials:[Partials.Channel,Partials.Message]
+    })
+    await client.guilds.fetch()
+    if (!client.guilds.cache.find(g => g.id == config.server_id)){
+        createError("'server_id' | i'm not in a server with this id!")
+    }
+    */
 
     
 

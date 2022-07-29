@@ -33,10 +33,15 @@ exports.createEmbed = (id) => {
     //-----------------------------------
     //create the embed
     const embed = new discord.EmbedBuilder()
-        .setColor(data.color)
         .setTitle(data.name)
     if (data.enableFooter) embed.setFooter({text:data.footer})
     if (data.enableThumbnail) embed.setThumbnail(data.thumbnail)
+
+    if (data.enableCustomColor){
+        embed.setColor(data.color)
+    }else{
+        embed.setColor(config.main_color)
+    }
 
     var description = data.description
     if (data.enableTicketExplaination){

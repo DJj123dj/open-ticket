@@ -78,11 +78,16 @@
             "id":"1",
             "name":"Choose Your Ticket",
             "description":"You can click one of the buttons below!",
+
             "enableFooter":false,
             "footer":"Open Ticket v2.4.0 - I'm a footer!",
+
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",
+
+            "enableCustomColor":false,
             "color":"#ffffff",
+
             "options":["general","apply"],
             "enableTicketExplaination":true,
             "enableMaxTicketsWarning":true

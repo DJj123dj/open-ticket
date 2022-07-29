@@ -18,6 +18,7 @@ module.exports = () => {
             if (!msg.guild) return
             if (!permsChecker.command(msg.author.id,msg.guild.id)){
                 permsChecker.sendUserNoPerms(msg.author)
+                return
             }
             
             var newname = msg.content.split(config.prefix+"rename")[1].substring(1)
@@ -60,6 +61,7 @@ module.exports = () => {
             if (!interaction.guild) return
             if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
                 permsChecker.sendUserNoPerms(interaction.user)
+                return
             }
             
             var newname = interaction.options.getString("name")

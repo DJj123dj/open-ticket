@@ -13,6 +13,7 @@ module.exports = () => {
         if (!msg.guild) return
         if (!permsChecker.command(msg.author.id,msg.guild.id)){
             permsChecker.sendUserNoPerms(msg.author)
+            return
         }
 
         msg.channel.messages.fetchPinned().then(msglist => {
@@ -47,6 +48,7 @@ module.exports = () => {
         if (!interaction.guild) return
         if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
             permsChecker.sendUserNoPerms(interaction.user)
+            return
         }
 
        interaction.channel.messages.fetchPinned().then(msglist => {

@@ -75,6 +75,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
         if (!guild) return
         if (!permsChecker.command(user.id,guild.id)){
             permsChecker.sendUserNoPerms(user)
+            return
         }
 
         //start delete proccess
@@ -115,6 +116,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
             if (!guild) return
             if (!permsChecker.command(user.id,guild.id)){
                 permsChecker.sendUserNoPerms(user)
+                return
             }
         }
 
@@ -202,6 +204,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
         if (!guild) return
         if (!permsChecker.command(user.id,guild.id)){
             permsChecker.sendUserNoPerms(user)
+            return
         }
 
         //start delete proccess

@@ -32,18 +32,22 @@ module.exports = () => {
         
     })
 
-    client.on("interactionCreate",(interaction) => {
+    client.on("interactionCreate",async (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "reopen") return
 
-        interaction.deferReply()
+        await interaction.deferReply()
 
-        interaction.channel.messages.fetchPinned().then(msglist => {
+        interaction.channel.messages.fetchPinned().then(async msglist => {
             var firstmsg = msglist.last()
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
-            interaction.reply({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
+            try {
+                await interaction.reply({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
+            }catch{
+                await interaction.editReply({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
+            }
 
             
             log("command","someone used the 'reopen' command",[{key:"user",value:interaction.user.tag}])

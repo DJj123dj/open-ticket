@@ -11,6 +11,11 @@ const storage = bot.storage
 const ticketOpenListeners = []
 const ticketCloseListeners = []
 const ticketDeleteListeners = []
+const ticketReopenListeners = []
+
+const transcriptCreationListeners = []
+const commandListeners = []
+const reactionRoleListeners = []
 
 /**
  * 
@@ -72,6 +77,51 @@ exports.onTicketDelete = (user,channel,guild,date,ticketdata) => {
 
 }
 
+/**
+ * 
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ */
+ exports.onTicketReopen = (user,channel,guild,date,ticketdata) => {
+    //system
+    bot.errorLog.log("api","ticket reopened",[{key:"userid",value:user.id},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id},{key:"ticketdata",value:JSON.stringify(ticketdata)}])
+
+    ticketReopenListeners.forEach((func) => {
+        try {
+            func(user,channel,guild,date,ticketdata)
+        }catch{}
+    })
+
+}
+
+/**
+ * 
+ * @param {discord.Message[]} messages 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date 
+ */
+ exports.transcriptCreation = (messages,channel,guild,date) => {
+    //system
+    bot.errorLog.log("api","transcript created",[{key:"messages",value:JSON.stringify(messages)},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id}])
+
+    transcriptCreationListeners.forEach((func) => {
+        try {
+            func(messages,channel,guild,date)
+        }catch{}
+    })
+
+}
+
+//onTicketAdd
+//onTicketRemove
+//command
+//reactionrole
+//error
+
 //EVENT CALLBACKS:
 
 /**
@@ -81,6 +131,14 @@ exports.onTicketDelete = (user,channel,guild,date,ticketdata) => {
  * @param {discord.Guild} guild
  * @param {Date} date 
  * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ */
+
+/**
+ * @callback TranscriptCreationEvent
+ * @param {discord.Message[]} messages 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date
  */
 
 //EVENT EXPORT:
@@ -100,8 +158,20 @@ const onTicketDelete = (callback) => {
     ticketDeleteListeners.push(callback)
 }
 
+/**@param {TicketActionEvent} callback */
+const onTicketReopen = (callback) => {
+    ticketReopenListeners.push(callback)
+}
+
+/**@param {TranscriptCreationEvent} callback */
+const onTranscriptCreation = (callback) => {
+    transcriptCreationListeners.push(callback)
+}
+
 exports.events = {
-    onTicketOpen:onTicketOpen,
-    onTicketClose:onTicketClose,
-    onTicketDelete:onTicketDelete
+    onTicketOpen,
+    onTicketClose,
+    onTicketDelete,
+    onTicketReopen,
+    onTranscriptCreation
 }
