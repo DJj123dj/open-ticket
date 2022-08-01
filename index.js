@@ -151,6 +151,8 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
 
 }
 
+const APIEvents = require("./core/api/modules/events")
+
 const debugLog = (debugString) => {
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nDEBUG: "+debugString)
@@ -172,6 +174,8 @@ process.on("uncaughtException",async (error,origin) => {
     const chalk = await (await import("chalk")).default
     console.log(chalk.red("\nOPEN TICKET ERROR: ")+error+"\n"+chalk.green("\nCreate a ticket in our support server for more information!\nIf you do this, you might help us to avoid a future bug!\n"))
     errorLog(error.name+": "+error.message+" | origin: "+origin,error.stack)
+
+    APIEvents.onError(error.name+": "+error.message,new Date())
 })
 
 client.login(config.auth_token)

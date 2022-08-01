@@ -20,6 +20,7 @@ const ticketRemoveListeners = []
 const transcriptCreationListeners = []
 const commandListeners = []
 const reactionRoleListeners = []
+const errorListeners = []
 
 /**
  * 
@@ -173,7 +174,7 @@ exports.onTranscriptCreation = (messages,channel,guild,date) => {
  * @param {discord.Guild} guild 
  * @param {Date} date 
  */
- exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
+exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
     //system
     bot.errorLog.log("api","someone used a command",[{key:"type",value:type},{key:"hasPerms",value:hasPerms},{key:"userid",value:user},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id}])
 
@@ -185,8 +186,46 @@ exports.onTranscriptCreation = (messages,channel,guild,date) => {
 
 }
 
-//reactionrole
-//error
+/**@typedef {"add"|"remove"|"add&remove"} OTReactionRoleType */
+/**@typedef {"add"|"remove"} OTReactionRoleMode */
+
+/**
+ * @param {OTReactionRoleMode} mode
+ * @param {OTReactionRoleType} type 
+ * @param {discord.Role} role
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild 
+ * @param {Date} date 
+ */
+ exports.onReactionRole = (mode,type,role,user,channel,guild,date) => {
+    //system
+    bot.errorLog.log("api","someone used a reaction role",[{key:"mode",value:mode},{key:"type",value:type},{key:"roleid",value:role.id},{key:"userid",value:user},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id}])
+
+    reactionRoleListeners.forEach((func) => {
+        try {
+            func(mode,type,role,user,channel,guild,date)
+        }catch{}
+    })
+
+}
+
+/**
+ * @param {String} err
+ * @param {Date} date 
+ */
+ exports.onError = (err,date) => {
+    //system
+    bot.errorLog.log("api","there is an error",[{key:"error",value:err}])
+
+    errorListeners.forEach((func) => {
+        try {
+            func(err,date)
+        }catch{}
+    })
+
+}
+
 
 //EVENT CALLBACKS:
 
@@ -224,6 +263,23 @@ exports.onTranscriptCreation = (messages,channel,guild,date) => {
  * @param {discord.User} user 
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild 
+ * @param {Date} date 
+ */
+
+/**
+ * @callback ReactionRoleEvent
+ * @param {OTReactionRoleMode} mode
+ * @param {OTReactionRoleType} type 
+ * @param {discord.Role} role
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild 
+ * @param {Date} date 
+ */
+
+/**
+ * @callback ErrorEvent
+ * @param {String} error
  * @param {Date} date 
  */
 
@@ -269,6 +325,16 @@ const onCommand = (callback) => {
     commandListeners.push(callback)
 }
 
+/**@param {ReactionRoleEvent} callback */
+const onReactionRole = (callback) => {
+    commandListeners.push(callback)
+}
+
+/**@param {ErrorEvent} callback */
+const onError = (callback) => {
+    errorListeners.push(callback)
+}
+
 exports.events = {
     onTicketOpen,
     onTicketClose,
@@ -277,5 +343,7 @@ exports.events = {
     onTicketAdd,
     onTicketRemove,
     onTranscriptCreation,
-    onCommand
+    onCommand,
+    onReactionRole,
+    onError
 }
