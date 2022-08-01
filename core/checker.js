@@ -245,14 +245,13 @@ exports.checker = async () => {
     //--------------------------|
     //--------------------------|
 
-    var configArray = ["bot_name","main_color","server_id","auth_token","main_adminroles","prefix","languagefile","credits","status","system","options","messages"]
+    var configArray = ["main_color","server_id","auth_token","main_adminroles","prefix","languagefile","credits","status","system","options","messages"]
     configArray.forEach((item) => {
         if (config[item] == undefined){
             throw new Error("\n\nMAIN ERROR: the item '"+item+"' doesn't exist in config.json")
         }
     })
-
-    checkType(config.bot_name,"string","bot_name")
+    
     checkHexColor(config.main_color,"main_color")
     checkDiscord("serverid",config.server_id,"server_id")
     checkToken(config.auth_token)

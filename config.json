@@ -1,5 +1,4 @@
 {
-    "bot_name":"Wumpus",
     "main_color":"#ffffff",
     "server_id":"server id (for slash cmds)",
     "auth_token":"auth token",
