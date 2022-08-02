@@ -167,7 +167,7 @@ module.exports = () => {
             }
         })
 
-        await require("./ticketCloser").closeTicket(interaction,prefix,"close")
+        await require("./ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close")
         closeTicketButtonChecker = false
     })
 
@@ -218,7 +218,7 @@ module.exports = () => {
             }
         })
 
-        await require("./ticketCloser").closeTicket(interaction,prefix,"close")
+        await require("./ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close")
         closeTicket1ButtonChecker = false
     })
 
@@ -270,7 +270,7 @@ module.exports = () => {
             }
         })
 
-        await require("./ticketCloser").closeTicket(interaction,prefix,"delete")
+        await require("./ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete")
         deleteTicketButtonChecker = false
     })
 
@@ -325,7 +325,7 @@ module.exports = () => {
             }
         })
 
-        await require("./ticketCloser").closeTicket(interaction,prefix,"deletenotranscript")
+        await require("./ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"deletenotranscript")
         deleteTicket1ButtonChecker = false
     })
 }

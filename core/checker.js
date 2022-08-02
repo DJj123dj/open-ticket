@@ -25,7 +25,7 @@ exports.checker = async () => {
             if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this channel id is invalid")
             }
-        }else if (mode == "roleid"){
+        }else if (mode == "roleid"){    
             if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this role id is invalid")
             }
@@ -41,7 +41,7 @@ exports.checker = async () => {
     }
     /**@param {String} value */
     const checkToken = (value) => {
-        if (value.includes(" ") || value.length < 40 || value.length > 70){
+        if (value.includes(" ") || value.length < 40 || value.length > 90){
             createError("'auth_token' | your token is invalid")
         }
     }
@@ -245,14 +245,13 @@ exports.checker = async () => {
     //--------------------------|
     //--------------------------|
 
-    var configArray = ["bot_name","main_color","server_id","auth_token","main_adminroles","prefix","languagefile","credits","status","system","options","messages"]
+    var configArray = ["main_color","server_id","auth_token","main_adminroles","prefix","languagefile","credits","status","system","options","messages"]
     configArray.forEach((item) => {
         if (config[item] == undefined){
             throw new Error("\n\nMAIN ERROR: the item '"+item+"' doesn't exist in config.json")
         }
     })
-
-    checkType(config.bot_name,"string","bot_name")
+    
     checkHexColor(config.main_color,"main_color")
     checkDiscord("serverid",config.server_id,"server_id")
     checkToken(config.auth_token)
@@ -309,6 +308,28 @@ exports.checker = async () => {
     config.options.forEach((option,index) => {
         checkOption(option,"options/"+index)
     })
+
+
+    //discord check
+    /**
+    const discord = require("discord.js")
+    const {GatewayIntentBits,Partials} = discord
+    const client = new discord.Client({
+        intents:[
+            GatewayIntentBits.DirectMessages,
+            GatewayIntentBits.GuildInvites,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.MessageContent
+        ],
+        partials:[Partials.Channel,Partials.Message]
+    })
+    await client.guilds.fetch()
+    if (!client.guilds.cache.find(g => g.id == config.server_id)){
+        createError("'server_id' | i'm not in a server with this id!")
+    }
+    */
 
     
 

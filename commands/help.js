@@ -5,6 +5,8 @@ const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
 
+const APIEvents = require("../core/api/modules/events")
+
 module.exports = () => {
     const helpEmbed = new discord.EmbedBuilder()
         .setColor(config.main_color)
@@ -24,6 +26,7 @@ module.exports = () => {
         if (!args[1]){
             msg.channel.send({embeds:[helpEmbed]})
             log("command","someone used the 'help' command",[{key:"user",value:msg.author.tag}])
+            APIEvents.onCommand("help",true,msg.author,msg.channel,msg.guild,new Date())
             return
         }
 
@@ -31,6 +34,7 @@ module.exports = () => {
 
             msg.channel.send({embeds:[helpEmbed]})
             log("command","someone used the 'help' command",[{key:"user",value:msg.author.tag}])
+            APIEvents.onCommand("help",true,msg.author,msg.channel,msg.guild,new Date())
         }
     })
 
@@ -40,5 +44,6 @@ module.exports = () => {
 
         interaction.reply({embeds:[helpEmbed]})
         log("command","someone used the 'help' command",[{key:"user",value:interaction.user.tag}])
+        APIEvents.onCommand("help",true,interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

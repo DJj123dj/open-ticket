@@ -4,6 +4,9 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
+const permsChecker = require("../core/utils/permisssionChecker")
+
+const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -11,13 +14,13 @@ module.exports = () => {
         var user = msg.mentions.users.first()
         if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<user>`:\n`"+config.prefix+"remove <user>`")]})
 
-        if (!msg.member.permissions.has("ManageChannels") && !msg.member.permissions.has("Administrator") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-            try {
-                return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
-            }catch{
-                return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-            }
+        if (!msg.guild) return
+        if (!permsChecker.command(msg.author.id,msg.guild.id)){
+            permsChecker.sendUserNoPerms(msg.author)
+            return
         }
+
+        interaction.deferReply()
 
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
@@ -31,6 +34,11 @@ module.exports = () => {
             
             log("command","someone used the 'remove' command",[{key:"user",value:msg.author.tag}])
             log("system","user removed from ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"removed_user",value:loguser.tag}])
+
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("../core/getoptions").getOptionsById("newT"+ticketId)
+            APIEvents.onTicketRemove(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
+            APIEvents.onCommand("remove",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         })
         
     })
@@ -40,11 +48,11 @@ module.exports = () => {
         if (interaction.commandName != "remove") return
         const user = interaction.options.getUser("user")
 
-        const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
-                interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
-                return
-            }
+        if (!interaction.guild) return
+        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+            permsChecker.sendUserNoPerms(interaction.user)
+            return
+        }
         
 
 
@@ -60,6 +68,11 @@ module.exports = () => {
             
             log("command","someone used the 'remove' command",[{key:"user",value:interaction.user.tag}])
             log("system","user removed from ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"removed_user",value:loguser.tag}])
+
+            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const ticketData = require("../core/getoptions").getOptionsById("newT"+ticketId)
+            APIEvents.onTicketRemove(interaction.user,loguser,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
+            APIEvents.onCommand("remove",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         })
 
        

@@ -44,6 +44,8 @@ const getUserInfo = (channel) => {
 
 exports.createTranscript = async (messagecollection,channel) => {
     const ticketuserdata = await getUserInfo(channel)
+
+    require("./api/modules/events").onTranscriptCreation(messagecollection,channel,channel.guild,new Date())
     try {
         const cd = new Date()
         const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
@@ -57,8 +59,8 @@ exports.createTranscript = async (messagecollection,channel) => {
 
             if (msg.content){var content = msg.content}else{var content = "*empty message*"}
 
-            const msgstats = "files: "+msg.attachments.size+" | embeds: "+msg.embeds.length+" | isbot: "+msg.author.bot
-            filearray.push("["+timestamp.getDate()+"/"+timestamp.getMonth()+"/"+timestamp.getFullYear()+" | "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds()+" | "+msg.author.tag+" ] ["+msgstats+"]\n"+content+"\n")
+            const msgstats = "files: "+msg.attachments.size+", embeds: "+msg.embeds.length
+            filearray.push("["+timestamp.getDate()+"/"+timestamp.getMonth()+"/"+timestamp.getFullYear()+", "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds()+"|"+msg.author.tag+"] ["+msgstats+"]\n"+content+"\n")
         })
 
         if (filearray.length < 2) filearray.push("transcript is empty")

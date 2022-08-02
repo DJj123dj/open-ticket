@@ -4,6 +4,9 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
+const permsChecker = require("../core/utils/permisssionChecker")
+
+const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -27,6 +30,7 @@ module.exports = () => {
             msg.channel.send({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
 
             log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
+            APIEvents.onCommand("close",true,msg.author,msg.channel,msg.guild,new Date())
             
         })
         
@@ -36,6 +40,8 @@ module.exports = () => {
     client.on("interactionCreate",(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "close") return
+
+        interaction.deferReply()
 
        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
@@ -54,6 +60,7 @@ module.exports = () => {
             interaction.reply({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
 
             log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
+            APIEvents.onCommand("close",true,interaction.user,interaction.channel,interaction.guild,new Date())
             
         })
     })

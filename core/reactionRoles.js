@@ -6,6 +6,8 @@ const log = bot.errorLog.log
 const l = bot.language
 const storage = bot.storage
 
+const APIEvents = require("./api/modules/events")
+
 module.exports = async () => {
     const chalk = await (await import("chalk")).default
     
@@ -34,23 +36,33 @@ module.exports = async () => {
                         interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
         
                         log("system","added role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                        const apirole = interaction.guild.roles.cache.find(r => r.id == role)
+                        APIEvents.onReactionRole("add","add",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                     })
+
                 }else if (mode == "remove"){
                     option.roles.forEach((role) => {
                         interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
                         
                         log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                        const apirole = interaction.guild.roles.cache.find(r => r.id == role)
+                        APIEvents.onReactionRole("remove","remove",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                     })
+                    
                 }else if (mode == "add&remove"){
                     option.roles.forEach((role) => {
                         if (interaction.guild.members.cache.find(u => u.id == user.id).roles.cache.has(role)){
                             interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
                             
                             log("system","added role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                            const apirole = interaction.guild.roles.cache.find(r => r.id == role)
+                            APIEvents.onReactionRole("add","add&remove",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                         }else {
                             interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
                             
                             log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                            const apirole = interaction.guild.roles.cache.find(r => r.id == role)
+                            APIEvents.onReactionRole("remove","add&remove",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                         }
                     })
                 }

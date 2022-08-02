@@ -1,0 +1,79 @@
+{
+    "errors":{
+        "missingArgsTitle":"Neplatné argumenty",
+        "missingArgsDescription":"Chybí argumenty",
+        "noPermsTitle":"Nemáš práva!",
+        "noPermsDescription":"Nemáš dostatečné práva na tento příkaz!\n Potřebuješ ADMINISTRATOR aby jsi mohl provést příkaz!",
+        "chooseFromListTitle":"Neplatné ID",
+        "chooseFromListDescription":"Vyber si z těchto ID:",
+        "boterror":"Error!",
+        "notInTicketTitle":"Nejsi v ticketu!",
+        "notInTicketDescription":"Tento příkaz nefunguje mimo tickety!",
+        "ticketDoesntExist":"Tento ticket už bohužel neexistuje!",
+        "roleDoesntExist":"Tato role bohužel neexistuje!",
+        "anotherOption":"Tato možnost není ticket ale něco jiného!",
+        "maxAmountTitle":"Maximální počet ticketů dosažen!",
+        "maxAmountDescription":"Dosáhl jsi maximálního povoleného počtu ticketů!\n Nemůžeš si vytvořit nový!",
+        "somethingWentWrong":"**Něco je špatně**\nProsím zkus to příště znovu!",
+        "somethingWentWrongTranscript":"Něco je špatně s transcriptem!**\nProsím zkus to příště znovu!"
+    },
+    "commands":{
+        "userAddedTitle":"Uživatel přidán!",
+        "userAddedDescription":"{0} je přidán do ticketu!",
+        "userRemovedTitle":"Uživatel odebrán!",
+        "userRemovedDescription":"{0} je odstraněn z ticketu!",
+
+        "renameTitle":"Jméno bylo změněno!",
+        "renameWarning":"Varování: jméno kanálu můžeš změnit pouze 2x za minutu!",
+
+        "closeTitle":"Zavři tento ticket!",
+        "closeDescription":"Můžeš zavřít ticket kliknutím na tlačítko níže!",
+        "deleteTitle":"Smaž tento ticket!",
+        "deleteDescription":"Můžeš smazat ticket kliknutím na tlačítko níže!",
+        "reopenTitle":"Znovu otevři ticket!",
+        "reopenDescription":"Můžeš znovu otevřít tento ticket kliknutínm na tlačítko níže!",
+
+        "ticketWarning":"The embed is in the message below!",
+        "maxTicketWarning":"**Varovaní:** _Můžeš si vytvořit použe {0} ticket(s) v jednu chvíli!_"
+    },
+    "helpMenu":{
+        "title":"Příkazy:",
+        "header1":"**Běž {0} vytvořit si ticket!**\n\n",
+        "header2":"**Použij příkaz `/new` nebo `/ticket` k vytvoření ticketu!**\n\n",
+
+        "msgCmd":"Vytvoř možnost otevírat tickety přes tlačítko. (ADMIN)",
+        "renameCmd":"Přejmenovat ticket. (Žádné mezery)",
+        "closeCmd":"Zavři ticket.",
+        "deleteCmd":"Smaž ticket.",
+        "addCmd":"Přidej člena do ticketu.",
+        "removeCmd":"Odebere člena z ticketu.",
+        "reopenCmd":"Znovu otevři ticket po uzavření."
+    },
+    "buttons":{
+        "close":"Zavři ticket",
+        "delete":"Smaž ticket",
+        "reopen":"Znovu otevři ticket",
+        "sendTranscript":"Odešli log ticketu"
+    },
+    "messages":{
+        "reopenTitle":"Ticket znovu otevřen!",
+        "reopenDescription":"Cítím se skvěle že si můžeme zase povídat!",
+        "closedTitle":"Zavřený ticket!",
+        "closedDescription":"Pouze admin team zde může nyní komunikovat!\n\n*Klikni na tlačítko níže pro smazání nebo znovu otevření ticketu!*",
+        "createdTitle":"Ticket vytvořen!",
+        "createdDescription":"Váš tiket je vytvořen, můžete ho zjistit pomocí pingu!",
+
+        "newTicketDmTitle":"Nový ticket!",
+        "closedTicketDmTitle":"Ticket uzavřen!",
+        "deletedTicketDmTitle":"Ticket smazán!",
+        "closedTicketDmDescription":"Tvůj ticket byl uzavřen!",
+        "deletedTicketDmDescription":"Tvůj ticket byl smazán!",
+        "reopenTicketDmTitle":"Ticket znovu otevřen!",
+        "reopenTicketDmDescription":"Tvůj ticket byl znovu otevřen!",
+        "newTranscriptTitle":"Nový log ticketu je zde!",
+        "newTranscriptDescription":"Zde najdeš log svého ticketu!",
+        "hereIsTheTranscript":"Zde je log:",
+
+        "chooseCategory":"Vyber kategorii:"
+    }
+}

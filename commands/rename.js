@@ -4,6 +4,9 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
+const permsChecker = require("../core/utils/permisssionChecker")
+
+const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
     client.on("messageCreate",msg => {
@@ -14,12 +17,10 @@ module.exports = () => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
 
-            if (!msg.member.permissions.has("ManageChannels") && !msg.member.permissions.has("Administrator") && config.main_adminroles.some((item)=>{return msg.member.roles.cache.has(item)}) == false){
-                try {
-                    return msg.member.send({embeds:[bot.errorLog.noPermsMessage]})
-                }catch{
-                    return msg.channel.send({embeds:[bot.errorLog.noPermsMessage]})
-                }
+            if (!msg.guild) return
+            if (!permsChecker.command(msg.author.id,msg.guild.id)){
+                permsChecker.sendUserNoPerms(msg.author)
+                return
             }
             
             var newname = msg.content.split(config.prefix+"rename")[1].substring(1)
@@ -42,7 +43,7 @@ module.exports = () => {
 
             log("command","someone used the 'rename' command",[{key:"user",value:msg.author.tag}])
             log("system","ticket renamed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
-            
+            APIEvents.onCommand("rename",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         })
         
         
@@ -52,14 +53,16 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "rename") return
 
+        interaction.deferReply()
+
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id)return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             
-            const permsmember = client.guilds.cache.find(g => g.id == interaction.guild.id).members.cache.find(m => m.id == interaction.member.id)
-            if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
-                interaction.reply({embeds:[bot.errorLog.noPermsMessage],ephemeral:true})
+            if (!interaction.guild) return
+            if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+                permsChecker.sendUserNoPerms(interaction.user)
                 return
             }
             
@@ -80,7 +83,8 @@ module.exports = () => {
 
             log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
             log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
-            
+
+            APIEvents.onCommand("rename",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         })
     })
 }
