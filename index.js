@@ -26,7 +26,7 @@ const client = new discord.Client({
 })
 exports.client = client
 
-client.setMaxListeners(30)
+client.setMaxListeners(50)
 
 if (process.argv[2]){
     if (process.argv[2].endsWith("d")){
@@ -48,8 +48,21 @@ if (isDev){
     }
 }else{var config = require('./config.json')}
 exports.config = config
+exports.storage = require('./core/dynamicdatabase/storage')
+
 exports.errorLog = require("./core/errorLogSystem")
 const log = this.errorLog.log
+
+exports.hiddenData = require("./core/utils/hiddendata")
+
+exports.embeds = {
+    commands:require("./core/interactionHandlers/embeds/commands")
+}
+exports.buttons = {
+    close:require("./core/interactionHandlers/buttons/close"),
+    firstmsg:require("./core/interactionHandlers/buttons/firstmsg"),
+    verifybars:require("./core/interactionHandlers/buttons/verifyBars")
+}
 
 client.on('ready',async () => {
     var statusSet = false
@@ -129,25 +142,26 @@ if (!isDev){
 if (process.argv[2] && process.argv[2].startsWith("slash")){
     //do nothing
 }else{
-    var storage = require('./core/dynamicdatabase/storage')
-    exports.storage = storage
 
     //commands
-    require('./commands/ticket')()
-    require("./commands/help")()
-    require("./commands/close")()
-    require("./commands/delete")()
-    require("./commands/rename")()
-    require("./commands/add")()
-    require("./commands/remove")()
-    require("./commands/reopen")()
+    require('./commands/ticket')(this)
+    require("./commands/help")(this)
+    require("./commands/close")(this)
+    require("./commands/delete")(this)
+    require("./commands/rename")(this)
+    require("./commands/add")(this)
+    require("./commands/remove")(this)
+    require("./commands/reopen")(this)
 
     //core
-    require('./core/ticketOpener')()
-    require("./core/ticketCloser").runThis()
-    require("./core/closebuttons")()
-    require("./core/reactionRoles")()
-    require("./core/ticketReopener")()
+    require('./core/ticketOpener')(this)
+    require("./core/ticketCloser").runThis(this)
+    require("./core/closebuttons")(this)
+    require("./core/reactionRoles")(this)
+    require("./core/ticketReopener").runThis(this)
+
+    //InteractionHandlers
+    require("./core/interactionHandlers/handlers/handlers")()
 
 }
 

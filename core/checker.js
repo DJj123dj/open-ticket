@@ -41,7 +41,7 @@ exports.checker = async () => {
     }
     /**@param {String} value */
     const checkToken = (value) => {
-        if (value.includes(" ") || value.length < 40 || value.length > 90){
+        if (value.includes(" ") || value.length < 40){
             createError("'auth_token' | your token is invalid")
         }
     }

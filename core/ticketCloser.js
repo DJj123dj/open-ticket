@@ -38,12 +38,16 @@ exports.runThis = () => {
  * @param {discord.TextChannel} channel
  * @param {String} prefix
  * @param {"delete"|"close"|"deletenotranscript"} mode
+ * @param {Boolean} nomessage
+ * @param {String} reason only when closing, not when deleting!
  */
-exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
+exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => {
     const guild = channel.guild
     const user = member.user
     const chalk = await (await import("chalk")).default
     const channelmessages = await channel.messages.fetch()
+
+    const newReason = reason ? reason : "none"
 
     //start code
 
@@ -80,7 +84,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
 
         //start delete proccess
         deleteRequired = true
-        await channel.send({content:"**"+l.messages.gettingdeleted+"**"})
+        if (!nomessage){
+            await channel.send({content:"**"+l.messages.gettingdeleted+"**"})
+        }
         log("system","deleted a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
@@ -92,7 +98,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
 
             const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
-            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
             require("./api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
@@ -159,7 +165,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
             const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
-            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
             if (!ticketData) return
 
@@ -188,38 +194,40 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
 
         channel.permissionOverwrites.set(permissionArray)
 
-        //message
-        var closeButtonRow = new discord.ActionRowBuilder()
-            .addComponents(
-                new discord.ButtonBuilder()
-                .setCustomId("deleteTicket1")
-                .setDisabled(false)
-                .setStyle(discord.ButtonStyle.Danger)
-                .setLabel(l.buttons.delete)
-                .setEmoji("✖️")
-            )
-            .addComponents(
-                new discord.ButtonBuilder()
-                .setCustomId("sendTranscript")
-                .setDisabled(false)
-                .setStyle(discord.ButtonStyle.Secondary)
-                .setLabel(l.buttons.sendTranscript)
-                .setEmoji("📄")
-            )
-            .addComponents(
-                new discord.ButtonBuilder()
-                .setCustomId("reopenTicket")
-                .setDisabled(false)
-                .setStyle(discord.ButtonStyle.Success)
-                .setLabel(l.buttons.reopen)
-                .setEmoji("✔")
-            )
-            
-        const embed = new discord.EmbedBuilder()
-            .setColor(config.main_color)
-            .setTitle(":lock: "+l.messages.closedTitle+" :lock:")
-            .setDescription(l.messages.closedDescription)
-        channel.send({embeds:[embed],components:[closeButtonRow]})
+        if (!nomessage){
+            //message
+            var closeButtonRow = new discord.ActionRowBuilder()
+                .addComponents(
+                    new discord.ButtonBuilder()
+                    .setCustomId("OTdeleteTicket1")
+                    .setDisabled(false)
+                    .setStyle(discord.ButtonStyle.Danger)
+                    .setLabel(l.buttons.delete)
+                    .setEmoji("✖️")
+                )
+                .addComponents(
+                    new discord.ButtonBuilder()
+                    .setCustomId("OTsendTranscript")
+                    .setDisabled(false)
+                    .setStyle(discord.ButtonStyle.Secondary)
+                    .setLabel(l.buttons.sendTranscript)
+                    .setEmoji("📄")
+                )
+                .addComponents(
+                    new discord.ButtonBuilder()
+                    .setCustomId("OTreopenTicket")
+                    .setDisabled(false)
+                    .setStyle(discord.ButtonStyle.Success)
+                    .setLabel(l.buttons.reopen)
+                    .setEmoji("✔")
+                )
+                
+            const embed = new discord.EmbedBuilder()
+                .setColor(config.main_color)
+                .setTitle(":lock: "+l.messages.closedTitle+" :lock:")
+                .setDescription(l.messages.closedDescription)
+            channel.send({embeds:[embed],components:[closeButtonRow]})
+        }
 
         log("system","closed a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
         
@@ -230,9 +238,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
             const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
-            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
-            require("./api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData})
+            require("./api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData},newReason)
 
             const id = firstmsg.embeds[0].author.name
 
@@ -240,7 +248,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
 
             try{
                 if (config.system.enable_DM_Messages){
-                    member.send({embeds:[bot.errorLog.custom(l.messages.closedTicketDmTitle,l.messages.closedTicketDmDescription,":ticket:",config.main_color)]})
+                    member.send({embeds:[bot.errorLog.custom(l.messages.closedTicketDmTitle,l.messages.closedTicketDmDescription+"\n\n**reason:** "+newReason,":ticket:",config.main_color)]})
                 }
             }
             catch{log("system","can't send DM to member, member doesn't allow dm's")}
@@ -259,7 +267,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
         //start delete proccess
         enableTranscript = false
         deleteRequired = true
-        channel.send({content:"**"+l.messages.gettingdeleted+"**"})
+        if (!nomessage){
+            await channel.send({content:"**"+l.messages.gettingdeleted+"**"})
+        }
         log("system","deleted a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
@@ -271,7 +281,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
 
             const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
-            const ticketData = require("./getoptions").getOptionsById("newT"+ticketId)
+            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
             require("./api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
@@ -291,6 +301,8 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
 
     if (enableTranscript == true && mode != "deletenotranscript"){
 
+        const transcriptReason = (mode == "close") ? "**reason:** "+newReason : "**reason:** none"
+
         if (config.system.enable_transcript || config.system.enable_DM_transcript){
             var fileattachment = await require("./transcript").createTranscript(channelmessages,channel)
 
@@ -300,10 +312,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
         if (config.system.enable_transcript){
             const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
-                .setTitle(l.messages.newTranscriptTitle)
-                .setAuthor({name:user.username,iconURL:user.displayAvatarURL({format:"png"})})
-                .setDescription(l.messages.newTranscriptDescription)
-                .setFooter({text:"ticket: "+channelname})
+                .setTitle("📄 "+l.messages.newTranscriptTitle)
+                .setDescription(transcriptReason)
+                .setFooter({text:"closed by: "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
             
             guild.channels.cache.find(c => c.id == config.system.transcript_channel).send({
                 embeds:[transcriptEmbed],
@@ -314,9 +325,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode) => {
         if (config.system.enable_DM_transcript){
             const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
-                .setTitle(l.messages.newTranscriptTitle)
-                .setDescription(l.messages.newTranscriptDescription)
-                .setFooter({text:"ticket: "+channelname})
+                .setTitle("📄 "+l.messages.newTranscriptTitle)
+                .setDescription(transcriptReason)
+                .setFooter({text:"closed by: "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
             
                 if (!isDatabaseError) ticketOpener.send({
                 embeds:[transcriptEmbed],

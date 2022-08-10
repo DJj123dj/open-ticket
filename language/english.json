@@ -3,7 +3,8 @@
         "missingArgsTitle":"Invalid Arguments!",
         "missingArgsDescription":"Missing Argument",
         "noPermsTitle":"No Permissions!",
-        "noPermsDescription":"You don't have the correct roles to run this command!\nYou need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
+        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
+        "noPermsDelete":"Only admins can delete a ticket!",
         "chooseFromListTitle":"Invalid ID",
         "chooseFromListDescription":"Choose one of the id's below:",
         "boterror":"Bot Error!",
@@ -18,26 +19,18 @@
         "somethingWentWrongTranscript":"Something went wrong while making the transcript!**\nPlease try again another time!"
     },
     "commands":{
-        "userAddedTitle":"User Added!",
-        "userAddedDescription":"{0} is added to this ticket!",
-        "userRemovedTitle":"User Removed!",
-        "userRemovedDescription":"{0} is removed from this ticket!",
-
-        "renameTitle":"The name is changed!",
-        "renameWarning":"Warning: you can only change the channel name 2 times per minute!\n(this is due discord rate limits)",
-
-        "closeTitle":"Close this ticket!",
-        "closeDescription":"You can close this ticket by clicking on the button below!",
-        "deleteTitle":"Delete this ticket!",
-        "deleteDescription":"You can delete this ticket by clicking on the button below!",
-        "reopenTitle":"Re-Open this ticket!",
-        "reopenDescription":"You can re-open this ticket by clicking on the button below!",
+        "userAddedTitle":"Added {0} to this ticket!",
+        "userRemovedTitle":"Removed {0} from this ticket!",
+        "renameTitle":"Changed the name to {0}!",
+        "closeTitle":"Closed this ticket!",
+        "deleteTitle":"Deleting this ticket...",
+        "reopenTitle":"Re-Opened this ticket!",
 
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
     },
     "helpMenu":{
-        "title":"Help Menu:",
+        "title":"Available Commands:",
         "header1":"**Go to {0} to create a ticket!**\n\n",
         "header2":"**Run the command `/new` or `/ticket` to create a ticket!**\n\n",
 
@@ -53,7 +46,7 @@
         "close":"Close Ticket",
         "delete":"Delete Ticket",
         "reopen":"Re-Open Ticket",
-        "sendTranscript":"Send Transcript File"
+        "sendTranscript":"Transcript"
     },
     "messages":{
         "reopenTitle":"Re-Opened this ticket!",
@@ -71,7 +64,6 @@
         "reopenTicketDmTitle":"Ticket Re-opened!",
         "reopenTicketDmDescription":"Your ticket is re-opened!",
         "newTranscriptTitle":"A new transcript is here!",
-        "newTranscriptDescription":"You can find the transcript in the text file above!",
         "hereIsTheTranscript":"Here is the transcript:",
 
         "chooseCategory":"choose a category:",

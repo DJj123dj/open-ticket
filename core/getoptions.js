@@ -7,7 +7,7 @@ const config = bot.config
  */
 exports.getTicketValue = (index,value) => {
     if (value == "id"){
-        return "newT"+config.options[index][value]
+        return "OTnewT"+config.options[index][value]
     }
     return config.options[index][value]
 }
@@ -35,7 +35,7 @@ exports.getRoleValue = (index,value) => {
     var result = []
     config.options.forEach((o) => {
         if (value == "id"){
-            result.push("newT"+o[value])
+            result.push("OTnewT"+o[value])
         }else{
         result.push(o[value])
         }
@@ -90,7 +90,7 @@ class TicketOptions {
 exports.getOptionsById = (id) => {
     var result = false
     config.options.forEach((option) => {
-        if ("newT"+option.id == id){
+        if ("OTnewT"+option.id == id){
             result = option
         }
     })

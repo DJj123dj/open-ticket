@@ -49,14 +49,15 @@ exports.onTicketOpen = (user,channel,guild,date,ticketdata) => {
  * @param {discord.Guild} guild
  * @param {Date} date 
  * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {String} reason
  */
-exports.onTicketClose = (user,channel,guild,date,ticketdata) => {
+exports.onTicketClose = (user,channel,guild,date,ticketdata,reason) => {
     //system
-    bot.errorLog.log("api","ticket closed",[{key:"userid",value:user.id},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id},{key:"ticketdata",value:JSON.stringify(ticketdata)}])
+    bot.errorLog.log("api","ticket closed",[{key:"userid",value:user.id},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id},{key:"ticketdata",value:JSON.stringify(ticketdata)},{key:"reason",value:reason}])
 
     ticketCloseListeners.forEach((func) => {
         try {
-            func(user,channel,guild,date,ticketdata)
+            func(user,channel,guild,date,ticketdata,reason)
         }catch{}
     })
 
@@ -239,6 +240,16 @@ exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
  */
 
 /**
+ * @callback TicketCloseEvent
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {String} reason
+ */
+
+/**
  * @callback TranscriptCreationEvent
  * @param {discord.Message[]} messages 
  * @param {discord.TextChannel} channel 
@@ -290,7 +301,7 @@ const onTicketOpen = (callback) => {
     ticketOpenListeners.push(callback)
 }
 
-/**@param {TicketActionEvent} callback */
+/**@param {TicketCloseEvent} callback */
 const onTicketClose = (callback) => {
     ticketCloseListeners.push(callback)
 }

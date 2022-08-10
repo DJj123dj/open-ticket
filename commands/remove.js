@@ -20,30 +20,28 @@ module.exports = () => {
             return
         }
 
-        interaction.deferReply()
-
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type")
 
             msg.channel.permissionOverwrites.delete(user.id)
-            msg.channel.send({embeds:[bot.errorLog.success(l.commands.userRemovedTitle,l.commands.userRemovedDescription.replace("{0}",user.tag))]})
+            msg.channel.send({embeds:[bot.embeds.commands.removeEmbed(user)]})
 
             var loguser = msg.mentions.users.first()
             
             log("command","someone used the 'remove' command",[{key:"user",value:msg.author.tag}])
             log("system","user removed from ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"removed_user",value:loguser.tag}])
 
-            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
-            const ticketData = require("../core/getoptions").getOptionsById("newT"+ticketId)
+            const ticketData = require("../core/getoptions").getOptionsById("OTnewT"+ticketId)
             APIEvents.onTicketRemove(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
             APIEvents.onCommand("remove",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         })
         
     })
 
-    client.on("interactionCreate",(interaction) => {
+    client.on("interactionCreate",async (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "remove") return
         const user = interaction.options.getUser("user")
@@ -53,28 +51,24 @@ module.exports = () => {
             permsChecker.sendUserNoPerms(interaction.user)
             return
         }
-        
 
-
-        interaction.channel.messages.fetchPinned().then(msglist => {
+        await interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type")
 
             interaction.channel.permissionOverwrites.delete(user.id)
-            interaction.reply({embeds:[bot.errorLog.success(l.commands.userRemovedTitle,l.commands.userRemovedDescription.replace("{0}",user.tag))]})
+            interaction.reply({embeds:[bot.embeds.commands.removeEmbed(user)]})
 
             var loguser = user
             
             log("command","someone used the 'remove' command",[{key:"user",value:interaction.user.tag}])
             log("system","user removed from ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"removed_user",value:loguser.tag}])
 
-            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
-            const ticketData = require("../core/getoptions").getOptionsById("newT"+ticketId)
+            const ticketData = require("../core/getoptions").getOptionsById("OTnewT"+ticketId)
             APIEvents.onTicketRemove(interaction.user,loguser,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
             APIEvents.onCommand("remove",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         })
-
-       
     })
 }

@@ -37,7 +37,7 @@ exports.getButton = (id) => {
     if (!option) return false
     if (option.type == "ticket"){
         var button = new discord.ButtonBuilder()
-            .setCustomId("newT"+option.id)
+            .setCustomId("OTnewT"+option.id)
             .setDisabled(false)
             .setStyle(getColor(option.color))
         
