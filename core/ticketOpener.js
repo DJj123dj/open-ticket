@@ -161,10 +161,10 @@ module.exports = () => {
                     const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
                     
                     var ticketEmbed = new discord.EmbedBuilder()
-                        .setAuthor({name:interaction.user.id})
+                        //.setAuthor({name:interaction.user.id})
                         .setColor(config.main_color)
                         .setTitle(currentTicketOptions.name)
-                        .setFooter({text:"Ticket Type: "+currentTicketOptions.id})
+                        //.setFooter({text:"Ticket Type: "+currentTicketOptions.id})
                     if (currentTicketOptions.ticketmessage.length > 0){
                         ticketEmbed.setDescription(currentTicketOptions.ticketmessage+hiddendata)
                     }else{

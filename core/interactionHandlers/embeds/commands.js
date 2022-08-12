@@ -82,3 +82,26 @@ exports.renameEmbed = (renamer,newname) => {
         .setColor(mc)
         .setFooter({text:reopener.tag,iconURL:reopener.displayAvatarURL()})
 }
+
+/**
+ * 
+ * @param {Boolean} done 
+ * @param {discord.TextChannel} channel
+ * @param {discord.User} author
+ * @returns {discord.EmbedBuilder}
+ */
+ exports.sendTranscriptEmbed = (done,channel,author) => {
+    if (done){
+        return new embed()
+            .setTitle("📄 "+l.messages.hereIsTheTranscript)
+            .setColor(mc)
+            .setDescription("Ticket: "+channel.name)
+            .setFooter({text:author.tag,iconURL:author.displayAvatarURL()})
+    }else{
+        return new embed()
+            .setTitle("📄 "+l.messages.hereIsTheTranscript)
+            .setColor(mc)
+            .setDescription("Loading...")
+            .setFooter({text:author.tag,iconURL:author.displayAvatarURL()})
+    }
+}

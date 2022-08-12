@@ -22,7 +22,7 @@ module.exports = () => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type")
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
             
             var newname = msg.content.split(config.prefix+"rename")[1].substring(1)
 
@@ -66,7 +66,7 @@ module.exports = () => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type")
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
             
             var newname = interaction.options.getString("name")
             var name = interaction.channel.name

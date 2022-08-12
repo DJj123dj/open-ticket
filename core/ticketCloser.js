@@ -94,16 +94,14 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         //getID & send DM & send api event
         await channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-
-            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value.value
             const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
             require("./api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
-            if (!firstmsg.embeds[0].author) return false
-            const id = firstmsg.embeds[0].author.name
+            const id = hiddendata.data.find(d => d.key == "openerid").value
 
             if (!id) return false
 
@@ -162,9 +160,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         //add ticket adminroles
         await channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
             const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
             if (!ticketData) return
@@ -235,14 +233,14 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         //getID & send DM & send api event
         await channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
             const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
             require("./api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData},newReason)
 
-            const id = firstmsg.embeds[0].author.name
+            const id = hiddendata.data.find(d => d.key == "openerid").value
 
             if (!id) return false
 
@@ -277,15 +275,14 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         //getID & send DM & send api event
         await channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-
-            const ticketId = firstmsg.embeds[0].footer.text.split("Ticket Type: ")[1]
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
             const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
 
             require("./api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
-            const id = firstmsg.embeds[0].author.name
+            const id = hiddendata.data.find(d => d.key == "openerid").value
 
             if (!id) return false
 

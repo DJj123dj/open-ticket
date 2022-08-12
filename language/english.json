@@ -67,6 +67,9 @@
         "hereIsTheTranscript":"Here is the transcript:",
 
         "chooseCategory":"choose a category:",
-        "gettingdeleted":"Ticket is getting deleted..."
+        "gettingdeleted":"Ticket is getting deleted...",
+
+        "none":"none",
+        "reason":"reason"
     }
 }

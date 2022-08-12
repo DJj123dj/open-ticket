@@ -17,7 +17,7 @@ module.exports = () => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type")
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
             msg.channel.send({embeds:[bot.embeds.commands.closeEmbed(msg.author)],components:[bot.buttons.close.closeCommandRow]})
 
@@ -50,7 +50,7 @@ module.exports = () => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type")
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
             interaction.reply({embeds:[bot.embeds.commands.closeEmbed(interaction.user)],components:[bot.buttons.close.closeCommandRow]})
 

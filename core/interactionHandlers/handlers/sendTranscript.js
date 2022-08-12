@@ -22,6 +22,7 @@ module.exports = () => {
         if (interaction.customId != "OTsendTranscript") return
 
         interaction.deferUpdate()
+        const tsmsg = await interaction.channel.send({embeds:[bot.embeds.commands.sendTranscriptEmbed(false,interaction.channel,interaction.user)]})
 
         const channelmessages = await interaction.channel.messages.fetch()
 
@@ -33,10 +34,10 @@ module.exports = () => {
 
         if (fileattachment == false){
             log("system","internal error: transcript is not created!")
-            interaction.channel.send({embeds:[bot.errorLog.serverError(l.errors.somethingWentWrongTranscript)]})
+            tsmsg.edit({embeds:[bot.errorLog.serverError(l.errors.somethingWentWrongTranscript)]})
             return
         }
 
-        interaction.channel.send({content:"**"+l.messages.hereIsTheTranscript+"**",files:[fileattachment]})
+        tsmsg.edit({embeds:[bot.embeds.commands.sendTranscriptEmbed(true,interaction.channel,interaction.user)],files:[fileattachment]})
     })
 }

@@ -18,10 +18,11 @@ const getUserInfo = (channel) => {
         }
         channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type")
 
-            const id = firstmsg.embeds[0].author.name ? firstmsg.embeds[0].author.name : false
+            const id = hiddendata.data.find(d => d.key == "openerid").value
 
             result.ticketopener.id = id
 
