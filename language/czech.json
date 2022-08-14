@@ -3,7 +3,8 @@
         "missingArgsTitle":"Neplatné argumenty",
         "missingArgsDescription":"Chybí argumenty",
         "noPermsTitle":"Nemáš práva!",
-        "noPermsDescription":"Nemáš dostatečné práva na tento příkaz!\n Potřebuješ ADMINISTRATOR aby jsi mohl provést příkaz!",
+        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
+        "noPermsDelete":"Only admins can delete a ticket!",
         "chooseFromListTitle":"Neplatné ID",
         "chooseFromListDescription":"Vyber si z těchto ID:",
         "boterror":"Error!",
@@ -18,26 +19,18 @@
         "somethingWentWrongTranscript":"Něco je špatně s transcriptem!**\nProsím zkus to příště znovu!"
     },
     "commands":{
-        "userAddedTitle":"Uživatel přidán!",
-        "userAddedDescription":"{0} je přidán do ticketu!",
-        "userRemovedTitle":"Uživatel odebrán!",
-        "userRemovedDescription":"{0} je odstraněn z ticketu!",
-
-        "renameTitle":"Jméno bylo změněno!",
-        "renameWarning":"Varování: jméno kanálu můžeš změnit pouze 2x za minutu!",
-
-        "closeTitle":"Zavři tento ticket!",
-        "closeDescription":"Můžeš zavřít ticket kliknutím na tlačítko níže!",
-        "deleteTitle":"Smaž tento ticket!",
-        "deleteDescription":"Můžeš smazat ticket kliknutím na tlačítko níže!",
-        "reopenTitle":"Znovu otevři ticket!",
-        "reopenDescription":"Můžeš znovu otevřít tento ticket kliknutínm na tlačítko níže!",
+        "userAddedTitle":"Added {0} to this ticket!",
+        "userRemovedTitle":"Removed {0} from this ticket!",
+        "renameTitle":"Changed the name to {0}!",
+        "closeTitle":"Closed this ticket!",
+        "deleteTitle":"Deleting this ticket...",
+        "reopenTitle":"Re-Opened this ticket!",
 
         "ticketWarning":"The embed is in the message below!",
-        "maxTicketWarning":"**Varovaní:** _Můžeš si vytvořit použe {0} ticket(s) v jednu chvíli!_"
+        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
     },
     "helpMenu":{
-        "title":"Příkazy:",
+        "title":"Available Commands:",
         "header1":"**Běž {0} vytvořit si ticket!**\n\n",
         "header2":"**Použij příkaz `/new` nebo `/ticket` k vytvoření ticketu!**\n\n",
 
@@ -71,9 +64,11 @@
         "reopenTicketDmTitle":"Ticket znovu otevřen!",
         "reopenTicketDmDescription":"Tvůj ticket byl znovu otevřen!",
         "newTranscriptTitle":"Nový log ticketu je zde!",
-        "newTranscriptDescription":"Zde najdeš log svého ticketu!",
         "hereIsTheTranscript":"Zde je log:",
 
-        "chooseCategory":"Vyber kategorii:"
+        "chooseCategory":"Vyber kategorii:",
+
+        "none":"none",
+        "reason":"reason"
     }
 }

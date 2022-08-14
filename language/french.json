@@ -3,7 +3,8 @@
         "missingArgsTitle":"Arguments invalides !",
         "missingArgsDescription":"Argument manquant",
         "noPermsTitle":"Pas de permissions!",
-        "noPermsDescription":"Vous n'avez pas les bons rôles pour exécuter cette commande !\nVous avez besoin de la permission `ADMINISTRATOR` ou d'être dans la liste des rôles autorisés !",
+        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
+        "noPermsDelete":"Only admins can delete a ticket!",
         "chooseFromListTitle":"Invalid ID",
         "chooseFromListDescription":"Choisissez l'un des identifiants ci-dessous:",
         "boterror":"Bot Error!",
@@ -18,26 +19,18 @@
         "somethingWentWrongTranscript":"Une erreur s'est produite lors de la création de la transcription !**\nVeuillez réessayer une autre fois !"
     },
     "commands":{
-        "userAddedTitle":"Utilisateur ajouté !",
-        "userAddedDescription":"{0} est ajouté à ce billet !",
-        "userRemovedTitle":"Utilisateur supprimé!",
-        "userRemovedDescription":"{0} est supprimé de ce ticket!",
+        "userAddedTitle":"Added {0} to this ticket!",
+        "userRemovedTitle":"Removed {0} from this ticket!",
+        "renameTitle":"Changed the name to {0}!",
+        "closeTitle":"Closed this ticket!",
+        "deleteTitle":"Deleting this ticket...",
+        "reopenTitle":"Re-Opened this ticket!",
 
-        "renameTitle":"Le nom est changé !",
-        "renameWarning":"Attention : vous ne pouvez modifier le nom de la chaîne que 2 fois par minute !\n(ceci est dû aux limites du taux de discorde)",
-
-        "closeTitle":"Fermez ce ticket !",
-        "closeDescription":"Vous pouvez fermer ce ticket en cliquant sur le bouton ci-dessous !",
-        "deleteTitle":"Supprimez ce billet !",
-        "deleteDescription":"Vous pouvez supprimer ce ticket en cliquant sur le bouton ci-dessous !",
-        "reopenTitle":"Ré-ouvrez ce ticket !",
-        "reopenDescription":"Vous pouvez rouvrir ce ticket en cliquant sur le bouton ci-dessous !",
-
-        "ticketWarning":"L'intégration est dans le message ci-dessous !",
-        "maxTicketWarning":"**Attention :** _Vous ne pouvez créer que {0} billet(s) à la fois !_"
+        "ticketWarning":"The embed is in the message below!",
+        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
     },
     "helpMenu":{
-        "title":"Menu d'aide:",
+        "title":"Available Commands:",
         "header1":"**Allez à {0} pour créer un ticket !**\n\n",
         "header2":"**Exécutez la commande `/new` ou `/ticket` pour créer un ticket!**\n\n",
 
@@ -65,10 +58,12 @@
 
         "newTicketDmTitle":"Nouveau ticket!",
         "newTranscriptTitle":"Une nouvelle transcription est ici!",
-        "newTranscriptDescription":"Vous pouvez trouver la transcription dans le fichier texte ci-dessus !",
         "hereIsTheTranscript":"Voici la transcription :",
 
         "chooseCategory":"choisissez une catégorie:",
-        "gettingdeleted":"Le ticket est en cours de suppression..."
+        "gettingdeleted":"Le ticket est en cours de suppression...",
+
+        "none":"none",
+        "reason":"reason"
     }
 }

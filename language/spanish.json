@@ -3,7 +3,8 @@
         "missingArgsTitle":"¡Argumentos inválidos!",
         "missingArgsDescription":"Argumento faltante.",
         "noPermsTitle":"¡Sin permisos!",
-        "noPermsDescription":"¡No tienes permiso para usar este comando.!\n¡Necesitas el permiso `ADMINISTRATOR` permiso o tener uno de los roles permitidos!",
+        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
+        "noPermsDelete":"Only admins can delete a ticket!",
         "chooseFromListTitle":"ID Invalida",
         "chooseFromListDescription":"Elije una de las ID de abajo:",
         "boterror":"¡Error del bot!",
@@ -18,26 +19,18 @@
         "somethingWentWrongTranscript":"**¡Algo salió mal al hacer el transcript!**\n¡Prueba en otro momento!"
     },
     "commands":{
-        "userAddedTitle":"¡Usuario agregado!",
-        "userAddedDescription":"¡{0} fué agregado al ticket!",
-        "userRemovedTitle":"¡Usuario eliminado!",
-        "userRemovedDescription":"¡{0} fué eliminado del ticket!",
+        "userAddedTitle":"Added {0} to this ticket!",
+        "userRemovedTitle":"Removed {0} from this ticket!",
+        "renameTitle":"Changed the name to {0}!",
+        "closeTitle":"Closed this ticket!",
+        "deleteTitle":"Deleting this ticket...",
+        "reopenTitle":"Re-Opened this ticket!",
 
-        "renameTitle":"¡El nombre fué cambiado!",
-        "renameWarning":"Aviso: Solo puedes cambiar el nombre 2 veces por minuto.\n(Esto es por limitaciones de Discord)",
-
-        "closeTitle":"¡Cierra el ticket!",
-        "closeDescription":"¡Puedes cerrar el ticket con el botón de abajo!",
-        "deleteTitle":"¡Elimina el ticket!",
-        "deleteDescription":"¡Puedes eliminar el ticket con el botón de abajo!",
-        "reopenTitle":"¡Re-Abre el ticket!",
-        "reopenDescription":"¡Puedes re-abrir el ticket con el botón de abajo!",
-
-        "ticketWarning":"¡El emblema está en el mensaje de abajo!",
-        "maxTicketWarning":"**Aviso:** _Solo puedes poseer {0} ticket(s) al mismo tiempo!_"
+        "ticketWarning":"The embed is in the message below!",
+        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
     },
     "helpMenu":{
-        "title":"Menú de ayuda:",
+        "title":"Available Commands:",
         "header1":"**¡Dirígete a {0} para crear un nuevo ticket!**\n\n",
         "header2":"**¡Ejecuta el comando `/new` o `/ticket` para crear un ticket!**\n\n",
 
@@ -71,10 +64,12 @@
         "reopenTicketDmTitle":"¡Ticket re-abierto!",
         "reopenTicketDmDescription":"¡Tu ticket se vió abierto de nuevo!",
         "newTranscriptTitle":"¡Un nuevo transcript está aquí!",
-        "newTranscriptDescription":"¡Puedes encontrar el transcript en el archivo de texto que se muestra arriba!",
         "hereIsTheTranscript":"Aquí está el transcript:",
 
         "chooseCategory":"elije una categoría:",
-        "gettingdeleted":"El ticket se está viendo eliminado..."
+        "gettingdeleted":"El ticket se está viendo eliminado...",
+
+        "none":"none",
+        "reason":"reason"
     }
 }
