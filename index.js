@@ -146,21 +146,21 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
 }else{
 
     //commands
-    require('./commands/ticket')(this)
-    require("./commands/help")(this)
-    require("./commands/close")(this)
-    require("./commands/delete")(this)
-    require("./commands/rename")(this)
-    require("./commands/add")(this)
-    require("./commands/remove")(this)
-    require("./commands/reopen")(this)
+    require('./commands/ticket')()
+    require("./commands/help")()
+    require("./commands/close")()
+    require("./commands/delete")()
+    require("./commands/rename")()
+    require("./commands/add")()
+    require("./commands/remove")()
+    require("./commands/reopen")()
 
     //core
-    require('./core/ticketOpener')(this)
-    require("./core/ticketCloser").runThis(this)
-    require("./core/closebuttons")(this)
-    require("./core/reactionRoles")(this)
-    require("./core/ticketReopener").runThis(this)
+    require('./core/ticketOpener')()
+    require("./core/ticketCloser").runThis()
+    //require("./core/closebuttons")() // => everything is now in ./core/interactionHandlers/
+    require("./core/reactionRoles")()
+    require("./core/ticketReopener").runThis()
 
     //InteractionHandlers
     require("./core/interactionHandlers/handlers/handlers")()

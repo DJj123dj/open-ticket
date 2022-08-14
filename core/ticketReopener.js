@@ -35,7 +35,7 @@ const reopenTicket = (guild,channel,user) => {
     })
 
     channel.permissionOverwrites.cache.forEach((p) => {
-        if (p.type == "member"){
+        if (p.type == 1){
             permissionsArray.push({
                 id:p.id,
                 type:"member",

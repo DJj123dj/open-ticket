@@ -4,7 +4,7 @@
         "missingArgsDescription":"Er missen parameters",
         "noPermsTitle":"Geen permissies!",
         "noPermsDescription":"Je hebt de `ADMINISTRATOR` permissie nodig of je moet in de lijst van toegestane users staan!",
-        "noPermsDelete":"Alleen admins kunnen een ticket sluiten!",
+        "noPermsDelete":"Alleen admins kunnen een ticket verwijderen!",
         "chooseFromListTitle":"Onjuist ID",
         "chooseFromListDescription":"Kies een van de id's hier onder:",
         "boterror":"Bot Error!",

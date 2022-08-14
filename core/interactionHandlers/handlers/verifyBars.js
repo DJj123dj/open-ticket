@@ -56,7 +56,7 @@ module.exports = () => {
         if (interaction.customId != "OTdeleteTicket1") return
         
         interaction.deferUpdate()
-        interaction.message.edit({components:[bot.buttons.verifybars.deleteVerifyBar]})
+        interaction.message.edit({components:[bot.buttons.verifybars.delete1VerifyBar]})
         
     })
     client.on("interactionCreate",interaction => {
@@ -64,6 +64,6 @@ module.exports = () => {
         if (interaction.customId != "OTdeleteTicketFalse1") return
         
         interaction.deferUpdate()
-        interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+        interaction.message.edit({components:[bot.buttons.close.closeCommandRow]})
     })
 }

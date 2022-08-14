@@ -34,7 +34,9 @@ module.exports = () => {
             if (!permissionChecker.sendUserNoDelete(interaction.user)){
                 permissionChecker.sendChannelNoDelete(interaction.channel)
             }
-            interaction.message.edit({components:firstcomponents})
+            await interaction.message.edit({components:[firstcomponents]})
+            deleteTicketButtonChecker = false
+            return
         }
 
         /**
@@ -51,29 +53,31 @@ module.exports = () => {
 
         interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
         await interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
-        console.log("hi")
         await require("../../../ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
         deleteTicketButtonChecker = false
     })
 
     //DELETE NO TRANSCRIPT
-    var deleteTicketButtonChecker = false
+    var deleteTicketButtonChecker1 = false
     client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicketTrue1") return
         
         interaction.deferUpdate()
 
-        if (deleteTicketButtonChecker == true) return
-        deleteTicketButtonChecker = true
+        if (deleteTicketButtonChecker1 == true) return
+        deleteTicketButtonChecker1 = true
 
-        const firstcomponents = bot.buttons.close.openRowNormal
+        const firstcomponents = bot.buttons.close.closeCommandRow
 
+        console.log("closed with NO TRANSCRIPT")
         if (!permissionChecker.command(interaction.user.id,interaction.guild.id)){
             if (!permissionChecker.sendUserNoDelete(interaction.user)){
                 permissionChecker.sendChannelNoDelete(interaction.channel)
             }
-            interaction.message.edit({components:firstcomponents})
+            await interaction.message.edit({components:[firstcomponents]})
+            deleteTicketButtonChecker1 = false
+            return
         }
 
         /**
@@ -90,6 +94,6 @@ module.exports = () => {
 
         interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
         await require("../../../ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"deletenotranscript",false,true)
-        deleteTicketButtonChecker = false
+        deleteTicketButtonChecker1 = false
     })
 }

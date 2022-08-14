@@ -35,7 +35,9 @@ module.exports = () => {
                 if (!permissionChecker.sendUserNoPerms(interaction.user)){
                     permissionChecker.sendChannelNoPerms(interaction.channel)
                 }
-                interaction.message.edit({components:firstcomponents})
+                interaction.message.edit({components:[firstcomponents]})
+                closeTicketButtonChecker = false
+                return
             }
         }
         

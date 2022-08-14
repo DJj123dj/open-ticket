@@ -38,6 +38,8 @@ module.exports = () => {
             return
         }
 
+        try {
         tsmsg.edit({embeds:[bot.embeds.commands.sendTranscriptEmbed(true,interaction.channel,interaction.user)],files:[fileattachment]})
+        }catch{}
     })
 }

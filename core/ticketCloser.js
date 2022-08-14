@@ -334,10 +334,13 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     }
 
     if (deleteRequired){
-        const timer = () => {return new Promise((resolve,reject) => {
-            setTimeout(() => {resolve(true)},7000)
-        })}
-        await timer()
-        await channel.delete()
+        //const timer = () => {return new Promise((resolve,reject) => {
+        //    setTimeout(() => {resolve(true)},7000)
+        //})}
+        //await timer()
+
+        setTimeout(async () => {
+            await channel.delete()
+        },6000)
     }
 }

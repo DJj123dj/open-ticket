@@ -176,15 +176,16 @@ exports.onTranscriptCreation = (messages,channel,guild,date) => {
  * @param {Date} date 
  */
 exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
+
+    const newguild = guild ? guild : false
     //system
-    bot.errorLog.log("api","someone used a command",[{key:"type",value:type},{key:"hasPerms",value:hasPerms},{key:"userid",value:user},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id}])
+    bot.errorLog.log("api","someone used a command",[{key:"type",value:type},{key:"hasPerms",value:hasPerms},{key:"userid",value:user},{key:"channelid",value:channel.id},{key:"guildid",value:newguild.id}])
 
     commandListeners.forEach((func) => {
         try {
-            func(type,hasPerms,user,channel,guild,date)
+            func(type,hasPerms,user,channel,newguild,date)
         }catch{}
     })
-
 }
 
 /**@typedef {"add"|"remove"|"add&remove"} OTReactionRoleType */
@@ -273,7 +274,7 @@ exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
  * @param {Boolean} hasPerms 
  * @param {discord.User} user 
  * @param {discord.TextChannel} channel 
- * @param {discord.Guild} guild 
+ * @param {discord.Guild|false} guild 
  * @param {Date} date 
  */
 

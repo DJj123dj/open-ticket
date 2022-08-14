@@ -53,7 +53,7 @@ module.exports = () => {
         if (!interaction.guild) return
         if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
             permsChecker.sendUserNoPerms(interaction.user)
-            return
+            return interaction.reply({embeds:[bot.errorLog.noPermsDelete]})
         }
 
         interaction.channel.messages.fetchPinned().then(msglist => {
