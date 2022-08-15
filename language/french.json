@@ -1,69 +1,75 @@
 {
     "errors":{
-        "missingArgsTitle":"Arguments invalides !",
+        "missingArgsTitle":"Arguments invalides!",
         "missingArgsDescription":"Argument manquant",
         "noPermsTitle":"Pas de permissions!",
-        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
-        "noPermsDelete":"Only admins can delete a ticket!",
+        "noPermsDescription":"Vous avez besoin de la permission `ADMINISTRATOR` ou être dans la liste des rôles autorisés!",
+        "noPermsDelete":"Seuls les administrateurs peuvent supprimer un ticket!",
         "chooseFromListTitle":"Invalid ID",
         "chooseFromListDescription":"Choisissez l'un des identifiants ci-dessous:",
         "boterror":"Bot Error!",
-        "notInTicketTitle":"Vous n'êtes pas dans un ticket !",
-        "notInTicketDescription":"Cette commande ne fonctionne pas en dehors des tickets !",
-        "ticketDoesntExist":"Ce billet n'existe plus !",
-        "roleDoesntExist":"Ce rôle n'existe plus !",
-        "anotherOption":"Cette option n'est pas un ticket mais un autre type !",
-        "maxAmountTitle":"Montant max atteint !",
-        "maxAmountDescription":"Vous avez atteint le nombre maximum de tickets autorisés !\nVous ne pouvez donc pas en créer un nouveau !",
-        "somethingWentWrong":"**Une erreur s'est produite !**\nVeuillez réessayer une autre fois !",
-        "somethingWentWrongTranscript":"Une erreur s'est produite lors de la création de la transcription !**\nVeuillez réessayer une autre fois !"
+        "notInTicketTitle":"Vous n'êtes pas dans un ticket!",
+        "notInTicketDescription":"Cette commande ne fonctionne pas en dehors des tickets!",
+        "ticketDoesntExist":"Ce ticket n'existe plus!",
+        "roleDoesntExist":"Ce rôle n'existe plus!",
+        "anotherOption":"Cette option n'est pas un ticket mais un autre type!",
+        "maxAmountTitle":"Montant maximum atteint!",
+        "maxAmountDescription":"Vous avez atteint le nombre maximum de tickets autorisés!\nVous ne pouvez donc pas en créer un nouveau!",
+        "somethingWentWrong":"**Quelque chose s'est mal passé!**\nVeuillez réessayer une autre fois!",
+        "somethingWentWrongTranscript":"Une erreur s'est produite lors de la création de la transcription!**\nVeuillez réessayer une autre fois!"
     },
     "commands":{
-        "userAddedTitle":"Added {0} to this ticket!",
-        "userRemovedTitle":"Removed {0} from this ticket!",
-        "renameTitle":"Changed the name to {0}!",
-        "closeTitle":"Closed this ticket!",
-        "deleteTitle":"Deleting this ticket...",
-        "reopenTitle":"Re-Opened this ticket!",
+        "userAddedTitle":"{0} a été ajouté à ce ticket!",
+        "userRemovedTitle":"Supprimé {0} de ce ticket!",
+        "renameTitle":"Changement du nom en {0}!",
+        "closeTitle":"Fermé ce ticket!",
+        "deleteTitle":"Suppression de ce ticket...",
+        "reopenTitle":"A rouvert ce ticket!",
 
-        "ticketWarning":"The embed is in the message below!",
-        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
+        "ticketWarning":"L'intégration est dans le message ci-dessous!",
+        "maxTicketWarning":"**Attention :** _Vous ne pouvez créer que {0} ticket(s) à la fois !_"
     },
     "helpMenu":{
-        "title":"Available Commands:",
+        "title":"Commandes disponibles :",
         "header1":"**Allez à {0} pour créer un ticket !**\n\n",
-        "header2":"**Exécutez la commande `/new` ou `/ticket` pour créer un ticket!**\n\n",
+        "header2":"**Exécutez la commande `/new` ou `/ticket` pour créer un ticket !**\n\n",
 
-        "msgCmd":"Créez une intégration avec des boutons. (administrateurs uniquement)",
+        "msgCmd":"Faire apparaître une intégration avec des boutons. (administrateurs uniquement)",
         "renameCmd":"Renommer un ticket. (sans espaces)",
         "closeCmd":"Fermer un ticket.",
         "deleteCmd":"Supprimer un billet.",
         "addCmd":"Ajouter un utilisateur au ticket.",
         "removeCmd":"Supprimer un utilisateur du ticket.",
-        "reopenCmd":"Re-Open a ticket after it was closed."
+        "reopenCmd":"Rouvrir un ticket après sa clôture."
     },
     "buttons":{
         "close":"Fermer le ticket",
         "delete":"Supprimer le billet",
         "reopen":"Billet de réouverture",
-        "sendTranscript":"Envoyer le fichier de transcription"
+        "sendTranscript":"Transcript"
     },
     "messages":{
         "reopenTitle":"A rouvert ce ticket!",
         "reopenDescription":"N'hésitez pas à reparler!",
-        "closedTitle":"Fermé ce ticket",
+        "closedTitle":"Fermé ce ticket!",
         "closedDescription":"Seuls les administrateurs peuvent parler dans ce ticket maintenant !\n\n*Cliquez sur le bouton ci-dessous pour supprimer ou rouvrir ce ticket !*",
         "createdTitle":"Ticket créé !",
         "createdDescription":"Votre ticket est créé, vous pouvez le détecter par un ping !",
 
-        "newTicketDmTitle":"Nouveau ticket!",
+        "newTicketDmTitle":"Nouveau billet!",
+        "closedTicketDmTitle":"Billet fermé!",
+        "deletedTicketDmTitle":"Billet supprimé !",
+        "closedTicketDmDescription":"Votre billet est fermé !",
+        "deletedTicketDmDescription":"Votre billet est supprimé !",
+        "reopenTicketDmTitle":"Billet rouvert!",
+        "reopenTicketDmDescription":"Votre billet est rouvert !",
         "newTranscriptTitle":"Une nouvelle transcription est ici!",
-        "hereIsTheTranscript":"Voici la transcription :",
+        "hereIsTheTranscript":"Voici la transcription :",
 
         "chooseCategory":"choisissez une catégorie:",
         "gettingdeleted":"Le ticket est en cours de suppression...",
 
-        "none":"none",
-        "reason":"reason"
+        "none":"rien",
+        "reason":"raison"
     }
 }
