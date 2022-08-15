@@ -15,19 +15,22 @@ module.exports = () => {
 
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-            
-            const closebutton = new discord.ActionRowBuilder()
-            .addComponents([
-                new discord.ButtonBuilder()
-                    .setCustomId("closeTicketTrue1")
-                    .setDisabled(false)
-                    .setStyle(discord.ButtonStyle.Secondary)
-                    .setEmoji("🔒")
-            ])
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            msg.channel.send({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
+            msg.channel.send({embeds:[bot.embeds.commands.closeEmbed(msg.author)],components:[bot.buttons.close.closeCommandRow]})
+
+            var name = msg.channel.name
+            var prefix = ""
+            const tickets = config.options
+            tickets.forEach((ticket) => {
+                if (name.startsWith(ticket.channelprefix)){
+                    prefix = ticket.channelprefix
+                }
+            })
+
+            require("../core/ticketCloser").NEWcloseTicket(msg.member,msg.channel,prefix,"close",false,true)
 
             log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
             APIEvents.onCommand("close",true,msg.author,msg.channel,msg.guild,new Date())
@@ -41,23 +44,26 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "close") return
 
-        interaction.deferReply()
+        //interaction.deferReply()
 
        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
-            
-            const closebutton = new discord.ActionRowBuilder()
-            .addComponents([
-                new discord.ButtonBuilder()
-                    .setCustomId("closeTicketTrue1")
-                    .setDisabled(false)
-                    .setStyle(discord.ButtonStyle.Secondary)
-                    .setEmoji("🔒")
-            ])
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            interaction.reply({embeds:[bot.errorLog.success(l.commands.closeTitle,l.commands.closeDescription)],components:[closebutton]})
+            interaction.reply({embeds:[bot.embeds.commands.closeEmbed(interaction.user)],components:[bot.buttons.close.closeCommandRow]})
+
+            var name = interaction.channel.name
+            var prefix = ""
+            const tickets = config.options
+            tickets.forEach((ticket) => {
+                if (name.startsWith(ticket.channelprefix)){
+                    prefix = ticket.channelprefix
+                }
+            })
+
+            require("../core/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close",false,true)
 
             log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
             APIEvents.onCommand("close",true,interaction.user,interaction.channel,interaction.guild,new Date())

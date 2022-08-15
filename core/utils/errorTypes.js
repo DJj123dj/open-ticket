@@ -1,3 +1,0 @@
-/**
- * @typedef {String|Boolean} OTErrorType
- */

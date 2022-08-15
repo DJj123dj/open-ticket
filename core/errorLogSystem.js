@@ -12,14 +12,19 @@ const c = discord.Colors
 
 exports.noPermsMessage = new embed()
     .setColor(c.Red)
-    .setTitle(":x: "+l.errors.noPermsTitle+" :x:")
+    .setTitle(":x: "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDescription)
+
+exports.noPermsDelete = new embed()
+    .setColor(c.Red)
+    .setTitle(":x: "+l.errors.noPermsTitle)
+    .setDescription(l.errors.noPermsDelete)
 
 /**@param {String} message */
 exports.invalidArgsMessage = (message) => {
     var x =  new embed()
         .setColor(c.Red)
-        .setTitle(":x: "+l.errors.missingArgsTitle+" :x:")
+        .setTitle(":x: "+l.errors.missingArgsTitle)
         .setDescription(message)
 
     return x
@@ -29,7 +34,7 @@ exports.invalidArgsMessage = (message) => {
 exports.serverError = (message) => {
     var x = new embed()
         .setColor(c.Orange)
-        .setTitle(":warning: "+l.errors.boterror+" :warning:")
+        .setTitle(":warning: "+l.errors.boterror)
         .setDescription(message)
 
     return x
@@ -39,14 +44,14 @@ exports.serverError = (message) => {
 exports.invalidIdChooseFromList = (list) => {
     var x = new embed()
         .setColor(c.Red)
-        .setTitle(":x: "+l.errors.chooseFromListTitle+" :x:")
+        .setTitle(":x: "+l.errors.chooseFromListTitle)
         .setDescription(l.errors.chooseFromListDescription+"\n`"+list.join("`\n`")+"`")
     return x
 }
 
 exports.notInATicket = new embed()
     .setColor(c.Red)
-    .setTitle(":x: "+l.errors.notInTicketTitle+" :x:")
+    .setTitle(":x: "+l.errors.notInTicketTitle)
     .setDescription(l.errors.notInTicketDescription)
 
 
@@ -54,7 +59,7 @@ exports.notInATicket = new embed()
 exports.success = (title,message) => {
     var x = new embed()
         .setColor(config.main_color)
-        .setTitle(":white_check_mark: "+title+" :white_check_mark:")
+        .setTitle(":white_check_mark: "+title)
         .setDescription(message)
 
     return x
@@ -64,7 +69,7 @@ exports.success = (title,message) => {
 exports.warning = (title,message) => {
     var x = new embed()
         .setColor(c.Orange)
-        .setTitle(":warning: "+title+" :warning:")
+        .setTitle(":warning: "+title)
         .setDescription(message)
 
     return x
@@ -74,7 +79,7 @@ exports.warning = (title,message) => {
 exports.custom = (title,message,emoji,color) => {
     var x = new embed()
         .setColor(color)
-        .setTitle(emoji+" "+title+" "+emoji)
+        .setTitle(emoji+" "+title)
         .setDescription(message)
 
     return x

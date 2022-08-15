@@ -11,3 +11,4 @@ openticketdebug.txt
 developerChangelog.md
 storage/dynamicDB/
 storage/.DS_Store
+.vscode/

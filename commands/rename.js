@@ -12,16 +12,17 @@ module.exports = () => {
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"rename")) return
 
+        if (!msg.guild) return
+        if (!permsChecker.command(msg.author.id,msg.guild.id)){
+            permsChecker.sendUserNoPerms(msg.author)
+            return
+        }
+
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-
-            if (!msg.guild) return
-            if (!permsChecker.command(msg.author.id,msg.guild.id)){
-                permsChecker.sendUserNoPerms(msg.author)
-                return
-            }
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
             
             var newname = msg.content.split(config.prefix+"rename")[1].substring(1)
 
@@ -39,7 +40,7 @@ module.exports = () => {
             if (!prefix) prefix = "noprefix-"
 
             msg.channel.setName(prefix+newname)
-            msg.channel.send({embeds:[bot.errorLog.success(l.commands.renameTitle,l.commands.renameWarning)]})
+            msg.channel.send({embeds:[bot.embeds.commands.renameEmbed(msg.author,prefix+newname)]})
 
             log("command","someone used the 'rename' command",[{key:"user",value:msg.author.tag}])
             log("system","ticket renamed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
@@ -53,18 +54,19 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "rename") return
 
-        interaction.deferReply()
+        if (!interaction.guild) return
+        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+            permsChecker.sendUserNoPerms(interaction.user)
+            return
+        }
+
+        //interaction.deferReply()
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id)return interaction.reply({embeds:[bot.errorLog.notInATicket]})
-            
-            if (!interaction.guild) return
-            if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
-                permsChecker.sendUserNoPerms(interaction.user)
-                return
-            }
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
             
             var newname = interaction.options.getString("name")
             var name = interaction.channel.name
@@ -79,7 +81,7 @@ module.exports = () => {
             if (!prefix) prefix = "noprefix-"
 
             interaction.channel.setName(prefix+newname)
-            interaction.reply({embeds:[bot.errorLog.success(l.commands.renameTitle,l.commands.renameWarning)]})
+            interaction.reply({embeds:[bot.embeds.commands.renameEmbed(interaction.user,prefix+newname)]})
 
             log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
             log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])

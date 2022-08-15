@@ -4,6 +4,7 @@
         "missingArgsDescription":"Chybí argumenty",
         "noPermsTitle":"Nemáš práva!",
         "noPermsDescription":"Nemáš dostatečné práva na tento příkaz!\n Potřebuješ ADMINISTRATOR aby jsi mohl provést příkaz!",
+        "noPermsDelete":"Pouze admin může smazat ticket!",
         "chooseFromListTitle":"Neplatné ID",
         "chooseFromListDescription":"Vyber si z těchto ID:",
         "boterror":"Error!",
@@ -18,20 +19,12 @@
         "somethingWentWrongTranscript":"Něco je špatně s transcriptem!**\nProsím zkus to příště znovu!"
     },
     "commands":{
-        "userAddedTitle":"Uživatel přidán!",
-        "userAddedDescription":"{0} je přidán do ticketu!",
-        "userRemovedTitle":"Uživatel odebrán!",
-        "userRemovedDescription":"{0} je odstraněn z ticketu!",
-
+        "userAddedTitle":"{0} byl přidán do ticketu!",
+        "userRemovedTitle":"{0} byl odebrám z ticketu!",
         "renameTitle":"Jméno bylo změněno!",
-        "renameWarning":"Varování: jméno kanálu můžeš změnit pouze 2x za minutu!",
-
         "closeTitle":"Zavři tento ticket!",
-        "closeDescription":"Můžeš zavřít ticket kliknutím na tlačítko níže!",
         "deleteTitle":"Smaž tento ticket!",
-        "deleteDescription":"Můžeš smazat ticket kliknutím na tlačítko níže!",
         "reopenTitle":"Znovu otevři ticket!",
-        "reopenDescription":"Můžeš znovu otevřít tento ticket kliknutínm na tlačítko níže!",
 
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Varovaní:** _Můžeš si vytvořit použe {0} ticket(s) v jednu chvíli!_"
@@ -71,9 +64,12 @@
         "reopenTicketDmTitle":"Ticket znovu otevřen!",
         "reopenTicketDmDescription":"Tvůj ticket byl znovu otevřen!",
         "newTranscriptTitle":"Nový log ticketu je zde!",
-        "newTranscriptDescription":"Zde najdeš log svého ticketu!",
         "hereIsTheTranscript":"Zde je log:",
 
-        "chooseCategory":"Vyber kategorii:"
+        "chooseCategory":"Vyber kategorii:",
+        "gettingdeleted":"Ticket bude smazán",
+
+        "none":"nic",
+        "reason":"důvod"
     }
 }

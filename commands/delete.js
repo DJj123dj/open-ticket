@@ -20,19 +20,22 @@ module.exports = () => {
 
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-            
-            const closebutton = new discord.ActionRowBuilder()
-            .addComponents([
-                new discord.ButtonBuilder()
-                    .setCustomId("deleteTicketTrue")
-                    .setDisabled(false)
-                    .setStyle(discord.ButtonStyle.Secondary)
-                    .setEmoji("❌")
-            ])
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            msg.channel.send({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
+            msg.channel.send({embeds:[bot.embeds.commands.deleteEmbed(msg.author)]})
+
+            var name = msg.channel.name
+            var prefix = ""
+            const tickets = config.options
+            tickets.forEach((ticket) => {
+                if (name.startsWith(ticket.channelprefix)){
+                    prefix = ticket.channelprefix
+                }
+            })
+
+            require("../core/ticketCloser").NEWcloseTicket(msg.member,msg.channel,prefix,"delete",false,true)
 
             log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
             APIEvents.onCommand("delete",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
@@ -45,31 +48,34 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "delete") return
 
-        interaction.deferReply()
+        //interaction.deferReply()
 
         if (!interaction.guild) return
         if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
             permsChecker.sendUserNoPerms(interaction.user)
-            return
+            return interaction.reply({embeds:[bot.errorLog.noPermsDelete]})
         }
 
-       interaction.channel.messages.fetchPinned().then(msglist => {
+        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
-            
-            const closebutton = new discord.ActionRowBuilder()
-            .addComponents([
-                new discord.ButtonBuilder()
-                    .setCustomId("deleteTicketTrue")
-                    .setDisabled(false)
-                    .setStyle(discord.ButtonStyle.Secondary)
-                    .setEmoji("❌")
-            ])
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            interaction.reply({embeds:[bot.errorLog.success(l.commands.deleteTitle,l.commands.deleteDescription)],components:[closebutton]})
+            interaction.reply({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
 
-            log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
+            var name = interaction.channel.name
+            var prefix = ""
+            const tickets = config.options
+            tickets.forEach((ticket) => {
+                if (name.startsWith(ticket.channelprefix)){
+                    prefix = ticket.channelprefix
+                }
+            })
+
+            require("../core/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
+
+            log("command","someone used the 'delete' command",[{key:"user",value:interaction.user.tag}])
             APIEvents.onCommand("delete",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
             
         })

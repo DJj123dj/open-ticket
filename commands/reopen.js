@@ -9,25 +9,18 @@ const permsChecker = require("../core/utils/permisssionChecker")
 const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
-    var reopenCommandBar = new discord.ActionRowBuilder()
-        .addComponents(
-            new discord.ButtonBuilder()
-                .setCustomId("reopenTicket1")
-                .setDisabled(false)
-                .setStyle(discord.ButtonStyle.Secondary)
-                .setEmoji("🔓")
-        )
-    
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"reopen")) return
 
         msg.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            msg.channel.send({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
+            msg.channel.send({embeds:[bot.embeds.commands.reopenEmbed(msg.author)],components:[bot.buttons.close.openRowNormal]})
 
+            require("../core/ticketReopener").reopenTicket(msg.guild,msg.channel,msg.author)
             
             log("command","someone used the 'reopen' command",[{key:"user",value:msg.author.tag}])
             APIEvents.onCommand("reopen",true,msg.author,msg.channel,msg.guild,new Date())
@@ -39,19 +32,17 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "reopen") return
 
-        await interaction.deferReply()
+        //interaction.deferReply()
 
         interaction.channel.messages.fetchPinned().then(async msglist => {
             var firstmsg = msglist.last()
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
+            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+            await interaction.reply({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
 
-            try {
-                await interaction.reply({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
-            }catch{
-                await interaction.editReply({embeds:[bot.errorLog.success(l.commands.reopenTitle,l.commands.reopenDescription)],components:[reopenCommandBar]})
-            }
-
+            require("../core/ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
             
             log("command","someone used the 'reopen' command",[{key:"user",value:interaction.user.tag}])
             APIEvents.onCommand("reopen",true,interaction.user,interaction.channel,interaction.guild,new Date())

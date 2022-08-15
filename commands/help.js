@@ -10,7 +10,7 @@ const APIEvents = require("../core/api/modules/events")
 module.exports = () => {
     const helpEmbed = new discord.EmbedBuilder()
         .setColor(config.main_color)
-        .setTitle(l.helpMenu.title)
+        .setTitle("❔ "+l.helpMenu.title)
 
     const prefix = config.prefix
     const header = config.system.ticket_channel ? l.helpMenu.header1.replace("{0}","<#"+config.system.ticket_channel+">") : l.helpMenu.header2
@@ -18,23 +18,25 @@ module.exports = () => {
 
     if (config.credits) helpEmbed.setFooter({text:"Open-Ticket by DJdj Development | view on github for source code",iconURL:"https://raw.githubusercontent.com/DJj123dj/open-ticket/main/logo.png"})
 
+    var otherprefix = prefix.endsWith(" ") ? prefix.substring(0,prefix.length-1) : prefix
 
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix)) return
         var args = msg.content.split(config.prefix)
         
-        if (!args[1]){
+        if (msg.content == config.prefix || msg.content == config.prefix+" " || msg.content == otherprefix){
             msg.channel.send({embeds:[helpEmbed]})
             log("command","someone used the 'help' command",[{key:"user",value:msg.author.tag}])
             APIEvents.onCommand("help",true,msg.author,msg.channel,msg.guild,new Date())
             return
         }
 
-        if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove") && !args[1].startsWith("rename") && !args[1].startsWith("reopen")){
-
-            msg.channel.send({embeds:[helpEmbed]})
-            log("command","someone used the 'help' command",[{key:"user",value:msg.author.tag}])
-            APIEvents.onCommand("help",true,msg.author,msg.channel,msg.guild,new Date())
+        if (args[1]){
+            if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove") && !args[1].startsWith("rename") && !args[1].startsWith("reopen")){
+                msg.channel.send({embeds:[helpEmbed]})
+                log("command","someone used the 'help' command",[{key:"user",value:msg.author.tag}])
+                APIEvents.onCommand("help",true,msg.author,msg.channel,msg.guild,new Date())
+            }
         }
     })
 

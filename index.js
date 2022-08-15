@@ -26,7 +26,7 @@ const client = new discord.Client({
 })
 exports.client = client
 
-client.setMaxListeners(30)
+client.setMaxListeners(50)
 
 if (process.argv[2]){
     if (process.argv[2].endsWith("d")){
@@ -48,8 +48,21 @@ if (isDev){
     }
 }else{var config = require('./config.json')}
 exports.config = config
+exports.storage = require('./core/dynamicdatabase/storage')
+
 exports.errorLog = require("./core/errorLogSystem")
 const log = this.errorLog.log
+
+exports.hiddenData = require("./core/utils/hiddendata")
+
+exports.embeds = {
+    commands:require("./core/interactionHandlers/embeds/commands")
+}
+exports.buttons = {
+    close:require("./core/interactionHandlers/buttons/close"),
+    firstmsg:require("./core/interactionHandlers/buttons/firstmsg"),
+    verifybars:require("./core/interactionHandlers/buttons/verifyBars")
+}
 
 client.on('ready',async () => {
     var statusSet = false
@@ -71,6 +84,7 @@ client.on('ready',async () => {
     if (!process.argv[2]){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
         log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
+        require("./core/utils/warningManager")()
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
@@ -92,6 +106,7 @@ client.on('ready',async () => {
     if (!process.argv[2].startsWith("slash")){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
         log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
+        require("./core/utils/warningManager")()
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
@@ -129,8 +144,6 @@ if (!isDev){
 if (process.argv[2] && process.argv[2].startsWith("slash")){
     //do nothing
 }else{
-    var storage = require('./core/dynamicdatabase/storage')
-    exports.storage = storage
 
     //commands
     require('./commands/ticket')()
@@ -145,9 +158,12 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
     //core
     require('./core/ticketOpener')()
     require("./core/ticketCloser").runThis()
-    require("./core/closebuttons")()
+    //require("./core/closebuttons")() // => everything is now in ./core/interactionHandlers/
     require("./core/reactionRoles")()
-    require("./core/ticketReopener")()
+    require("./core/ticketReopener").runThis()
+
+    //InteractionHandlers
+    require("./core/interactionHandlers/handlers/handlers")()
 
 }
 

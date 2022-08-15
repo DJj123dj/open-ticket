@@ -49,6 +49,20 @@ exports.sendUserNoPerms = (user) => {
 
 /**
  * 
+ * @param {discord.User} user 
+ * @returns {Boolean}
+ */
+ exports.sendUserNoDelete = (user) => {
+    try {
+        user.send({embeds:[bot.errorLog.noPermsDelete]})
+        return true
+    }catch{
+        return false
+    }
+}
+
+/**
+ * 
  * @param {discord.TextChannel} channel 
  * @returns {Boolean}
  */
@@ -69,6 +83,20 @@ exports.sendUserNoPerms = (user) => {
  exports.sendChannelNoTicket = (channel) => {
     try {
         channel.send({embeds:[bot.errorLog.notInATicket]})
+        return true
+    }catch{
+        return false
+    }
+}
+
+/**
+ * 
+ * @param {discord.TextChannel} channel 
+ * @returns {Boolean}
+ */
+ exports.sendChannelNoDelete = (channel) => {
+    try {
+        channel.send({embeds:[bot.errorLog.noPermsDelete]})
         return true
     }catch{
         return false

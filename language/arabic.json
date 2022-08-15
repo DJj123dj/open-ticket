@@ -3,7 +3,8 @@
         "missingArgsTitle":"حجج باطلة",
         "missingArgsDescription":"حجة مفقودة",
         "noPermsTitle":"ليس لديك إذن",
-        "noPermsDescription":"ليس لديك إذن لاستخدام هذا\nأنت بحاجة إلى إذن 'ADMINISTRATOR' أو أن تكون في قائمة الأدوار المسموح بها!",
+        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
+        "noPermsDelete":"Only admins can delete a ticket!",
         "chooseFromListTitle":"بطاقة التعريف غير صالحة",
         "chooseFromListDescription":"اختر أحد المعرفات أدناه:",
         "boterror":"مشكلة في الروبوت",
@@ -18,26 +19,18 @@
         "somethingWentWrongTranscript":"**حدث خطأ ما أثناء كتابة النص!**\nالرجاء المحاولة مرة أخرى!"
     },
     "commands":{
-        "userAddedTitle":"تمت إضافة المستخدم!",
-        "userAddedDescription":"{0} يضاف إلى هذه التذكرة!",
-        "userRemovedTitle":"تمت إزالة المستخدم!",
-        "userRemovedDescription":"{0} تمت إزالته من هذه التذكرة!",
+        "userAddedTitle":"Added {0} to this ticket!",
+        "userRemovedTitle":"Removed {0} from this ticket!",
+        "renameTitle":"Changed the name to {0}!",
+        "closeTitle":"Closed this ticket!",
+        "deleteTitle":"Deleting this ticket...",
+        "reopenTitle":"Re-Opened this ticket!",
 
-        "renameTitle":"تم تغيير الاسم!",
-        "renameWarning":"تحذير: يمكنك فقط تغيير اسم القناة مرتين في الدقيقة!\n(هذا يرجع إلى حدود معدل الخلاف)",
-
-        "closeTitle":"أغلق هذه التذكرة!",
-        "closeDescription":"يمكنك إغلاق هذه التذكرة بالضغط على الزر أدناه!",
-        "deleteTitle":"احذف هذه التذكرة!",
-        "deleteDescription":"يمكنك حذف هذه التذكرة بالضغط على الزر أدناه!",
-        "reopenTitle":"أعد فتح هذه التذكرة!",
-        "reopenDescription":"يمكنك إعادة فتح هذه التذكرة بالضغط على الزر أدناه!",
-
-        "ticketWarning":"التضمين في الرسالة أدناه!",
-        "maxTicketWarning":"**تحذير:** _يمكنك فقط إنشاء ملفات {0} تذكرة في كل مرة!_"
+        "ticketWarning":"The embed is in the message below!",
+        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
     },
     "helpMenu":{
-        "title":"قائمة التعليمات:",
+        "title":"Available Commands:",
         "header1":"**اذهب إلى {0} لإنشاء تذكرة!**\n\n",
         "header2":"**قم بتشغيل الأمر `/new` أو `/ticket` لإنشاء تذكرة!**\n\n",
 
@@ -71,10 +64,12 @@
         "reopenTicketDmTitle":"أعيد فتح التذكرة!",
         "reopenTicketDmDescription":"تم إعادة فتح تذكرتك!",
         "newTranscriptTitle":"نسخة جديدة هنا!",
-        "newTranscriptDescription":"يمكنك العثور على النص في الملف النصي أعلاه!",
         "hereIsTheTranscript":"هذا هو النص:",
 
         "chooseCategory":"اختر فئة:",
-        "gettingdeleted":"...يتم حذف التذكرة"
+        "gettingdeleted":"...يتم حذف التذكرة",
+
+        "none":"none",
+        "reason":"reason"
     }
 }

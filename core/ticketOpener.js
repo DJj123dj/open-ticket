@@ -9,35 +9,19 @@ const getconfigoptions = require("./getoptions")
 const storage = bot.storage
 
 module.exports = () => {
-    var closeButton = new discord.ActionRowBuilder()
-        .addComponents(
-            new discord.ButtonBuilder()
-            .setCustomId("closeTicket")
-            .setDisabled(false)
-            .setStyle(discord.ButtonStyle.Secondary)
-            .setLabel(l.buttons.close)
-            .setEmoji("🔒")
-        )
-        .addComponents(
-            new discord.ButtonBuilder()
-            .setCustomId("deleteTicket")
-            .setDisabled(false)
-            .setStyle(discord.ButtonStyle.Danger)
-            .setLabel(l.buttons.delete)
-            .setEmoji("✖️")
-        )
+    var closeButton = bot.buttons.firstmsg.firstmsgRowNormal
     
     //ticket button click / create ticket
     client.on("interactionCreate",(interaction) => {
         if (interaction.isChatInputCommand() && (interaction.commandName == "new" || interaction.commandName == "ticket")){
-            var customId = "newT"+interaction.options.getString("type")
+            var customId = "OTnewT"+interaction.options.getString("type")
         }else if (interaction.isButton()){
             var customId = interaction.customId
         }else return
 
         if (interaction.isButton()){
-            if (interaction.customId.startsWith("newT")){
-                const optionid = interaction.customId.split("newT")[1]
+            if (interaction.customId.startsWith("OTnewT")){
+                const optionid = interaction.customId.split("OTnewT")[1]
                 if (!optionid){
                     interaction.reply({embeds:[bot.errorLog.serverError(l.errors.ticketDoesntExist)]})
                     return
@@ -173,13 +157,19 @@ module.exports = () => {
                     
                 }).then((ticketChannel) => {
                     storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
+
+                    const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
                     
                     var ticketEmbed = new discord.EmbedBuilder()
-                        .setAuthor({name:interaction.user.id})
+                        //.setAuthor({name:interaction.user.id})
                         .setColor(config.main_color)
                         .setTitle(currentTicketOptions.name)
-                        .setFooter({text:"Ticket Type: "+currentTicketOptions.id})
-                    if (currentTicketOptions.ticketmessage.length > 0) ticketEmbed.setDescription(currentTicketOptions.ticketmessage)
+                        //.setFooter({text:"Ticket Type: "+currentTicketOptions.id})
+                    if (currentTicketOptions.ticketmessage.length > 0){
+                        ticketEmbed.setDescription(currentTicketOptions.ticketmessage+hiddendata)
+                    }else{
+                        ticketEmbed.setDescription(hiddendata)
+                    }
                 
                     ticketChannel.send({
                         content:"<@"+interaction.member.id+"> @here",
