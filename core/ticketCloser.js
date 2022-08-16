@@ -47,7 +47,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     const chalk = await (await import("chalk")).default
     const channelmessages = await channel.messages.fetch()
 
-    const newReason = reason ? reason : "none"
+    const newReason = reason ? reason : l.messages.none
 
     //start code
 
@@ -298,7 +298,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
 
     if (enableTranscript == true && mode != "deletenotranscript"){
 
-        const transcriptReason = (mode == "close") ? "**reason:** "+newReason : "**reason:** none"
+        const transcriptReason = (mode == "close") ? "**"+l.messages.reason+":** "+newReason : "**"+l.messages.reason+":** none"
 
         if (config.system.enable_transcript || config.system.enable_DM_transcript){
             var fileattachment = await require("./transcript").createTranscript(channelmessages,channel)

@@ -26,7 +26,7 @@ exports.command = (memberid,guildid) => {
  */
 exports.sendUserNoPerms = (user) => {
     try {
-        user.send({embeds:[bot.errorLog.noPermsMessage]})
+        user.send({embeds:[bot.errorLog.noPermsMessage(user)]})
         return true
     }catch{
         return false
@@ -54,7 +54,7 @@ exports.sendUserNoPerms = (user) => {
  */
  exports.sendUserNoDelete = (user) => {
     try {
-        user.send({embeds:[bot.errorLog.noPermsDelete]})
+        user.send({embeds:[bot.errorLog.noPermsDelete(user)]})
         return true
     }catch{
         return false
@@ -64,11 +64,12 @@ exports.sendUserNoPerms = (user) => {
 /**
  * 
  * @param {discord.TextChannel} channel 
+ * @param {discord.User} user
  * @returns {Boolean}
  */
- exports.sendChannelNoPerms = (channel) => {
+ exports.sendChannelNoPerms = (channel,user) => {
     try {
-        channel.send({embeds:[bot.errorLog.noPermsMessage]})
+        channel.send({embeds:[bot.errorLog.noPermsMessage(user)]})
         return true
     }catch{
         return false
@@ -78,9 +79,10 @@ exports.sendUserNoPerms = (user) => {
 /**
  * 
  * @param {discord.TextChannel} channel 
+ * @param {discord.User} user
  * @returns {Boolean}
  */
- exports.sendChannelNoTicket = (channel) => {
+ exports.sendChannelNoTicket = (channel,user) => {
     try {
         channel.send({embeds:[bot.errorLog.notInATicket]})
         return true
@@ -92,11 +94,12 @@ exports.sendUserNoPerms = (user) => {
 /**
  * 
  * @param {discord.TextChannel} channel 
+ * @param {discord.User} user
  * @returns {Boolean}
  */
- exports.sendChannelNoDelete = (channel) => {
+ exports.sendChannelNoDelete = (channel,user) => {
     try {
-        channel.send({embeds:[bot.errorLog.noPermsDelete]})
+        channel.send({embeds:[bot.errorLog.noPermsDelete(user)]})
         return true
     }catch{
         return false

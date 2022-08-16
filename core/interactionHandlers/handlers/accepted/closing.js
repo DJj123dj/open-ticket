@@ -33,7 +33,7 @@ module.exports = () => {
         if (config.system.closeMode == "adminonly"){
             if (!permissionChecker.command(interaction.user.id,interaction.guild.id)){
                 if (!permissionChecker.sendUserNoPerms(interaction.user)){
-                    permissionChecker.sendChannelNoPerms(interaction.channel)
+                    permissionChecker.sendChannelNoPerms(interaction.channel,interaction.user)
                 }
                 interaction.message.edit({components:[firstcomponents]})
                 closeTicketButtonChecker = false

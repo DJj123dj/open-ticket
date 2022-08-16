@@ -32,7 +32,7 @@ module.exports = () => {
 
         if (!permissionChecker.command(interaction.user.id,interaction.guild.id)){
             if (!permissionChecker.sendUserNoDelete(interaction.user)){
-                permissionChecker.sendChannelNoDelete(interaction.channel)
+                permissionChecker.sendChannelNoDelete(interaction.channel,interaction.user)
             }
             await interaction.message.edit({components:[firstcomponents]})
             deleteTicketButtonChecker = false
@@ -70,10 +70,9 @@ module.exports = () => {
 
         const firstcomponents = bot.buttons.close.closeCommandRow
 
-        console.log("closed with NO TRANSCRIPT")
         if (!permissionChecker.command(interaction.user.id,interaction.guild.id)){
             if (!permissionChecker.sendUserNoDelete(interaction.user)){
-                permissionChecker.sendChannelNoDelete(interaction.channel)
+                permissionChecker.sendChannelNoDelete(interaction.channel,interaction.user)
             }
             await interaction.message.edit({components:[firstcomponents]})
             deleteTicketButtonChecker1 = false

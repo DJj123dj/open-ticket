@@ -10,15 +10,23 @@ const loadChalk = async () => {
 const embed = discord.EmbedBuilder
 const c = discord.Colors
 
-exports.noPermsMessage = new embed()
+/**@param {discord.User} user*/
+exports.noPermsMessage = (user) => {
+    return new embed()
     .setColor(c.Red)
     .setTitle(":x: "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDescription)
+    .setFooter({iconURL:user.displayAvatarURL(),text:user.tag})
+}
 
-exports.noPermsDelete = new embed()
+/**@param {discord.User} user*/
+exports.noPermsDelete = (user) => {
+    return new embed()
     .setColor(c.Red)
     .setTitle(":x: "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDelete)
+    .setFooter({iconURL:user.displayAvatarURL(),text:user.tag})
+}
 
 /**@param {String} message */
 exports.invalidArgsMessage = (message) => {

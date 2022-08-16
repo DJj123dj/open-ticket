@@ -3,8 +3,8 @@
         "missingArgsTitle":"¡Argumentos inválidos!",
         "missingArgsDescription":"Argumento faltante.",
         "noPermsTitle":"¡Sin permisos!",
-        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
-        "noPermsDelete":"Only admins can delete a ticket!",
+        "noPermsDescription":"Necesitas el permiso de `ADMINISTRADOR` o estar en la lista de roles permitidos!",
+        "noPermsDelete":"Solo los administradores pueden eliminar un ticket.!",
         "chooseFromListTitle":"ID Invalida",
         "chooseFromListDescription":"Elije una de las ID de abajo:",
         "boterror":"¡Error del bot!",
@@ -19,18 +19,18 @@
         "somethingWentWrongTranscript":"**¡Algo salió mal al hacer el transcript!**\n¡Prueba en otro momento!"
     },
     "commands":{
-        "userAddedTitle":"Added {0} to this ticket!",
-        "userRemovedTitle":"Removed {0} from this ticket!",
-        "renameTitle":"Changed the name to {0}!",
-        "closeTitle":"Closed this ticket!",
-        "deleteTitle":"Deleting this ticket...",
-        "reopenTitle":"Re-Opened this ticket!",
+        "userAddedTitle":"Se agregó {0} al ticket!",
+        "userRemovedTitle":"Se eliminó {0} del ticket!",
+        "renameTitle":"Cambió el nombre a {0}!",
+        "closeTitle":"Cerró este ticket!",
+        "deleteTitle":"Eliminando este ticket...",
+        "reopenTitle":"Re-abrió este boleto!",
 
-        "ticketWarning":"The embed is in the message below!",
-        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
+        "ticketWarning":"La inserción está en el mensaje a continuación!",
+        "maxTicketWarning":"**Advertencia:** _Solo puedes crear {0} ticket(s) a la vez!_"
     },
     "helpMenu":{
-        "title":"Available Commands:",
+        "title":"Comandos disponibles:",
         "header1":"**¡Dirígete a {0} para crear un nuevo ticket!**\n\n",
         "header2":"**¡Ejecuta el comando `/new` o `/ticket` para crear un ticket!**\n\n",
 
@@ -66,10 +66,10 @@
         "newTranscriptTitle":"¡Un nuevo transcript está aquí!",
         "hereIsTheTranscript":"Aquí está el transcript:",
 
-        "chooseCategory":"elije una categoría:",
+        "chooseCategory":"Elije una categoría:",
         "gettingdeleted":"El ticket se está viendo eliminado...",
 
-        "none":"none",
-        "reason":"reason"
+        "none":"Ninguna.",
+        "reason":"Razón"
     }
 }
