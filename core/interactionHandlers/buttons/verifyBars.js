@@ -17,6 +17,14 @@ const bs = discord.ButtonStyle
 exports.closeVerifyBar = new arb()
     .addComponents(
         new button()
+        .setCustomId("OTcloseTicketReason")
+        .setDisabled(false)
+        .setStyle(bs.Primary)
+        .setEmoji("💬")
+        .setLabel("close with reason")
+    )
+    .addComponents(
+        new button()
         .setCustomId("OTcloseTicketTrue")
         .setDisabled(false)
         .setStyle(bs.Secondary)

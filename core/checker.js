@@ -260,7 +260,7 @@ exports.checker = async () => {
     //languagefile
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 

@@ -1,0 +1,75 @@
+{
+    "errors":{
+        "missingArgsTitle":"Argumentos inválidos!",
+        "missingArgsDescription":"Argumento ausente",
+        "noPermsTitle":"Sem permissões!",
+        "noPermsDescription":"Você precisa da permissão `ADMINISTRATOR` ou estar na lista de funções permitidas!",
+        "noPermsDelete":"Somente administradores podem deletar um ticket!",
+        "chooseFromListTitle":"ID inválido",
+        "chooseFromListDescription":"Escolha um dos IDs abaixo:",
+        "boterror":"Erro de bot!",
+        "notInTicketTitle":"Você não está em um ticket!",
+        "notInTicketDescription":"Este comando não funciona fora dos tickets!",
+        "ticketDoesntExist":"Este ticket não existe mais!",
+        "roleDoesntExist":"Esta função não existe mais!",
+        "anotherOption":"Esta opção não é um ticket, mas sim outro tipo!",
+        "maxAmountTitle":"Quantidade máxima atingida!",
+        "maxAmountDescription":"Você atingiu o número máximo de tickets permitidos!\nEntão você não pode criar um novo!",
+        "somethingWentWrong":"**Algo deu errado!**\nPor favor, tente novamente outra vez!",
+        "somethingWentWrongTranscript":"Algo deu errado ao fazer a transcrição!**\nPor favor, tente novamente outra vez!"
+    },
+    "commands":{
+        "userAddedTitle":"Adicionado {0} a este ticket!",
+        "userRemovedTitle":"Removido {0} deste ticket!",
+        "renameTitle":"Mudou o nome para {0}!",
+        "closeTitle":"Fechado este ticket!",
+        "deleteTitle":"Excluindo este ticket...",
+        "reopenTitle":"Reabriu este ticket!",
+
+        "ticketWarning":"A incorporação está na mensagem abaixo!",
+        "maxTicketWarning":"**Cuidado:** _Você só pode criar {0} tickets) de cada vez!!_"
+    },
+    "helpMenu":{
+        "title":"Comandos Disponíveis:",
+        "header1":"**Vá para {0} para criar um ticket!**\n\n",
+        "header2":"**Execute o comando `/new` ou `/ticket` para criar um ticket!**\n\n",
+
+        "msgCmd":"Gerar uma incorporação com botões. (somente administradores)",
+        "renameCmd":"Renomear um ticket. (sem espaços)",
+        "closeCmd":"Fechar um ticket.",
+        "deleteCmd":"Excluir um ticket.",
+        "addCmd":"Adicionar um usuário ao ticket.",
+        "removeCmd":"Remover um usuário do ticket.",
+        "reopenCmd":"Reabra um ticket depois que ele foi fechado."
+    },
+    "buttons":{
+        "close":"Fechar Ticket",
+        "delete":"Excluir Ticket",
+        "reopen":"Reabrir Ticket",
+        "sendTranscript":"Transcrição"
+    },
+    "messages":{
+        "reopenTitle":"Reabriu este ticket!",
+        "reopenDescription":"Sinta-se à vontade para falar novamente!",
+        "closedTitle":"Fechado este ticket!",
+        "closedDescription":"Somente administradores podem falar neste ticket agora!\n\n*Clique no botão abaixo para excluir ou reabrir este ticket!*",
+        "createdTitle":"Ticket criado!",
+        "createdDescription":"Seu ticket foi criado, você pode detectá-lo com um ping!",
+
+        "newTicketDmTitle":"Novo Ticket!",
+        "closedTicketDmTitle":"Ticket fechado!",
+        "deletedTicketDmTitle":"Ticket excluído!",
+        "closedTicketDmDescription":"Seu ticket está fechado!",
+        "deletedTicketDmDescription":"Seu bilhete foi excluído!",
+        "reopenTicketDmTitle":"Ticket reaberto!",
+        "reopenTicketDmDescription":"Seu ticket foi reaberto!",
+        "newTranscriptTitle":"Uma nova transcrição está aqui!",
+        "hereIsTheTranscript":"Aqui está a transcrição:",
+
+        "chooseCategory":"Escolha a categoria:",
+        "gettingdeleted":"Ticket está sendo deletado...",
+
+        "none":"none",
+        "reason":"reason"
+    }
+}
