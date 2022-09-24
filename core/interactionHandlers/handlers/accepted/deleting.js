@@ -5,7 +5,6 @@ const config = bot.config
 const l = bot.language
 const log = bot.errorLog.log
 
-const getconfigoptions = require("../../../getoptions")
 const permissionChecker = require("../../../utils/permisssionChecker")
 const storage = bot.storage
 const hiddendata = bot.hiddenData
@@ -53,7 +52,7 @@ module.exports = () => {
 
         interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
         await interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
-        await require("../../../ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
+        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
         deleteTicketButtonChecker = false
     })
 
@@ -92,7 +91,7 @@ module.exports = () => {
         })
 
         interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
-        await require("../../../ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"deletenotranscript",false,true)
+        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"deletenotranscript",false,true)
         deleteTicketButtonChecker1 = false
     })
 }

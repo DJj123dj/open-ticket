@@ -3,6 +3,7 @@
 
 
     "disclaimer":"DISABLE doesn't work yet! Below this message!",
+    "enableAPIdebug":false,
     "disable":{
         "messages":{
             "ticketCreated":false,

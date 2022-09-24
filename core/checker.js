@@ -1,6 +1,17 @@
 exports.checker = async () => {
     const chalk = await (await import("chalk")).default
-    const config = require("../config.json")
+
+    if (process.argv.some((v) => v == "--nochecker")) return 
+    if (process.argv.some((v) => v == "--devconfig")){
+        //console.log(chalk.blue("=> used dev config instead of normal config"))
+        try{
+            var tempconfig = require("../devConfig.json")
+        }catch(err){console.log(err);var tempconfig = require("../config.json")}
+    }else{
+        var tempconfig = require("../config.json")
+    }
+
+    const config = tempconfig
     var errorList = []
     var isError = false
     var warnList = []
@@ -195,8 +206,8 @@ exports.checker = async () => {
             //message
             checkType(option.message,"string",path+"/message")
 
-            //enableDMmessage
-            checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+            //enableDmOnOpen
+            checkType(option.enableDmOnOpen,"boolean",path+"/enableDmOnOpen")
 
             //ticketmessage
             checkType(option.ticketmessage,"string",path+"/ticketmessage")
@@ -230,8 +241,8 @@ exports.checker = async () => {
                 createError("'"+path+"/mode' | mode must be one of these: add, remove, add&remove")
             }
 
-            //enableDMmessage
-            checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+            //enableDmOnOpen
+            checkType(option.enableDmOnOpen,"boolean",path+"/enableDmOnOpen")
         }
     }
 
@@ -260,7 +271,7 @@ exports.checker = async () => {
     //languagefile
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 

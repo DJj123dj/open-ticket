@@ -27,7 +27,7 @@
         "reopenTitle":"Reabriu este ticket!",
 
         "ticketWarning":"A incorporação está na mensagem abaixo!",
-        "maxTicketWarning":"**Cuidado:** _Você só pode criar {0} tickets) de cada vez!!_"
+        "maxTicketWarning":"**Cuidado:** _Você só pode criar {0} ticket(s) de cada vez!!_"
     },
     "helpMenu":{
         "title":"Comandos Disponíveis:",

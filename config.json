@@ -41,7 +41,7 @@
             "channelprefix":"question-",
             "category":"category id",
             "message":"You created a ticket!",
-            "enableDMMessage":true,
+            "enableDmOnOpen":true,
             "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*"
             
         },
@@ -67,7 +67,7 @@
             "color":"red",
             "roles":["discord role id"],
             "mode":"add&remove|remove|add",
-            "enableDMMessage":true
+            "enableDmOnOpen":true
             
         }
     ],
@@ -77,6 +77,7 @@
             "id":"1",
             "name":"Choose Your Ticket",
             "description":"You can click one of the buttons below!",
+            "dropdown":false,
 
             "enableFooter":false,
             "footer":"Open Ticket v3.0.0 - I'm a footer!",

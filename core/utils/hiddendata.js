@@ -50,3 +50,17 @@ exports.writeHiddenData = (type,data) => {
 
     return result
 }
+
+/**
+ * 
+ * @param {String} description
+ * @returns {{description:String,hiddenData:hiddenData}}
+ */
+exports.removeHiddenData = (description) => {
+    const hiddenData = this.readHiddenData(description)
+
+    const splitted = description.split("[ ](OTDATA")
+    const original = splitted[0]
+
+    return {description:original,hiddenData:hiddenData}
+}

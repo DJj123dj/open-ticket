@@ -8,6 +8,8 @@ const l = bot.language
 const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
+    bot.errorLog.log("debug","COMMANDS: loaded help.js")
+
     const helpEmbed = new discord.EmbedBuilder()
         .setColor(config.main_color)
         .setTitle("❔ "+l.helpMenu.title)

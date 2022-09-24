@@ -5,7 +5,6 @@ const config = bot.config
 const l = bot.language
 const log = bot.errorLog.log
 
-const getconfigoptions = require("../../../getoptions")
 const permissionChecker = require("../../../utils/permisssionChecker")
 const storage = bot.storage
 const hiddendata = bot.hiddenData
@@ -24,6 +23,6 @@ module.exports = () => {
 
         interaction.deferUpdate()
         interaction.message.edit({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
-        require("../../../ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
+        require("../../../ticketActions/ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
     })
 }

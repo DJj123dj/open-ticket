@@ -1,6 +1,6 @@
 const index = require("../index")
 
-if (index.developerMode){
+if (index.developerConfig){
     var config = require("../devConfig.json")
 }else{var config = require("../config.json")}
 

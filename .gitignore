@@ -12,3 +12,5 @@ developerChangelog.md
 storage/dynamicDB/
 storage/.DS_Store
 .vscode/
+livestatus.json
+test.js

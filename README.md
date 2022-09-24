@@ -25,6 +25,7 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - R0JO
 - t0miiis
 - josuens14
+- M4
 
 ## features
 - discord interaction buttons
@@ -42,13 +43,11 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - configure everything per ticket
 - remove credits if you want :(
 - unlimited tickets spread over multiple messages
-
-*comming soon:*
-- dashboard
-- view transcripts in dashboard
-- share transcripts
 - close with reason
-- more translation
+
+*comming soon*
+- share transcripts
+- view transcripts in html
 
 ## installation
 **You need `node.js 16` to run this project!**

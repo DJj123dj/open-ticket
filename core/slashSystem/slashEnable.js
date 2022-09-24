@@ -2,7 +2,7 @@ const discord = require("discord.js")
 const bot = require("../../index")
 const client = require("../../index").client
 const config = bot.config
-const getoptions = require("../getoptions")
+const configParser = require("../utils/configParser")
 
 const act = discord.ApplicationCommandType
 const acot = discord.ApplicationCommandOptionType
@@ -11,12 +11,12 @@ module.exports = async () => {
     const chalk = (await import("chalk")).default
     const sid = config.server_id
 
-    const ids = getoptions.getTicketValues("id")
+    const ids = configParser.getTicketValuesArray("id")
     /**@type {[{name:String,value:String}]} */
     var choices = []
     ids.forEach((id) => {
-        const option = getoptions.getOptionsById(id)
-        if (option.type == "ticket"){
+        const option = configParser.getTicketById(id)
+        if (option){
             choices.push({name:option.name,value:option.id})
         }
     })
@@ -82,7 +82,7 @@ module.exports = async () => {
     //help
     client.application.commands.create({
         name:"help",
-        description:"The help menu",
+        description:"View the available commands.",
         defaultPermission:true,
         type:act.ChatInput
     },sid).then(() => {
@@ -95,7 +95,14 @@ module.exports = async () => {
         name:"close",
         description:"Close the current ticket.",
         defaultPermission:true,
-        type:act.ChatInput
+        type:act.ChatInput,
+        options:[{
+            name:"reason",
+            type:discord.ApplicationCommandOptionType.String,
+            required:false,
+            description:"The reason to close this ticket.",
+            maxLength:100
+        }]
     },sid).then(() => {
         readystats++
     })

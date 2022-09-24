@@ -9,6 +9,8 @@ const permsChecker = require("../core/utils/permisssionChecker")
 const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
+    bot.errorLog.log("debug","COMMANDS: loaded rename.js")
+
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"rename")) return
 

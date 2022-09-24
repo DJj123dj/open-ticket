@@ -9,6 +9,8 @@ const permsChecker = require("../core/utils/permisssionChecker")
 const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
+    bot.errorLog.log("debug","COMMANDS: loaded ticket.js")
+
     /**@type {String[]} */
     var msgIds = []
     config.messages.forEach((msg) => {
@@ -31,7 +33,7 @@ module.exports = () => {
             if (!msgIds.includes(id)) return msg.channel.send({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds)]})
 
 
-            const {embed,componentRows} = require("../core/ticketMessageEmbed").createEmbed(id)
+            const {embed,componentRows} = require("../core/utils/getEmbed").createEmbed(id)
             
             msg.channel.send({embeds:[embed],components:componentRows})
             
@@ -54,7 +56,7 @@ module.exports = () => {
 
             if (!msgIds.includes(id)) return interaction.reply({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds)]})
 
-            const {embed,componentRows} = require("../core/ticketMessageEmbed").createEmbed(id)
+            const {embed,componentRows} = require("../core/utils/getEmbed").createEmbed(id)
             
             interaction.reply({content:l.commands.ticketWarning})
             interaction.channel.send({embeds:[embed],components:componentRows})

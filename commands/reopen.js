@@ -9,6 +9,8 @@ const permsChecker = require("../core/utils/permisssionChecker")
 const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
+    bot.errorLog.log("debug","COMMANDS: loaded reopen.js")
+
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"reopen")) return
 
@@ -18,9 +20,11 @@ module.exports = () => {
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
+            if (hiddendata.data.find(h => h.key == "pendingdelete")) return msg.channel.send({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
+
             msg.channel.send({embeds:[bot.embeds.commands.reopenEmbed(msg.author)],components:[bot.buttons.close.openRowNormal]})
 
-            require("../core/ticketReopener").reopenTicket(msg.guild,msg.channel,msg.author)
+            require("../core/ticketActions/ticketReopener").reopenTicket(msg.guild,msg.channel,msg.author)
             
             log("command","someone used the 'reopen' command",[{key:"user",value:msg.author.tag}])
             APIEvents.onCommand("reopen",true,msg.author,msg.channel,msg.guild,new Date())
@@ -40,9 +44,11 @@ module.exports = () => {
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
+            if (hiddendata.data.find(h => h.key == "pendingdelete")) return interaction.reply({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
+
             await interaction.reply({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
 
-            require("../core/ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
+            require("../core/ticketActions/ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
             
             log("command","someone used the 'reopen' command",[{key:"user",value:interaction.user.tag}])
             APIEvents.onCommand("reopen",true,interaction.user,interaction.channel,interaction.guild,new Date())

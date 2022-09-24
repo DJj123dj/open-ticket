@@ -1,7 +1,6 @@
 const discord = require("discord.js")
 const bot = require("../../index")
 const config = bot.config
-const getoptions = require("../getoptions")
 const l = bot.language
 
 /**@returns {"DANGER"|"SUCCESS"|"PRIMARY"|"SECONDARY"} */
@@ -81,7 +80,7 @@ exports.rawButtonData = class {
         this.type = ""
 
         this.color = ""
-        this.enableDMMessage = true
+        this.enableDmOnOpen = true
         this.url = ""
         this.roles = ["",""]
         this.mode = ""

@@ -9,6 +9,8 @@ const permsChecker = require("../core/utils/permisssionChecker")
 const APIEvents = require("../core/api/modules/events")
 
 module.exports = () => {
+    bot.errorLog.log("debug","COMMANDS: loaded delete.js")
+
     client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"delete")) return
 
@@ -35,7 +37,7 @@ module.exports = () => {
                 }
             })
 
-            require("../core/ticketCloser").NEWcloseTicket(msg.member,msg.channel,prefix,"delete",false,true)
+            require("../core/ticketActions/ticketCloser").NEWcloseTicket(msg.member,msg.channel,prefix,"delete",false,true)
 
             log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
             APIEvents.onCommand("delete",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
@@ -73,7 +75,7 @@ module.exports = () => {
                 }
             })
 
-            require("../core/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
+            require("../core/ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
 
             log("command","someone used the 'delete' command",[{key:"user",value:interaction.user.tag}])
             APIEvents.onCommand("delete",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())

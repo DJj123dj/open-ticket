@@ -101,7 +101,7 @@ const normalLog = (debugString) => {
 
 /**
  * 
- * @param {"system"|"command"|"info"|"api"} type 
+ * @param {"system"|"command"|"info"|"api"|"debug"} type 
  * @param {String} message 
  * @param {[{key:String,value:String}]} params
  */
@@ -129,6 +129,9 @@ exports.log = async (type,message,params) => {
             console.log(chalk.red("[api v"+require("./api/api.json").version+"] ")+message+" "+chalk.yellow(parameters))
         }
         ptype = "api v"+require("./api/api.json").version
+    }else if (ptype == "debug"){
+        if (!process.argv.some((v) => v == "--debug")) return
+        console.log(chalk.redBright("[DEBUG] ")+message+" "+chalk.yellow(parameters))
     }
 
     const cd = new Date()

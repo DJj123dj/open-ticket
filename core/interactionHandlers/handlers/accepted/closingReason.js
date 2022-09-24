@@ -5,7 +5,6 @@ const config = bot.config
 const l = bot.language
 const log = bot.errorLog.log
 
-const getconfigoptions = require("../../../getoptions")
 const permissionChecker = require("../../../utils/permisssionChecker")
 const storage = bot.storage
 const hiddendata = bot.hiddenData
@@ -94,7 +93,7 @@ module.exports = () => {
          })
  
          //interaction.channel.send({embeds:[bot.embeds.commands.closeEmbed(interaction.user)],components:[bot.buttons.close.closeCommandRow]})
-         await require("../../../ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close",reason,true)
+         await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close",reason,true)
          closeTicketButtonChecker = false
     })
 }
