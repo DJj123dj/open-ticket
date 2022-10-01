@@ -52,9 +52,10 @@ exports.checker = async () => {
     }
     /**@param {String} value */
     const checkToken = (value) => {
-        if (value.includes(" ") || value.length < 40){
+        if (value.length < 40){
             createError("'auth_token' | your token is invalid")
         }
+        if (value.includes(" ")) createError("'auth_token' | your token includes spaces!")
     }
 
     /**@param {String} value @param {String} path */
@@ -133,8 +134,12 @@ exports.checker = async () => {
         }
     }
 
-    const getButtonClass = require("./utils/getButton").rawButtonData
-    /**@param {getButtonClass} option */
+    const configParser = require("./utils/configParser")
+    /**
+     * @param {configParser.OTAllOptions} option
+     * @param {String} path
+     */
+
     const checkOption = (option,path) => {
 
         //id
@@ -219,13 +224,13 @@ exports.checker = async () => {
                 createWarn("'"+path+"/url' | a url can't contain spaces")
             }
             if (option.url.length < 1){
-                createError("'"+path+"/url' | you have no url in this button")
+                createError("'"+path+"/url' | there is no url!")
             }
             if (!option.url.startsWith("https://") && !option.url.startsWith("http://") && !option.url.startsWith("discord://")){
                 createWarn("'"+path+"/url' | your url doesn't start with https or http!")
             }
             if (option.url.startsWith("http://")){
-                createWarn("'"+path+"/url' | your url is not a HTTPS link! discord maybe blocks this url!")
+                createWarn("'"+path+"/url' | your url is not a HTTPS link! discord can block this url!")
             }
         }else if (type == "role"){
             //color
@@ -246,8 +251,69 @@ exports.checker = async () => {
         }
     }
 
+    /**
+     * 
+     * @param {configParser.OTConfigMessage} input 
+     * @param {String} path 
+     */
     const checkMessage = (input,path) => {
+        //id
+        if (!input.id) createError("'"+path+"/id' | this embed doesn't have an id!")
+        if (input.id.length > 50) createError("'"+path+"/id' | the id can't be longer than 50")
+        if (input.id.includes(" ") || input.id.includes("\n")) createError("'"+path+"/id' | the id can't contain spaces!")
 
+        //name
+        if (input.name.length < 1){
+            createWarn("'"+path+"/name' | this embed has no name!")
+        }else if (input.name.length > 99) {
+            createError("'"+path+"/name' | the name can't be longer than 100")
+        }
+
+        //description
+        if (input.description.length < 0){
+            createWarn("'"+path+"/description' | this embed doesn't have a description!")
+        }
+
+        //dropdown
+        checkType(input.dropdown,"boolean",path+"/dropdown")
+
+        //footer
+        checkType(input.enableFooter,"boolean",path+"/enableFooter")
+        if (input.enableFooter){
+            if (input.footer.length < 1) createError("'"+path+"/footer' | no footer!")
+            if (input.footer.length > 200) createError("'"+path+"/footer' | footer length can't be more than 200!")
+        }
+
+        //thumbnail
+        checkType(input.enableThumbnail,"boolean",path+"/enableThumbnail")
+        if (input.enableThumbnail){
+            if (input.thumbnail.length < 1) createError("'"+path+"/thumbnail' | no thumbnail url!")
+        }
+
+        //customColor
+        checkType(input.enableCustomColor,"boolean",path+"/enableCustomColor")
+        if (input.enableCustomColor){
+            if (input.color.length < 1) createError("'"+path+"/color' | no color!")
+            checkHexColor(input.color,path+"/color")
+        }
+
+        //ticket explaination & max tickets warning
+        checkType(input.enableTicketExplaination,"boolean",path+"/enableTicketExplaination")
+        checkType(input.enableMaxTicketsWarning,"boolean",path+"/enableMaxTicketsWarning")
+
+        //OPTIONS!!!
+        var counter = 0
+        input.options.forEach((option) => {if (!configParser.optionExists(option)){counter++}})
+
+        if (counter == input.options.length){
+            createWarn("'"+path+"/options' | insert the option ids here!")
+        }else{
+            input.options.forEach((option,index) => {
+                if (!configParser.optionExists(option)){
+                    createWarn("'"+path+"/options:"+index+"' | this option doesnt exist!")
+                }
+            })
+        }
     }
 
     //--------------------------|
@@ -281,11 +347,12 @@ exports.checker = async () => {
         checkType(config.status.enabled,"boolean","status/enabled")
         if (config.status.enabled){
             if (config.status.type != "PLAYING" && config.status.type != "LISTENING" && config.status.type != "WATCHING"){
-                createError("'status/type' | not a valid status type!")
+                createError("'status/type' | not a valid status type! (LISTENING,WATCHING,PLAYING)")
             }
-            if (config.status.text.length < 1 || config.status.text.length > 40){
-                createError("'status/text' | text too long or short!")
+            if (config.status.text.length < 1){
+                createError("'status/text' | there is no status text!")
             }
+            if (config.status.text.length > 50) createError("'status/text' | text too long!")
         }
 
     
@@ -318,6 +385,11 @@ exports.checker = async () => {
 
     config.options.forEach((option,index) => {
         checkOption(option,"options/"+index)
+    })
+
+    //messages
+    config.messages.forEach((message,index) => {
+        checkMessage(message,"messages/"+index)
     })
 
 

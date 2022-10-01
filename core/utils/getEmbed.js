@@ -60,7 +60,8 @@ exports.createEmbed = (id) => {
         description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.max_allowed_tickets)
     }
 
-    embed.setDescription(description)
+    if (description) embed.setDescription(description)
+
     //-----------------------------------
 
 

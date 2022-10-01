@@ -6,7 +6,7 @@ const l = bot.language
 //==================
 
 //OTTicketOptions
-/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color: String,adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String}} OTTicketOptions */
+/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color: "red"|"green"|"blue"|"gray",adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, enableThumbnail:Boolean, thumbnailUrl:String}} OTTicketOptions */
 
 //OTRoleOptions
 /**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color:"red"|"green"|"blue"|"gray"|"none",roles:String[],mode:"add&remove"|"remove"|"add",enableDmOnOpen:Boolean}} OTRoleOptions */
@@ -19,7 +19,7 @@ const l = bot.language
 /**@typedef {{id: string, name: string, description: string, dropdown: boolean, enableFooter: boolean, footer: string, enableThumbnail: boolean, thumbnail: string, enableCustomColor: boolean, color: string, options: string[], enableTicketExplaination: boolean, enableMaxTicketsWarning: boolean}} OTConfigMessage*/
 
 //StringOptions
-/**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDmOnOpen"|"ticketmessage"} OTTicketStringOptions */
+/**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDmOnOpen"|"ticketmessage"|"enableThumbnail"|"thumbnailUrl"} OTTicketStringOptions */
 /**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"roles"|"mode"|"enableDmOnOpen"} OTRoleStringOptions */
 /**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"url"} OTWebsiteStringOptions */
 
@@ -152,5 +152,36 @@ exports.getTicketValuesArray = (value,idWithoutOTnewT) => {
                 result.push(opt[value])
         }
      })
+    return result
+}
+
+/**@type {OTTicketOptions} */
+this.ticketType = {}
+
+/**@type {OTRoleOptions} */
+this.roleType = {}
+
+/**@type {OTWebsiteOptions} */
+this.websiteType = {}
+
+/**@type {OTConfigMessage} */
+this.messageType = {}
+
+
+//OTAllOptions
+/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color:"red"|"green"|"blue"|"gray"|"none",roles:String[],mode:"add&remove"|"remove"|"add",adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, enableThumbnail:Boolean, thumbnailUrl:String,url:String}} OTAllOptions */
+
+/**
+ * 
+ * @param {String} id 
+ * @returns {Boolean}
+ */
+ exports.optionExists = (id) => {
+    var result = false
+    config.options.forEach((option) => {
+        if (option.id == id){
+            result = true
+        }
+    })
     return result
 }

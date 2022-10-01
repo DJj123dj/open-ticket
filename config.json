@@ -42,7 +42,10 @@
             "category":"category id",
             "message":"You created a ticket!",
             "enableDmOnOpen":true,
-            "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*"
+            "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*",
+
+            "enableThumbnail":false,
+            "thumbnailUrl":"https://www.example.com/catmemes/cat.png"
             
         },
         {
