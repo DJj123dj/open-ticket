@@ -294,7 +294,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             if (fileattachment == false){log("system","internal error: transcript is not created!");return}
         }
                     
-        if (config.system.enable_transcript){
+        if (config.system.enable_transcript && !require("../api/api.json").disable.transcripts.server){
             const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
                 .setTitle("📄 "+l.messages.newTranscriptTitle)
@@ -307,7 +307,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             })
         }
 
-        if (config.system.enable_DM_transcript){
+        if (config.system.enable_DM_transcript && !require("../api/api.json").disable.transcripts.dm){
             const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
                 .setTitle("📄 "+l.messages.newTranscriptTitle)

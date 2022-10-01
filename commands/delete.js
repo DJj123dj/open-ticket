@@ -7,11 +7,12 @@ const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded delete.js")
 
-    client.on("messageCreate",msg => {
+    if (!DISABLE.commands.text.delete) client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"delete")) return
 
         if (!msg.guild) return
@@ -46,7 +47,7 @@ module.exports = () => {
         
     })
 
-    client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.delete) client.on("interactionCreate",(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "delete") return
 

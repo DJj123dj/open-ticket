@@ -7,11 +7,12 @@ const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded rename.js")
 
-    client.on("messageCreate",msg => {
+    if (!DISABLE.commands.text.rename) client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"rename")) return
 
         if (!msg.guild) return
@@ -52,7 +53,7 @@ module.exports = () => {
         
     })
 
-    client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.rename) client.on("interactionCreate",(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "rename") return
 

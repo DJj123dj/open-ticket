@@ -331,7 +331,9 @@ exports.checker = async () => {
     
     checkHexColor(config.main_color,"main_color")
     checkDiscord("serverid",config.server_id,"server_id")
-    checkToken(config.auth_token)
+
+    if (!require("./api/api.json").disable.checkerjs.token) checkToken(config.auth_token)
+
     checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
     checkString(config.prefix,1,15,"prefix","prefix")
     //languagefile

@@ -7,6 +7,7 @@ const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded ticket.js")
@@ -18,7 +19,7 @@ module.exports = () => {
     })
 
 
-    client.on("messageCreate", msg => {
+    if (!DISABLE.commands.text.msg) client.on("messageCreate", msg => {
         if (msg.content.startsWith(config.prefix+"msg"||config.prefix+"message")){
             
             if (!msg.guild) return
@@ -42,7 +43,7 @@ module.exports = () => {
         }
     })
 
-    client.on("interactionCreate", (interaction) => {
+    if (!DISABLE.commands.slash.msg) client.on("interactionCreate", (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "message") return
 

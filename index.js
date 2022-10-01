@@ -165,7 +165,7 @@ client.on('ready',async () => {
     require("./core/api/pluginlauncher")()
     this.errorLog.log("debug","loading plugins")
 })
-    require("./core/checker").checker()
+if (!require("./core/api/api.json").disable.checkerjs.all) require("./core/checker").checker()
     this.errorLog.log("debug","loading checker.js")
     this.errorLog.log("debug","checking config...")
 

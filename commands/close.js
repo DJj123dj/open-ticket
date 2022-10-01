@@ -7,11 +7,12 @@ const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded close.js")
 
-    client.on("messageCreate",msg => {
+    if (!DISABLE.commands.text.close) client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"close")) return
 
         const args = msg.content.substring((config.prefix+"close").length).split(" ")
@@ -53,7 +54,7 @@ module.exports = () => {
         
     })
 
-    client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.close) client.on("interactionCreate",(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "close") return
 

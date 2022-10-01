@@ -7,11 +7,12 @@ const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded reopen.js")
 
-    client.on("messageCreate",msg => {
+    if (!DISABLE.commands.text.reopen) client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"reopen")) return
 
         msg.channel.messages.fetchPinned().then(msglist => {
@@ -32,7 +33,7 @@ module.exports = () => {
         
     })
 
-    client.on("interactionCreate",async (interaction) => {
+    if (!DISABLE.commands.slash.reopen) client.on("interactionCreate",async (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "reopen") return
 

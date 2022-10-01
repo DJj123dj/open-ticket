@@ -6,6 +6,7 @@ const log = bot.errorLog.log
 const l = bot.language
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded help.js")
@@ -22,7 +23,7 @@ module.exports = () => {
 
     var otherprefix = prefix.endsWith(" ") ? prefix.substring(0,prefix.length-1) : prefix
 
-    client.on("messageCreate",msg => {
+    if (!DISABLE.commands.text.help) client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix)) return
         var args = msg.content.split(config.prefix)
         
@@ -42,7 +43,7 @@ module.exports = () => {
         }
     })
 
-    client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.help) client.on("interactionCreate",(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "help") return
 

@@ -1,11 +1,12 @@
 {
     "version":"1.0.0",
-
-
-    "disclaimer":"DISABLE doesn't work yet! Below this message!",
     "enableAPIdebug":false,
+
+    "info":"If you turn these switches to true, then the feature will be turned OFF!",
+    "info2":"You can use this to disable some features you don't want!",
     "disable":{
         "messages":{
+            "DISCLAIMER":"the messages part doesn't work yet!",
             "ticketCreated":false,
             "ticketClosed":false,
             "ticketDeleted":false,

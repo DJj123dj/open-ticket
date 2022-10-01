@@ -7,11 +7,12 @@ const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded remove.js")
 
-    client.on("messageCreate",msg => {
+    if (!DISABLE.commands.text.remove) client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"remove")) return
         var user = msg.mentions.users.first()
         if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<user>`:\n`"+config.prefix+"remove <user>`")]})
@@ -43,7 +44,7 @@ module.exports = () => {
         
     })
 
-    client.on("interactionCreate",async (interaction) => {
+    if (!DISABLE.commands.slash.remove) client.on("interactionCreate",async (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "remove") return
         const user = interaction.options.getUser("user")
