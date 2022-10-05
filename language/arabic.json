@@ -25,6 +25,8 @@
     "closeTitle": "تم أغلاق التكت!",
     "deleteTitle": " جاري حذف التكت...",
     "reopenTitle": "إعادة فتح التكت!",
+    "claimTitle":"This ticket is now claimed to {0}",
+    "unclaimTitle":"This ticket isn't claimed anymore!",
 
     "ticketWarning": "هذا الأمبد موجود بالفعل في الرسالة بالأسفل!",
     "maxTicketWarning": "**تحذير:** _يمكنك فقط فتح {0} تكت في الوقت!_"

@@ -217,6 +217,17 @@ exports.checker = async () => {
             //ticketmessage
             checkType(option.ticketmessage,"string",path+"/ticketmessage")
 
+            //thumbnail
+            checkType(option.thumbnail.enable,"boolean",path/"/thumbnail/enable")
+            checkType(option.thumbnail.url,"string",path/"/thumbnail/url")
+
+            //closedCategory
+            checkType(option.closedCategory.enable,"boolean",path/"/closedCategory/enable")
+            checkType(option.closedCategory.id,"string",path/"/closedCategory/id")
+            if (option.closedCategory.enable){
+                checkDiscord("roleid",option.closedCategory.id,path+"/closedCategory/id")
+            }
+
         }else if (type == "website"){
             //url
             checkType(option.url,"string",path+"/url")
@@ -339,7 +350,7 @@ exports.checker = async () => {
     //languagefile
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 
@@ -382,6 +393,7 @@ exports.checker = async () => {
         if (config.system.enable_transcript){
             checkDiscord("channelid",config.system.transcript_channel,"system/transcript_channel")
         }
+        checkType(config.system.showSlashcmdsInHelp,"boolean","system/showSlashcmdsInHelp")
 
     //options
 

@@ -25,6 +25,8 @@
         "closeTitle":"Cerró este ticket!",
         "deleteTitle":"Eliminando este ticket...",
         "reopenTitle":"Re-abrió este boleto!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
 
         "ticketWarning":"La inserción está en el mensaje a continuación!",
         "maxTicketWarning":"**Advertencia:** _Solo puedes crear {0} ticket(s) a la vez!_"

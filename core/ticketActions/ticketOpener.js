@@ -185,7 +185,7 @@ module.exports = () => {
                         ticketEmbed.setDescription(hiddendata)
                     }
 
-                    if (currentTicketOptions.enableThumbnail) ticketEmbed.setThumbnail(currentTicketOptions.thumbnailUrl)
+                    if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)
                 
                     ticketChannel.send({
                         content:"<@"+interaction.member.id+"> @here",

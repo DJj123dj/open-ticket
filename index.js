@@ -12,17 +12,24 @@
 const discord = require("discord.js")
 const fs = require('fs')
 const {GatewayIntentBits,Partials} = discord
-const client = new discord.Client({
-    intents:[
-        GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.GuildInvites,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.MessageContent
-    ],
-    partials:[Partials.Channel,Partials.Message]
-})
+const APIBase = require("./core/api/modules/base")
+if (APIBase.embeddedMode){
+    var tempClient = APIBase.clientLocation
+}else{
+    var tempClient = new discord.Client({
+        intents:[
+            GatewayIntentBits.DirectMessages,
+            GatewayIntentBits.GuildInvites,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.MessageContent
+        ],
+        partials:[Partials.Channel,Partials.Message]
+    })
+}
+/**@type {discord.Client} */
+const client = tempClient
 exports.client = client
 client.setMaxListeners(50)
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","created client")
@@ -183,6 +190,8 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
     require("./commands/add")()
     require("./commands/remove")()
     require("./commands/reopen")()
+    require("./commands/claim")()
+    require("./commands/unclaim")()
 
     this.errorLog.log("debug","LOADING CORE")
     //core
@@ -198,14 +207,19 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
 
 this.errorLog.log("debug","loading api")
 const APIEvents = require("./core/api/modules/events")
+const APIConfig = require("./core/api/api.json")
 
 const debugLog = (debugString) => {
+    if (!APIConfig.disable.debug.all && !APIConfig.disable.debug.debuglogs){
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nDEBUG: "+debugString)
+    }
 }
 const errorLog = (errorString,stack) => {
+    if (!APIConfig.disable.debug.all){
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nERROR: "+errorString+" STACK: "+stack)
+    }
 }
 this.errorLog.log("debug","OT error system loaded successfully")
 
@@ -225,5 +239,5 @@ process.on("uncaughtException",async (error,origin) => {
     APIEvents.onError(error.name+": "+error.message,new Date())
 })
 
-client.login(config.auth_token)
+if (!APIBase.embeddedMode) client.login(config.auth_token)
 this.errorLog.log("debug","login with token")

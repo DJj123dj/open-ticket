@@ -92,6 +92,31 @@ exports.renameEmbed = (renamer,newname) => {
 
 /**
  * 
+ * @param {discord.User} claimer 
+ * @param {discord.User} user
+ * @returns {discord.EmbedBuilder}
+ */
+ exports.claimEmbed = (claimer,user) => {
+    return new embed()
+        .setTitle("📌 "+l.commands.claimTitle.replace("{0}",claimer.username))
+        .setColor(mc)
+        .setFooter({text:user.tag,iconURL:user.displayAvatarURL()})
+}
+
+/**
+ * 
+ * @param {discord.User} unclaimer 
+ * @returns {discord.EmbedBuilder}
+ */
+ exports.unclaimEmbed = (unclaimer) => {
+    return new embed()
+        .setTitle("🆓 "+l.commands.unclaimTitle)
+        .setColor(mc)
+        .setFooter({text:unclaimer.tag,iconURL:unclaimer.displayAvatarURL()})
+}
+
+/**
+ * 
  * @param {Boolean} done 
  * @param {discord.TextChannel} channel
  * @param {discord.User} author

@@ -15,6 +15,7 @@ else if (config.languagefile.startsWith("romanian")) localLanguage = require("..
 else if (config.languagefile.startsWith("arabic")) localLanguage = require("../language/arabic.json")
 else if (config.languagefile.startsWith("spanish")) localLanguage = require("../language/spanish.json")
 else if (config.languagefile.startsWith("portuguese")) localLanguage = require("../language/portuguese.json")
+else if (config.languagefile.startsWith("italian")) localLanguage = require("../language/italian.json")
 
 
 const errorLog = async () => {

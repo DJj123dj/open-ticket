@@ -32,10 +32,10 @@ module.exports = async () => {
     //process.stdout.write("[status] there are "+chalk.blue("0 out of 10")+" commands ready! (this can take up to 40 seconds)")
     setInterval(() => {
         process.stdout.cursorTo(0)
-        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 10")+" commands ready! (this can take up to 40 seconds)")
-        if (readystats >= 10){
+        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 12")+" commands ready! (this can take up to 40 seconds)")
+        if (readystats >= 12){
             console.log(chalk.green("\nready!"))
-            console.log(chalk.bgBlue("you can now start the bot with 'npm start'!"))
+            console.log(chalk.blue("you can now start the bot with "+chalk.bgBlue("'npm start'")+"!"))
             process.exit(1)
         }
     },100)
@@ -196,6 +196,35 @@ module.exports = async () => {
     client.application.commands.create({
         name:"reopen",
         description:"Reopen this ticket.",
+        defaultPermission:true,
+        type:act.ChatInput
+    },sid).then(() => {
+        readystats++
+    })
+
+    //claim
+    client.application.commands.create({
+        name:"claim",
+        description:"Claim this ticket / claim it for someone else.",
+        defaultPermission:true,
+        type:act.ChatInput,
+        options:[
+            {
+                name:"user",
+                type:acot.User,
+                required:false,
+                description:"The user to claim for."
+            }
+        ]
+        
+    },sid).then(() => {
+        readystats++
+    })
+
+    //unclaim
+    client.application.commands.create({
+        name:"unclaim",
+        description:"Unclaim this ticket.",
         defaultPermission:true,
         type:act.ChatInput
     },sid).then(() => {

@@ -24,7 +24,9 @@
 
         "enable_transcript":false,
         "enable_DM_transcript":false,
-        "transcript_channel":"channel id"
+        "transcript_channel":"channel id",
+
+        "showSlashcmdsInHelp":false
     },
 
     "options":[
@@ -44,8 +46,15 @@
             "enableDmOnOpen":true,
             "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*",
 
-            "enableThumbnail":false,
-            "thumbnailUrl":"https://www.example.com/catmemes/cat.png"
+            "thumbnail":{
+                "enable":false,
+                "url":"https://www.example.com/catmemes/cat.png"
+            },
+
+            "closedCategory":{
+                "enable":false,
+                "id":"category id"
+            }
             
         },
         {

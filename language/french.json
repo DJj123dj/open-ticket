@@ -25,6 +25,8 @@
         "closeTitle":"Fermé ce ticket!",
         "deleteTitle":"Suppression de ce ticket...",
         "reopenTitle":"A rouvert ce ticket!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
 
         "ticketWarning":"L'intégration est dans le message ci-dessous!",
         "maxTicketWarning":"**Attention :** _Vous ne pouvez créer que {0} ticket(s) à la fois !_"

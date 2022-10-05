@@ -154,6 +154,16 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
 
             if (!ticketData) return
 
+            if (ticketData.closedCategory.enable){
+                /**@type {discord.CategoryChannel} */
+                const category = guild.channels.cache.find(c => c.id == ticketData.closedCategory.id && c.type == discord.ChannelType.GuildCategory)
+                try {
+                    channel.setParent(category)
+                }catch{
+                    bot.errorLog.log("system","failed to move channel to new category!")
+                }
+            }
+
             /**
              * @type {String[]}
              */

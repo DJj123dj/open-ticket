@@ -25,6 +25,8 @@
         "closeTitle":"Closed this ticket!",
         "deleteTitle":"Deleting this ticket...",
         "reopenTitle":"Re-Opened this ticket!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
 
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"

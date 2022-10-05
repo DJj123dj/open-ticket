@@ -27,6 +27,7 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - josuens14
 - M4
 - David.
+- Maurizio
 
 ## features
 - discord interaction buttons
