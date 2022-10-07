@@ -2,7 +2,6 @@ const discord = require("discord.js")
 const bot = require("../../index")
 const client = require("../../index").client
 const config = bot.config
-const getoptions = require("../getoptions")
 
 module.exports = async () => {
     const chalk = (await import("chalk")).default

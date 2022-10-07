@@ -5,7 +5,7 @@ const config = bot.config
 const l = bot.language
 const log = bot.errorLog.log
 
-const getconfigoptions = require("../../getoptions")
+
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
 const mc = config.main_color
@@ -15,6 +15,14 @@ const arb = discord.ActionRowBuilder
 const bs = discord.ButtonStyle
 
 exports.closeVerifyBar = new arb()
+    .addComponents(
+        new button()
+        .setCustomId("OTcloseTicketReason")
+        .setDisabled(false)
+        .setStyle(bs.Primary)
+        .setEmoji("💬")
+        .setLabel(l.buttons.closeWithReason)
+    )
     .addComponents(
         new button()
         .setCustomId("OTcloseTicketTrue")

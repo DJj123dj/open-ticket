@@ -9,51 +9,80 @@
 //   |  \____/  |     |  |             |          |     |  |     \    |
 //   \__________/     |__|             \__________|     |__|      \___|
 
-
-const discord = require('discord.js')
+const discord = require("discord.js")
 const fs = require('fs')
 const {GatewayIntentBits,Partials} = discord
-const client = new discord.Client({
-    intents:[
-        GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.GuildInvites,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.MessageContent
-    ],
-    partials:[Partials.Channel,Partials.Message]
-})
+const APIBase = require("./core/api/modules/base")
+if (APIBase.embeddedMode){
+    var tempClient = APIBase.clientLocation
+}else{
+    var tempClient = new discord.Client({
+        intents:[
+            GatewayIntentBits.DirectMessages,
+            GatewayIntentBits.GuildInvites,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.MessageContent
+        ],
+        partials:[Partials.Channel,Partials.Message]
+    })
+}
+/**@type {discord.Client} */
+const client = tempClient
 exports.client = client
-
 client.setMaxListeners(50)
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","created client")
 
-if (process.argv[2]){
-    if (process.argv[2].endsWith("d")){
-        var isDev = true
-        console.log("starting in dev mode...")
-    }else{var isDev = false}
-}else{var isDev = false}
+var tempconfig = require("./config.json")
+/**@type {Boolean} */
+var isDevConfig = false
 
-exports.developerMode = isDev
+if (process.argv.some((v) => v == "--devconfig")){
+    async function logFLAGS(){
+        const chalk = await (await import("chalk")).default
+        console.log(chalk.blue("[FLAGS] => used dev config instead of normal config"))
+    }; logFLAGS()
+    isDevConfig = true
+    try{
+    tempconfig = require("./devConfig.json")
+    }catch{tempconfig = require("./config.json")}
+}else{
+    tempconfig = require("./config.json")
+}
+if (process.argv.some((v) => v == "--nochecker")){
+    async function logFLAGS(){
+        const chalk = await (await import("chalk")).default
+        console.log(chalk.blue("[FLAGS] => disabled checker.js"))
+    }; logFLAGS()
+}
+if (process.argv.some((v) => v == "--debug")){
+    async function logFLAGS(){
+        const chalk = await (await import("chalk")).default
+        console.log(chalk.blue("[FLAGS] => enabled DEBUG mode"))
+    }; logFLAGS()
+}
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded flags")
+
+exports.developerConfig = isDevConfig
 const language = require("./core/languageManager").language
 exports.language = language
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded language")
 
-if (isDev){
-    try {
-        var config = require('./devConfig.json')
-    }catch{
-        console.log("devConfig.json not found! Trying the normal config...")
-        var config = require("./config.json")
-    }
-}else{var config = require('./config.json')}
+const config = tempconfig
 exports.config = config
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded config")
 exports.storage = require('./core/dynamicdatabase/storage')
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded storage")
 
 exports.errorLog = require("./core/errorLogSystem")
 const log = this.errorLog.log
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","LOADED LOGGING SYSTEM")
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","switching to new logs")
+this.errorLog.log("debug","loaded new logs")
 
 exports.hiddenData = require("./core/utils/hiddendata")
+this.errorLog.log("debug","loaded hiddendataTM")
 
 exports.embeds = {
     commands:require("./core/interactionHandlers/embeds/commands")
@@ -63,8 +92,10 @@ exports.buttons = {
     firstmsg:require("./core/interactionHandlers/buttons/firstmsg"),
     verifybars:require("./core/interactionHandlers/buttons/verifyBars")
 }
+this.errorLog.log("debug","loaded buttons & embeds")
 
 client.on('ready',async () => {
+    this.errorLog.log("debug","client logged in")
     var statusSet = false
     const setStatus = (type,text) => {
         if (statusSet == true) return
@@ -78,13 +109,15 @@ client.on('ready',async () => {
         statusSet = true
         log("system","loaded status",[{key:"type",value:type},{key:"text",value:text}])
     }
+    this.errorLog.log("debug","bot status loaded")
 
     const chalk = await (await import("chalk")).default
 
     if (!process.argv[2]){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
+        this.errorLog.log("debug","loaded console interface")
         log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
-        require("./core/utils/warningManager")()
+        require("./core/utils/liveStatus")()
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
@@ -105,8 +138,9 @@ client.on('ready',async () => {
 
     if (!process.argv[2].startsWith("slash")){
         console.log(chalk.red("WELCOME TO OPEN TICKET!"))
+        this.errorLog.log("debug","loaded console interface")
         log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
-        require("./core/utils/warningManager")()
+        require("./core/utils/liveStatus")()
 
         console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
@@ -118,6 +152,7 @@ client.on('ready',async () => {
         await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
     }else{
         console.log(chalk.red("STARTING IN ")+chalk.blue("SLASH MODE")+chalk.red("..."))
+        this.errorLog.log("debug","slashmode activated")
         console.log("logs:\n================")
         console.log("client logged in...")
         console.log("loading files...")
@@ -135,16 +170,17 @@ client.on('ready',async () => {
 
     //load plugins
     require("./core/api/pluginlauncher")()
+    this.errorLog.log("debug","loading plugins")
 })
-
-if (!isDev){
-    require("./core/checker").checker()
-}
+if (!require("./core/api/api.json").disable.checkerjs.all) require("./core/checker").checker()
+    this.errorLog.log("debug","loading checker.js")
+    this.errorLog.log("debug","checking config...")
 
 if (process.argv[2] && process.argv[2].startsWith("slash")){
     //do nothing
 }else{
 
+    this.errorLog.log("debug","LOADING COMMANDS")
     //commands
     require('./commands/ticket')()
     require("./commands/help")()
@@ -154,29 +190,38 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
     require("./commands/add")()
     require("./commands/remove")()
     require("./commands/reopen")()
+    require("./commands/claim")()
+    require("./commands/unclaim")()
 
+    this.errorLog.log("debug","LOADING CORE")
     //core
-    require('./core/ticketOpener')()
-    require("./core/ticketCloser").runThis()
-    //require("./core/closebuttons")() // => everything is now in ./core/interactionHandlers/
+    require('./core/ticketActions/ticketOpener')()
     require("./core/reactionRoles")()
-    require("./core/ticketReopener").runThis()
 
+    this.errorLog.log("debug","LOADING INTERACTION HANDLERS")
     //InteractionHandlers
     require("./core/interactionHandlers/handlers/handlers")()
 
+    //require("./test")()
 }
 
+this.errorLog.log("debug","loading api")
 const APIEvents = require("./core/api/modules/events")
+const APIConfig = require("./core/api/api.json")
 
 const debugLog = (debugString) => {
+    if (!APIConfig.disable.debug.all && !APIConfig.disable.debug.debuglogs){
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nDEBUG: "+debugString)
+    }
 }
 const errorLog = (errorString,stack) => {
+    if (!APIConfig.disable.debug.all){
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nERROR: "+errorString+" STACK: "+stack)
+    }
 }
+this.errorLog.log("debug","OT error system loaded successfully")
 
 client.on("debug", async (message) => {
     if (message.startsWith("Provided token:")){
@@ -194,4 +239,5 @@ process.on("uncaughtException",async (error,origin) => {
     APIEvents.onError(error.name+": "+error.message,new Date())
 })
 
-client.login(config.auth_token)
+if (!APIBase.embeddedMode) client.login(config.auth_token)
+this.errorLog.log("debug","login with token")

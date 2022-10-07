@@ -7,9 +7,12 @@ const l = bot.language
 const permsChecker = require("../core/utils/permisssionChecker")
 
 const APIEvents = require("../core/api/modules/events")
+const DISABLE = require("../core/api/api.json").disable
 
 module.exports = () => {
-    client.on("messageCreate",msg => {
+    bot.errorLog.log("debug","COMMANDS: loaded delete.js")
+
+    if (!DISABLE.commands.text.delete) client.on("messageCreate",msg => {
         if (!msg.content.startsWith(config.prefix+"delete")) return
 
         if (!msg.guild) return
@@ -35,7 +38,7 @@ module.exports = () => {
                 }
             })
 
-            require("../core/ticketCloser").NEWcloseTicket(msg.member,msg.channel,prefix,"delete",false,true)
+            require("../core/ticketActions/ticketCloser").NEWcloseTicket(msg.member,msg.channel,prefix,"delete",false,true)
 
             log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
             APIEvents.onCommand("delete",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
@@ -44,7 +47,7 @@ module.exports = () => {
         
     })
 
-    client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.delete) client.on("interactionCreate",(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "delete") return
 
@@ -53,7 +56,7 @@ module.exports = () => {
         if (!interaction.guild) return
         if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
             permsChecker.sendUserNoPerms(interaction.user)
-            return interaction.reply({embeds:[bot.errorLog.noPermsDelete]})
+            return interaction.reply({embeds:[bot.errorLog.noPermsDelete(interaction.user)]})
         }
 
         interaction.channel.messages.fetchPinned().then(msglist => {
@@ -73,7 +76,7 @@ module.exports = () => {
                 }
             })
 
-            require("../core/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
+            require("../core/ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
 
             log("command","someone used the 'delete' command",[{key:"user",value:interaction.user.tag}])
             APIEvents.onCommand("delete",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())

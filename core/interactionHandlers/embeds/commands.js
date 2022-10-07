@@ -5,7 +5,6 @@ const config = bot.config
 const l = bot.language
 const log = bot.errorLog.log
 
-const getconfigoptions = require("../../getoptions")
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
 const mc = config.main_color
@@ -13,37 +12,45 @@ const mc = config.main_color
 /**
  * 
  * @param {discord.User} addedUser 
+ * @param {discord.User} adder
  * @returns {discord.EmbedBuilder}
  */
-exports.addEmbed = (addedUser) => {
+exports.addEmbed = (addedUser,adder) => {
     return new embed()
         .setTitle("⬆️ "+l.commands.userAddedTitle.replace("{0}",addedUser.username))
         .setColor(mc)
-        .setFooter({text:addedUser.tag,iconURL:addedUser.displayAvatarURL()})
+        .setFooter({text:adder.tag,iconURL:adder.displayAvatarURL()})
+        .setThumbnail(addedUser.displayAvatarURL({extension:"png"}))
 }
 
 /**
  * 
  * @param {discord.User} removedUser 
+ * @param {discord.User} remover
  * @returns {discord.EmbedBuilder}
  */
-exports.removeEmbed = (removedUser) => {
+exports.removeEmbed = (removedUser,remover) => {
     return new embed()
         .setTitle("⬇️ "+l.commands.userRemovedTitle.replace("{0}",removedUser.username))
         .setColor(mc)
-        .setFooter({text:removedUser.tag,iconURL:removedUser.displayAvatarURL()})
+        .setFooter({text:remover.tag,iconURL:remover.displayAvatarURL()})
+        .setThumbnail(removedUser.displayAvatarURL({extension:"png"}))
 }
 
 /**
  * 
  * @param {discord.User} closer 
+ * @param {String} description
  * @returns {discord.EmbedBuilder}
  */
-exports.closeEmbed = (closer) => {
-    return new embed()
+exports.closeEmbed = (closer,description) => {
+    const embd = new embed()
         .setTitle("🔒 "+l.commands.closeTitle)
         .setColor(mc)
         .setFooter({text:closer.tag,iconURL:closer.displayAvatarURL()})
+
+    if (description) embd.setDescription(description)
+    return embd
 }
 
 /**
@@ -81,6 +88,31 @@ exports.renameEmbed = (renamer,newname) => {
         .setTitle("🔓 "+l.commands.reopenTitle)
         .setColor(mc)
         .setFooter({text:reopener.tag,iconURL:reopener.displayAvatarURL()})
+}
+
+/**
+ * 
+ * @param {discord.User} claimer 
+ * @param {discord.User} user
+ * @returns {discord.EmbedBuilder}
+ */
+ exports.claimEmbed = (claimer,user) => {
+    return new embed()
+        .setTitle("📌 "+l.commands.claimTitle.replace("{0}",claimer.username))
+        .setColor(mc)
+        .setFooter({text:user.tag,iconURL:user.displayAvatarURL()})
+}
+
+/**
+ * 
+ * @param {discord.User} unclaimer 
+ * @returns {discord.EmbedBuilder}
+ */
+ exports.unclaimEmbed = (unclaimer) => {
+    return new embed()
+        .setTitle("🆓 "+l.commands.unclaimTitle)
+        .setColor(mc)
+        .setFooter({text:unclaimer.tag,iconURL:unclaimer.displayAvatarURL()})
 }
 
 /**

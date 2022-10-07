@@ -1,8 +1,8 @@
 const discord = require('discord.js')
-const bot = require('../index')
+const bot = require('../../index')
 const client = bot.client
 const config = bot.config
-const getButton = require("./utils/getButton")
+const getButton = require("./getButton")
 const l = bot.language
 
 /**
@@ -16,7 +16,7 @@ const l = bot.language
 exports.createEmbed = (id) => {
     //-----------------------------------
     //general importing
-    const data = require("./utils/getTicketMessages").getTicketMessage(id)
+    const data = require("./configParser").getConfigMessage(id)
     /**@type {discord.ButtonBuilder[]}*/
     var buttons = []
     /**@type {getButton.rawButtonData[]} */
@@ -60,31 +60,44 @@ exports.createEmbed = (id) => {
         description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.max_allowed_tickets)
     }
 
-    embed.setDescription(description)
-    //-----------------------------------
+    if (description) embed.setDescription(description)
 
     //-----------------------------------
-    //create the components
-    var AmountOfRows = Math.ceil(buttons.length / 4)
-    var currentRow = 0
 
-    /**
-     * @type {discord.MessageActionRow[]}
-     */
-    var componentRows = []
 
-    for (let i = AmountOfRows; i > 0; i--){
+    //-----------------------------------
+    //create the components IF DROPDOWN IS FALSE
+    if (!data.dropdown){
+        var AmountOfRows = Math.ceil(buttons.length / 4)
+        var currentRow = 0
 
-        componentRows.push(new discord.ActionRowBuilder())
-    }
+        /**
+         * @type {discord.MessageActionRow[]}
+         */
+        var componentRows = []
 
-    buttons.forEach((button,index) => {
-        componentRows[currentRow].addComponents([button])
+        for (let i = AmountOfRows; i > 0; i--){
 
-        if (index == 3 || index == 7 ||  index == 11 ||  index == 15 ||  index == 19 ||  index == 23 ||  index == 27 ||  index == 31 ||  index == 35 ||  index == 39){
-            currentRow = currentRow + 1
+            componentRows.push(new discord.ActionRowBuilder())
         }
-    })
+
+        buttons.forEach((button,index) => {
+            componentRows[currentRow].addComponents([button])
+
+            if (index == 3 || index == 7 ||  index == 11 ||  index == 15 ||  index == 19 ||  index == 23 ||  index == 27 ||  index == 31 ||  index == 35 ||  index == 39){
+                currentRow = currentRow + 1
+            }
+        })
+
+    //create the component IF DROPDOWN is true
+    }else{
+        const ids = data.options
+        const dropdown = require("./getDropdown").getDropdown(ids)
+        var componentRows = [
+            new discord.ActionRowBuilder()
+                .setComponents(dropdown)
+        ]
+    }
     //-----------------------------------
 
 

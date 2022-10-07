@@ -1,0 +1,83 @@
+{
+    "errors":{
+        "missingArgsTitle":"Argomenti non validi!",
+        "missingArgsDescription":"Argomento mancante",
+        "noPermsTitle":"Permessi mancanti!",
+        "noPermsDescription":"Hai bisogno del permesso `ADMINISTRATOR` e essere nella lista dei ruoli accettati!",
+        "noPermsDelete":"Solo gli amministratori possono chiudere un ticket!",
+        "chooseFromListTitle":"ID non valido",
+        "chooseFromListDescription":"Scegli uno degli ID sotto:",
+        "boterror":"Errore del bot!",
+        "notInTicketTitle":"Non sei in un ticket!",
+        "notInTicketDescription":"Questo comando non funziona fuori da un ticket!",
+        "ticketDoesntExist":"Questo ticket non esiste più!",
+        "roleDoesntExist":"Questo ruolo non esiste più!",
+        "anotherOption":"Questa opzione non è di un ticket!",
+        "maxAmountTitle":"Massimo numero raggiunto!",
+        "maxAmountDescription":"Hai raggiunto il massimo numero di ticket consentiti!\nNon puoi crearne altri!",
+        "somethingWentWrong":"**Qualcosa è andato storto!**\nPerfavore riprova un'altra volta!",
+        "somethingWentWrongTranscript":"Qualcosa è andata storta durante la trascrizione!**\nPerfavore riprova un'altra volta!"
+    },
+    "commands":{
+        "userAddedTitle":"Aggiunto {0} al ticket!",
+        "userRemovedTitle":"Rimosso {0} da questo ticket!",
+        "renameTitle":"Cambia il nome in {0}!",
+        "closeTitle":"Chiudo questo ticket!",
+        "deleteTitle":"Eliminando questo ticket...",
+        "reopenTitle":"Ri-Aperto questo ticket!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
+
+        "ticketWarning":"L'embed è nel messaggio sotto!",
+        "maxTicketWarning":"**Attenzione:** _Tu puoi creare solo {0} ticket(s) per volta!_"
+    },
+    "helpMenu":{
+        "title":"Comandi disponibili:",
+        "header1":"**Vai a {0} per creare un ticket!**\n\n",
+        "header2":"**Esegui il comando `/new` o `/ticket` per creare un ticket!**\n\n",
+
+        "msgCmd":"Crea un embed con pulsanti. (solo amministratori)",
+        "renameCmd":"Rinomina un ticket. (senza spazi)",
+        "closeCmd":"Chiudi un ticket.",
+        "deleteCmd":"Elimina un ticket.",
+        "addCmd":"Aggiungi un membro al ticket.",
+        "removeCmd":"Rimuovi un membro dal ticket.",
+        "reopenCmd":"Riapri un ticket dopo averlo chiuso."
+    },
+    "buttons":{
+        "close":"Chiudi il ticket",
+        "delete":"Elimina il ticket",
+        "reopen":"Riapri il ticket",
+        "sendTranscript":"Trascrizione",
+        "closeWithReason":"chiudi con un motivo"
+    },
+    "messages":{
+        "reopenTitle":"Riaperto questo ticket!",
+        "reopenDescription":"Sentiti libero di parlare di nuovo!",
+        "closedTitle":"Chiudo questo ticket!",
+        "closedDescription":"Solo gli amministratori possono parlare in questo ticket ora!\n\n*Clicca sul bottone sotto per chiudere o riaprire questo ticket!*",
+        "createdTitle":"Ticket creato!",
+        "createdDescription":"Il tuo ticket è stato creato, puoi capirlo dal ping!",
+
+        "newTicketDmTitle":"Nuovo ticket!",
+        "closedTicketDmTitle":"Ticket chiuso!",
+        "deletedTicketDmTitle":"Ticket eliminato!",
+        "closedTicketDmDescription":"Il tuo ticket è chiuso!",
+        "deletedTicketDmDescription":"Il tuo ticket è stato eliminato!",
+        "reopenTicketDmTitle":"Ticket riaperto!",
+        "reopenTicketDmDescription":"Il tuo ticket è stato riaperto!",
+        "newTranscriptTitle":"Un nuova trascrizione è qui!",
+        "hereIsTheTranscript":"Qui è la trascrizione:",
+
+        "chooseCategory":"scegli una categoria:",
+        "gettingdeleted":"Il ticket sta per essere chiuso...",
+
+        "none":"nessuno",
+        "reason":"motivo",
+
+        "deletedby":"eliminato da",
+        "closedby":"chiuso da",
+        "modalreason":"Quale'è il motivo per chiudere il ticket?",
+        "chooseATicket": "Scegli un ticket"
+    }
+}

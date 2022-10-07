@@ -1,36 +1,13 @@
 const discord = require('discord.js')
-const bot = require('../index')
+const bot = require('../../index')
 const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
 const storage = bot.storage
-const permsChecker = require("./utils/permisssionChecker")
+const permsChecker = require("../utils/permisssionChecker")
 
-exports.runThis = () => {
-    client.on("interactionCreate",async (interaction) => {
-        if (!interaction.isButton()) return
-        if (interaction.customId != "sendTranscript") return
-
-        interaction.deferUpdate()
-
-        const channelmessages = await interaction.channel.messages.fetch()
-
-        channelmessages.sweep((msgSweep) => {
-            return msgSweep.author.id == client.user.id
-        })
-
-        var fileattachment = await require("./transcript").createTranscript(channelmessages,interaction.channel)
-
-        if (fileattachment == false){
-            log("system","internal error: transcript is not created!")
-            interaction.channel.send({embeds:[bot.errorLog.serverError(l.errors.somethingWentWrongTranscript)]})
-            return
-        }
-
-        interaction.channel.send({content:"**"+l.messages.hereIsTheTranscript+"**",files:[fileattachment]})
-    })
-}
+const pendingDelete = []
 
 /**
  * 
@@ -47,9 +24,12 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     const chalk = await (await import("chalk")).default
     const channelmessages = await channel.messages.fetch()
 
-    const newReason = reason ? reason : "none"
+    const newReason = reason ? reason : l.messages.none
 
     //start code
+
+    //FIX CHANNEL COULD BE CLOSED AFTER DELETE:
+    if (pendingDelete.includes(channel.id)) return false
 
     //remove ot bot from transcript
     channelmessages.sweep((msgSweep) => {return msgSweep.author.id == client.user.id})
@@ -88,20 +68,27 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             await channel.send({content:"**"+l.messages.gettingdeleted+"**"})
         }
         log("system","deleted a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
+        pendingDelete.push(channel.id)
 
         if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
 
         //getID & send DM & send api event
-        await channel.messages.fetchPinned().then(msglist => {
+        await channel.messages.fetchPinned().then(async msglist => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value.value
-            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
+            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
-            require("./api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
+            require("../api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
             const id = hiddendata.data.find(d => d.key == "openerid").value
+
+            const sphd = bot.hiddenData.removeHiddenData(firstmsg.embeds[0].description)
+            sphd.hiddenData.data.push({key:"pendingdelete",value:"true"})
+            const newEmbed = new discord.EmbedBuilder(firstmsg.embeds[0].data)
+            newEmbed.setDescription(sphd.description + bot.hiddenData.writeHiddenData(sphd.hiddenData.type,sphd.hiddenData.data))
+            await firstmsg.edit({embeds:[newEmbed]})
 
             if (!id) return false
 
@@ -163,9 +150,19 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
-            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
+            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
             if (!ticketData) return
+
+            if (ticketData.closedCategory.enable){
+                /**@type {discord.CategoryChannel} */
+                const category = guild.channels.cache.find(c => c.id == ticketData.closedCategory.id && c.type == discord.ChannelType.GuildCategory)
+                try {
+                    channel.setParent(category)
+                }catch{
+                    bot.errorLog.log("system","failed to move channel to new category!")
+                }
+            }
 
             /**
              * @type {String[]}
@@ -236,9 +233,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
-            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
+            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
-            require("./api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData},newReason)
+            require("../api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData},newReason)
 
             const id = hiddendata.data.find(d => d.key == "openerid").value
 
@@ -278,9 +275,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
-            const ticketData = require("./getoptions").getOptionsById("OTnewT"+ticketId)
+            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
-            require("./api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
+            require("../api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
             const id = hiddendata.data.find(d => d.key == "openerid").value
 
@@ -298,20 +295,21 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
 
     if (enableTranscript == true && mode != "deletenotranscript"){
 
-        const transcriptReason = (mode == "close") ? "**reason:** "+newReason : "**reason:** none"
+        const transcriptReason = (mode == "close") ? "**"+l.messages.reason+":** "+newReason : "**"+l.messages.reason+":** "+l.messages.none
+        const closedByPrefix = (mode.startsWith("delete")) ? l.messages.deletedby : l.messages.closedby
 
         if (config.system.enable_transcript || config.system.enable_DM_transcript){
-            var fileattachment = await require("./transcript").createTranscript(channelmessages,channel)
+            var fileattachment = await require("../transcript").createTranscript(channelmessages,channel)
 
             if (fileattachment == false){log("system","internal error: transcript is not created!");return}
         }
                     
-        if (config.system.enable_transcript){
+        if (config.system.enable_transcript && !require("../api/api.json").disable.transcripts.server){
             const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
                 .setTitle("📄 "+l.messages.newTranscriptTitle)
                 .setDescription(transcriptReason)
-                .setFooter({text:"closed by: "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
+                .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
             
             guild.channels.cache.find(c => c.id == config.system.transcript_channel).send({
                 embeds:[transcriptEmbed],
@@ -319,12 +317,12 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             })
         }
 
-        if (config.system.enable_DM_transcript){
+        if (config.system.enable_DM_transcript && !require("../api/api.json").disable.transcripts.dm){
             const transcriptEmbed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
                 .setTitle("📄 "+l.messages.newTranscriptTitle)
                 .setDescription(transcriptReason)
-                .setFooter({text:"closed by: "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
+                .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
             
                 if (!isDatabaseError) ticketOpener.send({
                 embeds:[transcriptEmbed],
@@ -340,6 +338,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         //await timer()
 
         setTimeout(async () => {
+            pendingDelete.shift()
             await channel.delete()
         },6000)
     }

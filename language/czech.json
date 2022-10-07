@@ -25,6 +25,8 @@
         "closeTitle":"Zavři tento ticket!",
         "deleteTitle":"Smaž tento ticket!",
         "reopenTitle":"Znovu otevři ticket!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
 
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Varovaní:** _Můžeš si vytvořit použe {0} ticket(s) v jednu chvíli!_"
@@ -46,7 +48,8 @@
         "close":"Zavři ticket",
         "delete":"Smaž ticket",
         "reopen":"Znovu otevři ticket",
-        "sendTranscript":"Odešli log ticketu"
+        "sendTranscript":"Odešli log ticketu",
+        "closeWithReason":"close with reason"
     },
     "messages":{
         "reopenTitle":"Ticket znovu otevřen!",
@@ -70,6 +73,11 @@
         "gettingdeleted":"Ticket bude smazán",
 
         "none":"nic",
-        "reason":"důvod"
+        "reason":"důvod",
+
+        "deletedby":"deleted by",
+        "closedby":"closed by",
+        "modalreason":"What is the reason for closing this ticket?",
+        "chooseATicket": "Choose a ticket"
     }
 }

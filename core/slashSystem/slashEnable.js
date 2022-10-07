@@ -2,7 +2,7 @@ const discord = require("discord.js")
 const bot = require("../../index")
 const client = require("../../index").client
 const config = bot.config
-const getoptions = require("../getoptions")
+const configParser = require("../utils/configParser")
 
 const act = discord.ApplicationCommandType
 const acot = discord.ApplicationCommandOptionType
@@ -11,12 +11,12 @@ module.exports = async () => {
     const chalk = (await import("chalk")).default
     const sid = config.server_id
 
-    const ids = getoptions.getTicketValues("id")
+    const ids = configParser.getTicketValuesArray("id")
     /**@type {[{name:String,value:String}]} */
     var choices = []
     ids.forEach((id) => {
-        const option = getoptions.getOptionsById(id)
-        if (option.type == "ticket"){
+        const option = configParser.getTicketById(id)
+        if (option){
             choices.push({name:option.name,value:option.id})
         }
     })
@@ -32,18 +32,22 @@ module.exports = async () => {
     //process.stdout.write("[status] there are "+chalk.blue("0 out of 10")+" commands ready! (this can take up to 40 seconds)")
     setInterval(() => {
         process.stdout.cursorTo(0)
-        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 10")+" commands ready! (this can take up to 40 seconds)")
-        if (readystats >= 10){
+        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 12")+" commands ready! (this can take up to 40 seconds)")
+        if (readystats >= 12){
             console.log(chalk.green("\nready!"))
-            console.log(chalk.bgBlue("you can now start the bot with 'npm start'!"))
+            console.log(chalk.blue("you can now start the bot with "+chalk.bgBlue("'npm start'")+"!"))
             process.exit(1)
         }
     },100)
+
+    //slashtranslation
+    const ST = require("../../language/slashcmds/slash.json").data
 
     //create a ticket (/new or /ticket)
     client.application.commands.create({
         name:"ticket",
         description:"Create a ticket!",
+        descriptionLocalizations:ST.newticket,
         defaultPermission:true,
         type:act.ChatInput,
         options:[
@@ -53,7 +57,6 @@ module.exports = async () => {
                 description:"The type of ticket.",
                 required:true,
                 choices:choices
-
             }
         ]
     },sid).then(() => {
@@ -65,6 +68,7 @@ module.exports = async () => {
         description:"Create a ticket!",
         defaultPermission:true,
         type:act.ChatInput,
+        descriptionLocalizations:ST.newticket,
         options:[
             {
                 type:acot.String,
@@ -82,8 +86,9 @@ module.exports = async () => {
     //help
     client.application.commands.create({
         name:"help",
-        description:"The help menu",
+        description:"View the available commands.",
         defaultPermission:true,
+        descriptionLocalizations:ST.help,
         type:act.ChatInput
     },sid).then(() => {
         readystats++
@@ -95,7 +100,15 @@ module.exports = async () => {
         name:"close",
         description:"Close the current ticket.",
         defaultPermission:true,
-        type:act.ChatInput
+        descriptionLocalizations:ST.close,
+        type:act.ChatInput,
+        options:[{
+            name:"reason",
+            type:discord.ApplicationCommandOptionType.String,
+            required:false,
+            description:"The reason to close this ticket.",
+            maxLength:100
+        }]
     },sid).then(() => {
         readystats++
     })
@@ -105,6 +118,7 @@ module.exports = async () => {
         name:"delete",
         description:"Delete the current ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.delete,
         type:act.ChatInput
     },sid).then(() => {
         readystats++
@@ -115,6 +129,7 @@ module.exports = async () => {
         name:"message",
         description:"Create a ticket message.",
         defaultPermission:true,
+        descriptionLocalizations:ST.message,
         type:act.ChatInput,
         options:[
             {
@@ -136,6 +151,7 @@ module.exports = async () => {
         name:"add",
         description:"Add people to this ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.add,
         type:act.ChatInput,
         options:[
             {
@@ -154,6 +170,7 @@ module.exports = async () => {
         name:"remove",
         description:"Remove people from this ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.remove,
         type:act.ChatInput,
         options:[
             {
@@ -172,6 +189,7 @@ module.exports = async () => {
         name:"rename",
         description:"Rename this ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.rename,
         type:act.ChatInput,
         options:[
             {
@@ -189,6 +207,36 @@ module.exports = async () => {
     client.application.commands.create({
         name:"reopen",
         description:"Reopen this ticket.",
+        defaultPermission:true,
+        descriptionLocalizations:ST.reopen,
+        type:act.ChatInput
+    },sid).then(() => {
+        readystats++
+    })
+
+    //claim
+    client.application.commands.create({
+        name:"claim",
+        description:"Claim this ticket / claim it for someone else.",
+        defaultPermission:true,
+        type:act.ChatInput,
+        options:[
+            {
+                name:"user",
+                type:acot.User,
+                required:false,
+                description:"The user to claim for."
+            }
+        ]
+        
+    },sid).then(() => {
+        readystats++
+    })
+
+    //unclaim
+    client.application.commands.create({
+        name:"unclaim",
+        description:"Unclaim this ticket.",
         defaultPermission:true,
         type:act.ChatInput
     },sid).then(() => {

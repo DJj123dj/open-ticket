@@ -24,7 +24,9 @@
 
         "enable_transcript":false,
         "enable_DM_transcript":false,
-        "transcript_channel":"channel id"
+        "transcript_channel":"channel id",
+
+        "showSlashcmdsInHelp":false
     },
 
     "options":[
@@ -41,8 +43,18 @@
             "channelprefix":"question-",
             "category":"category id",
             "message":"You created a ticket!",
-            "enableDMMessage":true,
-            "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*"
+            "enableDmOnOpen":true,
+            "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*",
+
+            "thumbnail":{
+                "enable":false,
+                "url":"https://www.example.com/catmemes/cat.png"
+            },
+
+            "closedCategory":{
+                "enable":false,
+                "id":"category id"
+            }
             
         },
         {
@@ -67,7 +79,7 @@
             "color":"red",
             "roles":["discord role id"],
             "mode":"add&remove|remove|add",
-            "enableDMMessage":true
+            "enableDmOnOpen":true
             
         }
     ],
@@ -77,9 +89,10 @@
             "id":"1",
             "name":"Choose Your Ticket",
             "description":"You can click one of the buttons below!",
+            "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v2.5.0 - I'm a footer!",
+            "footer":"Open Ticket v3.0.0 - I'm a footer!",
 
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",

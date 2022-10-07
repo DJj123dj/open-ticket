@@ -25,6 +25,8 @@
         "closeTitle":"Closed this ticket!",
         "deleteTitle":"Deleting this ticket...",
         "reopenTitle":"Re-Opened this ticket!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
 
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
@@ -46,7 +48,8 @@
         "close":"Ticket schließen",
         "delete":"Ticket löschen",
         "reopen":"Ticket wieder öffnen",
-        "sendTranscript":"Transcript-Datei senden"
+        "sendTranscript":"Transcript-Datei senden",
+        "closeWithReason":"Geschlossen mit dem Grund"
     },
     "messages":{
         "reopenTitle":"Dieses Ticket wiedereröffnet!",
@@ -70,6 +73,11 @@
         "gettingdeleted":"Ticket wird gelöscht...",
 
         "none":"none",
-        "reason":"reason"
+        "reason":"reason",
+
+        "deletedby":"Gelöscht von",
+        "closedby":"Geschlossen von",
+        "modalreason":"Was ist der Grund für das schließen des Tickets?",
+        "chooseATicket": "Wähle ein Ticket"
     }
 }

@@ -1,75 +1,83 @@
 {
-    "errors":{
-        "missingArgsTitle":"حجج باطلة",
-        "missingArgsDescription":"حجة مفقودة",
-        "noPermsTitle":"ليس لديك إذن",
-        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
-        "noPermsDelete":"Only admins can delete a ticket!",
-        "chooseFromListTitle":"بطاقة التعريف غير صالحة",
-        "chooseFromListDescription":"اختر أحد المعرفات أدناه:",
-        "boterror":"مشكلة في الروبوت",
-        "notInTicketTitle":"أنت لست في تذكرة!",
-        "notInTicketDescription":"هذا الأمر لا يعمل خارج التذاكر!",
-        "ticketDoesntExist":"هذه التذكرة لم تعد موجودة!",
-        "roleDoesntExist":"هذا الدور لم يعد موجودًا!",
-        "anotherOption":"هذا الخيار ليس تذكرة بل نوع آخر!",
-        "maxAmountTitle":"بلغ الحد الأقصى!",
-        "maxAmountDescription":"لقد وصلت إلى الحد الأقصى لعدد التذاكر المسموح بها!\nلذلك لا يمكنك إنشاء واحدة جديدة!",
-        "somethingWentWrong":"**هناك خطأ ما!**\nالرجاء المحاولة مرة أخرى!",
-        "somethingWentWrongTranscript":"**حدث خطأ ما أثناء كتابة النص!**\nالرجاء المحاولة مرة أخرى!"
-    },
-    "commands":{
-        "userAddedTitle":"Added {0} to this ticket!",
-        "userRemovedTitle":"Removed {0} from this ticket!",
-        "renameTitle":"Changed the name to {0}!",
-        "closeTitle":"Closed this ticket!",
-        "deleteTitle":"Deleting this ticket...",
-        "reopenTitle":"Re-Opened this ticket!",
+  "errors": {
+    "missingArgsTitle": "قيمة غير صالحة!",
+    "missingArgsDescription": "قيمة مفقودة",
+    "noPermsTitle": "ليس لديك برمشنات !",
+    "noPermsDescription": "أنت بحاجة الى برمشن `ADMINISTRATOR` او أن تكون في قائمة المسموح بهم!",
+    "noPermsDelete": "فقط الإداريين يمكنهم حذف التكت!",
+    "chooseFromListTitle": "Invalid ID",
+    "chooseFromListDescription": "قم بأختيار أحد من الأيديات من الأسفل:",
+    "boterror": "خلل في البوت !",
+    "notInTicketTitle": "انت لست في تكت!",
+    "notInTicketDescription": "هذا الأمر لا يعمل خارج التكت!",
+    "ticketDoesntExist": "هذا التكت لم يعد فعال!",
+    "roleDoesntExist": "خطاً ,لم تعد الرتبة موجوده!",
+    "anotherOption": "هذا الخيار ليس التكت و لكنه شيء أخر!",
+    "maxAmountTitle": "خطأ , تم الوصول الى الحد الأقصى!",
+    "maxAmountDescription": "لقد وصلت الى الحد الأقصى لعدد التكتات المسموحة بها!\nSo لا يمكنك فتح واحدة أخرى!",
+    "somethingWentWrong": "**هناك خطاً!**\nأعد المحاولة لاحقاً!",
+    "somethingWentWrongTranscript": "هناك خطاً في محاولة طبع التكت!**\nأعد المحاولة لاحقاً!"
+  },
+  "commands": {
+    "userAddedTitle": "تم أضافة {0} من المستخدمين في التكت!",
+    "userRemovedTitle": "تم أزالة {0} من المستخدمين من التكت!",
+    "renameTitle": "تم تغيير أسم التكت الى {0}!",
+    "closeTitle": "تم أغلاق التكت!",
+    "deleteTitle": " جاري حذف التكت...",
+    "reopenTitle": "إعادة فتح التكت!",
+    "claimTitle":"This ticket is now claimed to {0}",
+    "unclaimTitle":"This ticket isn't claimed anymore!",
 
-        "ticketWarning":"The embed is in the message below!",
-        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
-    },
-    "helpMenu":{
-        "title":"Available Commands:",
-        "header1":"**اذهب إلى {0} لإنشاء تذكرة!**\n\n",
-        "header2":"**قم بتشغيل الأمر `/new` أو `/ticket` لإنشاء تذكرة!**\n\n",
+    "ticketWarning": "هذا الأمبد موجود بالفعل في الرسالة بالأسفل!",
+    "maxTicketWarning": "**تحذير:** _يمكنك فقط فتح {0} تكت في الوقت!_"
+  },
+  "helpMenu": {
+    "title": "الأوامر المتاحة:",
+    "header1": "**أذهب الى {0} لإنشاء تذكرة!**\n\n",
+    "header2": "**قم بكتابة أمر `/new` او `/ticket` لفتح تكت!**\n\n",
 
-        "msgCmd":"تفرخ تضمين مع الأزرار. (المسؤولون فقط)",
-        "renameCmd":"إعادة تسمية تذكرة. (بدون مسافات)",
-        "closeCmd":"أغلق التذكرة.",
-        "deleteCmd":"حذف التذكرة.",
-        "addCmd":"أضف مستخدمًا إلى التذكرة.",
-        "removeCmd":"إزالة مستخدم من التذكرة.",
-        "reopenCmd":"أعد فتح التذكرة بعد إغلاقه."
-    },
-    "buttons":{
-        "close":"إغلاق التذكرة",
-        "delete":"حذف التذكرة",
-        "reopen":"إعادة فتح التذكرة",
-        "sendTranscript":"إرسال ملف النص"
-    },
-    "messages":{
-        "reopenTitle":"أعيد فتح هذه التذكرة!",
-        "reopenDescription":"لا تتردد في التحدث مرة أخرى!",
-        "closedTitle":"أغلقت هذه التذكرة!",
-        "closedDescription":"يمكن للمسؤولين فقط التحدث في هذه التذكرة الآن!\n\n*انقر فوق الزر أدناه لحذف هذه التذكرة أو إعادة فتحها!*",
-        "createdTitle":"تم إنشاء التذكرة!",
-        "createdDescription":"تم إنشاء تذكرتك ، يمكنك اكتشافها عن طريق ping",
+    "msgCmd": "أنشاء أيمبد مع الأزرار. (الأداريين فقط)",
+    "renameCmd": "إعادة تسمية التكت. (بدون مسافات)",
+    "closeCmd": "أغلاق التكت.",
+    "deleteCmd": "حذف التكت.",
+    "addCmd": "إضافة مستخدم الى التكت.",
+    "removeCmd": "إزالة مستخدم من التكت.",
+    "reopenCmd": "إعادة فتح تكت بعد إغلاقة."
+  },
+  "buttons": {
+    "close": "إغلاق التكت",
+    "delete": "حذف التكت",
+    "reopen": "إعادة فتح التكت",
+    "sendTranscript": "طبع التكت",
+    "closeWithReason":"close with reason"
+  },
+  "messages": {
+    "reopenTitle": "تم إعادة فتح التكت بنجاح!",
+    "reopenDescription": "لا تتردد في فتح التكت مرة أخرى , حظاً موفقاً!",
+    "closedTitle": "تم إغلاق التكت!",
+    "closedDescription": "فقط الأداريين يمكنهم التحدث في هذا التكت الأن!\n\n*أضغط على الزر بالأسفل لحذف التكت او إعادة فتحة مجدداً!*",
+    "createdTitle": "تم إنشاء تكت!",
+    "createdDescription": "تم أنشاء تكت , قم بأنتظار الدعم في الطريق!",
 
-        "newTicketDmTitle":"تذكرة جديدة!",
-        "closedTicketDmTitle":"تم إغلاق التذكرة!",
-        "deletedTicketDmTitle":"تم حذف التذكرة!",
-        "closedTicketDmDescription":"تم إغلاق تذكرتك!",
-        "deletedTicketDmDescription":"تم حذف تذكرتك!",
-        "reopenTicketDmTitle":"أعيد فتح التذكرة!",
-        "reopenTicketDmDescription":"تم إعادة فتح تذكرتك!",
-        "newTranscriptTitle":"نسخة جديدة هنا!",
-        "hereIsTheTranscript":"هذا هو النص:",
+    "newTicketDmTitle": "تكت جديد!",
+    "closedTicketDmTitle": "تم إغلاق التكت!",
+    "deletedTicketDmTitle": "تم حذف التكت!",
+    "closedTicketDmDescription": "تم أغلاق تذكرتك من قبل إداري",
+    "deletedTicketDmDescription": "تم حذف تذكرتك من قبل إداري!",
+    "reopenTicketDmTitle": "تم إعادة فتح تذكرتك!",
+    "reopenTicketDmDescription": "تم إعادة فتح التكت!",
+    "newTranscriptTitle": "توجد نسخة تكت جديدة هنا!",
+    "hereIsTheTranscript": "هذا هي النسخة:",
 
-        "chooseCategory":"اختر فئة:",
-        "gettingdeleted":"...يتم حذف التذكرة",
+    "chooseCategory": "أختر الكتقاجوري:",
+    "gettingdeleted": "يتم حذف التكت...",
 
-        "none":"none",
-        "reason":"reason"
-    }
+    "none": "لا يوجد",
+    "reason": "سبب",
+
+    "deletedby":"deleted by",
+        "closedby":"closed by",
+        "modalreason":"What is the reason for closing this ticket?",
+        "chooseATicket": "Choose a ticket"
+  }
 }

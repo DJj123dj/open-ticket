@@ -50,7 +50,7 @@ exports.createTranscript = async (messagecollection,channel) => {
     try {
         const cd = new Date()
         const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
-        const dateString = cd.getDate()+" "+months[cd.getMonth()-1]+" "+cd.getFullYear()+" - "+cd.getSeconds()+":"+cd.getMinutes()+":"+cd.getHours()
+        const dateString = cd.getDate()+" "+months[cd.getMonth()-1]+" "+cd.getFullYear()+" - "+cd.getHours()+":"+cd.getMinutes()+":"+cd.getSeconds()
         const filearray = ["open ticket transcript:\ntranscript creation: "+dateString+"\nticket name: "+ticketuserdata.ticketname+"\nticket opener: "+ticketuserdata.ticketopener.name,"\nTRANSCRIPT START:"]
 
         messagecollection.reverse()

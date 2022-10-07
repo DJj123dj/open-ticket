@@ -25,6 +25,8 @@
         "closeTitle":"Ticket inchis!",
         "deleteTitle":"Se sterge ticket-ul...",
         "reopenTitle":"Ticket Re-deschis!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
 
         "ticketWarning":"Embed-ul se afla in mesajul de mai jos!",
         "maxTicketWarning":"**Avertizare:** _Poti creea doar {0} tickete active!_"
@@ -46,7 +48,8 @@
         "close":"Inchide ticket-ul",
         "delete":"Sterge ticket-ul",
         "reopen":"Re-deschide un ticket",
-        "sendTranscript":"Transcript"
+        "sendTranscript":"Transcript",
+        "closeWithReason":"Inchide cu motiv"
     },
     "messages":{
         "reopenTitle":"Ticket Re-deschis!",
@@ -70,6 +73,11 @@
         "gettingdeleted":"Ticket-ul se sterge...",
 
         "none":"niciunul",
-        "reason":"Motiv"
+        "reason":"Motiv",
+
+        "deletedby":"Sters de",
+        "closedby":"Inchis de",
+        "modalreason":"Care este motivul pentru inchiderea acestui ticket?",
+        "chooseATicket": "Alege un ticket"
     }
 }

@@ -5,7 +5,6 @@ const config = bot.config
 const l = bot.language
 const log = bot.errorLog.log
 
-const getconfigoptions = require("../../getoptions")
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
 const mc = config.main_color

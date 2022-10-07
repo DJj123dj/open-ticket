@@ -1,6 +1,17 @@
 exports.checker = async () => {
     const chalk = await (await import("chalk")).default
-    const config = require("../config.json")
+
+    if (process.argv.some((v) => v == "--nochecker")) return 
+    if (process.argv.some((v) => v == "--devconfig")){
+        //console.log(chalk.blue("=> used dev config instead of normal config"))
+        try{
+            var tempconfig = require("../devConfig.json")
+        }catch(err){console.log(err);var tempconfig = require("../config.json")}
+    }else{
+        var tempconfig = require("../config.json")
+    }
+
+    const config = tempconfig
     var errorList = []
     var isError = false
     var warnList = []
@@ -41,9 +52,10 @@ exports.checker = async () => {
     }
     /**@param {String} value */
     const checkToken = (value) => {
-        if (value.includes(" ") || value.length < 40){
+        if (value.length < 40){
             createError("'auth_token' | your token is invalid")
         }
+        if (value.includes(" ")) createError("'auth_token' | your token includes spaces!")
     }
 
     /**@param {String} value @param {String} path */
@@ -122,8 +134,12 @@ exports.checker = async () => {
         }
     }
 
-    const getButtonClass = require("./utils/getButton").rawButtonData
-    /**@param {getButtonClass} option */
+    const configParser = require("./utils/configParser")
+    /**
+     * @param {configParser.OTAllOptions} option
+     * @param {String} path
+     */
+
     const checkOption = (option,path) => {
 
         //id
@@ -195,11 +211,22 @@ exports.checker = async () => {
             //message
             checkType(option.message,"string",path+"/message")
 
-            //enableDMmessage
-            checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+            //enableDmOnOpen
+            checkType(option.enableDmOnOpen,"boolean",path+"/enableDmOnOpen")
 
             //ticketmessage
             checkType(option.ticketmessage,"string",path+"/ticketmessage")
+
+            //thumbnail
+            checkType(option.thumbnail.enable,"boolean",path/"/thumbnail/enable")
+            checkType(option.thumbnail.url,"string",path/"/thumbnail/url")
+
+            //closedCategory
+            checkType(option.closedCategory.enable,"boolean",path/"/closedCategory/enable")
+            checkType(option.closedCategory.id,"string",path/"/closedCategory/id")
+            if (option.closedCategory.enable){
+                checkDiscord("roleid",option.closedCategory.id,path+"/closedCategory/id")
+            }
 
         }else if (type == "website"){
             //url
@@ -208,13 +235,13 @@ exports.checker = async () => {
                 createWarn("'"+path+"/url' | a url can't contain spaces")
             }
             if (option.url.length < 1){
-                createError("'"+path+"/url' | you have no url in this button")
+                createError("'"+path+"/url' | there is no url!")
             }
             if (!option.url.startsWith("https://") && !option.url.startsWith("http://") && !option.url.startsWith("discord://")){
                 createWarn("'"+path+"/url' | your url doesn't start with https or http!")
             }
             if (option.url.startsWith("http://")){
-                createWarn("'"+path+"/url' | your url is not a HTTPS link! discord maybe blocks this url!")
+                createWarn("'"+path+"/url' | your url is not a HTTPS link! discord can block this url!")
             }
         }else if (type == "role"){
             //color
@@ -230,13 +257,74 @@ exports.checker = async () => {
                 createError("'"+path+"/mode' | mode must be one of these: add, remove, add&remove")
             }
 
-            //enableDMmessage
-            checkType(option.enableDMMessage,"boolean",path+"/enableDMMessage")
+            //enableDmOnOpen
+            checkType(option.enableDmOnOpen,"boolean",path+"/enableDmOnOpen")
         }
     }
 
+    /**
+     * 
+     * @param {configParser.OTConfigMessage} input 
+     * @param {String} path 
+     */
     const checkMessage = (input,path) => {
+        //id
+        if (!input.id) createError("'"+path+"/id' | this embed doesn't have an id!")
+        if (input.id.length > 50) createError("'"+path+"/id' | the id can't be longer than 50")
+        if (input.id.includes(" ") || input.id.includes("\n")) createError("'"+path+"/id' | the id can't contain spaces!")
 
+        //name
+        if (input.name.length < 1){
+            createWarn("'"+path+"/name' | this embed has no name!")
+        }else if (input.name.length > 99) {
+            createError("'"+path+"/name' | the name can't be longer than 100")
+        }
+
+        //description
+        if (input.description.length < 0){
+            createWarn("'"+path+"/description' | this embed doesn't have a description!")
+        }
+
+        //dropdown
+        checkType(input.dropdown,"boolean",path+"/dropdown")
+
+        //footer
+        checkType(input.enableFooter,"boolean",path+"/enableFooter")
+        if (input.enableFooter){
+            if (input.footer.length < 1) createError("'"+path+"/footer' | no footer!")
+            if (input.footer.length > 200) createError("'"+path+"/footer' | footer length can't be more than 200!")
+        }
+
+        //thumbnail
+        checkType(input.enableThumbnail,"boolean",path+"/enableThumbnail")
+        if (input.enableThumbnail){
+            if (input.thumbnail.length < 1) createError("'"+path+"/thumbnail' | no thumbnail url!")
+        }
+
+        //customColor
+        checkType(input.enableCustomColor,"boolean",path+"/enableCustomColor")
+        if (input.enableCustomColor){
+            if (input.color.length < 1) createError("'"+path+"/color' | no color!")
+            checkHexColor(input.color,path+"/color")
+        }
+
+        //ticket explaination & max tickets warning
+        checkType(input.enableTicketExplaination,"boolean",path+"/enableTicketExplaination")
+        checkType(input.enableMaxTicketsWarning,"boolean",path+"/enableMaxTicketsWarning")
+
+        //OPTIONS!!!
+        var counter = 0
+        input.options.forEach((option) => {if (!configParser.optionExists(option)){counter++}})
+
+        if (counter == input.options.length){
+            createWarn("'"+path+"/options' | insert the option ids here!")
+        }else{
+            input.options.forEach((option,index) => {
+                if (!configParser.optionExists(option)){
+                    createWarn("'"+path+"/options:"+index+"' | this option doesnt exist!")
+                }
+            })
+        }
     }
 
     //--------------------------|
@@ -254,27 +342,30 @@ exports.checker = async () => {
     
     checkHexColor(config.main_color,"main_color")
     checkDiscord("serverid",config.server_id,"server_id")
-    checkToken(config.auth_token)
+
+    if (!require("./api/api.json").disable.checkerjs.token) checkToken(config.auth_token)
+
     checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
     checkString(config.prefix,1,15,"prefix","prefix")
     //languagefile
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french")){
+    
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
-
 
     checkType(config.credits,"boolean","credits")
     //status:
         checkType(config.status.enabled,"boolean","status/enabled")
         if (config.status.enabled){
             if (config.status.type != "PLAYING" && config.status.type != "LISTENING" && config.status.type != "WATCHING"){
-                createError("'status/type' | not a valid status type!")
+                createError("'status/type' | not a valid status type! (LISTENING,WATCHING,PLAYING)")
             }
-            if (config.status.text.length < 1 || config.status.text.length > 40){
-                createError("'status/text' | text too long or short!")
+            if (config.status.text.length < 1){
+                createError("'status/text' | there is no status text!")
             }
+            if (config.status.text.length > 50) createError("'status/text' | text too long!")
         }
 
     
@@ -302,11 +393,17 @@ exports.checker = async () => {
         if (config.system.enable_transcript){
             checkDiscord("channelid",config.system.transcript_channel,"system/transcript_channel")
         }
+        checkType(config.system.showSlashcmdsInHelp,"boolean","system/showSlashcmdsInHelp")
 
     //options
 
     config.options.forEach((option,index) => {
         checkOption(option,"options/"+index)
+    })
+
+    //messages
+    config.messages.forEach((message,index) => {
+        checkMessage(message,"messages/"+index)
     })
 
 

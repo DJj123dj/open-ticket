@@ -10,15 +10,23 @@ const loadChalk = async () => {
 const embed = discord.EmbedBuilder
 const c = discord.Colors
 
-exports.noPermsMessage = new embed()
+/**@param {discord.User} user*/
+exports.noPermsMessage = (user) => {
+    return new embed()
     .setColor(c.Red)
     .setTitle(":x: "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDescription)
+    .setFooter({iconURL:user.displayAvatarURL(),text:user.tag})
+}
 
-exports.noPermsDelete = new embed()
+/**@param {discord.User} user*/
+exports.noPermsDelete = (user) => {
+    return new embed()
     .setColor(c.Red)
     .setTitle(":x: "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDelete)
+    .setFooter({iconURL:user.displayAvatarURL(),text:user.tag})
+}
 
 /**@param {String} message */
 exports.invalidArgsMessage = (message) => {
@@ -93,7 +101,7 @@ const normalLog = (debugString) => {
 
 /**
  * 
- * @param {"system"|"command"|"info"|"api"} type 
+ * @param {"system"|"command"|"info"|"api"|"debug"} type 
  * @param {String} message 
  * @param {[{key:String,value:String}]} params
  */
@@ -117,10 +125,13 @@ exports.log = async (type,message,params) => {
     }else if (ptype == "system"){
         console.log(chalk.green("[system] ")+message+" "+chalk.yellow(parameters))
     }else if (ptype == "api"){
-        if (require("./api/modules/base").enableApiLogs == true){
+        if (require("./api/api.json").enableAPIconsolelogs == true){
             console.log(chalk.red("[api v"+require("./api/api.json").version+"] ")+message+" "+chalk.yellow(parameters))
         }
         ptype = "api v"+require("./api/api.json").version
+    }else if (ptype == "debug"){
+        if (!process.argv.some((v) => v == "--debug")) return
+        console.log(chalk.redBright("[DEBUG] ")+message+" "+chalk.yellow(parameters))
     }
 
     const cd = new Date()

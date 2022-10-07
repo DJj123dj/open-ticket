@@ -1,22 +1,34 @@
 const discord = require('discord.js')
-const bot = require('../index')
+const bot = require('../../index')
 const client = bot.client
 const config = bot.config
 const l = bot.language
 const log = bot.errorLog.log
 
-const getconfigoptions = require("./getoptions")
+const configParser = require("../utils/configParser")
 const storage = bot.storage
 
 module.exports = () => {
+    //dropdown placeholder
+    client.on("interactionCreate",(interaction) => {
+        if (!interaction.isSelectMenu()) return
+        if (interaction.customId != "OTdropdownMenu") return
+        if (interaction.values.includes("OTChooseTicket")) interaction.deferUpdate()
+
+    })
+
+
     var closeButton = bot.buttons.firstmsg.firstmsgRowNormal
     
     //ticket button click / create ticket
-    client.on("interactionCreate",(interaction) => {
+    client.on("interactionCreate",async (interaction) => {
         if (interaction.isChatInputCommand() && (interaction.commandName == "new" || interaction.commandName == "ticket")){
             var customId = "OTnewT"+interaction.options.getString("type")
         }else if (interaction.isButton()){
             var customId = interaction.customId
+        }else if (interaction.isSelectMenu() && (interaction.customId == "OTdropdownMenu")){
+            var customId = interaction.values[0]
+
         }else return
 
         if (interaction.isButton()){
@@ -30,17 +42,19 @@ module.exports = () => {
         }
 
         
-        if (getconfigoptions.getTicketValues("id").includes(customId)){
+        if (configParser.getTicketValuesArray("id").includes(customId)){
 
             //ticketoptions from config
-            const currentTicketOptions = getconfigoptions.getOptionsById(customId)
+            const currentTicketOptions = configParser.getTicketById(customId)
 
-            if (currentTicketOptions == false || currentTicketOptions.type != "ticket") return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
+            if (currentTicketOptions == false) return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
 
             if (interaction.isButton()){
                 interaction.deferUpdate()
             }else if (interaction.isChatInputCommand()){
                 interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)]})
+            }else if (interaction.isSelectMenu()){
+                await interaction.deferUpdate()
             }
 
             if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
@@ -170,6 +184,8 @@ module.exports = () => {
                     }else{
                         ticketEmbed.setDescription(hiddendata)
                     }
+
+                    if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)
                 
                     ticketChannel.send({
                         content:"<@"+interaction.member.id+"> @here",
@@ -181,7 +197,7 @@ module.exports = () => {
                     })
                     
                     log("system","created new ticket",[{key:"ticket",value:ticketName},{key:"user",value:interaction.user.tag}])
-                    require("./api/modules/events").onTicketOpen(interaction.user,ticketChannel,interaction.guild,new Date(),{name:ticketName,status:"open",ticketOptions:currentTicketOptions})
+                    require("../api/modules/events").onTicketOpen(interaction.user,ticketChannel,interaction.guild,new Date(),{name:ticketName,status:"open",ticketOptions:currentTicketOptions})
                 })
             }else{
                 try {

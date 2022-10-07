@@ -25,6 +25,8 @@
         "closeTitle":"Fermé ce ticket!",
         "deleteTitle":"Suppression de ce ticket...",
         "reopenTitle":"A rouvert ce ticket!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
 
         "ticketWarning":"L'intégration est dans le message ci-dessous!",
         "maxTicketWarning":"**Attention :** _Vous ne pouvez créer que {0} ticket(s) à la fois !_"
@@ -46,7 +48,8 @@
         "close":"Fermer le ticket",
         "delete":"Supprimer le billet",
         "reopen":"Billet de réouverture",
-        "sendTranscript":"Transcript"
+        "sendTranscript":"Transcript",
+        "closeWithReason":"fermer avec une raison"
     },
     "messages":{
         "reopenTitle":"A rouvert ce ticket!",
@@ -70,6 +73,11 @@
         "gettingdeleted":"Le ticket est en cours de suppression...",
 
         "none":"rien",
-        "reason":"raison"
+        "reason":"raison",
+
+        "deletedby":"supprimé par",
+        "closedby":"fermé par",
+        "modalreason":"Qu’elle est la raison pour fermer ce ticket?",
+        "chooseATicket": "Choisir un ticket"
     }
 }
