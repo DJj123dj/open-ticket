@@ -48,7 +48,8 @@
         "close":"Cerrar ticket.",
         "delete":"Eliminar ticket",
         "reopen":"Re-Abrir ticket",
-        "sendTranscript":"Obtener transcript."
+        "sendTranscript":"Obtener transcript.",
+        "closeWithReason":"cerrar con razón"
     },
     "messages":{
         "reopenTitle":"¡Ticket Re-Abierto!",
@@ -72,6 +73,11 @@
         "gettingdeleted":"El ticket se está viendo eliminado...",
 
         "none":"Ninguna.",
-        "reason":"Razón"
+        "reason":"Razón",
+
+        "deletedby":"eliminado por",
+        "closedby":"cerrado por",
+        "modalreason":"Cúal es la razón para cerrar este ticket?",
+        "chooseATicket": "Elije un ticket"
     }
 }

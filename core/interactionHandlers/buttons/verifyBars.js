@@ -21,7 +21,7 @@ exports.closeVerifyBar = new arb()
         .setDisabled(false)
         .setStyle(bs.Primary)
         .setEmoji("💬")
-        .setLabel("close with reason")
+        .setLabel(l.buttons.closeWithReason)
     )
     .addComponents(
         new button()

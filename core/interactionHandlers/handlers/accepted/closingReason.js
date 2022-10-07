@@ -22,14 +22,14 @@ const tib = discord.TextInputBuilder
 module.exports = () => {
     //theModal
     const reasonModal = new modal()
-        .setTitle("close with reason")
+        .setTitle(l.buttons.closeWithReason)
         .setCustomId("OTCloseReasonModal")
         
     const reasonInput = new arb()
         .addComponents([
             new tib()
                 .setCustomId('OTreasonInput')
-                .setLabel("What is the reason for closing this ticket?")
+                .setLabel(l.messages.modalreason)
                 .setStyle(tis.Short)
                 .setMaxLength(100)
                 .setRequired(true)

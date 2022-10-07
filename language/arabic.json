@@ -48,7 +48,8 @@
     "close": "إغلاق التكت",
     "delete": "حذف التكت",
     "reopen": "إعادة فتح التكت",
-    "sendTranscript": "طبع التكت"
+    "sendTranscript": "طبع التكت",
+    "closeWithReason":"close with reason"
   },
   "messages": {
     "reopenTitle": "تم إعادة فتح التكت بنجاح!",
@@ -72,6 +73,11 @@
     "gettingdeleted": "يتم حذف التكت...",
 
     "none": "لا يوجد",
-    "reason": "سبب"
+    "reason": "سبب",
+
+    "deletedby":"deleted by",
+        "closedby":"closed by",
+        "modalreason":"What is the reason for closing this ticket?",
+        "chooseATicket": "Choose a ticket"
   }
 }

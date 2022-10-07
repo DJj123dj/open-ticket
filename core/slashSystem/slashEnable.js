@@ -40,10 +40,14 @@ module.exports = async () => {
         }
     },100)
 
+    //slashtranslation
+    const ST = require("../../language/slashcmds/slash.json").data
+
     //create a ticket (/new or /ticket)
     client.application.commands.create({
         name:"ticket",
         description:"Create a ticket!",
+        descriptionLocalizations:ST.newticket,
         defaultPermission:true,
         type:act.ChatInput,
         options:[
@@ -53,7 +57,6 @@ module.exports = async () => {
                 description:"The type of ticket.",
                 required:true,
                 choices:choices
-
             }
         ]
     },sid).then(() => {
@@ -65,6 +68,7 @@ module.exports = async () => {
         description:"Create a ticket!",
         defaultPermission:true,
         type:act.ChatInput,
+        descriptionLocalizations:ST.newticket,
         options:[
             {
                 type:acot.String,
@@ -84,6 +88,7 @@ module.exports = async () => {
         name:"help",
         description:"View the available commands.",
         defaultPermission:true,
+        descriptionLocalizations:ST.help,
         type:act.ChatInput
     },sid).then(() => {
         readystats++
@@ -95,6 +100,7 @@ module.exports = async () => {
         name:"close",
         description:"Close the current ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.close,
         type:act.ChatInput,
         options:[{
             name:"reason",
@@ -112,6 +118,7 @@ module.exports = async () => {
         name:"delete",
         description:"Delete the current ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.delete,
         type:act.ChatInput
     },sid).then(() => {
         readystats++
@@ -122,6 +129,7 @@ module.exports = async () => {
         name:"message",
         description:"Create a ticket message.",
         defaultPermission:true,
+        descriptionLocalizations:ST.message,
         type:act.ChatInput,
         options:[
             {
@@ -143,6 +151,7 @@ module.exports = async () => {
         name:"add",
         description:"Add people to this ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.add,
         type:act.ChatInput,
         options:[
             {
@@ -161,6 +170,7 @@ module.exports = async () => {
         name:"remove",
         description:"Remove people from this ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.remove,
         type:act.ChatInput,
         options:[
             {
@@ -179,6 +189,7 @@ module.exports = async () => {
         name:"rename",
         description:"Rename this ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.rename,
         type:act.ChatInput,
         options:[
             {
@@ -197,6 +208,7 @@ module.exports = async () => {
         name:"reopen",
         description:"Reopen this ticket.",
         defaultPermission:true,
+        descriptionLocalizations:ST.reopen,
         type:act.ChatInput
     },sid).then(() => {
         readystats++

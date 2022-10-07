@@ -48,7 +48,8 @@
         "close":"Inchide ticket-ul",
         "delete":"Sterge ticket-ul",
         "reopen":"Re-deschide un ticket",
-        "sendTranscript":"Transcript"
+        "sendTranscript":"Transcript",
+        "closeWithReason":"Inchide cu motiv"
     },
     "messages":{
         "reopenTitle":"Ticket Re-deschis!",
@@ -72,6 +73,11 @@
         "gettingdeleted":"Ticket-ul se sterge...",
 
         "none":"niciunul",
-        "reason":"Motiv"
+        "reason":"Motiv",
+
+        "deletedby":"Sters de",
+        "closedby":"Inchis de",
+        "modalreason":"Care este motivul pentru inchiderea acestui ticket?",
+        "chooseATicket": "Alege un ticket"
     }
 }

@@ -48,7 +48,8 @@
         "close":"Sluit Ticket",
         "delete":"Verwijder Ticket",
         "reopen":"Heropen Ticket",
-        "sendTranscript":"Transcript"
+        "sendTranscript":"Transcript",
+        "closeWithReason":"sluit met reden"
     },
     "messages":{
         "reopenTitle":"Ticket heropend!",
@@ -72,6 +73,11 @@
         "gettingdeleted":"Ticket wordt verwijderd...",
 
         "none":"geen",
-        "reason":"reden"
+        "reason":"reden",
+
+        "deletedby":"verwijderd door",
+        "closedby":"gesloten door",
+        "modalreason":"Wat is de reden om dit ticket te sluiten?",
+        "chooseATicket": "Kies een ticket"
     }
 }

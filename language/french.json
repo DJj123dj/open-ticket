@@ -48,7 +48,8 @@
         "close":"Fermer le ticket",
         "delete":"Supprimer le billet",
         "reopen":"Billet de réouverture",
-        "sendTranscript":"Transcript"
+        "sendTranscript":"Transcript",
+        "closeWithReason":"fermer avec une raison"
     },
     "messages":{
         "reopenTitle":"A rouvert ce ticket!",
@@ -72,6 +73,11 @@
         "gettingdeleted":"Le ticket est en cours de suppression...",
 
         "none":"rien",
-        "reason":"raison"
+        "reason":"raison",
+
+        "deletedby":"supprimé par",
+        "closedby":"fermé par",
+        "modalreason":"Qu’elle est la raison pour fermer ce ticket?",
+        "chooseATicket": "Choisir un ticket"
     }
 }

@@ -296,7 +296,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     if (enableTranscript == true && mode != "deletenotranscript"){
 
         const transcriptReason = (mode == "close") ? "**"+l.messages.reason+":** "+newReason : "**"+l.messages.reason+":** "+l.messages.none
-        const closedByPrefix = (mode.startsWith("delete")) ? "deleted by" : "closed by"
+        const closedByPrefix = (mode.startsWith("delete")) ? l.messages.deletedby : l.messages.closedby
 
         if (config.system.enable_transcript || config.system.enable_DM_transcript){
             var fileattachment = await require("../transcript").createTranscript(channelmessages,channel)

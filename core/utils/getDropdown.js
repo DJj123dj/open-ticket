@@ -15,11 +15,11 @@ exports.getDropdown = (ids) => {
         .setDisabled(false)
         .setMaxValues(1)
         .setMinValues(1)
-        .setPlaceholder("Choose a ticket")
+        .setPlaceholder(l.messages.chooseATicket)
         .addOptions(
             new discord.SelectMenuOptionBuilder()
                 .setDefault(true)
-                .setLabel("Choose a ticket")
+                .setLabel(l.messages.chooseATicket)
                 .setValue("OTChooseTicket")
         )
         

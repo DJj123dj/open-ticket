@@ -48,7 +48,8 @@
         "close":"Ticket schließen",
         "delete":"Ticket löschen",
         "reopen":"Ticket wieder öffnen",
-        "sendTranscript":"Transcript-Datei senden"
+        "sendTranscript":"Transcript-Datei senden",
+        "closeWithReason":"Geschlossen mit dem Grund"
     },
     "messages":{
         "reopenTitle":"Dieses Ticket wiedereröffnet!",
@@ -72,6 +73,11 @@
         "gettingdeleted":"Ticket wird gelöscht...",
 
         "none":"none",
-        "reason":"reason"
+        "reason":"reason",
+
+        "deletedby":"Gelöscht von",
+        "closedby":"Geschlossen von",
+        "modalreason":"Was ist der Grund für das schließen des Tickets?",
+        "chooseATicket": "Wähle ein Ticket"
     }
 }

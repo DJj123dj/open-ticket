@@ -1,15 +1,10 @@
-## We need translators!
-If you know a language that isn't already in open ticket and you can write json,
-then is this the job for you!
+# Open Ticket
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.0.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.0.0)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![documentation](https://img.shields.io/badge/documentation-Click%20Here-yellow.svg?style=flat-square)](https://docs.openticket.dj-dj.be)
 
-make a ticket in our server to start!
+Open ticket is the most configurable open-source ticket bot for discord! Made with the newest technologies. Like: Slash commands, transcripts, multiple ticket types, buttons & dropdowns!
+Start using it now, you can do anything!
 
-*if you translate, you will come in the credits*
-
-# open-ticket
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.0.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.0.0)  [![npm](https://img.shields.io/badge/npm-external%20libraries%20needed-CB3837.svg?style=flat-square&logo=npm)](#packages)  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) 
-
-This is an open-source discord ticket bot, you can configure it and it comes with cool features like transcripts & custom options!
+*We love to hear suggestions for more features!*
 
 <img src="logo.png" alt="Open Ticket logo" style="height: 200px; width:200px;"/>
 
@@ -22,7 +17,7 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 #### And our translators!
 - ExothDE
 - 1x1
-- R0JO
+- Redactado
 - t0miiis
 - josuens14
 - M4
@@ -33,17 +28,15 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - discord interaction buttons
 - slash & text commands
 - close, delete & re-open tickets
-- translation in 8 different languages
-- dynamic database system
+- translation in 10 different languages
 - transcripts
 - add/remove users from a ticket
-- custom colors & name for embeds
-- customise your ticket
-- create url buttons for websites
-- create reaction roles
-- build with discord.js v14
-- configure everything per ticket
-- remove credits if you want :(
+- a lot of customisation options.
+- tickets, reaction roles & links are all possible!
+- choose between buttons or dropdowns!
+- discord.js v14
+- everyting is configurable
+- custom API + plugins
 - unlimited tickets spread over multiple messages
 - close with reason
 
@@ -51,39 +44,16 @@ This is an open-source discord ticket bot, you can configure it and it comes wit
 - share transcripts
 - view transcripts in html
 
-## installation
-**You need `node.js 16` to run this project!**
+## quick start
+[Click here to start your adventure!](https://docs.openticket.dj-dj.be/quick-start)
 
-### packages
-- chalk => version `latest`
-- discord.js => version `latest`
-- express => version `latest`
-- node-localstorage => version `latest`
-- axios => version `latest`
-
-You can install all of them by running `npm install`
-
-## running
-you can run `node index.js` but i would recommend you to use `npm start`
-
-if there are any errors, you can open an **issue on github** or **contact me in our discord server**.
-
-### config
-Our config documentation is moved to another file:
-[click here to view](https://www.github.com/DJj123dj/open-ticket/wiki/config-v3.0.0)
-
-### intents & permissions
-In the discord developer portal in the "bot" panel you will find 3 switches under the title "Gateaway Intents". The following switches should always be turned on
-- `SERVER MEMBERS INTENT`
-- `MESSAGE CONTENT INTENT`
-
-To work the best, the bot needs `ADMINISTRATOR` permissions.
-You can also configure your own permissions
+## documentation
+[Official Documentation](https://docs.openticket.dj-dj.be)
 
 ## information
 
 _v3.0.0_
 
-changelog: [click here](https://www.github.com/DJj123dj/open-ticket/wiki/Changelog)
+changelog: [click here](https://docs.openticket.dj-dj.be/other/changelog)
 
 © 2022 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.dj-dj.be) | [terms of service](https://www.dj-dj.be/terms)
