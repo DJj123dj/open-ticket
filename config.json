@@ -100,7 +100,7 @@
             "enableCustomColor":false,
             "color":"#ffffff",
 
-            "options":["general","apply"],
+            "options":["general"],
             "enableTicketExplaination":true,
             "enableMaxTicketsWarning":true
         }
