@@ -19,9 +19,13 @@ module.exports = () => {
                 /**@type {Error} */
                 const theError = err
                 if (api.enableAPIdebug){
-                    const data = fs.readFileSync("./apiDebug.txt")
-                    const newData = data ? data.toString() : ""
-                    fs.writeFileSync("./apiDebug.txt",newData+"ERROR: "+theError.name+": "+theError.message+"\n"+theError.stack+"\n\n")
+                    try {
+                        const data = fs.readFileSync("./apiDebug.txt")
+                        const newData = data ? data.toString() : ""
+                        fs.writeFileSync("./apiDebug.txt",newData+"ERROR: "+theError.name+": "+theError.message+"\n"+theError.stack+"\n\n")
+                    }catch{
+                        fs.writeFileSync("./apiDebug.txt","ERROR: "+theError.name+": "+theError.message+"\n"+theError.stack+"\n\n")
+                    }
                 }
                 failcount++
                 totalcount++

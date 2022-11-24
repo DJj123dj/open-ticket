@@ -4,7 +4,8 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const l = bot.language
-const storage = bot.storage
+
+const configParser = require("../../utils/configParser")
 
 
 //EVENT API:
@@ -48,7 +49,7 @@ exports.onTicketOpen = (user,channel,guild,date,ticketdata) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  * @param {String} reason
  */
 exports.onTicketClose = (user,channel,guild,date,ticketdata,reason) => {
@@ -69,7 +70,7 @@ exports.onTicketClose = (user,channel,guild,date,ticketdata,reason) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  */
 exports.onTicketDelete = (user,channel,guild,date,ticketdata) => {
     //system
@@ -89,7 +90,7 @@ exports.onTicketDelete = (user,channel,guild,date,ticketdata) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  */
 exports.onTicketReopen = (user,channel,guild,date,ticketdata) => {
     //system
@@ -110,7 +111,7 @@ exports.onTicketReopen = (user,channel,guild,date,ticketdata) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  */
 exports.onTicketAdd = (user,editeduser,channel,guild,date,ticketdata) => {
     //system
@@ -131,7 +132,7 @@ exports.onTicketAdd = (user,editeduser,channel,guild,date,ticketdata) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  */
 exports.onTicketRemove = (user,editeduser,channel,guild,date,ticketdata) => {
     //system
@@ -237,7 +238,7 @@ exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  */
 
 /**
@@ -246,7 +247,7 @@ exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  * @param {String} reason
  */
 
@@ -265,7 +266,7 @@ exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
  * @param {Date} date 
- * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:Object|false}} ticketdata 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
  */
 
 /**

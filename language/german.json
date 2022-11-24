@@ -3,8 +3,7 @@
         "missingArgsTitle":"Ungültiges Argument!",
         "missingArgsDescription":"Fehlendes Argument!",
         "noPermsTitle":"Du hast keine Rechte!",
-        "noPermsDescription":"You need the `ADMINISTRATOR` permission or be in the list of allowed roles!",
-        "noPermsDelete":"Only admins can delete a ticket!",
+        "noPermsDescription":"Sie haben nicht die richtigen Rollen, um diesen Befehl auszuführen!\nSie benötigen die `ADMINISTRATOR` Erlaubnis oder in der Liste der erlaubten Rollen sein!",
         "chooseFromListTitle":"Ungültige ID",
         "chooseFromListDescription":"Wählen Sie eine der folgenden ID:",
         "boterror":"Bot Fehler!",
@@ -15,24 +14,30 @@
         "anotherOption":"Diese Option ist kein Ticket, sondern eine andere Art!",
         "maxAmountTitle":"Das Limit wurde erreicht!",
         "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neue erstellen.!",
-        "somethingWentWrong":"**Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
+        "somethingWentWrong":"Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
         "somethingWentWrongTranscript":"Bei der Erstellung der Transcript ist etwas schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
     },
     "commands":{
-        "userAddedTitle":"Added {0} to this ticket!",
-        "userRemovedTitle":"Removed {0} from this ticket!",
-        "renameTitle":"Changed the name to {0}!",
-        "closeTitle":"Closed this ticket!",
-        "deleteTitle":"Deleting this ticket...",
-        "reopenTitle":"Re-Opened this ticket!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
+        "userAddedTitle":"User geaddet!",
+        "userAddedDescription":"{0} wird zu diesem Ticket hinzugefügt!",
+        "userRemovedTitle":"User entfernt!",
+        "userRemovedDescription":"{0} wird aus diesem Ticket entfernt!",
 
-        "ticketWarning":"The embed is in the message below!",
-        "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
+        "renameTitle":"Der Name wurde geändert!",
+        "renameWarning":"Achtung: Sie können den Kanalnamen nur 2 Mal pro Minute ändern!\n(dies ist auf die Begrenzung der Diskordrate zurückzuführen)",
+
+        "closeTitle":"Dieses Ticket schließen!",
+        "closeDescription":"Sie können dieses Ticket schließen, indem Sie auf die Schaltfläche unten klicken!",
+        "deleteTitle":"Löschen Sie dieses Ticket!",
+        "deleteDescription":"Sie können dieses Ticket löschen, indem Sie auf die Schaltfläche unten klicken!",
+        "reopenTitle":"Öffne dieses Ticket erneut!",
+        "reopenDescription":"Sie können dieses Ticket erneut öffnen, indem Sie auf die Schaltfläche unten klicken!",
+
+        "ticketWarning":"Die Einbettung befindet sich in der Nachricht unten!",
+        "maxTicketWarning":"**Warnung:** _Sie können nur {0} ticket(s) erstellen zu einer Zeit!_"
     },
     "helpMenu":{
-        "title":"Available Commands:",
+        "title":"Hilfe Menu:",
         "header1":"**Gehe zu {0} um ein Ticket zu erstellen!**\n\n",
         "header2":"**Führen Sie den Befehl `/new` oder `/ticket` um ein Ticket zu erstellen!**\n\n",
 
@@ -64,20 +69,15 @@
         "deletedTicketDmTitle":"Ticket löschen!",
         "closedTicketDmDescription":"Ihr Ticket ist geschlossen!",
         "deletedTicketDmDescription":"Ihr Ticket ist gelöscht!",
-        "reopenTicketDmTitle":"Ticket neu Eröffnen!",
-        "reopenTicketDmDescription":"Dein Ticket ist Neu eröffnet!",
         "newTranscriptTitle":"Eine neue Transscript finden Sie hier!",
+        "newTranscriptDescription":"Die Abschrift finden Sie in der obigen Textdatei!",
         "hereIsTheTranscript":"Hier ist das Transscript:",
 
         "chooseCategory":"Wähle eine Kategorie:",
-        "gettingdeleted":"Ticket wird gelöscht...",
-
-        "none":"none",
-        "reason":"reason",
 
         "deletedby":"Gelöscht von",
         "closedby":"Geschlossen von",
-        "modalreason":"Was ist der Grund für das schließen des Tickets?",
+        "modalreason":"Was ist der Grund?",
         "chooseATicket": "Wähle ein Ticket"
     }
 }
