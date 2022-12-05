@@ -11,7 +11,7 @@ const storage = bot.storage
 module.exports = () => {
     //dropdown placeholder
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isSelectMenu()) return
+        if (!interaction.isStringSelectMenu()) return
         if (interaction.customId != "OTdropdownMenu") return
         if (interaction.values.includes("OTChooseTicket")) interaction.deferUpdate()
 

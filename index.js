@@ -126,7 +126,11 @@ client.on('ready',async () => {
 
         log("system","bot logged in!")
 
-        await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
+        try {
+            await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
+        }catch{
+            this.errorLog.log("info","tried to cache user information, failed!")
+        }
         return
     }
 
@@ -163,7 +167,7 @@ client.on('ready',async () => {
             console.log(chalk.green("switching to slashDisable.js"))
             require("./core/slashSystem/slashDisable")()
         }else{
-            console.log(chalk.red("Internal Error: unknown slash mode!"))
+            console.log(chalk.red("[SLASH CMD MANAGER]: unknown slash mode!"))
             process.exit(1)
         }
     }
