@@ -48,7 +48,7 @@ Start using it now, you can do anything!
 [Click here to start your adventure!](https://docs.openticket.dj-dj.be/quick-start)
 
 ## documentation
-[Official Documentation](https://docs.openticket.dj-dj.be)
+[<img src="./otWIKI.png" width="400px" href="https://docs.openticket.dj-dj.be">](https://docs.openticket.dj-dj.be)
 
 ## information
 
