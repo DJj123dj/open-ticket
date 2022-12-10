@@ -11,7 +11,7 @@ const storage = bot.storage
 module.exports = () => {
     //dropdown placeholder
     client.on("interactionCreate",(interaction) => {
-        if (!interaction.isSelectMenu()) return
+        if (!interaction.isStringSelectMenu()) return
         if (interaction.customId != "OTdropdownMenu") return
         if (interaction.values.includes("OTChooseTicket")) interaction.deferUpdate()
 
@@ -26,7 +26,7 @@ module.exports = () => {
             var customId = "OTnewT"+interaction.options.getString("type")
         }else if (interaction.isButton()){
             var customId = interaction.customId
-        }else if (interaction.isSelectMenu() && (interaction.customId == "OTdropdownMenu")){
+        }else if (interaction.isStringSelectMenu() && (interaction.customId == "OTdropdownMenu")){
             var customId = interaction.values[0]
 
         }else return
@@ -53,7 +53,7 @@ module.exports = () => {
                 interaction.deferUpdate()
             }else if (interaction.isChatInputCommand()){
                 interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)]})
-            }else if (interaction.isSelectMenu()){
+            }else if (interaction.isStringSelectMenu()){
                 await interaction.deferUpdate()
             }
 
