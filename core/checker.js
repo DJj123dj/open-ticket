@@ -85,6 +85,9 @@ exports.checker = async () => {
 
     /**@param {"userid"|"roleid"|"channelid"|"serverid"} mode @param {String[]} arrayValue @param {String} path */
     const checkDiscordArray = (mode,arrayValue,path) => {
+        if (!Array.isArray(arrayValue)){
+            return createError("'"+path+"' | this needs to be an Array!")
+        }
         if (mode == "userid"){
             arrayValue.forEach((value,index) => {
                 if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
@@ -438,6 +441,9 @@ exports.checker = async () => {
         const splitw = w.split("'")
         if (splitw.length > 1){
             var splitstring = chalk.yellow(splitw[0])+chalk.blue("'"+splitw[1]+"'")+chalk.yellow(splitw[2])
+            if (splitw[3]){splitstring = splitstring+chalk.yellow(splitw[3])}
+            if (splitw[4]){splitstring = splitstring+chalk.yellow(splitw[4])}
+            if (splitw[5]){splitstring = splitstring+chalk.yellow(splitw[5])}
         }else {var splitstring = chalk.yellow(splitw[0])}
         console.log(splitstring)
     })

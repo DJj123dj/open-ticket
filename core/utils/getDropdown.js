@@ -7,10 +7,10 @@ const configParser = require("./configParser")
 /**
  * 
  * @param {String[]} ids
- * @returns {discord.SelectMenuBuilder|false}
+ * @returns {discord.StringSelectMenuBuilder|false}
  */
 exports.getDropdown = (ids) => {
-    const dropdown = new discord.SelectMenuBuilder()
+    const dropdown = new discord.StringSelectMenuBuilder()
         .setCustomId("OTdropdownMenu")
         .setDisabled(false)
         .setMaxValues(1)

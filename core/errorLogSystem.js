@@ -93,10 +93,24 @@ exports.custom = (title,message,emoji,color) => {
     return x
 }
 
+exports.clearDebugFile = () => {
+    const fs = require("fs")
+    if (!fs.existsSync("./openticketdebug.txt")) return
+    const content = fs.readFileSync("./openticketdebug.txt").toString().split("\n")
+    if (content.length < 5000) return
+    for (let i = 0; i < 4000; i++) {
+        content.shift()
+    }
+
+    const newContent = "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="+content.join("\n")
+    fs.writeFileSync("./openticketdebug.txt",newContent)
+}
+
 const normalLog = (debugString) => {
     const fs = require("fs")
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nSYSTEM: "+debugString)
+    this.clearDebugFile()
 }
 
 /**

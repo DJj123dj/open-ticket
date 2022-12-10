@@ -218,12 +218,14 @@ const debugLog = (debugString) => {
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nDEBUG: "+debugString)
     }
+    this.errorLog.clearDebugFile()
 }
 const errorLog = (errorString,stack) => {
     if (!APIConfig.disable.debug.all){
     const content = fs.existsSync("./openticketdebug.txt") ? fs.readFileSync("./openticketdebug.txt").toString() : "==========================\n<OPEN TICKET DEBUG FILE:>\n=========================="
     fs.writeFileSync("./openticketdebug.txt",content+"\nERROR: "+errorString+" STACK: "+stack)
     }
+    this.errorLog.clearDebugFile()
 }
 this.errorLog.log("debug","OT error system loaded successfully")
 
