@@ -37,3 +37,7 @@ exports.delete = (category,id) => {
     ls.removeItem(category+"--"+id)
     return true
 }
+
+this.set("category","key","value")
+this.get("category","key",)
+this.delete("category","key")

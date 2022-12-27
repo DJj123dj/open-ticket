@@ -13,7 +13,9 @@ module.exports = () => {
     client.on("interactionCreate",(interaction) => {
         if (!interaction.isStringSelectMenu()) return
         if (interaction.customId != "OTdropdownMenu") return
-        if (interaction.values.includes("OTChooseTicket")) interaction.deferUpdate()
+        if (interaction.values.includes("OTChooseTicket")){
+            interaction.deferUpdate()
+        }
 
     })
 
@@ -50,11 +52,15 @@ module.exports = () => {
             if (currentTicketOptions == false) return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
 
             if (interaction.isButton()){
-                interaction.deferUpdate()
+                try {
+                    interaction.deferUpdate()
+                } catch{}
             }else if (interaction.isChatInputCommand()){
                 interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)]})
             }else if (interaction.isStringSelectMenu()){
-                await interaction.deferUpdate()
+                try {
+                    interaction.deferUpdate()
+                } catch{}
             }
 
             if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){

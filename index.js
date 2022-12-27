@@ -124,6 +124,12 @@ client.on('ready',async () => {
             setStatus(config.status.type,config.status.text)
         }
 
+        if (fs.existsSync("./storage/slashcmdEnabled.txt")){
+            /**@type {"true"|"false"} */
+            const data = fs.readFileSync("./storage/slashcmdEnabled.txt").toString()
+            if (data === "true"){require("./core/slashSystem/autoSlashUpdate")()}
+        }else{fs.writeFileSync("./storage/slashcmdEnabled.txt","false")}
+
         log("system","bot logged in!")
 
         try {
@@ -150,10 +156,19 @@ client.on('ready',async () => {
         if (config.status.enabled){
             setStatus(config.status.type,config.status.text)
         }
+        if (fs.existsSync("./storage/slashcmdEnabled.txt")){
+            /**@type {"true"|"false"} */
+            const data = fs.readFileSync("./storage/slashcmdEnabled.txt").toString()
+            if (data === "true"){require("./core/slashSystem/autoSlashUpdate")()}
+        }else{fs.writeFileSync("./storage/slashcmdEnabled.txt","false")}
 
         log("system","bot logged in!")
 
-        await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
+        try {
+            await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
+        }catch{
+            this.errorLog.log("info","tried to cache user information, failed!")
+        }
     }else{
         console.log(chalk.red("STARTING IN ")+chalk.blue("SLASH MODE")+chalk.red("..."))
         this.errorLog.log("debug","slashmode activated")

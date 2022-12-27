@@ -22,7 +22,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTcloseTicketTrue") return
         
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
 
         if (closeTicketButtonChecker == true) return
         closeTicketButtonChecker = true

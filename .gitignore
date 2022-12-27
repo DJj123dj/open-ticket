@@ -10,6 +10,7 @@ devConfig5.json
 openticketdebug.txt
 developerChangelog.md
 storage/dynamicDB/
+storage/slashcmdEnabled.txt
 storage/.DS_Store
 .vscode/
 livestatus.json

@@ -16,14 +16,20 @@ module.exports = async () => {
         if (interaction.isButton() && !interaction.customId.startsWith("newR")) return
         if (interaction.isStringSelectMenu() && !(interaction.customId == "OTdropdownMenu")) return
 
-        interaction.deferUpdate()
+        
+        
 
 
         const optionidRaw = interaction.isStringSelectMenu() ? interaction.values[0] : interaction.customId
+        if (!optionidRaw.includes("newR")) return
         const optionid = optionidRaw.split("newR")[1]
         if (!optionid){
             interaction.reply({embeds:[bot.errorLog.serverError(l.errors.roleDoesntExist)]})
             return
+        }else{
+            try {
+                interaction.deferUpdate()
+            } catch{}
         }
 
         try {
@@ -53,14 +59,14 @@ module.exports = async () => {
                 
             }else if (mode == "add&remove"){
                 option.roles.forEach((role) => {
-                    if (interaction.guild.members.cache.find(u => u.id == user.id).roles.cache.has(role)){
-                        interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
+                    if (!interaction.guild.members.cache.find(u => u.id == user.id).roles.cache.has(role)){
+                        interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
                         
                         log("system","added role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
                         const apirole = interaction.guild.roles.cache.find(r => r.id == role)
                         APIEvents.onReactionRole("add","add&remove",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                     }else {
-                        interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
+                        interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
                         
                         log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
                         const apirole = interaction.guild.roles.cache.find(r => r.id == role)
