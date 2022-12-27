@@ -16,7 +16,7 @@ const l = bot.language
 
 
 //OTConfigMessage
-/**@typedef {{id: string, name: string, description: string, dropdown: boolean, enableFooter: boolean, footer: string, enableThumbnail: boolean, thumbnail: string, enableCustomColor: boolean, color: string, options: string[], enableTicketExplaination: boolean, enableMaxTicketsWarning: boolean}} OTConfigMessage*/
+/**@typedef {{id: string, name: string, description: string, dropdown: boolean, enableFooter: boolean, footer: string, enableThumbnail: boolean, thumbnail: string, enableCustomColor: boolean, color: string, options: string[], other:{enableTicketExplaination: boolean, enableMaxTicketsWarning: boolean, customDropdownPlaceholder:{enable:Boolean,text:String}, customCategoryText:{enable:Boolean,text:String}, embedTitleURL:{enable:Boolean,url:String} } }} OTConfigMessage*/
 
 //StringOptions
 /**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDmOnOpen"|"ticketmessage"|"thumbnail"|"closedCategory"} OTTicketStringOptions */

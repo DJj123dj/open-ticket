@@ -92,7 +92,7 @@
             "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v3.0.1 - I'm a footer!",
+            "footer":"Open Ticket v3.1.0 - I'm a footer!",
 
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",
@@ -101,8 +101,23 @@
             "color":"#ffffff",
 
             "options":["general","apply"],
-            "enableTicketExplaination":true,
-            "enableMaxTicketsWarning":true
+            
+            "other":{
+                "enableTicketExplaination":true,
+                "enableMaxTicketsWarning":true,
+                "customDropdownPlaceholder":{
+                    "enable":false,
+                    "text":"Choose a ticket"
+                },
+                "customCategoryText":{
+                    "enable":false,
+                    "text":"choose a category:"
+                },
+                "embedTitleURL":{
+                    "enable":false,
+                    "url":"https://www.dj-dj.be/projects/open-ticket"
+                }
+            }
         }
     ]
 }

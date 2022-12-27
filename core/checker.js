@@ -312,8 +312,8 @@ exports.checker = async () => {
         }
 
         //ticket explaination & max tickets warning
-        checkType(input.enableTicketExplaination,"boolean",path+"/enableTicketExplaination")
-        checkType(input.enableMaxTicketsWarning,"boolean",path+"/enableMaxTicketsWarning")
+        checkType(input.other.enableTicketExplaination,"boolean",path+"/other/enableTicketExplaination")
+        checkType(input.other.enableMaxTicketsWarning,"boolean",path+"/other/enableMaxTicketsWarning")
 
         //OPTIONS!!!
         var counter = 0
