@@ -105,6 +105,7 @@
             "other":{
                 "enableTicketExplaination":true,
                 "enableMaxTicketsWarning":true,
+                
                 "customDropdownPlaceholder":{
                     "enable":false,
                     "text":"Choose a ticket"

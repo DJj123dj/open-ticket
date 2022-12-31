@@ -4,7 +4,12 @@ const location = "./storage/database.json"
 
 /**@returns {[{category:String, key:String, value:String}]}*/
 function getData(){
-    return JSON.parse(fs.readFileSync(location).toString())
+    if (fs.existsSync(location)){
+        return JSON.parse(fs.readFileSync(location).toString())
+    }else{
+        fs.writeFileSync(location,"[]")
+        return []
+    }
 }
 /**@param {[{category:String, key:String, value:String}]} data*/
 function setData(data){
