@@ -22,7 +22,6 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     const guild = channel.guild
     const user = member.user
     const chalk = await (await import("chalk")).default
-    const channelmessages = await channel.messages.fetch()
 
     const newReason = reason ? reason : l.messages.none
 
@@ -30,9 +29,6 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
 
     //FIX CHANNEL COULD BE CLOSED AFTER DELETE:
     if (pendingDelete.includes(channel.id)) return false
-
-    //remove ot bot from transcript
-    channelmessages.sweep((msgSweep) => {return msgSweep.author.id == client.user.id})
 
     /**@type {String}*/
     const channelname = channel.name
@@ -293,53 +289,65 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     }
 
 
-    if (enableTranscript == true && mode != "deletenotranscript"){
+    const transcriptHandler = async () => {
+        if (enableTranscript == true && mode != "deletenotranscript"){
+            //transcript messages
+            const transcriptReason = (mode == "close") ? "**"+l.messages.reason+":** "+newReason : "**"+l.messages.reason+":** "+l.messages.none
+            const closedByPrefix = (mode.startsWith("delete")) ? l.messages.deletedby : l.messages.closedby
 
-        const transcriptReason = (mode == "close") ? "**"+l.messages.reason+":** "+newReason : "**"+l.messages.reason+":** "+l.messages.none
-        const closedByPrefix = (mode.startsWith("delete")) ? l.messages.deletedby : l.messages.closedby
+            if (config.system.enable_transcript || config.system.enable_DM_transcript){
+                const channelmessages = await channel.messages.fetch({cache:true})
+                //remove ot bot from transcript
+                channelmessages.sweep((msgSweep) => {return msgSweep.author.id == client.user.id})
 
-        if (config.system.enable_transcript || config.system.enable_DM_transcript){
-            var fileattachment = await require("../transcript").createTranscript(channelmessages,channel)
+                var fileattachment = await require("../transcript").createTranscript(channelmessages,channel)
 
-            if (fileattachment == false){log("system","internal error: transcript is not created!");return}
-        }
-                    
-        if (config.system.enable_transcript && !require("../api/api.json").disable.transcripts.server){
-            const transcriptEmbed = new discord.EmbedBuilder()
-                .setColor(config.main_color)
-                .setTitle("📄 "+l.messages.newTranscriptTitle)
-                .setDescription(transcriptReason)
-                .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
-            
-            guild.channels.cache.find(c => c.id == config.system.transcript_channel).send({
-                embeds:[transcriptEmbed],
-                files:[fileattachment]
-            })
-        }
+                if (fileattachment == false){log("system","internal error: transcript is not created!");return}
+            }
+                        
+            if (config.system.enable_transcript && !require("../api/api.json").disable.transcripts.server){
+                const transcriptEmbed = new discord.EmbedBuilder()
+                    .setColor(config.main_color)
+                    .setTitle("📄 "+l.messages.newTranscriptTitle)
+                    .setDescription(transcriptReason)
+                    .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
+                
+                guild.channels.cache.find(c => c.id == config.system.transcript_channel).send({
+                    embeds:[transcriptEmbed],
+                    files:[fileattachment]
+                })
+            }
 
-        if (config.system.enable_DM_transcript && !require("../api/api.json").disable.transcripts.dm){
-            const transcriptEmbed = new discord.EmbedBuilder()
-                .setColor(config.main_color)
-                .setTitle("📄 "+l.messages.newTranscriptTitle)
-                .setDescription(transcriptReason)
-                .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
-            
-                if (!isDatabaseError) ticketOpener.send({
-                embeds:[transcriptEmbed],
-                files:[fileattachment]
-            })
+            if (config.system.enable_DM_transcript && !require("../api/api.json").disable.transcripts.dm){
+                const transcriptEmbed = new discord.EmbedBuilder()
+                    .setColor(config.main_color)
+                    .setTitle("📄 "+l.messages.newTranscriptTitle)
+                    .setDescription(transcriptReason)
+                    .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
+                
+                    if (!isDatabaseError) ticketOpener.send({
+                    embeds:[transcriptEmbed],
+                    files:[fileattachment]
+                })
+            }
         }
     }
+    const deleteHandler = async () => {
+        if (deleteRequired){
+            //const timer = () => {return new Promise((resolve,reject) => {
+            //    setTimeout(() => {resolve(true)},7000)
+            //})}
+            //await timer()
 
-    if (deleteRequired){
-        //const timer = () => {return new Promise((resolve,reject) => {
-        //    setTimeout(() => {resolve(true)},7000)
-        //})}
-        //await timer()
-
-        setTimeout(async () => {
             pendingDelete.shift()
-            await channel.delete()
-        },6000)
+                await channel.delete()
+
+            //setTimeout(async () => {
+            //    pendingDelete.shift()
+            //    await channel.delete()
+            //},6000)
+        }
     }
+    await transcriptHandler()
+    deleteHandler()
 }

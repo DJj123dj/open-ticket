@@ -34,6 +34,8 @@ module.exports = async () => {
         process.stdout.cursorTo(0)
         process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 12")+" commands ready! (this can take up to 40 seconds)")
         if (readystats >= 12){
+            const fs = require("fs")
+            fs.writeFileSync("./storage/slashcmdEnabled.txt","true")
             console.log(chalk.green("\nready!"))
             console.log(chalk.blue("you can now start the bot with "+chalk.bgBlue("'npm start'")+"!"))
             process.exit(1)

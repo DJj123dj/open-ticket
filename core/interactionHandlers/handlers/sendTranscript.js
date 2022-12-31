@@ -20,7 +20,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTsendTranscript") return
 
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
         const tsmsg = await interaction.channel.send({embeds:[bot.embeds.commands.sendTranscriptEmbed(false,interaction.channel,interaction.user)]})
 
         const channelmessages = await interaction.channel.messages.fetch()

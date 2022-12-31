@@ -43,9 +43,12 @@ exports.createEmbed = (id) => {
         embed.setColor(config.main_color)
     }
 
+    if (data.other.embedTitleURL.enable) embed.setURL(data.other.embedTitleURL)
+
     var description = data.description
-    if (data.enableTicketExplaination){
-        description = description+"\n\n__"+l.messages.chooseCategory+"__\n"
+    if (data.other.enableTicketExplaination){
+        const chooseCategoryMSG = data.other.customCategoryText.enable ? data.other.customCategoryText.text : l.messages.chooseCategory
+        description = description+"\n\n__"+chooseCategoryMSG+"__\n"
 
         var ticketExplainations = []
         buttonData.forEach((button) => {
@@ -56,7 +59,7 @@ exports.createEmbed = (id) => {
         description = description+ticketExplainations.join("\n\n")
     }
 
-    if (data.enableMaxTicketsWarning){
+    if (data.other.enableMaxTicketsWarning){
         description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.max_allowed_tickets)
     }
 
@@ -92,7 +95,8 @@ exports.createEmbed = (id) => {
     //create the component IF DROPDOWN is true
     }else{
         const ids = data.options
-        const dropdown = require("./getDropdown").getDropdown(ids)
+        const customPlaceholder = data.other.customDropdownPlaceholder.enable ? data.other.customDropdownPlaceholder.text : false
+        const dropdown = require("./getDropdown").getDropdown(ids,customPlaceholder)
         var componentRows = [
             new discord.ActionRowBuilder()
                 .setComponents(dropdown)

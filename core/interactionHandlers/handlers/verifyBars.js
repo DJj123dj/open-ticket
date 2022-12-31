@@ -20,7 +20,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTcloseTicket") return
         
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
         interaction.message.edit({components:[bot.buttons.verifybars.closeVerifyBar]})
         
     })
@@ -28,7 +30,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTcloseTicketFalse") return
         
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
         interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
     })
 
@@ -37,7 +41,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicket") return
         
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
         interaction.message.edit({components:[bot.buttons.verifybars.deleteVerifyBar]})
         
     })
@@ -45,7 +51,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicketFalse") return
         
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
         interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
     })
 
@@ -54,7 +62,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicket1") return
         
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
         interaction.message.edit({components:[bot.buttons.verifybars.delete1VerifyBar]})
         
     })
@@ -62,7 +72,9 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicketFalse1") return
         
-        interaction.deferUpdate()
+        try {
+            interaction.deferUpdate()
+        } catch{}
         interaction.message.edit({components:[bot.buttons.close.closeCommandRow]})
     })
 }

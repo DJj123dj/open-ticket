@@ -311,10 +311,6 @@ exports.checker = async () => {
             checkHexColor(input.color,path+"/color")
         }
 
-        //ticket explaination & max tickets warning
-        checkType(input.enableTicketExplaination,"boolean",path+"/enableTicketExplaination")
-        checkType(input.enableMaxTicketsWarning,"boolean",path+"/enableMaxTicketsWarning")
-
         //OPTIONS!!!
         var counter = 0
         input.options.forEach((option) => {if (!configParser.optionExists(option)){counter++}})
@@ -327,6 +323,42 @@ exports.checker = async () => {
                     createWarn("'"+path+"/options:"+index+"' | this option doesnt exist!")
                 }
             })
+        }
+
+        //other
+        //ticket explaination & max tickets warning
+        if (typeof input.other != "object"){
+            createError("'"+path+"/other' | this object doesn't exist!")
+        }else{
+            checkType(input.other.enableTicketExplaination,"boolean",path+"/other/enableTicketExplaination")
+            checkType(input.other.enableMaxTicketsWarning,"boolean",path+"/other/enableMaxTicketsWarning")
+
+            //customDropdownPlaceholder
+            if (typeof input.other.customDropdownPlaceholder != "object"){
+                createError("'"+path+"/other/customDropdownPlaceholder' | this object doesn't exist!")
+            }else{
+                checkType(input.other.customDropdownPlaceholder.enable,"boolean",path+"/other/customDropdownPlaceholder/enable")
+                checkType(input.other.customDropdownPlaceholder.text,"string",path+"/other/customDropdownPlaceholder/text")
+                if (input.other.customDropdownPlaceholder.enable && input.other.customDropdownPlaceholder.text.length < 1){createError("'"+path+"/other/customDropdownPlaceholder/text' | there is no placeholder text!")}
+            }
+
+            //customCategoryText
+            if (typeof input.other.customCategoryText != "object"){
+                createError("'"+path+"/other/customCategoryText' | this object doesn't exist!")
+            }else{
+                checkType(input.other.customCategoryText.enable,"boolean",path+"/other/customCategoryText/enable")
+                checkType(input.other.customCategoryText.text,"string",path+"/other/customCategoryText/text")
+                if (input.other.customCategoryText.enable && input.other.customCategoryText.text.length < 1){createError("'"+path+"/other/customCategoryText/text' | there is no category text!")}
+            }
+
+            //embedTitleURL
+            if (typeof input.other.embedTitleURL != "object"){
+                createError("'"+path+"/other/embedTitleURL' | this object doesn't exist!")
+            }else{
+                checkType(input.other.embedTitleURL.enable,"boolean",path+"/other/embedTitleURL/enable")
+                checkType(input.other.embedTitleURL.url,"string",path+"/other/embedTitleURL/text")
+                if (input.other.embedTitleURL.enable && input.other.embedTitleURL.url.length < 1){createError("'"+path+"/other/embedTitleURL/url' | there is no url!")}
+            }
         }
     }
 
