@@ -21,8 +21,6 @@ module.exports = () => {
     const header = config.system.ticket_channel ? l.helpMenu.header1.replace("{0}","<#"+config.system.ticket_channel+">") : l.helpMenu.header2
     helpEmbed.setDescription(header+"`"+prefix+msgName+" <id>` ➜ _"+l.helpMenu.msgCmd+"_\n\n`"+prefix+"rename <name>` ➜ _"+l.helpMenu.renameCmd+"_\n`"+prefix+"close` ➜ _"+l.helpMenu.closeCmd+"_\n`"+prefix+"delete` ➜ _"+l.helpMenu.deleteCmd+"_\n`"+prefix+"reopen` ➜ _"+l.helpMenu.reopenCmd+"_\n\n`"+prefix+"add <user>` ➜ _"+l.helpMenu.addCmd+"_\n`"+prefix+"remove <user>` ➜ _"+l.helpMenu.removeCmd+"_")
 
-    if (config.credits) helpEmbed.setFooter({text:"Open-Ticket by DJdj Development | view on github for source code",iconURL:"https://raw.githubusercontent.com/DJj123dj/open-ticket/main/logo.png"})
-
     var otherprefix = prefix.endsWith(" ") ? prefix.substring(0,prefix.length-1) : prefix
 
     if (!DISABLE.commands.text.help) client.on("messageCreate",msg => {

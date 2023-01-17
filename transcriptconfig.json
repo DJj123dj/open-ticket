@@ -1,0 +1,17 @@
+{
+    "sendTranscripts":{
+        "enableChannel":true,
+        "channel":"968899606912061490",
+        
+        "enableDM":true
+    },
+    "style":{
+        "titleColor":"#49c100",
+        "background":{
+            "enableCustomBackground":true,
+            "backgroundModus":"image",
+            "backgroundData":"https://pbs.twimg.com/media/EBjFBlVXsAAhvXl?format=jpg&name=4096x4096"
+            
+        }
+    }
+}

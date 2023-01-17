@@ -50,8 +50,8 @@ module.exports = () => {
             }
         })
 
-        interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
         await interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
+        await interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
         await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
         deleteTicketButtonChecker = false
     })
@@ -90,8 +90,10 @@ module.exports = () => {
             }
         })
 
-        interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
-        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"deletenotranscript",false,true)
+        await interaction.message.edit({components:[bot.buttons.close.closeCommandRowDisabled]})
+        await interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
+        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
         deleteTicketButtonChecker1 = false
+
     })
 }

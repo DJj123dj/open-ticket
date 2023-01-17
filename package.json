@@ -16,9 +16,7 @@
     "axios": "^0.27.2",
     "chalk": "^5.0.1",
     "discord.js": "^14.7.1",
-    "express": "^4.17.1",
-    "node": "^16.10.0",
-    "node-localstorage": "^2.2.1"
+    "node": "^16.10.0"
   },
   "repository": {
     "type": "git",

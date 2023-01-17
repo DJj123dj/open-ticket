@@ -368,7 +368,7 @@ exports.checker = async () => {
     //--------------------------|
     //--------------------------|
 
-    var configArray = ["main_color","server_id","auth_token","main_adminroles","prefix","languagefile","credits","status","system","options","messages"]
+    var configArray = ["main_color","server_id","auth_token","main_adminroles","prefix","languagefile","status","system","options","messages"]
     configArray.forEach((item) => {
         if (config[item] == undefined){
             throw new Error("\n\nMAIN ERROR: the item '"+item+"' doesn't exist in config.json")
@@ -390,7 +390,6 @@ exports.checker = async () => {
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 
-    checkType(config.credits,"boolean","credits")
     //status:
         checkType(config.status.enabled,"boolean","status/enabled")
         if (config.status.enabled){
@@ -423,11 +422,6 @@ exports.checker = async () => {
             createError("'system/closeMode' | the close mode must be adminonly or normal")
         }
 
-        checkType(config.system.enable_transcript,"boolean","system/enable_transcript")
-        checkType(config.system.enable_DM_transcript,"boolean","system/enable_DM_transcript")
-        if (config.system.enable_transcript){
-            checkDiscord("channelid",config.system.transcript_channel,"system/transcript_channel")
-        }
         checkType(config.system.showSlashcmdsInHelp,"boolean","system/showSlashcmdsInHelp")
 
     //options

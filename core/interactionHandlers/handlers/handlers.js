@@ -1,6 +1,5 @@
 module.exports = () => {
     require("./firstmsg")()
-    require("./sendTranscript")()
     require("./verifyBars")()
 
     //accepted

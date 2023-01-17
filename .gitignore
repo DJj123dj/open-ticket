@@ -12,6 +12,7 @@ developerChangelog.md
 storage/dynamicDB/
 storage/slashcmdEnabled.txt
 storage/database.json
+storage/tsdatabase.json
 storage/.DS_Store
 .vscode/
 livestatus.json

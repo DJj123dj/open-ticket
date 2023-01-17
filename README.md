@@ -15,14 +15,15 @@ Start using it now, you can do anything!
 - Sanke: for translation & new ideas
 - Everyone that reported a bug
 #### And our translators!
-- ExothDE
-- 1x1
-- Redactado
-- t0miiis
-- josuens14
-- M4
-- David.
-- Maurizio
+- Sanke#6086 (Romanian & French)
+- Redactado#1673 (Spanish)
+- t0miiis#3022 (Czech)
+- josuens14 (Spanish)
+- M4#5882 (Arabic)
+- ChilledBroke#9986 (Arabic)
+- David.#0187 (German)
+- Maurizio#0268 (Italian)
+- the_gamer#5095 (Danish)
 
 ## features
 - discord interaction buttons

@@ -1,0 +1,105 @@
+{
+	"version": "1.0.0",
+	"otversion": "3.1.0",
+	"style": {
+		"backgroundData": "https://pbs.twimg.com/media/EBjFBlVXsAAhvXl?format=jpg&name=4096x4096",
+		"backgroundModus": "image",
+		"enableCustomBackground": true,
+		"titleColor": "#49c100"
+	},
+	"bot": {
+		"name": "DJdj Test Bot",
+		"id": 958290611331539000,
+		"pfp": "https://cdn.discordapp.com/avatars/958290611331538975/7a989e8ce6cde2b3e3c7fc15001452a0.webp"
+	},
+	"ticket": {
+		"name": "question-djj123dj",
+		"id": 1064653735772565500,
+		"guildname": "DJDJ bot test",
+		"guildid": 935983011281903600,
+		"creatorname": "DJj123dj#1706",
+		"creatorid": 779742674932072400,
+		"closedbyname": "DJj123dj#1706",
+		"closedbyid": 779742674932072400,
+		"closedtime": 1673903703543,
+		"openedtime": 1673903631015,
+		"messages": 4,
+		"files": 0
+	},
+	"messages": [
+		{
+			"author": {
+				"name": "DJdj Test Bot#7338",
+				"id": 958290611331539000,
+				"color": "#ffffff",
+				"pfp": "https://cdn.discordapp.com/avatars/958290611331538975/7a989e8ce6cde2b3e3c7fc15001452a0.webp"
+			},
+			"content": "<@779742674932072469> @here",
+			"timestamp": 1673903631356,
+			"embeds": [
+				{
+					"title": "Question",
+					"description": "The staff will help you soon!\n\n*Click on the button below to close the ticket!*",
+					"authorimg": false,
+					"authortext": false,
+					"footerimg": false,
+					"footertext": false,
+					"color": "#49c100",
+					"image": false,
+					"thumbnail": false,
+					"url": false
+				}
+			],
+			"files": []
+		},
+		{
+			"author": {
+				"name": "DJdj Test Bot#7338",
+				"id": 958290611331539000,
+				"color": "#ffffff",
+				"pfp": "https://cdn.discordapp.com/avatars/958290611331538975/7a989e8ce6cde2b3e3c7fc15001452a0.webp"
+			},
+			"content": "",
+			"timestamp": 1673903631652,
+			"embeds": [],
+			"files": []
+		},
+		{
+			"author": {
+				"name": "DJj123dj#1706",
+				"id": 779742674932072400,
+				"color": "#ffffff",
+				"pfp": "https://cdn.discordapp.com/avatars/779742674932072469/4588af0ccb6a18a66d66c77bddbdfc81.webp"
+			},
+			"content": "**test markdown (again)**\n__hi__\n~~hello!~~\n\n_nice_\n\n**___super text!__**",
+			"timestamp": 1673903693407,
+			"embeds": [],
+			"files": []
+		},
+		{
+			"author": {
+				"name": "DJdj Test Bot#7338",
+				"id": 958290611331539000,
+				"color": "#ffffff",
+				"pfp": "https://cdn.discordapp.com/avatars/958290611331538975/7a989e8ce6cde2b3e3c7fc15001452a0.webp"
+			},
+			"content": "",
+			"timestamp": 1673903697253,
+			"embeds": [
+				{
+					"title": "❌ Deleting this ticket...",
+					"description": false,
+					"authorimg": false,
+					"authortext": false,
+					"footerimg": "https://cdn.discordapp.com/avatars/779742674932072469/4588af0ccb6a18a66d66c77bddbdfc81.webp",
+					"footertext": "DJj123dj#1706",
+					"color": "#49c100",
+					"image": false,
+					"thumbnail": false,
+					"url": false
+				}
+			],
+			"files": []
+		}
+	]
+}

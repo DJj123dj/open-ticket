@@ -49,7 +49,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     var enableTranscript = true
     var deleteRequired = false
 
-    if (mode == "delete"){
+    if (mode == "delete" || mode == "deletenotranscript"){
         //delete
         //check perms
         if (!guild) return
@@ -198,14 +198,6 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
                 )
                 .addComponents(
                     new discord.ButtonBuilder()
-                    .setCustomId("OTsendTranscript")
-                    .setDisabled(false)
-                    .setStyle(discord.ButtonStyle.Secondary)
-                    .setLabel(l.buttons.sendTranscript)
-                    .setEmoji("📄")
-                )
-                .addComponents(
-                    new discord.ButtonBuilder()
                     .setCustomId("OTreopenTicket")
                     .setDisabled(false)
                     .setStyle(discord.ButtonStyle.Success)
@@ -246,108 +238,23 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         })
 
 
-    }else if (mode == "deletenotranscript"){
-        //delete with no transcript
-        //check perms
-        if (!guild) return
-        if (!permsChecker.command(user.id,guild.id)){
-            permsChecker.sendUserNoPerms(user)
-            return
-        }
-
-        //start delete proccess
-        enableTranscript = false
-        deleteRequired = true
-        if (!nomessage){
-            await channel.send({content:"**"+l.messages.gettingdeleted+"**"})
-        }
-        log("system","deleted a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
-
-        if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
-
-        //getID & send DM & send api event
-        await channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
-            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
-
-            require("../api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
-
-            const id = hiddendata.data.find(d => d.key == "openerid").value
-
-            if (!id) return false
-
-            try{
-                if (config.system.enable_DM_Messages){
-                    member.send({embeds:[bot.errorLog.custom(l.messages.deletedTicketDmTitle,l.messages.deletedTicketDmDescription,":ticket:",config.main_color)]})
-                }
-            }
-            catch{log("system","can't send DM to member, member doesn't allow dm's")}
-        })
     }
 
 
     const transcriptHandler = async () => {
-        if (enableTranscript == true && mode != "deletenotranscript"){
-            //transcript messages
-            const transcriptReason = (mode == "close") ? "**"+l.messages.reason+":** "+newReason : "**"+l.messages.reason+":** "+l.messages.none
-            const closedByPrefix = (mode.startsWith("delete")) ? l.messages.deletedby : l.messages.closedby
+        if (!bot.tsconfig.sendTranscripts.enableChannel && !bot.tsconfig.sendTranscripts.enableDM) return false
 
-            if (config.system.enable_transcript || config.system.enable_DM_transcript){
-                const channelmessages = await channel.messages.fetch({cache:true})
-                //remove ot bot from transcript
-                channelmessages.sweep((msgSweep) => {return msgSweep.author.id == client.user.id})
-
-                var fileattachment = await require("../transcript").createTranscript(channelmessages,channel)
-
-                if (fileattachment == false){log("system","internal error: transcript is not created!");return}
-            }
-                        
-            if (config.system.enable_transcript && !require("../api/api.json").disable.transcripts.server){
-                const transcriptEmbed = new discord.EmbedBuilder()
-                    .setColor(config.main_color)
-                    .setTitle("📄 "+l.messages.newTranscriptTitle)
-                    .setDescription(transcriptReason)
-                    .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
-                
-                guild.channels.cache.find(c => c.id == config.system.transcript_channel).send({
-                    embeds:[transcriptEmbed],
-                    files:[fileattachment]
-                })
-            }
-
-            if (config.system.enable_DM_transcript && !require("../api/api.json").disable.transcripts.dm){
-                const transcriptEmbed = new discord.EmbedBuilder()
-                    .setColor(config.main_color)
-                    .setTitle("📄 "+l.messages.newTranscriptTitle)
-                    .setDescription(transcriptReason)
-                    .setFooter({text:closedByPrefix+": "+user.tag+" | ticket: "+channelname,iconURL:user.displayAvatarURL()})
-                
-                    if (!isDatabaseError) ticketOpener.send({
-                    embeds:[transcriptEmbed],
-                    files:[fileattachment]
-                })
-            }
-        }
+        const APIEvents = require("../api/modules/events")
+        const messages = await channel.messages.fetch({cache:true})
+        await require("../transcriptSystem/manager")(messages,guild,channel,user,reason)
+        APIEvents.onTranscriptCreation(messages,channel,guild,new Date())
     }
     const deleteHandler = async () => {
         if (deleteRequired){
-            //const timer = () => {return new Promise((resolve,reject) => {
-            //    setTimeout(() => {resolve(true)},7000)
-            //})}
-            //await timer()
-
             pendingDelete.shift()
-                await channel.delete()
-
-            //setTimeout(async () => {
-            //    pendingDelete.shift()
-            //    await channel.delete()
-            //},6000)
+            await channel.delete()
         }
     }
-    await transcriptHandler()
+    if (mode == "delete" || mode == "deletenotranscript") await transcriptHandler()
     deleteHandler()
 }

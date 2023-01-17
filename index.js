@@ -69,8 +69,13 @@ const language = require("./core/languageManager").language
 exports.language = language
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded language")
 
+
 const config = tempconfig
 exports.config = config
+
+const tsconfig = require("./transcriptconfig.json")
+exports.tsconfig = tsconfig
+
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded config")
 exports.storage = require('./core/dynamicdatabase/storage')
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded storage")
