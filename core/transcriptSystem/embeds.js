@@ -16,7 +16,7 @@ const tsconfig = bot.tsconfig
  */
 exports.beingprocessed = (name,id,rawprocesstime,user) => {
 
-    const newtime = new Date(new Date().getTime() + rawprocesstime)
+    const newtime = rawprocesstime
 
     const processtime = "<t:"+newtime.getTime().toString().substring(0,newtime.getTime().toString().length-3)+":R>"
 
@@ -47,7 +47,25 @@ exports.tsready = (name,id,url,user) => {
         .setFooter({text:name})
         .setURL(url)
 
-        .setDescription("The transcript is available [here]("+url+")")
+        .setDescription("\nThe transcript is available [here]("+url+")\n")
 
+    return embed
+}
+
+/**
+ * 
+ * @param {String} name 
+ * @param {String} id 
+ * @param {discord.User} user 
+ */
+exports.tserror = (name,id,user) => {
+    const embed = new discord.EmbedBuilder()
+        .setTitle("❌ Transcript")
+        .setColor(discord.Colors.Red)
+        .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
+        .setFooter({text:name})
+
+        .setDescription("Something went wrong while creating the HTML transcript.\n\n[possible reasons](https://docs.openticket.dj-dj.be/the-system/transcripts/transcript-errors)")
+    
     return embed
 }

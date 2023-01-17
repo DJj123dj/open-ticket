@@ -30,50 +30,55 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
 
     const messagesArray = []
     messages.forEach((msg) => {
-        const embedArray = []
-        const fileArray = []
 
-        msg.attachments.forEach((file) => {
-            fileArray.push({
-                name:file.name,
-                type:file.contentType,
-                size:file.size.toString()+" bytes",
-                url:file.url
+        console.log("'"+msg.content+"'",msg.embeds.length,msg.attachments.toJSON().length)
+        if (msg.content || msg.embeds.length > 0 || msg.attachments.toJSON().length > 0){
+
+            const embedArray = []
+            const fileArray = []
+
+            msg.attachments.forEach((file) => {
+                fileArray.push({
+                    name:file.name,
+                    type:file.contentType,
+                    size:file.size.toString()+" bytes",
+                    url:file.url
+                })
             })
-        })
 
-        msg.embeds.forEach((embed) => {
-            if (embed.description){
-                var desc = bot.hiddenData.removeHiddenData(embed.description).description
-            }else{var desc = false}
+            msg.embeds.forEach((embed) => {
+                if (embed.description){
+                    var desc = bot.hiddenData.removeHiddenData(embed.description).description
+                }else{var desc = false}
 
-            embedArray.push({
-                title:embed.title || false,
-                description:desc,
-                authorimg:((embed.author && embed.author.iconURL) ? embed.author.iconURL : false),
-                authortext:(embed.author ? embed.author.name : false),
-                footerimg:((embed.footer && embed.footer.iconURL) ? embed.footer.iconURL : false),
-                footertext:(embed.footer ? embed.footer.text : false),
-                color:embed.hexColor,
-                image:((embed.image && embed.image.url) ? embed.image.url : false),
-                thumbnail:((embed.thumbnail && embed.thumbnail.url) ? embed.thumbnail.url : false),
-                url:(embed.url ? embed.url : false)
+                embedArray.push({
+                    title:embed.title || false,
+                    description:desc,
+                    authorimg:((embed.author && embed.author.iconURL) ? embed.author.iconURL : false),
+                    authortext:(embed.author ? embed.author.name : false),
+                    footerimg:((embed.footer && embed.footer.iconURL) ? embed.footer.iconURL : false),
+                    footertext:(embed.footer ? embed.footer.text : false),
+                    color:embed.hexColor,
+                    image:((embed.image && embed.image.url) ? embed.image.url : false),
+                    thumbnail:((embed.thumbnail && embed.thumbnail.url) ? embed.thumbnail.url : false),
+                    url:(embed.url ? embed.url : false)
+                })
             })
-        })
 
 
-        messagesArray.push({
-            author:{
-                name:msg.author.tag,
-                id:Number(msg.author.id),
-                color:msg.author.hexAccentColor || "#ffffff",
-                pfp:msg.author.displayAvatarURL()
-            },
-            content:msg.content || "",
-            timestamp:msg.createdTimestamp,
-            embeds:embedArray,
-            files:fileArray
-        })
+            messagesArray.push({
+                author:{
+                    name:msg.author.tag,
+                    id:Number(msg.author.id),
+                    color:msg.author.hexAccentColor || "#ffffff",
+                    pfp:msg.author.displayAvatarURL()
+                },
+                content:msg.content || "",
+                timestamp:msg.createdTimestamp,
+                embeds:embedArray,
+                files:fileArray
+            })
+        }
     })
 
     const result = {

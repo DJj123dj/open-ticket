@@ -10,6 +10,16 @@ const tsconfig = bot.tsconfig
 const tsembeds = require("./embeds")
 const tsdb = require("./tsdb")
 
+
+const checkAvailability = async () => {
+    const axios = require("axios").default
+    const res = await axios.get("https://transcripts.dj-dj.be/status.txt")
+    if (!res || !(res.status == 200) || !res.data) return false
+
+    if ((res.data == "online") || (res.data == "1") || (res.data == "true")) return true
+    else return false
+}
+
 /**
  * 
  * @param {discord.Message[]} messages 
@@ -19,19 +29,11 @@ const tsdb = require("./tsdb")
  * @param {String|false} reason 
  */
 module.exports = async (messages,guild,channel,user,reason) => {
+    require("../api/modules/events").onTranscriptCreation(messages,channel,guild,new Date())
     const msglist = await channel.messages.fetchPinned()
 
-    const chName = channel.id
-    const chId = channel.name
-
-    if (tsconfig.sendTranscripts.enableChannel){
-        /**@type {discord.TextChannel|undefined} */
-        const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
-
-        if (!tc) return
-        const embed = tsembeds.beingprocessed(chName,chId,60000,user)
-        var msg = await tc.send({embeds:[embed]})
-    }else {var msg = false}
+    const chName = channel.name
+    const chId = channel.id
     
     /**@param {discord.Collection<string, discord.Message<true>>} msglist*/
     const asyncmanager = async (msglist) => {
@@ -67,25 +69,58 @@ module.exports = async (messages,guild,channel,user,reason) => {
             }
         })
 
-        require("fs").writeFileSync("./TESTJSON.json",JSON.stringify(JSONDATA,null,"\t"))
+        if (!await checkAvailability()){
+            const attachment = await require("./oldTranscript").createTranscript(messages,ch)
+            const errembed = tsembeds.tserror(chName,chId,user)
+
+            if (tsconfig.sendTranscripts.enableChannel){
+                /**@type {discord.TextChannel|undefined} */
+                const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
+        
+                if (!tc) return
+                tc.send({embeds:[errembed],files:[attachment]})
+            }
+            return
+        }
 
         const TSdata = await require("./communication/index").upload(JSONDATA)
         if (!TSdata) return false
         if (TSdata.status == "success"){
             const url = "https://transcripts.dj-dj.be/t/"+TSdata.time+"_"+TSdata.id+".html"
 
-            if (msg){
-                msg.edit(tsembeds.tsready(chName,chId,url,user))
-                console.log("URL:",url)
-            }
+            //calculate estimated time
+            const lastDumpTime = (new Date(TSdata.estimated.lastdump).getTime())
+            const dumpLoopTime = 15000
+            const nextDump = new Date(lastDumpTime+dumpLoopTime)
+            const processtime = TSdata.estimated.processtime+6000 //6sec extra time for overflow
 
-            if (tsconfig.sendTranscripts.enableDM){
-                if (!user) return
-                const embed = tsembeds.tsready(chName,chId,url,user)
-                try {
-                    user.send({embeds:[embed]})
-                }catch{}
-            }
+            const finaltime = new Date(nextDump.getTime()+processtime)
+            const duration = finaltime.getTime()-new Date().getTime()
+
+            //waiting
+            if (tsconfig.sendTranscripts.enableChannel){
+                /**@type {discord.TextChannel|undefined} */
+                const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
+        
+                if (!tc) return
+                const embed = tsembeds.beingprocessed(chName,chId,finaltime,user)
+                var msg = await tc.send({embeds:[embed]})
+            }else {var msg = false}
+
+            //ready
+            setTimeout(() => {
+                if (msg){
+                    msg.edit({embeds:[tsembeds.tsready(chName,chId,url,user)]})
+                }
+
+                if (tsconfig.sendTranscripts.enableDM){
+                    if (!user) return
+                    const embed = tsembeds.tsready(chName,chId,url,user)
+                    try {
+                        user.send({embeds:[embed]})
+                    }catch{}
+                }
+            },duration)
         }
     }
     asyncmanager(msglist)
