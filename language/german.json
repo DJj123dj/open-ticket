@@ -69,9 +69,8 @@
         "deletedTicketDmTitle":"Ticket löschen!",
         "closedTicketDmDescription":"Ihr Ticket ist geschlossen!",
         "deletedTicketDmDescription":"Ihr Ticket ist gelöscht!",
-        "newTranscriptTitle":"Eine neue Transscript finden Sie hier!",
-        "newTranscriptDescription":"Die Abschrift finden Sie in der obigen Textdatei!",
-        "hereIsTheTranscript":"Hier ist das Transscript:",
+        "newTranscriptTitle":"Eine neue Transcript finden Sie hier!",
+        "hereIsTheTranscript":"Hier ist das Transcript:",
 
         "chooseCategory":"Wähle eine Kategorie:",
 

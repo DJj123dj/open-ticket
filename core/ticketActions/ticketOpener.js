@@ -66,7 +66,7 @@ module.exports = () => {
             if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
 
                 try{
-                    if (config.system.enable_DM_Messages){
+                    if (currentTicketOptions.enableDmOnOpen){
                         interaction.member.send({embeds:[bot.errorLog.custom(l.messages.newTicketDmTitle,currentTicketOptions.message,":ticket:",config.main_color)]})
                     }
                 }

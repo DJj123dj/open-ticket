@@ -1,0 +1,17 @@
+{
+    "sendTranscripts":{
+        "enableChannel":false,
+        "channel":"transcript channel id",
+        
+        "enableDM":false
+    },
+    "style":{
+        "titleColor":"#F8BA00",
+        "background":{
+            "enableCustomBackground":false,
+            "backgroundModus":"color OR image",
+            "backgroundData":"#abc123 OR https://www.example.com/image.png"
+            
+        }
+    }
+}

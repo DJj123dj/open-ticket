@@ -114,26 +114,37 @@
             "it":"Rinomina il canale di un ticket."
         },
         "claim":{
-            "en-GB":"",
-            "en-US":"",
-            "nl":"",
-            "ro":"",
-            "de":"",
-            "cs":"",
-            "fr":"",
-            "es-ES":"",
-            "it":""
+            "en-GB":"Claim a ticket.",
+            "en-US":"Claim a ticket.",
+            "nl":"Claim een ticket.",
+            "ro":"  ",
+            "de":"  ",
+            "cs":"  ",
+            "fr":"  ",
+            "es-ES":"  ",
+            "it":"  "
         },
         "unclaim":{
-            "en-GB":"",
-            "en-US":"",
-            "nl":"",
-            "ro":"",
-            "de":"",
-            "cs":"",
-            "fr":"",
-            "es-ES":"",
-            "it":""
+            "en-GB":"Un-claim a ticket.",
+            "en-US":"Un-claim a ticket.",
+            "nl":"Ontclaim een ticket.",
+            "ro":"  ",
+            "de":"  ",
+            "cs":"  ",
+            "fr":"  ",
+            "es-ES":"  ",
+            "it":"  "
+        },
+        "category":{
+            "en-GB":"Change ticket type.",
+            "en-US":"Change ticket type.",
+            "nl":"Verander ticket type.",
+            "ro":"  ",
+            "de":"  ",
+            "cs":"  ",
+            "fr":"  ",
+            "es-ES":"  ",
+            "it":"  "
         }
     }
 }

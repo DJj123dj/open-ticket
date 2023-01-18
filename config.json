@@ -6,7 +6,6 @@
     "prefix":"!ticket ",
     "languagefile":"english",
 
-    "credits":true,
     "status":{
         "enabled":true,
         "type":"PLAYING",
@@ -22,9 +21,7 @@
         "member_role":"member role (doesn't have access to tickets)",
         "closeMode":"adminonly|normal",
 
-        "enable_transcript":false,
-        "enable_DM_transcript":false,
-        "transcript_channel":"channel id",
+        "transcripts":"!!!! ALL SETTINGS FOR TRANSCRIPTS ARE LOCATED IN: transcriptconfig.json !!!!",
 
         "showSlashcmdsInHelp":false
     },
@@ -92,7 +89,7 @@
             "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v3.1.0 - I'm a footer!",
+            "footer":"Open Ticket v3.2.0 - I'm a footer!",
 
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",

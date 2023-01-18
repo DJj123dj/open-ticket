@@ -17,6 +17,10 @@ const ticketReopenListeners = []
 const ticketAddListeners = []
 const ticketRemoveListeners = []
 
+const ticketClaimListeners = []
+const ticketUnclaimListeners = []
+const ticketChangeListeners = []
+
 
 const transcriptCreationListeners = []
 const commandListeners = []
@@ -148,6 +152,66 @@ exports.onTicketRemove = (user,editeduser,channel,guild,date,ticketdata) => {
 
 /**
  * 
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
+ */
+exports.onTicketClaim = (user,channel,guild,date,ticketdata) => {
+    //system
+    bot.errorLog.log("api","user claimed a ticket",[{key:"userid",value:user.id},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id},{key:"ticketdata",value:JSON.stringify(ticketdata)}])
+
+    ticketClaimListeners.forEach((func) => {
+        try {
+            func(user,channel,guild,date,ticketdata)
+        }catch{}
+    })
+
+}
+
+/**
+ * 
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
+ */
+exports.onTicketUnclaim = (user,channel,guild,date,ticketdata) => {
+    //system
+    bot.errorLog.log("api","user unclaimed a ticket",[{key:"userid",value:user.id},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id},{key:"ticketdata",value:JSON.stringify(ticketdata)}])
+
+    ticketUnclaimListeners.forEach((func) => {
+        try {
+            func(user,channel,guild,date,ticketdata)
+        }catch{}
+    })
+
+}
+
+/**
+ * @param {String} newtype
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
+ */
+exports.onTicketChange = (newtype,user,channel,guild,date,ticketdata) => {
+    //system
+    bot.errorLog.log("api","user changed ticket type",[{key:"newtype",value:newtype},{key:"userid",value:user.id},{key:"channelid",value:channel.id},{key:"guildid",value:guild.id},{key:"ticketdata",value:JSON.stringify(ticketdata)}])
+
+    ticketChangeListeners.forEach((func) => {
+        try {
+            func(newtype,user,channel,guild,date,ticketdata)
+        }catch{}
+    })
+
+}
+
+/**
+ * 
  * @param {discord.Message[]} messages 
  * @param {discord.TextChannel} channel 
  * @param {discord.Guild} guild
@@ -165,7 +229,7 @@ exports.onTranscriptCreation = (messages,channel,guild,date) => {
 
 }
 
-/**@typedef {"help"|"message"|"close"|"delete"|"reopen"|"rename"|"add"|"remove"} OTCommandType */
+/**@typedef {"help"|"message"|"close"|"delete"|"reopen"|"rename"|"add"|"remove"|"claim"|"unclaim"|"change"} OTCommandType */
 
 /**
  * 
@@ -270,6 +334,16 @@ exports.onCommand = (type,hasPerms,user,channel,guild,date) => {
  */
 
 /**
+ * @callback TicketTypeChangeEvent
+ * @param {String} newtype
+ * @param {discord.User} user 
+ * @param {discord.TextChannel} channel 
+ * @param {discord.Guild} guild
+ * @param {Date} date 
+ * @param {{name:String,status:"open"|"closed"|"deleted"|"reopened",ticketOptions:configParser.OTTicketOptions}} ticketdata 
+ */
+
+/**
  * @callback CommandEvent
  * @param {OTCommandType} type 
  * @param {Boolean} hasPerms 
@@ -328,6 +402,21 @@ const onTicketRemove = (callback) => {
     ticketRemoveListeners.push(callback)
 }
 
+/**@param {TicketActionEvent} callback */
+const onTicketClaim = (callback) => {
+    ticketClaimListeners.push(callback)
+}
+
+/**@param {TicketActionEvent} callback */
+const onTicketUnclaim = (callback) => {
+    ticketUnclaimListeners.push(callback)
+}
+
+/**@param {TicketTypeChangeEvent} callback */
+const onTicketChange = (callback) => {
+    ticketChangeListeners.push(callback)
+}
+
 /**@param {TranscriptCreationEvent} callback */
 const onTranscriptCreation = (callback) => {
     transcriptCreationListeners.push(callback)
@@ -355,6 +444,9 @@ exports.events = {
     onTicketReopen,
     onTicketAdd,
     onTicketRemove,
+    onTicketClaim,
+    onTicketUnclaim,
+    onTicketChange,
     onTranscriptCreation,
     onCommand,
     onReactionRole,
