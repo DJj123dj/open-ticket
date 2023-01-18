@@ -10,19 +10,20 @@ const tsdb = require("../tsdb")
 
 /**
  * @param {Object} json
- * @returns {OTuploadResponse}
+ * @returns {Promise<OTuploadResponse|false>}
  */
 exports.upload = async (json) => {
+    return new Promise(async (resolve,reject) => {
+        const data = encodeURIComponent(JSON.stringify(json))
 
-    const data = encodeURIComponent(JSON.stringify(json))
+        try {
+        const res = await axios.get("https://api.transcripts.dj-dj.be/upload?auth=openticketTRANSCRIPT1234&version=1.0.0&data="+data)
+        if (res.status != 200) resolve(false)
 
-    try {
-    const res = await axios.get("https://api.transcripts.dj-dj.be/upload?auth=openticketTRANSCRIPT1234&version=1.0.0&data="+data)
-    if (res.status != 200) return false
-
-    return res.data
-    }catch{
-        console.log("failed transcript upload!") 
-        return false
-    }
+        resolve(res.data)
+        }catch{
+            console.log("failed transcript upload!") 
+            resolve(false)
+        }
+    })
 }

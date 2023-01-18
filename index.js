@@ -216,6 +216,7 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
     require("./commands/reopen")()
     require("./commands/claim")()
     require("./commands/unclaim")()
+    require("./commands/change")()
 
     this.errorLog.log("debug","LOADING CORE")
     //core

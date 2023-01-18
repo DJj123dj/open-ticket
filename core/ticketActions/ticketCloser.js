@@ -88,12 +88,6 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
 
             if (!id) return false
 
-            try{
-                if (config.system.enable_DM_Messages){
-                    member.send({embeds:[bot.errorLog.custom(l.messages.deletedTicketDmTitle,l.messages.deletedTicketDmDescription,":ticket:",config.main_color)]})
-                }
-            }
-            catch{log("system","can't send DM to member, member doesn't allow dm's")}
         })
 
     }else if (mode == "close"){
@@ -229,12 +223,6 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
 
             if (!id) return false
 
-            try{
-                if (config.system.enable_DM_Messages){
-                    member.send({embeds:[bot.errorLog.custom(l.messages.closedTicketDmTitle,l.messages.closedTicketDmDescription+"\n\n**reason:** "+newReason,":ticket:",config.main_color)]})
-                }
-            }
-            catch{log("system","can't send DM to member, member doesn't allow dm's")}
         })
 
 

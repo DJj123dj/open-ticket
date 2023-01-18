@@ -57,15 +57,18 @@ exports.tsready = (name,id,url,user) => {
  * @param {String} name 
  * @param {String} id 
  * @param {discord.User} user 
+ * @param {undefined|String} err
  */
-exports.tserror = (name,id,user) => {
+exports.tserror = (name,id,user,err) => {
     const embed = new discord.EmbedBuilder()
         .setTitle("❌ Transcript")
         .setColor(discord.Colors.Red)
         .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
 
-        .setDescription("Something went wrong while creating the HTML transcript.\n\n[possible reasons](https://docs.openticket.dj-dj.be/the-system/transcripts/transcript-errors)")
+        const errDesc = (typeof err == "string") ? "\n"+err : ""
+
+        embed.setDescription("Something went wrong while creating the HTML transcript.\n\n[possible reasons](https://docs.openticket.dj-dj.be/the-system/transcripts/transcript-errors)"+errDesc)
     
     return embed
 }

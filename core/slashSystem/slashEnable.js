@@ -32,8 +32,8 @@ module.exports = async () => {
     //process.stdout.write("[status] there are "+chalk.blue("0 out of 10")+" commands ready! (this can take up to 40 seconds)")
     setInterval(() => {
         process.stdout.cursorTo(0)
-        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 12")+" commands ready! (this can take up to 40 seconds)")
-        if (readystats >= 12){
+        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 13")+" commands ready! (this can take up to 40 seconds)")
+        if (readystats >= 13){
             const fs = require("fs")
             fs.writeFileSync("./storage/slashcmdEnabled.txt","true")
             console.log(chalk.green("\nready!"))
@@ -241,6 +241,25 @@ module.exports = async () => {
         description:"Unclaim this ticket.",
         defaultPermission:true,
         type:act.ChatInput
+    },sid).then(() => {
+        readystats++
+    })
+
+    //category
+    client.application.commands.create({
+        name:"change",
+        description:"Change ticket type.",
+        defaultPermission:true,
+        type:act.ChatInput,
+        options:[
+            {
+                type:acot.String,
+                name:"type",
+                description:"The new ticket type.",
+                required:true,
+                choices:choices
+            }
+        ]
     },sid).then(() => {
         readystats++
     })

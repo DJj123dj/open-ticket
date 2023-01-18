@@ -70,7 +70,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
         })
 
         if (!await checkAvailability()){
-            const attachment = await require("./oldTranscript").createTranscript(messages,ch)
+            const attachment = await require("./oldTranscript").createTranscript(messages,channel)
             const errembed = tsembeds.tserror(chName,chId,user)
 
             if (tsconfig.sendTranscripts.enableChannel){
@@ -85,6 +85,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
 
         const TSdata = await require("./communication/index").upload(JSONDATA)
         if (!TSdata) return false
+
         if (TSdata.status == "success"){
             const url = "https://transcripts.dj-dj.be/t/"+TSdata.time+"_"+TSdata.id+".html"
 
@@ -121,6 +122,17 @@ module.exports = async (messages,guild,channel,user,reason) => {
                     }catch{}
                 }
             },duration)
+        }else{
+            const attachment = await require("./oldTranscript").createTranscript(messages,channel)
+            const errembed = tsembeds.tserror(chName,chId,user,"`error type: transcript API error`")
+
+            if (tsconfig.sendTranscripts.enableChannel){
+                /**@type {discord.TextChannel|undefined} */
+                const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
+        
+                if (!tc) return
+                tc.send({embeds:[errembed],files:[attachment]})
+            }
         }
     }
     asyncmanager(msglist)

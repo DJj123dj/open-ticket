@@ -137,3 +137,16 @@ exports.renameEmbed = (renamer,newname) => {
             .setFooter({text:author.tag,iconURL:author.displayAvatarURL()})
     }
 }
+
+/**
+ * 
+ * @param {discord.User} changer 
+ * @param {String} newtype
+ * @returns {discord.EmbedBuilder}
+ */
+exports.changeEmbed = (changer,newtype) => {
+    return new embed()
+        .setTitle("🔄 "+l.commands.changeTitle.replace("{0}",newtype))
+        .setColor(mc)
+        .setFooter({text:changer.tag,iconURL:changer.displayAvatarURL()})
+}

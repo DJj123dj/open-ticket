@@ -21,6 +21,7 @@ const version = require("../info.json").version
  */
 exports.compile = (guild,channel,user,messagesInv,data) => {
     const messages = messagesInv.reverse()
+    var invisibleMessages = 0
     
     const rawfiles = messages.filter((m) => Array.from(m.attachments).length > 0)
     var fileAmount = 0
@@ -30,8 +31,6 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
 
     const messagesArray = []
     messages.forEach((msg) => {
-
-        console.log("'"+msg.content+"'",msg.embeds.length,msg.attachments.toJSON().length)
         if (msg.content || msg.embeds.length > 0 || msg.attachments.toJSON().length > 0){
 
             const embedArray = []
@@ -78,7 +77,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
                 embeds:embedArray,
                 files:fileArray
             })
-        }
+        }else {invisibleMessages++}
     })
 
     const result = {
@@ -109,7 +108,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
             closedtime:data.ticket.closedtime,
             openedtime:data.ticket.openedtime,
             
-            messages:Array.from(messages).length,
+            messages:Array.from(messages).length-invisibleMessages,
             files:fileAmount
         },
         messages:messagesArray

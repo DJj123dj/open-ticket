@@ -1,16 +1,16 @@
 {
     "sendTranscripts":{
-        "enableChannel":true,
-        "channel":"968899606912061490",
+        "enableChannel":false,
+        "channel":"transcript channel id",
         
-        "enableDM":true
+        "enableDM":false
     },
     "style":{
-        "titleColor":"#49c100",
+        "titleColor":"#F8BA00",
         "background":{
-            "enableCustomBackground":true,
-            "backgroundModus":"image",
-            "backgroundData":"https://pbs.twimg.com/media/EBjFBlVXsAAhvXl?format=jpg&name=4096x4096"
+            "enableCustomBackground":false,
+            "backgroundModus":"color OR image",
+            "backgroundData":"#abc123 OR https://www.example.com/image.png"
             
         }
     }

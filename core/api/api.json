@@ -29,7 +29,8 @@
                 "remove":false,
                 "rename":false,
                 "claim":false,
-                "unclaim":false
+                "unclaim":false,
+                "change":false
             },
             "slash":{
                 "help":false,
@@ -42,7 +43,8 @@
                 "remove":false,
                 "rename":false,
                 "claim":false,
-                "unclaim":false
+                "unclaim":false,
+                "change":false
             }
         },
         "checkerjs":{
