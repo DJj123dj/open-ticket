@@ -1,5 +1,5 @@
 # Open Ticket
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.1.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.1.0)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![documentation](https://img.shields.io/badge/documentation-Click%20Here-yellow.svg?style=flat-square)](https://docs.openticket.dj-dj.be)
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.2.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.2.0)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![documentation](https://img.shields.io/badge/documentation-Click%20Here-yellow.svg?style=flat-square)](https://docs.openticket.dj-dj.be)
 
 Open ticket is the most configurable open-source ticket bot for discord! Made with the newest technologies. Like: Slash commands, transcripts, multiple ticket types, buttons & dropdowns!
 Start using it now, you can do anything!
@@ -26,6 +26,7 @@ Start using it now, you can do anything!
 - the_gamer#5095 (Danish)
 
 ## features
+- **🎉 NEW! html transcripts!**
 - discord interaction buttons
 - slash & text commands
 - close, delete & re-open tickets
@@ -40,9 +41,6 @@ Start using it now, you can do anything!
 - custom API + plugins
 - unlimited tickets spread over multiple messages
 - close with reason
-
-*comming soon*
-- share transcripts
 - view transcripts in html
 
 ## quick start
@@ -53,7 +51,7 @@ Start using it now, you can do anything!
 
 ## information
 
-_v3.1.0_
+_v3.2.0_
 
 changelog: [click here](https://docs.openticket.dj-dj.be/other/changelog)
 
