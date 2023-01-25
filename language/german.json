@@ -4,6 +4,7 @@
         "missingArgsDescription":"Fehlendes Argument!",
         "noPermsTitle":"Du hast keine Rechte!",
         "noPermsDescription":"Sie haben nicht die richtigen Rollen, um diesen Befehl auszuführen!\nSie benötigen die `ADMINISTRATOR` Erlaubnis oder in der Liste der erlaubten Rollen sein!",
+        "noPermsDelete":"Only admins can delete a ticket!",
         "chooseFromListTitle":"Ungültige ID",
         "chooseFromListDescription":"Wählen Sie eine der folgenden ID:",
         "boterror":"Bot Fehler!",
@@ -19,19 +20,14 @@
     },
     "commands":{
         "userAddedTitle":"User geaddet!",
-        "userAddedDescription":"{0} wird zu diesem Ticket hinzugefügt!",
         "userRemovedTitle":"User entfernt!",
-        "userRemovedDescription":"{0} wird aus diesem Ticket entfernt!",
-
         "renameTitle":"Der Name wurde geändert!",
-        "renameWarning":"Achtung: Sie können den Kanalnamen nur 2 Mal pro Minute ändern!\n(dies ist auf die Begrenzung der Diskordrate zurückzuführen)",
-
         "closeTitle":"Dieses Ticket schließen!",
-        "closeDescription":"Sie können dieses Ticket schließen, indem Sie auf die Schaltfläche unten klicken!",
         "deleteTitle":"Löschen Sie dieses Ticket!",
-        "deleteDescription":"Sie können dieses Ticket löschen, indem Sie auf die Schaltfläche unten klicken!",
         "reopenTitle":"Öffne dieses Ticket erneut!",
-        "reopenDescription":"Sie können dieses Ticket erneut öffnen, indem Sie auf die Schaltfläche unten klicken!",
+        "claimTitle":"This ticket is now claimed to {0}",
+        "unclaimTitle":"This ticket isn't claimed anymore!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"Die Einbettung befindet sich in der Nachricht unten!",
         "maxTicketWarning":"**Warnung:** _Sie können nur {0} ticket(s) erstellen zu einer Zeit!_"

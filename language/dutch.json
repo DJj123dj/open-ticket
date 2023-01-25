@@ -25,8 +25,9 @@
         "closeTitle":"Ticket gesloten!",
         "deleteTitle":"Ticket aan het verwijderen...",
         "reopenTitle":"Ticket heropend!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
+        "claimTitle":"Dit ticket is geclaimed door {0}",
+        "unclaimTitle":"Dit ticket is niet meer geclaimed!",
+        "changeTitle":"Ticket type veranderd naar {0}!",
 
         "ticketWarning":"De embed is in het bericht hier onder!",
         "maxTicketWarning":"**Waarschuwing:** _Je kan maar {0} ticket(s) tegelijkertijd maken!_"

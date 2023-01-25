@@ -1,6 +1,6 @@
 {
     "version":"1.0.0",
-    "otversion":"3.2.0",
+    "otversion":"3.2.1",
     "style":{
         "enableCustomBackground":false,
         "backgroundModus":"color OR image",

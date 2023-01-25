@@ -27,6 +27,7 @@
         "reopenTitle":"Reabriu este ticket!",
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"A incorporação está na mensagem abaixo!",
         "maxTicketWarning":"**Cuidado:** _Você só pode criar {0} ticket(s) de cada vez!!_"

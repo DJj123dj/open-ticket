@@ -27,6 +27,7 @@
         "reopenTitle":"Genåbnede denne ticket",
         "claimTitle":"Denne ticket er blevet taget af {0}",
         "unclaimTitle":"Denne ticket er nu tilgængelig!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"Emebeddet er i beskeden nedenunder",
         "maxTicketWarning":"**Fejl:** _Du kan kun oprettre {0} ticket adgangen!_"

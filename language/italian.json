@@ -27,6 +27,7 @@
         "reopenTitle":"Ri-Aperto questo ticket!",
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"L'embed è nel messaggio sotto!",
         "maxTicketWarning":"**Attenzione:** _Tu puoi creare solo {0} ticket(s) per volta!_"

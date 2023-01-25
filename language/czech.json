@@ -27,6 +27,7 @@
         "reopenTitle":"Znovu otevři ticket!",
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Varovaní:** _Můžeš si vytvořit použe {0} ticket(s) v jednu chvíli!_"
