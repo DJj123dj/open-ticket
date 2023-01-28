@@ -79,9 +79,9 @@
     },
     "transcripts":{
         "title":"Transcript",
-        "processed":"This transcript is being processed",
-        "wait":"Please wait!",
-        "estimated":"Estimated time",
-        "available":"The transcript is available here"
+        "processed":"Transcript in curs de procesare...",
+        "wait":"Te rugam sa astepti!",
+        "estimated":"Timp estimat",
+        "available":"Transcriptul este disponibil aici"
     }
 }
