@@ -15,8 +15,7 @@
         "anotherOption":"Dette er ikke en ticket, men noget andet!",
         "maxAmountTitle":"For mange tickets er blevet oprettet!",
         "maxAmountDescription":"Du har for mange tickets åbne!\nSå luk dem hvis du gerne vil oprette nye!",
-        "somethingWentWrong":"**Noget gik galt**\nKontakt en udvikler!",
-        "somethingWentWrongTranscript":"Noget gik galt med transcript!**\nKontakt en udvikler!"
+        "somethingWentWrong":"**Noget gik galt**\nKontakt en udvikler!"
     },
     "commands":{
         "userAddedTitle":"Tilføjer {0} til denne ticket!",
@@ -49,7 +48,6 @@
         "close":"Luk ticket",
         "delete":"Fjern ticket",
         "reopen":"Genåben ticket",
-        "sendTranscript":"Transcript",
         "closeWithReason":"Luk med grundlag"
     },
     "messages":{
@@ -67,9 +65,7 @@
         "deletedTicketDmDescription":"Din ticket er blevet fjernet!",
         "reopenTicketDmTitle":"Ticket Genåbnet!",
         "reopenTicketDmDescription":"Din ticket er blevet genåbent!",
-        "newTranscriptTitle":" En ny transcript er tilføjet!",
-        "hereIsTheTranscript":"Følgende transcript:",
-
+        
         "chooseCategory":"Vælg en kategori:",
         "gettingdeleted":"Ticketen slettes..",
 
@@ -80,5 +76,12 @@
         "closedby":"Lukket af",
         "modalreason":"Hvad er grundlaget for lukkens af denne ticket?",
         "chooseATicket": "Vælg en ticket"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"This transcript is being processed",
+        "wait":"Please wait!",
+        "estimated":"Estimated time",
+        "available":"The transcript is available here"
     }
 }

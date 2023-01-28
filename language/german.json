@@ -15,8 +15,7 @@
         "anotherOption":"Diese Option ist kein Ticket, sondern eine andere Art!",
         "maxAmountTitle":"Das Limit wurde erreicht!",
         "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neue erstellen.!",
-        "somethingWentWrong":"Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
-        "somethingWentWrongTranscript":"Bei der Erstellung der Transcript ist etwas schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
+        "somethingWentWrong":"Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
     },
     "commands":{
         "userAddedTitle":"User geaddet!",
@@ -49,7 +48,6 @@
         "close":"Ticket schließen",
         "delete":"Ticket löschen",
         "reopen":"Ticket wieder öffnen",
-        "sendTranscript":"Transcript-Datei senden",
         "closeWithReason":"Geschlossen mit dem Grund"
     },
     "messages":{
@@ -65,10 +63,11 @@
         "deletedTicketDmTitle":"Ticket löschen!",
         "closedTicketDmDescription":"Ihr Ticket ist geschlossen!",
         "deletedTicketDmDescription":"Ihr Ticket ist gelöscht!",
-        "newTranscriptTitle":"Eine neue Transcript finden Sie hier!",
-        "hereIsTheTranscript":"Hier ist das Transcript:",
-
+        "reopenTicketDmTitle":"Ticket Re-opened!",
+        "reopenTicketDmDescription":"Your ticket is re-opened!",
+        
         "chooseCategory":"Wähle eine Kategorie:",
+        "gettingdeleted":"Ticket is getting deleted...",
 
         "none":"keiner",
         "reason":"Grund",
@@ -77,5 +76,12 @@
         "closedby":"Geschlossen von",
         "modalreason":"Was ist der Grund?",
         "chooseATicket": "Wähle ein Ticket"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"This transcript is being processed",
+        "wait":"Please wait!",
+        "estimated":"Estimated time",
+        "available":"The transcript is available here"
     }
 }

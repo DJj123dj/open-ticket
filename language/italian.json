@@ -15,8 +15,7 @@
         "anotherOption":"Questa opzione non è di un ticket!",
         "maxAmountTitle":"Massimo numero raggiunto!",
         "maxAmountDescription":"Hai raggiunto il massimo numero di ticket consentiti!\nNon puoi crearne altri!",
-        "somethingWentWrong":"**Qualcosa è andato storto!**\nPerfavore riprova un'altra volta!",
-        "somethingWentWrongTranscript":"Qualcosa è andata storta durante la trascrizione!**\nPerfavore riprova un'altra volta!"
+        "somethingWentWrong":"**Qualcosa è andato storto!**\nPerfavore riprova un'altra volta!"
     },
     "commands":{
         "userAddedTitle":"Aggiunto {0} al ticket!",
@@ -49,7 +48,6 @@
         "close":"Chiudi il ticket",
         "delete":"Elimina il ticket",
         "reopen":"Riapri il ticket",
-        "sendTranscript":"Trascrizione",
         "closeWithReason":"chiudi con un motivo"
     },
     "messages":{
@@ -67,9 +65,7 @@
         "deletedTicketDmDescription":"Il tuo ticket è stato eliminato!",
         "reopenTicketDmTitle":"Ticket riaperto!",
         "reopenTicketDmDescription":"Il tuo ticket è stato riaperto!",
-        "newTranscriptTitle":"Un nuova trascrizione è qui!",
-        "hereIsTheTranscript":"Qui è la trascrizione:",
-
+        
         "chooseCategory":"scegli una categoria:",
         "gettingdeleted":"Il ticket sta per essere chiuso...",
 
@@ -80,5 +76,12 @@
         "closedby":"chiuso da",
         "modalreason":"Quale'è il motivo per chiudere il ticket?",
         "chooseATicket": "Scegli un ticket"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"This transcript is being processed",
+        "wait":"Please wait!",
+        "estimated":"Estimated time",
+        "available":"The transcript is available here"
     }
 }

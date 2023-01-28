@@ -15,8 +15,7 @@
         "anotherOption":"Deze optie is niet een ticket, maar een ander type!",
         "maxAmountTitle":"Maximum numer bereikt!",
         "maxAmountDescription":"Je hebt het maximum aantal openstaande tickets bereikt!\nDus je kan geen nieuwe meer maken!",
-        "somethingWentWrong":"**Iets ging fout!**\nProbeer een andere keer opnieuw!",
-        "somethingWentWrongTranscript":"Iets ging fout terwijl het transcript gemaakt werd!**\nProbeer een andere keer opnieuw!"
+        "somethingWentWrong":"**Iets ging fout!**\nProbeer een andere keer opnieuw!"
     },
     "commands":{
         "userAddedTitle":"{0} is toegevoegd aan dit ticket!",
@@ -49,7 +48,6 @@
         "close":"Sluit Ticket",
         "delete":"Verwijder Ticket",
         "reopen":"Heropen Ticket",
-        "sendTranscript":"Transcript",
         "closeWithReason":"sluit met reden"
     },
     "messages":{
@@ -67,9 +65,7 @@
         "deletedTicketDmDescription":"Je ticket is verwijderd!",
         "reopenTicketDmTitle":"Ticket Heropend!",
         "reopenTicketDmDescription":"Je ticket is heropend!",
-        "newTranscriptTitle":"Er is een nieuw transcript!",
-        "hereIsTheTranscript":"Hier is het transcript:",
-
+        
         "chooseCategory":"kies een categorie:",
         "gettingdeleted":"Ticket wordt verwijderd...",
 
@@ -80,5 +76,12 @@
         "closedby":"gesloten door",
         "modalreason":"Wat is de reden om dit ticket te sluiten?",
         "chooseATicket": "Kies een ticket"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"Dit transcript wordt verwerkt",
+        "wait":"Gelieve te wachten!",
+        "estimated":"Geschatte tijd",
+        "available":"Het transcript is hier beschikbaar"
     }
 }
