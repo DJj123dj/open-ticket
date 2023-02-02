@@ -59,5 +59,6 @@ Translators
 ## links
 current version: _v3.2.1_
 </br>changelog: [click here](https://docs.openticket.dj-dj.be/other/changelog)
+</br>documentation: [click here](https://docs.openticket.dj-dj.be/quick-start)
 
 © 2023 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.dj-dj.be) | [terms of service](https://www.dj-dj.be/terms)
