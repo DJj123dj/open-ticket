@@ -1,4 +1,3 @@
-```json
 {
     "errors":{
         "missingArgsTitle":"Ungültiges Argument!",
@@ -16,7 +15,7 @@
         "anotherOption":"Diese Option ist kein Ticket, sondern eine andere Art!",
         "maxAmountTitle":"Das Limit wurde erreicht!",
         "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neuen erstellen.!",
-        "somethingWentWrong":"**Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
+        "somethingWentWrong":"**Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
     },
     "commands":{
         "userAddedTitle":"User geaddet!",
@@ -85,4 +84,4 @@
         "estimated":"Verbleibende Zeit",
         "available":"Das Transcript ist hier verfügbar"
     }
-}```
+}
