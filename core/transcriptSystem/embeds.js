@@ -45,9 +45,13 @@ exports.tsready = (name,id,url,user) => {
         .setColor(config.main_color)
         .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
-        .setURL(url)
 
-        .setDescription("\n["+l.transcripts.available+"]("+url+")\n")
+        if (url){
+            embed.setURL(url)
+            embed.setDescription("\n["+l.transcripts.available+"]("+url+")\n")
+        }else{
+            embed.setDescription("\n"+l.transcripts.available+"\n")   
+        }
 
     return embed
 }

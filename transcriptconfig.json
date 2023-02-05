@@ -2,6 +2,7 @@
     "sendTranscripts":{
         "enableChannel":false,
         "channel":"transcript channel id",
+        "useHTMLtranscripts":true,
         
         "enableDM":false
     },

@@ -24,9 +24,9 @@
         "closeTitle":"Cerró este ticket!",
         "deleteTitle":"Eliminando este ticket...",
         "reopenTitle":"Re-abrió este boleto!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
-        "changeTitle":"Changed ticket type to {0}!",
+        "claimTitle":"Este ticket será atendido por {0}",
+        "unclaimTitle":"¡Este ticket ya no está reservado!",
+        "changeTitle":"¡Cambiando el tipo de ticket a {0}!",
 
         "ticketWarning":"La inserción está en el mensaje a continuación!",
         "maxTicketWarning":"**Advertencia:** _Solo puedes crear {0} ticket(s) a la vez!_"
@@ -78,10 +78,10 @@
         "chooseATicket": "Elije un ticket"
     },
     "transcripts":{
-        "title":"Transcript",
-        "processed":"This transcript is being processed",
-        "wait":"Please wait!",
-        "estimated":"Estimated time",
-        "available":"The transcript is available here"
+        "title":"Transcripción",
+        "processed":"La transcripción del ticket está siendo procesada...",
+        "wait":"¡Por favor, espere!",
+        "estimated":"Tiempo estimado",
+        "available":"La transcripción estará disponible aquí"
     }
 }

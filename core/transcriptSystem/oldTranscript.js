@@ -7,15 +7,19 @@ const l = bot.language
 /**
  * 
  * @param {discord.Message[]} messagecollection 
+ * @param {discord.TextChannel} channel
+ * @param {Boolean} backup
  * @returns new `discord.attachmentBuilder`
  */
 
-exports.createTranscript = async (messagecollection) => {
+exports.createTranscript = async (messagecollection,channel,backup) => {
     try {
         const cd = new Date()
         const months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
         const dateString = cd.getDate()+" "+months[cd.getMonth()-1]+" "+cd.getFullYear()+" - "+cd.getHours()+":"+cd.getMinutes()+":"+cd.getSeconds()
-        const filearray = ["BACKUP TRANSCRIPT:\n"]
+        let backuptitle = backup ? "BACKUP " : ""
+        let backupfilename = backup ? "backup" : ""
+        const filearray = [backuptitle+"TRANSCRIPT:\n"]
 
         messagecollection.reverse()
 
@@ -23,15 +27,20 @@ exports.createTranscript = async (messagecollection) => {
             const timestamp = new Date(msg.createdTimestamp)
 
             if (msg.content){var content = msg.content}else{var content = "*empty message*"}
-
+            const fileurls = []
+            const rawfiles = Array.from(msg.attachments)
+            rawfiles.forEach((file) => {
+                fileurls.push("attachment: "+file[1].url)
+            })
+            const filestring = fileurls.length > 0 ? fileurls.join("\n")+"\n" : ""
             const msgstats = "files: "+msg.attachments.size+", embeds: "+msg.embeds.length
-            filearray.push("["+timestamp.getDate()+"/"+timestamp.getMonth()+"/"+timestamp.getFullYear()+", "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds()+"|"+msg.author.tag+"] ["+msgstats+"]\n"+content+"\n")
+            filearray.push("["+timestamp.getDate()+"/"+timestamp.getMonth()+"/"+timestamp.getFullYear()+", "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds()+"|"+msg.author.tag+"] ["+msgstats+"]\n"+content+"\n"+filestring)
         })
 
         if (filearray.length < 2) filearray.push("transcript is empty")
         const filestring = filearray.join("\n")
         const filebuff = Buffer.from(filestring,"utf-8")
-        return new discord.AttachmentBuilder(filebuff,{name:"backuptranscript.txt",description:"Open Ticket transcript"})
+        return new discord.AttachmentBuilder(filebuff,{name:backupfilename+"transcript.txt",description:"Open Ticket transcript"})
     }catch{
         return false
     }

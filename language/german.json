@@ -1,21 +1,22 @@
+```json
 {
     "errors":{
         "missingArgsTitle":"Ungültiges Argument!",
         "missingArgsDescription":"Fehlendes Argument!",
         "noPermsTitle":"Du hast keine Rechte!",
-        "noPermsDescription":"Sie haben nicht die richtigen Rollen, um diesen Befehl auszuführen!\nSie benötigen die `ADMINISTRATOR` Erlaubnis oder in der Liste der erlaubten Rollen sein!",
-        "noPermsDelete":"Only admins can delete a ticket!",
+        "noPermsDescription":"Du benötigst die `ADMINISTRATOR` Rechte oder die erlaubte Rolle",
+        "noPermsDelete":"Nur Administratoren können ein Ticket löschen!",
         "chooseFromListTitle":"Ungültige ID",
-        "chooseFromListDescription":"Wählen Sie eine der folgenden ID:",
+        "chooseFromListDescription":"Wählen Sie eine der folgenden ID's:",
         "boterror":"Bot Fehler!",
-        "notInTicketTitle":"Du bist ein kein Ticket!",
-        "notInTicketDescription":"Der Befehl funktioniert nicht außerhalb eines Tickets!",
-        "ticketDoesntExist":"Das Ticket Exisitert nicht mehr!",
-        "roleDoesntExist":"Die Rolle Exisitiert nicht mehr!",
+        "notInTicketTitle":"Du bist in keinem Ticket!",
+        "notInTicketDescription":"Der Befehl funktioniert außerhalb eines Tickets nicht!",
+        "ticketDoesntExist":"Das Ticket exisitert nicht mehr!",
+        "roleDoesntExist":"Die Rolle exisitiert nicht mehr!",
         "anotherOption":"Diese Option ist kein Ticket, sondern eine andere Art!",
         "maxAmountTitle":"Das Limit wurde erreicht!",
-        "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neue erstellen.!",
-        "somethingWentWrong":"Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
+        "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neuen erstellen.!",
+        "somethingWentWrong":"**Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
     },
     "commands":{
         "userAddedTitle":"User geaddet!",
@@ -24,9 +25,9 @@
         "closeTitle":"Dieses Ticket schließen!",
         "deleteTitle":"Löschen Sie dieses Ticket!",
         "reopenTitle":"Öffne dieses Ticket erneut!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
-        "changeTitle":"Changed ticket type to {0}!",
+        "claimTitle":"Das Ticket wurde beansprucht von {0}",
+        "unclaimTitle":"Das Ticket wrid nicht mehr beansprucht",
+        "changeTitle":"Ticket Typ wurde geändert auf {0}!",
 
         "ticketWarning":"Die Einbettung befindet sich in der Nachricht unten!",
         "maxTicketWarning":"**Warnung:** _Sie können nur {0} ticket(s) erstellen zu einer Zeit!_"
@@ -63,25 +64,25 @@
         "deletedTicketDmTitle":"Ticket löschen!",
         "closedTicketDmDescription":"Ihr Ticket ist geschlossen!",
         "deletedTicketDmDescription":"Ihr Ticket ist gelöscht!",
-        "reopenTicketDmTitle":"Ticket Re-opened!",
-        "reopenTicketDmDescription":"Your ticket is re-opened!",
-        
-        "chooseCategory":"Wähle eine Kategorie:",
-        "gettingdeleted":"Ticket is getting deleted...",
+        "newTranscriptTitle":"Eine neue Transcript finden Sie hier!",
+        "hereIsTheTranscript":"Hier ist das Transcript:",
 
-        "none":"keiner",
+        "chooseCategory":"Wähle eine Kategorie:",
+        "gettingdeleted":"Ticket wird gelöscht...",
+
+        "none":"none",
         "reason":"Grund",
 
         "deletedby":"Gelöscht von",
         "closedby":"Geschlossen von",
         "modalreason":"Was ist der Grund?",
-        "chooseATicket": "Wähle ein Ticket"
+        "chooseATicket": "Wähle ein passendes Thema!"
     },
     "transcripts":{
         "title":"Transcript",
-        "processed":"This transcript is being processed",
-        "wait":"Please wait!",
-        "estimated":"Estimated time",
-        "available":"The transcript is available here"
+        "processed":"Das Transcript wird erstellt",
+        "wait":"Bitte warten!",
+        "estimated":"Verbleibende Zeit",
+        "available":"Das Transcript ist hier verfügbar"
     }
-}
+}```
