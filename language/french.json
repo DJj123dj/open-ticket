@@ -79,9 +79,9 @@
     },
     "transcripts":{
         "title":"Transcript",
-        "processed":"This transcript is being processed",
-        "wait":"Please wait!",
-        "estimated":"Estimated time",
-        "available":"The transcript is available here"
+        "processed":"Cette transcript est en cours de traitement",
+        "wait":"S'il vous plait, attendez...",
+        "estimated":"Temps estime:",
+        "available":"La transcript est disponible ici"
     }
 }
