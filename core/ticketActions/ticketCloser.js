@@ -134,10 +134,21 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
             }
         })
 
+        //ticketinfo error
+        const ticketInfoError = bot.errorLog.serverError("Unable to detect ticket information.\n*(First message that this bot sends)*\n\n__**Possible reasons:**__\n- you unpinned the first message\n- the first message is deleted\n- it has been unpinned & repinned after another message has been pinned.\n\n__**Possible solutions:**__\n- unpin all messages in this channel & repin the first message that this bot sent.\nIf this doesn't work, just delete the ticket manually!")
+
         //add ticket adminroles
         await channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
+                var firstmsg = msglist.find((m => m.author.id == client.user.id))
+                if (firstmsg == undefined || firstmsg.author.id != client.user.id){
+                    return channel.send({embeds:[ticketInfoError]})
+                }
+            }
+            
+            if (firstmsg.embeds.length < 1 || !firstmsg.embeds[0].description.includes("OTDATA")) return channel.send({embeds:[ticketInfoError]})
+
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
             const ticketData = require("../utils/configParser").getTicketById(ticketId,true)

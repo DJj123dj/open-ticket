@@ -1,61 +1,60 @@
 {
     "errors":{
         "missingArgsTitle":"Argomenti non validi!",
-        "missingArgsDescription":"Argomento mancante",
-        "noPermsTitle":"Permessi mancanti!",
-        "noPermsDescription":"Hai bisogno del permesso `ADMINISTRATOR` e essere nella lista dei ruoli accettati!",
-        "noPermsDelete":"Solo gli amministratori possono chiudere un ticket!",
+        "missingArgsDescription":"Argomenti mancanti",
+        "noPermsTitle":"Non hai i permessi sufficienti!",
+        "noPermsDescription":"Hai bisogno del permesso `ADMINISTRATOR` o essere nella lista dei ruoli consentiti!",
+        "noPermsDelete":"Solo gli amministratori possono eliminare i ticket!",
         "chooseFromListTitle":"ID non valido",
-        "chooseFromListDescription":"Scegli uno degli ID sotto:",
+        "chooseFromListDescription":"Scegli uno degli id sottostanti:",
         "boterror":"Errore del bot!",
         "notInTicketTitle":"Non sei in un ticket!",
-        "notInTicketDescription":"Questo comando non funziona fuori da un ticket!",
-        "ticketDoesntExist":"Questo ticket non esiste più!",
-        "roleDoesntExist":"Questo ruolo non esiste più!",
-        "anotherOption":"Questa opzione non è di un ticket!",
-        "maxAmountTitle":"Massimo numero raggiunto!",
-        "maxAmountDescription":"Hai raggiunto il massimo numero di ticket consentiti!\nNon puoi crearne altri!",
-        "somethingWentWrong":"**Qualcosa è andato storto!**\nPerfavore riprova un'altra volta!",
-        "somethingWentWrongTranscript":"Qualcosa è andata storta durante la trascrizione!**\nPerfavore riprova un'altra volta!"
+        "notInTicketDescription":"Questo comando non funziona al di fuori di un ticket!",
+        "ticketDoesntExist":"Questo ticket non esiste!",
+        "roleDoesntExist":"Questo ruolo non esiste!",
+        "anotherOption":"Questa opzione non è un ticket ma un'altra!",
+        "maxAmountTitle":"Massimo ammontare raggiunto!",
+        "maxAmountDescription":"Hai raggiunto il massimo di ticket aperti!\nNon puoi creare altri!",
+        "somethingWentWrong":"*Qualcosa è andato storto!*\nPerfavore riprova un'altra volta!"
     },
     "commands":{
-        "userAddedTitle":"Aggiunto {0} al ticket!",
-        "userRemovedTitle":"Rimosso {0} da questo ticket!",
-        "renameTitle":"Cambia il nome in {0}!",
-        "closeTitle":"Chiudo questo ticket!",
+        "userAddedTitle":"Aggiunti {0} a questo ticket!",
+        "userRemovedTitle":"Rimossi {0} da questo ticket!",
+        "renameTitle":"Cambiato il nome a {0}!",
+        "closeTitle":"Ticket chiuso!",
         "deleteTitle":"Eliminando questo ticket...",
-        "reopenTitle":"Ri-Aperto questo ticket!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
+        "reopenTitle":"Ri-aperto questo ticket!",
+        "claimTitle":"Questo ticket è ora gestito da {0}",
+        "unclaimTitle":"Questo ticket non è più gestito!",
+        "changeTitle":"Cambiato il tipo di ticket in {0}!",
 
         "ticketWarning":"L'embed è nel messaggio sotto!",
-        "maxTicketWarning":"**Attenzione:** _Tu puoi creare solo {0} ticket(s) per volta!_"
+        "maxTicketWarning":"*Attenzione:* Tu puoi creare solo {0} ticket alla volta!"
     },
     "helpMenu":{
         "title":"Comandi disponibili:",
-        "header1":"**Vai a {0} per creare un ticket!**\n\n",
-        "header2":"**Esegui il comando `/new` o `/ticket` per creare un ticket!**\n\n",
+        "header1":"*Vai a {0} per creare un ticket!*\n\n",
+        "header2":"*Esegui il comando `/new` o `/ticket` per creare un ticket!*\n\n",
 
-        "msgCmd":"Crea un embed con pulsanti. (solo amministratori)",
+        "msgCmd":"Crea un embed con bottoni. (solo amministratori)",
         "renameCmd":"Rinomina un ticket. (senza spazi)",
         "closeCmd":"Chiudi un ticket.",
         "deleteCmd":"Elimina un ticket.",
-        "addCmd":"Aggiungi un membro al ticket.",
-        "removeCmd":"Rimuovi un membro dal ticket.",
-        "reopenCmd":"Riapri un ticket dopo averlo chiuso."
+        "addCmd":"Aggiungi un utente al ticket.",
+        "removeCmd":"Rimuovi un utente da un ticket.",
+        "reopenCmd":"Ri-apri un ticket dopo averlo chiuso."
     },
     "buttons":{
-        "close":"Chiudi il ticket",
-        "delete":"Elimina il ticket",
-        "reopen":"Riapri il ticket",
-        "sendTranscript":"Trascrizione",
-        "closeWithReason":"chiudi con un motivo"
+        "close":"Chiudi",
+        "delete":"Elimini",
+        "reopen":"Ri-apri un ticket",
+        "closeWithReason":"chiudi con motivo"
     },
     "messages":{
-        "reopenTitle":"Riaperto questo ticket!",
-        "reopenDescription":"Sentiti libero di parlare di nuovo!",
-        "closedTitle":"Chiudo questo ticket!",
-        "closedDescription":"Solo gli amministratori possono parlare in questo ticket ora!\n\n*Clicca sul bottone sotto per chiudere o riaprire questo ticket!*",
+        "reopenTitle":"Ticket ri-aperto!",
+        "reopenDescription":"Sentiti libero di parlare nuovamente!",
+        "closedTitle":"Ticket chiuso!",
+        "closedDescription":"Solo gli amministratori possono parlare in questo ticket ora!\n\n*Clicca sul pulsante sotto per eliminare o ri-aprire questo ticket!*",
         "createdTitle":"Ticket creato!",
         "createdDescription":"Il tuo ticket è stato creato, puoi capirlo dal ping!",
 
@@ -63,11 +62,9 @@
         "closedTicketDmTitle":"Ticket chiuso!",
         "deletedTicketDmTitle":"Ticket eliminato!",
         "closedTicketDmDescription":"Il tuo ticket è chiuso!",
-        "deletedTicketDmDescription":"Il tuo ticket è stato eliminato!",
-        "reopenTicketDmTitle":"Ticket riaperto!",
-        "reopenTicketDmDescription":"Il tuo ticket è stato riaperto!",
-        "newTranscriptTitle":"Un nuova trascrizione è qui!",
-        "hereIsTheTranscript":"Qui è la trascrizione:",
+        "deletedTicketDmDescription":"Il tuo ticket è eliminato!",
+        "reopenTicketDmTitle":"Ticket ri-aperto!",
+        "reopenTicketDmDescription":"Il tuo ticket è stato ri-aperto!",
 
         "chooseCategory":"scegli una categoria:",
         "gettingdeleted":"Il ticket sta per essere chiuso...",
@@ -77,7 +74,14 @@
 
         "deletedby":"eliminato da",
         "closedby":"chiuso da",
-        "modalreason":"Quale'è il motivo per chiudere il ticket?",
+        "modalreason":"Quale è il motivo per chiudere questo ticket?",
         "chooseATicket": "Scegli un ticket"
+    },
+    "transcripts":{
+        "title":"Trascrizione",
+        "processed":"Questo ticket sta per essere processato",
+        "wait":"Perfavore attendi!",
+        "estimated":"Tempo estimato",
+        "available":"La trascrizione è disponibile qui"
     }
 }

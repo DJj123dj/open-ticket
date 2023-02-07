@@ -15,8 +15,7 @@
         "anotherOption":"Cette option n'est pas un ticket mais un autre type!",
         "maxAmountTitle":"Montant maximum atteint!",
         "maxAmountDescription":"Vous avez atteint le nombre maximum de tickets autorisés!\nVous ne pouvez donc pas en créer un nouveau!",
-        "somethingWentWrong":"**Quelque chose s'est mal passé!**\nVeuillez réessayer une autre fois!",
-        "somethingWentWrongTranscript":"Une erreur s'est produite lors de la création de la transcription!**\nVeuillez réessayer une autre fois!"
+        "somethingWentWrong":"**Quelque chose s'est mal passé!**\nVeuillez réessayer une autre fois!"
     },
     "commands":{
         "userAddedTitle":"{0} a été ajouté à ce ticket!",
@@ -27,6 +26,7 @@
         "reopenTitle":"A rouvert ce ticket!",
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"L'intégration est dans le message ci-dessous!",
         "maxTicketWarning":"**Attention :** _Vous ne pouvez créer que {0} ticket(s) à la fois !_"
@@ -48,7 +48,6 @@
         "close":"Fermer le ticket",
         "delete":"Supprimer le billet",
         "reopen":"Billet de réouverture",
-        "sendTranscript":"Transcript",
         "closeWithReason":"fermer avec une raison"
     },
     "messages":{
@@ -66,9 +65,7 @@
         "deletedTicketDmDescription":"Votre billet est supprimé !",
         "reopenTicketDmTitle":"Billet rouvert!",
         "reopenTicketDmDescription":"Votre billet est rouvert !",
-        "newTranscriptTitle":"Une nouvelle transcription est ici!",
-        "hereIsTheTranscript":"Voici la transcription :",
-
+        
         "chooseCategory":"choisissez une catégorie:",
         "gettingdeleted":"Le ticket est en cours de suppression...",
 
@@ -79,5 +76,12 @@
         "closedby":"fermé par",
         "modalreason":"Qu’elle est la raison pour fermer ce ticket?",
         "chooseATicket": "Choisir un ticket"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"Cette transcript est en cours de traitement",
+        "wait":"S'il vous plait, attendez...",
+        "estimated":"Temps estime:",
+        "available":"La transcript est disponible ici"
     }
 }

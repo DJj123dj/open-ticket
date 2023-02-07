@@ -15,8 +15,7 @@
         "anotherOption":"¡Esta opción no es un ticket, si no otra cosa!",
         "maxAmountTitle":"¡Máxima cantidad alcanzada!",
         "maxAmountDescription":"¡Has alcanzado la máxima cantidad de tickets permitida!\n¡Por lo que no puedes crear otro!",
-        "somethingWentWrong":"**¡Algo salió mal!**\n¡Prueba dentro de un rato!",
-        "somethingWentWrongTranscript":"**¡Algo salió mal al hacer el transcript!**\n¡Prueba en otro momento!"
+        "somethingWentWrong":"**¡Algo salió mal!**\n¡Prueba dentro de un rato!"
     },
     "commands":{
         "userAddedTitle":"Se agregó {0} al ticket!",
@@ -25,8 +24,9 @@
         "closeTitle":"Cerró este ticket!",
         "deleteTitle":"Eliminando este ticket...",
         "reopenTitle":"Re-abrió este boleto!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
+        "claimTitle":"Este ticket será atendido por {0}",
+        "unclaimTitle":"¡Este ticket ya no está reservado!",
+        "changeTitle":"¡Cambiando el tipo de ticket a {0}!",
 
         "ticketWarning":"La inserción está en el mensaje a continuación!",
         "maxTicketWarning":"**Advertencia:** _Solo puedes crear {0} ticket(s) a la vez!_"
@@ -48,7 +48,6 @@
         "close":"Cerrar ticket.",
         "delete":"Eliminar ticket",
         "reopen":"Re-Abrir ticket",
-        "sendTranscript":"Obtener transcript.",
         "closeWithReason":"cerrar con razón"
     },
     "messages":{
@@ -66,9 +65,7 @@
         "deletedTicketDmDescription":"¡Tu ticket fué eliminado!",
         "reopenTicketDmTitle":"¡Ticket re-abierto!",
         "reopenTicketDmDescription":"¡Tu ticket se vió abierto de nuevo!",
-        "newTranscriptTitle":"¡Un nuevo transcript está aquí!",
-        "hereIsTheTranscript":"Aquí está el transcript:",
-
+        
         "chooseCategory":"Elije una categoría:",
         "gettingdeleted":"El ticket se está viendo eliminado...",
 
@@ -79,5 +76,12 @@
         "closedby":"cerrado por",
         "modalreason":"Cúal es la razón para cerrar este ticket?",
         "chooseATicket": "Elije un ticket"
+    },
+    "transcripts":{
+        "title":"Transcripción",
+        "processed":"La transcripción del ticket está siendo procesada...",
+        "wait":"¡Por favor, espere!",
+        "estimated":"Tiempo estimado",
+        "available":"La transcripción estará disponible aquí"
     }
 }

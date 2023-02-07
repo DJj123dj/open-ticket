@@ -15,8 +15,7 @@
         "anotherOption":"Aceasta optiune este altceva decat un tip de ticket!",
         "maxAmountTitle":"Limita atinsa!",
         "maxAmountDescription":"Ai atins limita de tickets!\nAsa ca nu mai poti creea altele noi!",
-        "somethingWentWrong":"**Ceva nu a mers bine!**\nTe rugam sa incerci mai tarziu!",
-        "somethingWentWrongTranscript":"Ceva nu aa mers bine in timpul creeari transcript-ului!**\nTe rugam sa incerci mai tarziu!"
+        "somethingWentWrong":"**Ceva nu a mers bine!**\nTe rugam sa incerci mai tarziu!"
     },
     "commands":{
         "userAddedTitle":"{0} a fost adaugat in acest ticket!",
@@ -27,6 +26,7 @@
         "reopenTitle":"Ticket Re-deschis!",
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"Embed-ul se afla in mesajul de mai jos!",
         "maxTicketWarning":"**Avertizare:** _Poti creea doar {0} tickete active!_"
@@ -48,7 +48,6 @@
         "close":"Inchide ticket-ul",
         "delete":"Sterge ticket-ul",
         "reopen":"Re-deschide un ticket",
-        "sendTranscript":"Transcript",
         "closeWithReason":"Inchide cu motiv"
     },
     "messages":{
@@ -66,8 +65,6 @@
         "deletedTicketDmDescription":"Ticket-ul tau este sters!",
         "reopenTicketDmTitle":"Ticket Re-deschis!",
         "reopenTicketDmDescription":"Ticket-ul tau este re-deschis!",
-        "newTranscriptTitle":"Un nou transcript este aici!",
-        "hereIsTheTranscript":"Aici este transcriptul:",
 
         "chooseCategory":"Alege o categorie:",
         "gettingdeleted":"Ticket-ul se sterge...",
@@ -79,5 +76,12 @@
         "closedby":"Inchis de",
         "modalreason":"Care este motivul pentru inchiderea acestui ticket?",
         "chooseATicket": "Alege un ticket"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"Transcript in curs de procesare...",
+        "wait":"Te rugam sa astepti!",
+        "estimated":"Timp estimat",
+        "available":"Transcriptul este disponibil aici"
     }
 }

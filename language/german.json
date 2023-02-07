@@ -3,35 +3,30 @@
         "missingArgsTitle":"Ungültiges Argument!",
         "missingArgsDescription":"Fehlendes Argument!",
         "noPermsTitle":"Du hast keine Rechte!",
-        "noPermsDescription":"Sie haben nicht die richtigen Rollen, um diesen Befehl auszuführen!\nSie benötigen die `ADMINISTRATOR` Erlaubnis oder in der Liste der erlaubten Rollen sein!",
+        "noPermsDescription":"Du benötigst die `ADMINISTRATOR` Rechte oder die erlaubte Rolle",
+        "noPermsDelete":"Nur Administratoren können ein Ticket löschen!",
         "chooseFromListTitle":"Ungültige ID",
-        "chooseFromListDescription":"Wählen Sie eine der folgenden ID:",
+        "chooseFromListDescription":"Wählen Sie eine der folgenden ID's:",
         "boterror":"Bot Fehler!",
-        "notInTicketTitle":"Du bist ein kein Ticket!",
-        "notInTicketDescription":"Der Befehl funktioniert nicht außerhalb eines Tickets!",
-        "ticketDoesntExist":"Das Ticket Exisitert nicht mehr!",
-        "roleDoesntExist":"Die Rolle Exisitiert nicht mehr!",
+        "notInTicketTitle":"Du bist in keinem Ticket!",
+        "notInTicketDescription":"Der Befehl funktioniert außerhalb eines Tickets nicht!",
+        "ticketDoesntExist":"Das Ticket exisitert nicht mehr!",
+        "roleDoesntExist":"Die Rolle exisitiert nicht mehr!",
         "anotherOption":"Diese Option ist kein Ticket, sondern eine andere Art!",
         "maxAmountTitle":"Das Limit wurde erreicht!",
-        "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neue erstellen.!",
-        "somethingWentWrong":"Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!",
-        "somethingWentWrongTranscript":"Bei der Erstellung der Transcript ist etwas schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
+        "maxAmountDescription":"Sie haben die maximal zulässige Anzahl von Tickets erreicht!\nSie können also keine neuen erstellen.!",
+        "somethingWentWrong":"**Etwas ist schief gelaufen!**\nBitte versuchen Sie es ein anderes Mal!"
     },
     "commands":{
         "userAddedTitle":"User geaddet!",
-        "userAddedDescription":"{0} wird zu diesem Ticket hinzugefügt!",
         "userRemovedTitle":"User entfernt!",
-        "userRemovedDescription":"{0} wird aus diesem Ticket entfernt!",
-
         "renameTitle":"Der Name wurde geändert!",
-        "renameWarning":"Achtung: Sie können den Kanalnamen nur 2 Mal pro Minute ändern!\n(dies ist auf die Begrenzung der Diskordrate zurückzuführen)",
-
         "closeTitle":"Dieses Ticket schließen!",
-        "closeDescription":"Sie können dieses Ticket schließen, indem Sie auf die Schaltfläche unten klicken!",
         "deleteTitle":"Löschen Sie dieses Ticket!",
-        "deleteDescription":"Sie können dieses Ticket löschen, indem Sie auf die Schaltfläche unten klicken!",
         "reopenTitle":"Öffne dieses Ticket erneut!",
-        "reopenDescription":"Sie können dieses Ticket erneut öffnen, indem Sie auf die Schaltfläche unten klicken!",
+        "claimTitle":"Das Ticket wurde beansprucht von {0}",
+        "unclaimTitle":"Das Ticket wrid nicht mehr beansprucht",
+        "changeTitle":"Ticket Typ wurde geändert auf {0}!",
 
         "ticketWarning":"Die Einbettung befindet sich in der Nachricht unten!",
         "maxTicketWarning":"**Warnung:** _Sie können nur {0} ticket(s) erstellen zu einer Zeit!_"
@@ -53,7 +48,6 @@
         "close":"Ticket schließen",
         "delete":"Ticket löschen",
         "reopen":"Ticket wieder öffnen",
-        "sendTranscript":"Transcript-Datei senden",
         "closeWithReason":"Geschlossen mit dem Grund"
     },
     "messages":{
@@ -73,13 +67,21 @@
         "hereIsTheTranscript":"Hier ist das Transcript:",
 
         "chooseCategory":"Wähle eine Kategorie:",
+        "gettingdeleted":"Ticket wird gelöscht...",
 
-        "none":"keiner",
+        "none":"none",
         "reason":"Grund",
 
         "deletedby":"Gelöscht von",
         "closedby":"Geschlossen von",
         "modalreason":"Was ist der Grund?",
-        "chooseATicket": "Wähle ein Ticket"
+        "chooseATicket": "Wähle ein passendes Thema!"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"Das Transcript wird erstellt",
+        "wait":"Bitte warten!",
+        "estimated":"Verbleibende Zeit",
+        "available":"Das Transcript ist hier verfügbar"
     }
 }

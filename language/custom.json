@@ -15,8 +15,7 @@
         "anotherOption":"This option is not a ticket but another type!",
         "maxAmountTitle":"Max amount reached!",
         "maxAmountDescription":"You reached the maximum number of tickets allowed!\nSo you can't create a new one!",
-        "somethingWentWrong":"**Something went wrong!**\nPlease try again another time!",
-        "somethingWentWrongTranscript":"Something went wrong while making the transcript!**\nPlease try again another time!"
+        "somethingWentWrong":"**Something went wrong!**\nPlease try again another time!"
     },
     "commands":{
         "userAddedTitle":"Added {0} to this ticket!",
@@ -27,6 +26,7 @@
         "reopenTitle":"Re-Opened this ticket!",
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
+        "changeTitle":"Changed ticket type to {0}!",
 
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Warning:** _You can only create {0} ticket(s) at a time!_"
@@ -48,7 +48,6 @@
         "close":"Close Ticket",
         "delete":"Delete Ticket",
         "reopen":"Re-Open Ticket",
-        "sendTranscript":"Transcript",
         "closeWithReason":"close with reason"
     },
     "messages":{
@@ -66,8 +65,6 @@
         "deletedTicketDmDescription":"Your ticket is deleted!",
         "reopenTicketDmTitle":"Ticket Re-opened!",
         "reopenTicketDmDescription":"Your ticket is re-opened!",
-        "newTranscriptTitle":"A new transcript is here!",
-        "hereIsTheTranscript":"Here is the transcript:",
 
         "chooseCategory":"choose a category:",
         "gettingdeleted":"Ticket is getting deleted...",
@@ -79,5 +76,12 @@
         "closedby":"closed by",
         "modalreason":"What is the reason for closing this ticket?",
         "chooseATicket": "Choose a ticket"
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"This transcript is being processed",
+        "wait":"Please wait!",
+        "estimated":"Estimated time",
+        "available":"The transcript is available here"
     }
 }

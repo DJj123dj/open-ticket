@@ -1,83 +1,87 @@
 {
-    "errors":{
-        "missingArgsTitle":"Ugyldige argumenter",
-        "missingArgsDescription":"Manglende argumenter",
-        "noPermsTitle":"Ingen adgang",
-        "noPermsDescription":"Du har ikke adgang til denne kommando",
-        "noPermsDelete":"Kun administrators kan slette tickets",
-        "chooseFromListTitle":"Ugyldig ID",
-        "chooseFromListDescription":"Vælg et ID nedenunder",
-        "boterror":"Bot Fejl!",
-        "notInTicketTitle":"Du er ikke i en ticket!",
-        "notInTicketDescription":"Denne kommando fungere kun i tickets!",
-        "ticketDoesntExist":"Denne ticket eksistere ikke mere!",
-        "roleDoesntExist":"Denne rolle eksistere ikke mere!",
-        "anotherOption":"Dette er ikke en ticket, men noget andet!",
-        "maxAmountTitle":"For mange tickets er blevet oprettet!",
-        "maxAmountDescription":"Du har for mange tickets åbne!\nSå luk dem hvis du gerne vil oprette nye!",
-        "somethingWentWrong":"**Noget gik galt**\nKontakt en udvikler!",
-        "somethingWentWrongTranscript":"Noget gik galt med transcript!**\nKontakt en udvikler!"
-    },
-    "commands":{
-        "userAddedTitle":"Tilføjer {0} til denne ticket!",
-        "userRemovedTitle":"Fjernet {0} fra denne ticket!",
-        "renameTitle":"Ændret navnet til{0}!",
-        "closeTitle":"Closed this ticket!",
-        "deleteTitle":"Fjerner ticketen",
-        "reopenTitle":"Genåbnede denne ticket",
-        "claimTitle":"Denne ticket er blevet taget af {0}",
-        "unclaimTitle":"Denne ticket er nu tilgængelig!",
+  "errors": {
+    "missingArgsTitle": "Ugyldigt Argument!",
+    "missingArgsDescription": "Manglende Argument",
+    "noPermsTitle": "Ikke tilladelse!",
+    "noPermsDescription": "Du skal have tilladelsen `ADMINISTRATOR` eller være på listen over tilladte roller!",
+    "noPermsDelete": "Kun administratorer kan slette en ticket!",
+    "chooseFromListTitle": "Ugyldigt ID",
+    "chooseFromListDescription": "Vælg et af id'erne nedenfor:",
+    "boterror": "Bot Fejl!",
+    "notInTicketTitle": "Du er ikke i en ticket!",
+    "notInTicketDescription": "Denne kommando virker ikke udenfor tickets!",
+    "ticketDoesntExist": "Denne ticket findes ikke længere!",
+    "roleDoesntExist": "Denne rolle eksisterer ikke længere!",
+    "anotherOption": "Denne mulighed er ikke en ticket, men en anden type!",
+    "maxAmountTitle": "Maks. mængde opnået!",
+    "maxAmountDescription": "Du har nået det maksimale antal tilladte tickets!\nSå du kan ikke oprette en ny!",
+    "somethingWentWrong": "**Noget gik galt!**\nPrøv venligst igen en anden gang!"
+  },
+  "commands": {
+    "userAddedTitle": "Føjede {0} til denne ticket!",
+    "userRemovedTitle": "Fjernede {0} fra denne ticket!",
+    "renameTitle": "Ændrede navnet til {0}!",
+    "closeTitle": "Lukket denne ticket!",
+    "deleteTitle": "Sletter denne ticket...",
+    "reopenTitle": "Genåbnede denne ticket!",
+    "claimTitle": "Denne ticket er nu krævet til {0}",
+    "unclaimTitle": "Der gøres ikke krav på denne ticket længere!",
+    "changeTitle": "Ændrede ticket type til {0}!",
 
-        "ticketWarning":"Emebeddet er i beskeden nedenunder",
-        "maxTicketWarning":"**Fejl:** _Du kan kun oprettre {0} ticket adgangen!_"
-    },
-    "helpMenu":{
-        "title":"Tilgængelig kommandoer:",
-        "header1":"**Gå til {0} For at oprette en ticket!**\n\n",
-        "header2":"**Skriv kommandoen `/new` eller `/ticket` for at oprette en ticket!**\n\n",
+    "ticketWarning": "Embedet er i meddelelsen nedenfor!",
+    "maxTicketWarning": "**Warning:** _Du kan kun oprette {0} ticket(s) ad gangen!_"
+  },
+  "helpMenu": {
+    "title": "Tilgængelige kommandoer:",
+    "header1": "**Gå til {0} for at oprette en ticket!**\n\n",
+    "header2": "**Kør kommandoen `/new` eller `/ticket` for at oprette en billet!**\n\n",
 
-        "msgCmd":"Lav en embed med knapper (admins kun)",
-        "renameCmd":"Ændre navnet (ingen mellemrum)",
-        "closeCmd":"Luk denne ticket",
-        "deleteCmd":"Fjern denne ticket",
-        "addCmd":"Tilføj en person til ticketen",
-        "removeCmd":"Fjern en person fra ticketen",
-        "reopenCmd":"Genåben en ticket efter den har været lukket"
-    },
-    "buttons":{
-        "close":"Luk ticket",
-        "delete":"Fjern ticket",
-        "reopen":"Genåben ticket",
-        "sendTranscript":"Transcript",
-        "closeWithReason":"Luk med grundlag"
-    },
-    "messages":{
-        "reopenTitle":"Genåbener denne ticket",
-        "reopenDescription":"Du kan nu skrive igen",
-        "closedTitle":"Lukker ticketen!",
-        "closedDescription":"Kun administrators kan skrive lige nu!\n\n*Klik på knappen nedenunder for at slette eller genåbne ticketen!*",
-        "createdTitle":"Ticket oprettet!",
-        "createdDescription":"Din ticket er oprettet!",
+    "msgCmd": "Lav et embed med buttons. (kun administratorer)",
+    "renameCmd": "Omdøb en ticket. (Ingen Mellemrum!!)",
+    "closeCmd": "Luk en ticket.",
+    "deleteCmd": "Slet en ticket.",
+    "addCmd": "Tilføj en bruger til ticketen.",
+    "removeCmd": "Fjern en bruger fra ticketen.",
+    "reopenCmd": "Genåbn en ticket, efter at den var lukket."
+  },
+  "buttons": {
+    "close": "Luk Ticket",
+    "delete": "Slet Ticket",
+    "reopen": "Genåben Ticket",
+    "closeWithReason": "Luk med grundlag"
+  },
+  "messages": {
+    "reopenTitle": "Genåbnede denne ticket!",
+    "reopenDescription": "Snak gerne igen!",
+    "closedTitle": "Lukket denne ticket!",
+    "closedDescription": "Kun administratorer kan tale i denne billet nu!\n\n*Klik på knappen nedenfor for at slette eller genåbne denne billet!",
+    "createdTitle": "Ticket Oprettet!",
+    "createdDescription": "Din ticket er oprettet, du kan registrere den ved et ping!",
 
-        "newTicketDmTitle":"Ny Ticket!",
-        "closedTicketDmTitle":"Ticket Lukket!",
-        "deletedTicketDmTitle":"Ticket Fjernet!",
-        "closedTicketDmDescription":"Din ticket er blevet lukket!",
-        "deletedTicketDmDescription":"Din ticket er blevet fjernet!",
-        "reopenTicketDmTitle":"Ticket Genåbnet!",
-        "reopenTicketDmDescription":"Din ticket er blevet genåbent!",
-        "newTranscriptTitle":" En ny transcript er tilføjet!",
-        "hereIsTheTranscript":"Følgende transcript:",
+    "newTicketDmTitle": "Nt Ticket!",
+    "closedTicketDmTitle": "Ticket Lukket!",
+    "deletedTicketDmTitle": "Ticket Slettet!",
+    "closedTicketDmDescription": "Din ticket er lukket!",
+    "deletedTicketDmDescription": "Din ticket er slettet!",
+    "reopenTicketDmTitle": "Ticket Genåbnet!",
+    "reopenTicketDmDescription": "Din ticket er genåbnet!",
 
-        "chooseCategory":"Vælg en kategori:",
-        "gettingdeleted":"Ticketen slettes..",
+    "chooseCategory": "vælg en kategori:",
+    "gettingdeleted": "Ticketen bliver slettet...",
 
-        "none":"Ingen",
-        "reason":"Grundlag",
+    "none": "intet",
+    "reason": "grundlag",
 
-        "deletedby":"Fjernet af",
-        "closedby":"Lukket af",
-        "modalreason":"Hvad er grundlaget for lukkens af denne ticket?",
-        "chooseATicket": "Vælg en ticket"
-    }
+    "deletedby": "slettet af",
+    "closedby": "lukket af",
+    "modalreason": "Hvad er grunden til at lukke denne ticket?",
+    "chooseATicket": "Vælg en ticket"
+  },
+  "transcripts": {
+    "title": "Transcript",
+    "processed": "Dette transcript er under behandling",
+    "wait": "Vent venligst!",
+    "estimated": "Estimeret tid",
+    "available": "Transcriptet er tilgængelig her"
+  }
 }

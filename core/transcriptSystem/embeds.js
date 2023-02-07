@@ -21,12 +21,12 @@ exports.beingprocessed = (name,id,rawprocesstime,user) => {
     const processtime = "<t:"+newtime.getTime().toString().substring(0,newtime.getTime().toString().length-3)+":R>"
 
     const embed = new discord.EmbedBuilder()
-        .setTitle("🧾 Transcript")
+        .setTitle("🧾 "+l.transcripts.title)
         .setColor(config.main_color)
         .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
 
-        .setDescription("`This transcript is being processed...`\nPlease wait!\n\nEstimated time: "+processtime)
+        .setDescription("`"+l.transcripts.processed+"...`\n"+l.transcripts.wait+"\n\n"+l.transcripts.estimated+": "+processtime)
 
     return embed
 }
@@ -41,13 +41,17 @@ exports.beingprocessed = (name,id,rawprocesstime,user) => {
  */
 exports.tsready = (name,id,url,user) => {
     const embed = new discord.EmbedBuilder()
-        .setTitle("🧾 Transcript")
+        .setTitle("🧾 "+l.transcripts.title)
         .setColor(config.main_color)
         .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
-        .setURL(url)
 
-        .setDescription("\nThe transcript is available [here]("+url+")\n")
+        if (url){
+            embed.setURL(url)
+            embed.setDescription("\n["+l.transcripts.available+"]("+url+")\n")
+        }else{
+            embed.setDescription("\n"+l.transcripts.available+"\n")   
+        }
 
     return embed
 }
@@ -61,7 +65,7 @@ exports.tsready = (name,id,url,user) => {
  */
 exports.tserror = (name,id,user,err) => {
     const embed = new discord.EmbedBuilder()
-        .setTitle("❌ Transcript")
+        .setTitle("❌ "+l.transcripts.title)
         .setColor(discord.Colors.Red)
         .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})

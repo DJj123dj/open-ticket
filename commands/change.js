@@ -41,7 +41,10 @@ module.exports = () => {
             const prefix = splitted.shift()
             const name = (splitted.length > 0) ? splitted.join("-") : prefix
             
-
+            if (newTicket.category){
+                const parent = msg.guild.channels.cache.forEach((ch) => (ch.type == discord.ChannelType.GuildCategory) && ch.id == newTicket.category)
+                if (parent) msg.channel.setParent(parent)
+            }
             msg.channel.setName(newTicket.channelprefix+name)
             msg.channel.send({embeds:[bot.embeds.commands.changeEmbed(msg.author,newtype)]})
 
@@ -70,29 +73,28 @@ module.exports = () => {
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
             
-            console.log("HELLO WORLD!! 1")
             var newtype = interaction.options.getString("type",true)
             if (!newtype) return interaction.reply({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<type>`:\n`"+config.prefix+"change <type>`")]})
 
-            console.log("HELLO WORLD!! 2")
             const newTicket = require("../core/utils/configParser").getTicketById(newtype,true)
             const list = []
             config.options.forEach((o) => list.push(o.id))
             if (!newTicket) return bot.errorLog.invalidIdChooseFromList(list)
 
-            console.log("HELLO WORLD!! 3")
             /**@type {String} */
             var chName = interaction.channel.name
             const splitted = chName.split("-")
             const prefix = splitted.shift()
             const name = (splitted.length > 0) ? splitted.join("-") : prefix
-            
-            console.log("HELLO WORLD!! 4")
+
+            if (newTicket.category){
+                const parent = interaction.guild.channels.cache.forEach((ch) => (ch.type == discord.ChannelType.GuildCategory) && ch.id == newTicket.category)
+                if (parent) interaction.channel.setParent(parent)
+            }
 
             interaction.channel.setName(newTicket.channelprefix+name)
             interaction.reply({embeds:[bot.embeds.commands.changeEmbed(interaction.user,newtype)]})
 
-            console.log("HELLO WORLD!! 5")
             log("command","someone used the 'change' command",[{key:"user",value:interaction.user.tag}])
             log("system","ticket type changed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newtype",value:newtype}])
             APIEvents.onCommand("change",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())

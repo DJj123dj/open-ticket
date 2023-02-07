@@ -17,4 +17,4 @@ storage/.DS_Store
 .vscode/
 livestatus.json
 test.js
-testtsconfig.json
+devtsconfig.json

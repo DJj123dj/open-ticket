@@ -156,12 +156,13 @@ module.exports = () => {
                 if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
                     try {
                         const userrole = guild.roles.cache.find(r => r.id == config.system.member_role)
-                        if (!userrole) return
-                        permissionsArray.push({
-                            id:userrole,
-                            type:"role",
-                            deny:[pfb.ViewChannel]
-                        })
+                        if (userrole){
+                            permissionsArray.push({
+                                id:userrole,
+                                type:"role",
+                                deny:[pfb.ViewChannel]
+                            })
+                        }
                     }catch{
                         log("system","invalid role! At 'config.json => system/member_role")
                     }

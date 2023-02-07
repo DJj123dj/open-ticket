@@ -69,7 +69,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
                 author:{
                     name:msg.author.tag,
                     id:Number(msg.author.id),
-                    color:msg.author.hexAccentColor || "#ffffff",
+                    color:msg.member.displayHexColor || "#ffffff",
                     pfp:msg.author.displayAvatarURL()
                 },
                 content:msg.content || "",

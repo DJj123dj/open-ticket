@@ -12,6 +12,7 @@ const tsdb = require("./tsdb")
 
 
 const checkAvailability = async () => {
+    if (process.argv.some((v) => v == "--tsoffline")) return true
     const axios = require("axios").default
     const res = await axios.get("https://transcripts.dj-dj.be/status.txt")
     if (!res || !(res.status == 200) || !res.data) return false
@@ -48,90 +49,102 @@ module.exports = async (messages,guild,channel,user,reason) => {
 
         const ticketopener = client.users.cache.find(u => u.id == id)
         
-    
-        const JSONDATA = require("./communication/compileJson").compile(guild,channel,user,messages,{
-            style:{
-                titleColor:tsconfig.style.titleColor,
-                enableCustomBackground:tsconfig.style.background.enableCustomBackground,
-                backgroundModus:tsconfig.style.background.backgroundModus,
-                backgroundData:tsconfig.style.background.backgroundData
-            },
-            bot:{
-                name:client.user.username,
-                id:client.user.id,
-                pfp:client.user.displayAvatarURL()
-            },
-            ticket:{
-                creatorid:ticketopener.id,
-                creatorname:ticketopener.tag,
-                openedtime:opentime.getTime(),
-                closedtime:new Date().getTime()
-            }
-        })
-
-        if (!await checkAvailability()){
-            const attachment = await require("./oldTranscript").createTranscript(messages,channel)
-            const errembed = tsembeds.tserror(chName,chId,user)
-
-            if (tsconfig.sendTranscripts.enableChannel){
-                /**@type {discord.TextChannel|undefined} */
-                const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
-        
-                if (!tc) return
-                tc.send({embeds:[errembed],files:[attachment]})
-            }
-            return
-        }
-
-        const TSdata = await require("./communication/index").upload(JSONDATA)
-        if (!TSdata) return false
-
-        if (TSdata.status == "success"){
-            const url = "https://transcripts.dj-dj.be/t/"+TSdata.time+"_"+TSdata.id+".html"
-
-            //calculate estimated time
-            const lastDumpTime = (new Date(TSdata.estimated.lastdump).getTime())
-            const dumpLoopTime = 15000
-            const nextDump = new Date(lastDumpTime+dumpLoopTime)
-            const processtime = TSdata.estimated.processtime+6000 //6sec extra time for overflow
-
-            const finaltime = new Date(nextDump.getTime()+processtime)
-            const duration = finaltime.getTime()-new Date().getTime()
-
-            //waiting
-            if (tsconfig.sendTranscripts.enableChannel){
-                /**@type {discord.TextChannel|undefined} */
-                const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
-        
-                if (!tc) return
-                const embed = tsembeds.beingprocessed(chName,chId,finaltime,user)
-                var msg = await tc.send({embeds:[embed]})
-            }else {var msg = false}
-
-            //ready
-            setTimeout(() => {
-                if (msg){
-                    msg.edit({embeds:[tsembeds.tsready(chName,chId,url,user)]})
+        if (tsconfig.sendTranscripts.useHTMLtranscripts){
+            const JSONDATA = require("./communication/compileJson").compile(guild,channel,user,messages,{
+                style:{
+                    titleColor:tsconfig.style.titleColor,
+                    enableCustomBackground:tsconfig.style.background.enableCustomBackground,
+                    backgroundModus:tsconfig.style.background.backgroundModus,
+                    backgroundData:tsconfig.style.background.backgroundData
+                },
+                bot:{
+                    name:client.user.username,
+                    id:client.user.id,
+                    pfp:client.user.displayAvatarURL()
+                },
+                ticket:{
+                    creatorid:ticketopener.id,
+                    creatorname:ticketopener.tag,
+                    openedtime:opentime.getTime(),
+                    closedtime:new Date().getTime()
                 }
+            })
 
-                if (tsconfig.sendTranscripts.enableDM){
-                    if (!user) return
-                    const embed = tsembeds.tsready(chName,chId,url,user)
-                    try {
-                        user.send({embeds:[embed]})
-                    }catch{}
+            if (!await checkAvailability()){
+                const attachment = await require("./oldTranscript").createTranscript(messages,channel)
+                const errembed = tsembeds.tserror(chName,chId,user)
+
+                if (tsconfig.sendTranscripts.enableChannel){
+                    /**@type {discord.TextChannel|undefined} */
+                    const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
+            
+                    if (!tc) return
+                    tc.send({embeds:[errembed],files:[attachment]})
                 }
-            },duration)
+                return
+            }
+
+            const TSdata = await require("./communication/index").upload(JSONDATA)
+            if (!TSdata) return false
+
+            if (TSdata.status == "success"){
+                const url = "https://transcripts.dj-dj.be/t/"+TSdata.time+"_"+TSdata.id+".html"
+
+                //calculate estimated time
+                const lastDumpTime = (new Date(TSdata.estimated.lastdump).getTime())
+                const dumpLoopTime = 15000
+                const nextDump = new Date(lastDumpTime+dumpLoopTime)
+                const processtime = TSdata.estimated.processtime+6000 //6sec extra time for overflow
+
+                const finaltime = new Date(nextDump.getTime()+processtime)
+                const duration = finaltime.getTime()-new Date().getTime()
+
+                //waiting
+                if (tsconfig.sendTranscripts.enableChannel){
+                    /**@type {discord.TextChannel|undefined} */
+                    const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
+            
+                    if (!tc) return
+                    const embed = tsembeds.beingprocessed(chName,chId,finaltime,user)
+                    var msg = await tc.send({embeds:[embed]})
+                }else {var msg = false}
+
+                //ready
+                setTimeout(() => {
+                    if (msg){
+                        msg.edit({embeds:[tsembeds.tsready(chName,chId,url,user)]})
+                    }
+
+                    if (tsconfig.sendTranscripts.enableDM){
+                        if (!user) return
+                        const embed = tsembeds.tsready(chName,chId,url,user)
+                        try {
+                            user.send({embeds:[embed]})
+                        }catch{}
+                    }
+                },duration)
+            }else{
+                const attachment = await require("./oldTranscript").createTranscript(messages,channel)
+                const errembed = tsembeds.tserror(chName,chId,user,"`error type: transcript API error`")
+
+                if (tsconfig.sendTranscripts.enableChannel){
+                    /**@type {discord.TextChannel|undefined} */
+                    const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
+            
+                    if (!tc) return
+                    tc.send({embeds:[errembed],files:[attachment]})
+                }
+            }
         }else{
             const attachment = await require("./oldTranscript").createTranscript(messages,channel)
-            const errembed = tsembeds.tserror(chName,chId,user,"`error type: transcript API error`")
+            const embed = tsembeds.tsready(chName,chId,false,user)
 
             if (tsconfig.sendTranscripts.enableChannel){
                 /**@type {discord.TextChannel|undefined} */
                 const tc = guild.channels.cache.find((c) => c.id == tsconfig.sendTranscripts.channel)
         
                 if (!tc) return
-                tc.send({embeds:[errembed],files:[attachment]})
+                tc.send({embeds:[embed],files:[attachment]})
             }
         }
     }

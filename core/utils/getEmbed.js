@@ -46,7 +46,7 @@ exports.createEmbed = (id) => {
         embed.setColor(config.main_color)
     }
 
-    if (data.other.embedTitleURL.enable) embed.setURL(data.other.embedTitleURL)
+    if (data.other.embedTitleURL.enable) embed.setURL(data.other.embedTitleURL.url)
 
     var description = data.description
     if (data.other.enableTicketExplaination){

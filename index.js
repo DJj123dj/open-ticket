@@ -56,6 +56,12 @@ if (process.argv.some((v) => v == "--nochecker")){
         console.log(chalk.blue("[FLAGS] => disabled checker.js"))
     }; logFLAGS()
 }
+if (process.argv.some((v) => v == "--tsoffline")){
+    async function logFLAGS(){
+        const chalk = await (await import("chalk")).default
+        console.log(chalk.blue("[FLAGS] => offline check for html transcripts disabled!"))
+    }; logFLAGS()
+}
 if (process.argv.some((v) => v == "--debug")){
     async function logFLAGS(){
         const chalk = await (await import("chalk")).default
@@ -73,7 +79,7 @@ if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded
 const config = tempconfig
 exports.config = config
 
-const tsconfig = require("./transcriptconfig.json")
+const tsconfig = isDevConfig ? require("./devtsconfig.json") : require("./transcriptconfig.json")
 exports.tsconfig = tsconfig
 
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded config")

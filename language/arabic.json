@@ -15,8 +15,7 @@
     "anotherOption": "هذا الخيار ليس التكت و لكنه شيء أخر!",
     "maxAmountTitle": "خطأ , تم الوصول الى الحد الأقصى!",
     "maxAmountDescription": "لقد وصلت الى الحد الأقصى لعدد التكتات المسموحة بها!\nSo لا يمكنك فتح واحدة أخرى!",
-    "somethingWentWrong": "**هناك خطاً!**\nأعد المحاولة لاحقاً!",
-    "somethingWentWrongTranscript": "هناك خطاً في محاولة طبع التكت!**\nأعد المحاولة لاحقاً!"
+    "somethingWentWrong": "**هناك خطاً!**\nأعد المحاولة لاحقاً!"
   },
   "commands": {
     "userAddedTitle": "تم أضافة {0} من المستخدمين في التكت!",
@@ -27,6 +26,7 @@
     "reopenTitle": "إعادة فتح التكت!",
     "claimTitle":"This ticket is now claimed to {0}",
     "unclaimTitle":"This ticket isn't claimed anymore!",
+    "changeTitle":"Changed ticket type to {0}!",
 
     "ticketWarning": "هذا الأمبد موجود بالفعل في الرسالة بالأسفل!",
     "maxTicketWarning": "**تحذير:** _يمكنك فقط فتح {0} تكت في الوقت!_"
@@ -48,7 +48,6 @@
     "close": "إغلاق التكت",
     "delete": "حذف التكت",
     "reopen": "إعادة فتح التكت",
-    "sendTranscript": "طبع التكت",
     "closeWithReason":"close with reason"
   },
   "messages": {
@@ -66,9 +65,7 @@
     "deletedTicketDmDescription": "تم حذف تذكرتك من قبل إداري!",
     "reopenTicketDmTitle": "تم إعادة فتح تذكرتك!",
     "reopenTicketDmDescription": "تم إعادة فتح التكت!",
-    "newTranscriptTitle": "توجد نسخة تكت جديدة هنا!",
-    "hereIsTheTranscript": "هذا هي النسخة:",
-
+    
     "chooseCategory": "أختر الكتقاجوري:",
     "gettingdeleted": "يتم حذف التكت...",
 
@@ -79,5 +76,12 @@
         "closedby":"closed by",
         "modalreason":"What is the reason for closing this ticket?",
         "chooseATicket": "Choose a ticket"
-  }
+    },
+    "transcripts":{
+        "title":"Transcript",
+        "processed":"This transcript is being processed",
+        "wait":"Please wait!",
+        "estimated":"Estimated time",
+        "available":"The transcript is available here"
+    }
 }
