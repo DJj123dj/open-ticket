@@ -70,18 +70,18 @@
         "gettingdeleted":"Ticket está sendo deletado...",
 
         "none":"none",
-        "reason":"reason",
+        "reason":"Motivo",
 
         "deletedby":"deleted by",
         "closedby":"closed by",
-        "modalreason":"What is the reason for closing this ticket?",
-        "chooseATicket": "Choose a ticket"
+        "modalreason":"Quak o motivo de fechar o ticket?",
+        "chooseATicket": "Fechar Ticket"
     },
     "transcripts":{
-        "title":"Transcript",
-        "processed":"This transcript is being processed",
-        "wait":"Please wait!",
-        "estimated":"Estimated time",
-        "available":"The transcript is available here"
+        "title":"Transcrever",
+        "processed":"A Transcrição está em andamento",
+        "wait":"Por favor espere!",
+        "estimated":"Tempo estimado",
+        "available":"A Transcrição está disponível aqui"
     }
 }
