@@ -48,7 +48,7 @@
         "close":"Fechar Ticket",
         "delete":"Excluir Ticket",
         "reopen":"Reabrir Ticket",
-        "closeWithReason":"close with reason"
+        "closeWithReason":"fechado com motivo"
     },
     "messages":{
         "reopenTitle":"Reabriu este ticket!",
@@ -69,12 +69,12 @@
         "chooseCategory":"Escolha a categoria:",
         "gettingdeleted":"Ticket está sendo deletado...",
 
-        "none":"none",
-        "reason":"Motivo",
+        "none":"vazio",
+        "reason":"motivo",
 
-        "deletedby":"deleted by",
-        "closedby":"closed by",
-        "modalreason":"Quak o motivo de fechar o ticket?",
+        "deletedby":"deletado por",
+        "closedby":"fechado por",
+        "modalreason":"Qual o motivo de fechar o ticket?",
         "chooseATicket": "Fechar Ticket"
     },
     "transcripts":{
