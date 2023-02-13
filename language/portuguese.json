@@ -75,6 +75,7 @@
         "deletedby":"deletado por",
         "closedby":"fechado por",
         "modalreason":"Qual o motivo de fechar o ticket?",
+
         "chooseATicket": "Fechar Ticket"
     },
     "transcripts":{

@@ -21,7 +21,7 @@ module.exports = () => {
             return
         }
 
-        msg.channel.messages.fetchPinned().then(msglist => {
+        msg.channel.messages.fetchPinned().then(async msglist => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
@@ -42,9 +42,10 @@ module.exports = () => {
             const name = (splitted.length > 0) ? splitted.join("-") : prefix
             
             if (newTicket.category){
-                const parent = msg.guild.channels.cache.forEach((ch) => (ch.type == discord.ChannelType.GuildCategory) && ch.id == newTicket.category)
-                if (parent) msg.channel.setParent(parent)
+                const parent = await msg.guild.channels.fetch(newTicket.category,{cache:true})
+                if (parent && parent.type == discord.ChannelType.GuildCategory) msg.channel.setParent(parent)
             }
+            
             msg.channel.setName(newTicket.channelprefix+name)
             msg.channel.send({embeds:[bot.embeds.commands.changeEmbed(msg.author,newtype)]})
 
@@ -52,8 +53,6 @@ module.exports = () => {
             log("system","ticket type changed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newtype",value:newtype}])
             APIEvents.onCommand("change",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         })
-        
-        
     })
 
     if (!DISABLE.commands.slash.change) client.on("interactionCreate",(interaction) => {
@@ -67,7 +66,7 @@ module.exports = () => {
         }
 
         //interaction.deferReply()
-        interaction.channel.messages.fetchPinned().then(msglist => {
+        interaction.channel.messages.fetchPinned().then(async msglist => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
@@ -88,8 +87,8 @@ module.exports = () => {
             const name = (splitted.length > 0) ? splitted.join("-") : prefix
 
             if (newTicket.category){
-                const parent = interaction.guild.channels.cache.forEach((ch) => (ch.type == discord.ChannelType.GuildCategory) && ch.id == newTicket.category)
-                if (parent) interaction.channel.setParent(parent)
+                const parent = await interaction.guild.channels.fetch(newTicket.category,{cache:true})
+                if (parent && parent.type == discord.ChannelType.GuildCategory) interaction.channel.setParent(parent)
             }
 
             interaction.channel.setName(newTicket.channelprefix+name)
