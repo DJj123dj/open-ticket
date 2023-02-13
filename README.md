@@ -13,7 +13,7 @@ Take a look at all the features and discover the possibilities!
 ## Features
 - **🎉 NEW! html transcripts!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in 11 different languages
+- 🇬🇧 translation in 12 different languages
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
 - 🆒 plugins
@@ -47,6 +47,7 @@ Translators
 |--------------|-------------------------|
 |Dutch         |DJj123dj#1706            |
 |Romanian      |Sanke#6086               |
+|Russian       |Apexo#0723               |
 |French        |Sanke#6086               |
 |Spanish       |Redactado#1673 & josuens14#5267|
 |German        |david.#8276              |
