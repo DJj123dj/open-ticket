@@ -47,6 +47,7 @@ Translators
 |--------------|-------------------------|
 |Dutch         |DJj123dj#1706            |
 |Romanian      |Sanke#6086               |
+|Russian       |Apexo#0723               |
 |French        |Sanke#6086               |
 |Spanish       |Redactado#1673 & josuens14#5267|
 |German        |david.#8276              |
