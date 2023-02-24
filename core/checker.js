@@ -237,6 +237,14 @@ exports.checker = async () => {
                 createError("'"+path+"/thumbnail' | there is no thumbnail object!")
             }
 
+            //image
+            if (option.image){
+                checkType(option.image.enable,"boolean",path+"/image/enable")
+                checkType(option.image.url,"string",path+"/image/url")
+            }else{
+                createError("'"+path+"/image' | there is no image object!")
+            }
+
             //closedCategory
             if (option.closedCategory){
                 checkType(option.closedCategory.enable,"boolean",path/"/closedCategory/enable")
@@ -453,6 +461,7 @@ exports.checker = async () => {
         }
 
         checkType(config.system.showSlashcmdsInHelp,"boolean","system/showSlashcmdsInHelp")
+        checkType(config.system.answerInEphemeralOnOpen,"boolean","system/answerInEphemeralOnOpen")
 
     //options
 

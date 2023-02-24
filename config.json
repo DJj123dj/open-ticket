@@ -27,6 +27,7 @@
         "answerInEphemeralOnOpen":true
     },
 
+    "SUPPORT":"Take look at our wiki: https://docs.openticket.dj-dj.be or join our discord server: https://discord.dj-dj.be if you need support!",
     "options":[
         {
             "id":"general",
@@ -47,6 +48,10 @@
             "thumbnail":{
                 "enable":false,
                 "url":"https://www.example.com/catmemes/cat.png"
+            },
+            "image":{
+                "enable":false,
+                "url":"https://www.dj-dj.be/wp-content/uploads/2022/09/pfp-cropped.png"
             },
 
             "closedCategory":{

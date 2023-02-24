@@ -185,6 +185,7 @@ module.exports = () => {
                     }
 
                     if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)
+                    if (currentTicketOptions.image.enable) ticketEmbed.setImage(currentTicketOptions.image.url)
                 
                     ticketChannel.send({
                         content:"<@"+interaction.member.id+"> @here",

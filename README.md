@@ -33,7 +33,8 @@ Take a look at all the features and discover the possibilities!
 </details>
 
 ## preview
-Images coming soon
+Images coming soon<br>
+You can already see some images at our [documentation!](https://docs.openticket.dj-dj.be)
 
 
 ## credits
