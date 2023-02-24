@@ -8,7 +8,6 @@ const act = discord.ApplicationCommandType
 const acot = discord.ApplicationCommandOptionType
 
 module.exports = async () => {
-    bot.errorLog.log("info","auto-updating slash commands...")
     const sid = config.server_id
 
     const ids = configParser.getTicketValuesArray("id")

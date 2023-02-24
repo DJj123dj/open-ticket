@@ -13,13 +13,13 @@ if (lfexists) localLanguage = require("../language/"+config.languagefile+".json"
 const errorLog = async () => {
     const chalk = await (await import("chalk")).default
 
-    console.log(chalk.red("Something went wrong when loading the language!")+"\nCheck the config file or create a ticket in our server!")
+    require("./startscreen").headerDataLanguage("Something went wrong when loading the language!",true)
 }
 
 const successLog = async (language) => {
     const chalk = await (await import("chalk")).default
 
-    console.log(chalk.green("loaded language "+language+"..."))
+    require("./startscreen").headerDataLanguage("sucessfully loaded language "+language,false)
 }
 
 if (!localLanguage){
