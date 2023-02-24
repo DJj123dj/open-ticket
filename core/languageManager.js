@@ -1,34 +1,25 @@
 const index = require("../index")
 
 if (index.developerConfig){
-    var config = require("../devConfig.json")
+    var config = require("../devconfig.json")
 }else{var config = require("../config.json")}
 
 
 var localLanguage = require("../language/english.json")
-if (config.languagefile.startsWith("custom")) localLanguage = require("../language/custom.json")
-else if (config.languagefile.startsWith("dutch")) localLanguage = require("../language/dutch.json")
-else if (config.languagefile.startsWith("english")) localLanguage = require("../language/english.json")
-else if (config.languagefile.startsWith("german")) localLanguage = require("../language/german.json")
-else if (config.languagefile.startsWith("french")) localLanguage = require("../language/french.json")
-else if (config.languagefile.startsWith("romanian")) localLanguage = require("../language/romanian.json")
-else if (config.languagefile.startsWith("arabic")) localLanguage = require("../language/arabic.json")
-else if (config.languagefile.startsWith("spanish")) localLanguage = require("../language/spanish.json")
-else if (config.languagefile.startsWith("portuguese")) localLanguage = require("../language/portuguese.json")
-else if (config.languagefile.startsWith("italian")) localLanguage = require("../language/italian.json")
-else if (config.languagefile.startsWith("danish")) localLanguage = require("../language/danish.json")
-
+const fs = require("fs")
+const lfexists = fs.existsSync("./language/"+config.languagefile+".json")
+if (lfexists) localLanguage = require("../language/"+config.languagefile+".json")
 
 const errorLog = async () => {
     const chalk = await (await import("chalk")).default
 
-    console.log(chalk.red("Something went wrong when loading the language!")+"\nCheck the config file or create a ticket in our server!")
+    require("./startscreen").headerDataLanguage("Something went wrong when loading the language!",true)
 }
 
 const successLog = async (language) => {
     const chalk = await (await import("chalk")).default
 
-    console.log(chalk.green("loaded language "+language+"..."))
+    require("./startscreen").headerDataLanguage("sucessfully loaded language "+language,false)
 }
 
 if (!localLanguage){

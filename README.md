@@ -13,7 +13,7 @@ Take a look at all the features and discover the possibilities!
 ## Features
 - **🎉 NEW! html transcripts!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in 11 different languages
+- 🇬🇧 translation in 12 different languages
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
 - 🆒 plugins
@@ -33,7 +33,8 @@ Take a look at all the features and discover the possibilities!
 </details>
 
 ## preview
-Images coming soon
+Images coming soon<br>
+You can already see some images at our [documentation!](https://docs.openticket.dj-dj.be)
 
 
 ## credits
@@ -54,7 +55,8 @@ Translators
 |Czech         |t0miiis#3022             |
 |Arabic        |ChilledBroke#9986 & M4#5882|
 |Danish        |the_gamer#5095           |
-|Portuguese    |*unknown*                |
+|Portuguese    |QuirAddon#9778           |
+|Russian       |Apexo#0723               |
 
 ## links
 current version: _v3.2.2_

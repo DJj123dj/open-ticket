@@ -9,6 +9,7 @@
         "fr":"french",
         "es-ES":"spanish",
         "it":"italian",
+        "ru":"russian",
 
         "MISSING":"arabic,portuguese",
         "NOTAVAILABLE":"arabic,portuguese,czech"
@@ -23,7 +24,8 @@
             "cs":"A list of the available commands",
             "fr":"Une liste des commandes.",
             "es-ES":"Una lista de los comandos disponibles.",
-            "it":"Una lista di tutti i comandi disponibili."
+            "it":"Una lista di tutti i comandi disponibili.",
+            "ru":"Список доступных команд"
         },
         "message":{
             "en-GB":"Spawn an embed with buttons.",
@@ -34,7 +36,8 @@
             "cs":"Spawn an embed with buttons.",
             "fr":"Créer un embed avec des boutons.",
             "es-ES":"Genera un embed con botones.",
-            "it":"Genera un embed con un pulsante."
+            "it":"Genera un embed con un pulsante.",
+            "ru":"Создать embed с кнопками"
         },
         "close":{
             "en-GB":"Close a ticket.",
@@ -45,7 +48,8 @@
             "cs":"Close a ticket.",
             "fr":"Fermer un ticket.",
             "es-ES":"Cierra un ticket.",
-            "it":"Chiudi un ticket."
+            "it":"Chiudi un ticket.",
+            "ru":"Закрыть тикет"
         },
         "delete":{
             "en-GB":"Delete a ticket.",
@@ -56,7 +60,8 @@
             "cs":"Delete a ticket.",
             "fr":"Supprimer un ticket.",
             "es-ES":"Elimina un ticket.",
-            "it":"Elimina un ticket."
+            "it":"Elimina un ticket.",
+            "ru":"Удалить тикет"
         },
         "reopen":{
             "en-GB":"Re-Open a ticket.",
@@ -67,7 +72,8 @@
             "cs":"Re-Open a ticket.",
             "fr":"Re-ouvrir un ticket.",
             "es-ES":"Re-abre un ticket.",
-            "it":"Ri-Apri un ticket."
+            "it":"Ri-Apri un ticket.",
+            "ru":"Открыть заново тикет"
         },
         "add":{
             "en-GB":"Add another user to a ticket.",
@@ -78,7 +84,8 @@
             "cs":"Add another user to a ticket.",
             "fr":"Ajouter un utilisateur au ticket.",
             "es-ES":"Agrega otro usuario al ticket.",
-            "it":"Aggiungi un membro al ticket"
+            "it":"Aggiungi un membro al ticket",
+            "ru":"Добавить другого пользователя в тикет"
         },
         "remove":{
             "en-GB":"Remove a user from a ticket.",
@@ -89,7 +96,8 @@
             "cs":"Remove a user from a ticket.",
             "fr":"Enlever quelqu’un du ticket.",
             "es-ES":"Elimina otro usuario del ticket.",
-            "it":"Rimuovi un membro dal ticket"
+            "it":"Rimuovi un membro dal ticket",
+            "ru":"Удалить пользователя из тикета"
         },
         "newticket":{
             "en-GB":"Create a ticket",
@@ -100,7 +108,8 @@
             "cs":"Create a ticket",
             "fr":"Créer un ticket",
             "es-ES":"Crear un ticket.",
-            "it":"Crea un ticket"
+            "it":"Crea un ticket",
+            "ru":"Создать тикет"
         },
         "rename":{
             "en-GB":"Rename a ticket channel.",
@@ -111,7 +120,8 @@
             "cs":"Rename a ticket channel",
             "fr":"Renommer un ticket.",
             "es-ES":"Renombrar un canal de ticket.",
-            "it":"Rinomina il canale di un ticket."
+            "it":"Rinomina il canale di un ticket.",
+            "ru":"Переименовать канал тикета"
         },
         "claim":{
             "en-GB":"Claim a ticket.",
@@ -122,7 +132,8 @@
             "cs":"  ",
             "fr":"  ",
             "es-ES":"  ",
-            "it":"  "
+            "it":"  ",
+            "ru":"Взять тикет"
         },
         "unclaim":{
             "en-GB":"Un-claim a ticket.",
@@ -133,7 +144,8 @@
             "cs":"  ",
             "fr":"  ",
             "es-ES":"  ",
-            "it":"  "
+            "it":"  ",
+            "ru":"Снять тикет"
         },
         "category":{
             "en-GB":"Change ticket type.",
@@ -144,7 +156,8 @@
             "cs":"  ",
             "fr":"  ",
             "es-ES":"  ",
-            "it":"  "
+            "it":"  ",
+            "ru":"Изменить тип тикета"
         }
     }
 }

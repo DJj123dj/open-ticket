@@ -1,13 +1,46 @@
-//    __________       __________       ___________     ____       ____
-//   /   ____   \     /  ______  \     /          |     |   \      |  |
-//   |  /    \  |     |  |    |  |     |  |_______|     |    \     |  |
-//   |  |    |  |     |  |____|  |     |  |             |  |\ \    |  |
-//   |  |    |  |     |  ________/     |  |______       |  | \ \   |  |
-//   |  |    |  |     |  |             |   _____|       |  |  \ \  |  |
-//   |  |    |  |     |  |             |  |             |  |   \ \ |  |
-//   |  |    |  |     |  |             |  |________     |  |    \ \|  |
-//   |  \____/  |     |  |             |          |     |  |     \    |
-//   \__________/     |__|             \__________|     |__|      \___|
+/**
+   ____  _____  ______ _   _     _______ _____ _____ _  ________ _______ 
+  / __ \|  __ \|  ____| \ | |   |__   __|_   _/ ____| |/ /  ____|__   __|
+ | |  | | |__) | |__  |  \| |      | |    | || |    | ' /| |__     | |   
+ | |  | |  ___/|  __| | . ` |      | |    | || |    |  < |  __|    | |   
+ | |__| | |    | |____| |\  |      | |   _| || |____| . \| |____   | |   
+  \____/|_|    |______|_| \_|      |_|  |_____\_____|_|\_\______|  |_|   
+                                                                       
+                      Hey! we are looking for you!
+    Do you speak a language that isn't yet in our /languages directory
+        or do you speak one that isn't up-to-date? Open Ticket needs
+            translators for lots of different languages!
+  Feel free to join our translator team and help us improve Open Ticket!
+
+
+
+    
+    SUGGESTING NEW FEATURES:
+    =====================
+    Open Ticket is a community project. This means that 
+    almost all feature ideas come from our community. 
+    Are you missing something you want in open ticket? 
+    Then join our Discord server and we will add it (if possible)
+
+    Did you know that 80% of all features in OT were ideas from our community?
+
+
+
+    INFORMATION:
+    ============
+    Open Ticket v3.2.2  -  © DJdj Development
+
+    discord: https://discord.dj-dj.be
+    website: https://www.dj-dj.be
+    github: https://openticket.dj-dj.be
+    support e-mail: support@dj-dj.be
+
+    Config files:
+    ./config.json
+    ./transcriptconfig.json
+
+    Send ./openticketdebug.txt when there are errors!
+ */
 
 const discord = require("discord.js")
 const fs = require('fs')
@@ -39,34 +72,12 @@ var tempconfig = require("./config.json")
 var isDevConfig = false
 
 if (process.argv.some((v) => v == "--devconfig")){
-    async function logFLAGS(){
-        const chalk = await (await import("chalk")).default
-        console.log(chalk.blue("[FLAGS] => used dev config instead of normal config"))
-    }; logFLAGS()
     isDevConfig = true
     try{
-    tempconfig = require("./devConfig.json")
+    tempconfig = require("./devconfig.json")
     }catch{tempconfig = require("./config.json")}
 }else{
     tempconfig = require("./config.json")
-}
-if (process.argv.some((v) => v == "--nochecker")){
-    async function logFLAGS(){
-        const chalk = await (await import("chalk")).default
-        console.log(chalk.blue("[FLAGS] => disabled checker.js"))
-    }; logFLAGS()
-}
-if (process.argv.some((v) => v == "--tsoffline")){
-    async function logFLAGS(){
-        const chalk = await (await import("chalk")).default
-        console.log(chalk.blue("[FLAGS] => offline check for html transcripts disabled!"))
-    }; logFLAGS()
-}
-if (process.argv.some((v) => v == "--debug")){
-    async function logFLAGS(){
-        const chalk = await (await import("chalk")).default
-        console.log(chalk.blue("[FLAGS] => enabled DEBUG mode"))
-    }; logFLAGS()
 }
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded flags")
 
@@ -118,74 +129,37 @@ client.on('ready',async () => {
         }
         client.user.setActivity(text,{type:getTypeEnum(type)})
         statusSet = true
-        log("system","loaded status",[{key:"type",value:type},{key:"text",value:text}])
     }
     this.errorLog.log("debug","bot status loaded")
 
     const chalk = await (await import("chalk")).default
 
-    if (!process.argv[2]){
-        console.log(chalk.red("WELCOME TO OPEN TICKET!"))
+    require("./core/startscreen").run()
+    if (!process.argv[2] || (process.argv[2] && !process.argv[2].startsWith("slash"))){
         this.errorLog.log("debug","loaded console interface")
-        log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
+        
         require("./core/utils/liveStatus")()
 
-        console.log(chalk.blue("\n\nlogs:")+"\n============")
         if (config.status.enabled){
             setStatus(config.status.type,config.status.text)
         }
 
+        var updatingSlash = false
         if (fs.existsSync("./storage/slashcmdEnabled.txt")){
             /**@type {"true"|"false"} */
             const data = fs.readFileSync("./storage/slashcmdEnabled.txt").toString()
-            if (data === "true"){require("./core/slashSystem/autoSlashUpdate")()}
+            if (data === "true"){require("./core/slashSystem/autoSlashUpdate")(); updatingSlash = true}
         }else{fs.writeFileSync("./storage/slashcmdEnabled.txt","false")}
-
-        log("system","bot logged in!")
 
         try {
             await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
         }catch{
             this.errorLog.log("info","tried to cache user information, failed!")
         }
-        return
-    }
-
-    if (process.argv[2] == "d"){
-        if (config.status.enabled){
-            setStatus(config.status.type,config.status.text)
-        }
-    }
-
-    if (!process.argv[2].startsWith("slash")){
-        console.log(chalk.red("WELCOME TO OPEN TICKET!"))
-        this.errorLog.log("debug","loaded console interface")
-        log("info","open ticket ready",[{key:"version",value:require("./package.json").version},{key:"language",value:config.languagefile}])
-        require("./core/utils/liveStatus")()
-
-        console.log(chalk.blue("\n\nlogs:")+"\n============")
-        if (config.status.enabled){
-            setStatus(config.status.type,config.status.text)
-        }
-        if (fs.existsSync("./storage/slashcmdEnabled.txt")){
-            /**@type {"true"|"false"} */
-            const data = fs.readFileSync("./storage/slashcmdEnabled.txt").toString()
-            if (data === "true"){require("./core/slashSystem/autoSlashUpdate")()}
-        }else{fs.writeFileSync("./storage/slashcmdEnabled.txt","false")}
-
-        log("system","bot logged in!")
-
-        try {
-            await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
-        }catch{
-            this.errorLog.log("info","tried to cache user information, failed!")
-        }
+        require("./core/startscreen").headerDataReady(chalk,config.status,updatingSlash,false)
     }else{
-        console.log(chalk.red("STARTING IN ")+chalk.blue("SLASH MODE")+chalk.red("..."))
+        require("./core/startscreen").headerDataReady(chalk,config.status,updatingSlash,true)
         this.errorLog.log("debug","slashmode activated")
-        console.log("logs:\n================")
-        console.log("client logged in...")
-        console.log("loading files...")
         if (process.argv[3] == "enable"){
             console.log(chalk.green("switching to slashEnable.js"))
             require("./core/slashSystem/slashEnable")()
@@ -193,7 +167,7 @@ client.on('ready',async () => {
             console.log(chalk.green("switching to slashDisable.js"))
             require("./core/slashSystem/slashDisable")()
         }else{
-            console.log(chalk.red("[SLASH CMD MANAGER]: unknown slash mode!"))
+            console.log(chalk.bgRed("[SLASH CMD MANAGER]: unknown slash command action!"))
             process.exit(1)
         }
     }

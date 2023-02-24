@@ -53,10 +53,10 @@ module.exports = () => {
 
             if (interaction.isButton()){
                 try {
-                    interaction.deferUpdate()
+                    if (config.system.answerInEphemeralOnOpen) interaction.deferReply({ephemeral:true})
                 } catch{}
             }else if (interaction.isChatInputCommand()){
-                interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)]})
+                interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
             }else if (interaction.isStringSelectMenu()){
                 try {
                     interaction.deferUpdate()
@@ -64,14 +64,6 @@ module.exports = () => {
             }
 
             if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
-
-                try{
-                    if (currentTicketOptions.enableDmOnOpen){
-                        interaction.member.send({embeds:[bot.errorLog.custom(l.messages.newTicketDmTitle,currentTicketOptions.message,":ticket:",config.main_color)]})
-                    }
-                }
-                catch{log("system","can't send DM to member, member doesn't allow dm's")}
-                
 
                 //update storage
                 storage.set("ticketStorage",interaction.member.id,Number(storage.get("ticketStorage",interaction.member.id))+1)
@@ -193,6 +185,7 @@ module.exports = () => {
                     }
 
                     if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)
+                    if (currentTicketOptions.image.enable) ticketEmbed.setImage(currentTicketOptions.image.url)
                 
                     ticketChannel.send({
                         content:"<@"+interaction.member.id+"> @here",
@@ -205,6 +198,24 @@ module.exports = () => {
                     
                     log("system","created new ticket",[{key:"ticket",value:ticketName},{key:"user",value:interaction.user.tag}])
                     require("../api/modules/events").onTicketOpen(interaction.user,ticketChannel,interaction.guild,new Date(),{name:ticketName,status:"open",ticketOptions:currentTicketOptions})
+
+                    const channelbutton = new discord.ActionRowBuilder()
+                        .addComponents([
+                            new discord.ButtonBuilder()
+                                .setStyle(discord.ButtonStyle.Link)
+                                .setDisabled(false)
+                                .setEmoji("🎫")
+                                .setLabel("go to ticket")
+                                .setURL(ticketChannel.url)
+                        ])
+                        
+                    try{
+                        if (currentTicketOptions.enableDmOnOpen) interaction.member.send({embeds:[bot.errorLog.custom(l.messages.newTicketDmTitle,currentTicketOptions.message,":ticket:",config.main_color)],components:[channelbutton]})
+                    }
+                    catch{log("system","failed to send DM")}
+
+                    if ((interaction.isButton() && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()) interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
+                    
                 })
             }else{
                 try {
