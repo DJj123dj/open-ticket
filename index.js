@@ -1,13 +1,46 @@
-//    __________       __________       ___________     ____       ____
-//   /   ____   \     /  ______  \     /          |     |   \      |  |
-//   |  /    \  |     |  |    |  |     |  |_______|     |    \     |  |
-//   |  |    |  |     |  |____|  |     |  |             |  |\ \    |  |
-//   |  |    |  |     |  ________/     |  |______       |  | \ \   |  |
-//   |  |    |  |     |  |             |   _____|       |  |  \ \  |  |
-//   |  |    |  |     |  |             |  |             |  |   \ \ |  |
-//   |  |    |  |     |  |             |  |________     |  |    \ \|  |
-//   |  \____/  |     |  |             |          |     |  |     \    |
-//   \__________/     |__|             \__________|     |__|      \___|
+/**
+   ____  _____  ______ _   _     _______ _____ _____ _  ________ _______ 
+  / __ \|  __ \|  ____| \ | |   |__   __|_   _/ ____| |/ /  ____|__   __|
+ | |  | | |__) | |__  |  \| |      | |    | || |    | ' /| |__     | |   
+ | |  | |  ___/|  __| | . ` |      | |    | || |    |  < |  __|    | |   
+ | |__| | |    | |____| |\  |      | |   _| || |____| . \| |____   | |   
+  \____/|_|    |______|_| \_|      |_|  |_____\_____|_|\_\______|  |_|   
+                                                                       
+                      Hey! we are looking for you!
+    Do you speak a language that isn't yet in our /languages directory
+        or do you speak one that isn't up-to-date? Open Ticket needs
+            translators for lots of different languages!
+  Feel free to join our translator team and help us improve Open Ticket!
+
+
+
+    
+    SUGGESTING NEW FEATURES:
+    =====================
+    Open Ticket is a community project. This means that 
+    almost all feature ideas come from our community. 
+    Are you missing something you want in open ticket? 
+    Then join our Discord server and we will add it (if possible)
+
+    Did you know that 80% of all features in OT were ideas from our community?
+
+
+
+    INFORMATION:
+    ============
+    Open Ticket v3.2.2  -  © DJdj Development
+
+    discord: https://discord.dj-dj.be
+    website: https://www.dj-dj.be
+    github: https://openticket.dj-dj.be
+    support e-mail: support@dj-dj.be
+
+    Config files:
+    ./config.json
+    ./transcriptconfig.json
+
+    Send ./openticketdebug.txt when there are errors!
+ */
 
 const discord = require("discord.js")
 const fs = require('fs')
@@ -45,7 +78,7 @@ if (process.argv.some((v) => v == "--devconfig")){
     }; logFLAGS()
     isDevConfig = true
     try{
-    tempconfig = require("./devConfig.json")
+    tempconfig = require("./devconfig.json")
     }catch{tempconfig = require("./config.json")}
 }else{
     tempconfig = require("./config.json")

@@ -5,7 +5,7 @@ exports.checker = async () => {
     if (process.argv.some((v) => v == "--devconfig")){
         //console.log(chalk.blue("=> used dev config instead of normal config"))
         try{
-            var tempconfig = require("../devConfig.json")
+            var tempconfig = require("../devconfig.json")
         }catch(err){console.log(err);var tempconfig = require("../config.json")}
     }else{
         var tempconfig = require("../config.json")
@@ -404,7 +404,7 @@ exports.checker = async () => {
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
     
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 

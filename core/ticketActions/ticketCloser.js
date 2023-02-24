@@ -239,12 +239,37 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
 
     }
 
+    /**
+     * 
+     * @param {discord.TextChannel} channel 
+     * @param {Number} limit 
+     * @returns 
+     */
+    const getmessages = async (channel,limit) => {
+        const final = []
+        var lastId = ""
+    
+        while (true) {
+            const options = {limit:100}
+            if (lastId) options.before = lastId
+    
+            const messages = await channel.messages.fetch(options)
+            messages.forEach(msg => {final.push(msg)})
+            lastId = messages.last().id
+    
+            if (messages.size != 100 || final >= limit) {
+                break
+            }
+        }
+        return final
+    }
+
 
     const transcriptHandler = async () => {
         if (!bot.tsconfig.sendTranscripts.enableChannel && !bot.tsconfig.sendTranscripts.enableDM) return false
 
         const APIEvents = require("../api/modules/events")
-        const messages = await channel.messages.fetch({cache:true})
+        const messages = await getmessages(channel,5000)
         await require("../transcriptSystem/manager")(messages,guild,channel,user,reason)
         APIEvents.onTranscriptCreation(messages,channel,guild,new Date())
     }

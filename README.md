@@ -47,7 +47,6 @@ Translators
 |--------------|-------------------------|
 |Dutch         |DJj123dj#1706            |
 |Romanian      |Sanke#6086               |
-|Russian       |Apexo#0723               |
 |French        |Sanke#6086               |
 |Spanish       |Redactado#1673 & josuens14#5267|
 |German        |david.#8276              |
@@ -55,7 +54,8 @@ Translators
 |Czech         |t0miiis#3022             |
 |Arabic        |ChilledBroke#9986 & M4#5882|
 |Danish        |the_gamer#5095           |
-|Portuguese    |*unknown*                |
+|Portuguese    |QuirAddon#9778           |
+|Russian       |Apexo#0723               |
 
 ## links
 current version: _v3.2.2_

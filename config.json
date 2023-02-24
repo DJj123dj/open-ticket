@@ -18,12 +18,13 @@
         "enable_DM_Messages":true,
 
         "has@everyoneaccess":false,
-        "member_role":"member role (doesn't have access to tickets)",
-        "closeMode":"adminonly|normal",
+        "member_role":"member role (this role doesn't have access to tickets)",
+        "closeMode":"adminonly or normal (select one of the 2)",
 
         "transcripts":"!!!! ALL SETTINGS FOR TRANSCRIPTS ARE LOCATED IN: transcriptconfig.json !!!!",
 
-        "showSlashcmdsInHelp":false
+        "showSlashcmdsInHelp":false,
+        "answerInEphemeralOnOpen":true
     },
 
     "options":[
