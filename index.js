@@ -28,7 +28,7 @@
 
     INFORMATION:
     ============
-    Open Ticket v3.2.2  -  © DJdj Development
+    Open Ticket v3.3.0  -  © DJdj Development
 
     discord: https://discord.dj-dj.be
     website: https://www.dj-dj.be
