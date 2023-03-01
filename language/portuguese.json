@@ -48,7 +48,7 @@
         "close":"Fechar Ticket",
         "delete":"Excluir Ticket",
         "reopen":"Reabrir Ticket",
-        "closeWithReason":"close with reason"
+        "closeWithReason":"fechado com motivo"
     },
     "messages":{
         "reopenTitle":"Reabriu este ticket!",
@@ -69,19 +69,20 @@
         "chooseCategory":"Escolha a categoria:",
         "gettingdeleted":"Ticket está sendo deletado...",
 
-        "none":"none",
-        "reason":"reason",
+        "none":"vazio",
+        "reason":"motivo",
 
-        "deletedby":"Deleteado por:",
-        "closedby":"Fechado por:",
-        "modalreason":"Qual a razão para o fechamento do ticket?",
-        "chooseATicket": "Escolha o ticket"
+        "deletedby":"deletado por",
+        "closedby":"fechado por",
+        "modalreason":"Qual o motivo de fechar o ticket?",
+
+        "chooseATicket": "Fechar Ticket"
     },
     "transcripts":{
-        "title":"Transcript",
-        "processed":"A transcrição está sendo processada!",
-        "wait":"Por favor espere",
+        "title":"Transcrever",
+        "processed":"A Transcrição está em andamento",
+        "wait":"Por favor espere!",
         "estimated":"Tempo estimado",
-        "available":"A transcrição está disponivel aqui:"
+        "available":"A Transcrição está disponível aqui"
     }
 }

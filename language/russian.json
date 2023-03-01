@@ -1,0 +1,87 @@
+{
+    "errors":{
+        "missingArgsTitle":"Неверные аргументы!",
+        "missingArgsDescription":"Отсутствует аргумент",
+        "noPermsTitle":"Недостаточно прав!",
+        "noPermsDescription":"Вы должны иметь права `ADMINISTRATOR` или быть в списке разрешённых ролей!",
+        "noPermsDelete":"Только админы могут удалить тикет!",
+        "chooseFromListTitle":"Неверный ID",
+        "chooseFromListDescription":"Выберите один из id ниже:",
+        "boterror":"Ошибка бота!",
+        "notInTicketTitle":"Вы не в тикете!",
+        "notInTicketDescription":"Эта команда не работает вне тикетов!",
+        "ticketDoesntExist":"Этого тикета больше не существует!",
+        "roleDoesntExist":"Этой роли больше не существует!",
+        "anotherOption":"Эта опция не является тикетом, а представляет собой другой тип!",
+        "maxAmountTitle":"Максимальное количество достигнуто!",
+        "maxAmountDescription":"Вы достигли максимальное количество разрешённых тикетов!\nТеперь вы не можете создать ещё один!",
+        "somethingWentWrong":"**Что-то пошло не так!**\nПожайлуста, попробуйте в другой раз!"
+    },
+    "commands":{
+        "userAddedTitle":"Добавлено {0} в этот тикет!",
+        "userRemovedTitle":"Удалено {0} из этого тикета!",
+        "renameTitle":"Изменено имя на {0}!",
+        "closeTitle":"Закрыл этот тикет!",
+        "deleteTitle":"Удаляем этот тикет...",
+        "reopenTitle":"Открываем заново этот тикет!",
+        "claimTitle":"Этот тикет теперь взят {0}",
+        "unclaimTitle":"Этот тикет никем не взят!",
+        "changeTitle":"Изменён тип тикета на {0}!",
+
+        "ticketWarning":"embed ниже сообщения!",
+        "maxTicketWarning":"**Предупреждение:** _Вы можете создать только {0} тикет(а/ов) в этот раз!_"
+    },
+    "helpMenu":{
+        "title":"Доступные команды:",
+        "header1":"**Перейдите в {0}, чтобы создать тикет!**\n\n",
+        "header2":"**Выполните команду `/new` или `/ticket` для создания тикета!**\n\n",
+
+        "msgCmd":"Создать embed с кнопками. (только админам)",
+        "renameCmd":"Переименовать тикет. (без пробелов)",
+        "closeCmd":"Закрыть тикет.",
+        "deleteCmd":"Удалить тикет.",
+        "addCmd":"Добавить пользователя в тикет.",
+        "removeCmd":"Удалить пользователя из тикета.",
+        "reopenCmd":"Открыть заново тикет после того, как он был закрыт."
+    },
+    "buttons":{
+        "close":"Закрыть тикет",
+        "delete":"Удалить тикет",
+        "reopen":"Открыть заново тикет",
+        "closeWithReason":"закрыть с причиной"
+    },
+    "messages":{
+        "reopenTitle":"Открыл заново этот тикет!",
+        "reopenDescription":"Не стесняйтесь обращаться снова!",
+        "closedTitle":"Закрыл этот тикет!",
+        "closedDescription":"Только админы теперь могут писать в этом тикете!\n\n*Нажмите на кнопку ниже, чтобы удалить или заново окрыть тикет!*",
+        "createdTitle":"Тикет создан!",
+        "createdDescription":"Ваш тикет создан, вы можете обнаружить его по пингу!",
+
+        "newTicketDmTitle":"Новый тикет!",
+        "closedTicketDmTitle":"Тикет закрыт!",
+        "deletedTicketDmTitle":"Тикет удалён!",
+        "closedTicketDmDescription":"Ваш тикет закрыт!",
+        "deletedTicketDmDescription":"Ваш тикет удалён!",
+        "reopenTicketDmTitle":"Тикет открыт заново!",
+        "reopenTicketDmDescription":"Ваш тикет открыт заново!",
+
+        "chooseCategory":"выберите категорию:",
+        "gettingdeleted":"Тикет будет удалён...",
+
+        "none":"отсутствует",
+        "reason":"причина",
+
+        "deletedby":"удалён",
+        "closedby":"закрыт",
+        "modalreason":"Какая причина закрытия этого тикета?",
+        "chooseATicket": "Выберите тикет"
+    },
+    "transcripts":{
+        "title":"Транскрипт",
+        "processed":"This transcript is being processed",
+        "wait":"Пожайлуста подождите!",
+        "estimated":"Оценочное время",
+        "available":"Транскрипт здесь доступен"
+    }
+}

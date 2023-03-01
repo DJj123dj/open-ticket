@@ -119,7 +119,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
                         if (!user) return
                         const embed = tsembeds.tsready(chName,chId,url,user)
                         try {
-                            user.send({embeds:[embed]})
+                            ticketopener.send({embeds:[embed]})
                         }catch{}
                     }
                 },duration)

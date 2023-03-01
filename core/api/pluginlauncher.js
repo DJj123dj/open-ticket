@@ -33,5 +33,5 @@ module.exports = () => {
         }
     })
 
-    log("info","loaded plugins",[{key:"success",value:successcount},{key:"error",value:failcount},{key:"total",value:totalcount}])
+    require("../startscreen").headerDataPlugins({total:totalcount,success:successcount,error:failcount})
 }

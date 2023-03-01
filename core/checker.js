@@ -5,7 +5,7 @@ exports.checker = async () => {
     if (process.argv.some((v) => v == "--devconfig")){
         //console.log(chalk.blue("=> used dev config instead of normal config"))
         try{
-            var tempconfig = require("../devConfig.json")
+            var tempconfig = require("../devconfig.json")
         }catch(err){console.log(err);var tempconfig = require("../config.json")}
     }else{
         var tempconfig = require("../config.json")
@@ -237,6 +237,14 @@ exports.checker = async () => {
                 createError("'"+path+"/thumbnail' | there is no thumbnail object!")
             }
 
+            //image
+            if (option.image){
+                checkType(option.image.enable,"boolean",path+"/image/enable")
+                checkType(option.image.url,"string",path+"/image/url")
+            }else{
+                createError("'"+path+"/image' | there is no image object!")
+            }
+
             //closedCategory
             if (option.closedCategory){
                 checkType(option.closedCategory.enable,"boolean",path/"/closedCategory/enable")
@@ -404,7 +412,7 @@ exports.checker = async () => {
     checkType(config.languagefile,"string","languagefile")
     const lf = config.languagefile
     
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian") && !lf.startsWith("turkish")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 
@@ -453,6 +461,7 @@ exports.checker = async () => {
         }
 
         checkType(config.system.showSlashcmdsInHelp,"boolean","system/showSlashcmdsInHelp")
+        checkType(config.system.answerInEphemeralOnOpen,"boolean","system/answerInEphemeralOnOpen")
 
     //options
 

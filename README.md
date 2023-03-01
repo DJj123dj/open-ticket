@@ -1,6 +1,6 @@
 <img src="https://www.dj-dj.be/wp-content/uploads/2023/02/open-ticket-cropped.png" alt="Open Ticket" width="600px">
 
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.2.1-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.2.1)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.3.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.3.0)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
 
 ### Open Ticket
 Open Ticket is of the most customisable discord ticket bots of all time!
@@ -13,7 +13,7 @@ Take a look at all the features and discover the possibilities!
 ## Features
 - **🎉 NEW! html transcripts!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in 11 different languages
+- 🇬🇧 translation in 13 different languages
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
 - 🆒 plugins
@@ -33,7 +33,8 @@ Take a look at all the features and discover the possibilities!
 </details>
 
 ## preview
-Images coming soon
+Images coming soon<br>
+You can already see some images at our [documentation!](https://docs.openticket.dj-dj.be)
 
 
 ## credits
@@ -54,10 +55,12 @@ Translators
 |Czech         |t0miiis#3022             |
 |Arabic        |ChilledBroke#9986 & M4#5882|
 |Danish        |the_gamer#5095           |
-|Portuguese    |*unknown*                |
+|Portuguese    |QuirAddon#9778           |
+|Russian       |Apexo#0723               |
+|Turkish       |Hydrâelčhâvø#1575        |
 
 ## links
-current version: _v3.2.1_
+current version: _v3.3.0_
 </br>changelog: [click here](https://docs.openticket.dj-dj.be/other/changelog)
 </br>documentation: [click here](https://docs.openticket.dj-dj.be/quick-start)
 
