@@ -72,16 +72,16 @@
         "none":"none",
         "reason":"reason",
 
-        "deletedby":"deleted by",
-        "closedby":"closed by",
-        "modalreason":"What is the reason for closing this ticket?",
-        "chooseATicket": "Choose a ticket"
+        "deletedby":"Deleteado por:",
+        "closedby":"Fechado por:",
+        "modalreason":"Qual a razão para o fechamento do ticket?",
+        "chooseATicket": "Escolha o ticket"
     },
     "transcripts":{
         "title":"Transcript",
-        "processed":"This transcript is being processed",
-        "wait":"Please wait!",
-        "estimated":"Estimated time",
-        "available":"The transcript is available here"
+        "processed":"A transcrição está sendo processada!",
+        "wait":"Por favor espere",
+        "estimated":"Tempo estimado",
+        "available":"A transcrição está disponivel aqui:"
     }
 }
