@@ -13,7 +13,7 @@ Take a look at all the features and discover the possibilities!
 ## Features
 - **🎉 NEW! html transcripts!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in 13 different languages
+- 🇬🇧 translation in 14 different languages
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
 - 🆒 plugins
@@ -58,6 +58,7 @@ Translators
 |Portuguese    |QuirAddon#9778           |
 |Russian       |Apexo#0723               |
 |Turkish       |Hydrâelčhâvø#1575        |
+|Polish        |MKevas#8311              |
 
 ## links
 current version: _v3.3.0_
