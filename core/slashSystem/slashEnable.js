@@ -7,7 +7,8 @@ const configParser = require("../utils/configParser")
 const act = discord.ApplicationCommandType
 const acot = discord.ApplicationCommandOptionType
 
-module.exports = async () => {
+/**@param {Boolean|undefined} invisible*/
+module.exports = async (invisible) => {
     const chalk = (await import("chalk")).default
     const sid = config.server_id
 
@@ -30,17 +31,19 @@ module.exports = async () => {
     var readystats = 0
 
     //process.stdout.write("[status] there are "+chalk.blue("0 out of 10")+" commands ready! (this can take up to 40 seconds)")
-    setInterval(() => {
-        process.stdout.cursorTo(0)
-        process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 13")+" commands ready! (this can take up to 40 seconds)")
-        if (readystats >= 13){
-            const fs = require("fs")
-            fs.writeFileSync("./storage/slashcmdEnabled.txt","true")
-            console.log(chalk.green("\nready!"))
-            console.log(chalk.blue("you can now start the bot with "+chalk.bgBlue("'npm start'")+"!"))
-            process.exit(1)
-        }
-    },100)
+    if (!invisible){
+        setInterval(() => {
+            process.stdout.cursorTo(0)
+            process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 13")+" commands ready! (this can take up to 40 seconds)")
+            if (readystats >= 13){
+                const fs = require("fs")
+                fs.writeFileSync("./storage/slashcmdEnabled.txt","true")
+                console.log(chalk.green("\nready!"))
+                console.log(chalk.blue("you can now start the bot with "+chalk.bgBlue("'npm start'")+"!"))
+                process.exit(1)
+            }
+        },100)
+    }
 
     //slashtranslation
     const ST = require("../../language/slashcmds/slash.json").data

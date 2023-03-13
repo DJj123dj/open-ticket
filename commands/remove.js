@@ -55,14 +55,16 @@ module.exports = () => {
             return
         }
 
+        await interaction.deferReply()
+
         await interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
             interaction.channel.permissionOverwrites.delete(user.id)
-            interaction.reply({embeds:[bot.embeds.commands.removeEmbed(user,interaction.user)]})
+            interaction.editReply({embeds:[bot.embeds.commands.removeEmbed(user,interaction.user)]})
 
             var loguser = user
             

@@ -212,7 +212,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
                 
             const embed = new discord.EmbedBuilder()
                 .setColor(config.main_color)
-                .setTitle(":lock: "+l.messages.closedTitle+" :lock:")
+                .setTitle(":lock: "+l.commands.closeTitle+" :lock:")
                 .setDescription(l.messages.closedDescription)
             channel.send({embeds:[embed],components:[closeButtonRow]})
         }

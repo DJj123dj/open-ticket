@@ -23,7 +23,7 @@
         "renameTitle":"Zmieniono nazwę na {0}!",
         "closeTitle":"Zamknięto ten ticket!",
         "deleteTitle":"Usuwanie tego zgłoszenia..",
-        "reopenTitle":"Ponownie otwarto ten ticket!",
+        
         "claimTitle":"Tym ticketem zajmuje się {0}",
         "unclaimTitle":"Ten ticket nie jest już odbierany!",
         "changeTitle":"Zmieniono typ biletu na {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"Zamknij z powodem"
     },
     "messages":{
-        "reopenTitle":"Ponownie otworzyłem ten ticket!",
-        "reopenDescription":"Zapraszam do ponownej rozmowy!",
-        "closedTitle":"Zamknięto ten ticket!",
         "closedDescription":"Tylko admini mogą teraz rozmawiać w tym zgłoszeniu!\n\n*Kliknij przycisk poniżej, aby usunąć lub ponownie otworzyć ten ticket!*",
         "createdTitle":"Ticket Created!",
         "createdDescription":"Twój ticket został utworzony, możesz go wykryć za pomocą pingu!",

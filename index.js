@@ -135,7 +135,9 @@ client.on('ready',async () => {
     const chalk = await (await import("chalk")).default
 
     require("./core/startscreen").run()
+
     if (!process.argv[2] || (process.argv[2] && !process.argv[2].startsWith("slash"))){
+        //normal start
         this.errorLog.log("debug","loaded console interface")
         
         require("./core/utils/liveStatus")()
@@ -149,15 +151,27 @@ client.on('ready',async () => {
             /**@type {"true"|"false"} */
             const data = fs.readFileSync("./storage/slashcmdEnabled.txt").toString()
             if (data === "true"){require("./core/slashSystem/autoSlashUpdate")(); updatingSlash = true}
-        }else{fs.writeFileSync("./storage/slashcmdEnabled.txt","false")}
+        }else{
+            if (process.argv.some((v) => v == "--noslash")){
+                fs.writeFileSync("./storage/slashcmdEnabled.txt","false")
+            }else{
+                fs.writeFileSync("./storage/slashcmdEnabled.txt","true")
+                require("./core/slashSystem/slashEnable")(true)
+                updatingSlash = true
+                console.log("LEEEETSSS GOOO!")
+            }
+        }
 
         try {
             await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
         }catch{
             this.errorLog.log("info","tried to cache user information, failed!")
         }
+        console.log("updatingslash",updatingSlash)
         require("./core/startscreen").headerDataReady(chalk,config.status,updatingSlash,false)
+
     }else{
+        //slash command activation using node index.js slash (enable|disable)
         require("./core/startscreen").headerDataReady(chalk,config.status,updatingSlash,true)
         this.errorLog.log("debug","slashmode activated")
         if (process.argv[3] == "enable"){

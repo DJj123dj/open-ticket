@@ -23,7 +23,7 @@
         "renameTitle":"Cambió el nombre a {0}!",
         "closeTitle":"Cerró este ticket!",
         "deleteTitle":"Eliminando este ticket...",
-        "reopenTitle":"Re-abrió este boleto!",
+        
         "claimTitle":"Este ticket será atendido por {0}",
         "unclaimTitle":"¡Este ticket ya no está reservado!",
         "changeTitle":"¡Cambiando el tipo de ticket a {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"cerrar con razón"
     },
     "messages":{
-        "reopenTitle":"¡Ticket Re-Abierto!",
-        "reopenDescription":"¡Siéntete libre de hablar de nuevo!",
-        "closedTitle":"¡Ticket cerrado!",
         "closedDescription":"¡Solo admins pueden hablar ahora en este ticket!\n\n*¡Presiona en el botón de abajo para eliminar o re-abrir el ticket!*",
         "createdTitle":"¡Ticket creado!",
         "createdDescription":"¡Ticket creado, también te he mencionado en él!",

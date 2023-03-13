@@ -23,7 +23,7 @@
         "renameTitle":"Changed the name to {0}!",
         "closeTitle":"Closed this ticket!",
         "deleteTitle":"Deleting this ticket...",
-        "reopenTitle":"Re-Opened this ticket!",
+        
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
         "changeTitle":"Changed ticket type to {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"close with reason"
     },
     "messages":{
-        "reopenTitle":"Re-Opened this ticket!",
-        "reopenDescription":"Feel free to talk again!",
-        "closedTitle":"Closed this ticket!",
         "closedDescription":"Only admins can talk in this ticket now!\n\n*Click on the button below to delete or to re-open this ticket!*",
         "createdTitle":"Ticket Created!",
         "createdDescription":"Your ticket is created, you can detect it by a ping!",

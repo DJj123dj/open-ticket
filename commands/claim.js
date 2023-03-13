@@ -45,7 +45,7 @@ module.exports = () => {
         
     })
 
-    if (!DISABLE.commands.slash.claim) client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.claim) client.on("interactionCreate",async (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "claim") return
         const user = interaction.options.getUser("user",false) ? interaction.options.getUser("user",true) : interaction.user
@@ -56,14 +56,16 @@ module.exports = () => {
             return
         }
 
+        await interaction.deferReply()
+
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            //interaction.reply({embeds:[bot.embeds.commands.claimEmbed(user,interaction.user)]})
-            interaction.reply({embeds:[bot.errorLog.warning("Coming soon!","This feature isn't ready yet!\nIt will become active in the next update!")]})
+            //interaction.editReply({embeds:[bot.embeds.commands.claimEmbed(user,interaction.user)]})
+            interaction.editReply({embeds:[bot.errorLog.warning("Coming soon!","This feature isn't ready yet!\nIt will become active in the next update!")]})
 
             var loguser = user
             log("command","someone used the 'claim' command",[{key:"user",value:interaction.user.tag}])

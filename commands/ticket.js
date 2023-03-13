@@ -30,8 +30,8 @@ module.exports = () => {
 
             const id = msg.content.split(config.prefix+"msg")[1].substring(1) ? msg.content.split(config.prefix+"msg")[1].substring(1) : false
 
-            if (!id) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<id>`:\n`"+config.prefix+"msg <id>`")]})
-            if (!msgIds.includes(id)) return msg.channel.send({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds)]})
+            if (!id) return msg.channel.send({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds,l.errors.missingArgsDescription+" `<id>`:\n`"+config.prefix+"msg <id>`")]})
+            if (!msgIds.includes(id)) return msg.channel.send({embeds:[bot.errorLog.invalidIdChooseFromList(msgIds,l.errors.missingArgsDescription+" `<id>`:\n`"+config.prefix+"msg <id>`")]})
 
 
             const {embed,componentRows} = require("../core/utils/getEmbed").createEmbed(id)

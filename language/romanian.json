@@ -23,7 +23,7 @@
         "renameTitle":"Nume schimbat in {0}!",
         "closeTitle":"Ticket inchis!",
         "deleteTitle":"Se sterge ticket-ul...",
-        "reopenTitle":"Ticket Re-deschis!",
+        
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
         "changeTitle":"Changed ticket type to {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"Inchide cu motiv"
     },
     "messages":{
-        "reopenTitle":"Ticket Re-deschis!",
-        "reopenDescription":"Poti vorbi din nou!",
-        "closedTitle":"Ticket inchis!",
         "closedDescription":"Doar adminii pot vorbi in acest ticket acum!\n\n*Apasa pe butonul de mai jos pentru a re-deschide ori sterge ticket-ul!*",
         "createdTitle":"Ticket Creat!",
         "createdDescription":"Ticket-ul tau a fost creat, poti sa il vezi in canalul pe care ai fost mentionat!",

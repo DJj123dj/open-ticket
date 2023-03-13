@@ -23,7 +23,7 @@
         "renameTitle":"Der Name wurde geändert!",
         "closeTitle":"Dieses Ticket schließen!",
         "deleteTitle":"Löschen Sie dieses Ticket!",
-        "reopenTitle":"Öffne dieses Ticket erneut!",
+        
         "claimTitle":"Das Ticket wurde beansprucht von {0}",
         "unclaimTitle":"Das Ticket wrid nicht mehr beansprucht",
         "changeTitle":"Ticket Typ wurde geändert auf {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"Geschlossen mit dem Grund"
     },
     "messages":{
-        "reopenTitle":"Dieses Ticket wiedereröffnet!",
-        "reopenDescription":"Sie können gerne weiterreden!",
-        "closedTitle":"Dieses Ticket geschlossen!",
         "closedDescription":"Nur Admins können jetzt in diesem Ticket sprechen!\n\n*Klicken Sie auf die Schaltfläche unten, um dieses Ticket zu löschen oder erneut zu öffnen!*",
         "createdTitle":"Ticket erstellt!",
         "createdDescription":"Ihr Ticket ist erstellt, Sie können es durch einen Ping erkennen!",

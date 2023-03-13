@@ -23,7 +23,7 @@
         "renameTitle":"Cambiato il nome a {0}!",
         "closeTitle":"Ticket chiuso!",
         "deleteTitle":"Eliminando questo ticket...",
-        "reopenTitle":"Ri-aperto questo ticket!",
+        
         "claimTitle":"Questo ticket è ora gestito da {0}",
         "unclaimTitle":"Questo ticket non è più gestito!",
         "changeTitle":"Cambiato il tipo di ticket in {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"chiudi con motivo"
     },
     "messages":{
-        "reopenTitle":"Ticket ri-aperto!",
-        "reopenDescription":"Sentiti libero di parlare nuovamente!",
-        "closedTitle":"Ticket chiuso!",
         "closedDescription":"Solo gli amministratori possono parlare in questo ticket ora!\n\n*Clicca sul pulsante sotto per eliminare o ri-aprire questo ticket!*",
         "createdTitle":"Ticket creato!",
         "createdDescription":"Il tuo ticket è stato creato, puoi capirlo dal ping!",

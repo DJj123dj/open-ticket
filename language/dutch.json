@@ -23,7 +23,7 @@
         "renameTitle":"De naam is veranderd naar {0}!",
         "closeTitle":"Ticket gesloten!",
         "deleteTitle":"Ticket aan het verwijderen...",
-        "reopenTitle":"Ticket heropend!",
+        
         "claimTitle":"Dit ticket is geclaimed door {0}",
         "unclaimTitle":"Dit ticket is niet meer geclaimed!",
         "changeTitle":"Ticket type veranderd naar {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"sluit met reden"
     },
     "messages":{
-        "reopenTitle":"Ticket heropend!",
-        "reopenDescription":"Voel vrij om weer te praten!",
-        "closedTitle":"Ticket gesloten!",
         "closedDescription":"Alleen admins kunnen nog praten.\n\n*Klik op de knoppen hieronder voor meer acties!*",
         "createdTitle":"Ticket Aangemaakt!",
         "createdDescription":"U ticket is gemaakt, je kan het detecteren bij een ping!",

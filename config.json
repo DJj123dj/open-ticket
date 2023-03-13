@@ -15,7 +15,7 @@
     "system":{
         "ticket_channel":"channel id",
         "max_allowed_tickets":3,
-        "enable_DM_Messages":true,
+        "enable_DM_Messages":false,
 
         "has@everyoneaccess":false,
         "member_role":"member role (this role doesn't have access to tickets)",

@@ -50,7 +50,7 @@ exports.createEmbed = (id) => {
 
     var description = data.description
     if (data.other.enableTicketExplaination){
-        const chooseCategoryMSG = data.other.customCategoryText.enable ? data.other.customCategoryText.text : l.messages.chooseCategory
+        const chooseCategoryMSG = data.other.customCategoryText.enable ? data.other.customCategoryText.text : l.messages.chooseATicket
         description = description+"\n\n__"+chooseCategoryMSG+"__\n"
 
         var ticketExplainations = []

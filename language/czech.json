@@ -23,7 +23,7 @@
         "renameTitle":"Změnit jmeno na {0}!",
         "closeTitle":"Zavři tenhle ticket!",
         "deleteTitle":"Mažu ticket...",
-        "reopenTitle":"Znovu otevíram ticket",
+        
         "claimTitle":"Nyní jsi převzal ticket {0}",
         "unclaimTitle":"Tento ticketu už je převzatý!",
         "changeTitle":"Změnil jsi typ ticketu na {0}!",
@@ -51,9 +51,6 @@
         "closeWithReason":"zavřít s důvodem"
     },
     "messages":{
-        "reopenTitle":"Znovu otevřit ticket!",
-        "reopenDescription":"Klidně napiš znova!",
-        "closedTitle":"Zavřít tenhle ticket!",
         "closedDescription":"Pouze admini muzou zde psát ted!\n\n*Klikni na  tlačítko níže pro smazání nebo pro znovu otevření tohohle ticketu!*",
         "createdTitle":"Ticket otevřen!",
         "createdDescription":"Tvůj ticket je vytvořem, můžeš si ho všimnout pomocí pingu!",

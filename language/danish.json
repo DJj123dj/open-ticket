@@ -23,7 +23,7 @@
     "renameTitle": "Ændrede navnet til {0}!",
     "closeTitle": "Lukket denne ticket!",
     "deleteTitle": "Sletter denne ticket...",
-    "reopenTitle": "Genåbnede denne ticket!",
+    
     "claimTitle": "Denne ticket er nu krævet til {0}",
     "unclaimTitle": "Der gøres ikke krav på denne ticket længere!",
     "changeTitle": "Ændrede ticket type til {0}!",
@@ -51,9 +51,6 @@
     "closeWithReason": "Luk med grundlag"
   },
   "messages": {
-    "reopenTitle": "Genåbnede denne ticket!",
-    "reopenDescription": "Snak gerne igen!",
-    "closedTitle": "Lukket denne ticket!",
     "closedDescription": "Kun administratorer kan tale i denne billet nu!\n\n*Klik på knappen nedenfor for at slette eller genåbne denne billet!",
     "createdTitle": "Ticket Oprettet!",
     "createdDescription": "Din ticket er oprettet, du kan registrere den ved et ping!",

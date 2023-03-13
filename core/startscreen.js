@@ -14,6 +14,7 @@ const showFlags = async (chalk) => {
     if (process.argv.some((v) => v == "--nochecker")) console.log(chalk.blue("[FLAGS] => disabled checker.js")); isFlag = true
     if (process.argv.some((v) => v == "--tsoffline")) console.log(chalk.blue("[FLAGS] => offline check for html transcripts disabled!")); isFlag = true
     if (process.argv.some((v) => v == "--debug")) console.log(chalk.blue("[FLAGS] => enabled DEBUG mode")); isFlag = true
+    if (process.argv.some((v) => v == "--noslash")) console.log(chalk.blue("[FLAGS] => slash commands disabled")); isFlag = true
 
     if (!isFlag) console.log(chalk.blue("no flags!"))
 }
@@ -48,7 +49,7 @@ exports.headerDataReady = (chalk,status,updatingslash,slashmode) => {
         console.log("\n\n"+chalk.red(chalk.underline("STARTING IN SLASH CMD CONFIGURATION MODE!")))
         return
     }
-    console.log(chalk.hex("f8ba00")("updating slash cmds: ")+chalk.bold(slashmode))
+    console.log(chalk.hex("f8ba00")("updating slash cmds: ")+chalk.bold(updatingslash))
 }
 
 var languageMSG = ""

@@ -23,7 +23,7 @@
     "renameTitle": "تم تغيير أسم التكت الى {0}!",
     "closeTitle": "تم أغلاق التكت!",
     "deleteTitle": " جاري حذف التكت...",
-    "reopenTitle": "إعادة فتح التكت!",
+    
     "claimTitle":"This ticket is now claimed to {0}",
     "unclaimTitle":"This ticket isn't claimed anymore!",
     "changeTitle":"Changed ticket type to {0}!",
@@ -51,9 +51,6 @@
     "closeWithReason":"close with reason"
   },
   "messages": {
-    "reopenTitle": "تم إعادة فتح التكت بنجاح!",
-    "reopenDescription": "لا تتردد في فتح التكت مرة أخرى , حظاً موفقاً!",
-    "closedTitle": "تم إغلاق التكت!",
     "closedDescription": "فقط الأداريين يمكنهم التحدث في هذا التكت الأن!\n\n*أضغط على الزر بالأسفل لحذف التكت او إعادة فتحة مجدداً!*",
     "createdTitle": "تم إنشاء تكت!",
     "createdDescription": "تم أنشاء تكت , قم بأنتظار الدعم في الطريق!",

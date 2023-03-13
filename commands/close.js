@@ -54,7 +54,7 @@ module.exports = () => {
         
     })
 
-    if (!DISABLE.commands.slash.close) client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.close) client.on("interactionCreate",async(interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "close") return
 
@@ -62,16 +62,18 @@ module.exports = () => {
 
         const reason = interaction.options.getString("reason") ? interaction.options.getString("reason") : false
 
+        await interaction.deferReply()
+
        interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            if (hiddendata.data.find(h => h.key == "pendingdelete")) return interaction.reply({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
+            if (hiddendata.data.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
 
             const descriptionReason = reason ? "**"+l.messages.reason+":** "+reason : false
-            interaction.reply({embeds:[bot.embeds.commands.closeEmbed(interaction.user,descriptionReason)],components:[bot.buttons.close.closeCommandRow]})
+            interaction.editReply({embeds:[bot.embeds.commands.closeEmbed(interaction.user,descriptionReason)],components:[bot.buttons.close.closeCommandRow]})
 
             var name = interaction.channel.name
             var prefix = ""
