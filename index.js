@@ -45,24 +45,17 @@
 const discord = require("discord.js")
 const fs = require('fs')
 const {GatewayIntentBits,Partials} = discord
-const APIBase = require("./core/api/modules/base")
-if (APIBase.embeddedMode){
-    var tempClient = APIBase.clientLocation
-}else{
-    var tempClient = new discord.Client({
-        intents:[
-            GatewayIntentBits.DirectMessages,
-            GatewayIntentBits.GuildInvites,
-            GatewayIntentBits.GuildMembers,
-            GatewayIntentBits.GuildMessages,
-            GatewayIntentBits.Guilds,
-            GatewayIntentBits.MessageContent
-        ],
-        partials:[Partials.Channel,Partials.Message]
-    })
-}
-/**@type {discord.Client} */
-const client = tempClient
+const client = new discord.Client({
+    intents:[
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.GuildInvites,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.MessageContent
+    ],
+    partials:[Partials.Channel,Partials.Message]
+})
 exports.client = client
 client.setMaxListeners(50)
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","created client")
@@ -139,8 +132,6 @@ client.on('ready',async () => {
     if (!process.argv[2] || (process.argv[2] && !process.argv[2].startsWith("slash"))){
         //normal start
         this.errorLog.log("debug","loaded console interface")
-        
-        require("./core/utils/liveStatus")()
 
         if (config.status.enabled){
             setStatus(config.status.type,config.status.text)
@@ -148,26 +139,31 @@ client.on('ready',async () => {
 
         var updatingSlash = false
         if (fs.existsSync("./storage/slashcmdEnabled.txt")){
-            /**@type {"true"|"false"} */
+            /**@type {"true"|"false"|String} */
             const data = fs.readFileSync("./storage/slashcmdEnabled.txt").toString()
-            if (data === "true"){require("./core/slashSystem/autoSlashUpdate")(); updatingSlash = true}
+            if (data === require("./package.json").version){
+                require("./core/slashSystem/autoSlashUpdate")()
+                updatingSlash = true
+
+            }else if ((data != require("./package.json").version) && (data != "false")){
+                require("./core/slashSystem/slashEnable")(true)
+                updatingSlash = true
+            }
         }else{
             if (process.argv.some((v) => v == "--noslash")){
                 fs.writeFileSync("./storage/slashcmdEnabled.txt","false")
             }else{
-                fs.writeFileSync("./storage/slashcmdEnabled.txt","true")
+                fs.writeFileSync("./storage/slashcmdEnabled.txt",require("./package.json").version)
                 require("./core/slashSystem/slashEnable")(true)
                 updatingSlash = true
-                console.log("LEEEETSSS GOOO!")
             }
         }
 
         try {
-            await client.guilds.cache.find((g) => g.id == config.server_id).members.fetch()
+            await client.guilds.cache.find((g) => g.id == config.serverId).members.fetch()
         }catch{
             this.errorLog.log("info","tried to cache user information, failed!")
         }
-        console.log("updatingslash",updatingSlash)
         require("./core/startscreen").headerDataReady(chalk,config.status,updatingSlash,false)
 
     }else{
@@ -260,5 +256,6 @@ process.on("uncaughtException",async (error,origin) => {
     APIEvents.onError(error.name+": "+error.message,new Date())
 })
 
-if (!APIBase.embeddedMode) client.login(config.auth_token)
+const token = config.token.fromENV ? process.env.TOKEN : config.token.value
+client.login(token)
 this.errorLog.log("debug","login with token")

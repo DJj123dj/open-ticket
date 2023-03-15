@@ -7,8 +7,8 @@ if (index.developerConfig){
 
 var localLanguage = require("../language/english.json")
 const fs = require("fs")
-const lfexists = fs.existsSync("./language/"+config.languagefile+".json")
-if (lfexists) localLanguage = require("../language/"+config.languagefile+".json")
+const lfexists = fs.existsSync("./language/"+config.languageFile+".json")
+if (lfexists) localLanguage = require("../language/"+config.languageFile+".json")
 
 const errorLog = async () => {
     const chalk = await (await import("chalk")).default
@@ -30,5 +30,5 @@ if (!localLanguage){
     runError()
 }else{
     exports.language = localLanguage
-    successLog(config.languagefile)
+    successLog(config.languageFile)
 }

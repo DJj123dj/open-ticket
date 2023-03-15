@@ -15,6 +15,7 @@ const showFlags = async (chalk) => {
     if (process.argv.some((v) => v == "--tsoffline")) console.log(chalk.blue("[FLAGS] => offline check for html transcripts disabled!")); isFlag = true
     if (process.argv.some((v) => v == "--debug")) console.log(chalk.blue("[FLAGS] => enabled DEBUG mode")); isFlag = true
     if (process.argv.some((v) => v == "--noslash")) console.log(chalk.blue("[FLAGS] => slash commands disabled")); isFlag = true
+    if (process.argv.some((v) => v == "--localstatus")) console.log(chalk.blue("[FLAGS] => using local livestatus.json")); isFlag = true
 
     if (!isFlag) console.log(chalk.blue("no flags!"))
 }
@@ -23,7 +24,7 @@ exports.run = async () => {
     const chalk = await (await import("chalk")).default
     console.log(chalk.hex("f8ba00")(logo))
     const version = require("../package.json").version
-    var headertext = "v"+version+"  -  Support: https://discord.dj-dj.be  -  Language: "+config.languagefile
+    var headertext = "v"+version+"  -  Support: https://discord.dj-dj.be  -  Language: "+config.languageFile
     const spaceamount = (84-headertext.length)/2
     var i = 0
     while (i < spaceamount){
@@ -63,14 +64,15 @@ exports.headerDataLanguage = async (message,err) => {
     languageErr = err
 }
 
-/**
- * @param {{total:Number,error:Number,success:Number}} plugins
-*/
+/**@param {{total:Number,error:Number,success:Number}} plugins*/
 exports.headerDataPlugins = async (plugins) => {
     const chalk = await (await import("chalk")).default
     const lmsg = languageErr ? chalk.red(languageMSG) : languageMSG
     console.log(chalk.hex("f8ba00")("language: ")+lmsg)
     console.log(chalk.hex("f8ba00")("plugins loaded: ")+chalk.bold(plugins.total+" total ")+"("+plugins.success+"✅ "+plugins.error+"❌)")
+
+    console.log("\n"+chalk.bold(chalk.underline("LIVESTATUS:")))
+    await require("./utils/liveStatus").run(plugins)
 
     console.log("\n"+chalk.bold(chalk.underline("LOGS:")))
 }

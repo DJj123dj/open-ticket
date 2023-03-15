@@ -8,7 +8,7 @@ const act = discord.ApplicationCommandType
 const acot = discord.ApplicationCommandOptionType
 
 module.exports = async () => {
-    const sid = config.server_id
+    const sid = config.serverId
 
     const ids = configParser.getTicketValuesArray("id")
     /**@type {[{name:String,value:String}]} */

@@ -119,7 +119,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         })
 
         //add main adminroles
-        config.main_adminroles.forEach((role,index) => {
+        config.adminRoles.forEach((role,index) => {
             try {
                 const adminrole = guild.roles.cache.find(r => r.id == role)
                 if (!adminrole) return
@@ -170,7 +170,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
              */
             const ticketadmin = ticketData.adminroles
             ticketadmin.forEach((role,index) => {
-                if (!config.main_adminroles.includes(role)){
+                if (!config.adminRoles.includes(role)){
                     try {
                         const adminrole = guild.roles.cache.find(r => r.id == role)
                         if (!adminrole) return
@@ -211,7 +211,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
                 )
                 
             const embed = new discord.EmbedBuilder()
-                .setColor(config.main_color)
+                .setColor(config.color)
                 .setTitle(":lock: "+l.commands.closeTitle+" :lock:")
                 .setDescription(l.messages.closedDescription)
             channel.send({embeds:[embed],components:[closeButtonRow]})

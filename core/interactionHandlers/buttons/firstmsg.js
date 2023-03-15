@@ -7,7 +7,7 @@ const log = bot.errorLog.log
 
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
-const mc = config.main_color
+const mc = config.color
 
 const button = discord.ButtonBuilder
 const arb = discord.ActionRowBuilder

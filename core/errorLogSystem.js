@@ -67,7 +67,7 @@ exports.notInATicket = new embed()
 /**@param {String} message @param {String} title */
 exports.success = (title,message) => {
     var x = new embed()
-        .setColor(config.main_color)
+        .setColor(config.color)
         .setTitle(":white_check_mark: "+title)
         .setDescription(message)
 

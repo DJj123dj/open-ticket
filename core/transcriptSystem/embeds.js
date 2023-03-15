@@ -22,7 +22,7 @@ exports.beingprocessed = (name,id,rawprocesstime,user) => {
 
     const embed = new discord.EmbedBuilder()
         .setTitle("🧾 "+l.transcripts.title)
-        .setColor(config.main_color)
+        .setColor(config.color)
         .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
 
@@ -42,7 +42,7 @@ exports.beingprocessed = (name,id,rawprocesstime,user) => {
 exports.tsready = (name,id,url,user) => {
     const embed = new discord.EmbedBuilder()
         .setTitle("🧾 "+l.transcripts.title)
-        .setColor(config.main_color)
+        .setColor(config.color)
         .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
 

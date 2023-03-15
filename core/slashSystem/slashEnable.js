@@ -10,7 +10,7 @@ const acot = discord.ApplicationCommandOptionType
 /**@param {Boolean|undefined} invisible*/
 module.exports = async (invisible) => {
     const chalk = (await import("chalk")).default
-    const sid = config.server_id
+    const sid = config.serverId
 
     const ids = configParser.getTicketValuesArray("id")
     /**@type {[{name:String,value:String}]} */
@@ -36,14 +36,15 @@ module.exports = async (invisible) => {
             process.stdout.cursorTo(0)
             process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 13")+" commands ready! (this can take up to 40 seconds)")
             if (readystats >= 13){
-                const fs = require("fs")
-                fs.writeFileSync("./storage/slashcmdEnabled.txt","true")
                 console.log(chalk.green("\nready!"))
                 console.log(chalk.blue("you can now start the bot with "+chalk.bgBlue("'npm start'")+"!"))
                 process.exit(1)
             }
         },100)
     }
+
+    const fs = require("fs")
+    fs.writeFileSync("./storage/slashcmdEnabled.txt",require("../../package.json").version)
 
     //slashtranslation
     const ST = require("../../language/slashcmds/slash.json").data

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node index.js d",
+    "test": "node index.js --devconfig",
     "slashEnable": "node index.js slash enable",
     "slashDisable": "node index.js slash disable",
     "cleardata": "node ./core/dynamicdatabase/cleardata.js"

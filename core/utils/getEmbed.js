@@ -43,7 +43,7 @@ exports.createEmbed = (id) => {
     if (data.enableCustomColor){
         embed.setColor(data.color)
     }else{
-        embed.setColor(config.main_color)
+        embed.setColor(config.color)
     }
 
     if (data.other.embedTitleURL.enable) embed.setURL(data.other.embedTitleURL.url)
@@ -63,7 +63,7 @@ exports.createEmbed = (id) => {
     }
 
     if (data.other.enableMaxTicketsWarning){
-        description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.max_allowed_tickets)
+        description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.maxAmountOfTickets)
     }
 
     if (description) embed.setDescription(description)
