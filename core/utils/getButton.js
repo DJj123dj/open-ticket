@@ -32,6 +32,12 @@ exports.getOption = getOption
  * @returns {discord.ButtonBuilder|false}
  */
 exports.getButton = (id) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.utils",
+        file:"./core/utils/getButton.js",
+        time:new Date().getTime(),
+        type:"getbutton"
+    })
     const option = getOption(id)
     if (!option) return false
     if (option.type == "ticket"){
@@ -67,28 +73,4 @@ exports.getButton = (id) => {
     }
 
     return button
-}
-
-
-exports.rawButtonData = class {
-    constructor() {
-        this.id = ""
-        this.name = ""
-        this.description = ""
-        this.icon = ""
-        this.label = ""
-        this.type = ""
-
-        this.color = ""
-        this.enableDmOnOpen = true
-        this.url = ""
-        this.roles = ["",""]
-        this.mode = ""
-        this.adminroles = ["",""]
-        this.channelprefix = ""
-        this.category = ""
-        this.message = ""
-        this.ticketmessage = ""
-        
-    }
 }

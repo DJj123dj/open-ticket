@@ -14,12 +14,18 @@ const l = bot.language
 
 
 exports.createEmbed = (id) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.utils",
+        file:"./core/utils/getEmbed.js",
+        time:new Date().getTime(),
+        type:"getembed"
+    })
     //-----------------------------------
     //general importing
     const data = require("./configParser").getConfigMessage(id)
     /**@type {discord.ButtonBuilder[]}*/
     var buttons = []
-    /**@type {getButton.rawButtonData[]} */
+    /**@type {import('./configParser').OTAllOptions[]} */
     var buttonData = []
 
     data.options.forEach((option) => {

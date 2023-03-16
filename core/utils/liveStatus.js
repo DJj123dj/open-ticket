@@ -4,6 +4,7 @@ const client = bot.client
 const config = bot.config
 const log = bot.errorLog.log
 const axios = require("axios").default
+const fs = require("fs")
 
 const loadChalk = async () => {
     return await (await import("chalk")).default
@@ -15,6 +16,19 @@ const loadChalk = async () => {
 //OTLiveStatusError
 /**@typedef {{bot:{id:String,pfp:String,name:String}, openticket:{version:String,language:String, slashcmds:Boolean,transcripts:false|"text"|"html",config:{system:{},options:{},messages:{},transcripts:{}},plugins:String[],pluginload:{success:Number,error:Number,total:Number}}, details:{actions:[{type:String,category:String,file:String,time:Number}],errortime:Number}, error:String}} OTLiveStatusError */
 
+/**@type {[{type:String, category:String, file:String, time:Number}]} */
+exports.actionRecorder = []
+
+//================================================================
+//=========================FUNCTIONS==============================
+//================================================================
+
+const getSlashEnabled = () => {
+    if (!fs.existsSync("./storage/slashcmdEnabled.txt")) return false
+    if (fs.readFileSync("./storage/slashcmdEnabled.txt").toString() == require("../../package.json").version){
+        return true
+    }else return false
+}
 
 /**
  * @param {Boolean} [local=false]
@@ -68,8 +82,9 @@ exports.run = async (pluginData) => {
         var tsmode = bot.tsconfig.sendTranscripts.useHTMLtranscripts ? "html" : "text"
         const isTranscript = (a.transcripts.includes("html") && tsmode == "html" && tsenabled) || (a.transcripts.includes("text") && tsmode == "text" && tsenabled) || (a.transcripts.includes("both") && tsenabled)
         const isPlugins = (a.usingPlugins.includes("yes") && pluginData.total > 0) || (a.usingPlugins.includes("no") && pluginData.total == 0) || (a.usingPlugins.includes("both"))
+        const isSlashCMD = (a.usingSlashCommands.includes("yes") && getSlashEnabled()) || (a.usingSlashCommands.includes("no") && !getSlashEnabled()) || (a.usingSlashCommands.includes("both"))
 
-        if (!isLanguage || !isVersion || !isTranscript || !isPlugins) return
+        if (!isLanguage || !isVersion || !isTranscript || !isPlugins || !isSlashCMD) return
         announcement.style.forEach((s) => activeStyles.push(s))
     })
     const final = []
@@ -136,8 +151,43 @@ const uploadLiveStatus = (options) => {
     })
 }
 
-/**@param {String} err */
-const liveStatusUploadManager = (err) => {
-    //use globalPluginData for (some) plugin details
+/**@param {String} err @returns {Promise<Boolean>}*/
+exports.liveStatusUploadManager = async (err) => {
+    return new Promise(async (resolve) => {
+        //use globalPluginData for (some) plugin details
 
+        var tsenabled = (bot.tsconfig.sendTranscripts.enableChannel || bot.tsconfig.sendTranscripts.enableDM)
+        var tsmode = bot.tsconfig.sendTranscripts.useHTMLtranscripts ? "html" : "text"
+        const transcriptMode = tsenabled ? tsmode : false
+        const slashMode = getSlashEnabled()
+
+        try {
+            resolve(await uploadLiveStatus({
+                bot:{
+                    id:client.user.id,
+                    name:client.user.tag,
+                    pfp:client.user.displayAvatarURL()
+                },
+                error:err,
+                openticket:{
+                    config:{
+                        messages:config.messages,
+                        options:config.options,
+                        transcripts:bot.tsconfig,
+                        system:config.system
+                    },
+                    language:config.languageFile,
+                    version:require("../../package.json").version,
+                    slashcmds:slashMode,
+                    transcripts:transcriptMode,
+                    plugins:fs.readdirSync("./plugins"),
+                    pluginload:globalPluginData
+                },
+                details:{
+                    errortime:new Date().getTime(),
+                    actions:this.actionRecorder
+                }
+            }))
+        }catch{resolve(false)}
+    })
 }
