@@ -16,6 +16,7 @@ const showFlags = async (chalk) => {
     if (process.argv.some((v) => v == "--debug")) console.log(chalk.blue("[FLAGS] => enabled DEBUG mode")); isFlag = true
     if (process.argv.some((v) => v == "--noslash")) console.log(chalk.blue("[FLAGS] => slash commands disabled")); isFlag = true
     if (process.argv.some((v) => v == "--localstatus")) console.log(chalk.blue("[FLAGS] => using local livestatus.json")); isFlag = true
+    if (process.argv.some((v) => v == "--noerrorupload")) console.log(chalk.blue("[FLAGS] => not uploading errors to liveStatus")); isFlag = true
 
     if (!isFlag) console.log(chalk.blue("no flags!"))
 }

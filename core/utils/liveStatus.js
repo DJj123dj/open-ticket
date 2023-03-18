@@ -139,6 +139,7 @@ exports.run = async (pluginData) => {
 /**@param {OTLiveStatusError} options @returns {Promise<Boolean>} */
 const uploadLiveStatus = (options) => {
     return new Promise((resolve,reject) => {
+        if (process.argv.some((v) => v == "--noerrorupload")) return resolve(true)
         try {
             var data = encodeURIComponent(JSON.stringify(options))
             axios.get("https://livestatus.dj-dj.be/openticket?auth=openticketLIVESTATUS1234&data="+data).then((res) => {
@@ -154,40 +155,42 @@ const uploadLiveStatus = (options) => {
 /**@param {String} err @returns {Promise<Boolean>}*/
 exports.liveStatusUploadManager = async (err) => {
     return new Promise(async (resolve) => {
-        //use globalPluginData for (some) plugin details
+        
+        if (process.argv.some((v) => v == "--noerrorupload")) return resolve(true)
+        else{
+            var tsenabled = (bot.tsconfig.sendTranscripts.enableChannel || bot.tsconfig.sendTranscripts.enableDM)
+            var tsmode = bot.tsconfig.sendTranscripts.useHTMLtranscripts ? "html" : "text"
+            const transcriptMode = tsenabled ? tsmode : false
+            const slashMode = getSlashEnabled()
 
-        var tsenabled = (bot.tsconfig.sendTranscripts.enableChannel || bot.tsconfig.sendTranscripts.enableDM)
-        var tsmode = bot.tsconfig.sendTranscripts.useHTMLtranscripts ? "html" : "text"
-        const transcriptMode = tsenabled ? tsmode : false
-        const slashMode = getSlashEnabled()
-
-        try {
-            resolve(await uploadLiveStatus({
-                bot:{
-                    id:client.user.id,
-                    name:client.user.tag,
-                    pfp:client.user.displayAvatarURL()
-                },
-                error:err,
-                openticket:{
-                    config:{
-                        messages:config.messages,
-                        options:config.options,
-                        transcripts:bot.tsconfig,
-                        system:config.system
+            try {
+                resolve(await uploadLiveStatus({
+                    bot:{
+                        id:client.user.id,
+                        name:client.user.tag,
+                        pfp:client.user.displayAvatarURL()
                     },
-                    language:config.languageFile,
-                    version:require("../../package.json").version,
-                    slashcmds:slashMode,
-                    transcripts:transcriptMode,
-                    plugins:fs.readdirSync("./plugins"),
-                    pluginload:globalPluginData
-                },
-                details:{
-                    errortime:new Date().getTime(),
-                    actions:this.actionRecorder
-                }
-            }))
-        }catch{resolve(false)}
+                    error:err,
+                    openticket:{
+                        config:{
+                            messages:config.messages,
+                            options:config.options,
+                            transcripts:bot.tsconfig,
+                            system:config.system
+                        },
+                        language:config.languageFile,
+                        version:require("../../package.json").version,
+                        slashcmds:slashMode,
+                        transcripts:transcriptMode,
+                        plugins:fs.readdirSync("./plugins"),
+                        pluginload:globalPluginData
+                    },
+                    details:{
+                        errortime:new Date().getTime(),
+                        actions:this.actionRecorder
+                    }
+                }))
+            }catch{resolve(false)}
+        }
     })
 }

@@ -23,11 +23,18 @@
         "renameTitle":"Cambiato il nome a {0}!",
         "closeTitle":"Ticket chiuso!",
         "deleteTitle":"Eliminando questo ticket...",
+        "reopenTitle":"Ri-aperto questo ticket!",
         
-        "claimTitle":"Questo ticket è ora gestito da {0}",
+        "claimTitle":"Questo ticket adesso è gestito da {0}",
         "unclaimTitle":"Questo ticket non è più gestito!",
-        "changeTitle":"Cambiato il tipo di ticket in {0}!",
+        "changeTitle":"Ticket cambiato in {0}!",
 
+        "statsTitle":"Queste sono le stats per {0}!",
+        "autocloseTitle":"Questo ticket sarà eliminato direttamente dopo {0}!",
+        "autocloseRejectTitle":"Questo ticket non sarà più chiuso automaticamente!",
+        "autocloseWarn":"Questo vale solo per i ticket inattivi!",
+
+        "goToTicket":"vai al ticket",
         "ticketWarning":"L'embed è nel messaggio sotto!",
         "maxTicketWarning":"*Attenzione:* Tu puoi creare solo {0} ticket alla volta!"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Elimina un ticket.",
         "addCmd":"Aggiungi un utente al ticket.",
         "removeCmd":"Rimuovi un utente da un ticket.",
-        "reopenCmd":"Ri-apri un ticket dopo averlo chiuso."
+        "reopenCmd":"Ri-apri un ticket dopo averlo chiuso.",
+        "changeCmd":"Cambia tipo di ticket.",
+        "claimCmd":"Gestisci un ticket.",
+        "unclaimCmd":"Lascia la gestione del ticket.",
+        "statsCmd":"Vedi le statistiche dei ticket.",
+        "autocloseCmd":"Imposta il timer dell'autochiusura dei ticket"
     },
     "buttons":{
         "close":"Chiudi",
@@ -68,9 +80,11 @@
 
         "none":"nessuno",
         "reason":"motivo",
-
+        "createdat":"creato il",
+        "openedby":"aperto da",
         "deletedby":"eliminato da",
         "closedby":"chiuso da",
+        
         "modalreason":"Quale è il motivo per chiudere questo ticket?",
         "chooseATicket": "Scegli un ticket"
     },

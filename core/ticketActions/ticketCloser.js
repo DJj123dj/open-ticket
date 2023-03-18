@@ -35,7 +35,7 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
     const ticketOpenerChannelName = channelname.split(prefix)[1]
 
     //get user that opened the ticket
-    var getuserID = storage.get("userTicketStorage",channel.id)
+    var getuserID = storage.get("userFromChannel",channel.id)
     try {
         var ticketOpener = client.users.cache.find(u => u.id === getuserID)
         var isDatabaseError = false
@@ -66,7 +66,9 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         log("system","deleted a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
         pendingDelete.push(channel.id)
 
-        if (!isDatabaseError) storage.set("ticketStorage",getuserID,Number(storage.get("ticketStorage",getuserID)) - 1)
+        if (!isDatabaseError) storage.set("amountOfUserTickets",getuserID,Number(storage.get("amountOfUserTickets",getuserID)) - 1)
+        storage.delete("userFromChannel",channel.id)
+        storage.delete("claimData",channel.id)
 
         //getID & send DM & send api event
         await channel.messages.fetchPinned().then(async msglist => {
@@ -191,30 +193,12 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         channel.permissionOverwrites.set(permissionArray)
 
         if (!nomessage){
-            //message
-            var closeButtonRow = new discord.ActionRowBuilder()
-                .addComponents(
-                    new discord.ButtonBuilder()
-                    .setCustomId("OTdeleteTicket1")
-                    .setDisabled(false)
-                    .setStyle(discord.ButtonStyle.Danger)
-                    .setLabel(l.buttons.delete)
-                    .setEmoji("✖️")
-                )
-                .addComponents(
-                    new discord.ButtonBuilder()
-                    .setCustomId("OTreopenTicket")
-                    .setDisabled(false)
-                    .setStyle(discord.ButtonStyle.Success)
-                    .setLabel(l.buttons.reopen)
-                    .setEmoji("✔")
-                )
-                
+            //message 
             const embed = new discord.EmbedBuilder()
                 .setColor(config.color)
                 .setTitle(":lock: "+l.commands.closeTitle+" :lock:")
                 .setDescription(l.messages.closedDescription)
-            channel.send({embeds:[embed],components:[closeButtonRow]})
+            channel.send({embeds:[embed],components:[bot.buttons.close.closeCommandRow]})
         }
 
         log("system","closed a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])

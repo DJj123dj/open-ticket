@@ -23,11 +23,18 @@
         "renameTitle":"Changement du nom en {0}!",
         "closeTitle":"Fermé ce ticket!",
         "deleteTitle":"Suppression de ce ticket...",
+        "reopenTitle":"A rouvert ce ticket!",
         
         "claimTitle":"This ticket is now claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
         "changeTitle":"Changed ticket type to {0}!",
 
+        "statsTitle":"Here are the stats for {0}!",
+        "autocloseTitle":"This ticket will be closed automatically after {0}!",
+        "autocloseRejectTitle":"This ticket will no longer be closed automatically!",
+        "autocloseWarn":"This only affects inactive tickets!",
+
+        "goToTicket":"go to ticket",
         "ticketWarning":"L'intégration est dans le message ci-dessous!",
         "maxTicketWarning":"**Attention :** _Vous ne pouvez créer que {0} ticket(s) à la fois !_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Supprimer un billet.",
         "addCmd":"Ajouter un utilisateur au ticket.",
         "removeCmd":"Supprimer un utilisateur du ticket.",
-        "reopenCmd":"Rouvrir un ticket après sa clôture."
+        "reopenCmd":"Rouvrir un ticket après sa clôture.",
+        "changeCmd":"Change ticket type.",
+        "claimCmd":"Claim a ticket.",
+        "unclaimCmd":"Unclaim a ticket.",
+        "statsCmd":"View ticket stats.",
+        "autocloseCmd":"Set timer to automatically close ticket"
     },
     "buttons":{
         "close":"Fermer le ticket",
@@ -68,9 +80,11 @@
 
         "none":"rien",
         "reason":"raison",
-
+        "createdat":"created at",
+        "openedby":"opened by",
         "deletedby":"supprimé par",
         "closedby":"fermé par",
+        
         "modalreason":"Qu’elle est la raison pour fermer ce ticket?",
         "chooseATicket": "Choisir un ticket"
     },

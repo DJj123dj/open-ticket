@@ -23,11 +23,18 @@
     "renameTitle": "Ændrede navnet til {0}!",
     "closeTitle": "Lukket denne ticket!",
     "deleteTitle": "Sletter denne ticket...",
+    "reopenTitle": "Genåbnede denne ticket!",
     
-    "claimTitle": "Denne ticket er nu krævet til {0}",
-    "unclaimTitle": "Der gøres ikke krav på denne ticket længere!",
-    "changeTitle": "Ændrede ticket type til {0}!",
+    "claimTitle": "Denne ticket bliver nu håndteret af {0}",
+    "unclaimTitle": "Denne ticket bliver ikke håndteret længere!",
+    "changeTitle": "Ændrede ticket-type til {0}!",
 
+    "statsTitle": "Her er statestikerne til {0}!",
+    "autocloseTitle": "Denne ticket lukker automatisk om {0}!",
+    "autocloseRejectTitle": "Denne ticket lukker ikke længere automatisk!",
+    "autocloseWarn": "Dette har kun effekt på inaktive tickets!",
+
+    "goToTicket": "gå til ticket",
     "ticketWarning": "Embedet er i meddelelsen nedenfor!",
     "maxTicketWarning": "**Warning:** _Du kan kun oprette {0} ticket(s) ad gangen!_"
   },
@@ -42,7 +49,12 @@
     "deleteCmd": "Slet en ticket.",
     "addCmd": "Tilføj en bruger til ticketen.",
     "removeCmd": "Fjern en bruger fra ticketen.",
-    "reopenCmd": "Genåbn en ticket, efter at den var lukket."
+    "reopenCmd": "Genåbn en ticket, efter at den var lukket.",
+    "changeCmd": "Skift ticket type.",
+    "claimCmd": "Håndter en ticket.",
+    "unclaimCmd": "Afhåndter en ticket.",
+    "statsCmd": "Se ticket statestiker.",
+    "autocloseCmd": "Angiv tiden til automatisk at lukke en ticket"
   },
   "buttons": {
     "close": "Luk Ticket",
@@ -68,9 +80,11 @@
 
     "none": "intet",
     "reason": "grundlag",
-
+    "createdat": "lavet af",
+    "openedby": "åbnet af",
     "deletedby": "slettet af",
     "closedby": "lukket af",
+    
     "modalreason": "Hvad er grunden til at lukke denne ticket?",
     "chooseATicket": "Vælg en ticket"
   },

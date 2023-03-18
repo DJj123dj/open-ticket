@@ -23,11 +23,18 @@
         "renameTitle":"Zmieniono nazwę na {0}!",
         "closeTitle":"Zamknięto ten ticket!",
         "deleteTitle":"Usuwanie tego zgłoszenia..",
+        "reopenTitle":"Ponownie otwarto ten ticket!",
         
-        "claimTitle":"Tym ticketem zajmuje się {0}",
-        "unclaimTitle":"Ten ticket nie jest już odbierany!",
-        "changeTitle":"Zmieniono typ biletu na {0}!",
+        "claimTitle":"Ten ticket został odebrany przez {0}",
+        "unclaimTitle":"Nie można już odebrać tego biletu!",
+        "changeTitle":"Changed ticket type to {0}!",
 
+        "statsTitle":"Oto statystyki dotyczące {0}!",
+        "autocloseTitle":"Ten ticket zostanie automatycznie zamknięty po {0}!",
+        "autocloseRejectTitle":"Ten ticket nie będzie już automatycznie zamykany!",
+        "autocloseWarn":"Dotyczy to tylko nieaktywnych biletów!",
+
+        "goToTicket":"Przejdź do ticketa",
         "ticketWarning":"Osadzenie znajduje się w wiadomości poniżej!",
         "maxTicketWarning":"**Ostrzeżenie:** _Możesz utworzyć tylko {0} bilet(ów) na raz!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Skasuj ticket.",
         "addCmd":"Dodaj użytkownika do zgłoszenia.",
         "removeCmd":"Usuń użytkownika ze zgłoszenia.",
-        "reopenCmd":"Otwórz ponownie ticket po jego zamknięciu."
+        "reopenCmd":"Otwórz ponownie ticket po jego zamknięciu.",
+        "changeCmd":"Zmień typ ticketa.",
+        "claimCmd":"Odbierz ticket.",
+        "unclaimCmd":"Zrezygnuj z ticketa.",
+        "statsCmd":"Pokaż statystyki zgłoszenia.",
+        "autocloseCmd":"Ustaw timer, aby automatycznie zamykał ticket."
     },
     "buttons":{
         "close":"Zamknij",
@@ -68,9 +80,11 @@
 
         "none":"brak",
         "reason":"powód",
-
+        "createdat":"utworzony",
+        "openedby":"otwarte przez",
         "deletedby":"skasowane przez",
         "closedby":"zamknięte przez",
+        
         "modalreason":"Jaki jest powód zamknięcia tego zgłoszenia?",
         "chooseATicket": "Wybierz zgłoszenie"
     },

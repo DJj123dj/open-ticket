@@ -41,8 +41,18 @@ module.exports = () => {
                 return
             }
         }
+        if (interaction.message.pinned && interaction.message.author.id == client.user.id){
+            const claimdata = storage.get("claimData",interaction.channel.id)
+            console.log(claimdata)
+            if (claimdata && claimdata != "false"){
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim]})
+            }else{
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabled]})
+            }
+        }else{
+            interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
+        }
         
-        interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
 
         /**
          * @type {String}

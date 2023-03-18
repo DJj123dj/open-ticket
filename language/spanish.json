@@ -23,11 +23,18 @@
         "renameTitle":"Cambió el nombre a {0}!",
         "closeTitle":"Cerró este ticket!",
         "deleteTitle":"Eliminando este ticket...",
+        "reopenTitle":"Re-abrió este boleto!",
         
-        "claimTitle":"Este ticket será atendido por {0}",
-        "unclaimTitle":"¡Este ticket ya no está reservado!",
-        "changeTitle":"¡Cambiando el tipo de ticket a {0}!",
+        "claimTitle":"Este ticket fué reclamado por {0}",
+        "unclaimTitle":"¡Este ticket se encuentra desatendido!",
+        "changeTitle":"¡Cambiado el tipo de ticket a {0}!",
 
+        "statsTitle":"¡Aquí están las estadísticas para {0}!",
+        "autocloseTitle":"¡Este ticket será cerrado después de {0}!",
+        "autocloseRejectTitle":"¡Cierre automático del ticket desactivado!",
+        "autocloseWarn":"¡Esto solo afecta tickets inactivos!",
+
+        "goToTicket":"ir al ticket",
         "ticketWarning":"La inserción está en el mensaje a continuación!",
         "maxTicketWarning":"**Advertencia:** _Solo puedes crear {0} ticket(s) a la vez!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Eliminar un ticket.",
         "addCmd":"Agregar un usuario al ticket.",
         "removeCmd":"Eliminar un usuario del ticket.",
-        "reopenCmd":"Re-Abre un ticket después de que este se vea cerrado."
+        "reopenCmd":"Re-Abre un ticket después de que este se vea cerrado.",
+        "changeCmd":"Cambia el tipo de ticket.",
+        "claimCmd":"Reclama un ticket.",
+        "unclaimCmd":"Desatiende un ticket.",
+        "statsCmd":"Mira las estadísticas de los tickets.",
+        "autocloseCmd":"Establece un temporizador para cerrar el ticket."
     },
     "buttons":{
         "close":"Cerrar ticket.",
@@ -68,9 +80,11 @@
 
         "none":"Ninguna.",
         "reason":"Razón",
-
+        "createdat":"creado el",
+        "openedby":"abierto por",
         "deletedby":"eliminado por",
         "closedby":"cerrado por",
+        
         "modalreason":"Cúal es la razón para cerrar este ticket?",
         "chooseATicket": "Elije un ticket"
     },

@@ -63,10 +63,10 @@ module.exports = () => {
                 } catch{}
             }
 
-            if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.maxAmountOfTickets){
+            if (storage.get("amountOfUserTickets",interaction.member.id) == null || storage.get("amountOfUserTickets",interaction.member.id) == "false"|| Number(storage.get("amountOfUserTickets",interaction.member.id)) < config.system.maxAmountOfTickets){
 
                 //update storage
-                storage.set("ticketStorage",interaction.member.id,Number(storage.get("ticketStorage",interaction.member.id))+1)
+                storage.set("amountOfUserTickets",interaction.member.id,Number(storage.get("amountOfUserTickets",interaction.member.id))+1)
                 var ticketNumber = interaction.member.user.username
 
                 //set ticketName
@@ -162,7 +162,7 @@ module.exports = () => {
                     permissionOverwrites:permissionsArray
                     
                 }).then((ticketChannel) => {
-                    storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
+                    storage.set("userFromChannel",ticketChannel.id,interaction.member.id)
 
                     const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
                     
@@ -198,7 +198,7 @@ module.exports = () => {
                                 .setStyle(discord.ButtonStyle.Link)
                                 .setDisabled(false)
                                 .setEmoji("🎫")
-                                .setLabel("go to ticket")
+                                .setLabel(l.commands.goToTicket)
                                 .setURL(ticketChannel.url)
                         ])
                         
