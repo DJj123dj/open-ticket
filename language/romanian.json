@@ -24,10 +24,17 @@
         "closeTitle":"Ticket inchis!",
         "deleteTitle":"Se sterge ticket-ul...",
         "reopenTitle":"Ticket Re-deschis!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
-        "changeTitle":"Changed ticket type to {0}!",
 
+        "claimTitle":"Acest ticket a primit claim de la {0}",
+        "unclaimTitle":"Acest ticket nu mai este detinut!",
+        "changeTitle":"A fost schimbat tipul ticket-ului la {0}!",
+
+        "statsTitle":"Acestea sunt informatiile pentru {0}!",
+        "autocloseTitle":"Acest ticket va fi inchis automat dupa {0}!",
+        "autocloseRejectTitle":"Acest ticket nu va mai fi inchis automat!",
+        "autocloseWarn":"Aceasta optiune afecteaza numai ticketele inactive!",
+
+        "goToTicket":"Mergi la ticket",
         "ticketWarning":"Embed-ul se afla in mesajul de mai jos!",
         "maxTicketWarning":"**Avertizare:** _Poti creea doar {0} tickete active!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Sterge un ticket.",
         "addCmd":"Adauga un utilizator in ticket.",
         "removeCmd":"Sterge un utilizator din ticket.",
-        "reopenCmd":"Re-deschide un ticket dupa ce a fost deschis."
+        "reopenCmd":"Re-deschide un ticket dupa ce a fost deschis.",
+        "changeCmd":"Schimba categoria ticket-ului.",
+        "claimCmd":"Revendica un ticket",
+        "unclaimCmd":"Anuleaza revendicarea unui ticket.",
+        "statsCmd":"Afiseasa informatiile ticket-ului.",
+        "autocloseCmd":"Seteaza un cronometru pentru inchiderea ticket-ului."
     },
     "buttons":{
         "close":"Inchide ticket-ul",
@@ -51,9 +63,6 @@
         "closeWithReason":"Inchide cu motiv"
     },
     "messages":{
-        "reopenTitle":"Ticket Re-deschis!",
-        "reopenDescription":"Poti vorbi din nou!",
-        "closedTitle":"Ticket inchis!",
         "closedDescription":"Doar adminii pot vorbi in acest ticket acum!\n\n*Apasa pe butonul de mai jos pentru a re-deschide ori sterge ticket-ul!*",
         "createdTitle":"Ticket Creat!",
         "createdDescription":"Ticket-ul tau a fost creat, poti sa il vezi in canalul pe care ai fost mentionat!",
@@ -71,9 +80,11 @@
 
         "none":"niciunul",
         "reason":"Motiv",
-
+        "createdat":"Creat la",
+        "openedby":"Deschis de",
         "deletedby":"Sters de",
         "closedby":"Inchis de",
+        
         "modalreason":"Care este motivul pentru inchiderea acestui ticket?",
         "chooseATicket": "Alege un ticket"
     },

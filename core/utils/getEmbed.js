@@ -14,12 +14,18 @@ const l = bot.language
 
 
 exports.createEmbed = (id) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.utils",
+        file:"./core/utils/getEmbed.js",
+        time:new Date().getTime(),
+        type:"getembed"
+    })
     //-----------------------------------
     //general importing
     const data = require("./configParser").getConfigMessage(id)
     /**@type {discord.ButtonBuilder[]}*/
     var buttons = []
-    /**@type {getButton.rawButtonData[]} */
+    /**@type {import('./configParser').OTAllOptions[]} */
     var buttonData = []
 
     data.options.forEach((option) => {
@@ -43,14 +49,14 @@ exports.createEmbed = (id) => {
     if (data.enableCustomColor){
         embed.setColor(data.color)
     }else{
-        embed.setColor(config.main_color)
+        embed.setColor(config.color)
     }
 
     if (data.other.embedTitleURL.enable) embed.setURL(data.other.embedTitleURL.url)
 
     var description = data.description
     if (data.other.enableTicketExplaination){
-        const chooseCategoryMSG = data.other.customCategoryText.enable ? data.other.customCategoryText.text : l.messages.chooseCategory
+        const chooseCategoryMSG = data.other.customCategoryText.enable ? data.other.customCategoryText.text : l.messages.chooseATicket
         description = description+"\n\n__"+chooseCategoryMSG+"__\n"
 
         var ticketExplainations = []
@@ -63,7 +69,7 @@ exports.createEmbed = (id) => {
     }
 
     if (data.other.enableMaxTicketsWarning){
-        description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.max_allowed_tickets)
+        description = description+"\n\n"+l.commands.maxTicketWarning.replace("{0}",config.system.maxAmountOfTickets)
     }
 
     if (description) embed.setDescription(description)

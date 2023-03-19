@@ -9,7 +9,7 @@ const permissionChecker = require("../../../utils/permisssionChecker")
 const storage = bot.storage
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
-const mc = config.main_color
+const mc = config.color
 
 const button = discord.ButtonBuilder
 const arb = discord.ActionRowBuilder
@@ -52,7 +52,7 @@ module.exports = () => {
 
         await interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
         await interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
-        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
+        await require("../../../ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"delete",false,true)
         deleteTicketButtonChecker = false
     })
 
@@ -92,7 +92,7 @@ module.exports = () => {
 
         await interaction.message.edit({components:[bot.buttons.close.closeCommandRowDisabled]})
         await interaction.channel.send({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
-        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"delete",false,true)
+        await require("../../../ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"delete",false,true)
         deleteTicketButtonChecker1 = false
 
     })

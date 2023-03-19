@@ -37,17 +37,17 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "reopen") return
 
-        //interaction.deferReply()
+        await interaction.deferReply()
 
         interaction.channel.messages.fetchPinned().then(async msglist => {
             var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            if (hiddendata.data.find(h => h.key == "pendingdelete")) return interaction.reply({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
+            if (hiddendata.data.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
 
-            await interaction.reply({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
+            await interaction.editReply({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
 
             require("../core/ticketActions/ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
             

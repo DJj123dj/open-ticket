@@ -24,10 +24,17 @@
         "closeTitle":"Dieses Ticket schließen!",
         "deleteTitle":"Löschen Sie dieses Ticket!",
         "reopenTitle":"Öffne dieses Ticket erneut!",
-        "claimTitle":"Das Ticket wurde beansprucht von {0}",
-        "unclaimTitle":"Das Ticket wrid nicht mehr beansprucht",
-        "changeTitle":"Ticket Typ wurde geändert auf {0}!",
+        
+        "claimTitle":"Dieses Ticket wurde beansprucht von {0}",
+        "unclaimTitle":"Dieses Ticket wird nichtmehr beansprucht.",
+        "changeTitle":"Ticket Typ wurde geändert zu {0}!",
 
+        "statsTitle":"Hier sind die Stats für {0}!",
+        "autocloseTitle":"Dieses Ticket wird automatisch geschlossen in {0}!",
+        "autocloseRejectTitle":"Dieses Ticket wird nichtmehr automatisch geschlossen",
+        "autocloseWarn":"Dies betrifft nur inaktive Tickets!",
+
+        "goToTicket":"Geh zu deinem Ticket",
         "ticketWarning":"Die Einbettung befindet sich in der Nachricht unten!",
         "maxTicketWarning":"**Warnung:** _Sie können nur {0} ticket(s) erstellen zu einer Zeit!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Ein Ticket löschen.",
         "addCmd":"Fügen Sie dem Ticket einen Benutzer hinzu.",
         "removeCmd":"Entfernen eines Benutzers aus dem Ticket.",
-        "reopenCmd":"Öffnen Sie ein Ticket erneut, nachdem es geschlossen wurde."
+        "reopenCmd":"Öffnen Sie ein Ticket erneut, nachdem es geschlossen wurde.",
+        "changeCmd":"Ticket Typ ändern",
+        "claimCmd":"Ticket beanspruchen",
+        "unclaimCmd":"Ticket nicht mehr beanspruchen.",
+        "statsCmd":"Ticket Stats",
+        "autocloseCmd":"Timer wurde gesetzt auf automatisches schließen des Tickets"
     },
     "buttons":{
         "close":"Ticket schließen",
@@ -51,9 +63,6 @@
         "closeWithReason":"Geschlossen mit dem Grund"
     },
     "messages":{
-        "reopenTitle":"Dieses Ticket wiedereröffnet!",
-        "reopenDescription":"Sie können gerne weiterreden!",
-        "closedTitle":"Dieses Ticket geschlossen!",
         "closedDescription":"Nur Admins können jetzt in diesem Ticket sprechen!\n\n*Klicken Sie auf die Schaltfläche unten, um dieses Ticket zu löschen oder erneut zu öffnen!*",
         "createdTitle":"Ticket erstellt!",
         "createdDescription":"Ihr Ticket ist erstellt, Sie können es durch einen Ping erkennen!",
@@ -71,9 +80,11 @@
 
         "none":"none",
         "reason":"Grund",
-
+        "createdat":"Erstellt um",
+        "openedby":"Geöffnet um",
         "deletedby":"Gelöscht von",
         "closedby":"Geschlossen von",
+        
         "modalreason":"Was ist der Grund?",
         "chooseATicket": "Wähle ein passendes Thema!"
     },

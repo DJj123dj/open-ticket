@@ -19,19 +19,12 @@ const reopenTicket = (guild,channel,user) => {
 
     var permissionsArray = []
 
-    //set everyone allowed
-    if (config.system['has@everyoneaccess']){
-        var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
-        var everyoneDenyPerms = []
-    }else{
-        var everyoneAllowPerms = []
-        var everyoneDenyPerms = [pfb.ViewChannel]
-    }
+    //set @everyone no ticket access
     permissionsArray.push({
         id:guild.roles.everyone,
         type:"role",
-        allow:everyoneAllowPerms,
-        deny:everyoneDenyPerms
+        allow:[],
+        deny:[pfb.ViewChannel]
     })
 
     channel.permissionOverwrites.cache.forEach((p) => {

@@ -47,6 +47,17 @@ exports.get = (category,key) => {
     const result = tempresult ? tempresult.value : false
     return result
 }
+
+/**
+ * @param {String} category 
+ * @returns {[{key:String,value:String}]|false}
+ */
+exports.getCategory = (category) => {
+    const currentData = getData()
+    const result = currentData.filter((v) => v.category == category)
+    return result
+}
+
 /**
  * @param {String} category 
  * @param {String} key 

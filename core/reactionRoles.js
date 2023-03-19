@@ -16,8 +16,12 @@ module.exports = async () => {
         if (interaction.isButton() && !interaction.customId.startsWith("newR")) return
         if (interaction.isStringSelectMenu() && !(interaction.customId == "OTdropdownMenu")) return
 
-        
-        
+        bot.actionRecorder.push({
+            category:"ot.managers.reactionroles",
+            file:"./core/reactionRoles.js",
+            time:new Date().getTime(),
+            type:"reactionRoles.interactionCreated"
+        })
 
 
         const optionidRaw = interaction.isStringSelectMenu() ? interaction.values[0] : interaction.customId
@@ -40,6 +44,12 @@ module.exports = async () => {
             const user = interaction.member
             
             if (mode == "add"){
+                bot.actionRecorder.push({
+                    category:"ot.managers.reactionroles",
+                    file:"./core/reactionRoles.js",
+                    time:new Date().getTime(),
+                    type:"reactionRoles.type.add"
+                })
                 option.roles.forEach((role) => {
                     interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
     
@@ -49,6 +59,12 @@ module.exports = async () => {
                 })
 
             }else if (mode == "remove"){
+                bot.actionRecorder.push({
+                    category:"ot.managers.reactionroles",
+                    file:"./core/reactionRoles.js",
+                    time:new Date().getTime(),
+                    type:"reactionRoles.type.remove"
+                })
                 option.roles.forEach((role) => {
                     interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
                     
@@ -58,6 +74,12 @@ module.exports = async () => {
                 })
                 
             }else if (mode == "add&remove"){
+                bot.actionRecorder.push({
+                    category:"ot.managers.reactionroles",
+                    file:"./core/reactionRoles.js",
+                    time:new Date().getTime(),
+                    type:"reactionRoles.type.add&remove"
+                })
                 option.roles.forEach((role) => {
                     if (!interaction.guild.members.cache.find(u => u.id == user.id).roles.cache.has(role)){
                         interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)

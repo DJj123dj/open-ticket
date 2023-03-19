@@ -26,7 +26,20 @@ exports.createTranscript = async (messagecollection,channel,backup) => {
         messagecollection.forEach((msg) => {
             const timestamp = new Date(msg.createdTimestamp)
 
-            if (msg.content){var content = msg.content}else{var content = "*empty message*"}
+            //empty message handling
+            if (msg.content){
+                var content = msg.content
+            }else if (msg.embeds.length > 0 && msg.attachments.length > 0){
+                var content = "*this message only has embeds & files*"
+            }else if (msg.embeds.length > 0){
+                var content = "*this message only has embeds*"
+            }else if (msg.attachments.length > 0){
+                var content = "*this message only has files*"
+            }else{
+                var content = "*empty message*"
+            }
+
+
             const fileurls = []
             const rawfiles = Array.from(msg.attachments)
             rawfiles.forEach((file) => {

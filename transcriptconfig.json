@@ -1,10 +1,10 @@
 {
     "sendTranscripts":{
         "enableChannel":false,
+        "enableDM":false,
+
         "channel":"transcript channel id",
-        "useHTMLtranscripts":true,
-        
-        "enableDM":false
+        "useHTMLtranscripts":true
     },
     "style":{
         "titleColor":"#F8BA00",

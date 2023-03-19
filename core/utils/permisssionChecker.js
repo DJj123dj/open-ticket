@@ -13,8 +13,14 @@ const storage = bot.storage
  * @returns {Boolean} has permissions?
  */
 exports.command = (memberid,guildid) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"command"
+    })
     const permsmember = client.guilds.cache.find(g => g.id == guildid).members.cache.find(m => m.id == memberid)
-    if (config.main_adminroles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
+    if (config.adminRoles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
         return false
     }else {return true}
 }
@@ -25,6 +31,12 @@ exports.command = (memberid,guildid) => {
  * @returns {Boolean}
  */
 exports.sendUserNoPerms = (user) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"sendusernoperms"
+    })
     try {
         user.send({embeds:[bot.errorLog.noPermsMessage(user)]})
         return true
@@ -39,6 +51,12 @@ exports.sendUserNoPerms = (user) => {
  * @returns {Boolean}
  */
  exports.sendUserNoTicket = (user) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"sendusernoticket"
+    })
     try {
         user.send({embeds:[bot.errorLog.notInATicket]})
         return true
@@ -53,6 +71,12 @@ exports.sendUserNoPerms = (user) => {
  * @returns {Boolean}
  */
  exports.sendUserNoDelete = (user) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"sendusernodelete"
+    })
     try {
         user.send({embeds:[bot.errorLog.noPermsDelete(user)]})
         return true
@@ -68,6 +92,12 @@ exports.sendUserNoPerms = (user) => {
  * @returns {Boolean}
  */
  exports.sendChannelNoPerms = (channel,user) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"sendchannelnoperms"
+    })
     try {
         channel.send({embeds:[bot.errorLog.noPermsMessage(user)]})
         return true
@@ -83,6 +113,12 @@ exports.sendUserNoPerms = (user) => {
  * @returns {Boolean}
  */
  exports.sendChannelNoTicket = (channel,user) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"sendchannelnoticket"
+    })
     try {
         channel.send({embeds:[bot.errorLog.notInATicket]})
         return true
@@ -98,6 +134,12 @@ exports.sendUserNoPerms = (user) => {
  * @returns {Boolean}
  */
  exports.sendChannelNoDelete = (channel,user) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"sendchannelnodelete"
+    })
     try {
         channel.send({embeds:[bot.errorLog.noPermsDelete(user)]})
         return true

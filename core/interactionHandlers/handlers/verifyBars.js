@@ -8,7 +8,7 @@ const log = bot.errorLog.log
 const storage = bot.storage
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
-const mc = config.main_color
+const mc = config.color
 
 const button = discord.ButtonBuilder
 const arb = discord.ActionRowBuilder
@@ -33,7 +33,17 @@ module.exports = () => {
         try {
             interaction.deferUpdate()
         } catch{}
-        interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+
+        if (interaction.message.pinned && interaction.message.author.id == client.user.id){
+            const claimdata = storage.get("claimData",interaction.channel.id)
+            if (claimdata && claimdata != "false"){
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim]})
+            }else{
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal]})
+            }
+        }else{
+            interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+        }
     })
 
     //DELETE
@@ -54,7 +64,17 @@ module.exports = () => {
         try {
             interaction.deferUpdate()
         } catch{}
-        interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+        
+        if (interaction.message.pinned && interaction.message.author.id == client.user.id){
+            const claimdata = storage.get("claimData",interaction.channel.id)
+            if (claimdata && claimdata != "false"){
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim]})
+            }else{
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal]})
+            }
+        }else{
+            interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+        }
     })
 
     //DELETE NO TRANSCRIPT

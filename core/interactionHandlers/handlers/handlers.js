@@ -7,4 +7,5 @@ module.exports = () => {
     require("./accepted/reopening")()
     require("./accepted/deleting")()
     require("./accepted/closingReason")()
+    require("./accepted/claiming")()
 }

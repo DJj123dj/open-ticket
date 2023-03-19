@@ -7,7 +7,7 @@ const log = bot.errorLog.log
 
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
-const mc = config.main_color
+const mc = config.color
 
 /**
  * 
@@ -50,6 +50,21 @@ exports.closeEmbed = (closer,description) => {
         .setFooter({text:closer.tag,iconURL:closer.displayAvatarURL()})
 
     if (description) embd.setDescription(description)
+    return embd
+}
+
+/**
+ * 
+ * @param {discord.User} closer 
+ * @param {Number} time
+ * @returns {discord.EmbedBuilder}
+ */
+exports.autocloseSignalEmbed = (closer,time) => {
+    const embd = new embed()
+        .setTitle("⏰ This ticket got closed by Autoclose!")
+        .setColor(mc)
+        .setFooter({text:closer.tag,iconURL:closer.displayAvatarURL()})
+        .setDescription("This ticket has been inactive for `"+time+"h`!")
     return embd
 }
 

@@ -6,7 +6,7 @@ const l = bot.language
 //==================
 
 //OTTicketOptions
-/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color: "red"|"green"|"blue"|"gray",adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, thumbnail:{enable:Boolean,url:String}, image:{enable:Boolean,url:String}, closedCategory:{enable:Boolean,id:String}}} OTTicketOptions */
+/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color: "red"|"green"|"blue"|"gray",adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, thumbnail:{enable:Boolean,url:String}, image:{enable:Boolean,url:String}, closedCategory:{enable:Boolean,id:String}, autoclose:{enable:Boolean,inactiveHours:Number} }} OTTicketOptions */
 
 //OTRoleOptions
 /**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color:"red"|"green"|"blue"|"gray"|"none",roles:String[],mode:"add&remove"|"remove"|"add",enableDmOnOpen:Boolean}} OTRoleOptions */
@@ -19,7 +19,7 @@ const l = bot.language
 /**@typedef {{id: string, name: string, description: string, dropdown: boolean, enableFooter: boolean, footer: string, enableThumbnail: boolean, thumbnail: string, enableCustomColor: boolean, color: string, options: string[], other:{enableTicketExplaination: boolean, enableMaxTicketsWarning: boolean, customDropdownPlaceholder:{enable:Boolean,text:String}, customCategoryText:{enable:Boolean,text:String}, embedTitleURL:{enable:Boolean,url:String} } }} OTConfigMessage*/
 
 //OTAllOptions
-/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color:"red"|"green"|"blue"|"gray"|"none",roles:String[],mode:"add&remove"|"remove"|"add",adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, thumbnail:{enable:Boolean,url:String}, image:{enable:Boolean,url:String}, url:String, closedCategory:{enable:Boolean,id:String}}} OTAllOptions */
+/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color:"red"|"green"|"blue"|"gray"|"none",roles:String[],mode:"add&remove"|"remove"|"add",adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, thumbnail:{enable:Boolean,url:String}, image:{enable:Boolean,url:String}, url:String, closedCategory:{enable:Boolean,id:String}, autoclose:{enable:Boolean,inactiveHours:Number}}} OTAllOptions */
 
 //StringOptions
 /**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDmOnOpen"|"ticketmessage"|"thumbnail"|"image"|"closedCategory"} OTTicketStringOptions */

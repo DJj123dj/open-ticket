@@ -1,0 +1,98 @@
+{
+    "errors":{
+        "missingArgsTitle":"Nieprawidłowe argumenty!",
+        "missingArgsDescription":"Brakujący argument",
+        "noPermsTitle":"Brak permisji!",
+        "noPermsDescription":"Musisz mieć uprawnienia `ADMINISTRATOR` lub być na liście dozwolonych ról!",
+        "noPermsDelete":"Tylko administratorzy mogą usunąć zgłoszenie!",
+        "chooseFromListTitle":"Błędne ID",
+        "chooseFromListDescription":"Wybierz jeden z poniższych identyfikatorów:",
+        "boterror":"Błąd bota!",
+        "notInTicketTitle":"Nie jesteś w tickecie!",
+        "notInTicketDescription":"To polecenie nie działa poza ticketami!",
+        "ticketDoesntExist":"Ten ticket już nie istnieje!",
+        "roleDoesntExist":"Ta rola już nie istnieje!",
+        "anotherOption":"Ta opcja nie jest ticketem, ale innym typem!",
+        "maxAmountTitle":"Maksymalna liczba osiągnięta!",
+        "maxAmountDescription":"Osiągnąłeś maksymalną dozwoloną liczbę ticketów!\nWięc nie możesz stworzyć nowego!",
+        "somethingWentWrong":"**Coś poszło nie tak!**\nSpróbuj ponownie innym razem!"
+    },
+    "commands":{
+        "userAddedTitle":"Dodano {0} do tego ticketa!",
+        "userRemovedTitle":"Usunięto {0} z tego ticketa!",
+        "renameTitle":"Zmieniono nazwę na {0}!",
+        "closeTitle":"Zamknięto ten ticket!",
+        "deleteTitle":"Usuwanie tego zgłoszenia..",
+        "reopenTitle":"Ponownie otwarto ten ticket!",
+        
+        "claimTitle":"Ten ticket został odebrany przez {0}",
+        "unclaimTitle":"Nie można już odebrać tego biletu!",
+        "changeTitle":"Changed ticket type to {0}!",
+
+        "statsTitle":"Oto statystyki dotyczące {0}!",
+        "autocloseTitle":"Ten ticket zostanie automatycznie zamknięty po {0}!",
+        "autocloseRejectTitle":"Ten ticket nie będzie już automatycznie zamykany!",
+        "autocloseWarn":"Dotyczy to tylko nieaktywnych biletów!",
+
+        "goToTicket":"Przejdź do ticketa",
+        "ticketWarning":"Osadzenie znajduje się w wiadomości poniżej!",
+        "maxTicketWarning":"**Ostrzeżenie:** _Możesz utworzyć tylko {0} bilet(ów) na raz!_"
+    },
+    "helpMenu":{
+        "title":"Dostępne polecenia:",
+        "header1":"**Przejdź do {0}, aby utworzyć zgłoszenie!**\n\n",
+        "header2":"**Uruchom polecenie `/new` lub `/ticket`, aby utworzyć zgłoszenie!**\n\n",
+
+        "msgCmd":"Odradzaj osadzanie za pomocą przycisków. (tylko administratorzy)",
+        "renameCmd":"Zmień nazwę zgłoszenia. (bez spacji)",
+        "closeCmd":"Zamknij ticket.",
+        "deleteCmd":"Skasuj ticket.",
+        "addCmd":"Dodaj użytkownika do zgłoszenia.",
+        "removeCmd":"Usuń użytkownika ze zgłoszenia.",
+        "reopenCmd":"Otwórz ponownie ticket po jego zamknięciu.",
+        "changeCmd":"Zmień typ ticketa.",
+        "claimCmd":"Odbierz ticket.",
+        "unclaimCmd":"Zrezygnuj z ticketa.",
+        "statsCmd":"Pokaż statystyki zgłoszenia.",
+        "autocloseCmd":"Ustaw timer, aby automatycznie zamykał ticket."
+    },
+    "buttons":{
+        "close":"Zamknij",
+        "delete":"Skasuj",
+        "reopen":"Otworz ponownie",
+        "closeWithReason":"Zamknij z powodem"
+    },
+    "messages":{
+        "closedDescription":"Tylko admini mogą teraz rozmawiać w tym zgłoszeniu!\n\n*Kliknij przycisk poniżej, aby usunąć lub ponownie otworzyć ten ticket!*",
+        "createdTitle":"Ticket Created!",
+        "createdDescription":"Twój ticket został utworzony, możesz go wykryć za pomocą pingu!",
+
+        "newTicketDmTitle":"Nowy Ticket!",
+        "closedTicketDmTitle":"Ticket Zamknięty!",
+        "deletedTicketDmTitle":"Ticket Skasowany!",
+        "closedTicketDmDescription":"Twój ticket jest zamknięty!",
+        "deletedTicketDmDescription":"Twój ticket został skasowany!",
+        "reopenTicketDmTitle":"Ticket otwarty!",
+        "reopenTicketDmDescription":"Twój ticket został ponownie otwarty!",
+
+        "chooseCategory":"Wybierz kategorię:",
+        "gettingdeleted":"Ticket jest usuwany..",
+
+        "none":"brak",
+        "reason":"powód",
+        "createdat":"utworzony",
+        "openedby":"otwarte przez",
+        "deletedby":"skasowane przez",
+        "closedby":"zamknięte przez",
+        
+        "modalreason":"Jaki jest powód zamknięcia tego zgłoszenia?",
+        "chooseATicket": "Wybierz zgłoszenie"
+    },
+    "transcripts":{
+        "title":"Transkrypcja",
+        "processed":"Ta transkrypcja jest przetwarzana",
+        "wait":"Proszę czekać!",
+        "estimated":"Szacowany czas",
+        "available":"Transkrypcja jest dostępna tutaj"
+    }
+}

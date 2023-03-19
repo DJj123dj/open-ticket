@@ -9,7 +9,7 @@ const permissionChecker = require("../../../utils/permisssionChecker")
 const storage = bot.storage
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
-const mc = config.main_color
+const mc = config.color
 
 const button = discord.ButtonBuilder
 const arb = discord.ActionRowBuilder
@@ -41,8 +41,17 @@ module.exports = () => {
                 return
             }
         }
+        if (interaction.message.pinned && interaction.message.author.id == client.user.id){
+            const claimdata = storage.get("claimData",interaction.channel.id)
+            if (claimdata && claimdata != "false"){
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim]})
+            }else{
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabled]})
+            }
+        }else{
+            interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
+        }
         
-        interaction.message.edit({components:[bot.buttons.close.openRowDisabled]})
 
         /**
          * @type {String}
@@ -57,7 +66,7 @@ module.exports = () => {
         })
 
         interaction.channel.send({embeds:[bot.embeds.commands.closeEmbed(interaction.user)],components:[bot.buttons.close.closeCommandRow]})
-        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close",false,true)
+        await require("../../../ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"close",false,true)
         closeTicketButtonChecker = false
     })
 }

@@ -24,10 +24,17 @@
         "closeTitle":"Ticket gesloten!",
         "deleteTitle":"Ticket aan het verwijderen...",
         "reopenTitle":"Ticket heropend!",
+        
         "claimTitle":"Dit ticket is geclaimed door {0}",
         "unclaimTitle":"Dit ticket is niet meer geclaimed!",
         "changeTitle":"Ticket type veranderd naar {0}!",
 
+        "statsTitle":"Hier zijn de stats voor {0}!",
+        "autocloseTitle":"Dit ticket wordt automatisch gesloten na {0}!",
+        "autocloseRejectTitle":"Dit ticket wordt niet langer automatisch gesloten!",
+        "autocloseWarn":"Dit geldt alleen voor inactieve tickets!",
+
+        "goToTicket":"ga naar ticket",
         "ticketWarning":"De embed is in het bericht hier onder!",
         "maxTicketWarning":"**Waarschuwing:** _Je kan maar {0} ticket(s) tegelijkertijd maken!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Verijder een ticket.",
         "addCmd":"Voeg een user aan een ticket.",
         "removeCmd":"Verwijder een user van een ticket.",
-        "reopenCmd":"Heropen een ticket nadat het gesloten is."
+        "reopenCmd":"Heropen een ticket nadat het gesloten is.",
+        "changeCmd":"Verander ticket type.",
+        "claimCmd":"Claim een ticket.",
+        "unclaimCmd":"Unclaim een ticket.",
+        "statsCmd":"Bekijk ticket stats.",
+        "autocloseCmd":"Zet een timer om het ticket automatisch te sluiten"
     },
     "buttons":{
         "close":"Sluit Ticket",
@@ -51,9 +63,6 @@
         "closeWithReason":"sluit met reden"
     },
     "messages":{
-        "reopenTitle":"Ticket heropend!",
-        "reopenDescription":"Voel vrij om weer te praten!",
-        "closedTitle":"Ticket gesloten!",
         "closedDescription":"Alleen admins kunnen nog praten.\n\n*Klik op de knoppen hieronder voor meer acties!*",
         "createdTitle":"Ticket Aangemaakt!",
         "createdDescription":"U ticket is gemaakt, je kan het detecteren bij een ping!",
@@ -71,9 +80,11 @@
 
         "none":"geen",
         "reason":"reden",
-
+        "createdat":"gecreëerd op",
+        "openedby":"geopend door",
         "deletedby":"verwijderd door",
         "closedby":"gesloten door",
+
         "modalreason":"Wat is de reden om dit ticket te sluiten?",
         "chooseATicket": "Kies een ticket"
     },

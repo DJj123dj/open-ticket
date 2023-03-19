@@ -1,10 +1,13 @@
 {
-    "main_color":"#ffffff",
-    "server_id":"server id (for slash cmds)",
-    "auth_token":"auth token",
-    "main_adminroles":["discord role id"],
+    "color":"#ffffff",
+    "serverId":"server id (for slash cmds)",
+    "token":{
+        "value":"insert your bot token here",
+        "fromENV":false
+    },
+    "adminRoles":["discord role id"],
     "prefix":"!ticket ",
-    "languagefile":"english",
+    "languageFile":"english",
 
     "status":{
         "enabled":true,
@@ -13,13 +16,11 @@
     },
 
     "system":{
-        "ticket_channel":"channel id",
-        "max_allowed_tickets":3,
-        "enable_DM_Messages":true,
+        "maxAmountOfTickets":3,
+        "dmMessages":false,
 
-        "has@everyoneaccess":false,
-        "member_role":"member role (this role doesn't have access to tickets)",
-        "closeMode":"adminonly or normal (select one of the 2)",
+        "memberRole":"member role (leave empty if you have no member role)",
+        "closeMode":"adminonly OR normal (select one!)",
 
         "transcripts":"!!!! ALL SETTINGS FOR TRANSCRIPTS ARE LOCATED IN: transcriptconfig.json !!!!",
 
@@ -57,6 +58,11 @@
             "closedCategory":{
                 "enable":false,
                 "id":"category id"
+            },
+
+            "autoclose":{
+                "enable":false,
+                "inactiveHours":24
             }
             
         },
@@ -95,7 +101,7 @@
             "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v3.2.2 - I'm a footer!",
+            "footer":"Open Ticket v3.3.0 - I'm a footer!",
 
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",

@@ -11,6 +11,12 @@ const configParser = require("./configParser")
  * @returns {discord.StringSelectMenuBuilder|false}
  */
 exports.getDropdown = (ids,placeholder) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.utils",
+        file:"./core/utils/getDropdown.js",
+        time:new Date().getTime(),
+        type:"getdropdown"
+    })
     const dropdown = new discord.StringSelectMenuBuilder()
         .setCustomId("OTdropdownMenu")
         .setDisabled(false)
@@ -18,7 +24,7 @@ exports.getDropdown = (ids,placeholder) => {
         .setMinValues(1)
         .setPlaceholder(placeholder || l.messages.chooseATicket)
         .addOptions(
-            new discord.SelectMenuOptionBuilder()
+            new discord.StringSelectMenuBuilder()
                 .setDefault(true)
                 .setLabel(placeholder || l.messages.chooseATicket)
                 .setValue("OTChooseTicket")
@@ -28,7 +34,7 @@ exports.getDropdown = (ids,placeholder) => {
         const option = configParser.getTicketById(id,true)
         const roleoption = configParser.getRoleById(id,true)
         if (option){
-            const selectComponent = new discord.SelectMenuOptionBuilder()
+            const selectComponent = new discord.StringSelectMenuOptionBuilder()
             .setDefault(false)
             .setValue("OTnewT"+option.id)
 
@@ -37,12 +43,13 @@ exports.getDropdown = (ids,placeholder) => {
             }else{
                 if (option.label) selectComponent.setLabel(option.label)
                 if (option.icon) selectComponent.setEmoji(option.icon)
+                if (option.description) selectComponent.setDescription(option.description)
             }
 
             dropdown.addOptions(selectComponent)
 
         }else if (roleoption){
-            const selectComponent = new discord.SelectMenuOptionBuilder()
+            const selectComponent = new discord.StringSelectMenuOptionBuilder()
             .setDefault(false)
             .setValue("OTnewR"+roleoption.id)
 

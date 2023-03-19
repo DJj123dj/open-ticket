@@ -53,20 +53,20 @@ module.exports = () => {
 
             if (interaction.isButton()){
                 try {
-                    if (config.system.answerInEphemeralOnOpen) interaction.deferReply({ephemeral:true})
+                    if (config.system.answerInEphemeralOnOpen) await interaction.deferReply({ephemeral:true})
                 } catch{}
             }else if (interaction.isChatInputCommand()){
-                interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
             }else if (interaction.isStringSelectMenu()){
                 try {
-                    interaction.deferUpdate()
+                   await interaction.deferUpdate()
                 } catch{}
             }
 
-            if (storage.get("ticketStorage",interaction.member.id) == null || storage.get("ticketStorage",interaction.member.id) == "false"|| Number(storage.get("ticketStorage",interaction.member.id)) < config.system.max_allowed_tickets){
+            if (storage.get("amountOfUserTickets",interaction.member.id) == null || storage.get("amountOfUserTickets",interaction.member.id) == "false"|| Number(storage.get("amountOfUserTickets",interaction.member.id)) < config.system.maxAmountOfTickets){
 
                 //update storage
-                storage.set("ticketStorage",interaction.member.id,Number(storage.get("ticketStorage",interaction.member.id))+1)
+                storage.set("amountOfUserTickets",interaction.member.id,Number(storage.get("amountOfUserTickets",interaction.member.id))+1)
                 var ticketNumber = interaction.member.user.username
 
                 //set ticketName
@@ -84,19 +84,12 @@ module.exports = () => {
                 const pfb = discord.PermissionFlagsBits
                 const guild = client.guilds.cache.find(g => g.id == interaction.guild.id)
 
-                //set everyone allowed
-                if (config.system['has@everyoneaccess']){
-                    var everyoneAllowPerms = [pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
-                    var everyoneDenyPerms = []
-                }else{
-                    var everyoneAllowPerms = []
-                    var everyoneDenyPerms = [pfb.ViewChannel]
-                }
+                //set @everyone no ticket access
                 permissionsArray.push({
                     id:interaction.guild.roles.everyone,
                     type:"role",
-                    allow:everyoneAllowPerms,
-                    deny:everyoneDenyPerms
+                    allow:[],
+                    deny:[pfb.ViewChannel]
                 })
 
                 //add the user that created the ticket
@@ -107,7 +100,7 @@ module.exports = () => {
                 })
 
                 //add main adminroles
-                config.main_adminroles.forEach((role,index) => {
+                config.adminRoles.forEach((role,index) => {
                     try {
                         const adminrole = guild.roles.cache.find(r => r.id == role)
                         if (!adminrole) return
@@ -128,7 +121,7 @@ module.exports = () => {
                  */
                 const ticketadmin = currentTicketOptions.adminroles
                 ticketadmin.forEach((role,index) => {
-                    if (!config.main_adminroles.includes(role)){
+                    if (!config.adminRoles.includes(role)){
                         try {
                             const adminrole = guild.roles.cache.find(r => r.id == role)
                             if (!adminrole) return
@@ -145,9 +138,9 @@ module.exports = () => {
                 })
 
                 //add member role
-                if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
+                if (config.system.memberRole && ![" ","0","false","null","undefined"].includes(config.system.memberRole)){
                     try {
-                        const userrole = guild.roles.cache.find(r => r.id == config.system.member_role)
+                        const userrole = guild.roles.cache.find(r => r.id == config.system.memberRole)
                         if (userrole){
                             permissionsArray.push({
                                 id:userrole,
@@ -156,7 +149,7 @@ module.exports = () => {
                             })
                         }
                     }catch{
-                        log("system","invalid role! At 'config.json => system/member_role")
+                        log("system","invalid role! At 'config.json => system/memberRole")
                     }
                 }
 
@@ -169,15 +162,21 @@ module.exports = () => {
                     permissionOverwrites:permissionsArray
                     
                 }).then((ticketChannel) => {
-                    storage.set("userTicketStorage",ticketChannel.id,interaction.member.id)
+                    storage.set("userFromChannel",ticketChannel.id,interaction.member.id)
+                    if (currentTicketOptions.autoclose.enable) storage.set("autocloseTickets",ticketChannel.id,currentTicketOptions.autoclose.inactiveHours)
 
                     const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
                     
                     var ticketEmbed = new discord.EmbedBuilder()
                         //.setAuthor({name:interaction.user.id})
-                        .setColor(config.main_color)
+                        .setColor(config.color)
                         .setTitle(currentTicketOptions.name)
                         //.setFooter({text:"Ticket Type: "+currentTicketOptions.id})
+                    if (currentTicketOptions.autoclose.enable){
+                        const footerText = l.commands.autocloseTitle.replace("{0}",currentTicketOptions.autoclose.inactiveHours+"h")
+                        ticketEmbed.setFooter({text:footerText})
+                    }
+
                     if (currentTicketOptions.ticketmessage.length > 0){
                         ticketEmbed.setDescription(currentTicketOptions.ticketmessage+hiddendata)
                     }else{
@@ -205,12 +204,12 @@ module.exports = () => {
                                 .setStyle(discord.ButtonStyle.Link)
                                 .setDisabled(false)
                                 .setEmoji("🎫")
-                                .setLabel("go to ticket")
+                                .setLabel(l.commands.goToTicket)
                                 .setURL(ticketChannel.url)
                         ])
                         
                     try{
-                        if (currentTicketOptions.enableDmOnOpen) interaction.member.send({embeds:[bot.errorLog.custom(l.messages.newTicketDmTitle,currentTicketOptions.message,":ticket:",config.main_color)],components:[channelbutton]})
+                        if (currentTicketOptions.enableDmOnOpen) interaction.member.send({embeds:[bot.errorLog.custom(l.messages.newTicketDmTitle,currentTicketOptions.message,":ticket:",config.color)],components:[channelbutton]})
                     }
                     catch{log("system","failed to send DM")}
 
@@ -219,7 +218,7 @@ module.exports = () => {
                 })
             }else{
                 try {
-                    if (config.system.enable_DM_Messages){
+                    if (config.system.dmMessages){
                         interaction.member.send({embeds:[bot.errorLog.warning(l.errors.maxAmountTitle,l.errors.maxAmountDescription)]})
                     }
                 }

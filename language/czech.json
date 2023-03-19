@@ -24,10 +24,17 @@
         "closeTitle":"Zavři tenhle ticket!",
         "deleteTitle":"Mažu ticket...",
         "reopenTitle":"Znovu otevíram ticket",
-        "claimTitle":"Nyní jsi převzal ticket {0}",
-        "unclaimTitle":"Tento ticketu už je převzatý!",
-        "changeTitle":"Změnil jsi typ ticketu na {0}!",
+        
+        "claimTitle":"Ticket nyní převzal {0}",
+        "unclaimTitle":"Ticket už není převzaný",
+        "changeTitle":"Změněn typ ticketu {0}!",
 
+        "statsTitle":"Tady je info o ticketu {0}!",
+        "autocloseTitle":"Tento ticketu bude automaticky uzavřen za {0}!",
+        "autocloseRejectTitle":"Tento ticketu už nebude automaticky uzavřen!",
+        "autocloseWarn":"Toto zavře pouze neaktivní tickety!",
+
+        "goToTicket":"běž do ticketu",
         "ticketWarning":"The embed is in the message below!",
         "maxTicketWarning":"**Warning:** _Můžeš vytvořit pouze {0} v tuhle chvíli!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Odstranit ticket.",
         "addCmd":"Pridat uživatele do ticketu.",
         "removeCmd":"Odebrat uživatele z ticketu.",
-        "reopenCmd":"Re-Open a ticket after it was closed."
+        "reopenCmd":"Re-Open a ticket after it was closed.",
+        "changeCmd":"Změnit typ ticketu.",
+        "claimCmd":"Převzi ticket.",
+        "unclaimCmd":"Uvolnit ticket.",
+        "statsCmd":"Zobrazit info o ticketu.",
+        "autocloseCmd":"Nastavit automatické uzavření ticketu"
     },
     "buttons":{
         "close":"Zavřit ticket",
@@ -51,9 +63,6 @@
         "closeWithReason":"zavřít s důvodem"
     },
     "messages":{
-        "reopenTitle":"Znovu otevřit ticket!",
-        "reopenDescription":"Klidně napiš znova!",
-        "closedTitle":"Zavřít tenhle ticket!",
         "closedDescription":"Pouze admini muzou zde psát ted!\n\n*Klikni na  tlačítko níže pro smazání nebo pro znovu otevření tohohle ticketu!*",
         "createdTitle":"Ticket otevřen!",
         "createdDescription":"Tvůj ticket je vytvořem, můžeš si ho všimnout pomocí pingu!",
@@ -71,9 +80,11 @@
 
         "none":"žádný",
         "reason":"důvod",
-
+        "createdat":"otevřeno v",
+        "openedby":"otevřel",
         "deletedby":"smazano uzivatelem",
         "closedby":"zavreno uzivatelem",
+        
         "modalreason":"Jakž byl důvod k zavření toho ticketu?",
         "chooseATicket": "Vyber ticket"
     },

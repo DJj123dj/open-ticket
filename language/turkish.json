@@ -1,0 +1,98 @@
+{
+    "errors":{
+        "missingArgsTitle":"Geçersiz argümanlar!",
+        "missingArgsDescription":"Eksik argüman!",
+        "noPermsTitle":"Bunun için yetkin yok!",
+        "noPermsDescription":"Bunu yapmak için 'ADMİNİSTRAR'rolüne ihtiyacınız var, veya izin verilen roller listesinde olun!",
+        "noPermsDelete":"Sadece adminler bileti silebilir!",
+        "chooseFromListTitle":"Geçersiz Kimlik",
+        "chooseFromListDescription":"Aşağıdaki kimliklerden birini seçin:",
+        "boterror":"Bot Hatası!",
+        "notInTicketTitle":"Bir biletin yok!",
+        "notInTicketDescription":"Bu komut bilet dışında kullanılamaz!",
+        "ticketDoesntExist":"Bu bilet artık yok!",
+        "roleDoesntExist":"Bu rol artık yok!",
+        "anotherOption":"Bu seçenek bir bilet değil, başka bir türdür!",
+        "maxAmountTitle":"Ulaşabileceğin maksimum tutara ulaştın!",
+        "maxAmountDescription":"İzin verilen maksimum bilet sayısına ulaştınız!\nHhayır yeni bir tane oluşturamazsın!",
+        "somethingWentWrong":"**Bir şeyler ters gitti!**\n lütfen başka bir zaman tekrar deneyin!"
+    },
+    "commands":{
+        "userAddedTitle":"Bilete {0} adlı kullanıcı eklendi!",
+        "userRemovedTitle":"Biletten {0} adlı kullanıcı çıkarıldı !",
+        "renameTitle":"Bilet ismi {0} olarak değştirildi!",
+        "closeTitle":"Bilet Kapatıldı!",
+        "deleteTitle":"Bilet siliniyor...",
+        "reopenTitle":"Bilet Yeniden Açıldı!",
+        
+        "claimTitle":"Bu bilet artık talep edildi. {0}",
+        "unclaimTitle":"Tu bilet artık talep edilmiyor!",
+        "changeTitle":"Bu bilet türü {0} olarak değiştirildi!",
+
+        "statsTitle":"Here are the stats for {0}!",
+        "autocloseTitle":"This ticket will be closed automatically after {0}!",
+        "autocloseRejectTitle":"This ticket will no longer be closed automatically!",
+        "autocloseWarn":"This only affects inactive tickets!",
+
+        "goToTicket":"go to ticket",
+        "ticketWarning":"Gömme aşağıdaki mesajda yer almaktadır!",
+        "maxTicketWarning":"**Uyarı:** _You can only create {0} ticket(s) at a time!_"
+    },
+    "helpMenu":{
+        "title":"Kullanılabilir Komutlar:",
+        "header1":"**Bilet oluşturmak için {0} kanalını kullan!**\n\n",
+        "header2":"**Bilet oluşturmak için `/new` veya `/ticket' komutunu çalıştırın!**\n\n",
+
+        "msgCmd":"Gömülü bilet mesajı gönderir. (sadece yöneticiler)",
+        "renameCmd":"Bilet adını değiştirir. (boşluk olmadan)",
+        "closeCmd":"Bileti kapatır.",
+        "deleteCmd":"Bileti siler.",
+        "addCmd":"Bilete kullanıcı ekler.",
+        "removeCmd":"Biletten kullanıcı çıkarır.",
+        "reopenCmd":"Bilet kapandıktan sonra tekrar açar.",
+        "changeCmd":"Change ticket type.",
+        "claimCmd":"Claim a ticket.",
+        "unclaimCmd":"Unclaim a ticket.",
+        "statsCmd":"View ticket stats.",
+        "autocloseCmd":"Set timer to automatically close ticket"
+    },
+    "buttons":{
+        "close":"Bileti Kapat",
+        "delete":"Bileti Sil",
+        "reopen":"Bileti Yeniden Aç",
+        "closeWithReason":"Bu bileti neden kapatıyorsun ?"
+    },
+    "messages":{
+        "closedDescription":"Bu bilette artık sadece yöneticiler konuşabilir!\n\n* Bu bileti silmek veya yeniden açmak için aşağıdaki butona tıklayın!*",
+        "createdTitle":"Talep Oluşturuldu!",
+        "createdDescription":"Your ticket is created, you can detect it by a ping!",
+
+        "newTicketDmTitle":"Yeni Bilet!",
+        "closedTicketDmTitle":"Bilet Kapatıldı!",
+        "deletedTicketDmTitle":"Bilet Silindi!",
+        "closedTicketDmDescription":"Senin biletin kapatıldı!",
+        "deletedTicketDmDescription":"Senin biletin silindi!",
+        "reopenTicketDmTitle":"Bilet yeniden açıldı!",
+        "reopenTicketDmDescription":"Senin biletin yeniden açıldı!",
+
+        "chooseCategory":"Bir kategori seç:",
+        "gettingdeleted":"Bu bilet siliniyor...",
+
+        "none":"yok",
+        "reason":"sebep",
+        "createdat":"created at",
+        "openedby":"opened by",
+        "deletedby":"Silen kişi",
+        "closedby":"Kapatan kişi",
+        
+        "modalreason":"Bu biletin kapanmasının sebebi nedir?",
+        "chooseATicket": "Bir bilet seçin"
+    },
+    "transcripts":{
+        "title":"Transkript",
+        "processed":"Bu transkript işleniyor",
+        "wait":"Lütfen Bekleyiniz!",
+        "estimated":"Tahmini Süre",
+        "available":"Transkript burada mevcuttur"
+    }
+}

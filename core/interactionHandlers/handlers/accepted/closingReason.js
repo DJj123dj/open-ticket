@@ -9,7 +9,7 @@ const permissionChecker = require("../../../utils/permisssionChecker")
 const storage = bot.storage
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
-const mc = config.main_color
+const mc = config.color
 
 const button = discord.ButtonBuilder
 const arb = discord.ActionRowBuilder
@@ -93,7 +93,7 @@ module.exports = () => {
          })
  
          //interaction.channel.send({embeds:[bot.embeds.commands.closeEmbed(interaction.user)],components:[bot.buttons.close.closeCommandRow]})
-         await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close",reason,true)
+         await require("../../../ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"close",reason,true)
          closeTicketButtonChecker = false
     })
 }

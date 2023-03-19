@@ -24,10 +24,17 @@
         "closeTitle":"Закрыл этот тикет!",
         "deleteTitle":"Удаляем этот тикет...",
         "reopenTitle":"Открываем заново этот тикет!",
+        
         "claimTitle":"Этот тикет теперь взят {0}",
         "unclaimTitle":"Этот тикет никем не взят!",
         "changeTitle":"Изменён тип тикета на {0}!",
 
+        "statsTitle":"Here are the stats for {0}!",
+        "autocloseTitle":"This ticket will be closed automatically after {0}!",
+        "autocloseRejectTitle":"This ticket will no longer be closed automatically!",
+        "autocloseWarn":"This only affects inactive tickets!",
+
+        "goToTicket":"go to ticket",
         "ticketWarning":"embed ниже сообщения!",
         "maxTicketWarning":"**Предупреждение:** _Вы можете создать только {0} тикет(а/ов) в этот раз!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Удалить тикет.",
         "addCmd":"Добавить пользователя в тикет.",
         "removeCmd":"Удалить пользователя из тикета.",
-        "reopenCmd":"Открыть заново тикет после того, как он был закрыт."
+        "reopenCmd":"Открыть заново тикет после того, как он был закрыт.",
+        "changeCmd":"Change ticket type.",
+        "claimCmd":"Claim a ticket.",
+        "unclaimCmd":"Unclaim a ticket.",
+        "statsCmd":"View ticket stats.",
+        "autocloseCmd":"Set timer to automatically close ticket"
     },
     "buttons":{
         "close":"Закрыть тикет",
@@ -51,9 +63,6 @@
         "closeWithReason":"закрыть с причиной"
     },
     "messages":{
-        "reopenTitle":"Открыл заново этот тикет!",
-        "reopenDescription":"Не стесняйтесь обращаться снова!",
-        "closedTitle":"Закрыл этот тикет!",
         "closedDescription":"Только админы теперь могут писать в этом тикете!\n\n*Нажмите на кнопку ниже, чтобы удалить или заново окрыть тикет!*",
         "createdTitle":"Тикет создан!",
         "createdDescription":"Ваш тикет создан, вы можете обнаружить его по пингу!",
@@ -71,9 +80,11 @@
 
         "none":"отсутствует",
         "reason":"причина",
-
+        "createdat":"created at",
+        "openedby":"opened by",
         "deletedby":"удалён",
         "closedby":"закрыт",
+        
         "modalreason":"Какая причина закрытия этого тикета?",
         "chooseATicket": "Выберите тикет"
     },

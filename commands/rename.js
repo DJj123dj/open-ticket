@@ -53,7 +53,7 @@ module.exports = () => {
         
     })
 
-    if (!DISABLE.commands.slash.rename) client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.rename) client.on("interactionCreate",async (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "rename") return
 
@@ -63,11 +63,11 @@ module.exports = () => {
             return
         }
 
-        //interaction.deferReply()
+        await interaction.deferReply()
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
             
@@ -84,7 +84,7 @@ module.exports = () => {
             if (!prefix) prefix = "noprefix-"
 
             interaction.channel.setName(prefix+newname)
-            interaction.reply({embeds:[bot.embeds.commands.renameEmbed(interaction.user,prefix+newname)]})
+            interaction.editReply({embeds:[bot.embeds.commands.renameEmbed(interaction.user,prefix+newname)]})
 
             log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
             log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])

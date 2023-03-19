@@ -48,12 +48,13 @@ exports.serverError = (message) => {
     return x
 }
 
-/**@param {String[]} list */
-exports.invalidIdChooseFromList = (list) => {
+/**@param {String[]} list @param {String|undefined} message */
+exports.invalidIdChooseFromList = (list,message) => {
+    const beforemsg = message ? message+"\n\n" : ""
     var x = new embed()
         .setColor(c.Red)
         .setTitle(":x: "+l.errors.chooseFromListTitle)
-        .setDescription(l.errors.chooseFromListDescription+"\n`"+list.join("`\n`")+"`")
+        .setDescription(beforemsg+l.errors.chooseFromListDescription+"\n`"+list.join("`\n`")+"`")
     return x
 }
 
@@ -66,7 +67,7 @@ exports.notInATicket = new embed()
 /**@param {String} message @param {String} title */
 exports.success = (title,message) => {
     var x = new embed()
-        .setColor(config.main_color)
+        .setColor(config.color)
         .setTitle(":white_check_mark: "+title)
         .setDescription(message)
 

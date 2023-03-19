@@ -53,9 +53,9 @@ exports.checker = async () => {
     /**@param {String} value */
     const checkToken = (value) => {
         if (value.length < 40){
-            createError("'auth_token' | your token is invalid")
+            createError("'token/value' | your token is invalid")
         }
-        if (value.includes(" ")) createError("'auth_token' | your token includes spaces!")
+        if (value.includes(" ")) createError("'token/value' | your token includes spaces!")
     }
 
     /**@param {String} value @param {String} path */
@@ -119,24 +119,29 @@ exports.checker = async () => {
         if (type == "boolean"){
             if (typeof value != "boolean"){
                 createError("'"+path+"' | invalid type, this must be a boolean!")
-            }
+                return true
+            }else return false
         }else if (type == "number"){
             if (typeof value != "number"){
                 createError("'"+path+"' | invalid type, this must be a number!")
-            }
+                return true
+            }else return false
         }else if (type == "string"){
             if (typeof value != "string"){
                 createError("'"+path+"' | invalid type, this must be a string!")
-            }
+                return true
+            }else return false
         }else if (type == "array"){
             if (!Array.isArray(value)){
                 createError("'"+path+"' | invalid type, this must be an array!")
-            }
+                return true
+            }else return false
         }else if (type == "object"){
             if (typeof value != "object"){
                 createError("'"+path+"' | invalid type, this must be an object!")
-            }
-        }
+                return true
+            }else return false
+        }else return false
     }
 
     const checkButtonColor = (value,path) => {
@@ -256,6 +261,14 @@ exports.checker = async () => {
                 createError("'"+path+"/closedCategory' | there is no closedCategory object!")
             }
 
+            //autoclose
+            if (option.autoclose){
+                checkType(option.autoclose.enable,"boolean",path/"/autoclose/enable")
+                checkType(option.autoclose.inactiveHours,"number",path/"/autoclose/id")
+            }else{
+                createError("'"+path+"/autoclose' | there is no autoclose object!")
+            }
+
         }else if (type == "website"){
             //url
             checkType(option.url,"string",path+"/url")
@@ -337,17 +350,19 @@ exports.checker = async () => {
         }
 
         //OPTIONS!!!
-        var counter = 0
-        input.options.forEach((option) => {if (!configParser.optionExists(option)){counter++}})
+        if (checkType(input.options,"array",path+"/options")){
+            var counter = 0
+            input.options.forEach((option) => {if (!configParser.optionExists(option)){counter++}})
 
-        if (counter == input.options.length){
-            createWarn("'"+path+"/options' | insert the option ids here!")
-        }else{
-            input.options.forEach((option,index) => {
-                if (!configParser.optionExists(option)){
-                    createWarn("'"+path+"/options:"+index+"' | this option doesnt exist!")
-                }
-            })
+            if (counter == input.options.length){
+                createWarn("'"+path+"/options' | insert the option ids here!")
+            }else{
+                input.options.forEach((option,index) => {
+                    if (!configParser.optionExists(option)){
+                        createWarn("'"+path+"/options:"+index+"' | this option doesnt exist!")
+                    }
+                })
+            }
         }
 
         //other
@@ -393,26 +408,26 @@ exports.checker = async () => {
     //--------------------------|
     //--------------------------|
 
-    var configArray = ["main_color","server_id","auth_token","main_adminroles","prefix","languagefile","status","system","options","messages"]
+    var configArray = ["color","serverId","token","adminRoles","prefix","languageFile","status","system","options","messages"]
     configArray.forEach((item) => {
         if (config[item] == undefined){
             throw new Error("\n\nMAIN ERROR: the item '"+item+"' doesn't exist in config.json")
         }
     })
     
-    checkHexColor(config.main_color,"main_color")
-    checkDiscord("serverid",config.server_id,"server_id")
+    checkHexColor(config.color,"main_color")
+    checkDiscord("serverid",config.serverId,"server_id")
 
-    if (!require("./api/api.json").disable.checkerjs.token) checkToken(config.auth_token)
+    if (!require("./api/api.json").disable.checkerjs.token && !config.token.fromENV) checkToken(config.token.value)
 
-    checkType(config.main_adminroles,"array","/main_adminroles")
-    checkDiscordArray("roleid",config.main_adminroles,"main_adminroles")
+    checkType(config.adminRoles,"array","/main_adminroles")
+    checkDiscordArray("roleid",config.adminRoles,"main_adminroles")
     checkString(config.prefix,1,15,"prefix","prefix")
     //languagefile
-    checkType(config.languagefile,"string","languagefile")
-    const lf = config.languagefile
+    checkType(config.languageFile,"string","languagefile")
+    const lf = config.languageFile
     
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian") && !lf.startsWith("turkish")  && !lf.startsWith("polish")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 
@@ -430,28 +445,18 @@ exports.checker = async () => {
 
     
     //system:
-        //ticket channel
-        if (config.system.ticket_channel){
-            if (config.system.ticket_channel.length < 16 || config.system.ticket_channel.length > 20 || !/^\d+$/.test(config.system.ticket_channel)){
-                createError("'system/ticket_channel' | this channel id is invalid")
-            }
-        }else createWarn("'"+path+"' | you have no ticket channel selected!")
-
         //max tickets
-        checkType(config.system.max_allowed_tickets,"number","system/max_allowed_tickets")
+        checkType(config.system.maxAmountOfTickets,"number","system/maxAmountOfTickets")
 
         //enableDMmessages
-        checkType(config.system.enable_DM_Messages,"boolean","system/enable_DM_Messages")
+        checkType(config.system.dmMessages,"boolean","system/dmMessages")
 
-        //has@everyoneaccess
-        checkType(config.system["has@everyoneaccess"],"boolean","system/has@everyoneaccess")
-
-        //member_role
-        checkType(config.system.member_role,"string","system/member_role")
-        if (config.system.member_role != "" && config.system.member_role != " " && config.system.member_role != "false" && config.system.member_role != "null" && config.system.member_role != "0"){
-            checkDiscord("roleid",config.system.member_role,"system/member_role")
+        //memberRole
+        checkType(config.system.memberRole,"string","system/memberRole")
+        if (config.system.memberRole && ![" ","0","false","null","undefined"].includes(config.system.memberRole)){
+            checkDiscord("roleid",config.system.memberRole,"system/memberRole")
         }else{
-            createWarn("'system/member_role' | You don't have a member role, but it's recommended!")
+            createWarn("'system/memberRole' | You don't have a member role, but it's recommended!")
         }
 
         //closemode

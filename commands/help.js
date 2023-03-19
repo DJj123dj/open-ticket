@@ -15,11 +15,14 @@ module.exports = () => {
     const prefix = config.system.showSlashcmdsInHelp ? "/" : config.prefix
 
     const helpEmbed = new discord.EmbedBuilder()
-        .setColor(config.main_color)
+        .setColor(config.color)
         .setTitle("❔ "+l.helpMenu.title)
 
-    const header = config.system.ticket_channel ? l.helpMenu.header1.replace("{0}","<#"+config.system.ticket_channel+">") : l.helpMenu.header2
-    helpEmbed.setDescription(header+"`"+prefix+msgName+" <id>` ➜ _"+l.helpMenu.msgCmd+"_\n\n`"+prefix+"rename <name>` ➜ _"+l.helpMenu.renameCmd+"_\n`"+prefix+"close` ➜ _"+l.helpMenu.closeCmd+"_\n`"+prefix+"delete` ➜ _"+l.helpMenu.deleteCmd+"_\n`"+prefix+"reopen` ➜ _"+l.helpMenu.reopenCmd+"_\n\n`"+prefix+"add <user>` ➜ _"+l.helpMenu.addCmd+"_\n`"+prefix+"remove <user>` ➜ _"+l.helpMenu.removeCmd+"_\n\n`"+prefix+"change <newtype>` ➜ _Change ticket type._")
+    const header = l.helpMenu.header2
+    helpEmbed.setDescription(header+"`"+prefix+msgName+" <id>` ➜ _"+l.helpMenu.msgCmd+"_\n\n`"+prefix+"rename <name>` ➜ _"+l.helpMenu.renameCmd+"_\n`"+prefix+"close [reason]` ➜ _"+l.helpMenu.closeCmd+"_\n`"+prefix+"delete` ➜ _"+l.helpMenu.deleteCmd+"_\n`"+prefix+"reopen` ➜ _"+l.helpMenu.reopenCmd+"_\n\n`"+prefix+"add <user>` ➜ _"+l.helpMenu.addCmd+"_\n`"+prefix+"remove <user>` ➜ _"+l.helpMenu.removeCmd+"_\n\n`"+prefix+"change <newtype>` ➜ _"+l.helpMenu.changeCmd+"_\n`"+prefix+"claim [user]` ➜ _"+l.helpMenu.claimCmd+"_\n`"+prefix+"unclaim` ➜ _"+l.helpMenu.unclaimCmd+"_")
+    helpEmbed.addFields([
+        {name:"Autoclose",value:l.helpMenu.autocloseCmd+"\n`"+prefix+"autoclose enable <inactive time>`\n`"+prefix+"autoclose disable`"}
+    ])
 
     var otherprefix = prefix.endsWith(" ") ? prefix.substring(0,prefix.length-1) : prefix
 

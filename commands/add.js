@@ -44,7 +44,7 @@ module.exports = () => {
         
     })
 
-    if (!DISABLE.commands.slash.add) client.on("interactionCreate",(interaction) => {
+    if (!DISABLE.commands.slash.add) client.on("interactionCreate",async (interaction) => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "add") return
         const user = interaction.options.getUser("user")
@@ -55,14 +55,16 @@ module.exports = () => {
             return
         }
 
+        await interaction.deferReply()
+
         interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
             const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
             interaction.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
-            interaction.reply({embeds:[bot.embeds.commands.addEmbed(user,interaction.user)]})
+            interaction.editReply({embeds:[bot.embeds.commands.addEmbed(user,interaction.user)]})
 
             var loguser = user
             log("command","someone used the 'add' command",[{key:"user",value:interaction.user.tag}])

@@ -24,10 +24,17 @@
         "closeTitle":"Fechado este ticket!",
         "deleteTitle":"Excluindo este ticket...",
         "reopenTitle":"Reabriu este ticket!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
-        "changeTitle":"Changed ticket type to {0}!",
+        
+        "claimTitle":"Esse ticket foi reinvidicado {0}",
+        "unclaimTitle":"Esse ticket não foi reinvidicado!",
+        "changeTitle":"Tipo de ticket alterado para {0}!",
 
+        "statsTitle":"Aqui estão as estatísticas para {0}!",
+        "autocloseTitle":"Este ticket vai fechar altomaticamente após {0}!",
+        "autocloseRejectTitle":"Este ticket não será mais fechado automaticamente!",
+        "autocloseWarn":"Isso apenas afeta tickets inativos!",
+
+        "goToTicket":"ir para ticket",
         "ticketWarning":"A incorporação está na mensagem abaixo!",
         "maxTicketWarning":"**Cuidado:** _Você só pode criar {0} ticket(s) de cada vez!!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Excluir um ticket.",
         "addCmd":"Adicionar um usuário ao ticket.",
         "removeCmd":"Remover um usuário do ticket.",
-        "reopenCmd":"Reabra um ticket depois que ele foi fechado."
+        "reopenCmd":"Reabra um ticket depois que ele foi fechado.",
+        "changeCmd":"Mudar tipo de ticket",
+        "claimCmd":"Resgatar Ticket",
+        "unclaimCmd":"Desresgatar Ticket",
+        "statsCmd":"Olhar status do ticket",
+        "autocloseCmd":"Definir tempo para fechar ticket automaticamente."
     },
     "buttons":{
         "close":"Fechar Ticket",
@@ -51,9 +63,6 @@
         "closeWithReason":"fechado com motivo"
     },
     "messages":{
-        "reopenTitle":"Reabriu este ticket!",
-        "reopenDescription":"Sinta-se à vontade para falar novamente!",
-        "closedTitle":"Fechado este ticket!",
         "closedDescription":"Somente administradores podem falar neste ticket agora!\n\n*Clique no botão abaixo para excluir ou reabrir este ticket!*",
         "createdTitle":"Ticket criado!",
         "createdDescription":"Seu ticket foi criado, você pode detectá-lo com um ping!",
@@ -71,11 +80,12 @@
 
         "none":"vazio",
         "reason":"motivo",
-
+        "createdat":"Criado por:",
+        "openedby":"Aberto por:",
         "deletedby":"deletado por",
         "closedby":"fechado por",
+        
         "modalreason":"Qual o motivo de fechar o ticket?",
-
         "chooseATicket": "Fechar Ticket"
     },
     "transcripts":{

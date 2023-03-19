@@ -24,10 +24,17 @@
         "closeTitle":"Fermé ce ticket!",
         "deleteTitle":"Suppression de ce ticket...",
         "reopenTitle":"A rouvert ce ticket!",
-        "claimTitle":"This ticket is now claimed to {0}",
-        "unclaimTitle":"This ticket isn't claimed anymore!",
-        "changeTitle":"Changed ticket type to {0}!",
+        
+        "claimTitle":"Ce ticket est maintenant réclamé à {0}",
+        "unclaimTitle":"Ce ticket n'est pas réclamé!",
+        "changeTitle":"Modification du type de ticket en {0}!",
 
+        "statsTitle":"Voici les statistiques pour {0}!",
+        "autocloseTitle":"Ce ticket sera automatiquement clôturé après {0}!",
+        "autocloseRejectTitle":"Ce ticket ne sera plus clôturé automatiquement!",
+        "autocloseWarn":"Cela n'affecte que les tickets inactifs!",
+
+        "goToTicket":"Aller au ticket",
         "ticketWarning":"L'intégration est dans le message ci-dessous!",
         "maxTicketWarning":"**Attention :** _Vous ne pouvez créer que {0} ticket(s) à la fois !_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd":"Supprimer un billet.",
         "addCmd":"Ajouter un utilisateur au ticket.",
         "removeCmd":"Supprimer un utilisateur du ticket.",
-        "reopenCmd":"Rouvrir un ticket après sa clôture."
+        "reopenCmd":"Rouvrir un ticket après sa clôture.",
+        "changeCmd":"Changer le type de ticket.",
+        "claimCmd":"Réclamer un billet",
+        "unclaimCmd":"Annuler la réclamation d'un ticket.",
+        "statsCmd":"Afficher les statistiques des tickets.",
+        "autocloseCmd":"Définir une minuterie pour fermer automatiquement le ticket"
     },
     "buttons":{
         "close":"Fermer le ticket",
@@ -51,9 +63,6 @@
         "closeWithReason":"fermer avec une raison"
     },
     "messages":{
-        "reopenTitle":"A rouvert ce ticket!",
-        "reopenDescription":"N'hésitez pas à reparler!",
-        "closedTitle":"Fermé ce ticket!",
         "closedDescription":"Seuls les administrateurs peuvent parler dans ce ticket maintenant !\n\n*Cliquez sur le bouton ci-dessous pour supprimer ou rouvrir ce ticket !*",
         "createdTitle":"Ticket créé !",
         "createdDescription":"Votre ticket est créé, vous pouvez le détecter par un ping !",
@@ -71,9 +80,11 @@
 
         "none":"rien",
         "reason":"raison",
-
+        "createdat":"Créé à",
+        "openedby":"Ouvert par",
         "deletedby":"supprimé par",
         "closedby":"fermé par",
+        
         "modalreason":"Qu’elle est la raison pour fermer ce ticket?",
         "chooseATicket": "Choisir un ticket"
     },
