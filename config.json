@@ -58,6 +58,11 @@
             "closedCategory":{
                 "enable":false,
                 "id":"category id"
+            },
+
+            "autoclose":{
+                "enable":false,
+                "inactiveHours":24
             }
             
         },

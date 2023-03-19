@@ -93,7 +93,7 @@ module.exports = () => {
          })
  
          //interaction.channel.send({embeds:[bot.embeds.commands.closeEmbed(interaction.user)],components:[bot.buttons.close.closeCommandRow]})
-         await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close",reason,true)
+         await require("../../../ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"close",reason,true)
          closeTicketButtonChecker = false
     })
 }

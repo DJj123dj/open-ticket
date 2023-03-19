@@ -25,7 +25,7 @@
         "deleteTitle":"Deleting this ticket...",
         "reopenTitle":"Re-Opened this ticket!",
         
-        "claimTitle":"This ticket is now claimed to {0}",
+        "claimTitle":"This ticket is claimed to {0}",
         "unclaimTitle":"This ticket isn't claimed anymore!",
         "changeTitle":"Changed ticket type to {0}!",
 

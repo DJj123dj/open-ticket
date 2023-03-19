@@ -33,7 +33,17 @@ module.exports = () => {
         try {
             interaction.deferUpdate()
         } catch{}
-        interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+
+        if (interaction.message.pinned && interaction.message.author.id == client.user.id){
+            const claimdata = storage.get("claimData",interaction.channel.id)
+            if (claimdata && claimdata != "false"){
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim]})
+            }else{
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal]})
+            }
+        }else{
+            interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+        }
     })
 
     //DELETE
@@ -54,7 +64,17 @@ module.exports = () => {
         try {
             interaction.deferUpdate()
         } catch{}
-        interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+        
+        if (interaction.message.pinned && interaction.message.author.id == client.user.id){
+            const claimdata = storage.get("claimData",interaction.channel.id)
+            if (claimdata && claimdata != "false"){
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim]})
+            }else{
+                interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal]})
+            }
+        }else{
+            interaction.message.edit({components:[bot.buttons.close.openRowNormal]})
+        }
     })
 
     //DELETE NO TRANSCRIPT

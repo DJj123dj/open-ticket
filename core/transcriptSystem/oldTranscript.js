@@ -30,11 +30,11 @@ exports.createTranscript = async (messagecollection,channel,backup) => {
             if (msg.content){
                 var content = msg.content
             }else if (msg.embeds.length > 0 && msg.attachments.length > 0){
-                var content = "*this message only has embeds & files**"
+                var content = "*this message only has embeds & files*"
             }else if (msg.embeds.length > 0){
-                var content = "*this message only has embeds**"
+                var content = "*this message only has embeds*"
             }else if (msg.attachments.length > 0){
-                var content = "*this message only has files**"
+                var content = "*this message only has files*"
             }else{
                 var content = "*empty message*"
             }

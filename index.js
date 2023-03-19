@@ -300,6 +300,7 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
     //core
     require('./core/ticketActions/ticketOpener')()
     require("./core/reactionRoles")()
+    require("./core/ticketActions/ticketAutoclose")()
 
     this.errorLog.log("debug","LOADING INTERACTION HANDLERS")
     //InteractionHandlers

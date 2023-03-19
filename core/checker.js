@@ -261,6 +261,14 @@ exports.checker = async () => {
                 createError("'"+path+"/closedCategory' | there is no closedCategory object!")
             }
 
+            //autoclose
+            if (option.autoclose){
+                checkType(option.autoclose.enable,"boolean",path/"/autoclose/enable")
+                checkType(option.autoclose.inactiveHours,"number",path/"/autoclose/id")
+            }else{
+                createError("'"+path+"/autoclose' | there is no autoclose object!")
+            }
+
         }else if (type == "website"){
             //url
             checkType(option.url,"string",path+"/url")

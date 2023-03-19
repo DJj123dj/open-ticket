@@ -55,6 +55,21 @@ exports.closeEmbed = (closer,description) => {
 
 /**
  * 
+ * @param {discord.User} closer 
+ * @param {Number} time
+ * @returns {discord.EmbedBuilder}
+ */
+exports.autocloseSignalEmbed = (closer,time) => {
+    const embd = new embed()
+        .setTitle("⏰ This ticket got closed by Autoclose!")
+        .setColor(mc)
+        .setFooter({text:closer.tag,iconURL:closer.displayAvatarURL()})
+        .setDescription("This ticket has been inactive for `"+time+"h`!")
+    return embd
+}
+
+/**
+ * 
  * @param {discord.User} deleter 
  * @returns {discord.EmbedBuilder}
  */

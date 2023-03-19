@@ -1,3 +1,13 @@
+/**
+==================================================================
+ALL DATABASE FILES NEED TO EXPORT THE FOLLOWING FUNCTIONS:
+- get(category:String,key:String) => String (value)
+- set(category:String,key:String,value:String) => Boolean (success)
+- delete(category:String,key:String) => Boolean (success)
+- getCategory(category:String) => Array[{key:String,value:String}] (key,value)
+==================================================================
+ */
+
 try {
     var db = require("./dynamicfiles/database")
 }catch(err){

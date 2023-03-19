@@ -43,7 +43,6 @@ module.exports = () => {
         }
         if (interaction.message.pinned && interaction.message.author.id == client.user.id){
             const claimdata = storage.get("claimData",interaction.channel.id)
-            console.log(claimdata)
             if (claimdata && claimdata != "false"){
                 interaction.message.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim]})
             }else{
@@ -67,7 +66,7 @@ module.exports = () => {
         })
 
         interaction.channel.send({embeds:[bot.embeds.commands.closeEmbed(interaction.user)],components:[bot.buttons.close.closeCommandRow]})
-        await require("../../../ticketActions/ticketCloser").NEWcloseTicket(interaction.member,interaction.channel,prefix,"close",false,true)
+        await require("../../../ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"close",false,true)
         closeTicketButtonChecker = false
     })
 }

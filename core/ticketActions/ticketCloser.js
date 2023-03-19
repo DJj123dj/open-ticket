@@ -18,7 +18,7 @@ const pendingDelete = []
  * @param {Boolean} nomessage
  * @param {String} reason only when closing, not when deleting!
  */
-exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => {
+exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
     const guild = channel.guild
     const user = member.user
     const chalk = await (await import("chalk")).default
@@ -69,6 +69,8 @@ exports.NEWcloseTicket = async (member,channel,prefix,mode,reason,nomessage) => 
         if (!isDatabaseError) storage.set("amountOfUserTickets",getuserID,Number(storage.get("amountOfUserTickets",getuserID)) - 1)
         storage.delete("userFromChannel",channel.id)
         storage.delete("claimData",channel.id)
+        storage.delete("autocloseTickets",channel.id)
+        if (Number(storage.get("amountOfUserTickets",getuserID)) < 0) storage.set("amountOfUserTickets",getuserID,0)
 
         //getID & send DM & send api event
         await channel.messages.fetchPinned().then(async msglist => {

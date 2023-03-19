@@ -53,13 +53,13 @@ module.exports = () => {
 
             if (interaction.isButton()){
                 try {
-                    if (config.system.answerInEphemeralOnOpen) interaction.deferReply({ephemeral:true})
+                    if (config.system.answerInEphemeralOnOpen) await interaction.deferReply({ephemeral:true})
                 } catch{}
             }else if (interaction.isChatInputCommand()){
-                interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
             }else if (interaction.isStringSelectMenu()){
                 try {
-                    interaction.deferUpdate()
+                   await interaction.deferUpdate()
                 } catch{}
             }
 
@@ -163,6 +163,7 @@ module.exports = () => {
                     
                 }).then((ticketChannel) => {
                     storage.set("userFromChannel",ticketChannel.id,interaction.member.id)
+                    if (currentTicketOptions.autoclose.enable) storage.set("autocloseTickets",ticketChannel.id,currentTicketOptions.autoclose.inactiveHours)
 
                     const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
                     
@@ -171,6 +172,11 @@ module.exports = () => {
                         .setColor(config.color)
                         .setTitle(currentTicketOptions.name)
                         //.setFooter({text:"Ticket Type: "+currentTicketOptions.id})
+                    if (currentTicketOptions.autoclose.enable){
+                        const footerText = l.commands.autocloseTitle.replace("{0}",currentTicketOptions.autoclose.inactiveHours+"h")
+                        ticketEmbed.setFooter({text:footerText})
+                    }
+
                     if (currentTicketOptions.ticketmessage.length > 0){
                         ticketEmbed.setDescription(currentTicketOptions.ticketmessage+hiddendata)
                     }else{
