@@ -41,11 +41,10 @@ module.exports = () => {
                 .setFooter({text:"claimed by: "+interaction.user.tag,iconURL:interaction.user.displayAvatarURL()})
                 .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
-            if (!firstmsg.components[0].components[1].disabled){
-                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
-
-            }else if (firstmsg.components[0].components[1].disabled){
+            if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
+            }else{
+                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
             }
 
             msg.channel.send({embeds:[bot.embeds.commands.claimEmbed(claimingUser,msg.author)]})
@@ -67,6 +66,7 @@ module.exports = () => {
         if (!interaction.guild) return
         if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
             permsChecker.sendUserNoPerms(interaction.user)
+            interaction.reply({content:":x: "+l.errors.noPermsTitle,ephemeral:true})
             return
         }
 
@@ -87,11 +87,10 @@ module.exports = () => {
                 .setFooter({text:"claimed by: "+user.tag,iconURL:user.displayAvatarURL()})
                 .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
-            if (!firstmsg.components[0].components[1].disabled){
-                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
-
-            }else if (firstmsg.components[0].components[1].disabled){
+            if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
+            }else{
+                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
             }
 
             interaction.editReply({embeds:[bot.embeds.commands.claimEmbed(user,interaction.user)]})

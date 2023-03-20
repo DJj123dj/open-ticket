@@ -10,6 +10,7 @@ const storage = bot.storage
 const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
 const mc = config.color
+const permsChecker = require("../../../utils/permisssionChecker")
 
 const button = discord.ButtonBuilder
 const arb = discord.ActionRowBuilder
@@ -22,8 +23,14 @@ module.exports = () => {
         if (interaction.customId != "OTclaimTicket") return
         
         try {
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         }catch{}
+
+        if (!interaction.guild) return
+        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+            permsChecker.sendUserNoPerms(interaction.user)
+            return
+        }
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             /**@type {discord.Message} */
@@ -40,11 +47,10 @@ module.exports = () => {
                 .setFooter({text:"claimed by: "+interaction.user.tag,iconURL:interaction.user.displayAvatarURL()})
                 .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
-            if (!firstmsg.components[0].components[1].disabled){
-                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
-
-            }else if (firstmsg.components[0].components[1].disabled){
+            if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
+            }else{
+                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
             }
         })
     })

@@ -64,12 +64,12 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
                 })
             })
 
-
+            const memberColor = msg.member ? msg.member.displayHexColor : "#ffffff"
             messagesArray.push({
                 author:{
                     name:msg.author.tag,
                     id:Number(msg.author.id),
-                    color:msg.member.displayHexColor || "#ffffff",
+                    color:memberColor,
                     pfp:msg.author.displayAvatarURL()
                 },
                 content:msg.content || "",

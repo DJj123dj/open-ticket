@@ -59,6 +59,7 @@ Translators
 |Russian       |Apexo#0723               |
 |Turkish       |Hydrâelčhâvø#1575        |
 |Polish        |MKevas#8311              |
+|Slovenian     |n1kkec#5341              |
 
 ## links
 current version: _v3.3.0_

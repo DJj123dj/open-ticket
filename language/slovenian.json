@@ -24,10 +24,17 @@
         "closeTitle": "Zaprl ta ticket!",
         "deleteTitle": "Brisanje ticketa...",
         "reopenTitle": "Ponovno odprl ta ticket!",
-        "claimTitle": "Ta ticket je zdaj claimana za {0}",
-        "unclaimTitle": "Ta ticket ni več zahtevan!",
-        "changeTitle": "Vrsta ticketa je spremenjena na {0}!",
+        
+        "claimTitle":"Ticket je claimal {0}",
+        "unclaimTitle":"Ticket ni več claiman!",
+        "changeTitle":"Changed ticket type to {0}!",
 
+        "statsTitle":"Statistike za {0}!",
+        "autocloseTitle":"Ticket so avtomatsko zapru po {0}!",
+        "autocloseRejectTitle":"Ticket se nebo avtomatsko zapru!",
+        "autocloseWarn":"To ima efekt samo na inactive ticketih!",
+
+        "goToTicket":"pojdi v ticket",
         "ticketWarning": "Opozorilo je v spodnjem sporočilu!",
         "maxTicketWarning": "**Opozorilo:** _Naenkrat lahko ustvarite le {0} ticketov!_"
     },
@@ -42,7 +49,12 @@
         "deleteCmd": "Izbriši ticket.",
         "addCmd": "Dodaj uporabnika v ticket.",
         "removeCmd": "Odstrani uporabnika z ticket-a.",
-        "reopenCmd": "Ponovno odprite ticket, ko je bila zaprta."
+        "reopenCmd": "Ponovno odprite ticket, ko je bila zaprta.",
+        "changeCmd":"Spremeni tip ticketa.",
+        "claimCmd":"Claimaj ticket.",
+        "unclaimCmd":"Unclaimaj ticket.",
+        "statCmds":"Statistike ticketa.",
+        "autocloseCmd":"Nastavi timer da avtomatsko zapre ticket"
     },
     "buttons":{
         "close":"Zapri Ticket",
@@ -51,9 +63,6 @@
         "closeWithReason":"Zapri z razlogom"
     },
     "messages":{
-        "reopenTitle": "Ponovno odprl ta ticket!",
-        "reopenDescription": "Feel free to talk again!",
-        "closedTitle": "Zaprli ta ticket!",
         "closedDescription": "V tem ticket-u lahko zdaj govorijo samo administratorji!\n\n*Kliknite na spodnji gumb za brisanje ali ponovno odprtje te ticket!*",
         "createdTitle": "Ticket ustvarjen!",
         "createdDescription": "Vaš ticket je ustvarjen, lahko jo odkrijete s pingom!",
@@ -71,9 +80,11 @@
 
         "none": "ni",
         "reason": "razlog",
-
+        "createdat":"ustvarjeno ob",
+        "openedby":"odprto od",
         "deletedby": "izbrisano s",
         "closedby": "zaprl",
+
         "modalreason": "Kakšen je razlog za zaprtje tega ticket?",
         "chooseATicket": "Izberi ticket"
     },
