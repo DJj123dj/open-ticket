@@ -48,6 +48,7 @@ module.exports = () => {
                 
                 }catch{
                     log("system","can't find autoclose channel with ID: "+t.key)
+                    storage.delete("autocloseTickets",t.key)
                 }
             })
         }catch{}
