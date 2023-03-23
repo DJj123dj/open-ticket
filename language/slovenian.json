@@ -1,0 +1,98 @@
+{
+    "errors":{
+        "missingArgsTitle":"Napačen argument!",
+        "missingArgsDescription":"Argument manka",
+        "noPermsTitle":"Nimas dovoljenja!",
+        "noPermsDescription":"Potrebuješ dovoljenje `ADMINISTRATOR` ali pa biti v listi dovoljenih role!",
+        "noPermsDelete":"Samo admini lahko izbrišejo ticket!",
+        "chooseFromListTitle":"Napačen ID",
+        "chooseFromListDescription":"Izberi eden izmed ID-jev:",
+        "boterror":"NAPAKA Bota!",
+        "notInTicketTitle":"Nisi v ticketu!",
+        "notInTicketDescription": "Ta ukaz ne deluje zunaj ticket-ov!",
+        "ticketDoesntExist": "Ta ticket ne obstaja več!",
+        "roleDoesntExist": "Ta vloga ne obstaja več!",
+        "anotherOption": "Ta možnost ni ticket, ampak druga vrsta!",
+        "maxAmountTitle": "Najvišji doseženi znesek!",
+        "maxAmountDescription": "Dosegli ste največje dovoljeno število ticket-ov!\nTako da ne morete ustvariti nove!",
+        "somethingWentWrong": "**Nekaj je šlo narobe!**\nProsimo, poskusite znova drugič!"
+    },
+    "commands":{
+        "userAddedTitle": "Dodan {0} v ta ticket!",
+        "userRemovedTitle": "Odstranjeo {0} iz tega ticket-!",
+        "renameTitle": "Spremenjeno ime na {0}!",
+        "closeTitle": "Zaprl ta ticket!",
+        "deleteTitle": "Brisanje ticketa...",
+        "reopenTitle": "Ponovno odprl ta ticket!",
+        
+        "claimTitle":"Ticket je claimal {0}",
+        "unclaimTitle":"Ticket ni več claiman!",
+        "changeTitle":"Changed ticket type to {0}!",
+
+        "statsTitle":"Statistike za {0}!",
+        "autocloseTitle":"Ticket so avtomatsko zapru po {0}!",
+        "autocloseRejectTitle":"Ticket se nebo avtomatsko zapru!",
+        "autocloseWarn":"To ima efekt samo na inactive ticketih!",
+
+        "goToTicket":"pojdi v ticket",
+        "ticketWarning": "Opozorilo je v spodnjem sporočilu!",
+        "maxTicketWarning": "**Opozorilo:** _Naenkrat lahko ustvarite le {0} ticketov!_"
+    },
+    "helpMenu":{
+        "title": "Razpoložljivi ukazi:",
+        "header1": "**Izberite {0} in ustvarite ticket!**\n\n",
+        "header2": "**Zaženi ukaz `/new` ali `/ticket` za ustvarjanje ticket-a!**\n\n",
+
+        "msgCmd": "Ustvari vstavek z gumbi. (samo za administratorje)",
+        "renameCmd": "Preimenujte ticket. (brez presledkov)",
+        "closeCmd": "Zapri ticket.",
+        "deleteCmd": "Izbriši ticket.",
+        "addCmd": "Dodaj uporabnika v ticket.",
+        "removeCmd": "Odstrani uporabnika z ticket-a.",
+        "reopenCmd": "Ponovno odprite ticket, ko je bila zaprta.",
+        "changeCmd":"Spremeni tip ticketa.",
+        "claimCmd":"Claimaj ticket.",
+        "unclaimCmd":"Unclaimaj ticket.",
+        "statCmds":"Statistike ticketa.",
+        "autocloseCmd":"Nastavi timer da avtomatsko zapre ticket"
+    },
+    "buttons":{
+        "close":"Zapri Ticket",
+        "delete":"Izbrisi Ticket",
+        "reopen":"Odpri Ticket",
+        "closeWithReason":"Zapri z razlogom"
+    },
+    "messages":{
+        "closedDescription": "V tem ticket-u lahko zdaj govorijo samo administratorji!\n\n*Kliknite na spodnji gumb za brisanje ali ponovno odprtje te ticket!*",
+        "createdTitle": "Ticket ustvarjen!",
+        "createdDescription": "Vaš ticket je ustvarjen, lahko jo odkrijete s pingom!",
+
+        "newTicketDmTitle": "Nov ticket!",
+        "closedTicketDmTitle": "Ticket zaprt!",
+        "deletedTicketDmTitle": "Izbrisan ticket!",
+        "closedTicketDmDescription": "Vaš ticket je zaprta!",
+        "deletedTicketDmDescription": "Vaš ticket je izbrisan!",
+        "reopenTicketDmTitle": "Ticket je ponovno odprt!",
+        "reopenTicketDmDescription": "Vaš ticket je ponovno odprt!",
+
+        "chooseCategory": "izberite kategorijo:",
+        "gettingdeleted": "Ticket se briše...",
+
+        "none": "ni",
+        "reason": "razlog",
+        "createdat":"ustvarjeno ob",
+        "openedby":"odprto od",
+        "deletedby": "izbrisano s",
+        "closedby": "zaprl",
+
+        "modalreason": "Kakšen je razlog za zaprtje tega ticket?",
+        "chooseATicket": "Izberi ticket"
+    },
+    "transcripts":{
+        "naslov": "Transkript",
+        "obdelano": "Ta prepis se obdeluje",
+        "wait": "Počakajte!",
+        "estimated": "Predvideni čas",
+        "available": "Prepis je na voljo tukaj"
+    }
+}

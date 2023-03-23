@@ -48,11 +48,10 @@ module.exports = () => {
                 newEmbed.setFooter(null)
             }
 
-            if (!firstmsg.components[0].components[1].disabled){
-                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal],embeds:[newEmbed]})
-
-            }else if (firstmsg.components[0].components[1].disabled){
+            if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabled],embeds:[newEmbed]})
+            }else{
+                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal],embeds:[newEmbed]})
             }
 
             msg.channel.send({embeds:[bot.embeds.commands.unclaimEmbed(msg.author)]})
@@ -73,6 +72,7 @@ module.exports = () => {
         if (!interaction.guild) return
         if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
             permsChecker.sendUserNoPerms(interaction.user)
+            interaction.reply({content:":x: "+l.errors.noPermsTitle,ephemeral:true})
             return
         }
 
@@ -104,11 +104,10 @@ module.exports = () => {
                 newEmbed.setFooter(null)
             }
 
-            if (!firstmsg.components[0].components[1].disabled){
-                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal],embeds:[newEmbed]})
-
-            }else if (firstmsg.components[0].components[1].disabled){
+            if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabled],embeds:[newEmbed]})
+            }else{
+                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormal],embeds:[newEmbed]})
             }
 
             interaction.editReply({embeds:[bot.embeds.commands.unclaimEmbed(interaction.user)]})

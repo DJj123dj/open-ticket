@@ -35,6 +35,15 @@ const reopenTicket = (guild,channel,user) => {
                 allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
                 deny:[]
             })
+        }else{
+            if (p.id != guild.roles.everyone){
+                permissionsArray.push({
+                    id:p.id,
+                    type:"role",
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
+                    deny:[]
+                })
+            }
         }
     })
 

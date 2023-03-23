@@ -24,7 +24,7 @@ exports.getDropdown = (ids,placeholder) => {
         .setMinValues(1)
         .setPlaceholder(placeholder || l.messages.chooseATicket)
         .addOptions(
-            new discord.StringSelectMenuBuilder()
+            new discord.StringSelectMenuOptionBuilder()
                 .setDefault(true)
                 .setLabel(placeholder || l.messages.chooseATicket)
                 .setValue("OTChooseTicket")

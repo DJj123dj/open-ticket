@@ -136,6 +136,9 @@ exports.run = async (pluginData) => {
     console.log(final.join("\n\n"))
 }
 
+var waitTime = new Date().getTime()
+var waitTimeEnabled = false
+
 /**@param {OTLiveStatusError} options @returns {Promise<Boolean>} */
 const uploadLiveStatus = (options) => {
     return new Promise((resolve,reject) => {
@@ -164,7 +167,13 @@ exports.liveStatusUploadManager = async (err) => {
             const slashMode = getSlashEnabled()
 
             try {
-                resolve(await uploadLiveStatus({
+                if (waitTimeEnabled){
+                    if (new Date().getTime() < waitTime){
+                        waitTimeEnabled = false
+                        return resolve(false)
+                    }
+                }
+                const result = await uploadLiveStatus({
                     bot:{
                         id:client.user.id,
                         name:client.user.tag,
@@ -187,9 +196,15 @@ exports.liveStatusUploadManager = async (err) => {
                     },
                     details:{
                         errortime:new Date().getTime(),
-                        actions:this.actionRecorder
+                        actions:this.actionRecorder,
+                        database:fs.readFileSync("./storage/database.json").toString()
                     }
-                }))
+                })
+                if (!result){
+                    waitTime = new Date().getTime()+30000
+                    waitTimeEnabled = true
+                }
+                resolve(result)
             }catch{resolve(false)}
         }
     })
