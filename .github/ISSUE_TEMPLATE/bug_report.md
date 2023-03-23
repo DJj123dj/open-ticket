@@ -1,9 +1,9 @@
 ---
 name: Bug report
-about: Create a report to help us improve Open Ticket
+about: Report bugs to help us improve open ticket!
 title: "[BUG] your bug"
 labels: bug
-assignees: ''
+assignees: DJj123dj
 
 ---
 

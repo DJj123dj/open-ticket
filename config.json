@@ -41,7 +41,7 @@
             "color":"gray",
             "adminroles":["role id"],
             "channelprefix":"question-",
-            "category":"category id",
+            "category":"category id (or leave empty)",
             "message":"You created a ticket!",
             "enableDmOnOpen":true,
             "ticketmessage":"The staff will help you soon!\n\n*Click on the button below to close the ticket!*",
