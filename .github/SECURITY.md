@@ -31,3 +31,11 @@ Don't just report the error and never reply again! It can be possible that we ne
 
 ## Contributing
 Visit [Contributing.md](/.github/CONTRIBUTING.md) for rules about translating & adding features!
+
+<br>
+SECURITY POLICY - Last updated: 23/3/2023<br>
+© DJdj Development<br><br>
+Website: https://www.dj-dj.be <br>
+Discord: https://discord.dj-dj.be <br>
+Email: support@dj-dj.be <br>
+Open Ticket website: https://openticket.dj-dj.be
