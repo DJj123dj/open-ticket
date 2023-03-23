@@ -1,9 +1,9 @@
 ---
 name: Plugin
-about: Show your open ticket plugins here!
+about: Show your plugin to the developers from open ticket!
 title: "[PLUGIN] your plugin"
 labels: plugin
-assignees: ''
+assignees: DJj123dj
 
 ---
 
