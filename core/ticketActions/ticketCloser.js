@@ -131,7 +131,8 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
                 permissionArray.push({
                     id:adminrole,
                     type:"role",
-                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
+                    deny:[]
                 })
             }catch{
                 log("system","invalid role! At 'config.json => main_adminroles:"+index)
@@ -182,8 +183,8 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
                         permissionArray.push({
                             id:adminrole,
                             type:"role",
-                            allow:[pfb.AddReactions,pfb.ViewChannel],
-                            deny:[pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages]
+                            allow:[pfb.AddReactions,pfb.ViewChannel,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages],
+                            deny:[]
                         })
                     }catch{
                         log("system","invalid role! At 'config.json => options/ticket/...:"+index)
