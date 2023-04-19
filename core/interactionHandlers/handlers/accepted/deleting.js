@@ -22,7 +22,7 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicketTrue") return
         
-        interaction.deferUpdate()
+        await interaction.deferUpdate()
 
         if (deleteTicketButtonChecker == true) return
         deleteTicketButtonChecker = true
@@ -62,7 +62,7 @@ module.exports = () => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicketTrue1") return
         
-        interaction.deferUpdate()
+        await interaction.deferUpdate()
 
         if (deleteTicketButtonChecker1 == true) return
         deleteTicketButtonChecker1 = true

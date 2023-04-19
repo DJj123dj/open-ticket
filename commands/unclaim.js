@@ -35,7 +35,7 @@ module.exports = () => {
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
             hiddendata.data.push({key:"claimedby",value:"false"})
-            storage.set("claimData",interaction.channel.id,"false")
+            storage.set("claimData",msg.channel.id,"false")
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
                 .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))

@@ -34,11 +34,11 @@ module.exports = () => {
             const hiddendata = hdraw.hiddenData
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            hiddendata.data.push({key:"claimedby",value:interaction.user.id})
-            storage.set("claimData",interaction.channel.id,interaction.user.id)
+            hiddendata.data.push({key:"claimedby",value:claimingUser.id})
+            storage.set("claimData",msg.channel.id,claimingUser.id)
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
-                .setFooter({text:"claimed by: "+interaction.user.tag,iconURL:interaction.user.displayAvatarURL()})
+                .setFooter({text:"claimed by: "+msg.author.tag,iconURL:msg.author.displayAvatarURL()})
                 .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
             if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
@@ -66,8 +66,7 @@ module.exports = () => {
         if (!interaction.guild) return
         if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
             permsChecker.sendUserNoPerms(interaction.user)
-            interaction.reply({content:":x: "+l.errors.noPermsTitle,ephemeral:true})
-            return
+            return interaction.reply({content:":x: "+l.errors.noPermsTitle,ephemeral:true})
         }
 
         await interaction.deferReply()
@@ -80,8 +79,8 @@ module.exports = () => {
             const hiddendata = hdraw.hiddenData
             const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            hiddendata.data.push({key:"claimedby",value:interaction.user.id})
-            storage.set("claimData",interaction.channel.id,interaction.user.id)
+            hiddendata.data.push({key:"claimedby",value:user.id})
+            storage.set("claimData",interaction.channel.id,user.id)
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
                 .setFooter({text:"claimed by: "+user.tag,iconURL:user.displayAvatarURL()})

@@ -10,13 +10,12 @@ const storage = bot.storage
 
 module.exports = () => {
     //dropdown placeholder
-    client.on("interactionCreate",(interaction) => {
+    client.on("interactionCreate",async (interaction) => {
         if (!interaction.isStringSelectMenu()) return
         if (interaction.customId != "OTdropdownMenu") return
         if (interaction.values.includes("OTChooseTicket")){
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         }
-
     })
 
 
@@ -37,7 +36,7 @@ module.exports = () => {
             if (interaction.customId.startsWith("OTnewT")){
                 const optionid = interaction.customId.split("OTnewT")[1]
                 if (!optionid){
-                    interaction.reply({embeds:[bot.errorLog.serverError(l.errors.ticketDoesntExist)]})
+                    await interaction.reply({embeds:[bot.errorLog.serverError(l.errors.ticketDoesntExist)]})
                     return
                 }
             }
@@ -53,7 +52,7 @@ module.exports = () => {
 
             if (interaction.isButton()){
                 try {
-                    if (config.system.answerInEphemeralOnOpen) await interaction.deferReply({ephemeral:true})
+                    await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpe})
                 } catch{}
             }else if (interaction.isChatInputCommand()){
                 await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
@@ -110,9 +109,7 @@ module.exports = () => {
                             type:"role",
                             allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
                         })
-                    }catch{
-                        log("system","invalid role! At 'config.json => main_adminroles:"+index)
-                    }
+                    }catch{}
                 })
 
                 //add ticket adminroles
@@ -131,9 +128,28 @@ module.exports = () => {
                                 type:"role",
                                 allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
                             })
-                        }catch{
-                            log("system","invalid role! At 'config.json => options/ticket/...:"+index)
-                        }
+                        }catch{}
+                    }
+                })
+
+                //add ticket adminroles
+                /**
+                 * @type {String[]}
+                 */
+                const readonlyTicketadmin = currentTicketOptions.readonlyAdminroles
+                readonlyTicketadmin.forEach((role,index) => {
+                    if (!config.adminRoles.includes(role) && !currentTicketOptions.adminroles.includes(role)){
+                        try {
+                            const adminrole = guild.roles.cache.find(r => r.id == role)
+                            if (!adminrole) return
+                        
+                            permissionsArray.push({
+                                id:adminrole,
+                                type:"role",
+                                allow:[pfb.AddReactions,pfb.ViewChannel],
+                                deny:[pfb.SendMessages,pfb.AttachFiles,pfb.EmbedLinks]
+                            })
+                        }catch{}
                     }
                 })
 
@@ -148,9 +164,7 @@ module.exports = () => {
                                 deny:[pfb.ViewChannel]
                             })
                         }
-                    }catch{
-                        log("system","invalid role! At 'config.json => system/memberRole")
-                    }
+                    }catch{}
                 }
 
                 //create the channel
@@ -166,7 +180,7 @@ module.exports = () => {
                     if (currentTicketOptions.autoclose.enable) storage.set("autocloseTickets",ticketChannel.id,currentTicketOptions.autoclose.inactiveHours)
 
                     const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
-                    
+
                     var ticketEmbed = new discord.EmbedBuilder()
                         //.setAuthor({name:interaction.user.id})
                         .setColor(config.color)
