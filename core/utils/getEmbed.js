@@ -40,11 +40,25 @@ exports.createEmbed = (id) => {
     //create the embed
     const embed = new discord.EmbedBuilder()
         .setTitle(data.name)
-    if (data.enableFooter) embed.setFooter({text:data.footer})
+    
+    try {
+        const footerimg = (data.enableFooter && data.enableFooterImage) ? data.footerImage : undefined
+        if (data.enableFooter) embed.setFooter({text:data.footer,iconURL:footerimg})
+    }catch{
+        bot.errorLog.log("info","FOOTER FAILED TO LOAD, probably invalid url!")
+    }
 
     try {
         if (data.enableThumbnail) embed.setThumbnail(data.thumbnail)
-    }catch{bot.errorLog.log("info","THUMBNAIL FAILED TO LOAD, probably invalid url!")}
+    }catch{
+        bot.errorLog.log("info","THUMBNAIL FAILED TO LOAD, probably invalid url!")
+    }
+
+    try {
+        if (data.enableImage) embed.setImage(data.image)
+    }catch{
+        bot.errorLog.log("info","IMAGE FAILED TO LOAD, probably invalid url!")
+    }
 
     if (data.enableCustomColor){
         embed.setColor(data.color)

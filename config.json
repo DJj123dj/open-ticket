@@ -40,6 +40,7 @@
 
             "color":"gray",
             "adminroles":["role id"],
+            "readonlyAdminroles":["role id"],
             "channelprefix":"question-",
             "category":"category id (or leave empty)",
             "message":"You created a ticket!",
@@ -101,10 +102,16 @@
             "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v3.3.1 - I'm a footer!",
+            "footer":"Open Ticket v3.3.2 - I'm a footer!",
+
+            "enableFooterImage":false,
+            "footerImage":"https://www.example.com/catmemes/cat.png",
 
             "enableThumbnail":false,
             "thumbnail":"https://www.example.com/catmemes/cat.png",
+
+            "enableImage":false,
+            "image":"https://www.example.com/catmemes/cat.png",
 
             "enableCustomColor":false,
             "color":"#ffffff",

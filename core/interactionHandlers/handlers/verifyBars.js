@@ -16,22 +16,22 @@ const bs = discord.ButtonStyle
 
 module.exports = () => {
     //CLOSE
-    client.on("interactionCreate",interaction => {
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTcloseTicket") return
         
         try {
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         } catch{}
         interaction.message.edit({components:[bot.buttons.verifybars.closeVerifyBar]})
         
     })
-    client.on("interactionCreate",interaction => {
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTcloseTicketFalse") return
         
         try {
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         } catch{}
 
         if (interaction.message.pinned && interaction.message.author.id == client.user.id){
@@ -47,22 +47,22 @@ module.exports = () => {
     })
 
     //DELETE
-    client.on("interactionCreate",interaction => {
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicket") return
         
         try {
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         } catch{}
         interaction.message.edit({components:[bot.buttons.verifybars.deleteVerifyBar]})
         
     })
-    client.on("interactionCreate",interaction => {
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicketFalse") return
         
         try {
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         } catch{}
         
         if (interaction.message.pinned && interaction.message.author.id == client.user.id){
@@ -78,22 +78,22 @@ module.exports = () => {
     })
 
     //DELETE NO TRANSCRIPT
-    client.on("interactionCreate",interaction => {
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicket1") return
         
         try {
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         } catch{}
         interaction.message.edit({components:[bot.buttons.verifybars.delete1VerifyBar]})
         
     })
-    client.on("interactionCreate",interaction => {
+    client.on("interactionCreate",async interaction => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTdeleteTicketFalse1") return
         
         try {
-            interaction.deferUpdate()
+            await interaction.deferUpdate()
         } catch{}
         interaction.message.edit({components:[bot.buttons.close.closeCommandRow]})
     })

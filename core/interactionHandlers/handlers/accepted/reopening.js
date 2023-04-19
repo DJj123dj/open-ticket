@@ -17,11 +17,11 @@ const bs = discord.ButtonStyle
 
 module.exports = () => {
     //REOPEN
-    client.on("interactionCreate",(interaction) => {
+    client.on("interactionCreate",async (interaction) => {
         if (!interaction.isButton()) return
         if (interaction.customId != "OTreopenTicket") return
 
-        interaction.deferUpdate()
+        await interaction.deferUpdate()
         interaction.message.edit({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
         require("../../../ticketActions/ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
     })

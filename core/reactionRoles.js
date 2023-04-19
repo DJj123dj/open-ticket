@@ -11,7 +11,7 @@ const APIEvents = require("./api/modules/events")
 module.exports = async () => {
     const chalk = await (await import("chalk")).default
     
-    client.on("interactionCreate",(interaction) => {
+    client.on("interactionCreate",async (interaction) => {
         if (!interaction.isButton() && !interaction.isStringSelectMenu()) return
         if (interaction.isButton() && !interaction.customId.startsWith("newR")) return
         if (interaction.isStringSelectMenu() && !(interaction.customId == "OTdropdownMenu")) return
@@ -32,7 +32,7 @@ module.exports = async () => {
             return
         }else{
             try {
-                interaction.deferUpdate()
+                await interaction.deferUpdate()
             } catch{}
         }
 

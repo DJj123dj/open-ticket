@@ -52,6 +52,8 @@ module.exports = () => {
             }else{
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
             }
+
+            interaction.channel.send({embeds:[bot.embeds.commands.claimEmbed(interaction.user,interaction.user)]})
         })
     })
 }
