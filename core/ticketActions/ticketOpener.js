@@ -47,12 +47,11 @@ module.exports = () => {
 
             //ticketoptions from config
             const currentTicketOptions = configParser.getTicketById(customId)
-
             if (currentTicketOptions == false) return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
 
             if (interaction.isButton()){
                 try {
-                    await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpe})
+                    await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
                 } catch{}
             }else if (interaction.isChatInputCommand()){
                 await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})

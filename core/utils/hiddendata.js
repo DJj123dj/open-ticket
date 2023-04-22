@@ -9,8 +9,8 @@
 
 exports.readHiddenData = (messageContent) => {
     //ticketdata//type:123|userid:456)
-    if (!messageContent.includes("[ ](OTDATA|")) return {type:"",data:[],status:false}
-    const rawhidden = messageContent.split("[ ](OTDATA|")[1]
+    if (!messageContent.includes("[ ](https://OTDATA|")) return {type:"",data:[],status:false}
+    const rawhidden = messageContent.split("[ ](https://OTDATA|")[1]
     const rawhidden2 = rawhidden.split("//")
 
     const datatype = rawhidden2[0]
@@ -47,7 +47,7 @@ exports.writeHiddenData = (type,data) => {
 
     const datastring = dataValues.join("|")
 
-    const result = "[ ](OTDATA|"+type+"//"+datastring+")"
+    const result = "[ ](https://OTDATA|"+type+"//"+datastring+")"
 
     return result
 }
@@ -58,10 +58,10 @@ exports.writeHiddenData = (type,data) => {
  * @returns {{description:String,hiddenData:hiddenData}}
  */
 exports.removeHiddenData = (description) => {
-    if (!description.includes("[ ](OTDATA|")) return {description:description,hiddenData:[]}
+    if (!description.includes("[ ](https://OTDATA|")) return {description:description,hiddenData:[]}
 
     const hiddenData = this.readHiddenData(description)
-    const splitted = description.split("[ ](OTDATA")
+    const splitted = description.split("[ ](https://OTDATA")
     const original = splitted[0]
 
     return {description:original,hiddenData:hiddenData}
