@@ -24,33 +24,28 @@ module.exports = () => {
         }
         const reason = tempreason
 
-        msg.channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
+        if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            if (hiddendata.data.find(h => h.key == "pendingdelete")) return msg.channel.send({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
+        if (hiddendata.find(h => h.key == "pendingdelete")) return msg.channel.send({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
 
-            const descriptionReason = reason ? "**"+l.messages.reason+":** "+reason : false
-            msg.channel.send({embeds:[bot.embeds.commands.closeEmbed(msg.author,descriptionReason)],components:[bot.buttons.close.closeCommandRow]})
+        const descriptionReason = reason ? "**"+l.messages.reason+":** "+reason : false
+        msg.channel.send({embeds:[bot.embeds.commands.closeEmbed(msg.author,descriptionReason)],components:[bot.buttons.close.closeCommandRow]})
 
-            var name = msg.channel.name
-            var prefix = ""
-            const tickets = config.options
-            tickets.forEach((ticket) => {
-                if (name.startsWith(ticket.channelprefix)){
-                    prefix = ticket.channelprefix
-                }
-            })
-
-            require("../core/ticketActions/ticketCloser").closeManager(msg.member,msg.channel,prefix,"close",reason,true)
-
-            log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
-            APIEvents.onCommand("close",true,msg.author,msg.channel,msg.guild,new Date())
-            
+        var name = msg.channel.name
+        var prefix = ""
+        const tickets = config.options
+        tickets.forEach((ticket) => {
+            if (name.startsWith(ticket.channelprefix)){
+                prefix = ticket.channelprefix
+            }
         })
-        
+
+        require("../core/ticketActions/ticketCloser").closeManager(msg.member,msg.channel,prefix,"close",reason,true)
+
+        log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
+        APIEvents.onCommand("close",true,msg.author,msg.channel,msg.guild,new Date())
         
     })
 
@@ -64,31 +59,27 @@ module.exports = () => {
 
         await interaction.deferReply()
 
-       interaction.channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            if (hiddendata.data.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
+        if (hiddendata.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
 
-            const descriptionReason = reason ? "**"+l.messages.reason+":** "+reason : false
-            interaction.editReply({embeds:[bot.embeds.commands.closeEmbed(interaction.user,descriptionReason)],components:[bot.buttons.close.closeCommandRow]})
+        const descriptionReason = reason ? "**"+l.messages.reason+":** "+reason : false
+        interaction.editReply({embeds:[bot.embeds.commands.closeEmbed(interaction.user,descriptionReason)],components:[bot.buttons.close.closeCommandRow]})
 
-            var name = interaction.channel.name
-            var prefix = ""
-            const tickets = config.options
-            tickets.forEach((ticket) => {
-                if (name.startsWith(ticket.channelprefix)){
-                    prefix = ticket.channelprefix
-                }
-            })
-
-            require("../core/ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"close",false,true)
-
-            log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
-            APIEvents.onCommand("close",true,interaction.user,interaction.channel,interaction.guild,new Date())
-            
+        var name = interaction.channel.name
+        var prefix = ""
+        const tickets = config.options
+        tickets.forEach((ticket) => {
+            if (name.startsWith(ticket.channelprefix)){
+                prefix = ticket.channelprefix
+            }
         })
+
+        require("../core/ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"close",false,true)
+
+        log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
+        APIEvents.onCommand("close",true,interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

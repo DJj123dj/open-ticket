@@ -73,26 +73,16 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
         if (Number(storage.get("amountOfUserTickets",getuserID)) < 0) storage.set("amountOfUserTickets",getuserID,0)
 
         //getID & send DM & send api event
-        await channel.messages.fetchPinned().then(async msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value.value
-            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
-            require("../api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
+        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
+        if (hiddendata.length < 1) return channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
-            const id = hiddendata.data.find(d => d.key == "openerid").value
+        require("../api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
-            const sphd = bot.hiddenData.removeHiddenData(firstmsg.embeds[0].description)
-            sphd.hiddenData.data.push({key:"pendingdelete",value:"true"})
-            const newEmbed = new discord.EmbedBuilder(firstmsg.embeds[0].data)
-            newEmbed.setDescription(sphd.description + bot.hiddenData.writeHiddenData(sphd.hiddenData.type,sphd.hiddenData.data))
-            await firstmsg.edit({embeds:[newEmbed]})
-
-            if (!id) return false
-
-        })
+        hiddendata.push({key:"pendingdelete",value:"true"})
+        bot.hiddenData.writeHiddenData(channel.id,hiddendata)
 
     }else if (mode == "close"){
         //close
@@ -143,54 +133,39 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
         const ticketInfoError = bot.errorLog.serverError("Unable to detect ticket information.\n*(First message that this bot sends)*\n\n__**Possible reasons:**__\n- you unpinned the first message\n- the first message is deleted\n- it has been unpinned & repinned after another message has been pinned.\n\n__**Possible solutions:**__\n- unpin all messages in this channel & repin the first message that this bot sent.\nIf this doesn't work, just delete the ticket manually!")
 
         //add ticket adminroles
-        await channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                var firstmsg = msglist.find((m => m.author.id == client.user.id))
-                if (firstmsg == undefined || firstmsg.author.id != client.user.id){
-                    return channel.send({embeds:[ticketInfoError]})
-                }
+
+        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
+        if (hiddendata.length < 1) return channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
+
+        if (!ticketData) return
+        if (ticketData.closedCategory.enable){
+            /**@type {discord.CategoryChannel} */
+            const category = guild.channels.cache.find(c => c.id == ticketData.closedCategory.id && c.type == discord.ChannelType.GuildCategory)
+            try {
+                channel.setParent(category)
+            }catch{
+                bot.errorLog.log("system","failed to move channel to new category!")
             }
-            
-            if (firstmsg.embeds.length < 1 || !firstmsg.embeds[0].description.includes("OTDATA")) return channel.send({embeds:[ticketInfoError]})
+        }
 
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
-            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
-
-            if (!ticketData) return
-
-            if (ticketData.closedCategory.enable){
-                /**@type {discord.CategoryChannel} */
-                const category = guild.channels.cache.find(c => c.id == ticketData.closedCategory.id && c.type == discord.ChannelType.GuildCategory)
+        ticketData.adminroles.forEach((role,index) => {
+            if (!config.adminRoles.includes(role)){
                 try {
-                    channel.setParent(category)
+                    const adminrole = guild.roles.cache.find(r => r.id == role)
+                    if (!adminrole) return
+                
+                    permissionArray.push({
+                        id:adminrole,
+                        type:"role",
+                        allow:[pfb.AddReactions,pfb.ViewChannel,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages],
+                        deny:[]
+                    })
                 }catch{
-                    bot.errorLog.log("system","failed to move channel to new category!")
+                    log("system","invalid role! At 'config.json => options/ticket/...:"+index)
                 }
             }
-
-            /**
-             * @type {String[]}
-             */
-            const ticketadmin = ticketData.adminroles
-            ticketadmin.forEach((role,index) => {
-                if (!config.adminRoles.includes(role)){
-                    try {
-                        const adminrole = guild.roles.cache.find(r => r.id == role)
-                        if (!adminrole) return
-                    
-                        permissionArray.push({
-                            id:adminrole,
-                            type:"role",
-                            allow:[pfb.AddReactions,pfb.ViewChannel,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages],
-                            deny:[]
-                        })
-                    }catch{
-                        log("system","invalid role! At 'config.json => options/ticket/...:"+index)
-                    }
-                }
-            })
         })
 
         channel.permissionOverwrites.set(permissionArray)
@@ -207,23 +182,8 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
         log("system","closed a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
         
 
-        //getID & send DM & send api event
-        await channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
-            const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
-
-            require("../api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData},newReason)
-
-            const id = hiddendata.data.find(d => d.key == "openerid").value
-
-            if (!id) return false
-
-        })
-
-
+        //send api event
+        require("../api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData},newReason)
     }
 
     /**
@@ -263,6 +223,9 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
     const deleteHandler = async () => {
         if (deleteRequired){
             pendingDelete.shift()
+            //delete HIDDENDATA
+            storage.delete("HIDDENDATA",channel.id)
+
             await channel.delete()
         }
     }

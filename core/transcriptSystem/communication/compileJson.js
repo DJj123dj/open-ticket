@@ -46,13 +46,9 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
             })
 
             msg.embeds.forEach((embed) => {
-                if (embed.description){
-                    var desc = bot.hiddenData.removeHiddenData(embed.description).description
-                }else{var desc = false}
-
                 embedArray.push({
                     title:embed.title || false,
-                    description:desc,
+                    description:embed.description ? embed.description : false,
                     authorimg:((embed.author && embed.author.iconURL) ? embed.author.iconURL : false),
                     authortext:(embed.author ? embed.author.name : false),
                     footerimg:((embed.footer && embed.footer.iconURL) ? embed.footer.iconURL : false),

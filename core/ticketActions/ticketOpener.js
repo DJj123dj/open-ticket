@@ -132,25 +132,23 @@ module.exports = () => {
                 })
 
                 //add ticket adminroles
-                /**
-                 * @type {String[]}
-                 */
-                const readonlyTicketadmin = currentTicketOptions.readonlyAdminroles
-                readonlyTicketadmin.forEach((role,index) => {
-                    if (!config.adminRoles.includes(role) && !currentTicketOptions.adminroles.includes(role)){
-                        try {
-                            const adminrole = guild.roles.cache.find(r => r.id == role)
-                            if (!adminrole) return
-                        
-                            permissionsArray.push({
-                                id:adminrole,
-                                type:"role",
-                                allow:[pfb.AddReactions,pfb.ViewChannel],
-                                deny:[pfb.SendMessages,pfb.AttachFiles,pfb.EmbedLinks]
-                            })
-                        }catch{}
-                    }
-                })
+                if (currentTicketOptions.readonlyAdminroles){
+                    currentTicketOptions.readonlyAdminroles.forEach((role,index) => {
+                        if (!config.adminRoles.includes(role) && !currentTicketOptions.adminroles.includes(role)){
+                            try {
+                                const adminrole = guild.roles.cache.find(r => r.id == role)
+                                if (!adminrole) return
+                            
+                                permissionsArray.push({
+                                    id:adminrole,
+                                    type:"role",
+                                    allow:[pfb.AddReactions,pfb.ViewChannel],
+                                    deny:[pfb.SendMessages,pfb.AttachFiles,pfb.EmbedLinks]
+                                })
+                            }catch{}
+                        }
+                    })
+                }
 
                 //add member role
                 if (config.system.memberRole && ![" ","0","false","null","undefined"].includes(config.system.memberRole)){
@@ -178,7 +176,7 @@ module.exports = () => {
                     storage.set("userFromChannel",ticketChannel.id,interaction.member.id)
                     if (currentTicketOptions.autoclose.enable) storage.set("autocloseTickets",ticketChannel.id,currentTicketOptions.autoclose.inactiveHours)
 
-                    const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
+                    bot.hiddenData.writeHiddenData(ticketChannel.id,[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
 
                     var ticketEmbed = new discord.EmbedBuilder()
                         //.setAuthor({name:interaction.user.id})
@@ -191,9 +189,7 @@ module.exports = () => {
                     }
 
                     if (currentTicketOptions.ticketmessage.length > 0){
-                        ticketEmbed.setDescription(currentTicketOptions.ticketmessage+hiddendata)
-                    }else{
-                        ticketEmbed.setDescription(hiddendata)
+                        ticketEmbed.setDescription(currentTicketOptions.ticketmessage)
                     }
 
                     if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)

@@ -26,36 +26,31 @@ module.exports = () => {
             return
         }
 
-        msg.channel.messages.fetchPinned().then(msglist => {
-            /**@type {discord.Message} */
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-            const hdraw = bot.hiddenData.removeHiddenData(firstmsg.embeds[0].description)
-            const hiddendata = hdraw.hiddenData
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
+        if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            hiddendata.data.push({key:"claimedby",value:claimingUser.id})
-            storage.set("claimData",msg.channel.id,claimingUser.id)
-            
-            const newEmbed = new embed(firstmsg.embeds[0].data)
-                .setFooter({text:"claimed by: "+msg.author.tag,iconURL:msg.author.displayAvatarURL()})
-                .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
+        hiddendata.push({key:"claimedby",value:claimingUser.id})
+        bot.hiddenData.writeHiddenData(msg.channel.id,hiddendata)
+        storage.set("claimData",msg.channel.id,claimingUser.id)
+        
+        const newEmbed = new embed(firstmsg.embeds[0].data)
+            .setFooter({text:"claimed by: "+msg.author.tag,iconURL:msg.author.displayAvatarURL()})
 
-            if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
-                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
-            }else{
-                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
-            }
+        if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
+            firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
+        }else{
+            firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
+        }
 
-            msg.channel.send({embeds:[bot.embeds.commands.claimEmbed(claimingUser,msg.author)]})
+        msg.channel.send({embeds:[bot.embeds.commands.claimEmbed(claimingUser,msg.author)]})
 
-            log("command","someone used the 'claim' command",[{key:"user",value:msg.author.tag}])
-            log("system","user claimed to ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"claimed_user",value:claimingUser.tag}])
+        log("command","someone used the 'claim' command",[{key:"user",value:msg.author.tag}])
+        log("system","user claimed to ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"claimed_user",value:claimingUser.tag}])
 
-            const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
-            APIEvents.onTicketClaim(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
-            APIEvents.onCommand("claim",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
-        }) 
+        const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
+        APIEvents.onTicketClaim(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
+        APIEvents.onCommand("claim",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
     })
 
     if (!DISABLE.commands.slash.claim) client.on("interactionCreate",async (interaction) => {
@@ -71,35 +66,35 @@ module.exports = () => {
 
         await interaction.deferReply()
 
-        interaction.channel.messages.fetchPinned().then(msglist => {
-            /**@type {discord.Message} */
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-            const hdraw = bot.hiddenData.removeHiddenData(firstmsg.embeds[0].description)
-            const hiddendata = hdraw.hiddenData
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            hiddendata.data.push({key:"claimedby",value:user.id})
-            storage.set("claimData",interaction.channel.id,user.id)
+        hiddendata.push({key:"claimedby",value:user.id})
+        bot.hiddenData.writeHiddenData(interaction.channel.id,hiddendata)
+        storage.set("claimData",interaction.channel.id,user.id)
+        
+        interaction.channel.messages.fetchPinned().then(msglist => {
+            var firstmsg = msglist.last()
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
                 .setFooter({text:"claimed by: "+user.tag,iconURL:user.displayAvatarURL()})
-                .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
             if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
             }else{
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
             }
-
-            interaction.editReply({embeds:[bot.embeds.commands.claimEmbed(user,interaction.user)]})
-
-            log("command","someone used the 'claim' command",[{key:"user",value:interaction.user.tag}])
-            log("system","user claimed to ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"claimed_user",value:user.tag}])
-
-            const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
-            APIEvents.onTicketClaim(interaction.user,user,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
-            APIEvents.onCommand("claim",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         })
+
+        interaction.editReply({embeds:[bot.embeds.commands.claimEmbed(user,interaction.user)]})
+
+        log("command","someone used the 'claim' command",[{key:"user",value:interaction.user.tag}])
+        log("system","user claimed to ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"claimed_user",value:user.tag}])
+
+        const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
+        APIEvents.onTicketClaim(interaction.user,user,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
+        APIEvents.onCommand("claim",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

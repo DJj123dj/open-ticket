@@ -36,7 +36,7 @@
 
         "goToTicket":"Geh zu deinem Ticket",
         "ticketWarning":"Die Einbettung befindet sich in der Nachricht unten!",
-        "maxTicketWarning":"**Warnung:** _Sie können nur {0} ticket(s) erstellen zu einer Zeit!_"
+        "maxTicketWarning":"**Warnung:** _Es können maximal {0} Tickets zur gleichen Zeit geöffnet sein!_"
     },
     "helpMenu":{
         "title":"Hilfe Menu:",

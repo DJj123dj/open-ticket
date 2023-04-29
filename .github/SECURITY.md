@@ -10,7 +10,7 @@ Support for Open Ticket is only available for the versions specified below!
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 3.3.3   | :white_check_mark: |
+| 3.4.0   | :white_check_mark: |
 | 3.3.0   | 🟧                |
 | 3.2.2   | 🟧 |
 | < 3.2.2   | :x:                |

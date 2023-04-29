@@ -1,68 +1,49 @@
+const storage = require("../../index").storage
 
-/**@typedef {{type:String,data:[{key:String,value:String}],status:Boolean}} hiddenData */
+/**@typedef {[{key:String,value:String}]} hiddenData */
 
 /**
  * 
- * @param {String} messageContent 
+ * @param {String} channelid 
  * @returns {hiddenData}
  */
 
-exports.readHiddenData = (messageContent) => {
-    //ticketdata//type:123|userid:456)
-    if (!messageContent.includes("[ ](https://OTDATA|")) return {type:"",data:[],status:false}
-    const rawhidden = messageContent.split("[ ](https://OTDATA|")[1]
-    const rawhidden2 = rawhidden.split("//")
+exports.readHiddenData = (channelid) => {
+    const content = storage.get("HIDDENDATA",channelid)
+    if (!content) return {type:"",data:[],status:false}
 
-    const datatype = rawhidden2[0]
-    var rawhiddendata = rawhidden2[1]
-    var rawhiddendataArray = rawhiddendata.split("")
-    rawhiddendataArray.pop()
-
-    rawhiddendata = rawhiddendataArray.join("")
-
-    const splittedData = rawhiddendata.split("|")
-
-    const resultData = []
-    splittedData.forEach((data) => {
-        //   type:123
-        const dataresult = data.split(":")
-
-        resultData.push({key:dataresult[0],value:dataresult[1]})
-    })
-
-    return {type:datatype,data:resultData,status:true}
+    try {
+        return JSON.parse(content)
+    } catch {
+        return []
+    }
 }
 
 /**
  * 
- * @param {String} type 
+ * @param {String} channelid 
  * @param {[{key:String,value:String}]} data 
- * @returns {String}
+ * @returns {Boolean}
  */
-exports.writeHiddenData = (type,data) => {
-    const dataValues = []
-    data.forEach((d) => {
-        dataValues.push(d.key+":"+d.value)
-    })
-
-    const datastring = dataValues.join("|")
-
-    const result = "[ ](https://OTDATA|"+type+"//"+datastring+")"
-
-    return result
+exports.writeHiddenData = (channelid,data) => {
+    try {
+        storage.set("HIDDENDATA",channelid,JSON.stringify(data))
+        return true
+    } catch {
+        return false
+    }
 }
 
 /**
  * 
- * @param {String} description
- * @returns {{description:String,hiddenData:hiddenData}}
+ * @param {String} channelid
+ * @returns {Boolean}
  */
-exports.removeHiddenData = (description) => {
-    if (!description.includes("[ ](https://OTDATA|")) return {description:description,hiddenData:[]}
-
-    const hiddenData = this.readHiddenData(description)
-    const splitted = description.split("[ ](https://OTDATA")
-    const original = splitted[0]
-
-    return {description:original,hiddenData:hiddenData}
+exports.deleteHiddenData = (channelid) => {
+    try {
+        storage.delete("HIDDENDATA",channelid)
+        return true
+    } catch {
+        return false
+    }
 }

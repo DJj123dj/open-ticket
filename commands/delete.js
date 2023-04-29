@@ -21,29 +21,25 @@ module.exports = () => {
             return
         }
 
-        msg.channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
+        if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            msg.channel.send({embeds:[bot.embeds.commands.deleteEmbed(msg.author)]})
+        msg.channel.send({embeds:[bot.embeds.commands.deleteEmbed(msg.author)]})
 
-            var name = msg.channel.name
-            var prefix = ""
-            const tickets = config.options
-            tickets.forEach((ticket) => {
-                if (name.startsWith(ticket.channelprefix)){
-                    prefix = ticket.channelprefix
-                }
-            })
-
-            require("../core/ticketActions/ticketCloser").closeManager(msg.member,msg.channel,prefix,"delete",false,true)
-
-            log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
-            APIEvents.onCommand("delete",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
+        var name = msg.channel.name
+        var prefix = ""
+        const tickets = config.options
+        tickets.forEach((ticket) => {
+            if (name.startsWith(ticket.channelprefix)){
+                prefix = ticket.channelprefix
+            }
         })
-        
+
+        require("../core/ticketActions/ticketCloser").closeManager(msg.member,msg.channel,prefix,"delete",false,true)
+
+        log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
+        APIEvents.onCommand("delete",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         
     })
 
@@ -59,28 +55,24 @@ module.exports = () => {
 
         await interaction.deferReply()
 
-        interaction.channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            interaction.editReply({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
+        interaction.editReply({embeds:[bot.embeds.commands.deleteEmbed(interaction.user)]})
 
-            var name = interaction.channel.name
-            var prefix = ""
-            const tickets = config.options
-            tickets.forEach((ticket) => {
-                if (name.startsWith(ticket.channelprefix)){
-                    prefix = ticket.channelprefix
-                }
-            })
-
-            require("../core/ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"delete",false,true)
-
-            log("command","someone used the 'delete' command",[{key:"user",value:interaction.user.tag}])
-            APIEvents.onCommand("delete",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
-            
+        var name = interaction.channel.name
+        var prefix = ""
+        const tickets = config.options
+        tickets.forEach((ticket) => {
+            if (name.startsWith(ticket.channelprefix)){
+                prefix = ticket.channelprefix
+            }
         })
+
+        require("../core/ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"delete",false,true)
+
+        log("command","someone used the 'delete' command",[{key:"user",value:interaction.user.tag}])
+        APIEvents.onCommand("delete",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

@@ -36,16 +36,14 @@ module.exports = async (messages,guild,channel,user,reason) => {
     const chName = channel.name
     const chId = channel.id
     
-    /**@param {discord.Collection<string, discord.Message<true>>} msglist*/
-    const asyncmanager = async (msglist) => {
-        var firstmsg = msglist.last()
+    const asyncmanager = async () => {
+        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
+        if (hiddendata.length < 1) return
+        const ticketId = hiddendata.find(d => d.key == "type").value
+        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
-        if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-        const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-        const ticketId = hiddendata.data.find(d => d.key == "type")
-
-        const id = hiddendata.data.find(d => d.key == "openerid").value
-        const opentime = new Date(Number(hiddendata.data.find(d => d.key == "createdms").value))
+        const id = hiddendata.find(d => d.key == "openerid").value
+        const opentime = new Date(Number(hiddendata.find(d => d.key == "createdms").value))
 
         const ticketopener = client.users.cache.find(u => u.id == id)
         
@@ -148,5 +146,5 @@ module.exports = async (messages,guild,channel,user,reason) => {
             }
         }
     }
-    asyncmanager(msglist)
+    asyncmanager()
 }
