@@ -29,12 +29,12 @@
         "unclaimTitle":"Этот тикет никем не взят!",
         "changeTitle":"Изменён тип тикета на {0}!",
 
-        "statsTitle":"Here are the stats for {0}!",
-        "autocloseTitle":"This ticket will be closed automatically after {0}!",
-        "autocloseRejectTitle":"This ticket will no longer be closed automatically!",
-        "autocloseWarn":"This only affects inactive tickets!",
+        "statsTitle":"Здесь статистика для {0}!",
+        "autocloseTitle":"Этот тикет будет закрыт автоматически после {0}!",
+        "autocloseRejectTitle":"Этот тикет больше не будет закрыт автоматически!",
+        "autocloseWarn":"Это касается только неактивных тикетов!",
 
-        "goToTicket":"go to ticket",
+        "goToTicket":"перейти в тикет",
         "ticketWarning":"embed ниже сообщения!",
         "maxTicketWarning":"**Предупреждение:** _Вы можете создать только {0} тикет(а/ов) в этот раз!_"
     },
@@ -50,11 +50,11 @@
         "addCmd":"Добавить пользователя в тикет.",
         "removeCmd":"Удалить пользователя из тикета.",
         "reopenCmd":"Открыть заново тикет после того, как он был закрыт.",
-        "changeCmd":"Change ticket type.",
-        "claimCmd":"Claim a ticket.",
-        "unclaimCmd":"Unclaim a ticket.",
-        "statsCmd":"View ticket stats.",
-        "autocloseCmd":"Set timer to automatically close ticket"
+        "changeCmd":"Поменять тип тикета.",
+        "claimCmd":"Взять тикет.",
+        "unclaimCmd":"Снять тикет.",
+        "statsCmd":"Посмотреть статистику тикета.",
+        "autocloseCmd":"Установить таймер, чтобы автоматически закрыть тикет"
     },
     "buttons":{
         "close":"Закрыть тикет",
@@ -80,8 +80,8 @@
 
         "none":"отсутствует",
         "reason":"причина",
-        "createdat":"created at",
-        "openedby":"opened by",
+        "createdat":"создан",
+        "openedby":"открыт",
         "deletedby":"удалён",
         "closedby":"закрыт",
         
@@ -90,7 +90,7 @@
     },
     "transcripts":{
         "title":"Транскрипт",
-        "processed":"This transcript is being processed",
+        "processed":"Этот транскрипт находится в процессе обработки",
         "wait":"Пожайлуста подождите!",
         "estimated":"Оценочное время",
         "available":"Транскрипт здесь доступен"
