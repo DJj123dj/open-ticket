@@ -136,21 +136,23 @@ module.exports = () => {
                  * @type {String[]}
                  */
                 const readonlyTicketadmin = currentTicketOptions.readonlyAdminroles
-                readonlyTicketadmin.forEach((role,index) => {
-                    if (!config.adminRoles.includes(role) && !currentTicketOptions.adminroles.includes(role)){
-                        try {
-                            const adminrole = guild.roles.cache.find(r => r.id == role)
-                            if (!adminrole) return
-                        
-                            permissionsArray.push({
-                                id:adminrole,
-                                type:"role",
-                                allow:[pfb.AddReactions,pfb.ViewChannel],
-                                deny:[pfb.SendMessages,pfb.AttachFiles,pfb.EmbedLinks]
-                            })
-                        }catch{}
-                    }
-                })
+                if (readonlyTicketadmin){
+                    readonlyTicketadmin.forEach((role,index) => {
+                        if (!config.adminRoles.includes(role) && !currentTicketOptions.adminroles.includes(role)){
+                            try {
+                                const adminrole = guild.roles.cache.find(r => r.id == role)
+                                if (!adminrole) return
+
+                                permissionsArray.push({
+                                    id:adminrole,
+                                    type:"role",
+                                    allow:[pfb.AddReactions,pfb.ViewChannel],
+                                    deny:[pfb.SendMessages,pfb.AttachFiles,pfb.EmbedLinks]
+                                })
+                            }catch{}
+                        }
+                    })
+                }
 
                 //add member role
                 if (config.system.memberRole && ![" ","0","false","null","undefined"].includes(config.system.memberRole)){
