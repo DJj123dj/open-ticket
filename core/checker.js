@@ -427,7 +427,7 @@ exports.checker = async () => {
     checkType(config.languageFile,"string","languagefile")
     const lf = config.languageFile
     
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian") && !lf.startsWith("turkish") && !lf.startsWith("polish") && !lf.startsWith("slovenian")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian") && !lf.startsWith("turkish") && !lf.startsWith("polish") && !lf.startsWith("slovenian")  && !lf.startsWith("thai")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 

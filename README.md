@@ -60,6 +60,7 @@ Translators
 |Turkish       |Hydrâelčhâvø#1575        |
 |Polish        |MKevas#8311              |
 |Slovenian     |n1kkec#5341              |
+|Thai          |Mods HD#0661             |
 
 ## links
 current version: _v3.4.0_

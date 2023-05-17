@@ -7,12 +7,26 @@
         "useHTMLtranscripts":true
     },
     "style":{
-        "titleColor":"#F8BA00",
         "background":{
             "enableCustomBackground":false,
-            "backgroundModus":"color OR image",
-            "backgroundData":"#abc123 OR https://www.example.com/image.png"
+            "backgroundModus":"image OR color",
+            "backgroundData":"image url OR hex color (#ffffff)"
             
+        },
+        "header":{
+            "enableCustomHeader":false,
+            "backgroundColor":"#202225",
+            "decoColor":"#F8BA00",
+            "textColor":"#ffffff"
+            
+        },
+        "stats":{
+            "enableCustomStats":false,
+            "backgroundColor":"#202225",
+            "keyTextColor":"#737373",
+            "valueTextColor":"#ffffff",
+            "hideBackgroundColor":"#40444a",
+            "hideTextColor":"#ffffff"
         }
     }
 }
