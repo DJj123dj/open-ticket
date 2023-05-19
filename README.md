@@ -1,7 +1,3 @@
-### ⚠️ WARNING!
-In open ticket **v3.3.3 & below**, there is a bug causing weird looking embeds, we solved this in the [dev branch](https://github.com/DJj123dj/open-ticket/tree/dev). Try to download open ticket from there while we are fixing the bug!
-<hr>
-
 <img src="https://www.dj-dj.be/wp-content/uploads/2023/02/open-ticket-cropped.png" alt="Open Ticket" width="600px">
 
 [![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.4.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.4.0)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
