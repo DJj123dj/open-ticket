@@ -11,6 +11,14 @@ const version = require("../info.json").version
 /**@typedef {{style:{enableCustomBackground:Boolean, backgroundModus:"color"|"image", backgroundData:String, titleColor:String}, bot:{name:String, id:Number, pfp:String}, ticket:{creatorname:String, creatorid:Number, closedtime:Number, openedtime:Number}}} OThtsDataOption */
 
 
+/**==========================================================
+=============================================================
+================THIS FILE ISN'T USED ANYMORE!!===============
+            This file is for html transcripts V1! 
+       Visit compileJsonV2.js for the current version!
+=============================================================
+===========================================================*/
+
 /**
  * 
  * @param {discord.Guild} guild 
@@ -46,13 +54,9 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
             })
 
             msg.embeds.forEach((embed) => {
-                if (embed.description){
-                    var desc = bot.hiddenData.removeHiddenData(embed.description).description
-                }else{var desc = false}
-
                 embedArray.push({
                     title:embed.title || false,
-                    description:desc,
+                    description:embed.description ? embed.description : false,
                     authorimg:((embed.author && embed.author.iconURL) ? embed.author.iconURL : false),
                     authortext:(embed.author ? embed.author.name : false),
                     footerimg:((embed.footer && embed.footer.iconURL) ? embed.footer.iconURL : false),

@@ -64,6 +64,15 @@
             "autoclose":{
                 "enable":false,
                 "inactiveHours":24
+            },
+
+            "ping":{
+                "@here":true,
+                "@everyone":false,
+                "custom":{
+                    "enable":false,
+                    "roleId":"012345678910"
+                }
             }
             
         },
@@ -102,7 +111,7 @@
             "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v3.3.3 - I'm a footer!",
+            "footer":"Open Ticket v3.4.0 - I'm a footer!",
 
             "enableFooterImage":false,
             "footerImage":"https://www.example.com/catmemes/cat.png",

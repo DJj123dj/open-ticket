@@ -132,12 +132,8 @@ module.exports = () => {
                 })
 
                 //add ticket adminroles
-                /**
-                 * @type {String[]}
-                 */
-                const readonlyTicketadmin = currentTicketOptions.readonlyAdminroles
-                if (readonlyTicketadmin){
-                    readonlyTicketadmin.forEach((role,index) => {
+                if (currentTicketOptions.readonlyAdminroles){
+                    currentTicketOptions.readonlyAdminroles.forEach((role,index) => {
                         if (!config.adminRoles.includes(role) && !currentTicketOptions.adminroles.includes(role)){
                             try {
                                 const adminrole = guild.roles.cache.find(r => r.id == role)
@@ -180,7 +176,7 @@ module.exports = () => {
                     storage.set("userFromChannel",ticketChannel.id,interaction.member.id)
                     if (currentTicketOptions.autoclose.enable) storage.set("autocloseTickets",ticketChannel.id,currentTicketOptions.autoclose.inactiveHours)
 
-                    const hiddendata = bot.hiddenData.writeHiddenData("ticketdata",[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
+                    bot.hiddenData.writeHiddenData(ticketChannel.id,[{key:"type",value:currentTicketOptions.id},{key:"openerid",value:interaction.user.id},{key:"createdms",value:new Date().getTime()}])
 
                     var ticketEmbed = new discord.EmbedBuilder()
                         //.setAuthor({name:interaction.user.id})
@@ -193,16 +189,19 @@ module.exports = () => {
                     }
 
                     if (currentTicketOptions.ticketmessage.length > 0){
-                        ticketEmbed.setDescription(currentTicketOptions.ticketmessage+hiddendata)
-                    }else{
-                        ticketEmbed.setDescription(hiddendata)
+                        ticketEmbed.setDescription(currentTicketOptions.ticketmessage)
                     }
 
                     if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)
                     if (currentTicketOptions.image.enable) ticketEmbed.setImage(currentTicketOptions.image.url)
                 
+                    const herePing = currentTicketOptions.ping['@here'] ? " @here" : ""
+                    const everyonePing = currentTicketOptions.ping['@everyone'] ? " @everyone" : ""
+                    const customPing = currentTicketOptions.ping.custom.enable ? " <@&"+currentTicketOptions.ping.custom.roleId+">" : ""
+
+
                     ticketChannel.send({
-                        content:"<@"+interaction.member.id+"> @here",
+                        content:"<@"+interaction.member.id+">"+herePing+everyonePing+customPing,
                         embeds:[ticketEmbed],
                         components:[closeButton]
                     

@@ -23,25 +23,21 @@ module.exports = () => {
             return
         }
 
-        msg.channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
+        if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            msg.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
-            msg.channel.send({embeds:[bot.embeds.commands.addEmbed(user,msg.author)]})
+        msg.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
+        msg.channel.send({embeds:[bot.embeds.commands.addEmbed(user,msg.author)]})
 
-            var loguser = msg.mentions.users.first()
-            log("command","someone used the 'add' command",[{key:"user",value:msg.author.tag}])
-            log("system","user added to ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"added_user",value:loguser.tag}])
+        var loguser = msg.mentions.users.first()
+        log("command","someone used the 'add' command",[{key:"user",value:msg.author.tag}])
+        log("system","user added to ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"added_user",value:loguser.tag}])
 
-            const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
-            APIEvents.onTicketAdd(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
+        const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
+        APIEvents.onTicketAdd(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
 
-            APIEvents.onCommand("add",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
-        })
-        
+        APIEvents.onCommand("add",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
     })
 
     if (!DISABLE.commands.slash.add) client.on("interactionCreate",async (interaction) => {
@@ -57,25 +53,20 @@ module.exports = () => {
 
         await interaction.deferReply()
 
-        interaction.channel.messages.fetchPinned().then(msglist => {
-            var firstmsg = msglist.last()
-            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-            const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
 
-            interaction.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
-            interaction.editReply({embeds:[bot.embeds.commands.addEmbed(user,interaction.user)]})
+        interaction.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
+        interaction.editReply({embeds:[bot.embeds.commands.addEmbed(user,interaction.user)]})
 
-            var loguser = user
-            log("command","someone used the 'add' command",[{key:"user",value:interaction.user.tag}])
-            log("system","user added to ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"added_user",value:loguser.tag}])
+        var loguser = user
+        log("command","someone used the 'add' command",[{key:"user",value:interaction.user.tag}])
+        log("system","user added to ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"added_user",value:loguser.tag}])
 
-            const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
-            APIEvents.onTicketAdd(interaction.user,loguser,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
-            APIEvents.onCommand("add",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
-            
-        })
-
+        const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
+        APIEvents.onTicketAdd(interaction.user,loguser,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
+        APIEvents.onCommand("add",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
        
     })
 }

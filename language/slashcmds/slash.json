@@ -10,6 +10,7 @@
         "es-ES":"spanish",
         "it":"italian",
         "ru":"russian",
+        "tr": "Türkçe",
 
         "MISSING":"arabic,portuguese",
         "NOTAVAILABLE":"arabic,portuguese,czech"
@@ -25,7 +26,8 @@
             "fr":"Une liste des commandes.",
             "es-ES":"Una lista de los comandos disponibles.",
             "it":"Una lista di tutti i comandi disponibili.",
-            "ru":"Список доступных команд"
+            "ru":"Список доступных команд",
+            "tr": "Kullanılabilir komutların listesi."
         },
         "message":{
             "en-GB":"Spawn an embed with buttons.",
@@ -37,7 +39,8 @@
             "fr":"Créer un embed avec des boutons.",
             "es-ES":"Genera un embed con botones.",
             "it":"Genera un embed con un pulsante.",
-            "ru":"Создать embed с кнопками"
+            "ru":"Создать embed с кнопками",
+            "tr": "Butonlar ile bir yerleştirme oluşturun."
         },
         "close":{
             "en-GB":"Close a ticket.",
@@ -49,7 +52,8 @@
             "fr":"Fermer un ticket.",
             "es-ES":"Cierra un ticket.",
             "it":"Chiudi un ticket.",
-            "ru":"Закрыть тикет"
+            "ru":"Закрыть тикет",
+            "tr": "Bileti kapat."
         },
         "delete":{
             "en-GB":"Delete a ticket.",
@@ -61,7 +65,8 @@
             "fr":"Supprimer un ticket.",
             "es-ES":"Elimina un ticket.",
             "it":"Elimina un ticket.",
-            "ru":"Удалить тикет"
+            "ru":"Удалить тикет",
+            "tr": "Bileti sil."
         },
         "reopen":{
             "en-GB":"Re-Open a ticket.",
@@ -73,7 +78,8 @@
             "fr":"Re-ouvrir un ticket.",
             "es-ES":"Re-abre un ticket.",
             "it":"Ri-Apri un ticket.",
-            "ru":"Открыть заново тикет"
+            "ru":"Открыть заново тикет",
+            "tr": "Bileti yeniden aç."
         },
         "add":{
             "en-GB":"Add another user to a ticket.",
@@ -85,7 +91,8 @@
             "fr":"Ajouter un utilisateur au ticket.",
             "es-ES":"Agrega otro usuario al ticket.",
             "it":"Aggiungi un membro al ticket",
-            "ru":"Добавить другого пользователя в тикет"
+            "ru":"Добавить другого пользователя в тикет",
+            "tr": "Bilete başka bir kullanıcı ekle."
         },
         "remove":{
             "en-GB":"Remove a user from a ticket.",
@@ -97,7 +104,8 @@
             "fr":"Enlever quelqu’un du ticket.",
             "es-ES":"Elimina otro usuario del ticket.",
             "it":"Rimuovi un membro dal ticket",
-            "ru":"Удалить пользователя из тикета"
+            "ru":"Удалить пользователя из тикета",
+            "tr": "Kullanıcıyı bir biletten kaldır."
         },
         "newticket":{
             "en-GB":"Create a ticket",
@@ -109,7 +117,8 @@
             "fr":"Créer un ticket",
             "es-ES":"Crear un ticket.",
             "it":"Crea un ticket",
-            "ru":"Создать тикет"
+            "ru":"Создать тикет",
+            "tr": "Bilet oluştur"
         },
         "rename":{
             "en-GB":"Rename a ticket channel.",
@@ -121,7 +130,8 @@
             "fr":"Renommer un ticket.",
             "es-ES":"Renombrar un canal de ticket.",
             "it":"Rinomina il canale di un ticket.",
-            "ru":"Переименовать канал тикета"
+            "ru":"Переименовать канал тикета",
+            "tr": "Bilet kanalını yeniden adlandır."
         },
         "claim":{
             "en-GB":"Claim a ticket.",
@@ -133,7 +143,8 @@
             "fr":"  ",
             "es-ES":"  ",
             "it":"  ",
-            "ru":"Взять тикет"
+            "ru":"Взять тикет",
+            "tr":"Bilet talep et."
         },
         "unclaim":{
             "en-GB":"Un-claim a ticket.",
@@ -145,7 +156,8 @@
             "fr":"  ",
             "es-ES":"  ",
             "it":"  ",
-            "ru":"Снять тикет"
+            "ru":"Снять тикет",
+            "tr":"Bileti iptal et."
         },
         "category":{
             "en-GB":"Change ticket type.",
@@ -157,7 +169,8 @@
             "fr":"  ",
             "es-ES":"  ",
             "it":"  ",
-            "ru":"Изменить тип тикета"
+            "ru":"Изменить тип тикета",
+            "tr":"Bilet türünü değiştir."
         }
     }
 }

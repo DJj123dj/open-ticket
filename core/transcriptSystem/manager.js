@@ -14,11 +14,15 @@ const tsdb = require("./tsdb")
 const checkAvailability = async () => {
     if (process.argv.some((v) => v == "--tsoffline")) return true
     const axios = require("axios").default
-    const res = await axios.get("https://transcripts.dj-dj.be/status.txt")
-    if (!res || !(res.status == 200) || !res.data) return false
+    try{
+        const res = await axios.get("https://transcripts.dj-dj.be/api/status.json")
+        if (!res || !(res.status == 200) || !res.data) return false
 
-    if ((res.data == "online") || (res.data == "1") || (res.data == "true")) return true
-    else return false
+        if (res.data && res.data["v2"] == "online") return true
+        else return false
+    }catch{
+        return false
+    }
 }
 
 /**
@@ -36,35 +40,54 @@ module.exports = async (messages,guild,channel,user,reason) => {
     const chName = channel.name
     const chId = channel.id
     
-    /**@param {discord.Collection<string, discord.Message<true>>} msglist*/
-    const asyncmanager = async (msglist) => {
-        var firstmsg = msglist.last()
+    const asyncmanager = async () => {
+        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
+        if (hiddendata.length < 1) return
+        const ticketId = hiddendata.find(d => d.key == "type").value
+        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
-        if (firstmsg == undefined || firstmsg.author.id != client.user.id) return false
-        const hiddendata = bot.hiddenData.readHiddenData(firstmsg.embeds[0].description)
-        const ticketId = hiddendata.data.find(d => d.key == "type")
-
-        const id = hiddendata.data.find(d => d.key == "openerid").value
-        const opentime = new Date(Number(hiddendata.data.find(d => d.key == "createdms").value))
+        const id = hiddendata.find(d => d.key == "openerid").value
+        const opentime = new Date(Number(hiddendata.find(d => d.key == "createdms").value))
 
         const ticketopener = client.users.cache.find(u => u.id == id)
         
         if (tsconfig.sendTranscripts.useHTMLtranscripts){
-            const JSONDATA = require("./communication/compileJson").compile(guild,channel,user,messages,{
+            const tsb = tsconfig.style.background
+            const tsh = tsconfig.style.header
+            const tss = tsconfig.style.stats
+            const JSONDATA = require("./communication/compileJsonV2").compile(guild,channel,user,messages,{
                 style:{
-                    titleColor:tsconfig.style.titleColor,
-                    enableCustomBackground:tsconfig.style.background.enableCustomBackground,
-                    backgroundModus:tsconfig.style.background.backgroundModus,
-                    backgroundData:tsconfig.style.background.backgroundData
+                    background:{
+                        enableCustomBackground:tsb.enableCustomBackground,
+                        backgroundModus:tsb.backgroundModus,
+                        backgroundData:tsb.backgroundData
+                    },
+                    header:{
+                        enableCustomHeader:tsh.enableCustomHeader,
+                        backgroundColor:tsh.backgroundColor,
+                        decoColor:tsh.decoColor,
+                        textColor:tsh.textColor
+                    },
+                    stats:{
+                        enableCustomStats:tss.enableCustomStats,
+                        backgroundColor:tss.backgroundColor,
+                        keyTextColor:tss.keyTextColor,
+                        valueTextColor:tss.valueTextColor,
+                        hideBackgroundColor:tss.hideBackgroundColor,
+                        hideTextColor:tss.hideTextColor
+                    }
+                    
                 },
                 bot:{
                     name:client.user.username,
                     id:client.user.id,
-                    pfp:client.user.displayAvatarURL()
+                    pfp:client.user.displayAvatarURL(),
                 },
                 ticket:{
                     creatorid:ticketopener.id,
                     creatorname:ticketopener.tag,
+                    creatorpfp:ticketopener.displayAvatarURL(),
+
                     openedtime:opentime.getTime(),
                     closedtime:new Date().getTime()
                 }
@@ -88,16 +111,17 @@ module.exports = async (messages,guild,channel,user,reason) => {
             if (!TSdata) return false
 
             if (TSdata.status == "success"){
-                const url = "https://transcripts.dj-dj.be/t/"+TSdata.time+"_"+TSdata.id+".html"
+                //MAKE THIS COMPATIBLE WITH PREMIUM "customTranscriptUrl" IN FUTURE VERSIONS!!
+                const url = "https://transcripts.dj-dj.be/v2/"+TSdata.time+"_"+TSdata.id+".html"
 
                 //calculate estimated time
-                const lastDumpTime = (new Date(TSdata.estimated.lastdump).getTime())
-                const dumpLoopTime = 15000
-                const nextDump = new Date(lastDumpTime+dumpLoopTime)
-                const processtime = TSdata.estimated.processtime+6000 //6sec extra time for overflow
+                //const lastDumpTime = (new Date(TSdata.estimated.lastdump).getTime())
+                //const dumpLoopTime = 15000
+                //const nextDump = new Date(lastDumpTime+dumpLoopTime)
+                //const processtime = TSdata.estimated.processtime+6000 //6sec extra time for overflow
 
-                const finaltime = new Date(nextDump.getTime()+processtime)
-                const duration = finaltime.getTime()-new Date().getTime()
+                const duration = TSdata.estimated.waittime
+                const finaltime = new Date(new Date().getTime()+duration)
 
                 //waiting
                 if (tsconfig.sendTranscripts.enableChannel){
@@ -148,5 +172,5 @@ module.exports = async (messages,guild,channel,user,reason) => {
             }
         }
     }
-    asyncmanager(msglist)
+    asyncmanager()
 }

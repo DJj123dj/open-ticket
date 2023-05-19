@@ -7,7 +7,6 @@ const log = bot.errorLog.log
 
 const permissionChecker = require("../../../utils/permisssionChecker")
 const storage = bot.storage
-const hiddendata = bot.hiddenData
 const embed = discord.EmbedBuilder
 const mc = config.color
 const permsChecker = require("../../../utils/permisssionChecker")
@@ -32,20 +31,21 @@ module.exports = () => {
             return
         }
 
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        hiddendata.push({key:"claimedby",value:interaction.user.id})
+        bot.hiddenData.writeHiddenData(interaction.channel.id,hiddendata)
+        storage.set("claimData",interaction.channel.id,interaction.user.id)
+
         interaction.channel.messages.fetchPinned().then(msglist => {
             /**@type {discord.Message} */
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-            const hdraw = bot.hiddenData.removeHiddenData(firstmsg.embeds[0].description)
-            const hiddendata = hdraw.hiddenData
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
-
-            hiddendata.data.push({key:"claimedby",value:interaction.user.id})
-            storage.set("claimData",interaction.channel.id,interaction.user.id)
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
                 .setFooter({text:"claimed by: "+interaction.user.tag,iconURL:interaction.user.displayAvatarURL()})
-                .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
             if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})

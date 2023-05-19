@@ -4,7 +4,7 @@ In open ticket **v3.3.3 & below**, there is a bug causing weird looking embeds, 
 
 <img src="https://www.dj-dj.be/wp-content/uploads/2023/02/open-ticket-cropped.png" alt="Open Ticket" width="600px">
 
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.3.3-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.3.3)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.4.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.4.0)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
 
 ### Open Ticket
 Open Ticket is of the most customisable discord ticket bots of all time!
@@ -15,9 +15,9 @@ Take a look at all the features and discover the possibilities!
 ### [Documentation](https://docs.openticket.dj-dj.be/quick-start)
 
 ## Features
-- **🎉 NEW! html transcripts!**
+- **🎉 NEW! html transcripts V2!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in 14 different languages
+- 🇬🇧 translation in 18 different languages
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
 - 🆒 plugins
@@ -64,9 +64,12 @@ Translators
 |Turkish       |Hydrâelčhâvø#1575        |
 |Polish        |MKevas#8311              |
 |Slovenian     |n1kkec#5341              |
+|Thai          |Mods HD#0661             |
+|Norwegian     |NoOneNook#0266           |
+|Greek         |ꙅoᴎɒᎸɘƚꙅ#3744             |
 
 ## links
-current version: _v3.3.3_
+current version: _v3.4.0_
 </br>changelog: [click here](https://docs.openticket.dj-dj.be/other/changelog)
 </br>documentation: [click here](https://docs.openticket.dj-dj.be/quick-start)
 

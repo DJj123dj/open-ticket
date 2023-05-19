@@ -1,5 +1,8 @@
 {
-  "errors": {
+    "_CREDITS":"the_gamer#5095",
+    "_INFO":"This file is a translation for open ticket 3.4.0",
+
+    "errors": {
     "missingArgsTitle": "Ugyldigt Argument!",
     "missingArgsDescription": "Manglende Argument",
     "noPermsTitle": "Ikke tilladelse!",

@@ -26,19 +26,20 @@ module.exports = () => {
         const unclaimuser = storage.get("claimData",msg.channel.id)
         if (!unclaimuser || unclaimuser == "false") return msg.channel.send({embeds:[bot.errorLog.serverError("This ticket isn't claimed yet!")]})
 
+        const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
+        if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        hiddendata.push({key:"claimedby",value:"false"})
+        bot.hiddenData.writeHiddenData(msg.channel.id,hiddendata)
+        storage.set("claimData",msg.channel.id,"false")
+
         msg.channel.messages.fetchPinned().then(msglist => {
             /**@type {discord.Message} */
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-            const hdraw = bot.hiddenData.removeHiddenData(firstmsg.embeds[0].description)
-            const hiddendata = hdraw.hiddenData
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
-
-            hiddendata.data.push({key:"claimedby",value:"false"})
-            storage.set("claimData",msg.channel.id,"false")
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
-                .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
             const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
             if (ticketData && ticketData.autoclose.enable){
@@ -81,20 +82,20 @@ module.exports = () => {
         const unclaimuser = storage.get("claimData",interaction.channel.id)
         if (!unclaimuser || unclaimuser == "false") return interaction.editReply({embeds:[bot.errorLog.serverError("This ticket isn't claimed yet!")]})
 
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        hiddendata.push({key:"claimedby",value:"false"})
+        bot.hiddenData.writeHiddenData(interaction.channel.id,hiddendata)
+        storage.set("claimData",interaction.channel.id,"false")
 
         interaction.channel.messages.fetchPinned().then(msglist => {
             /**@type {discord.Message} */
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-            const hdraw = bot.hiddenData.removeHiddenData(firstmsg.embeds[0].description)
-            const hiddendata = hdraw.hiddenData
-            const ticketId = hiddendata.data.find(d => d.key == "type").value
 
-            hiddendata.data.push({key:"claimedby",value:"false"})
-            storage.set("claimData",interaction.channel.id,"false")
-            
             const newEmbed = new embed(firstmsg.embeds[0].data)
-                .setDescription(hdraw.description+bot.hiddenData.writeHiddenData(hiddendata.type,hiddendata.data))
 
             const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
             if (ticketData && ticketData.autoclose.enable){
