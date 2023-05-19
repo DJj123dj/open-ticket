@@ -52,12 +52,6 @@ exports.replacementions = (text,guild) => {
         var text = res[1]
         return "<@&"+text+"::regular> "
     })
-    /**TODO!!!!!!!
-     * - remove console.log :)
-     * - set role colors in ENTIRE TRANSCRIPT (users,replies,mentions,...) to #ffffff if #000000
-     * because black => default color
-     * - see compileJsonV2
-     */
 
     return defaultroletext
 }

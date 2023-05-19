@@ -6,7 +6,7 @@ const l = bot.language
 //==================
 
 //OTTicketOptions
-/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color: "red"|"green"|"blue"|"gray",adminroles: String[], readonlyAdminroles: String[], channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, thumbnail:{enable:Boolean,url:String}, image:{enable:Boolean,url:String}, closedCategory:{enable:Boolean,id:String}, autoclose:{enable:Boolean,inactiveHours:Number} }} OTTicketOptions */
+/**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color: "red"|"green"|"blue"|"gray",adminroles: String[], readonlyAdminroles: String[], channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, thumbnail:{enable:Boolean,url:String}, image:{enable:Boolean,url:String}, closedCategory:{enable:Boolean,id:String}, autoclose:{enable:Boolean,inactiveHours:Number}, ping:{"@here":Boolean, "@everyone":Boolean, custom:{enable:Boolean, roleId:String}} }} OTTicketOptions */
 
 //OTRoleOptions
 /**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color:"red"|"green"|"blue"|"gray"|"none",roles:String[],mode:"add&remove"|"remove"|"add",enableDmOnOpen:Boolean}} OTRoleOptions */
@@ -22,7 +22,7 @@ const l = bot.language
 /**@typedef {{id: String,name: String,description: String,icon: String,label: String,type: "ticket"|"role"|"website",color:"red"|"green"|"blue"|"gray"|"none",roles:String[],mode:"add&remove"|"remove"|"add",adminroles: String[],channelprefix: String,category: String,message: String,enableDmOnOpen: Boolean,ticketmessage: String, thumbnail:{enable:Boolean,url:String}, image:{enable:Boolean,url:String}, url:String, closedCategory:{enable:Boolean,id:String}, autoclose:{enable:Boolean,inactiveHours:Number}, readonlyAdminroles: String[]}} OTAllOptions */
 
 //StringOptions
-/**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDmOnOpen"|"ticketmessage"|"thumbnail"|"image"|"closedCategory"|"adminroles"|"autoclose"} OTTicketStringOptions */
+/**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"adminroles"|"channelprefix"|"category"|"message"|"enableDmOnOpen"|"ticketmessage"|"thumbnail"|"image"|"closedCategory"|"adminroles"|"autoclose"|"ping"} OTTicketStringOptions */
 /**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"color"|"roles"|"mode"|"enableDmOnOpen"} OTRoleStringOptions */
 /**@typedef {"id"|"name"|"description"|"icon"|"label"|"type"|"url"} OTWebsiteStringOptions */
 

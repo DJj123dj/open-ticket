@@ -11,9 +11,9 @@ Take a look at all the features and discover the possibilities!
 ### [Documentation](https://docs.openticket.dj-dj.be/quick-start)
 
 ## Features
-- **🎉 NEW! html transcripts!**
+- **🎉 NEW! html transcripts V2!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in 14 different languages
+- 🇬🇧 translation in 18 different languages
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
 - 🆒 plugins
@@ -61,6 +61,8 @@ Translators
 |Polish        |MKevas#8311              |
 |Slovenian     |n1kkec#5341              |
 |Thai          |Mods HD#0661             |
+|Norwegian     |NoOneNook#0266           |
+|Greek         |ꙅoᴎɒᎸɘƚꙅ#3744             |
 
 ## links
 current version: _v3.4.0_

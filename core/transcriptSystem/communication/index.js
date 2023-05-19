@@ -18,7 +18,6 @@ exports.upload = async (json) => {
 
         try {
         const res = await axios.post("https://transcripts.dj-dj.be/api/upload?auth=openticketTRANSCRIPT1234&version=2",JSON.stringify(json))
-        //const res = await axios.get("https://transcripts.dj-dj.be/api/upload?auth=openticketTRANSCRIPT1234&version=2&data="+data)
         if (res.status != 200) resolve(false)
         
         resolve(res.data)

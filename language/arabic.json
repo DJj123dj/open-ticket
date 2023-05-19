@@ -1,4 +1,7 @@
 {
+    "_CREDITS":"ChilledBroke#9986 & M4#5882",
+    "_INFO":"This file is a translation for open ticket 3.4.0",
+
     "errors": {
         "missingArgsTitle": "قيمة غير صالحة!",
         "missingArgsDescription": "قيمة مفقودة",

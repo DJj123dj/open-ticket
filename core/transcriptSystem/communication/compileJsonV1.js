@@ -11,6 +11,14 @@ const version = require("../info.json").version
 /**@typedef {{style:{enableCustomBackground:Boolean, backgroundModus:"color"|"image", backgroundData:String, titleColor:String}, bot:{name:String, id:Number, pfp:String}, ticket:{creatorname:String, creatorid:Number, closedtime:Number, openedtime:Number}}} OThtsDataOption */
 
 
+/**==========================================================
+=============================================================
+================THIS FILE ISN'T USED ANYMORE!!===============
+            This file is for html transcripts V1! 
+       Visit compileJsonV2.js for the current version!
+=============================================================
+===========================================================*/
+
 /**
  * 
  * @param {discord.Guild} guild 

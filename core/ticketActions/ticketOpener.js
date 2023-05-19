@@ -195,8 +195,13 @@ module.exports = () => {
                     if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)
                     if (currentTicketOptions.image.enable) ticketEmbed.setImage(currentTicketOptions.image.url)
                 
+                    const herePing = currentTicketOptions.ping['@here'] ? " @here" : ""
+                    const everyonePing = currentTicketOptions.ping['@everyone'] ? " @everyone" : ""
+                    const customPing = currentTicketOptions.ping.custom.enable ? " <@&"+currentTicketOptions.ping.custom.roleId+">" : ""
+
+
                     ticketChannel.send({
-                        content:"<@"+interaction.member.id+"> @here",
+                        content:"<@"+interaction.member.id+">"+herePing+everyonePing+customPing,
                         embeds:[ticketEmbed],
                         components:[closeButton]
                     
