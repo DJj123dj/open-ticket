@@ -102,7 +102,32 @@
             
         }
     ],
-
+    "modals": [
+        {
+            "id": 1,
+            "title": "Modal Title",
+            "questions": [
+                {
+                "label": "Name", 
+                "style": "short",
+                "max-length": 50,
+                "min-length": 3,
+                "placeholder": "Enter your name",
+                "value": "",
+                "required": true
+            },
+            {
+                "label": "Description", 
+                "style": "paragraph",
+                "max-length": 1000,
+                "min-length": 10,
+                "placeholder": "Explain what happened",
+                "value": "",
+                "required": true
+            }
+            ]
+        }
+    ],
     "messages":[
         {
             "id":"1",
