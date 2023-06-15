@@ -394,7 +394,12 @@ exports.checker = async () => {
 
 
             //value
-            checkType(input.value, "string", path + "/value")
+            if (checkType(input.value, "string", path + "/value")){
+                if (input.value !== "" &&(input.value.length < input.minLength || input.value.length > input.maxLength)){
+                    createError("'" + path + "/value' | value must be bigger than \"minLength\" and smaller than \"maxLength\"!")
+                }
+            }
+
 
 
             //required
