@@ -49,7 +49,7 @@
 
             "modal":{
                 "enable": true,
-                "modalId":"name_decription"
+                "modalId":"name_description"
             },
 
             "thumbnail":{
@@ -113,23 +113,23 @@
             "title": "Modal Title",
             "questions": [
                 {
-                "label": "Name", 
-                "style": "short",
-                "maxLength": 50,
-                "minLength": 3,
-                "placeholder": "Enter your name",
-                "value": "",
-                "required": true
-            },
-            {
-                "label": "Description", 
-                "style": "long",
-                "maxLength": 1000,
-                "minLength": 10,
-                "placeholder": "Explain what happened",
-                "value": "",
-                "required": true
-            }
+                    "label": "Name",
+                    "style": "short",
+                    "maxLength": 50,
+                    "minLength": 3,
+                    "placeholder": "Enter your name",
+                    "value": "",
+                    "required": true
+                },
+                {
+                    "label": "Description",
+                    "style": "long",
+                    "maxLength": 1000,
+                    "minLength": 0,
+                    "placeholder": "Explain what happened",
+                    "value": "",
+                    "required": false
+                }
             ]
         }
     ],
