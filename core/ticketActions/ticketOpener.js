@@ -42,37 +42,29 @@ module.exports = () => {
             }
         }
 
-        
-        if (configParser.getTicketValuesArray("id").includes(customId)){
+
+        if (configParser.getTicketValuesArray("id").includes(customId)) {
 
             //ticketoptions from config
             const currentTicketOptions = configParser.getTicketById(customId)
-            if (currentTicketOptions == false) return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
+            if (currentTicketOptions == false) return interaction.reply({embeds: [bot.errorLog.serverError(l.errors.anotherOption)]})
 
-            if (storage.get("amountOfUserTickets",interaction.member.id) == null || storage.get("amountOfUserTickets",interaction.member.id) == "false"|| Number(storage.get("amountOfUserTickets",interaction.member.id)) < config.system.maxAmountOfTickets){
+            if (storage.get("amountOfUserTickets", interaction.member.id) == null || storage.get("amountOfUserTickets", interaction.member.id) == "false" || Number(storage.get("amountOfUserTickets", interaction.member.id)) < config.system.maxAmountOfTickets) {
 
-                //update storage
-                storage.set("amountOfUserTickets",interaction.member.id,Number(storage.get("amountOfUserTickets",interaction.member.id))+1)
-                var ticketNumber = interaction.member.user.username
-
-                //set ticketName
-                var ticketName = currentTicketOptions.channelprefix+ticketNumber
-                var logsname = currentTicketOptions.name
-                
                 //display modal
                 let modalReply = [];
                 if (currentTicketOptions.modal.enable && currentTicketOptions.modal.modalId.length > 0) {
-                    modalConfig = configParser.getTicketModal(currentTicketOptions.modal.modalId) 
+                    let modalConfig = configParser.getTicketModal(currentTicketOptions.modal.modalId)
                     if (modalConfig.questions.length != undefined) {
                         const questions = modalConfig.questions
                         const modal = new discord.ModalBuilder()
-                        .setCustomId(modalConfig.id)
-                        .setTitle(modalConfig.title)
+                            .setCustomId(modalConfig.id)
+                            .setTitle(modalConfig.title)
                         let index = 0;
                         //Build each question component
                         while (index < questions.length && index < 5) {
                             const question = questions[index];
-                        
+
                             const component = new discord.TextInputBuilder()
                                 .setCustomId(index + "-" + currentTicketOptions.modal.id)
                                 .setLabel(question.label)
@@ -81,39 +73,46 @@ module.exports = () => {
                                 .setRequired(question.required)
                             if (question.placeholder != "") component.setPlaceholder(question.placeholder)
                             if (question.value.length > question.minLength & question.value.length < question.maxLength && question.value != "") component.setValue(question.value)
-                            if (question.style == "short") component.setStyle(discord.TextInputStyle.Short)
-                            else if (question.style == "long") component.setStyle(discord.TextInputStyle.Paragraph)
+                            if (question.style === "short") component.setStyle(discord.TextInputStyle.Short)
+                            else if (question.style === "long") component.setStyle(discord.TextInputStyle.Paragraph)
                             modal.addComponents(new discord.ActionRowBuilder().addComponents(component))
-                        
+
                             index++;
-                        }    
+                        }
 
                         await interaction.showModal(modal)
 
                         interaction = await interaction.awaitModalSubmit({
-                            // Timeout after a minute of not receiving any valid Modals
-                            time: 60000 * 5,
-                            // Make sure we only accept Modals from the User who sent the original Interaction we're responding to
+                            time: 6000 * 15, //timeout after 15 minutes
+                            dispose: true,
                             filter: i => i.user.id === interaction.user.id,
                         }).catch(error => {
-                            // Catch any Errors that are thrown (e.g. if the awaitModalSubmit times out after 60000 ms)
-                            console.error(error)
+                            if (error.code !== 'InteractionCollectorError' && error !== 'Collector received no interactions before ending with reason: time') {
+                                console.error(error)
+                            }
                             return null
                         })
-                        if (interaction.isModalSubmit()) {
+                        if (interaction === null) return;
+                        else if (interaction.isModalSubmit()) {
                             let i = 0;
                             interaction.fields.fields.each(field => {
-                            modalReply.push([questions[i].label, field.value])
-                            i++;
-                        })
-                            if (config.system.answerInEphemeralOnOpen) await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
-                            else await interaction.deferUpdate()
+                                const inputGiven = field.value.length <= 0 ? `_${typeof (l.modals || {}).emptyAnswer === "undefined" ? "No answer was given" : l.modals.emptyAnswer}_` : field.value
+                                modalReply.push([questions[i].label, inputGiven])
+                                i++;
+                            })
+                            try {
+                                if (config.system.answerInEphemeralOnOpen) await interaction.deferReply({ephemeral: config.system.answerInEphemeralOnOpen})
+                                else {
+                                    await interaction.deferUpdate()
+                                }
+                            } catch {
+                                return
+                            }
                         }
                     }
-                    
                 }
                 if (config.system.answerInEphemeralOnOpen && !currentTicketOptions.modal.enable) {
-                    if (interaction.isButton()){
+                    if (interaction.isButton() || interaction.isStringSelectMenu()) {
                         try {
                             await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
                         } catch{}
@@ -124,9 +123,16 @@ module.exports = () => {
                            await interaction.deferUpdate()
                         } catch{}
                     }
-                } else if(!currentTicketOptions.modal.enable) {
+                } else if (!currentTicketOptions.modal.enable && !interaction.isModalSubmit()) {
                     await interaction.deferUpdate()
                 }
+
+                //update storage
+                storage.set("amountOfUserTickets", interaction.member.id, Number(storage.get("amountOfUserTickets", interaction.member.id)) + 1)
+                var ticketNumber = interaction.member.user.username
+                //set ticketName
+                var ticketName = currentTicketOptions.channelprefix + ticketNumber
+                var logsname = currentTicketOptions.name
 
                 //category
                 if (currentTicketOptions.category.length < 16 || currentTicketOptions.category.length > 20){
@@ -290,7 +296,7 @@ module.exports = () => {
                     }
                     catch{log("system","failed to send DM")}
 
-                    if (((interaction.isButton() || interaction.isModalSubmit()) && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()) interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
+                    if (((interaction.isButton() || interaction.isModalSubmit() || interaction.isStringSelectMenu()) && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()) interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
                     
                 })
             }else{
