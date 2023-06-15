@@ -382,6 +382,8 @@ exports.checker = async () => {
                 checkType(input.maxLength, "number", path + "/minLength")
                 if (input.minLength < 0) {
                     createError("'" + path + "/minLength' | cannot be smaller than 0")
+                }else if (input.required === false && input.minLength > 0){
+                    createError("'" + path + "/minLength' | if \"required\" is set to \"true\" then \"minLength\" must be 0")
                 }
             } else {
                 createError("'" + path + "/minLength' | there is no \"minLength\" attribute!")
