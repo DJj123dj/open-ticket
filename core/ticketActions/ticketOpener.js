@@ -49,18 +49,6 @@ module.exports = () => {
             const currentTicketOptions = configParser.getTicketById(customId)
             if (currentTicketOptions == false) return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
 
-            if (interaction.isButton()){
-                try {
-                    await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
-                } catch{}
-            }else if (interaction.isChatInputCommand()){
-                await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
-            }else if (interaction.isStringSelectMenu()){
-                try {
-                   await interaction.deferUpdate()
-                } catch{}
-            }
-
             if (storage.get("amountOfUserTickets",interaction.member.id) == null || storage.get("amountOfUserTickets",interaction.member.id) == "false"|| Number(storage.get("amountOfUserTickets",interaction.member.id)) < config.system.maxAmountOfTickets){
 
                 //update storage
@@ -71,6 +59,75 @@ module.exports = () => {
                 var ticketName = currentTicketOptions.channelprefix+ticketNumber
                 var logsname = currentTicketOptions.name
                 
+                //display modal
+                let modalReply = [];
+                if (currentTicketOptions.modal.enable && currentTicketOptions.modal.modalId.length > 0) {
+                    modalConfig = configParser.getTicketModal(currentTicketOptions.modal.modalId) 
+                    if (modalConfig.questions.length != undefined) {
+                        const questions = modalConfig.questions
+                        const modal = new discord.ModalBuilder()
+                        .setCustomId(modalConfig.id)
+                        .setTitle(modalConfig.title)
+                        let index = 0;
+                        //Build each question component
+                        while (index < questions.length && index < 5) {
+                            const question = questions[index];
+                        
+                            const component = new discord.TextInputBuilder()
+                                .setCustomId(index + "-" + currentTicketOptions.modal.id)
+                                .setLabel(question.label)
+                                .setMaxLength(question.maxLength)
+                                .setMinLength(question.minLength)
+                                .setPlaceholder(question.placeholder)
+                                .setRequired(question.required)
+                            if (question.value.length > question.minLength & question.value.length < question.maxLength && question.value != "") component.setValue(question.value)
+                            if (question.style == "short") component.setStyle(discord.TextInputStyle.Short)
+                            else if (question.style == "long") component.setStyle(discord.TextInputStyle.Paragraph)
+                            modal.addComponents(new discord.ActionRowBuilder().addComponents(component))
+                        
+                            index++;
+                        }    
+
+                        await interaction.showModal(modal)
+
+                        interaction = await interaction.awaitModalSubmit({
+                            // Timeout after a minute of not receiving any valid Modals
+                            time: 60000 * 5,
+                            // Make sure we only accept Modals from the User who sent the original Interaction we're responding to
+                            filter: i => i.user.id === interaction.user.id,
+                        }).catch(error => {
+                            // Catch any Errors that are thrown (e.g. if the awaitModalSubmit times out after 60000 ms)
+                            console.error(error)
+                            return null
+                        })
+                        if (interaction.isModalSubmit()) {
+                            let i = 0;
+                            interaction.fields.fields.each(field => {
+                            modalReply.push([questions[i].label, field.value])
+                            i++;
+                        })
+                            if (config.system.answerInEphemeralOnOpen) await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                            else await interaction.deferUpdate()
+                        }
+                    }
+                    
+                }
+                if (config.system.answerInEphemeralOnOpen && !currentTicketOptions.modal.enable) {
+                    if (interaction.isButton()){
+                        try {
+                            await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                        } catch{}
+                    }else if (interaction.isChatInputCommand()){
+                        await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                    }else if (interaction.isStringSelectMenu()){
+                        try {
+                           await interaction.deferUpdate()
+                        } catch{}
+                    }
+                } else if(!currentTicketOptions.modal.enable) {
+                    await interaction.deferUpdate()
+                }
+
                 //category
                 if (currentTicketOptions.category.length < 16 || currentTicketOptions.category.length > 20){
                     var newTicketCategory = null
@@ -194,6 +251,12 @@ module.exports = () => {
 
                     if (currentTicketOptions.thumbnail.enable) ticketEmbed.setThumbnail(currentTicketOptions.thumbnail.url)
                     if (currentTicketOptions.image.enable) ticketEmbed.setImage(currentTicketOptions.image.url)
+
+                    if (currentTicketOptions.modal.enable && interaction.isModalSubmit()) {
+                        modalReply.forEach(item => {
+                            ticketEmbed.addFields({name: item[0], value: item[1]})
+                        })
+                    }
                 
                     const herePing = currentTicketOptions.ping['@here'] ? " @here" : ""
                     const everyonePing = currentTicketOptions.ping['@everyone'] ? " @everyone" : ""
@@ -227,7 +290,7 @@ module.exports = () => {
                     }
                     catch{log("system","failed to send DM")}
 
-                    if ((interaction.isButton() && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()) interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
+                    if (((interaction.isButton() || interaction.isModalSubmit()) && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()) interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
                     
                 })
             }else{
