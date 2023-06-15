@@ -359,7 +359,7 @@ exports.checker = async () => {
 
             //style
             if (input.style) {
-                if (input.style != "short" && input.style != "long") {
+                if (input.style !== "short" && input.style !== "long") {
                     createError("'" + path + "/style' | invalid style, it must be \"short\" or \"long\"")
                 }
             } else {
@@ -396,11 +396,7 @@ exports.checker = async () => {
 
 
             //required
-            if (input.required) {
-                checkType(input.required, "boolean", path + "/required")
-            } else {
-                createError("'" + path + "/required' | there is no \"required\" attribute!")
-            }
+            if (checkType(input.required, "boolean", path + "/required")){}
 
 
         })
