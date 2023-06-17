@@ -179,7 +179,7 @@ exports.checker = async () => {
         checkType(option.description,"string",path+"/description")
 
         //icon
-        const emojiRegex = /(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])/gi;
+        const emojiRegex = /(?:\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])|(?:<a?:[^:]*:[0-9]+>)/gi
         if (option.icon.length > 0){
 
             const isEmoji = emojiRegex.test(option.icon)
@@ -427,7 +427,7 @@ exports.checker = async () => {
     checkType(config.languageFile,"string","languagefile")
     const lf = config.languageFile
     
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian") && !lf.startsWith("turkish") && !lf.startsWith("polish") && !lf.startsWith("slovenian")  && !lf.startsWith("thai") && !lf.startsWith("norwegian") && !lf.startsWith("greek")){
+    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian") && !lf.startsWith("turkish") && !lf.startsWith("polish") && !lf.startsWith("slovenian")  && !lf.startsWith("thai") && !lf.startsWith("norwegian") && !lf.startsWith("greek") && !lf.startsWith("ukrainian")){
         createError("'languagefile' | invalid language, more info in the wiki")
     }
 

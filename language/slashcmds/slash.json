@@ -2,6 +2,7 @@
     "examples":{
         "en-GB":"english",
         "en-US":"english",
+        "no": "Norwegian",
         "nl":"dutch",
         "ro":"romanian",
         "de":"german",
@@ -19,6 +20,7 @@
         "help":{
             "en-GB":"A list of the available commands.",
             "en-US":"A list of the available commands.",
+            "no":"En liste over commands.",
             "nl":"Een lijst met de beschikbare commands.",
             "ro":"O lista a comenzilor disponibile.",
             "de":"Eine Liste der verfügbaren Befehle.",
@@ -32,6 +34,7 @@
         "message":{
             "en-GB":"Spawn an embed with buttons.",
             "en-US":"Spawn an embed with buttons.",
+            "no":"Legg inn en melding i denne kanalen",
             "nl":"Spawn een embed met knoppen.",
             "ro":"Deschide un embed cu butoane.",
             "de":"Sendet ein Embed mit Knöpfen.",
@@ -45,6 +48,7 @@
         "close":{
             "en-GB":"Close a ticket.",
             "en-US":"Close a ticket.",
+            "no":"Lukk ticket.",
             "nl":"Sluit een ticket",
             "ro":"Inchide un ticket.",
             "de":"Schließe ein Ticket.",
@@ -58,6 +62,7 @@
         "delete":{
             "en-GB":"Delete a ticket.",
             "en-US":"Delete a ticket.",
+            "no":"Slett ticket.",
             "nl":"Verwijder een ticket",
             "ro":"Sterge un ticket.",
             "de":"Lösche ein Ticket.",
@@ -71,6 +76,7 @@
         "reopen":{
             "en-GB":"Re-Open a ticket.",
             "en-US":"Re-Open a ticket.",
+            "no":"Gjenåpne ticket.",
             "nl":"Heropen een ticket.",
             "ro":"Re-deschide un ticket.",
             "de":"Wiedereröffnung eines Tickets.",
@@ -84,6 +90,7 @@
         "add":{
             "en-GB":"Add another user to a ticket.",
             "en-US":"Add another user to a ticket.",
+            "no":"Legg til en annen bruker til ticket.",
             "nl":"Voeg een andere user toe aan een ticket.",
             "ro":"Adauga un utilizator la acest ticket.",
             "de":"Füge einen anderen Nutzer zum Ticket hinzu.",
@@ -97,6 +104,7 @@
         "remove":{
             "en-GB":"Remove a user from a ticket.",
             "en-US":"Remove a user from a ticket.",
+            "no":"Fjern en bruker fra ticket.",
             "nl":"Verwijder een user van een ticket.",
             "ro":"Sterge un utilizator dintr-un ticket.",
             "de":"Entferne einen Nutzer von dem Ticket.",
@@ -110,6 +118,7 @@
         "newticket":{
             "en-GB":"Create a ticket",
             "en-US":"Create a ticket",
+            "no":"Lag en ny ticket",
             "nl":"Maak een ticket aan",
             "ro":"Creeaza un ticket.",
             "de":"Erstelle ein Ticket.",
@@ -123,6 +132,7 @@
         "rename":{
             "en-GB":"Rename a ticket channel.",
             "en-US":"Rename a ticket channel.",
+            "no":"Gi nytt navn til ticket kanalen.",
             "nl":"Hernoem een ticket channel.",
             "ro":"Redenumeste un ticket.",
             "de":"Benenne einen Ticket Channel.",
@@ -136,6 +146,7 @@
         "claim":{
             "en-GB":"Claim a ticket.",
             "en-US":"Claim a ticket.",
+            "no":"Overta ticket.",
             "nl":"Claim een ticket.",
             "ro":"  ",
             "de":"  ",
@@ -149,6 +160,7 @@
         "unclaim":{
             "en-GB":"Un-claim a ticket.",
             "en-US":"Un-claim a ticket.",
+            "no":"Frigjør ticket.",
             "nl":"Ontclaim een ticket.",
             "ro":"  ",
             "de":"  ",
@@ -162,6 +174,7 @@
         "category":{
             "en-GB":"Change ticket type.",
             "en-US":"Change ticket type.",
+            "no":"Endre ticket type.",
             "nl":"Verander ticket type.",
             "ro":"  ",
             "de":"  ",

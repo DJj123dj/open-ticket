@@ -1,6 +1,6 @@
 {
   "name": "open-ticket",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "This is an open-source discord ticket bot, you can configure it and it comes with cool features like a transcript.",
   "main": "index.js",
   "scripts": {

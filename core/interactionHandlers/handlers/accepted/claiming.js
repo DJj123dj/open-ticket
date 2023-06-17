@@ -45,7 +45,7 @@ module.exports = () => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
-                .setFooter({text:"claimed by: "+interaction.user.tag,iconURL:interaction.user.displayAvatarURL()})
+                .setFooter({text:"claimed by: "+interaction.user.username,iconURL:interaction.user.displayAvatarURL()})
 
             if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})

@@ -25,7 +25,7 @@ module.exports = () => {
 
         require("../core/ticketActions/ticketReopener").reopenTicket(msg.guild,msg.channel,msg.author)
         
-        log("command","someone used the 'reopen' command",[{key:"user",value:msg.author.tag}])
+        log("command","someone used the 'reopen' command",[{key:"user",value:msg.author.username}])
         APIEvents.onCommand("reopen",true,msg.author,msg.channel,msg.guild,new Date())
     })
 
@@ -45,7 +45,7 @@ module.exports = () => {
 
         require("../core/ticketActions/ticketReopener").reopenTicket(interaction.guild,interaction.channel,interaction.user)
         
-        log("command","someone used the 'reopen' command",[{key:"user",value:interaction.user.tag}])
+        log("command","someone used the 'reopen' command",[{key:"user",value:interaction.user.username}])
         APIEvents.onCommand("reopen",true,interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

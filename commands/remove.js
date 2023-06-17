@@ -32,8 +32,8 @@ module.exports = () => {
 
         var loguser = msg.mentions.users.first()
         
-        log("command","someone used the 'remove' command",[{key:"user",value:msg.author.tag}])
-        log("system","user removed from ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"removed_user",value:loguser.tag}])
+        log("command","someone used the 'remove' command",[{key:"user",value:msg.author.username}])
+        log("system","user removed from ticket",[{key:"user",value:msg.author.username},{key:"ticket",value:msg.channel.name},{key:"removed_user",value:loguser.username}])
 
         const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
         APIEvents.onTicketRemove(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
@@ -62,8 +62,8 @@ module.exports = () => {
 
         var loguser = user
         
-        log("command","someone used the 'remove' command",[{key:"user",value:interaction.user.tag}])
-        log("system","user removed from ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"removed_user",value:loguser.tag}])
+        log("command","someone used the 'remove' command",[{key:"user",value:interaction.user.username}])
+        log("system","user removed from ticket",[{key:"user",value:interaction.user.username},{key:"ticket",value:interaction.channel.name},{key:"removed_user",value:loguser.username}])
 
         const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
         APIEvents.onTicketRemove(interaction.user,loguser,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})

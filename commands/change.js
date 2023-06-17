@@ -48,8 +48,8 @@ module.exports = () => {
         msg.channel.setName(newTicket.channelprefix+name)
         msg.channel.send({embeds:[bot.embeds.commands.changeEmbed(msg.author,newtype)]})
 
-        log("command","someone used the 'change' command",[{key:"user",value:msg.author.tag}])
-        log("system","ticket type changed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newtype",value:newtype}])
+        log("command","someone used the 'change' command",[{key:"user",value:msg.author.username}])
+        log("system","ticket type changed",[{key:"user",value:msg.author.username},{key:"ticket",value:name},{key:"newtype",value:newtype}])
         APIEvents.onCommand("change",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
     })
 
@@ -111,8 +111,8 @@ module.exports = () => {
         
         interaction.editReply({embeds:[bot.embeds.commands.changeEmbed(interaction.user,newtype)]})
 
-        log("command","someone used the 'change' command",[{key:"user",value:interaction.user.tag}])
-        log("system","ticket type changed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newtype",value:newtype}])
+        log("command","someone used the 'change' command",[{key:"user",value:interaction.user.username}])
+        log("system","ticket type changed",[{key:"user",value:interaction.user.username},{key:"ticket",value:name},{key:"newtype",value:newtype}])
         APIEvents.onCommand("change",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

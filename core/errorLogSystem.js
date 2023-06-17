@@ -16,7 +16,7 @@ exports.noPermsMessage = (user) => {
     .setColor(c.Red)
     .setTitle(":x: "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDescription)
-    .setFooter({iconURL:user.displayAvatarURL(),text:user.tag})
+    .setFooter({iconURL:user.displayAvatarURL(),text:user.username})
 }
 
 /**@param {discord.User} user*/
@@ -25,7 +25,7 @@ exports.noPermsDelete = (user) => {
     .setColor(c.Red)
     .setTitle(":x: "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDelete)
-    .setFooter({iconURL:user.displayAvatarURL(),text:user.tag})
+    .setFooter({iconURL:user.displayAvatarURL(),text:user.username})
 }
 
 /**@param {String} message */

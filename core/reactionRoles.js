@@ -53,7 +53,7 @@ module.exports = async () => {
                 option.roles.forEach((role) => {
                     interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
     
-                    log("system","added role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                    log("system","added role (reaction roles)",[{key:"user",value:interaction.user.username},{key:"role",value:role}])
                     const apirole = interaction.guild.roles.cache.find(r => r.id == role)
                     APIEvents.onReactionRole("add","add",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                 })
@@ -68,7 +68,7 @@ module.exports = async () => {
                 option.roles.forEach((role) => {
                     interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
                     
-                    log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                    log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.username},{key:"role",value:role}])
                     const apirole = interaction.guild.roles.cache.find(r => r.id == role)
                     APIEvents.onReactionRole("remove","remove",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                 })
@@ -84,13 +84,13 @@ module.exports = async () => {
                     if (!interaction.guild.members.cache.find(u => u.id == user.id).roles.cache.has(role)){
                         interaction.guild.members.cache.find(u => u.id == user.id).roles.add(role)
                         
-                        log("system","added role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                        log("system","added role (reaction roles)",[{key:"user",value:interaction.user.username},{key:"role",value:role}])
                         const apirole = interaction.guild.roles.cache.find(r => r.id == role)
                         APIEvents.onReactionRole("add","add&remove",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                     }else {
                         interaction.guild.members.cache.find(u => u.id == user.id).roles.remove(role)
                         
-                        log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.tag},{key:"role",value:role}])
+                        log("system","removed role (reaction roles)",[{key:"user",value:interaction.user.username},{key:"role",value:role}])
                         const apirole = interaction.guild.roles.cache.find(r => r.id == role)
                         APIEvents.onReactionRole("remove","add&remove",apirole,interaction.user,interaction.channel,interaction.guild,new Date())
                     }

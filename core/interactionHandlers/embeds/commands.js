@@ -19,7 +19,7 @@ exports.addEmbed = (addedUser,adder) => {
     return new embed()
         .setTitle("⬆️ "+l.commands.userAddedTitle.replace("{0}",addedUser.username))
         .setColor(mc)
-        .setFooter({text:adder.tag,iconURL:adder.displayAvatarURL()})
+        .setFooter({text:adder.username,iconURL:adder.displayAvatarURL()})
         .setThumbnail(addedUser.displayAvatarURL({extension:"png"}))
 }
 
@@ -33,7 +33,7 @@ exports.removeEmbed = (removedUser,remover) => {
     return new embed()
         .setTitle("⬇️ "+l.commands.userRemovedTitle.replace("{0}",removedUser.username))
         .setColor(mc)
-        .setFooter({text:remover.tag,iconURL:remover.displayAvatarURL()})
+        .setFooter({text:remover.username,iconURL:remover.displayAvatarURL()})
         .setThumbnail(removedUser.displayAvatarURL({extension:"png"}))
 }
 
@@ -47,7 +47,7 @@ exports.closeEmbed = (closer,description) => {
     const embd = new embed()
         .setTitle("🔒 "+l.commands.closeTitle)
         .setColor(mc)
-        .setFooter({text:closer.tag,iconURL:closer.displayAvatarURL()})
+        .setFooter({text:closer.username,iconURL:closer.displayAvatarURL()})
 
     if (description) embd.setDescription(description)
     return embd
@@ -63,7 +63,7 @@ exports.autocloseSignalEmbed = (closer,time) => {
     const embd = new embed()
         .setTitle("⏰ This ticket got closed by Autoclose!")
         .setColor(mc)
-        .setFooter({text:closer.tag,iconURL:closer.displayAvatarURL()})
+        .setFooter({text:closer.username,iconURL:closer.displayAvatarURL()})
         .setDescription("This ticket has been inactive for `"+time+"h`!")
     return embd
 }
@@ -77,7 +77,7 @@ exports.deleteEmbed = (deleter) => {
     return new embed()
         .setTitle("❌ "+l.commands.deleteTitle)
         .setColor(mc)
-        .setFooter({text:deleter.tag,iconURL:deleter.displayAvatarURL()})
+        .setFooter({text:deleter.username,iconURL:deleter.displayAvatarURL()})
 }
 
 /**
@@ -90,7 +90,7 @@ exports.renameEmbed = (renamer,newname) => {
     return new embed()
         .setTitle("🔄 "+l.commands.renameTitle.replace("{0}",newname))
         .setColor(mc)
-        .setFooter({text:renamer.tag,iconURL:renamer.displayAvatarURL()})
+        .setFooter({text:renamer.username,iconURL:renamer.displayAvatarURL()})
 }
 
 /**
@@ -102,7 +102,7 @@ exports.renameEmbed = (renamer,newname) => {
     return new embed()
         .setTitle("🔓 "+l.commands.reopenTitle)
         .setColor(mc)
-        .setFooter({text:reopener.tag,iconURL:reopener.displayAvatarURL()})
+        .setFooter({text:reopener.username,iconURL:reopener.displayAvatarURL()})
 }
 
 /**
@@ -115,7 +115,7 @@ exports.renameEmbed = (renamer,newname) => {
     return new embed()
         .setTitle("📌 "+l.commands.claimTitle.replace("{0}",claimer.username))
         .setColor(mc)
-        .setFooter({text:user.tag,iconURL:user.displayAvatarURL()})
+        .setFooter({text:user.username,iconURL:user.displayAvatarURL()})
 }
 
 /**
@@ -127,7 +127,7 @@ exports.renameEmbed = (renamer,newname) => {
     return new embed()
         .setTitle("🆓 "+l.commands.unclaimTitle)
         .setColor(mc)
-        .setFooter({text:unclaimer.tag,iconURL:unclaimer.displayAvatarURL()})
+        .setFooter({text:unclaimer.username,iconURL:unclaimer.displayAvatarURL()})
 }
 
 /**
@@ -140,5 +140,5 @@ exports.changeEmbed = (changer,newtype) => {
     return new embed()
         .setTitle("🔄 "+l.commands.changeTitle.replace("{0}",newtype))
         .setColor(mc)
-        .setFooter({text:changer.tag,iconURL:changer.displayAvatarURL()})
+        .setFooter({text:changer.username,iconURL:changer.displayAvatarURL()})
 }

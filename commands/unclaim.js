@@ -57,8 +57,8 @@ module.exports = () => {
 
             msg.channel.send({embeds:[bot.embeds.commands.unclaimEmbed(msg.author)]})
 
-            log("command","someone used the 'unclaim' command",[{key:"user",value:msg.author.tag}])
-            log("system","user unclaimed from ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"unclaimed_user",value:unclaimuser}])
+            log("command","someone used the 'unclaim' command",[{key:"user",value:msg.author.username}])
+            log("system","user unclaimed from ticket",[{key:"user",value:msg.author.username},{key:"ticket",value:msg.channel.name},{key:"unclaimed_user",value:unclaimuser}])
 
             
             APIEvents.onTicketUnclaim(msg.author,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
@@ -113,8 +113,8 @@ module.exports = () => {
 
             interaction.editReply({embeds:[bot.embeds.commands.unclaimEmbed(interaction.user)]})
 
-            log("command","someone used the 'unclaim' command",[{key:"user",value:interaction.user.tag}])
-            log("system","user unclaimed from ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"unclaimed_user",value:unclaimuser}])
+            log("command","someone used the 'unclaim' command",[{key:"user",value:interaction.user.username}])
+            log("system","user unclaimed from ticket",[{key:"user",value:interaction.user.username},{key:"ticket",value:interaction.channel.name},{key:"unclaimed_user",value:unclaimuser}])
 
             APIEvents.onTicketUnclaim(interaction.user,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
             APIEvents.onCommand("unclaim",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())

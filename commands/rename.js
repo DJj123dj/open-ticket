@@ -39,12 +39,11 @@ module.exports = () => {
         })
 
         if (!prefix) prefix = "noprefix-"
-
         msg.channel.setName(prefix+newname)
         msg.channel.send({embeds:[bot.embeds.commands.renameEmbed(msg.author,prefix+newname)]})
 
-        log("command","someone used the 'rename' command",[{key:"user",value:msg.author.tag}])
-        log("system","ticket renamed",[{key:"user",value:msg.author.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
+        log("command","someone used the 'rename' command",[{key:"user",value:msg.author.username}])
+        log("system","ticket renamed",[{key:"user",value:msg.author.username},{key:"ticket",value:name},{key:"newname",value:newname}])
         APIEvents.onCommand("rename",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
     })
 
@@ -79,8 +78,8 @@ module.exports = () => {
         interaction.channel.setName(prefix+newname)
         interaction.editReply({embeds:[bot.embeds.commands.renameEmbed(interaction.user,prefix+newname)]})
 
-        log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.tag}])
-        log("system","ticket renamed",[{key:"user",value:interaction.user.tag},{key:"ticket",value:name},{key:"newname",value:newname}])
+        log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.username}])
+        log("system","ticket renamed",[{key:"user",value:interaction.user.username},{key:"ticket",value:name},{key:"newname",value:newname}])
 
         APIEvents.onCommand("rename",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
     })

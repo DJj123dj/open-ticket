@@ -8,12 +8,12 @@ Support for Open Ticket is only available for the versions specified below!
 🟧 Partially Supported
 ❌ Not Supported
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 3.4.0   | :white_check_mark: |
-| 3.3.0   | 🟧                |
-| 3.2.2   | 🟧 |
-| < 3.2.2   | :x:                |
+| Version   | Supported         |
+|-----------|-------------------|
+| 3.4.1     | ✅                |
+| 3.4.0     | ✅                |
+| 3.3.3     | 🟧                |
+| < 3.3.3   | ❌                |
 
 ## Reporting a Vulnerability
 

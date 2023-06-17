@@ -1,6 +1,6 @@
 {
     "_CREDITS":"ꙅoᴎɒᎸɘƚꙅ#3744",
-    "_INFO":"This file is a translation for open ticket 3.4.0",
+    "_INFO":"This file is a translation for open ticket 3.4.1",
 
     "errors":{
         "missingArgsTitle":"Invalid Arguments!",
@@ -88,7 +88,7 @@
         "deletedby":"Διεγράφη απο",
         "closedby":"Έκλεισε από",
         
-        "modalreason":"Ποιός είναι ο λόγος για να κλείσει το εισιτήριο?",
+        "modalreason":"Γιατι να κλείσει το εισιτήριο?",
         "chooseATicket": "Δίαλεξε ενα εισιτήριο"
     },
     "transcripts":{

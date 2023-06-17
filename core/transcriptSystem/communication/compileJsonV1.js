@@ -71,7 +71,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
             const memberColor = msg.member ? msg.member.displayHexColor : "#ffffff"
             messagesArray.push({
                 author:{
-                    name:msg.author.tag,
+                    name:msg.author.username,
                     id:Number(msg.author.id),
                     color:memberColor,
                     pfp:msg.author.displayAvatarURL()
@@ -106,7 +106,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
 
             creatorname:data.ticket.creatorname,
             creatorid:Number(data.ticket.creatorid),
-            closedbyname:user.tag,
+            closedbyname:user.username,
             closedbyid:Number(user.id),
 
             closedtime:data.ticket.closedtime,

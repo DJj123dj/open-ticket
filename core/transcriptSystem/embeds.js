@@ -23,7 +23,7 @@ exports.beingprocessed = (name,id,rawprocesstime,user) => {
     const embed = new discord.EmbedBuilder()
         .setTitle("🧾 "+l.transcripts.title)
         .setColor(config.color)
-        .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
+        .setAuthor({name:user.username,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
 
         .setDescription("`"+l.transcripts.processed+"...`\n"+l.transcripts.wait+"\n\n"+l.transcripts.estimated+": "+processtime)
@@ -43,7 +43,7 @@ exports.tsready = (name,id,url,user) => {
     const embed = new discord.EmbedBuilder()
         .setTitle("🧾 "+l.transcripts.title)
         .setColor(config.color)
-        .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
+        .setAuthor({name:user.username,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
 
         if (url){
@@ -67,7 +67,7 @@ exports.tserror = (name,id,user,err) => {
     const embed = new discord.EmbedBuilder()
         .setTitle("❌ "+l.transcripts.title)
         .setColor(discord.Colors.Red)
-        .setAuthor({name:user.tag,iconURL:user.displayAvatarURL()})
+        .setAuthor({name:user.username,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
 
         const errDesc = (typeof err == "string") ? "\n"+err : ""

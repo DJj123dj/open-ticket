@@ -35,7 +35,7 @@ module.exports = () => {
         storage.set("claimData",msg.channel.id,claimingUser.id)
         
         const newEmbed = new embed(firstmsg.embeds[0].data)
-            .setFooter({text:"claimed by: "+msg.author.tag,iconURL:msg.author.displayAvatarURL()})
+            .setFooter({text:"claimed by: "+msg.author.username,iconURL:msg.author.displayAvatarURL()})
 
         if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
             firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
@@ -45,8 +45,8 @@ module.exports = () => {
 
         msg.channel.send({embeds:[bot.embeds.commands.claimEmbed(claimingUser,msg.author)]})
 
-        log("command","someone used the 'claim' command",[{key:"user",value:msg.author.tag}])
-        log("system","user claimed to ticket",[{key:"user",value:msg.author.tag},{key:"ticket",value:msg.channel.name},{key:"claimed_user",value:claimingUser.tag}])
+        log("command","someone used the 'claim' command",[{key:"user",value:msg.author.username}])
+        log("system","user claimed to ticket",[{key:"user",value:msg.author.username},{key:"ticket",value:msg.channel.name},{key:"claimed_user",value:claimingUser.username}])
 
         const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
         APIEvents.onTicketClaim(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
@@ -79,7 +79,7 @@ module.exports = () => {
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             
             const newEmbed = new embed(firstmsg.embeds[0].data)
-                .setFooter({text:"claimed by: "+user.tag,iconURL:user.displayAvatarURL()})
+                .setFooter({text:"claimed by: "+user.username,iconURL:user.displayAvatarURL()})
 
             if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
                 firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
@@ -90,8 +90,8 @@ module.exports = () => {
 
         interaction.editReply({embeds:[bot.embeds.commands.claimEmbed(user,interaction.user)]})
 
-        log("command","someone used the 'claim' command",[{key:"user",value:interaction.user.tag}])
-        log("system","user claimed to ticket",[{key:"user",value:interaction.user.tag},{key:"ticket",value:interaction.channel.name},{key:"claimed_user",value:user.tag}])
+        log("command","someone used the 'claim' command",[{key:"user",value:interaction.user.username}])
+        log("system","user claimed to ticket",[{key:"user",value:interaction.user.username},{key:"ticket",value:interaction.channel.name},{key:"claimed_user",value:user.username}])
 
         const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
         APIEvents.onTicketClaim(interaction.user,user,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
