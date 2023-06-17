@@ -65,6 +65,9 @@
         "reopen":"Re-Abrir ticket",
         "closeWithReason":"cerrar con razón"
     },
+    "modals":{
+        "emptyAnswer": "No ha sido respondido"
+    },
     "messages":{
         "closedDescription":"¡Solo admins pueden hablar ahora en este ticket!\n\n*¡Presiona en el botón de abajo para eliminar o re-abrir el ticket!*",
         "createdTitle":"¡Ticket creado!",
