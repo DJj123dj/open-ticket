@@ -44,7 +44,7 @@ module.exports = () => {
 
         require("../core/ticketActions/ticketCloser").closeManager(msg.member,msg.channel,prefix,"close",reason,true)
 
-        log("command","someone used the 'close' command",[{key:"user",value:msg.author.tag}])
+        log("command","someone used the 'close' command",[{key:"user",value:msg.author.username}])
         APIEvents.onCommand("close",true,msg.author,msg.channel,msg.guild,new Date())
         
     })
@@ -79,7 +79,7 @@ module.exports = () => {
 
         require("../core/ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"close",false,true)
 
-        log("command","someone used the 'close' command",[{key:"user",value:interaction.user.tag}])
+        log("command","someone used the 'close' command",[{key:"user",value:interaction.user.username}])
         APIEvents.onCommand("close",true,interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

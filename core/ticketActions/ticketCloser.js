@@ -63,7 +63,7 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
         if (!nomessage){
             await channel.send({content:"**"+l.messages.gettingdeleted+"**"})
         }
-        log("system","deleted a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
+        log("system","deleted a ticket",[{key:"user",value:user.username},{key:"ticket",value:channel.name}])
         pendingDelete.push(channel.id)
 
         if (!isDatabaseError) storage.set("amountOfUserTickets",getuserID,Number(storage.get("amountOfUserTickets",getuserID)) - 1)
@@ -179,7 +179,7 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
             channel.send({embeds:[embed],components:[bot.buttons.close.closeCommandRow]})
         }
 
-        log("system","closed a ticket",[{key:"user",value:user.tag},{key:"ticket",value:channel.name}])
+        log("system","closed a ticket",[{key:"user",value:user.username},{key:"ticket",value:channel.name}])
         
 
         //send api event

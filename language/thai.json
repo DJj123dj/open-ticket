@@ -1,101 +1,101 @@
 {
     "_CREDITS":"Mods HD#0661",
-    "_INFO":"This file is a translation for open ticket 3.4.0",
+    "_INFO":"This file is a translation for open ticket 3.4.1",
 
     "errors":{
         "missingArgsTitle":"อาร์กิวเมนต์ไม่ถูกต้อง!",
-        "missingArgsDescription":"อาร์กิวเมนต์ไม่ครบ",
+        "missingArgsDescription":"ขาดอาร์กิวเมนต์",
         "noPermsTitle":"ไม่มีสิทธิ์!",
-        "noPermsDescription":"คุณต้องมีสิทธิ์ ADMINISTRATOR หรืออยู่ในรายชื่อบทบาทที่อนุญาต!",
+        "noPermsDescription":"คุณต้องมีสิทธิ์ `ADMINISTRATOR` หรืออยู่ในรายการบทบาทที่ได้รับอนุญาต!",
         "noPermsDelete":"เฉพาะผู้ดูแลระบบเท่านั้นที่สามารถลบตั๋วได้!",
         "chooseFromListTitle":"ID ไม่ถูกต้อง",
         "chooseFromListDescription":"เลือกหนึ่งใน ID ด้านล่าง:",
         "boterror":"ข้อผิดพลาดของบอท!",
         "notInTicketTitle":"คุณไม่ได้อยู่ในตั๋ว!",
-        "notInTicketDescription":"คำสั่งนี้ไม่สามารถทำงานนอกตั๋วได้!",
-        "ticketDoesntExist":"ตั๋วนี้ไม่มีอยู่แล้ว!",
-        "roleDoesntExist":"บทบาทนี้ไม่มีอยู่แล้ว!",
-        "anotherOption":"ตัวเลือกนี้ไม่ใช่ตั๋วแต่เป็นประเภทอื่น!",
-        "maxAmountTitle":"จำนวนสูงสุดแล้ว!",
-        "maxAmountDescription":"คุณได้สร้างตั๋วครบจำนวนที่เราให้สร้างไว้แล้ว\nดังนั้นคุณไม่สามารถสร้างตั๋วใหม่ได้!",
-        "somethingWentWrong":"เกิดข้อผิดพลาดบางอย่าง!\nโปรดลองอีกครั้งในครั้งถัดไป!"
+        "notInTicketDescription":"คำสั่งนี้ไม่ทำงานนอกตั๋ว!",
+        "ticketDoesntExist":"ตั๋วนี้ไม่มีอีกแล้ว!",
+        "roleDoesntExist":"บทบาทนี้ไม่มีอีกแล้ว!",
+        "anotherOption":"ตัวเลือกนี้ไม่ใช่ตั๋ว แต่เป็นประเภทอื่น!",
+        "maxAmountTitle":"ถึงจำนวนสูงสุดแล้ว!",
+        "maxAmountDescription":"คุณได้ถึงจำนวนสูงสุดของตั๋วที่อนุญาต!\nดังนั้นคุณไม่สามารถสร้างใหม่ได้!",
+        "somethingWentWrong":"**มีบางอย่างผิดพลาด!**\nกรุณาลองอีกครั้งในภายหลัง!"
     },
     "commands":{
-        "userAddedTitle":"เพิ่ม {0} เข้าสู่ตั๋วนี้แล้ว!",
-        "userRemovedTitle":"นำ {0} ออกจากตั๋วนี้แล้ว!",
+        "userAddedTitle":"เพิ่ม {0} ในตั๋วนี้!",
+        "userRemovedTitle":"ลบ {0} ออกจากตั๋วนี้!",
         "renameTitle":"เปลี่ยนชื่อเป็น {0}!",
         "closeTitle":"ปิดตั๋วนี้!",
         "deleteTitle":"กำลังลบตั๋วนี้...",
-        "reopenTitle":"เปิดตั๋วนี้ใหม่!",
-    
-        "claimTitle":"ตั๋วนี้ถูกเรียกเก็บโดย {0}",
-        "unclaimTitle":"ไม่มีการเรียกเก็บตั๋วนี้อีกต่อไป!",
+        "reopenTitle":"เปิดตั๋วนี้อีกครั้ง!",
+
+        "claimTitle":"ตั๋วนี้ถูกเรียกขึ้นโดย {0}",
+        "unclaimTitle":"ตั๋วนี้ไม่ได้ถูกเรียกขึ้นแล้ว!",
         "changeTitle":"เปลี่ยนประเภทตั๋วเป็น {0}!",
-    
+
         "statsTitle":"นี่คือสถิติสำหรับ {0}!",
         "autocloseTitle":"ตั๋วนี้จะถูกปิดอัตโนมัติหลังจาก {0}!",
         "autocloseRejectTitle":"ตั๋วนี้จะไม่ถูกปิดอัตโนมัติอีกต่อไป!",
-        "autocloseWarn":"สิ่งนี้มีผลต่อตั๋วที่ไม่มีการเคลื่อนไหว!",
-    
-        "goToTicket":"ไปยังตั๋ว",
-        "ticketWarning":"Embed อยู่ในข้อความข้างล่าง",
-        "maxTicketWarning":"**คำเตือน:** _คุณสามารถสร้างตั๋วได้สูงสุด {0} ตั๋วต่อครั้ง!_"
+        "autocloseWarn":"ส่วนนี้มีผลกับตั๋วที่ไม่ได้ใช้งาน!",
+       
+        "goToTicket":"ไปที่ตั๋ว",
+        "ticketWarning":"Embed อยู่ในข้อความด้านล่าง!",
+        "maxTicketWarning":"**คำเตือน:** _คุณสามารถสร้างได้ {0} ตั๋วในครั้งเดียว!_"       
     },
     "helpMenu":{
-        "title":"คำสั่งที่มีอยู่:",
+        "title":"คำสั่งที่ใช้ได้:",
         "header1":"**ไปที่ {0} เพื่อสร้างตั๋ว!**\n\n",
         "header2":"**ใช้คำสั่ง `/new` หรือ `/ticket` เพื่อสร้างตั๋ว!**\n\n",
-    
-        "msgCmd":"แสดง Embed พร้อมปุ่ม (สำหรับแอดมินเท่านั้น)",
-        "renameCmd":"เปลี่ยนชื่อตั๋ว (ห้ามมีช่องว่าง)",
+       
+        "msgCmd":"สร้าง embed พร้อมปุ่ม (เฉพาะผู้ดูแลระบบ)",
+        "renameCmd":"เปลี่ยนชื่อตั๋ว (ไม่มีช่องว่าง)",
         "closeCmd":"ปิดตั๋ว",
         "deleteCmd":"ลบตั๋ว",
-        "addCmd":"เพิ่มผู้ใช้เข้าสู่ตั๋ว",
-        "removeCmd":"นำผู้ใช้ออกจากตั๋ว",
-        "reopenCmd":"เปิดตั๋วใหม่หลังจากถูกปิด",
+        "addCmd":"เพิ่มผู้ใช้ในตั๋ว",
+        "removeCmd":"ลบผู้ใช้ออกจากตั๋ว",
+        "reopenCmd":"เปิดตั๋วอีกครั้งหลังจากถูกปิด",
         "changeCmd":"เปลี่ยนประเภทตั๋ว",
-        "claimCmd":"เรียกเก็บตั๋ว",
-        "unclaimCmd":"ยกเลิกการเรียกเก็บตั๋ว",
-        "statsCmd":"ดูสถิติของตั๋ว",
-        "autocloseCmd":"ตั้งเวลาปิดตั๋วโดยอัตโนมัติ"
+        "claimCmd":"เรียกขึ้นตั๋ว",
+        "unclaimCmd":"ยกเลิกการเรียกขึ้นตั๋ว",
+        "statsCmd":"ดูสถิติตั๋ว",
+        "autocloseCmd":"ตั้งค่าการปิดตั๋วอัตโนมัติ"
     },
     "buttons":{
         "close":"ปิดตั๋ว",
         "delete":"ลบตั๋ว",
-        "reopen":"เปิดตั๋วใหม่",
-        "closeWithReason":"ปิดตั๋วพร้อมเหตุผล"
+        "reopen":"เปิดตั๋วอีกครั้ง",
+        "closeWithReason":"ปิดด้วยเหตุผล"       
     },
     "messages":{
-        "closedDescription":"ตอนนี้เฉพาะผู้ดูแลเท่านั้นที่สามารถพูดได้ในตั๋วนี้!\n\n*คลิกที่ปุ่มด้านล่างเพื่อลบหรือเปิดตั๋วใหม่!*",
+        "closedDescription":"เฉพาะผู้ดูแลระบบเท่านั้นที่สามารถพูดคุยในตั๋วนี้ได้!\n\n*คลิกที่ปุ่มด้านล่างเพื่อลบหรือเปิดตั๋วนี้อีกครั้ง!*",
         "createdTitle":"สร้างตั๋วแล้ว!",
-        "createdDescription":"ตั๋วของคุณถูกสร้างเรียบร้อยแล้ว คุณจะได้รับการแจ้งเตือนด้วยการพิมพ์ข้อความด้วย @ ตามตั๋วของคุณ!",
-    
+        "createdDescription":"ตั๋วของคุณถูกสร้างแล้ว คุณสามารถตรวจสอบได้จากการแจ้งเตือน!",
+       
         "newTicketDmTitle":"ตั๋วใหม่!",
-        "closedTicketDmTitle":"ตั๋วถูกปิด!",
-        "deletedTicketDmTitle":"ตั๋วถูกลบ!",
+        "closedTicketDmTitle":"ปิดตั๋ว!",
+        "deletedTicketDmTitle":"ลบตั๋ว!",
         "closedTicketDmDescription":"ตั๋วของคุณถูกปิด!",
         "deletedTicketDmDescription":"ตั๋วของคุณถูกลบ!",
-        "reopenTicketDmTitle":"ตั๋วถูกเปิดใหม่!",
-        "reopenTicketDmDescription":"ตั๋วของคุณถูกเปิดใหม่!",
-    
+        "reopenTicketDmTitle":"เปิดตั๋วอีกครั้ง!",
+        "reopenTicketDmDescription":"ตั๋วของคุณถูกเปิดอีกครั้ง!",
+       
         "chooseCategory":"เลือกหมวดหมู่:",
         "gettingdeleted":"กำลังลบตั๋ว...",
-    
+       
         "none":"ไม่มี",
         "reason":"เหตุผล",
         "createdat":"สร้างเมื่อ",
         "openedby":"เปิดโดย",
-        "deletedby":"ลบโดย",
-        "closedby":"ปิดโดย",
-    
-        "modalreason":"เหตุผลที่ต้องการปิดตั๋ว?",
-        "chooseATicket": "เลือกตั๋ว"    
+        "deletedby":"ถูกลบโดย",
+        "closedby":"ถูกปิดโดย",
+
+        "modalreason":"เหตุผลในการปิดตั๋วนี้คืออะไร?",
+        "chooseATicket": "เลือกตั๋ว"       
     },
     "transcripts":{
-        "title":"บันทึกข้อความ",
-        "processed":"กำลังประมวลผลบันทึกข้อความ",
-        "wait":"โปรดรอสักครู่!",
+        "title":"บันทึกการสนทนา",
+        "processed":"บันทึกการสนทนากำลังดำเนินการ",
+        "wait":"กรุณารอ!",
         "estimated":"เวลาโดยประมาณ",
-        "available":"บันทึกข้อความพร้อมใช้งานที่นี่"    
+        "available":"บันทึกการสนทนาสามารถใช้งานได้ที่นี่"       
     }
 }

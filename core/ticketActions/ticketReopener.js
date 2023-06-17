@@ -15,7 +15,7 @@ const pfb = discord.PermissionFlagsBits
      * @returns 
      */
 const reopenTicket = (guild,channel,user) => {
-    log("system","re-opened a ticket",[{key:"ticket",value:channel.name},{key:"user",value:user.tag}])
+    log("system","re-opened a ticket",[{key:"ticket",value:channel.name},{key:"user",value:user.username}])
 
     var permissionsArray = []
 

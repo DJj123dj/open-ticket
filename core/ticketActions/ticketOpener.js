@@ -54,7 +54,9 @@ module.exports = () => {
                     await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
                 } catch{}
             }else if (interaction.isChatInputCommand()){
-                await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                try {
+                    await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                } catch{}
             }else if (interaction.isStringSelectMenu()){
                 try {
                    await interaction.deferUpdate()
@@ -209,7 +211,7 @@ module.exports = () => {
                         firstmsg.pin()
                     })
                     
-                    log("system","created new ticket",[{key:"ticket",value:ticketName},{key:"user",value:interaction.user.tag}])
+                    log("system","created new ticket",[{key:"ticket",value:ticketName},{key:"user",value:interaction.user.username}])
                     require("../api/modules/events").onTicketOpen(interaction.user,ticketChannel,interaction.guild,new Date(),{name:ticketName,status:"open",ticketOptions:currentTicketOptions})
 
                     const channelbutton = new discord.ActionRowBuilder()
@@ -227,7 +229,13 @@ module.exports = () => {
                     }
                     catch{log("system","failed to send DM")}
 
-                    if ((interaction.isButton() && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()) interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
+                    if ((interaction.isButton() && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()){
+                        if (interaction.deferred){
+                            interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
+                        }else{
+                            interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
+                        }
+                    }
                     
                 })
             }else{

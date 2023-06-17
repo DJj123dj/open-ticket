@@ -176,28 +176,30 @@ exports.liveStatusUploadManager = async (err) => {
                 const result = await uploadLiveStatus({
                     bot:{
                         id:client.user.id,
-                        name:client.user.tag,
+                        name:client.user.username,
                         pfp:client.user.displayAvatarURL()
                     },
                     error:err,
                     openticket:{
                         config:{
-                            messages:config.messages,
-                            options:config.options,
-                            transcripts:bot.tsconfig,
-                            system:config.system
+                            //TEMPORARY SOLUTION => AXIOS 414 ERROR!
+                            //messages:config.messages,
+                            //options:config.options,
+                            //transcripts:bot.tsconfig,
+                            //system:config.system
                         },
                         language:config.languageFile,
-                        version:"3.4.0",
+                        version:"3.4.1",
                         slashcmds:slashMode,
                         transcripts:transcriptMode,
                         plugins:fs.readdirSync("./plugins"),
                         pluginload:globalPluginData
                     },
                     details:{
-                        errortime:new Date().getTime(),
-                        actions:this.actionRecorder,
-                        database:fs.readFileSync("./storage/database.json").toString()
+                        errortime:new Date().getTime()
+                        //TEMPORARY SOLUTION => AXIOS 414 ERROR!
+                        //actions:this.actionRecorder,
+                        //database:fs.readFileSync("./storage/database.json").toString()
                     }
                 })
                 if (!result){

@@ -85,7 +85,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
                 },
                 ticket:{
                     creatorid:ticketopener.id,
-                    creatorname:ticketopener.tag,
+                    creatorname:ticketopener.username,
                     creatorpfp:ticketopener.displayAvatarURL(),
 
                     openedtime:opentime.getTime(),

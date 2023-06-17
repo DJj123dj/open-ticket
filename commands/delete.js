@@ -38,7 +38,7 @@ module.exports = () => {
 
         require("../core/ticketActions/ticketCloser").closeManager(msg.member,msg.channel,prefix,"delete",false,true)
 
-        log("command","someone used the 'delete' command",[{key:"user",value:msg.author.tag}])
+        log("command","someone used the 'delete' command",[{key:"user",value:msg.author.username}])
         APIEvents.onCommand("delete",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         
     })
@@ -72,7 +72,7 @@ module.exports = () => {
 
         require("../core/ticketActions/ticketCloser").closeManager(interaction.member,interaction.channel,prefix,"delete",false,true)
 
-        log("command","someone used the 'delete' command",[{key:"user",value:interaction.user.tag}])
+        log("command","someone used the 'delete' command",[{key:"user",value:interaction.user.username}])
         APIEvents.onCommand("delete",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

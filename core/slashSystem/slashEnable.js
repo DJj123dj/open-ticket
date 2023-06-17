@@ -33,7 +33,7 @@ module.exports = async (invisible) => {
     //process.stdout.write("[status] there are "+chalk.blue("0 out of 10")+" commands ready! (this can take up to 40 seconds)")
     if (!invisible){
         setInterval(() => {
-            process.stdout.cursorTo(0)
+            if (process.stdout && process.stdout.cursorTo) process.stdout.cursorTo(0)
             process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 13")+" commands ready! (this can take up to 40 seconds)")
             if (readystats >= 13){
                 console.log(chalk.green("\nready!"))

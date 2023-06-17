@@ -47,7 +47,7 @@ exports.createTranscript = async (messagecollection,channel,backup) => {
             })
             const filestring = fileurls.length > 0 ? fileurls.join("\n")+"\n" : ""
             const msgstats = "files: "+msg.attachments.size+", embeds: "+msg.embeds.length
-            filearray.push("["+timestamp.getDate()+"/"+timestamp.getMonth()+"/"+timestamp.getFullYear()+", "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds()+"|"+msg.author.tag+"] ["+msgstats+"]\n"+content+"\n"+filestring)
+            filearray.push("["+timestamp.getDate()+"/"+timestamp.getMonth()+"/"+timestamp.getFullYear()+", "+timestamp.getHours()+":"+timestamp.getMinutes()+":"+timestamp.getSeconds()+"|"+msg.author.username+"] ["+msgstats+"]\n"+content+"\n"+filestring)
         })
 
         if (filearray.length < 2) filearray.push("transcript is empty")
