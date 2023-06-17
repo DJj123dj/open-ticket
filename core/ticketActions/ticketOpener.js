@@ -140,7 +140,7 @@ module.exports = () => {
                             try {
                                 const adminrole = guild.roles.cache.find(r => r.id == role)
                                 if (!adminrole) return
-                            
+
                                 permissionsArray.push({
                                     id:adminrole,
                                     type:"role",
