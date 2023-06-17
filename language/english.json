@@ -65,6 +65,9 @@
         "reopen":"Re-Open Ticket",
         "closeWithReason":"close with reason"
     },
+    "modals":{
+        "emptyAnswer": "No answer was given"
+    },
     "messages":{
         "closedDescription":"Only admins can talk in this ticket now!\n\n*Click on the button below to delete or to re-open this ticket!*",
         "createdTitle":"Ticket Created!",
