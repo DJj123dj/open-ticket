@@ -14,7 +14,7 @@ const DISABLE = require("../core/api/api.json").disable
 module.exports = () => {
     bot.errorLog.log("debug","COMMANDS: loaded claim.js")
     
-    if (!DISABLE.commands.text.claim) client.on("messageCreate",msg => {
+    if (!DISABLE.commands.text.claim) client.on("messageCreate", async msg => {
         if (!msg.content.startsWith(config.prefix+"claim")) return
         var user = msg.mentions.users.first()
         
@@ -34,14 +34,19 @@ module.exports = () => {
         bot.hiddenData.writeHiddenData(msg.channel.id,hiddendata)
         storage.set("claimData",msg.channel.id,claimingUser.id)
         
-        const newEmbed = new embed(firstmsg.embeds[0].data)
-            .setFooter({text:"claimed by: "+msg.author.username,iconURL:msg.author.displayAvatarURL()})
+        await msg.channel.messages.fetchPinned().then(msglist => {
+            var firstmsg = msglist.last()
+            if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+            
+            const newEmbed = new embed(firstmsg.embeds[0].data)
+                .setFooter({text:"claimed by: "+msg.author.username,iconURL:msg.author.displayAvatarURL()})
 
-        if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
-            firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
-        }else{
-            firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
-        }
+            if (firstmsg.components[0].components[1] && firstmsg.components[0].components[1].disabled){
+                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowDisabledNoClaim],embeds:[newEmbed]})
+            }else{
+                firstmsg.edit({components:[bot.buttons.firstmsg.firstmsgRowNormalNoClaim],embeds:[newEmbed]})
+            }
+        })
 
         msg.channel.send({embeds:[bot.embeds.commands.claimEmbed(claimingUser,msg.author)]})
 
@@ -74,7 +79,7 @@ module.exports = () => {
         bot.hiddenData.writeHiddenData(interaction.channel.id,hiddendata)
         storage.set("claimData",interaction.channel.id,user.id)
         
-        interaction.channel.messages.fetchPinned().then(msglist => {
+        await interaction.channel.messages.fetchPinned().then(msglist => {
             var firstmsg = msglist.last()
             if (firstmsg == undefined || firstmsg.author.id != client.user.id) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
             

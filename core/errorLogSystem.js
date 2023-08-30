@@ -58,6 +58,11 @@ exports.invalidIdChooseFromList = (list,message) => {
     return x
 }
 
+exports.failedRenameChannel = new embed()
+    .setColor(c.Red)
+    .setTitle(":x: Failed to rename channel")
+    .setDescription("Discord channels can only be renamed twice every 10 minutes! Open Ticket can't do anything about this error!")
+
 exports.notInATicket = new embed()
     .setColor(c.Red)
     .setTitle(":x: "+l.errors.notInTicketTitle)
