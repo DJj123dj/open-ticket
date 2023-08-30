@@ -1,6 +1,13 @@
+# Coming Soon: OPEN TICKET v4.0 🎉
+Open Ticket v4 is open ticket, but writting from the ground up! For the first time ever!
+There will be a massive improvement with the API that allows for plugins 30 times more advanced than the current ones! It will also be more stable and faster!
+
+It is expected to have a public beta release somewhere around 30 September!
+<hr>
+
 <img src="https://www.dj-dj.be/wp-content/uploads/2023/02/open-ticket-cropped.png" alt="Open Ticket" width="600px">
 
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.4.2-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.4.2)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.4.3-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.4.3)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
 
 ### Open Ticket
 Open Ticket is the most customisable discord ticket bot that you will ever find! There are more than 150 options to customise in the config! This includes html transcripts, unlimited amount of tickets, custom embeds & more! Did you know that even the html transcripts are highly customisable? Don't wait and check it out! If you're having trouble setting the bot up, feel free to join our support server and we will help you further!
@@ -64,7 +71,7 @@ Translators
 |Ukrainian     |anderskiy                |
 
 ## links
-current version: _v3.4.2_
+current version: _v3.4.3_
 </br>changelog: [click here](https://docs.openticket.dj-dj.be/other/changelog)
 </br>documentation: [click here](https://docs.openticket.dj-dj.be/quick-start)
 

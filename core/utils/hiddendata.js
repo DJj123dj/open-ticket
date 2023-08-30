@@ -10,7 +10,7 @@ const storage = require("../../index").storage
 
 exports.readHiddenData = (channelid) => {
     const content = storage.get("HIDDENDATA",channelid)
-    if (!content) return {type:"",data:[],status:false}
+    if (!content) return []
 
     try {
         return JSON.parse(content)

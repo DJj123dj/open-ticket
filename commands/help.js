@@ -38,7 +38,7 @@ module.exports = () => {
         }
 
         if (args[1]){
-            if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove") && !args[1].startsWith("rename") && !args[1].startsWith("reopen")){
+            if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove") && !args[1].startsWith("rename") && !args[1].startsWith("reopen")  && !args[1].startsWith("change") && !args[1].startsWith("claim") && !args[1].startsWith("unclaim")){
                 msg.channel.send({embeds:[helpEmbed]})
                 log("command","someone used the 'help' command",[{key:"user",value:msg.author.username}])
                 APIEvents.onCommand("help",true,msg.author,msg.channel,msg.guild,new Date())
