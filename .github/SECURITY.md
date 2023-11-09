@@ -10,11 +10,10 @@ Support for Open Ticket is only available for the versions specified below!
 
 | Version   | Supported         |
 |-----------|-------------------|
-| 3.4.3     | ✅                |
+| 3.4.4     | ✅                |
 | 3.4.2     | ✅                |
-| 3.4.1     | ✅                |
-| 3.4.0     | 🟧                |
-| < 3.4.0   | ❌                |
+| 3.4.1     | 🟧                |
+| < 3.4.1   | ❌                |
 
 ## Reporting a Vulnerability
 
@@ -34,7 +33,7 @@ Don't just report the error and never reply again! It can be possible that we ne
 Visit [Contributing.md](/.github/CONTRIBUTING.md) for rules about translating & adding features!
 
 <br>
-SECURITY POLICY - Last updated: 23/3/2023<br>
+SECURITY POLICY - Last updated: 9/11/2023<br>
 © DJdj Development<br><br>
 Website: https://www.dj-dj.be <br>
 Discord: https://discord.dj-dj.be <br>
