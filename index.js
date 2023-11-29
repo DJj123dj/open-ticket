@@ -28,7 +28,7 @@
 
     INFORMATION:
     ============
-    Open Ticket v3.4.4  -  © DJdj Development
+    Open Ticket v3.5.0  -  © DJdj Development
 
     discord: https://discord.dj-dj.be
     website: https://www.dj-dj.be
@@ -87,8 +87,11 @@ exports.language = language
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded language")
 
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded config")
-exports.storage = require('./core/dynamicdatabase/storage')
+exports.storage = require('./core/dynamicdatabase/storage').main
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded storage")
+
+exports.statsStorage = require('./core/dynamicdatabase/storage').stats
+if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded stats storage")
 
 exports.errorLog = require("./core/errorLogSystem")
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","LOADED LOGGING SYSTEM")
@@ -118,17 +121,19 @@ client.on('ready',async () => {
         time:new Date().getTime(),
         type:"client.loggedin.success"
     })
-    var statusSet = false
     const setStatus = (type,text) => {
-        if (statusSet == true) return
-        const getTypeEnum = (text) => {
-            if (text.toLowerCase() == "playing") return discord.ActivityType.Playing
-            else if (text.toLowerCase() == "listening") return discord.ActivityType.Listening
-            else if (text.toLowerCase() == "watching") return discord.ActivityType.Watching
+        const getTypeEnum = (type) => {
+            if (type.toLowerCase() == "playing") return discord.ActivityType.Playing
+            else if (type.toLowerCase() == "listening") return discord.ActivityType.Listening
+            else if (type.toLowerCase() == "watching") return discord.ActivityType.Watching
+            else if (type.toLowerCase() == "custom") return discord.ActivityType.Custom
             else return discord.ActivityType.Listening
         }
-        client.user.setActivity(text,{type:getTypeEnum(type)})
-        statusSet = true
+        client.user.setActivity({
+            type:getTypeEnum(type),
+            state:(text.toLowerCase() == "custom") ? text : undefined,
+            name:text
+        })
     }
     this.errorLog.log("debug","bot status loaded")
     this.actionRecorder.push({
@@ -153,6 +158,7 @@ client.on('ready',async () => {
         this.errorLog.log("debug","loaded console interface")
 
         if (config.status.enabled){
+            console.log("TEST STATUS (delete me)")
             setStatus(config.status.type,config.status.text)
         }
 

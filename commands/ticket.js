@@ -23,7 +23,7 @@ module.exports = () => {
         if (msg.content.startsWith(config.prefix+"msg"||config.prefix+"message")){
             
             if (!msg.guild) return
-            if (!permsChecker.command(msg.author.id,msg.guild.id)){
+            if (!permsChecker.global(msg.author.id,msg.guild.id)){
                 permsChecker.sendUserNoPerms(msg.author)
                 return
             }
@@ -39,7 +39,7 @@ module.exports = () => {
             msg.channel.send({embeds:[embed],components:componentRows})
             
             log("command","someone used the 'message' command",[{key:"user",value:msg.author.username},{key:"id",value:id}])
-            APIEvents.onCommand("message",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
+            APIEvents.onCommand("message",permsChecker.global(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
         }
     })
 
@@ -48,7 +48,7 @@ module.exports = () => {
         if (interaction.commandName != "message") return
 
             if (!interaction.guild) return
-            if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+            if (!permsChecker.global(interaction.user.id,interaction.guild.id)){
                 permsChecker.sendUserNoPerms(interaction.user)
                 return
             }
@@ -64,7 +64,7 @@ module.exports = () => {
             
             log("command","someone used the 'message' command",[{key:"user",value:interaction.user.username},{key:"id",value:id}])
 
-            APIEvents.onCommand("message",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
+            APIEvents.onCommand("message",permsChecker.global(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
         
     })
 }

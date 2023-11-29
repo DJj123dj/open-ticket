@@ -31,8 +31,12 @@ module.exports = () => {
 
         const firstcomponents = interaction.message.components
 
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
         if (config.system.closeMode == "adminonly"){
-            if (!permissionChecker.command(interaction.user.id,interaction.guild.id)){
+            if (!permissionChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
                 if (!permissionChecker.sendUserNoPerms(interaction.user)){
                     permissionChecker.sendChannelNoPerms(interaction.channel,interaction.user)
                 }

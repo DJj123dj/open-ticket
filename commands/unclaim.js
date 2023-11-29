@@ -18,17 +18,18 @@ module.exports = () => {
         if (!msg.content.startsWith(config.prefix+"unclaim")) return
 
         if (!msg.guild) return
-        if (!permsChecker.command(msg.author.id,msg.guild.id)){
+
+        const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
+        if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(msg.author.id,msg.guild.id,ticketId)){
             permsChecker.sendUserNoPerms(msg.author)
             return
         }
 
         const unclaimuser = storage.get("claimData",msg.channel.id)
         if (!unclaimuser || unclaimuser == "false") return msg.channel.send({embeds:[bot.errorLog.serverError("This ticket isn't claimed yet!")]})
-
-        const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
-        if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
-        const ticketId = hiddendata.find(d => d.key == "type").value
 
         hiddendata.push({key:"claimedby",value:"false"})
         bot.hiddenData.writeHiddenData(msg.channel.id,hiddendata)
@@ -62,7 +63,7 @@ module.exports = () => {
 
             
             APIEvents.onTicketUnclaim(msg.author,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
-            APIEvents.onCommand("unclaim",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
+            APIEvents.onCommand("unclaim",permsChecker.ticket(msg.author.id,msg.guild.id,ticketId),msg.author,msg.channel,msg.guild,new Date())
         }) 
     })
 
@@ -71,7 +72,12 @@ module.exports = () => {
         if (interaction.commandName != "unclaim") return
 
         if (!interaction.guild) return
-        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
             permsChecker.sendUserNoPerms(interaction.user)
             interaction.reply({content:":x: "+l.errors.noPermsTitle,ephemeral:true})
             return
@@ -81,10 +87,6 @@ module.exports = () => {
 
         const unclaimuser = storage.get("claimData",interaction.channel.id)
         if (!unclaimuser || unclaimuser == "false") return interaction.editReply({embeds:[bot.errorLog.serverError("This ticket isn't claimed yet!")]})
-
-        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
-        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-        const ticketId = hiddendata.find(d => d.key == "type").value
 
         hiddendata.push({key:"claimedby",value:"false"})
         bot.hiddenData.writeHiddenData(interaction.channel.id,hiddendata)
@@ -117,7 +119,7 @@ module.exports = () => {
             log("system","user unclaimed from ticket",[{key:"user",value:interaction.user.username},{key:"ticket",value:interaction.channel.name},{key:"unclaimed_user",value:unclaimuser}])
 
             APIEvents.onTicketUnclaim(interaction.user,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
-            APIEvents.onCommand("unclaim",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
+            APIEvents.onCommand("unclaim",permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId),interaction.user,interaction.channel,interaction.guild,new Date())
         })
     })
 }

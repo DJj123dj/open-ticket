@@ -51,9 +51,14 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
 
     if (mode == "delete" || mode == "deletenotranscript"){
         //delete
+        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
+        if (hiddendata.length < 1) return channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
+
         //check perms
         if (!guild) return
-        if (!permsChecker.command(user.id,guild.id)){
+        if (!permsChecker.ticket(user.id,guild.id,ticketId)){
             permsChecker.sendUserNoPerms(user)
             return
         }
@@ -72,13 +77,6 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
         storage.delete("autocloseTickets",channel.id)
         if (Number(storage.get("amountOfUserTickets",getuserID)) < 0) storage.set("amountOfUserTickets",getuserID,0)
 
-        //getID & send DM & send api event
-
-        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
-        if (hiddendata.length < 1) return channel.send({embeds:[bot.errorLog.notInATicket]})
-        const ticketId = hiddendata.find(d => d.key == "type").value
-        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
-
         require("../api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
         hiddendata.push({key:"pendingdelete",value:"true"})
@@ -86,10 +84,15 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
 
     }else if (mode == "close"){
         //close
+        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
+        if (hiddendata.length < 1) return channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
+
         //check perms
         if (config.system.closeMode == "adminonly"){
             if (!guild) return
-            if (!permsChecker.command(user.id,guild.id)){
+            if (!permsChecker.ticket(user.id,guild.id,ticketId)){
                 permsChecker.sendUserNoPerms(user)
                 return
             }
@@ -128,16 +131,6 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
                 log("system","invalid role! At 'config.json => main_adminroles:"+index)
             }
         })
-
-        //ticketinfo error
-        const ticketInfoError = bot.errorLog.serverError("Unable to detect ticket information.\n*(First message that this bot sends)*\n\n__**Possible reasons:**__\n- you unpinned the first message\n- the first message is deleted\n- it has been unpinned & repinned after another message has been pinned.\n\n__**Possible solutions:**__\n- unpin all messages in this channel & repin the first message that this bot sent.\nIf this doesn't work, just delete the ticket manually!")
-
-        //add ticket adminroles
-
-        const hiddendata = bot.hiddenData.readHiddenData(channel.id)
-        if (hiddendata.length < 1) return channel.send({embeds:[bot.errorLog.notInATicket]})
-        const ticketId = hiddendata.find(d => d.key == "type").value
-        const ticketData = require("../utils/configParser").getTicketById(ticketId,true)
 
         if (!ticketData) return
         if (ticketData.closedCategory.enable){

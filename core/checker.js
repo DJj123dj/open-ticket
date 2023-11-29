@@ -434,7 +434,7 @@ exports.checker = async () => {
     //status:
         checkType(config.status.enabled,"boolean","status/enabled")
         if (config.status.enabled){
-            if (config.status.type != "PLAYING" && config.status.type != "LISTENING" && config.status.type != "WATCHING"){
+            if (config.status.type != "PLAYING" && config.status.type != "LISTENING" && config.status.type != "WATCHING" && config.status.type != "CUSTOM"){
                 createError("'status/type' | not a valid status type! (LISTENING,WATCHING,PLAYING)")
             }
             if (config.status.text.length < 1){

@@ -12,17 +12,44 @@ const storage = bot.storage
  * @param {String} guildid
  * @returns {Boolean} has permissions?
  */
-exports.command = (memberid,guildid) => {
+exports.global = (memberid,guildid) => {
     bot.actionRecorder.push({
         category:"ot.managers.permissionChecker",
         file:"./core/permissionChecker.js",
         time:new Date().getTime(),
-        type:"command"
+        type:"global"
     })
     const permsmember = client.guilds.cache.find(g => g.id == guildid).members.cache.find(m => m.id == memberid)
     if (config.adminRoles.some((item)=>{return permsmember.roles.cache.has(item)}) == false && !permsmember.permissions.has("Administrator") && !permsmember.permissions.has("ManageGuild")){
         return false
     }else {return true}
+}
+
+/**
+ * 
+ * @param {String} memberid
+ * @param {String} guildid
+ * @param {String} optionid
+ * @returns {Boolean} has permissions?
+ */
+exports.ticket = (memberid,guildid,optionid) => {
+    bot.actionRecorder.push({
+        category:"ot.managers.permissionChecker",
+        file:"./core/permissionChecker.js",
+        time:new Date().getTime(),
+        type:"ticket"
+    })
+
+    const option = config.options.find((opt) => opt.id == optionid)
+    const ticketadmins = option && option.adminroles ? option.adminroles : []
+    const permsmember = client.guilds.cache.find(g => g.id == guildid).members.cache.find(m => m.id == memberid)
+
+    const isGlobalAdmin = config.adminRoles.some((item)=>{return permsmember.roles.cache.has(item)})
+    const isTicketAdmin = ticketadmins.some((item)=>{return permsmember.roles.cache.has(item)})
+    const hasAdministrator = permsmember.permissions.has("Administrator")
+    const hasManageGuild = permsmember.permissions.has("ManageGuild")
+
+    return isGlobalAdmin || isTicketAdmin || hasAdministrator || hasManageGuild
 }
 
 /**
