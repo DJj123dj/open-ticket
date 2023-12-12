@@ -16,6 +16,12 @@ function setData(data){
     fs.writeFileSync(location,JSON.stringify(data,null,"\t"))
 }
 
+/**
+ * @param {String} category 
+ * @param {String} key 
+ * @param {String|Boolean|Number} value
+ * @returns {Boolean} exists?
+ */
 exports.set = (category,key,value) => {
         const currentData = getData()
         const exists = currentData.find((d) => (d.category == category) && (d.key == key)) ? true : false
@@ -39,18 +45,17 @@ exports.set = (category,key,value) => {
 /**
  * @param {String} category 
  * @param {String} key 
- * @returns {String|false}
+ * @returns {String|Boolean|Number|undefined}
  */
 exports.get = (category,key) => {
     const currentData = getData()
-    const tempresult = currentData.find((d) => (d.category == category) && (d.key == key))
-    const result = tempresult ? tempresult.value : false
+    const result = currentData.find((d) => (d.category == category) && (d.key == key))
     return result
 }
 
 /**
  * @param {String} category 
- * @returns {[{key:String,value:String}]|false}
+ * @returns {[{key:String,value:String|Boolean|Number}]|false}
  */
 exports.getCategory = (category) => {
     const currentData = getData()
@@ -61,7 +66,7 @@ exports.getCategory = (category) => {
 /**
  * @param {String} category 
  * @param {String} key 
- * @param {String} value 
+ * @returns {Boolean} exists?
  */
 exports.delete = (category,key) => {
     const currentData = getData()
