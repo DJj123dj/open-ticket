@@ -35,6 +35,10 @@ const checkAvailability = async () => {
  */
 module.exports = async (messages,guild,channel,user,reason) => {
     require("../api/modules/events").onTranscriptCreation(messages,channel,guild,new Date())
+    bot.statsManager.updateGlobalStats("TRANSCRIPTS_CREATED",(current) => {
+        if (typeof current != "undefined") return current+1
+        return 1
+    })
     const msglist = await channel.messages.fetchPinned()
 
     const chName = channel.name

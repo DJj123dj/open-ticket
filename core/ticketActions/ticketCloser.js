@@ -79,6 +79,19 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
 
         require("../api/modules/events").onTicketDelete(user,channel,guild,new Date(),{name:channel.name,status:"deleted",ticketOptions:ticketData})
 
+        //STATS
+        bot.statsManager.updateGlobalStats("TICKETS_DELETED",(current) => {
+            if (typeof current != "undefined") return current+1
+            return 1
+        })
+        bot.statsManager.updateUserStats("TICKETS_DELETED",user.id,(current) => {
+            if (typeof current != "undefined") return current+1
+            return 1
+        })
+        bot.statsManager.removeStats("ticket","CREATED_BY",channel.id)
+        bot.statsManager.removeStats("ticket","CREATED_AT",channel.id)
+        bot.statsManager.removeStats("ticket","STATUS",channel.id)
+
         hiddendata.push({key:"pendingdelete",value:"true"})
         bot.hiddenData.writeHiddenData(channel.id,hiddendata)
 
@@ -177,13 +190,26 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
 
         //send api event
         require("../api/modules/events").onTicketClose(user,channel,guild,new Date(),{name:channel.name,status:"closed",ticketOptions:ticketData},newReason)
+
+        //STATS
+        bot.statsManager.updateGlobalStats("TICKETS_CLOSED",(current) => {
+            if (typeof current != "undefined") return current+1
+            return 1
+        })
+        bot.statsManager.updateUserStats("TICKETS_CLOSED",user.id,(current) => {
+            if (typeof current != "undefined") return current+1
+            return 1
+        })
+        bot.statsManager.updateTicketStats("STATUS",channel.id,(current) => {
+            return "closed"
+        })
     }
 
     /**
      * 
      * @param {discord.TextChannel} channel 
      * @param {Number} limit 
-     * @returns 
+     * @returns {Promise<discord.Message[]>} 
      */
     const getmessages = async (channel,limit) => {
         const final = []

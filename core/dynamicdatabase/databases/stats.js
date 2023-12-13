@@ -50,7 +50,7 @@ exports.set = (category,key,value) => {
 exports.get = (category,key) => {
     const currentData = getData()
     const result = currentData.find((d) => (d.category == category) && (d.key == key))
-    return result
+    return (result) ? result.value : undefined
 }
 
 /**

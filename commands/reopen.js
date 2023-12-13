@@ -39,7 +39,7 @@ module.exports = () => {
         if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
 
-        if (hiddendata.data.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
+        if (hiddendata.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
 
         await interaction.editReply({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
 

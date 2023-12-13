@@ -111,7 +111,8 @@ exports.buttons = {
 }
 this.errorLog.log("debug","loaded buttons & embeds")
 
-require("./core/statsManager").startupStatsManager()
+exports.statsManager = require("./core/statsManager")
+this.statsManager.startupStatsManager()
 
 //START CLIENT LOGIN PROCESS
 client.on('ready',async () => {

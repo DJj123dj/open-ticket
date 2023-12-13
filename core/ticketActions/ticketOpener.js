@@ -214,6 +214,25 @@ module.exports = () => {
                     log("system","created new ticket",[{key:"ticket",value:ticketName},{key:"user",value:interaction.user.username}])
                     require("../api/modules/events").onTicketOpen(interaction.user,ticketChannel,interaction.guild,new Date(),{name:ticketName,status:"open",ticketOptions:currentTicketOptions})
 
+                    //STATS:
+                    bot.statsManager.updateGlobalStats("TICKETS_CREATED",(current) => {
+                        if (typeof current != "undefined") return current+1
+                        return 1
+                    })
+                    bot.statsManager.updateUserStats("TICKETS_CREATED",interaction.user.id,(current) => {
+                        if (typeof current != "undefined") return current+1
+                        return 1
+                    })
+                    bot.statsManager.updateTicketStats("CREATED_BY",ticketChannel.id,(current) => {
+                        return interaction.user.id
+                    })
+                    bot.statsManager.updateTicketStats("CREATED_AT",ticketChannel.id,(current) => {
+                        return new Date().getTime()
+                    })
+                    bot.statsManager.updateTicketStats("STATUS",ticketChannel.id,(current) => {
+                        return "open"
+                    })
+
                     const channelbutton = new discord.ActionRowBuilder()
                         .addComponents([
                             new discord.ButtonBuilder()
