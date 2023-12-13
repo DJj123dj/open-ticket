@@ -17,7 +17,7 @@ exports.upload = async (json) => {
         const data = encodeURIComponent(JSON.stringify(json))
 
         try {
-        const res = await axios.post("https://transcripts.dj-dj.be/api/upload?auth=openticketTRANSCRIPT1234&version=2",JSON.stringify(json))
+        const res = await axios.post("https://apis.dj-dj.be/transcripts/upload?auth=openticketTRANSCRIPT1234&version=2",JSON.stringify(json))
         if (res.status != 200) resolve(false)
         
         resolve(res.data)

@@ -27,6 +27,10 @@
             "valueTextColor":"#ffffff",
             "hideBackgroundColor":"#40444a",
             "hideTextColor":"#ffffff"
+        },
+        "favicon":{
+            "enableCustomFavicon":false,
+            "imageUrl":"https://transcripts.dj-dj.be/favicon.png"
         }
     }
 }

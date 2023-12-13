@@ -13,6 +13,7 @@ storage/dynamicDB/
 storage/slashcmdEnabled.txt
 storage/database.json
 storage/tsdatabase.json
+storage/stats.json
 storage/.DS_Store
 .vscode/
 livestatus.json

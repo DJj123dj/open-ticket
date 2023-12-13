@@ -10,7 +10,7 @@ const version = require("../info.json").version
 
 const mentions = require("./mentions").replacementions
 
-/**@typedef {{background:{enableCustomBackground:Boolean, backgroundModus:"color"|"image", backgroundData:String}, header:{enableCustomHeader:Boolean, decoColor:String, backgroundColor:String, textColor:String}, stats:{enableCustomStats:Boolean, backgroundColor:String, keyTextColor:String, valueTextColor:String, hideBackgroundColor:String, hideTextColor:String}} OTTranscriptStyle} */
+/**@typedef {{background:{enableCustomBackground:Boolean, backgroundModus:"color"|"image", backgroundData:String}, header:{enableCustomHeader:Boolean, decoColor:String, backgroundColor:String, textColor:String}, stats:{enableCustomStats:Boolean, backgroundColor:String, keyTextColor:String, valueTextColor:String, hideBackgroundColor:String, hideTextColor:String}, favicon:{enableCustomFavicon:Boolean, imageUrl:String}} OTTranscriptStyle} */
 /**@typedef {{name:String, id:String, pfp:String}} OTTranscriptBot */
 /**@typedef {{name:String, id:String, guildname:String, guildid:String, guildinvite:String|false, creatorname:String, creatorid:String, closedbyname:String, closedbyid:String, claimedname:String, claimedid:String, creatorpfp:String, closedbypfp:String, claimedpfp:String, closedtime:Number, openedtime:Number, components:{messages:1, files:1, embeds:1, reactions:1, interactions:{dropdowns:1, buttons:1, total:1}, attachments:{invites:1, images:1, gifs:1, stickers:1}}, roleColors:[{id:String,color:String}] }} OTTranscriptTicket */
 /**@typedef {{author:{name:String, id:String, color:String, pfp:String, bot:Boolean, verifiedBot:Boolean, system:Boolean}, content:String|false, timestamp:Number, type:"normal", important:Boolean, edited:Boolean, embeds:[{title:String|false, description:String|false, authorimg:String|false, authortext:String|false, footerimg:String|false, footertext:String|false, color:String, image:String|false, thumbnail:String|false, url:String|false, fields:[{name:String,value:String,inline:Boolean}]}], attachments:[{type:"FILE", name:String, fileType:String, size:String, url:String}, {type:"FILE:image", name:String, fileType:String, size:String, url:String}, {type:"URL:invite", guildId:String, guildName:String, guildSize:Number, guildOnline:Number, image:String, url:String}, {type:"URL:gif", url:String}, {type:"BUILDIN:sticker", name:String, url:String}], components:[{type:"buttons", buttons:[{type:"interaction"|"url", label:String|false, icon:String|false, color:"gray"|"green"|"red"|"blue", id:String|false, url:String|false, disabled:Boolean}]}, {type:"dropdown", placeholder:String|false, options:[{label:String|false, icon:String|false, description:String|false, id:String|false}]}, {type:"reactions", reactions:[{amount:1, emoji:String, type:"svg"|"image"|"gif"}]}], reply:{type:"reply"|"command"|false, user:{name:String, id:String, color:String, pfp:String, bot:Boolean, verifiedBot:Boolean, system:Boolean}, replyOptions:{content:String, messageId:String, channelId:String, guildId:String}, commandOptions:{interactionName:String, interactionId:String}}}} OTTranscriptMessage */
@@ -288,6 +288,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
     const dsb = data.style.background
     const dsh = data.style.header
     const dss = data.style.stats
+    const dsf = data.style.favicon
 
     /**@type {OTTranscriptCompileInput} */
     const result = {
@@ -382,8 +383,8 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
                 name:"test-server"
             },
             customFavicon:{
-                enabled:false,
-                image:"https://openticket.dj-dj.be"
+                enabled:dsf.enableCustomFavicon,
+                image:(dsf.imageUrl) ? dsf.imageUrl : "https://openticket.dj-dj.be"
             },
             additionalFlags:[]
         }

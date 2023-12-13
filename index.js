@@ -17,13 +17,10 @@
     
     SUGGESTING NEW FEATURES:
     =====================
-    Open Ticket is a community project. This means that 
-    almost all feature ideas come from our community. 
-    Are you missing something you want in open ticket? 
-    Then join our Discord server and we will add it (if possible)
-
-    Did you know that 80% of all features in OT were ideas from our community?
-
+    Open Ticket is an open-source community project!
+    Because of this, almost 80% of all features in OT were ideas from our community!
+    Feel free to add new ideas in our discord server
+    or via github issues! Translations are always welcome!
 
 
     INFORMATION:
@@ -32,7 +29,7 @@
 
     discord: https://discord.dj-dj.be
     website: https://www.dj-dj.be
-    github: https://openticket.dj-dj.be
+    github: https://github.openticket.dj-dj.be
     support e-mail: support@dj-dj.be
 
     Config files:
@@ -60,6 +57,7 @@ exports.client = client
 client.setMaxListeners(50)
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","created client")
 
+//LOAD CONFIG
 var tempconfig = require("./config.json")
 /**@type {Boolean} */
 var isDevConfig = false
@@ -75,15 +73,16 @@ if (process.argv.some((v) => v == "--devconfig")){
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded flags")
 
 exports.developerConfig = isDevConfig
-
 const config = tempconfig
 exports.config = config
-
 const tsconfig = isDevConfig ? require("./devtsconfig.json") : require("./transcriptconfig.json")
 exports.tsconfig = tsconfig
 
+//LOAD LANGUAGE
 const language = require("./core/languageManager").language
 exports.language = language
+
+//LOAD FLAGS
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded language")
 
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","loaded config")
@@ -98,11 +97,10 @@ if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","LOADED
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","switching to new logs")
 this.errorLog.log("debug","loaded new logs")
 
+//LOAD SYSTEM LIBRARYS
 exports.actionRecorder = require("./core/utils/liveStatus").actionRecorder
-
 exports.hiddenData = require("./core/utils/hiddendata")
 this.errorLog.log("debug","loaded hiddendataTM")
-
 exports.embeds = {
     commands:require("./core/interactionHandlers/embeds/commands")
 }
@@ -113,6 +111,9 @@ exports.buttons = {
 }
 this.errorLog.log("debug","loaded buttons & embeds")
 
+require("./core/statsManager").startupStatsManager()
+
+//START CLIENT LOGIN PROCESS
 client.on('ready',async () => {
     this.errorLog.log("debug","client logged in")
     this.actionRecorder.push({
@@ -158,7 +159,6 @@ client.on('ready',async () => {
         this.errorLog.log("debug","loaded console interface")
 
         if (config.status.enabled){
-            console.log("TEST STATUS (delete me)")
             setStatus(config.status.type,config.status.text)
         }
 
@@ -232,7 +232,7 @@ client.on('ready',async () => {
         }
     }
 
-    //load plugins
+    //LOAD PLUGINS (after client login)
     this.actionRecorder.push({
         category:"ot.managers.plugins",
         file:"./core/api/pluginlauncher.js",
@@ -248,6 +248,8 @@ client.on('ready',async () => {
     })
     this.errorLog.log("debug","loading plugins")
 })
+
+//LOAD CHECKER.JS
 if (!require("./core/api/api.json").disable.checkerjs.all){
     this.actionRecorder.push({
         category:"ot.managers.main",
@@ -266,6 +268,7 @@ if (!require("./core/api/api.json").disable.checkerjs.all){
     })
 }
 
+//LOAD COMMANDS & CORE
 if (process.argv[2] && process.argv[2].startsWith("slash")){
     //do nothing
 }else{
@@ -320,6 +323,7 @@ if (process.argv[2] && process.argv[2].startsWith("slash")){
     })
 }
 
+//LOAD API
 this.actionRecorder.push({
     category:"ot.managers.loader",
     file:"./index.js",
@@ -337,6 +341,7 @@ this.actionRecorder.push({
     type:"api.success"
 })
 
+//ERROR SYSTEM
 this.actionRecorder.push({
     category:"ot.managers.loader",
     file:"./index.js",
@@ -388,6 +393,7 @@ this.actionRecorder.push({
     type:"debugsystem.success"
 })
 
+//LOGIN SYSTEM
 const token = config.token.fromENV ? process.env.TOKEN : config.token.value
 client.login(token)
 this.errorLog.log("debug","login with token")
