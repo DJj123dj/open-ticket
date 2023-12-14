@@ -220,7 +220,7 @@ const getTicketStats = async (guild,channelid) => {
         createdAt: (typeof createdAt == "undefined") ? new Date().getTime() : createdAt,
         createdBy: (typeof createdBy == "undefined") ? 0 : createdBy,
         messageAmount,
-        participants:participants,
+        participants:participants.slice(0,50),
         ticketName:channel.name,
         status: (typeof status == "undefined") ? "open" : status
     }

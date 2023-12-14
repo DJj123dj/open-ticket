@@ -21,7 +21,8 @@ module.exports = () => {
     const header = l.helpMenu.header2
     helpEmbed.setDescription(header+"`"+prefix+msgName+" <id>` ➜ _"+l.helpMenu.msgCmd+"_\n\n`"+prefix+"rename <name>` ➜ _"+l.helpMenu.renameCmd+"_\n`"+prefix+"close [reason]` ➜ _"+l.helpMenu.closeCmd+"_\n`"+prefix+"delete` ➜ _"+l.helpMenu.deleteCmd+"_\n`"+prefix+"reopen` ➜ _"+l.helpMenu.reopenCmd+"_\n\n`"+prefix+"add <user>` ➜ _"+l.helpMenu.addCmd+"_\n`"+prefix+"remove <user>` ➜ _"+l.helpMenu.removeCmd+"_\n\n`"+prefix+"change <newtype>` ➜ _"+l.helpMenu.changeCmd+"_\n`"+prefix+"claim [user]` ➜ _"+l.helpMenu.claimCmd+"_\n`"+prefix+"unclaim` ➜ _"+l.helpMenu.unclaimCmd+"_")
     helpEmbed.addFields([
-        {name:"Autoclose",value:l.helpMenu.autocloseCmd+"\n`"+prefix+"autoclose enable <inactive time>`\n`"+prefix+"autoclose disable`"}
+        {name:"Autoclose",value:l.helpMenu.autocloseCmd+"\n`"+prefix+"autoclose enable <inactive time>`\n`"+prefix+"autoclose disable`"},
+        {name:"Stats",value:"Get statistics from the bot"+"\n`"+prefix+"stats global`\n`"+prefix+"stats ticket`\n`"+prefix+"stats user [user]`"}
     ])
 
     var otherprefix = prefix.endsWith(" ") ? prefix.substring(0,prefix.length-1) : prefix
@@ -38,7 +39,7 @@ module.exports = () => {
         }
 
         if (args[1]){
-            if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove") && !args[1].startsWith("rename") && !args[1].startsWith("reopen")  && !args[1].startsWith("change") && !args[1].startsWith("claim") && !args[1].startsWith("unclaim")){
+            if (!args[1].startsWith("close") && !args[1].startsWith("delete") && !args[1].startsWith("remove") && !args[1].startsWith("add") && !args[1].startsWith("msg") && !args[1].startsWith("remove") && !args[1].startsWith("rename") && !args[1].startsWith("reopen")  && !args[1].startsWith("change") && !args[1].startsWith("claim") && !args[1].startsWith("unclaim") && !args[1].startsWith("stats")){
                 msg.channel.send({embeds:[helpEmbed]})
                 log("command","someone used the 'help' command",[{key:"user",value:msg.author.username}])
                 APIEvents.onCommand("help",true,msg.author,msg.channel,msg.guild,new Date())
