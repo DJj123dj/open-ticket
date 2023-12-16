@@ -97,5 +97,39 @@
         "wait":"Будь-ласка почекайте!",
         "estimated":"Розрахунковий час",
         "available":"Транскрипція доступна тут"
+    },
+    "stats":{
+        "globalTitle":"Загальна статистика",
+        "ticketTitle":"Статистика тікету для {0}",
+        "userTitle":"Статистика корстувача для {0}",
+        "systemTitle":"Системна статистика",
+        "versionTitle":"Версія бота",
+
+        "ticketsCreated":"Тікет створен",
+        "ticketsClosed":"Тікет закрито",
+        "ticketsDeleted":"Тікет видалено",
+        "ticketsReopened":"Тікет перевідкритий",
+        "ticketsAutoclosed":"Тікет автоматично закритий",
+        "transcriptsCreated":"Транскрипт створено",
+        "startupDate":"Дата запуску",
+        "latestUpdate":"Останнє оновлення",
+        "ticketCreatedOn":"Тікет створено",
+        "ticketCreatedBy":"Тікет створено",
+        "messagesSent":"Повідомлення відправлено",
+        "status":"Стан",
+        "participants":"Учасники",
+        "role":"Роль",
+
+        "switches":{
+            "globalAdmin":"Головна",
+            "ticketAdmin":"Тікет",
+            "member":"Учасник",
+            "open":"Відкрити",
+            "reopened":"Перевідкритий",
+            "closed":"Закритий",
+            "autoclosed":"Автоматично закритий"
+        },
+
+        "errorUserNotFound":"Учасник не знайдений у базі даних статистики!"
     }
 }

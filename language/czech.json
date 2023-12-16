@@ -97,5 +97,39 @@
         "wait":"Prosím počkej!",
         "estimated":"Odhadovaný čas",
         "available":"Záloha je uložena zde!"
+    },
+    "stats":{
+        "globalTitle":"Globalní statistiky",
+        "ticketTitle":"Statistiky ticketů pro {0}",
+        "userTitle":"Statistiky uživatele {0}",
+        "systemTitle":"Systémové statistiky",
+        "versionTitle":"Verze bota",
+
+        "ticketsCreated":"Ticket založen",
+        "ticketsClosed":"Ticket uzavřen",
+        "ticketsDeleted":"Ticket vymazán",
+        "ticketsReopened":"Ticket znovu otevřen",
+        "ticketsAutoclosed":"Ticket byl automaticky uzavřen",
+        "transcriptsCreated":"Transcripty vytvořeny",
+        "startupDate":"Datum spuštění",
+        "latestUpdate":"Poslední aktualizace",
+        "ticketCreatedOn":"Ticket vytvořen dne",
+        "ticketCreatedBy":"Ticket vytvořil",
+        "messagesSent":"Zpráva odeslána",
+        "status":"Status",
+        "participants":"Účastníci",
+        "role":"Role",
+
+        "switches":{
+            "globalAdmin":"Global Admin",
+            "ticketAdmin":"Ticket Admin",
+            "member":"Uživatel",
+            "open":"Otevřít",
+            "reopened":"Znovu Otevřít",
+            "closed":"Uzavřít",
+            "autoclosed":"Automaticky uzavřen"
+        },
+
+        "errorUserNotFound":"Tento uživatel není v databázi statistik k nalezení!"
     }
 }

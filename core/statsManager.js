@@ -6,7 +6,7 @@ const log = bot.errorLog.log
 const l = bot.language
 const permissionChecker = require("./utils/permisssionChecker")
 
-/**@typedef {"TICKETS_CREATED"|"TICKETS_CLOSED"|"TICKETS_DELETED"|"TICKETS_REOPENED"|"TICKETS_AUTOCLOSED"|"TRANSCRIPTS_CREATED"|"TIME_SINCE_UPDATE"} OTGlobalStatsType */
+/**@typedef {"TICKETS_CREATED"|"TICKETS_CLOSED"|"TICKETS_DELETED"|"TICKETS_REOPENED"|"TICKETS_AUTOCLOSED"|"TRANSCRIPTS_CREATED"|"TIME_SINCE_UPDATE"|"LAST_VERSION"} OTGlobalStatsType */
 /**@typedef {"CREATED_AT"|"CREATED_BY"|"STATUS"} OTTicketStatsType */
 /**@typedef {"TICKETS_CREATED"|"TICKETS_CLOSED"|"TICKETS_DELETED"|"TICKETS_REOPENED"} OTUserStatsType */
 /**
@@ -88,11 +88,25 @@ const getStats = (scope,type,id) => {
 }
 
 const startupStatsManager = () => {
+    //UPDATE LAST UPDATE DATE
     if (!existStats("global","TIME_SINCE_UPDATE")){
         updateGlobalStats("TIME_SINCE_UPDATE",(current) => {
             return new Date().getTime()
         })
+        updateGlobalStats("LAST_VERSION",(current) => {
+            return (require("../package.json")).version
+        })
     }
+    if ((require("../package.json")).version != getStats("global","LAST_VERSION")){
+        updateGlobalStats("TIME_SINCE_UPDATE",(current) => {
+            return new Date().getTime()
+        })
+        updateGlobalStats("LAST_VERSION",(current) => {
+            return (require("../package.json")).version
+        })
+    }
+
+    //UPDATE THE OTHER STATS
     if (!existStats("global","TICKETS_CREATED")){
         updateGlobalStats("TICKETS_CREATED",(current) => {
             return 0
@@ -261,24 +275,25 @@ const createGlobalStatsEmbed = async () => {
     const stats = await getGlobalStats()
 
     const sentences = [
-        `Tickets Created: \`${stats.ticketsCreated}\``,
-        `Tickets Closed: \`${stats.ticketsClosed}\``,
-        `Tickets Deleted: \`${stats.ticketsDeleted}\``,
-        `Tickets Autoclosed: \`${stats.ticketsAutoclosed}\``,
-        `Tickets Reopened: \`${stats.ticketsReopened}\``,
-        `Startup Date: <t:${Math.round(stats.startDate/1000)}:f>`,
-        `Latest Update: <t:${Math.round(stats.updateDate/1000)}:D>`
+        `${l.stats.ticketsCreated}: \`${stats.ticketsCreated}\``,
+        `${l.stats.ticketsClosed}: \`${stats.ticketsClosed}\``,
+        `${l.stats.ticketsDeleted}: \`${stats.ticketsDeleted}\``,
+        `${l.stats.ticketsReopened}: \`${stats.ticketsReopened}\``,
+        `${l.stats.ticketsAutoclosed}: \`${stats.ticketsAutoclosed}\``,
+        
+        `${l.stats.startupDate}: <t:${Math.round(stats.startDate/1000)}:f>`,
+        `${l.stats.latestUpdate}: <t:${Math.round(stats.updateDate/1000)}:D>`
     ]
 
     const embed = new EmbedBuilder()
         .setColor(config.color)
-        .setTitle("📊 Global Stats!")
+        .setTitle(`📊 ${l.stats.globalTitle}!`)
         .setDescription(sentences.slice(0,5).join("\n"))
         .addFields({
-            name:"System Stats:",
+            name:`${l.stats.systemTitle}:`,
             value:sentences.slice(5,7).join("\n")
         })
-        .setFooter({text:`Bot Version: v${stats.version}`})
+        .setFooter({text:`${l.stats.versionTitle}: v${stats.version}`})
     return embed
 }
 
@@ -290,28 +305,28 @@ const createTicketStatsEmbed = async (guild,channelid) => {
     const stats = await getTicketStats(guild,channelid)
 
     if (stats.status == "open"){
-        var newStatus = `🟢 \`Open\``
+        var newStatus = `🟢 \`${l.stats.switches.open}\``
     }else if (stats.status == "reopened"){
-        var newStatus = `🟢 \`Reopened\``
+        var newStatus = `🟢 \`${l.stats.switches.reopened}\``
     }else if (stats.status == "closed"){
-        var newStatus = `🔴 \`Closed\``
+        var newStatus = `🔴 \`${l.stats.switches.closed}\``
     }else if (stats.status == "autoclosed"){
-        var newStatus = `🔴 \`Autoclosed\``
+        var newStatus = `🔴 \`${l.stats.switches.autoclosed}\``
     }
 
     const sentences = [
-        `Ticket Created On: <t:${Math.round(stats.createdAt/1000)}:f>`,
-        `Ticket Created By: \`${stats.createdBy}\``,
-        `Messages Sent: \`${stats.messageAmount}\``,
-        `Status: ${newStatus}`
+        `${l.stats.ticketCreatedOn}: <t:${Math.round(stats.createdAt/1000)}:f>`,
+        `${l.stats.ticketCreatedBy}: \`${stats.createdBy}\``,
+        `${l.stats.messagesSent}: \`${stats.messageAmount}\``,
+        `${l.stats.status}: ${newStatus}`
     ]
 
     const embed = new EmbedBuilder()
         .setColor(config.color)
-        .setTitle(`📊 Ticket Stats for #${stats.ticketName}!`)
+        .setTitle(`📊 ${l.stats.ticketTitle}`.replace("{0}",`#${stats.ticketName}!`))
         .setDescription(sentences.join("\n"))
         .addFields({
-            name:"Participants:",
+            name:`${l.stats.participants}:`,
             value:stats.participants.join("\n")
         })
     return embed
@@ -326,24 +341,24 @@ const createUserStatsEmbed = async (guild,user,channelid) => {
     const stats = await getUserStats(guild,user,channelid)
 
     if (stats.role == "globaladmin"){
-        var newRole = `🟢 \`Global Admin\``
+        var newRole = `🟢 \`${l.stats.switches.globalAdmin}\``
     }else if (stats.role == "ticketadmin"){
-        var newRole = `🟡 \`Ticket Admin\``
+        var newRole = `🟡 \`${l.stats.switches.ticketAdmin}\``
     }else if (stats.role == "member"){
-        var newRole = `🔴 \`Member\``
+        var newRole = `🔴 \`${l.stats.switches.member}\``
     }
 
     const sentences = [
-        `Role: ${newRole}`,
-        `Tickets Created: \`${stats.ticketsCreated}\``,
-        `Tickets Closed: \`${stats.ticketsClosed}\``,
-        `Tickets Deleted: \`${stats.ticketsDeleted}\``,
-        `Tickets Reopened: \`${stats.ticketsReopened}\``
+        `${l.stats.role}: ${newRole}`,
+        `${l.stats.ticketsCreated}: \`${stats.ticketsCreated}\``,
+        `${l.stats.ticketsClosed}: \`${stats.ticketsClosed}\``,
+        `${l.stats.ticketsDeleted}: \`${stats.ticketsDeleted}\``,
+        `${l.stats.ticketsReopened}: \`${stats.ticketsReopened}\``
     ]
 
     const embed = new EmbedBuilder()
         .setColor(config.color)
-        .setTitle(`📊 User Stats for ${stats.userName}!`)
+        .setTitle(`📊 ${l.stats.userTitle}`.replace("{0}",`${stats.userName}!`))
         .setDescription(sentences.join("\n"))
     return embed
 }

@@ -97,5 +97,39 @@
         "wait":"Te rugam sa astepti!",
         "estimated":"Timp estimat",
         "available":"Transcriptul este disponibil aici"
+    },
+    "stats":{
+        "globalTitle":"Statistici Globale",
+        "ticketTitle":"Statistici Ticket pentru  {0}",
+        "userTitle":"Statistici utilizator pentru {0}",
+        "systemTitle":"Statistici Sistem",
+        "versionTitle":"Versiune Bot",
+
+        "ticketsCreated":"Tickete Create",
+        "ticketsClosed":"Tickets Inchise",
+        "ticketsDeleted":"Tickete Sterse",
+        "ticketsReopened":"Tickete Redeschise",
+        "ticketsAutoclosed":"Tickets Inchise automat",
+        "transcriptsCreated":"Transcript-uri create",
+        "startupDate":"Data startup",
+        "latestUpdate":"Update recent",
+        "ticketCreatedOn":"Ticket creat pe data",
+        "ticketCreatedBy":"Ticket Creat de",
+        "messagesSent":"Mesaje trimise",
+        "status":"Status",
+        "participants":"Participanti",
+        "role":"Rol",
+
+        "switches":{
+            "globalAdmin":"Admin Global",
+            "ticketAdmin":"Admin Ticket",
+            "member":"Membru",
+            "open":"Deschis",
+            "reopened":"Redeschis",
+            "closed":"Inchis",
+            "autoclosed":"Inchis automat"
+        },
+
+        "errorUserNotFound":"Acest utilizator nu poate fi gasit in database-ul nostru!"
     }
 }

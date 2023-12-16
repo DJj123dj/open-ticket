@@ -97,5 +97,39 @@
         "wait":"Пожайлуста подождите!",
         "estimated":"Оценочное время",
         "available":"Транскрипт здесь доступен"
+    },
+    "stats":{
+        "globalTitle":"Общая статистика",
+        "ticketTitle":"Статистика тикета для {0}",
+        "userTitle":"Статистика пользователя для {0}",
+        "systemTitle":"Системная статистика",
+        "versionTitle":"Версия бота",
+
+        "ticketsCreated":"Тикет создан",
+        "ticketsClosed":"Тикет закрыт",
+        "ticketsDeleted":"Тикет удален",
+        "ticketsReopened":"Тикет переоткрыт",
+        "ticketsAutoclosed":"Тикет автоматически закрыт",
+        "transcriptsCreated":"Транскрипт создан",
+        "startupDate":"Дата запуска",
+        "latestUpdate":"Последнее обновление",
+        "ticketCreatedOn":"Тикет создан",
+        "ticketCreatedBy":"Тикет создан",
+        "messagesSent":"Сообщение отправлено",
+        "status":"Статус",
+        "participants":"Участники",
+        "role":"Роль",
+
+        "switches":{
+            "globalAdmin":"Главная",
+            "ticketAdmin":"Тикет",
+            "member":"Участник",
+            "open":"Открыть",
+            "reopened":"Переоткрытый",
+            "closed":"Закрыт",
+            "autoclosed":"Автоматически закрыт"
+        },
+
+        "errorUserNotFound":"Участник не найден в базе данных статистики!"
     }
 }

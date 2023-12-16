@@ -29,14 +29,14 @@ module.exports = () => {
             if (mention){
                 //get user from mention
                 if (!bot.statsManager.existStats("user","TICKETS_CREATED",mention.id)){
-                    msg.channel.send({embeds:[bot.errorLog.serverError("This user can't be found in the stats database!")]})
+                    msg.channel.send({embeds:[bot.errorLog.serverError(l.stats.errorUserNotFound)]})
                     return
                 }
                 msg.channel.send({embeds:[await bot.statsManager.createUserStatsEmbed(msg.guild,mention,msg.channel.id)]})
             }else{
                 //use author as user
                 if (!bot.statsManager.existStats("user","TICKETS_CREATED",msg.author.id)){
-                    msg.channel.send({embeds:[bot.errorLog.serverError("This user can't be found in the stats database!")]})
+                    msg.channel.send({embeds:[bot.errorLog.serverError(l.stats.errorUserNotFound)]})
                     return
                 }
                 msg.channel.send({embeds:[await bot.statsManager.createUserStatsEmbed(msg.guild,msg.author,msg.channel.id)]})
@@ -75,14 +75,14 @@ module.exports = () => {
             if (mention){
                 //get user from mention
                 if (!bot.statsManager.existStats("user","TICKETS_CREATED",mention.id)){
-                    interaction.editReply({embeds:[bot.errorLog.serverError("This user can't be found in the stats database!")]})
+                    interaction.editReply({embeds:[bot.errorLog.serverError(l.stats.errorUserNotFound)]})
                     return
                 }
                 interaction.editReply({embeds:[await bot.statsManager.createUserStatsEmbed(interaction.guild,mention,interaction.channel.id)]})
             }else{
                 //use author as user
                 if (!bot.statsManager.existStats("user","TICKETS_CREATED",interaction.user.id)){
-                    interaction.editReply({embeds:[bot.errorLog.serverError("This user can't be found in the stats database!")]})
+                    interaction.editReply({embeds:[bot.errorLog.serverError(l.stats.errorUserNotFound)]})
                     return
                 }
                 interaction.editReply({embeds:[await bot.statsManager.createUserStatsEmbed(interaction.guild,interaction.user,interaction.channel.id)]})

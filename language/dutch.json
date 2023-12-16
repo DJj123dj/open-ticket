@@ -97,5 +97,39 @@
         "wait":"Gelieve te wachten!",
         "estimated":"Geschatte tijd",
         "available":"Het transcript is hier beschikbaar"
+    },
+    "stats":{
+        "globalTitle":"Globale Stats",
+        "ticketTitle":"Ticket Stats voor {0}",
+        "userTitle":"User Stats voor {0}",
+        "systemTitle":"Systeem Stats",
+        "versionTitle":"Bot Versie",
+
+        "ticketsCreated":"Tickets Gemaakt",
+        "ticketsClosed":"Tickets Gesloten",
+        "ticketsDeleted":"Tickets Verwijderd",
+        "ticketsReopened":"Tickets Heropend",
+        "ticketsAutoclosed":"Tickets Auto-gesloten",
+        "transcriptsCreated":"Transcripts Gemaakt",
+        "startupDate":"Opstart Datum",
+        "latestUpdate":"Laatste Update",
+        "ticketCreatedOn":"Ticket Gemaakt Op",
+        "ticketCreatedBy":"Ticket Gemaakt Door",
+        "messagesSent":"Berichten Verzonden",
+        "status":"Status",
+        "participants":"Deelnemers",
+        "role":"Rol",
+
+        "switches":{
+            "globalAdmin":"Globale Admin",
+            "ticketAdmin":"Ticket Admin",
+            "member":"Member",
+            "open":"Open",
+            "reopened":"Heropend",
+            "closed":"Gesloten",
+            "autoclosed":"Auto-gesloten"
+        },
+
+        "errorUserNotFound":"Deze user kan niet in de database gevonden worden!"
     }
 }
