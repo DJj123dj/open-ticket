@@ -49,26 +49,28 @@ DJdj Development Team
 |djj123dj      |sankedev    |DJ-Lite    |vuur_draak|
 
 Translators
-|Language      |Translator               |
-|--------------|-------------------------|
-|Dutch         |djj123dj                 |
-|Romanian      |sankedev                 |
-|French        |sankedev                 |
-|Spanish       |redactado & josuens      |
-|German        |david.3                  |
-|Italian       |maurizio26               |
-|Czech         |t0miiis#3022             |
-|Arabic        |Sarcastic#9318           |
-|Danish        |.the_gamer               |
-|Portuguese    |quiradon                 |
-|Russian       |apexo                    |
-|Turkish       |Hydra#0009               |
-|Polish        |mkevas                   |
-|Slovenian     |n1kkec                   |
-|Thai          |modshd                   |
-|Norwegian     |noonenook                |
-|Greek         |stefanos#5739            |
-|Ukrainian     |anderskiy                |
+
+|Language           |Maintainer (discord name)|Status       |
+|-------------------|-------------------|-------------------|
+|English            |djj123dj           |🟢 Up To Date                   |
+|Dutch              |djj123dj           |🟢 Up To Date                   |
+|French             |sankedev           |🟠 Will be updated next version |
+|Romanian           |sankedev           |🟢 Up To Date                   |
+|Spanish            |redactado & josuens|🟠 Will be updated next version |
+|German             |david.3            |🟢 Up To Date                   |
+|Italian            |maurizio26         |🟠 Will be updated next version |
+|Czech              |spyeye_            |🟢 Up To Date                   |
+|Arabic             |Sarcastic#9318     |🔴 Outdated                     |
+|Danish             |.the_gamer         |🟢 Up To Date                   |
+|Portuguese         |quiradon           |🟠 Will be updated next version |
+|Russian            |apexo & ander      |🟢 Up To Date                   |
+|Ukrainian          |ander              |🟢 Up To Date                   |
+|Turkish            |Hydra#0009         |🔴 Outdated                     |
+|Polish             |mkevas             |🟠 Will be updated next version |
+|Slovenian          |n1kkec             |🔴 Outdated                     |
+|Thai               |modshd             |🟢 Up To Date                   |
+|Norwegian          |noonenook          |🟠 Will be updated next version |
+|Greek              |stefanos__.        |🔴 Outdated                     |
 
 ## links
 current version: _v3.5.0_

@@ -99,37 +99,37 @@
         "available":"บันทึกการสนทนาสามารถใช้งานได้ที่นี่"       
     },
     "stats":{
-        "globalTitle":"สถานะทั้งหมด",
-        "ticketTitle":"สถานะ Ticket สำหรับ {0}",
-        "userTitle":"สถานะผู้ใช้สำหรับ {0}",
+        "globalTitle":"สถิติทั้งหมด",
+        "ticketTitle":"สถิติห้องติดต่อสำหรับ {0}",
+        "userTitle":"สถิติผู้ใช้สำหรับ {0}",
         "systemTitle":"สถานะระบบ",
         "versionTitle":"เวอร์ชั่นของบอท",
 
-        "ticketsCreated":"Tickets ที่ถูกสร้าง",
-        "ticketsClosed":"Tickets ที่ถูกปิด",
-        "ticketsDeleted":"Tickets ที่ถูกลบ",
-        "ticketsReopened":"Tickets ที่ถูกเปิดใหม่",
-        "ticketsAutoclosed":"Tickets ที่ปิดโดยอัตโนมัติ",
-        "transcriptsCreated":"Transcripts ที่ถูกสร้าง",
-        "startupDate":"เวลาเริ่มต้น",
-        "latestUpdate":"อัปเดตล่าสุด",
-        "ticketCreatedOn":"Ticket สร้างบน",
-        "ticketCreatedBy":"Ticket สร้างโดย",
-        "messagesSent":"ส่งข้อความไปแล้ว",
+        "ticketsCreated":"ห้องติดต่อที่สร้าง",
+        "ticketsClosed":"ห้องติดต่อที่ปิด",
+        "ticketsDeleted":"ห้องติดต่อที่ลบ:",
+        "ticketsReopened":"ห้องติดต่อที่เปิดใหม่",
+        "ticketsAutoclosed":"ห้องติดต่อที่ปิดโดยอัตโนมัติ",
+        "transcriptsCreated":"ทรานสคริปต์ที่สร้าง",
+        "startupDate":"วันที่เริ่มต้น",
+        "latestUpdate":"การอัปเดตล่าสุด",
+        "ticketCreatedOn":"ห้องติดต่อที่สร้างเมื่อ",
+        "ticketCreatedBy":"ห้องติดต่อที่สร้างโดย",
+        "messagesSent":"ข้อความที่ส่ง",
         "status":"สถานะ",
         "participants":"ผู้มีส่วนร่วม",
         "role":"บทบาท",
-
+    
         "switches":{
-            "globalAdmin":"แอดมินทั้งหมด",
-            "ticketAdmin":"Ticket แอดมิน",
-            "member":"สมาชิก",
+            "globalAdmin":"ผู้ดูแลทั้งหมด",
+            "ticketAdmin":"ผู้ดูแลห้องติดต่อ",
+            "member":"ผู้ใช้",
             "open":"เปิด",
             "reopened":"เปิดใหม่",
             "closed":"ปิด",
-            "autoclosed":"ปิดอัตโนมัติ"
+            "autoclosed":"ปิดโดยอัตโนมัติ"
         },
-
-        "errorUserNotFound":"ผู้ใช้นี้ไม่มีอยู่ในฐานข้อมูล"
+    
+        "errorUserNotFound":"ไม่พบผู้ใช้ในฐานข้อมูลสถิติ!"
     }
 }
