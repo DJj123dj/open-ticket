@@ -318,7 +318,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
         bot:{
             name:data.bot.name || "Open Ticket",
             id:data.bot.id || 0,
-            pfp:data.bot.pfp || "dj-dj.be/wp-content/uploads/2022/07/profielfoto-blauw-wit.png?size=128"
+            pfp:data.bot.pfp || "transcripts.dj-dj.be/favicon.png"
         },
         ticket:{
             name:channel.name,
