@@ -229,7 +229,7 @@ exports.onTranscriptCreation = (messages,channel,guild,date) => {
 
 }
 
-/**@typedef {"help"|"message"|"close"|"delete"|"reopen"|"rename"|"add"|"remove"|"claim"|"unclaim"|"change"} OTCommandType */
+/**@typedef {"help"|"message"|"close"|"delete"|"reopen"|"rename"|"add"|"remove"|"claim"|"unclaim"|"change"|"stats"} OTCommandType */
 
 /**
  * 

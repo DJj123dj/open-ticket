@@ -34,8 +34,8 @@ module.exports = async (invisible) => {
     if (!invisible){
         setInterval(() => {
             if (process.stdout && process.stdout.cursorTo) process.stdout.cursorTo(0)
-            process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 13")+" commands ready! (this can take up to 40 seconds)")
-            if (readystats >= 13){
+            process.stdout.write("[status] there are "+chalk.blue(readystats+" out of 14")+" commands ready! (this can take up to 40 seconds)")
+            if (readystats >= 14){
                 console.log(chalk.green("\nready!"))
                 console.log(chalk.blue("you can now start the bot with "+chalk.bgBlue("'npm start'")+"!"))
                 process.exit(1)
@@ -268,4 +268,38 @@ module.exports = async (invisible) => {
         readystats++
     })
 
+    //stats
+    client.application.commands.create({
+        name:"stats",
+        description:"See bot statistics!",
+        defaultPermission:true,
+        type:act.ChatInput,
+        options:[
+            {
+                type:acot.Subcommand,
+                name:"global",
+                description:"See the global bot stats!"
+            },
+            {
+                type:acot.Subcommand,
+                name:"ticket",
+                description:"See the stats of a ticket (use inside of ticket)!"
+            },
+            {
+                type:acot.Subcommand,
+                name:"user",
+                description:"See the stats from a user or yourself!",
+                options:[
+                    {
+                        type:acot.User,
+                        name:"user",
+                        required:false,
+                        description:"See the stats from a specific user!"
+                    }
+                ]
+            }
+        ]
+    },sid).then(() => {
+        readystats++
+    })
 }

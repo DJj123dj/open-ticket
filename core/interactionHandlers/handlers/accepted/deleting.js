@@ -29,7 +29,11 @@ module.exports = () => {
 
         const firstcomponents = bot.buttons.close.openRowNormal
 
-        if (!permissionChecker.command(interaction.user.id,interaction.guild.id)){
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permissionChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
             if (!permissionChecker.sendUserNoDelete(interaction.user)){
                 permissionChecker.sendChannelNoDelete(interaction.channel,interaction.user)
             }
@@ -69,7 +73,11 @@ module.exports = () => {
 
         const firstcomponents = bot.buttons.close.closeCommandRow
 
-        if (!permissionChecker.command(interaction.user.id,interaction.guild.id)){
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.channel.send({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permissionChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
             if (!permissionChecker.sendUserNoDelete(interaction.user)){
                 permissionChecker.sendChannelNoDelete(interaction.channel,interaction.user)
             }

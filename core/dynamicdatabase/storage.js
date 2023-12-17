@@ -9,11 +9,15 @@ ALL DATABASE FILES NEED TO EXPORT THE FOLLOWING FUNCTIONS:
  */
 
 try {
-    var db = require("./dynamicfiles/database")
+    var main = require("./databases/main")
+    var stats = require("./databases/stats")
 }catch(err){
     console.log(err)
-    console.log("I couldn't find the database file! (location: ./core/dynamicdatabase/storage.js:2)")
+    console.log("Unable to find the database handlers!")
     process.exit(1)
 }
 
-module.exports = db
+module.exports = {
+    main,
+    stats
+}

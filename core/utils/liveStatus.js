@@ -46,7 +46,7 @@ const getLivestatus = (local) => {
             }
         }else{
             try {
-                axios.get("https://livestatus.dj-dj.be/openticket.json").then((res) => {
+                axios.get("https://apis.dj-dj.be/livestatus/announcements/openticket.json").then((res) => {
                     const livestatus = res.data
                     if (!Array.isArray(livestatus)) return resolve(false)
                     if (!livestatus) return resolve(false)
@@ -189,7 +189,7 @@ exports.liveStatusUploadManager = async (err) => {
                             //system:config.system
                         },
                         language:config.languageFile,
-                        version:"3.4.4",
+                        version:"3.5.0",
                         slashcmds:slashMode,
                         transcripts:transcriptMode,
                         plugins:fs.readdirSync("./plugins"),

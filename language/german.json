@@ -1,6 +1,6 @@
 {
     "_CREDITS":"david.#8276 ",
-    "_INFO":"This file is a translation for open ticket 3.4.4",
+    "_INFO":"This file is a translation for open ticket 3.5.0",
 
     "errors":{
         "missingArgsTitle":"Ungültiges Argument!",
@@ -97,5 +97,39 @@
         "wait":"Bitte warten!",
         "estimated":"Verbleibende Zeit",
         "available":"Das Transcript ist hier verfügbar"
+    },
+    "stats":{
+        "globalTitle":"Global Stats",
+        "ticketTitle":"Ticket Stats für {0}",
+        "userTitle":"NutzerStats für {0}",
+        "systemTitle":"System Stats",
+        "versionTitle":"Bot Version",
+
+        "ticketsCreated":"Tickets erstellt",
+        "ticketsClosed":"Tickets geschlossen",
+        "ticketsDeleted":"Tickets gelöscht",
+        "ticketsReopened":"Tickets wiedergeöffnet",
+        "ticketsAutoclosed":"Tickets Autogeschlossen",
+        "transcriptsCreated":"Transcripts erstellt",
+        "startupDate":"Start Datum",
+        "latestUpdate":"Letztes Update",
+        "ticketCreatedOn":"Ticket erstellt am",
+        "ticketCreatedBy":"Ticket erstellt von",
+        "messagesSent":"Nachrichten gesendet",
+        "status":"Status",
+        "participants":"Teilnehmer",
+        "role":"Rolle",
+
+        "switches":{
+            "globalAdmin":"Global Admin",
+            "ticketAdmin":"Ticket Admin",
+            "member":"Nutzer",
+            "open":"Öffnen",
+            "reopened":"Wiedergeöffnet",
+            "closed":"Geschlossen",
+            "autoclosed":"Autogeschlossen"
+        },
+
+        "errorUserNotFound":"Der Nutzer wurde in der Statistik-Datenbank nicht gefunden!"
     }
 }

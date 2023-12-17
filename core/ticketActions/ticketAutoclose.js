@@ -43,6 +43,15 @@ module.exports = () => {
                         require("./ticketCloser").closeManager(clientMember,channel,prefix,"close","OTautoclose",true)
                         storage.delete("autocloseTickets",channel.id)
 
+                        //STATS
+                        bot.statsManager.updateGlobalStats("TICKETS_AUTOCLOSED",(current) => {
+                            if (typeof current != "undefined") return current+1
+                            return 1
+                        })
+                        bot.statsManager.updateTicketStats("STATUS",channel.id,(current) => {
+                            return "autoclosed"
+                        })
+
                         channel.send({embeds:[bot.embeds.commands.autocloseSignalEmbed(client.user,t.value)],components:[bot.buttons.close.closeCommandRow]})
                     }
                 

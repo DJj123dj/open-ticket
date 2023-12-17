@@ -46,9 +46,21 @@ const reopenTicket = (guild,channel,user) => {
             }
         }
     })
-
     channel.permissionOverwrites.set(permissionsArray)
 
     require("../api/modules/events").onTicketReopen(user,channel,guild,new Date(),{name:channel.name,status:"reopened",ticketOptions:false})
+    
+    //STATS
+    bot.statsManager.updateGlobalStats("TICKETS_REOPENED",(current) => {
+        if (typeof current != "undefined") return current+1
+        return 1
+    })
+    bot.statsManager.updateUserStats("TICKETS_REOPENED",user.id,(current) => {
+        if (typeof current != "undefined") return current+1
+        return 1
+    })
+    bot.statsManager.updateTicketStats("STATUS",channel.id,(current) => {
+        return "reopened"
+    })
 }
 exports.reopenTicket = reopenTicket

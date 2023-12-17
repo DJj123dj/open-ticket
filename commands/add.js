@@ -18,14 +18,15 @@ module.exports = () => {
         if (!user) return msg.channel.send({embeds:[bot.errorLog.invalidArgsMessage(l.errors.missingArgsDescription+" `<user>`:\n`"+config.prefix+"add <user>`")]})
 
         if (!msg.guild) return
-        if (!permsChecker.command(msg.author.id,msg.guild.id)){
-            permsChecker.sendUserNoPerms(msg.author)
-            return
-        }
 
         const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
         if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
+        
+        if (!permsChecker.ticket(msg.author.id,msg.guild.id,ticketId)){
+            permsChecker.sendUserNoPerms(msg.author)
+            return
+        }
 
         msg.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
         msg.channel.send({embeds:[bot.embeds.commands.addEmbed(user,msg.author)]})
@@ -37,7 +38,7 @@ module.exports = () => {
         const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
         APIEvents.onTicketAdd(msg.author,loguser,msg.channel,msg.guild,new Date(),{status:"open",name:msg.channel.name,ticketOptions:ticketData})
 
-        APIEvents.onCommand("add",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
+        APIEvents.onCommand("add",permsChecker.ticket(msg.author.id,msg.guild.id,ticketId),msg.author,msg.channel,msg.guild,new Date())
     })
 
     if (!DISABLE.commands.slash.add) client.on("interactionCreate",async (interaction) => {
@@ -46,16 +47,17 @@ module.exports = () => {
         const user = interaction.options.getUser("user")
 
         if (!interaction.guild) return
-        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
             permsChecker.sendUserNoPerms(interaction.user)
             return
         }
 
         await interaction.deferReply()
-
-        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
-        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-        const ticketId = hiddendata.find(d => d.key == "type").value
 
         interaction.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
         interaction.editReply({embeds:[bot.embeds.commands.addEmbed(user,interaction.user)]})
@@ -66,7 +68,7 @@ module.exports = () => {
 
         const ticketData = require("../core/utils/configParser").getTicketById(ticketId,true)
         APIEvents.onTicketAdd(interaction.user,loguser,interaction.channel,interaction.guild,new Date(),{status:"open",name:interaction.channel.name,ticketOptions:ticketData})
-        APIEvents.onCommand("add",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
+        APIEvents.onCommand("add",permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId),interaction.user,interaction.channel,interaction.guild,new Date())
        
     })
 }

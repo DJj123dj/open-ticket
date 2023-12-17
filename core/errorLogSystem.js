@@ -14,7 +14,7 @@ const c = discord.Colors
 exports.noPermsMessage = (user) => {
     return new embed()
     .setColor(c.Red)
-    .setTitle(":x: "+l.errors.noPermsTitle)
+    .setTitle("❌ "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDescription)
     .setFooter({iconURL:user.displayAvatarURL(),text:user.username})
 }
@@ -23,7 +23,7 @@ exports.noPermsMessage = (user) => {
 exports.noPermsDelete = (user) => {
     return new embed()
     .setColor(c.Red)
-    .setTitle(":x: "+l.errors.noPermsTitle)
+    .setTitle("❌ "+l.errors.noPermsTitle)
     .setDescription(l.errors.noPermsDelete)
     .setFooter({iconURL:user.displayAvatarURL(),text:user.username})
 }
@@ -32,7 +32,7 @@ exports.noPermsDelete = (user) => {
 exports.invalidArgsMessage = (message) => {
     var x =  new embed()
         .setColor(c.Red)
-        .setTitle(":x: "+l.errors.missingArgsTitle)
+        .setTitle("❌ "+l.errors.missingArgsTitle)
         .setDescription(message)
 
     return x
@@ -42,7 +42,7 @@ exports.invalidArgsMessage = (message) => {
 exports.serverError = (message) => {
     var x = new embed()
         .setColor(c.Orange)
-        .setTitle(":warning: "+l.errors.boterror)
+        .setTitle("⚠️ "+l.errors.boterror)
         .setDescription(message)
 
     return x
@@ -53,19 +53,19 @@ exports.invalidIdChooseFromList = (list,message) => {
     const beforemsg = message ? message+"\n\n" : ""
     var x = new embed()
         .setColor(c.Red)
-        .setTitle(":x: "+l.errors.chooseFromListTitle)
+        .setTitle("❌ "+l.errors.chooseFromListTitle)
         .setDescription(beforemsg+l.errors.chooseFromListDescription+"\n`"+list.join("`\n`")+"`")
     return x
 }
 
 exports.failedRenameChannel = new embed()
     .setColor(c.Red)
-    .setTitle(":x: Failed to rename channel")
+    .setTitle("❌ Failed to rename channel")
     .setDescription("Discord channels can only be renamed twice every 10 minutes! Open Ticket can't do anything about this error!")
 
 exports.notInATicket = new embed()
     .setColor(c.Red)
-    .setTitle(":x: "+l.errors.notInTicketTitle)
+    .setTitle("❌ "+l.errors.notInTicketTitle)
     .setDescription(l.errors.notInTicketDescription)
 
 
@@ -73,7 +73,7 @@ exports.notInATicket = new embed()
 exports.success = (title,message) => {
     var x = new embed()
         .setColor(config.color)
-        .setTitle(":white_check_mark: "+title)
+        .setTitle("✅ "+title)
         .setDescription(message)
 
     return x
@@ -83,7 +83,7 @@ exports.success = (title,message) => {
 exports.warning = (title,message) => {
     var x = new embed()
         .setColor(c.Orange)
-        .setTitle(":warning: "+title)
+        .setTitle("⚠️ "+title)
         .setDescription(message)
 
     return x

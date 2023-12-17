@@ -26,14 +26,15 @@ module.exports = () => {
         }catch{}
 
         if (!interaction.guild) return
-        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
-            permsChecker.sendUserNoPerms(interaction.user)
-            return
-        }
 
         const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
         if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
+            permsChecker.sendUserNoPerms(interaction.user)
+            return
+        }
 
         hiddendata.push({key:"claimedby",value:interaction.user.id})
         bot.hiddenData.writeHiddenData(interaction.channel.id,hiddendata)

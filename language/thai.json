@@ -1,6 +1,6 @@
 {
     "_CREDITS":"Mods HD#0661",
-    "_INFO":"This file is a translation for open ticket 3.4.4",
+    "_INFO":"This file is a translation for open ticket 3.5.0",
 
     "errors":{
         "missingArgsTitle":"อาร์กิวเมนต์ไม่ถูกต้อง!",
@@ -97,5 +97,39 @@
         "wait":"กรุณารอ!",
         "estimated":"เวลาโดยประมาณ",
         "available":"บันทึกการสนทนาสามารถใช้งานได้ที่นี่"       
+    },
+    "stats":{
+        "globalTitle":"สถิติทั้งหมด",
+        "ticketTitle":"สถิติห้องติดต่อสำหรับ {0}",
+        "userTitle":"สถิติผู้ใช้สำหรับ {0}",
+        "systemTitle":"สถานะระบบ",
+        "versionTitle":"เวอร์ชั่นของบอท",
+
+        "ticketsCreated":"ห้องติดต่อที่สร้าง",
+        "ticketsClosed":"ห้องติดต่อที่ปิด",
+        "ticketsDeleted":"ห้องติดต่อที่ลบ:",
+        "ticketsReopened":"ห้องติดต่อที่เปิดใหม่",
+        "ticketsAutoclosed":"ห้องติดต่อที่ปิดโดยอัตโนมัติ",
+        "transcriptsCreated":"ทรานสคริปต์ที่สร้าง",
+        "startupDate":"วันที่เริ่มต้น",
+        "latestUpdate":"การอัปเดตล่าสุด",
+        "ticketCreatedOn":"ห้องติดต่อที่สร้างเมื่อ",
+        "ticketCreatedBy":"ห้องติดต่อที่สร้างโดย",
+        "messagesSent":"ข้อความที่ส่ง",
+        "status":"สถานะ",
+        "participants":"ผู้มีส่วนร่วม",
+        "role":"บทบาท",
+    
+        "switches":{
+            "globalAdmin":"ผู้ดูแลทั้งหมด",
+            "ticketAdmin":"ผู้ดูแลห้องติดต่อ",
+            "member":"ผู้ใช้",
+            "open":"เปิด",
+            "reopened":"เปิดใหม่",
+            "closed":"ปิด",
+            "autoclosed":"ปิดโดยอัตโนมัติ"
+        },
+    
+        "errorUserNotFound":"ไม่พบผู้ใช้ในฐานข้อมูลสถิติ!"
     }
 }

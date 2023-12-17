@@ -17,14 +17,15 @@ module.exports = () => {
         if (!msg.channel.isTextBased()) return
 
         if (!msg.guild) return
-        if (!permsChecker.command(msg.author.id,msg.guild.id)){
-            permsChecker.sendUserNoPerms(msg.author)
-            return
-        }
 
         const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
         if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(msg.author.id,msg.guild.id,ticketId)){
+            permsChecker.sendUserNoPerms(msg.author)
+            return
+        }
             
         const list = []
         config.options.forEach((o) => {
@@ -67,7 +68,7 @@ module.exports = () => {
 
         log("command","someone used the 'change' command",[{key:"user",value:msg.author.username}])
         log("system","ticket type changed",[{key:"user",value:msg.author.username},{key:"ticket",value:name},{key:"newtype",value:newtype}])
-        APIEvents.onCommand("change",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
+        APIEvents.onCommand("change",permsChecker.ticket(msg.author.id,msg.guild.id,ticketId),msg.author,msg.channel,msg.guild,new Date())
     })
 
     if (!DISABLE.commands.slash.change) client.on("interactionCreate",async (interaction) => {
@@ -76,15 +77,17 @@ module.exports = () => {
         if (!interaction.channel.isTextBased()) return
 
         if (!interaction.guild) return
-        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
             permsChecker.sendUserNoPerms(interaction.user)
             return
         }
 
         await interaction.deferReply()
-        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
-        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-        const ticketId = hiddendata.find(d => d.key == "type").value
             
         const list = []
         config.options.forEach((o) => {
@@ -126,6 +129,6 @@ module.exports = () => {
 
         log("command","someone used the 'change' command",[{key:"user",value:interaction.user.username}])
         log("system","ticket type changed",[{key:"user",value:interaction.user.username},{key:"ticket",value:name},{key:"newtype",value:newtype}])
-        APIEvents.onCommand("change",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
+        APIEvents.onCommand("change",permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId),interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

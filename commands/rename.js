@@ -16,14 +16,15 @@ module.exports = () => {
         if (!msg.content.startsWith(config.prefix+"rename")) return
 
         if (!msg.guild) return
-        if (!permsChecker.command(msg.author.id,msg.guild.id)){
-            permsChecker.sendUserNoPerms(msg.author)
-            return
-        }
 
         const hiddendata = bot.hiddenData.readHiddenData(msg.channel.id)
         if (hiddendata.length < 1) return msg.channel.send({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(msg.author.id,msg.guild.id,ticketId)){
+            permsChecker.sendUserNoPerms(msg.author)
+            return
+        }
             
         var newname = msg.content.split(config.prefix+"rename")[1].substring(1)
 
@@ -44,7 +45,7 @@ module.exports = () => {
 
         log("command","someone used the 'rename' command",[{key:"user",value:msg.author.username}])
         log("system","ticket renamed",[{key:"user",value:msg.author.username},{key:"ticket",value:name},{key:"newname",value:newname}])
-        APIEvents.onCommand("rename",permsChecker.command(msg.author.id,msg.guild.id),msg.author,msg.channel,msg.guild,new Date())
+        APIEvents.onCommand("rename",permsChecker.ticket(msg.author.id,msg.guild.id,ticketId),msg.author,msg.channel,msg.guild,new Date())
     })
 
     if (!DISABLE.commands.slash.rename) client.on("interactionCreate",async (interaction) => {
@@ -52,16 +53,17 @@ module.exports = () => {
         if (interaction.commandName != "rename") return
 
         if (!interaction.guild) return
-        if (!permsChecker.command(interaction.user.id,interaction.guild.id)){
+
+        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
+        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        const ticketId = hiddendata.find(d => d.key == "type").value
+
+        if (!permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
             permsChecker.sendUserNoPerms(interaction.user)
             return
         }
 
         await interaction.deferReply()
-
-        const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
-        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
-        const ticketId = hiddendata.find(d => d.key == "type").value
             
         var newname = interaction.options.getString("name")
         var name = interaction.channel.name
@@ -81,6 +83,6 @@ module.exports = () => {
         log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.username}])
         log("system","ticket renamed",[{key:"user",value:interaction.user.username},{key:"ticket",value:name},{key:"newname",value:newname}])
 
-        APIEvents.onCommand("rename",permsChecker.command(interaction.user.id,interaction.guild.id),interaction.user,interaction.channel,interaction.guild,new Date())
+        APIEvents.onCommand("rename",permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId),interaction.user,interaction.channel,interaction.guild,new Date())
     })
 }

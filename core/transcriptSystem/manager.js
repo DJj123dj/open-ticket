@@ -35,6 +35,10 @@ const checkAvailability = async () => {
  */
 module.exports = async (messages,guild,channel,user,reason) => {
     require("../api/modules/events").onTranscriptCreation(messages,channel,guild,new Date())
+    bot.statsManager.updateGlobalStats("TRANSCRIPTS_CREATED",(current) => {
+        if (typeof current != "undefined") return current+1
+        return 1
+    })
     const msglist = await channel.messages.fetchPinned()
 
     const chName = channel.name
@@ -55,6 +59,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
             const tsb = tsconfig.style.background
             const tsh = tsconfig.style.header
             const tss = tsconfig.style.stats
+            const tsf = tsconfig.style.favicon
             const JSONDATA = require("./communication/compileJsonV2").compile(guild,channel,user,messages,{
                 style:{
                     background:{
@@ -75,6 +80,10 @@ module.exports = async (messages,guild,channel,user,reason) => {
                         valueTextColor:tss.valueTextColor,
                         hideBackgroundColor:tss.hideBackgroundColor,
                         hideTextColor:tss.hideTextColor
+                    },
+                    favicon:{
+                        enableCustomFavicon:tsf.enableCustomFavicon,
+                        imageUrl:tsf.imageUrl
                     }
                     
                 },
