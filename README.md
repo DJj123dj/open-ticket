@@ -58,22 +58,22 @@ Take a look at all the features and discover the possibilities!
 |-------------------|--------------------------|--------------------------------|
 |English            |djj123dj                  |🟢 Up To Date                   |
 |Dutch              |djj123dj                  |🟢 Up To Date                   |
-|French             |sankedev                  |🟠 Will be updated next version |
+|French             |sankedev                  |🟢 Up To Date                   |
 |Romanian           |sankedev                  |🟢 Up To Date                   |
-|Spanish            |redactado & josuens       |🟠 Will be updated next version |
+|Spanish            |redactado & josuens       |🟢 Up To Date                   |
 |German             |david.3                   |🟢 Up To Date                   |
-|Italian            |maurizio26                |🟠 Will be updated next version |
+|Italian            |maurizio26                |🟢 Up To Date                   |
 |Czech              |spyeye_                   |🟢 Up To Date                   |
 |Arabic             |Sarcastic#9318            |🔴 Outdated                     |
 |Danish             |.the_gamer                |🟢 Up To Date                   |
-|Portuguese         |quiradon                  |🟠 Will be updated next version |
+|Portuguese         |quiradon                  |🔴 Outdated                     |
 |Russian            |apexo & ander             |🟢 Up To Date                   |
 |Ukrainian          |ander                     |🟢 Up To Date                   |
 |Turkish            |Hydra#0009                |🔴 Outdated                     |
-|Polish             |mkevas                    |🟠 Will be updated next version |
+|Polish             |mkevas                    |🟢 Up To Date                   |
 |Slovenian          |n1kkec                    |🔴 Outdated                     |
 |Thai               |modshd                    |🟢 Up To Date                   |
-|Norwegian          |noonenook                 |🟠 Will be updated next version |
+|Norwegian          |noonenook                 |🟢 Up To Date                   |
 |Greek              |stefanos__.               |🔴 Outdated                     |
 
 ## links

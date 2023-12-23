@@ -99,37 +99,37 @@
         "available":"Transkrypcja jest dostępna tutaj"
     },
     "stats":{
-        "globalTitle":"Global Stats",
-        "ticketTitle":"Ticket Stats for {0}",
-        "userTitle":"User Stats for {0}",
-        "systemTitle":"System Stats",
-        "versionTitle":"Bot Version",
+        "globalTitle":"Globalne Statystyki",
+        "ticketTitle":"Statystyki biletów dla {0}",
+        "userTitle":"Statystyki użytkowników dla {0}",
+        "systemTitle":"Statystyki systemu",
+        "versionTitle":"Wersja bota",
 
-        "ticketsCreated":"Tickets Created",
-        "ticketsClosed":"Tickets Closed",
-        "ticketsDeleted":"Tickets Deleted",
-        "ticketsReopened":"Tickets Reopened",
-        "ticketsAutoclosed":"Tickets Autoclosed",
-        "transcriptsCreated":"Transcripts Created",
-        "startupDate":"Startup Date",
-        "latestUpdate":"Latest Update",
-        "ticketCreatedOn":"Ticket Created On",
-        "ticketCreatedBy":"Ticket Created By",
-        "messagesSent":"Messages Sent",
+        "ticketsCreated":"Bilety stworzone",
+        "ticketsClosed":"Bilety zamknięte",
+        "ticketsDeleted":"Bilety skasowane",
+        "ticketsReopened":"Bilety otwarte ponownie",
+        "ticketsAutoclosed":"Bilety automatycznie zamknięte",
+        "transcriptsCreated":"Utworzono transkrypcje",
+        "startupDate":"Data uruchomienia",
+        "latestUpdate":"Najnowsza aktualizacja",
+        "ticketCreatedOn":"Bilet został utworzony dnia",
+        "ticketCreatedBy":"Bilet stworzony przez",
+        "messagesSent":"Wiadomość wysłana",
         "status":"Status",
-        "participants":"Participants",
-        "role":"Role",
+        "participants":"Uczestnicy",
+        "role":"Rola",
 
         "switches":{
-            "globalAdmin":"Global Admin",
-            "ticketAdmin":"Ticket Admin",
-            "member":"Member",
-            "open":"Open",
-            "reopened":"Reopened",
-            "closed":"Closed",
-            "autoclosed":"Autoclosed"
+            "globalAdmin":"Globalny administrator",
+            "ticketAdmin":"Admin biletowy",
+            "member":"Użytkownik",
+            "open":"Otwarte",
+            "reopened":"Otwarte ponownie",
+            "closed":"Zamknięte",
+            "autoclosed":"Automatycznie zamknięte"
         },
 
-        "errorUserNotFound":"This user can't be found in the stats database!"
+        "errorUserNotFound":"Tego użytkownika nie można znaleźć w bazie statystyk!"
     }
 }

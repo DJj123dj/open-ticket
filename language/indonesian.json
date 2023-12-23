@@ -99,37 +99,37 @@
         "available":"Transkrip tersedia di sini"
     },
     "stats":{
-        "globalTitle":"Global Stats",
-        "ticketTitle":"Ticket Stats for {0}",
-        "userTitle":"User Stats for {0}",
-        "systemTitle":"System Stats",
-        "versionTitle":"Bot Version",
+        "globalTitle":"Statistik Global",
+        "ticketTitle":"Status Tiket Untuk {0}",
+        "userTitle":"Status Pengguna Untuk {0}",
+        "systemTitle":"Status Sistem",
+        "versionTitle":"Versi Robot",
 
-        "ticketsCreated":"Tickets Created",
-        "ticketsClosed":"Tickets Closed",
-        "ticketsDeleted":"Tickets Deleted",
-        "ticketsReopened":"Tickets Reopened",
-        "ticketsAutoclosed":"Tickets Autoclosed",
-        "transcriptsCreated":"Transcripts Created",
-        "startupDate":"Startup Date",
-        "latestUpdate":"Latest Update",
-        "ticketCreatedOn":"Ticket Created On",
-        "ticketCreatedBy":"Ticket Created By",
-        "messagesSent":"Messages Sent",
+        "ticketsCreated":"Tiket Dibuat",
+        "ticketsClosed":"Tiket Ditutup",
+        "ticketsDeleted":"Tiket Dihapus",
+        "ticketsReopened":"Tiket Dibuka Kembali",
+        "ticketsAutoclosed":"Tiket Ditutup Otomatis",
+        "transcriptsCreated":"Transkrip Dibuat",
+        "startupDate":"Tanggal Mulai",
+        "latestUpdate":"Pembaruan Terbaru",
+        "ticketCreatedOn":"Tiket Dibuat Pada",
+        "ticketCreatedBy":"Tiket Dibuat Oleh",
+        "messagesSent":"Pesan Terkirim",
         "status":"Status",
-        "participants":"Participants",
-        "role":"Role",
+        "participants":"Partisipan",
+        "role":"Peran",
 
         "switches":{
-            "globalAdmin":"Global Admin",
+            "globalAdmin":"Admin Global",
             "ticketAdmin":"Ticket Admin",
-            "member":"Member",
-            "open":"Open",
-            "reopened":"Reopened",
-            "closed":"Closed",
-            "autoclosed":"Autoclosed"
+            "member":"Anggota",
+            "open":"Buka",
+            "reopened":"Dibuka kembali",
+            "closed":"Ditutup",
+            "autoclosed":"Ditutup Otomatis"
         },
 
-        "errorUserNotFound":"This user can't be found in the stats database!"
+        "errorUserNotFound":"Pengguna ini tidak dapat ditemukan dalam basis data statistik!"
     }
 }
