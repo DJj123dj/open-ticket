@@ -2,22 +2,26 @@ const discord = require("discord.js")
 const bot = require("../../index")
 const config = bot.config
 const l = bot.language
+const b = discord.ButtonStyle
 
-/**@returns {"DANGER"|"SUCCESS"|"PRIMARY"|"SECONDARY"} */
+/**
+ * @param {String} color
+ * @returns {"DANGER"|"SUCCESS"|"PRIMARY"|"SECONDARY"} */
 const getColor = (color) => {
-    const b = discord.ButtonStyle
-    if (color.toLowerCase() == "red"){
-        return b.Danger
-    }else if (color.toLowerCase() == "green"){
-        return b.Success
-    }else if (color.toLowerCase() == "blue" || color.toLowerCase() == "blurple"){
-        return b.Primary
-    }else if (color.toLowerCase() == "black" || color.toLowerCase() == "gray" || color.toLowerCase() == "grey"){
-        return b.Secondary
-    }else if (color == "DANGER" || color == "SECONDARY" || color == "SUCCESS" || color == "PRIMARY"){
-        return color
-    }else if (color.toLowerCase() == "none" || color.toLowerCase() == "false" || color.toLowerCase() == ""){
-        return b.Secondary
+    if (color){
+        if (color.toLowerCase() == "red"){
+            return b.Danger
+        }else if (color.toLowerCase() == "green"){
+            return b.Success
+        }else if (color.toLowerCase() == "blue" || color.toLowerCase() == "blurple"){
+            return b.Primary
+        }else if (color.toLowerCase() == "black" || color.toLowerCase() == "gray" || color.toLowerCase() == "grey"){
+            return b.Secondary
+        }else if (color.toUpperCase() == "DANGER" || color.toUpperCase() == "SECONDARY" || color.toUpperCase() == "SUCCESS" || color.toUpperCase() == "PRIMARY"){
+            return color
+        }else if (color.toLowerCase() == "none" || color.toLowerCase() == "false" || color.toLowerCase() == ""){
+            return b.Secondary
+        }else return b.Secondary
     }else return b.Secondary
 }
 

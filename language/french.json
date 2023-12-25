@@ -99,37 +99,37 @@
         "available":"La transcript est disponible ici"
     },
     "stats":{
-        "globalTitle":"Global Stats",
-        "ticketTitle":"Ticket Stats for {0}",
-        "userTitle":"User Stats for {0}",
-        "systemTitle":"System Stats",
-        "versionTitle":"Bot Version",
+        "globalTitle":"Statistiques mondiales",
+        "ticketTitle":"Statistiques des tickets pour {0}",
+        "userTitle":"Statistiques utilisateur pour {0}",
+        "systemTitle":"Statistiques du système",
+        "versionTitle":"Version du bot",
 
-        "ticketsCreated":"Tickets Created",
-        "ticketsClosed":"Tickets Closed",
-        "ticketsDeleted":"Tickets Deleted",
-        "ticketsReopened":"Tickets Reopened",
-        "ticketsAutoclosed":"Tickets Autoclosed",
-        "transcriptsCreated":"Transcripts Created",
-        "startupDate":"Startup Date",
-        "latestUpdate":"Latest Update",
-        "ticketCreatedOn":"Ticket Created On",
-        "ticketCreatedBy":"Ticket Created By",
-        "messagesSent":"Messages Sent",
+        "ticketsCreated":"Tickets créés",
+        "ticketsClosed":"Tickets fermés",
+        "ticketsDeleted":"Tickets supprimés",
+        "ticketsReopened":"Tickets rouverts",
+        "ticketsAutoclosed":"Tickets fermés automatiquement",
+        "transcriptsCreated":"Transcriptions créées",
+        "startupDate":"Date de démarrage du bot",
+        "latestUpdate":"Dernière mise à jour",
+        "ticketCreatedOn":"Ticket créé le",
+        "ticketCreatedBy":"Ticket créé par",
+        "messagesSent":"Messages envoyés",
         "status":"Status",
         "participants":"Participants",
         "role":"Role",
 
         "switches":{
-            "globalAdmin":"Global Admin",
-            "ticketAdmin":"Ticket Admin",
-            "member":"Member",
-            "open":"Open",
-            "reopened":"Reopened",
-            "closed":"Closed",
-            "autoclosed":"Autoclosed"
+            "globalAdmin":"Administrateur global",
+            "ticketAdmin":"Administrateur des Tickets",
+            "member":"Membre",
+            "open":"Ouvrir",
+            "reopened":"Rouvert",
+            "closed":"Fermée",
+            "autoclosed":"fermeture automatique"
         },
 
-        "errorUserNotFound":"This user can't be found in the stats database!"
+        "errorUserNotFound":"Cet utilisateur est introuvable dans la base de données de statistiques!"
     }
 }

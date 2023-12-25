@@ -99,37 +99,37 @@
         "available":"La transcripción estará disponible aquí"
     },
     "stats":{
-        "globalTitle":"Global Stats",
-        "ticketTitle":"Ticket Stats for {0}",
-        "userTitle":"User Stats for {0}",
-        "systemTitle":"System Stats",
-        "versionTitle":"Bot Version",
+        "globalTitle":"Estadísticas Globales",
+        "ticketTitle":"Estadísitcas para el ticket {0}",
+        "userTitle":"Estadísticas para el usuario {0}",
+        "systemTitle":"Estadísticas del sistema",
+        "versionTitle":"Versión del bot",
 
-        "ticketsCreated":"Tickets Created",
-        "ticketsClosed":"Tickets Closed",
-        "ticketsDeleted":"Tickets Deleted",
-        "ticketsReopened":"Tickets Reopened",
-        "ticketsAutoclosed":"Tickets Autoclosed",
-        "transcriptsCreated":"Transcripts Created",
-        "startupDate":"Startup Date",
-        "latestUpdate":"Latest Update",
-        "ticketCreatedOn":"Ticket Created On",
-        "ticketCreatedBy":"Ticket Created By",
-        "messagesSent":"Messages Sent",
-        "status":"Status",
-        "participants":"Participants",
-        "role":"Role",
+        "ticketsCreated":"Tickets Creados",
+        "ticketsClosed":"Tickets Cerrados",
+        "ticketsDeleted":"Tickets Eliminados",
+        "ticketsReopened":"Tickets Reabiertos",
+        "ticketsAutoclosed":"Tickets Cerrados automáticamente",
+        "transcriptsCreated":"Transcripciones Creadas",
+        "startupDate":"Fecha de Inicio",
+        "latestUpdate":"Última Actualización",
+        "ticketCreatedOn":"Ticket creado el",
+        "ticketCreatedBy":"Ticket creado por",
+        "messagesSent":"Mensajes enviados",
+        "status":"Estado",
+        "participants":"Participantes",
+        "role":"Rol",
 
         "switches":{
-            "globalAdmin":"Global Admin",
-            "ticketAdmin":"Ticket Admin",
-            "member":"Member",
-            "open":"Open",
-            "reopened":"Reopened",
-            "closed":"Closed",
-            "autoclosed":"Autoclosed"
+            "globalAdmin":"Admin Global",
+            "ticketAdmin":"Admin del Ticket",
+            "member":"Miembro",
+            "open":"Abierto",
+            "reopened":"Reabierto",
+            "closed":"Cerrado",
+            "autoclosed":"Cerrado automáticamente"
         },
 
-        "errorUserNotFound":"This user can't be found in the stats database!"
+        "errorUserNotFound":"¡Este usuario no pudo ser encontrado en la base de datos de estadísitcas!"
     }
 }
