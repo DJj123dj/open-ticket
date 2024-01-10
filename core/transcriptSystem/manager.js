@@ -113,6 +113,12 @@ module.exports = async (messages,guild,channel,user,reason) => {
                     if (!tc) return
                     tc.send({embeds:[errembed],files:[attachment]})
                 }
+                if (tsconfig.sendTranscripts.enableDM && user){
+                    const embed = tsembeds.tsready(chName,chId,null,user)
+                    try {
+                        ticketopener.send({embeds:[embed],files:[attachment]})
+                    }catch{}
+                }
                 return
             }
 
@@ -167,6 +173,12 @@ module.exports = async (messages,guild,channel,user,reason) => {
                     if (!tc) return
                     tc.send({embeds:[errembed],files:[attachment]})
                 }
+                if (tsconfig.sendTranscripts.enableDM && user){
+                    const embed = tsembeds.tsready(chName,chId,null,user)
+                    try {
+                        ticketopener.send({embeds:[embed],files:[attachment]})
+                    }catch{}
+                }
             }
         }else{
             const attachment = await require("./oldTranscript").createTranscript(messages,channel)
@@ -178,6 +190,12 @@ module.exports = async (messages,guild,channel,user,reason) => {
         
                 if (!tc) return
                 tc.send({embeds:[embed],files:[attachment]})
+            }
+            if (tsconfig.sendTranscripts.enableDM && user){
+                const embed = tsembeds.tsready(chName,chId,null,user)
+                try {
+                    ticketopener.send({embeds:[embed],files:[attachment]})
+                }catch{}
             }
         }
     }
