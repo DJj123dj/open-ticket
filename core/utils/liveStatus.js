@@ -189,7 +189,7 @@ exports.liveStatusUploadManager = async (err) => {
                             //system:config.system
                         },
                         language:config.languageFile,
-                        version:"3.5.0",
+                        version:"3.5.2",
                         slashcmds:slashMode,
                         transcripts:transcriptMode,
                         plugins:fs.readdirSync("./plugins"),

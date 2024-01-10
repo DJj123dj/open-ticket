@@ -53,7 +53,7 @@
             },
             "image":{
                 "enable":false,
-                "url":"https://www.dj-dj.be/wp-content/uploads/2022/09/pfp-cropped.png"
+                "url":"https://www.example.com/catmemes/cat.png"
             },
 
             "closedCategory":{
@@ -111,7 +111,7 @@
             "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v3.5.0 - I'm a footer!",
+            "footer":"Open Ticket v3.5.2 - I'm a footer!",
 
             "enableFooterImage":false,
             "footerImage":"https://www.example.com/catmemes/cat.png",

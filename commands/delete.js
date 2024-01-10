@@ -51,7 +51,7 @@ module.exports = () => {
         if (!interaction.guild) return
 
         const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
-        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        if (hiddendata.length < 1) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
 
         if (!permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){

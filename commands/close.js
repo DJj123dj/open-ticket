@@ -57,13 +57,15 @@ module.exports = () => {
 
         const reason = interaction.options.getString("reason") ? interaction.options.getString("reason") : false
 
-        await interaction.deferReply()
+        
 
         const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
-        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        if (hiddendata.length < 1) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
 
-        if (hiddendata.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
+        if (hiddendata.find(h => h.key == "pendingdelete")) return interaction.reply({embeds:[bot.errorLog.warning("Warning!","You can't close a ticket while it's being deleted!")]})
+
+        await interaction.deferReply()
 
         const descriptionReason = reason ? "**"+l.messages.reason+":** "+reason : false
         interaction.editReply({embeds:[bot.embeds.commands.closeEmbed(interaction.user,descriptionReason)],components:[bot.buttons.close.closeCommandRow]})

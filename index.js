@@ -25,7 +25,7 @@
 
     INFORMATION:
     ============
-    Open Ticket v3.5.0  -  © DJdj Development
+    Open Ticket v3.5.2  -  © DJdj Development
 
     discord: https://discord.dj-dj.be
     website: https://www.dj-dj.be
@@ -54,7 +54,7 @@ const client = new discord.Client({
     partials:[Partials.Channel,Partials.Message]
 })
 exports.client = client
-client.setMaxListeners(50)
+client.setMaxListeners(100)
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","created client")
 
 //LOAD CONFIG
@@ -396,7 +396,55 @@ this.actionRecorder.push({
     type:"debugsystem.success"
 })
 
+//PARSE .env FILE FROM DOTENV LIB
+//npm i dotenv
+//https://github.com/motdotla/dotenv
+/**@param {Buffer} src */
+const loadFromDotEnv = (src) => {
+    const LINE = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg
+    
+    const obj = {}
+    
+    // Convert buffer to string
+    let lines = src.toString()
+    
+    // Convert line breaks to same format
+    lines = lines.replace(/\r\n?/mg, '\n')
+    
+    let match
+    while ((match = LINE.exec(lines)) != null) {
+        const key = match[1]
+    
+        // Default undefined or null to empty string
+        let value = (match[2] || '')
+    
+        // Remove whitespace
+        value = value.trim()
+    
+        // Check if double quoted
+        const maybeQuote = value[0]
+    
+        // Remove surrounding quotes
+        value = value.replace(/^(['"`])([\s\S]*)\1$/mg, '$2')
+    
+        // Expand newlines if double quoted
+        if (maybeQuote === '"') {
+        value = value.replace(/\\n/g, '\n')
+        value = value.replace(/\\r/g, '\r')
+        }
+    
+        // Add to object
+        obj[key] = value
+    }
+    process.env.TOKEN = obj.TOKEN
+}
+
 //LOGIN SYSTEM
-const token = config.token.fromENV ? process.env.TOKEN : config.token.value
-client.login(token)
+if (config.token.fromENV){
+    loadFromDotEnv(fs.readFileSync(".env"))
+    client.login(process.env.TOKEN)
+}else{
+    client.login(config.token.value)
+}
+
 this.errorLog.log("debug","login with token")

@@ -33,13 +33,13 @@ module.exports = () => {
         if (!interaction.isChatInputCommand()) return
         if (interaction.commandName != "reopen") return
 
-        await interaction.deferReply()
-
         const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
-        if (hiddendata.length < 1) return interaction.editReply({embeds:[bot.errorLog.notInATicket]})
+        if (hiddendata.length < 1) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value
 
-        if (hiddendata.find(h => h.key == "pendingdelete")) return interaction.editReply({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
+        if (hiddendata.find(h => h.key == "pendingdelete")) return interaction.reply({embeds:[bot.errorLog.warning("Warning!","You can't re-open a ticket while it's being deleted!")]})
+
+        await interaction.deferReply()
 
         await interaction.editReply({embeds:[bot.embeds.commands.reopenEmbed(interaction.user)],components:[bot.buttons.close.openRowNormal]})
 

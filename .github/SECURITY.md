@@ -10,11 +10,11 @@ We only support Open Ticket versions listed below! With support, we mean bugs, e
 
 | Version   | Supported         |
 |-----------|-------------------|
+| 3.5.2     | ✅                |
+| 3.5.1     | ✅                |
 | 3.5.0     | ✅                |
-| 3.4.4     | ✅                |
-| 3.4.3     | 🟧                |
-| 3.4.2     | 🟧                |
-| < 3.4.2   | ❌                |
+| 3.4.4     | 🟧                |
+| < 3.4.4   | ❌                |
 
 ## Reporting a Vulnerability
 
