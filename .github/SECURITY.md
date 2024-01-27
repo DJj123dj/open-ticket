@@ -1,20 +1,19 @@
 # Security Policy
 
 ## Supported Versions
+Below, you can find a list with the status of every open ticket version. This list will change every update!
 
-We only support Open Ticket versions listed below! With support, we mean bugs, errors & helping you further!
+- ✅ Supported **(bugs, errors, discord support, documentation, html transcripts)**
+- 🟧 Deprecated / Partially Supported **(discord support, documentation, html transcripts)**
+- ❌ Fully Deprecated / Not Supported **(sometimes documentation)**
 
-✅ Supported
-🟧 Partially Supported
-❌ Not Supported
-
-| Version   | Supported         |
-|-----------|-------------------|
-| 3.5.2     | ✅                |
-| 3.5.1     | ✅                |
-| 3.5.0     | ✅                |
-| 3.4.4     | 🟧                |
-| < 3.4.4   | ❌                |
+| Version   | Supported | Until                       |
+|-----------|-----------|-----------------------------|
+| 3.5.3     | ✅        |                             |
+| 3.5.2     | ✅        | April 2024                  |
+| 3.5.1     | 🟧        | Next Update                 |
+| 3.5.0     | 🟧        | Next Update                 |
+| < 3.5.0   | ❌        |                             |
 
 ## Reporting a Vulnerability
 

@@ -43,7 +43,7 @@ exports.getDropdown = (ids,placeholder) => {
             }else{
                 if (option.label) selectComponent.setLabel(option.label)
                 if (option.icon) selectComponent.setEmoji(option.icon)
-                if (option.description) selectComponent.setDescription(option.description)
+                if (option.description && option.description.length < 100) selectComponent.setDescription(option.description)
             }
 
             dropdown.addOptions(selectComponent)

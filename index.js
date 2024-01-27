@@ -25,7 +25,7 @@
 
     INFORMATION:
     ============
-    Open Ticket v3.5.2  -  © DJdj Development
+    Open Ticket v3.5.3  -  © DJdj Development
 
     discord: https://discord.dj-dj.be
     website: https://www.dj-dj.be
@@ -382,11 +382,6 @@ process.on("uncaughtException",async (error,origin) => {
     errorLog(error.name+": "+error.message+" | origin: "+origin,error.stack)
 
     APIEvents.onError(error.name+": "+error.message,new Date())
-
-    //TEMPORARY INTEGRATION FOR LIVESTATUS ERROR UPLOADER:
-    try {
-        await require("./core/utils/liveStatus").liveStatusUploadManager(error.name+": "+error.message+" | origin: "+origin+"\n"+error.stack)
-    } catch {this.errorLog.log("info","FAILED TO AUTO-REPORT ERROR! (you can ignore this error)")}
 })
 
 this.actionRecorder.push({
