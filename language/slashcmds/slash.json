@@ -12,9 +12,10 @@
         "it":"italian",
         "ru":"russian",
         "tr": "Türkçe",
+        "ar": "Arabic",
 
-        "MISSING":"arabic,portuguese",
-        "NOTAVAILABLE":"arabic,portuguese,czech"
+        "MISSING":"portuguese",
+        "NOTAVAILABLE":"portuguese,czech"
     },
     "data":{
         "help":{
@@ -29,7 +30,8 @@
             "es-ES":"Una lista de los comandos disponibles.",
             "it":"Una lista di tutti i comandi disponibili.",
             "ru":"Список доступных команд",
-            "tr": "Kullanılabilir komutların listesi."
+            "tr": "Kullanılabilir komutların listesi.",
+            "ar": "قائمة للكوماندات المتاحة"
         },
         "message":{
             "en-GB":"Spawn an embed with buttons.",
@@ -43,7 +45,8 @@
             "es-ES":"Genera un embed con botones.",
             "it":"Genera un embed con un pulsante.",
             "ru":"Создать embed с кнопками",
-            "tr": "Butonlar ile bir yerleştirme oluşturun."
+            "tr": "Butonlar ile bir yerleştirme oluşturun.",
+            "ar": "أنشاء أيمبد مع الأزرار."
         },
         "close":{
             "en-GB":"Close a ticket.",
@@ -57,7 +60,8 @@
             "es-ES":"Cierra un ticket.",
             "it":"Chiudi un ticket.",
             "ru":"Закрыть тикет",
-            "tr": "Bileti kapat."
+            "tr": "Bileti kapat.",
+            "ar": "اغلاق تيكت."
         },
         "delete":{
             "en-GB":"Delete a ticket.",
@@ -71,7 +75,8 @@
             "es-ES":"Elimina un ticket.",
             "it":"Elimina un ticket.",
             "ru":"Удалить тикет",
-            "tr": "Bileti sil."
+            "tr": "Bileti sil.",
+            "ar": "حذف تيكت."
         },
         "reopen":{
             "en-GB":"Re-Open a ticket.",
@@ -85,7 +90,8 @@
             "es-ES":"Re-abre un ticket.",
             "it":"Ri-Apri un ticket.",
             "ru":"Открыть заново тикет",
-            "tr": "Bileti yeniden aç."
+            "tr": "Bileti yeniden aç.",
+            "ar": "اعادة فتح تيكت."
         },
         "add":{
             "en-GB":"Add another user to a ticket.",
@@ -99,7 +105,8 @@
             "es-ES":"Agrega otro usuario al ticket.",
             "it":"Aggiungi un membro al ticket",
             "ru":"Добавить другого пользователя в тикет",
-            "tr": "Bilete başka bir kullanıcı ekle."
+            "tr": "Bilete başka bir kullanıcı ekle.",
+            "ar": "اضافة مستخدم اخر الى تيكت معين."
         },
         "remove":{
             "en-GB":"Remove a user from a ticket.",
@@ -113,7 +120,8 @@
             "es-ES":"Elimina otro usuario del ticket.",
             "it":"Rimuovi un membro dal ticket",
             "ru":"Удалить пользователя из тикета",
-            "tr": "Kullanıcıyı bir biletten kaldır."
+            "tr": "Kullanıcıyı bir biletten kaldır.",
+            "ar": "ازالة مستخدم من تيكت معين."
         },
         "newticket":{
             "en-GB":"Create a ticket",
@@ -127,7 +135,8 @@
             "es-ES":"Crear un ticket.",
             "it":"Crea un ticket",
             "ru":"Создать тикет",
-            "tr": "Bilet oluştur"
+            "tr": "Bilet oluştur",
+            "ar": "انشاء تيكت."
         },
         "rename":{
             "en-GB":"Rename a ticket channel.",
@@ -141,7 +150,8 @@
             "es-ES":"Renombrar un canal de ticket.",
             "it":"Rinomina il canale di un ticket.",
             "ru":"Переименовать канал тикета",
-            "tr": "Bilet kanalını yeniden adlandır."
+            "tr": "Bilet kanalını yeniden adlandır.",
+            "ar": "اعادة تسمية التيكت."
         },
         "claim":{
             "en-GB":"Claim a ticket.",
@@ -155,7 +165,8 @@
             "es-ES":"  ",
             "it":"  ",
             "ru":"Взять тикет",
-            "tr":"Bilet talep et."
+            "tr":"Bilet talep et.",
+            "ar": "تعيين التيكت"
         },
         "unclaim":{
             "en-GB":"Un-claim a ticket.",
@@ -169,7 +180,8 @@
             "es-ES":"  ",
             "it":"  ",
             "ru":"Снять тикет",
-            "tr":"Bileti iptal et."
+            "tr":"Bileti iptal et.",
+            "ar": "ازالة التعيين من شخص الى التيكت"
         },
         "category":{
             "en-GB":"Change ticket type.",
@@ -183,7 +195,8 @@
             "es-ES":"  ",
             "it":"  ",
             "ru":"Изменить тип тикета",
-            "tr":"Bilet türünü değiştir."
+            "tr":"Bilet türünü değiştir.",
+            "ar": "تغيير نوع التيكت"
         }
     }
 }

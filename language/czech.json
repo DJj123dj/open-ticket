@@ -1,6 +1,6 @@
 {
     "_CREDITS":"spyeye_",
-    "_INFO":"This file is a translation for open ticket 3.5.2",
+    "_INFO":"This file is a translation for open ticket 3.5.3",
 
     "errors":{
         "missingArgsTitle":"Neplatný Argument!",
@@ -99,37 +99,37 @@
         "available":"Záloha je uložena zde!"
     },
     "stats":{
-        "globalTitle":"Globalní statistiky",
-        "ticketTitle":"Statistiky ticketů pro {0}",
-        "userTitle":"Statistiky uživatele {0}",
-        "systemTitle":"Systémové statistiky",
+        "globalTitle":"Globální statistiky",
+        "ticketTitle":"Ticket statistiky pro {0}",
+        "userTitle":"Uživatelské statistiky pro {0}",
+        "systemTitle":"Sytstémov= statistiky",
         "versionTitle":"Verze bota",
 
-        "ticketsCreated":"Ticket založen",
-        "ticketsClosed":"Ticket uzavřen",
-        "ticketsDeleted":"Ticket vymazán",
-        "ticketsReopened":"Ticket znovu otevřen",
-        "ticketsAutoclosed":"Ticket byl automaticky uzavřen",
-        "transcriptsCreated":"Transcripty vytvořeny",
-        "startupDate":"Datum spuštění",
+        "ticketsCreated":"Ticketů vytvořeno:",
+        "ticketsClosed":"Tickety zavřeno:",
+        "ticketsDeleted":"Ticketu smazáno:",
+        "ticketsReopened":"Ticketů znovuotevřených:",
+        "ticketsAutoclosed":"Ticketů automaticky zavřeno:",
+        "transcriptsCreated":"Záloh ticketů vytvořeno:",
+        "startupDate":"Datum zapnutí",
         "latestUpdate":"Poslední aktualizace",
-        "ticketCreatedOn":"Ticket vytvořen dne",
+        "ticketCreatedOn":"Ticket založen na",
         "ticketCreatedBy":"Ticket vytvořil",
-        "messagesSent":"Zpráva odeslána",
+        "messagesSent":"Zpráva poslána",
         "status":"Status",
         "participants":"Účastníci",
         "role":"Role",
 
         "switches":{
-            "globalAdmin":"Global Admin",
+            "globalAdmin":"Globální Admin",
             "ticketAdmin":"Ticket Admin",
-            "member":"Uživatel",
-            "open":"Otevřít",
-            "reopened":"Znovu Otevřít",
-            "closed":"Uzavřít",
-            "autoclosed":"Automaticky uzavřen"
+            "member":"Člen",
+            "open":"Otevřený",
+            "reopened":"Znovuotevřený",
+            "closed":"Zavřený",
+            "autoclosed":"Automaticky zavřený"
         },
 
-        "errorUserNotFound":"Tento uživatel není v databázi statistik k nalezení!"
+        "errorUserNotFound":"Tento uživatel nebyl nalezen v databázi statistik!"
     }
 }
