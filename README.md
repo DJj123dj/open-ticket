@@ -64,7 +64,7 @@ Take a look at all the features and discover the possibilities!
 |German             |david.3                   |🟢 Up To Date                   |
 |Italian            |maurizio26                |🟢 Up To Date                   |
 |Czech              |spyeye_                   |🟢 Up To Date                   |
-|Arabic             |Sarcastic#9318            |🔴 Outdated                     |
+|Arabic             |deqressing                |🟢 Up To Date                   |
 |Danish             |.the_gamer                |🟢 Up To Date                   |
 |Portuguese         |quiradon                  |🔴 Outdated                     |
 |Russian            |apexo & ander             |🟢 Up To Date                   |
