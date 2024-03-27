@@ -5,10 +5,10 @@ There will be massive improvements for more stability & features! But the best p
 
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket" width="600px">
 
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.5.3-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.5.3)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.5.4-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.5.4)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://docs.openticket.dj-dj.be)
 
 ### Open Ticket
-Open Ticket is the most customisable discord ticket bot that you will ever find! There are more than 150 options to customise in the config! This includes html transcripts, unlimited amount of tickets, custom embeds & more! Did you know that even the html transcripts are highly customisable? Don't wait and check it out! If you're having trouble setting the bot up, feel free to join our support server and we will help you further!
+Open Ticket is the most customisable discord ticket bot that you will ever find! There are more than 150 options to customise in the config! This includes html transcripts, unlimited tickets, custom embeds & more! Did you know that even the html transcripts are highly customisable? Don't wait and check it out! If you're having trouble setting the bot up, feel free to join our support server and we will help you further!
 
 Take a look at all the features and discover the possibilities!
 ### [Visit the Documentation!](https://docs.openticket.dj-dj.be/quick-start)
@@ -16,25 +16,17 @@ Take a look at all the features and discover the possibilities!
 ## Features
 - **🎉 advanced html transcripts!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in 19 different languages
+- 🇬🇧 translation in 22 different languages
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
-- 🆒 plugins
-- ∞ unlimited tickets & unlimited messages
+- 🆒 custom plugins
+- ∞ unlimited tickets & embeds
 - ➕➖ add/remove users from a ticket
 - 📊 ticket, user & global staticstics
 - /slash & text commands
-
-<details>
-  <summary><b>But wait, there are even more features! Click here to discover!</b></summary>
-  
-  
-  - fully customisable embeds & buttons
-  - close tickets with reason
-  - reaction roles (or verification system)
-  - discord interaction buttons
-  - discord.js v14
-</details>
+- 📥 reaction roles & url buttons
+- 🖥️ discord.js v14 & axios
+- 🎛️ latest discord integration
 
 ## preview
 <img src="https://apis.dj-dj.be/cdn/openticket/message_buttons.png" alt="Message with buttons" width="350px">
@@ -54,31 +46,33 @@ Take a look at all the features and discover the possibilities!
 |Designer         |vuur_draak         |
 
 ### Translators
-|Language           |Maintainer (discord name) |Status                          |
-|-------------------|--------------------------|--------------------------------|
-|English            |djj123dj                  |🟢 Up To Date                   |
-|Dutch              |djj123dj                  |🟢 Up To Date                   |
-|French             |sankedev & tostam         |🟢 Up To Date                   |
-|Romanian           |sankedev                  |🟢 Up To Date                   |
-|Spanish            |redactado & josuens       |🟢 Up To Date                   |
-|German             |david.3                   |🟢 Up To Date                   |
-|Italian            |maurizio26                |🟢 Up To Date                   |
-|Czech              |spyeye_                   |🟢 Up To Date                   |
-|Arabic             |deqressing                |🟢 Up To Date                   |
-|Danish             |.the_gamer                |🟢 Up To Date                   |
-|Portuguese         |quiradon                  |🔴 Outdated                     |
-|Russian            |apexo & ander             |🟢 Up To Date                   |
-|Ukrainian          |ander                     |🟢 Up To Date                   |
-|Turkish            |Hydra#0009                |🔴 Outdated                     |
-|Polish             |mkevas                    |🟢 Up To Date                   |
-|Slovenian          |n1kkec                    |🔴 Outdated                     |
-|Thai               |modshd                    |🟢 Up To Date                   |
-|Norwegian          |noonenook                 |🟢 Up To Date                   |
-|Greek              |stefanos__.               |🔴 Outdated                     |
-|Indonesian         |erxg                      |🟢 Up To Date                   |
+|Language           |Maintainer (discord name) |Status         |
+|-------------------|--------------------------|---------------|
+|English            |djj123dj                  |🟢 Up To Date  |
+|Dutch              |djj123dj                  |🟢 Up To Date  |
+|French             |sankedev & tostam         |🟢 Up To Date  |
+|Romanian           |sankedev                  |🟢 Up To Date  |
+|Spanish            |redactado & josuens       |🟢 Up To Date  |
+|German             |david.3                   |🟢 Up To Date  |
+|Italian            |maurizio26                |🟢 Up To Date  |
+|Czech              |spyeye_                   |🟢 Up To Date  |
+|Arabic             |deqressing                |🟢 Up To Date  |
+|Danish             |.the_gamer                |🟢 Up To Date  |
+|Portuguese         |quiradon                  |🔴 Outdated    |
+|Russian            |apexo & ander             |🟢 Up To Date  |
+|Ukrainian          |ander                     |🟢 Up To Date  |
+|Turkish            |Hydra#0009                |🔴 Outdated    |
+|Polish             |mkevas                    |🟢 Up To Date  |
+|Slovenian          |n1kkec                    |🔴 Outdated    |
+|Thai               |modshd                    |🟢 Up To Date  |
+|Norwegian          |noonenook                 |🟢 Up To Date  |
+|Greek              |stefanos__.               |🔴 Outdated    |
+|Indonesian         |erxg                      |🟢 Up To Date  |
+|Kurdish            |raze.hama                 |🟢 Up To Date  |
+|Hungarian          |Snowy                     |🔴 Outdated    |
 
 ## links
-current version: _v3.5.3_
+current version: _v3.5.4_
 </br>changelog: [click here](https://otgithub.dj-dj.be/releases)
 </br>documentation: [click here](https://docs.openticket.dj-dj.be/quick-start)
 

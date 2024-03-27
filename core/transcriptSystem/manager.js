@@ -114,7 +114,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
                     tc.send({embeds:[errembed],files:[attachment]})
                 }
                 if (tsconfig.sendTranscripts.enableDM && user){
-                    const embed = tsembeds.tsready(chName,chId,null,user)
+                    const embed = tsembeds.tsready(chName,null,user,ticketopener)
                     try {
                         ticketopener.send({embeds:[embed],files:[attachment]})
                     }catch{}
@@ -151,12 +151,12 @@ module.exports = async (messages,guild,channel,user,reason) => {
                 //ready
                 setTimeout(() => {
                     if (msg){
-                        msg.edit({embeds:[tsembeds.tsready(chName,chId,url,user)]})
+                        msg.edit({embeds:[tsembeds.tsready(chName,url,user,ticketopener)]})
                     }
 
                     if (tsconfig.sendTranscripts.enableDM){
                         if (!user) return
-                        const embed = tsembeds.tsready(chName,chId,url,user)
+                        const embed = tsembeds.tsready(chName,url,user,ticketopener)
                         try {
                             ticketopener.send({embeds:[embed]})
                         }catch{}
@@ -174,7 +174,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
                     tc.send({embeds:[errembed],files:[attachment]})
                 }
                 if (tsconfig.sendTranscripts.enableDM && user){
-                    const embed = tsembeds.tsready(chName,chId,null,user)
+                    const embed = tsembeds.tsready(chName,null,user,ticketopener)
                     try {
                         ticketopener.send({embeds:[embed],files:[attachment]})
                     }catch{}
@@ -182,7 +182,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
             }
         }else{
             const attachment = await require("./oldTranscript").createTranscript(messages,channel)
-            const embed = tsembeds.tsready(chName,chId,false,user)
+            const embed = tsembeds.tsready(chName,null,user,ticketopener)
 
             if (tsconfig.sendTranscripts.enableChannel){
                 /**@type {discord.TextChannel|undefined} */
@@ -192,7 +192,7 @@ module.exports = async (messages,guild,channel,user,reason) => {
                 tc.send({embeds:[embed],files:[attachment]})
             }
             if (tsconfig.sendTranscripts.enableDM && user){
-                const embed = tsembeds.tsready(chName,chId,null,user)
+                const embed = tsembeds.tsready(chName,null,user,ticketopener)
                 try {
                     ticketopener.send({embeds:[embed],files:[attachment]})
                 }catch{}

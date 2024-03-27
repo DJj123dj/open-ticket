@@ -34,17 +34,19 @@ exports.beingprocessed = (name,id,rawprocesstime,user) => {
 
 /**
  * 
- * @param {String} name 
- * @param {String} id 
- * @param {String} url
- * @param {discord.User} user 
+ * @param {String} name channel name
+ * @param {String} url transcript url
+ * @param {discord.User} user transcript closer
+ * @param {discord.User} creator transcript creator
  */
-exports.tsready = (name,id,url,user) => {
+exports.tsready = (name,url,user,creator) => {
     const embed = new discord.EmbedBuilder()
         .setTitle("🧾 "+l.transcripts.title)
         .setColor(config.color)
         .setAuthor({name:user.username,iconURL:user.displayAvatarURL()})
         .setFooter({text:name})
+        
+        if (creator) embed.setFields([{name:"Ticket Creator", value:"<@"+creator.id+">"}])
 
         if (url){
             embed.setURL(url)
