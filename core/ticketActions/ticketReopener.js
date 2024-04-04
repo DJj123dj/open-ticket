@@ -6,15 +6,26 @@ const log = bot.errorLog.log
 const l = bot.language
 const storage = bot.storage
 const pfb = discord.PermissionFlagsBits
+const permsChecker = require("../utils/permisssionChecker")
 
 /**
      * 
      * @param {discord.Guild} guild 
      * @param {discord.TextBasedChannel} channel 
      * @param {discord.User} user 
+     * @param {String} ticketId option id
      * @returns 
      */
-const reopenTicket = (guild,channel,user) => {
+const reopenTicket = (guild,channel,user,ticketId) => {
+    //check perms
+    if (config.system.closeMode == "adminonly"){
+        if (!guild) return
+        if (!permsChecker.ticket(user.id,guild.id,ticketId)){
+            permsChecker.sendUserNoPerms(user)
+            return
+        }
+    }
+
     log("system","re-opened a ticket",[{key:"ticket",value:channel.name},{key:"user",value:user.username}])
 
     var permissionsArray = []

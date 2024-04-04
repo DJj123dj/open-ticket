@@ -215,7 +215,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
                         interactionName:msg.interaction.commandName
                     },
                     user:{
-                        name:msg.interaction.user.username,
+                        name:msg.interaction.user.displayName,
                         id:msg.interaction.user.id,
                         color:replycolor,
                         pfp:msg.interaction.user.displayAvatarURL(),
@@ -227,15 +227,15 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
             }else if (replytype == "reply"){
 
                 var replycontentRAW = messages.find((msg2) => msg2.id == msg.reference.messageId)
-                var replycontent = (replycontentRAW && replycontentRAW.content) ? replycontentRAW.content.slice(0,(60-replycontentRAW.author.username.length)) : "deleted this message"
+                var replycontent = (replycontentRAW && replycontentRAW.content) ? replycontentRAW.content.slice(0,(60-replycontentRAW.author.displayName.length)) : "deleted this message"
                 const replycolorRAW = (replycontentRAW) ? msg.guild.members.cache.find((m) => m.id == replycontentRAW.author.id) : false
                 const replycolor = (replycolorRAW) ? replycolorRAW.displayHexColor.replace("#000000","#ffffff") : "#ffffff"
                 
                 var user = (replycontentRAW && replycontentRAW.content) ? {
-                    name:(replycontentRAW) ? replycontentRAW.author.username : "undefined",
+                    name:(replycontentRAW) ? replycontentRAW.author.displayName : "undefined",
                     id:(replycontentRAW) ? replycontentRAW.author.id : "undefined",
                     color:replycolor,
-                    pfp:(replycontentRAW) ? replycontentRAW.author.username : "",
+                    pfp:(replycontentRAW) ? replycontentRAW.author.displayName : "",
                     bot:(replycontentRAW) ? replycontentRAW.author.bot : false,
                     system:(replycontentRAW) ? replycontentRAW.author.system : false,
                     verifiedBot:(replycontentRAW) ? replycontentRAW.author.flags.has(discord.UserFlags.VerifiedBot) : false,
@@ -264,7 +264,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
             const authorColor = msg.member ? msg.member.displayHexColor.replace("#000000","#ffffff") : "#ffffff"
             messagesArray.push({
                 author:{
-                    name:msg.author.username,
+                    name:msg.author.displayName,
                     id:msg.author.id,
                     color:authorColor,
                     pfp:msg.author.displayAvatarURL(),
@@ -332,7 +332,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
             creatorid:data.ticket.creatorid,
             creatorpfp:data.ticket.creatorpfp,
 
-            closedbyname:user.username,
+            closedbyname:user.displayName,
             closedbyid:user.id,
             closedbypfp:user.displayAvatarURL(),
 

@@ -57,8 +57,6 @@ module.exports = () => {
 
         const reason = interaction.options.getString("reason") ? interaction.options.getString("reason") : false
 
-        
-
         const hiddendata = bot.hiddenData.readHiddenData(interaction.channel.id)
         if (hiddendata.length < 1) return interaction.reply({embeds:[bot.errorLog.notInATicket]})
         const ticketId = hiddendata.find(d => d.key == "type").value

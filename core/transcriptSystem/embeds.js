@@ -74,7 +74,7 @@ exports.tserror = (name,id,user,err) => {
 
         const errDesc = (typeof err == "string") ? "\n"+err : ""
 
-        embed.setDescription("Something went wrong while creating the HTML transcript.\n\n[possible reasons](https://docs.openticket.dj-dj.be/the-system/transcripts/transcript-errors)"+errDesc)
+        embed.setDescription("Something went wrong while creating the HTML transcript.\n\n[possible reasons](https://otdocs.dj-dj.be/docs/current/docs/system/transcripts)"+errDesc)
     
     return embed
 }

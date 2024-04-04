@@ -1,16 +1,15 @@
 {
   "name": "open-ticket",
+  "author": "DJdj Development",
   "version": "3.5.4",
-  "description": "TThe most advanced open-source discord ticket bot with HTML transcripts and plugins! It uses discord.js v14 & no database required!",
+  "description": "The most advanced open-source discord ticket bot with HTML transcripts and plugins! It uses discord.js v14 & no database required!",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "node index.js --devconfig --noerrorupload",
     "slashEnable": "node index.js slash enable",
-    "slashDisable": "node index.js slash disable",
-    "cleardata": "node ./core/dynamicdatabase/cleardata.js"
+    "slashDisable": "node index.js slash disable"
   },
-  "author": "DJdj Development",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.2",
@@ -22,7 +21,8 @@
     "url": "git+https://github.com/DJj123dj/open-ticket.git"
   },
   "bugs": {
-    "url": "https://github.com/DJj123dj/open-ticket/issues"
+    "url": "https://github.com/DJj123dj/open-ticket/issues",
+    "email": "support@dj-dj.be"
   },
-  "homepage": "https://github.com/DJj123dj/open-ticket#readme"
+  "homepage": "https://openticket.dj-dj.be"
 }

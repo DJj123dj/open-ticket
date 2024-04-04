@@ -29,23 +29,23 @@ exports.checker = async () => {
     /**@param {"userid"|"roleid"|"channelid"|"serverid"|"categoryid"} mode @param {String} value @param {String} path */
     const checkDiscord = (mode,value,path) => {
         if (mode == "userid"){
-            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+            if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this user id is invalid")
             }
         }else if (mode == "channelid"){
-            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+            if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this channel id is invalid")
             }
         }else if (mode == "roleid"){    
-            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+            if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this role id is invalid")
             }
         }else if (mode == "serverid"){
-            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+            if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this server id is invalid")
             }
         }else if (mode == "categoryid"){
-            if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+            if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                 createError("'"+path+"' | this category id is invalid")
             }
         }
@@ -402,11 +402,11 @@ exports.checker = async () => {
         }
     }
 
-    //--------------------------|
-    //--------------------------|
-    //checker => START HERE     |
-    //--------------------------|
-    //--------------------------|
+    //////////////////////////////////////////
+    //////////////////////////////////////////
+    /////////!!! CHECKER.JS START !!!/////////
+    //////////////////////////////////////////
+    //////////////////////////////////////////
 
     var configArray = ["color","serverId","token","adminRoles","prefix","languageFile","status","system","options","messages"]
     configArray.forEach((item) => {
@@ -416,19 +416,44 @@ exports.checker = async () => {
     })
     
     checkHexColor(config.color,"main_color")
-    checkDiscord("serverid",config.serverId,"server_id")
+    checkDiscord("serverid",config.serverId,"serverId")
 
     if (!require("./api/api.json").disable.checkerjs.token && !config.token.fromENV) checkToken(config.token.value)
 
-    checkType(config.adminRoles,"array","/main_adminroles")
-    checkDiscordArray("roleid",config.adminRoles,"main_adminroles")
+    checkType(config.adminRoles,"array","/adminRoles")
+    checkDiscordArray("roleid",config.adminRoles,"adminRoles")
     checkString(config.prefix,1,15,"prefix","prefix")
-    //languagefile
-    checkType(config.languageFile,"string","languagefile")
-    const lf = config.languageFile
     
-    if (!lf.startsWith("custom") && !lf.startsWith("english") && !lf.startsWith("dutch") && !lf.startsWith("romanian") && !lf.startsWith("german") && !lf.startsWith("arabic") && !lf.startsWith("spanish") && !lf.startsWith("portuguese") && !lf.startsWith("french") && !lf.startsWith("italian") && !lf.startsWith("czech") && !lf.startsWith("danish") && !lf.startsWith("russian") && !lf.startsWith("turkish") && !lf.startsWith("polish") && !lf.startsWith("slovenian")  && !lf.startsWith("thai") && !lf.startsWith("norwegian") && !lf.startsWith("greek") && !lf.startsWith("ukrainian") && !lf.startsWith("hungarian") && !lf.startsWith("indonesian") && !lf.startsWith("kurdish")){
-        createError("'languagefile' | invalid language, more info in the wiki")
+    //languagefile
+    checkType(config.languageFile,"string","languageFile")
+    const languageList = [
+        "custom",
+        "english",
+        "dutch",
+        "romanian",
+        "german",
+        "arabic",
+        "spanish",
+        "portuguese",
+        "french",
+        "italian",
+        "czech",
+        "danish",
+        "russian",
+        "turkish",
+        "polish",
+        "slovenian", 
+        "thai",
+        "norwegian",
+        "greek",
+        "ukrainian",
+        "hungarian",
+        "indonesian",
+        "kurdish",
+        "persian"
+    ]
+    if (!languageList.some((l) => config.languageFile.startsWith(l))){
+        createError("'languageFile' | invalid language, more info in the wiki")
     }
 
     //status:
@@ -483,34 +508,35 @@ exports.checker = async () => {
     //the end
     if (errorList.length > 0 || warnList.length > 0){
         console.log("REPORT:\n===========================")
-    }
-    warnList.forEach((w) => {
-        const splitw = w.split("'")
-        if (splitw.length > 1){
-            var splitstring = chalk.yellow(splitw[0])+chalk.blue("'"+splitw[1]+"'")+chalk.yellow(splitw[2])
-            if (splitw[3]){splitstring = splitstring+chalk.yellow(splitw[3])}
-            if (splitw[4]){splitstring = splitstring+chalk.yellow(splitw[4])}
-            if (splitw[5]){splitstring = splitstring+chalk.yellow(splitw[5])}
-        }else {var splitstring = chalk.yellow(splitw[0])}
-        console.log(splitstring)
-    })
-    errorList.forEach((e) => {
-        const splite = e.split("'")
-        if (splite.length > 1){
-            var splitstring = chalk.red(splite[0])+chalk.blue("'"+splite[1]+"'")+chalk.red(splite[2])
-        }else {var splitstring = chalk.red(splite[0])}
-        console.log(splitstring)
-    })
-    if (isError){
-        console.log("===========================")
-        console.log("=> "+chalk.bgRed("your bot doesn't work if you don't fix the above errors!"))
-        if (isWarn){
-            console.log("\n=> "+chalk.bgYellow("if you ignore warns, some things may work differently than expected!"))
+        warnList.forEach((w) => {
+            const splitw = w.split("'")
+            if (splitw.length > 1){
+                var splitstring = chalk.yellow(splitw[0])+chalk.blue("'"+splitw[1]+"'")+chalk.yellow(splitw[2])
+                if (splitw[3]){splitstring = splitstring+chalk.yellow(splitw[3])}
+                if (splitw[4]){splitstring = splitstring+chalk.yellow(splitw[4])}
+                if (splitw[5]){splitstring = splitstring+chalk.yellow(splitw[5])}
+            }else {var splitstring = chalk.yellow(splitw[0])}
+            console.log(splitstring)
+        })
+        errorList.forEach((e) => {
+            const splite = e.split("'")
+            if (splite.length > 1){
+                var splitstring = chalk.red(splite[0])+chalk.blue("'"+splite[1]+"'")+chalk.red(splite[2])
+            }else {var splitstring = chalk.red(splite[0])}
+            console.log(splitstring)
+        })
+        if (isError){
+            console.log("===========================")
+            console.log("=> "+chalk.bgRed("your bot doesn't work if you don't fix the above errors!"))
+            if (isWarn){
+                console.log("\n=> "+chalk.bgYellow("if you ignore warns, some things may work differently than expected!"))
+            }
+            console.log(chalk.bold.green("\nDOCUMENTATION => https://otdocs.dj-dj.be\nSUPPORT => https://discord.dj-dj.be\n"))
+            process.exit(0)
+        }else if (isWarn){
+            console.log("===========================")
+            console.log("=> "+chalk.bgYellow("if you ignore warns, some things may work differently than expected!"))
+            console.log(chalk.bold.green("\nDOCUMENTATION => https://otdocs.dj-dj.be\nSUPPORT => https://discord.dj-dj.be\n"))
         }
-        process.exit(0)
-    }else if (isWarn == true && isError == false){
-        console.log("===========================")
-        console.log("=> "+chalk.bgYellow("if you ignore warns, some things may work differently than expected!"))
     }
-
 }

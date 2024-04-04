@@ -4,7 +4,7 @@ const bot = require("../../index")
 exports.client = bot.client
 exports.config = bot.config
 exports.utils = {
-    log:bot.errorLog.log(),
+    log:bot.errorLog.log,
     storage:bot.storage
 }
 
