@@ -1,4 +1,7 @@
 {
+    "_DOCUMENTATION":"https://otdocs.dj-dj.be",
+    "_SUPPORT":"https://discord.dj-dj.be",
+    
     "color":"#ffffff",
     "serverId":"server id (for slash cmds)",
     "token":{
@@ -28,10 +31,9 @@
         "answerInEphemeralOnOpen":true
     },
 
-    "SUPPORT":"Take look at our wiki: https://docs.openticket.dj-dj.be or join our discord server: https://discord.dj-dj.be if you need support!",
     "options":[
         {
-            "id":"general",
+            "id":"example-ticket",
             "name":"Question",
             "description":"Create this ticket if you have a question.",
             "icon":"🎫",
@@ -74,10 +76,9 @@
                     "roleId":"012345678910"
                 }
             }
-            
         },
         {
-            "id":"website",
+            "id":"example-website",
             "name":"Website",
             "description":"Go to our website.",
             "icon":"✅",
@@ -85,33 +86,31 @@
             "type":"website",
 
             "url":"https://www.dj-dj.be"
-            
         },
         {
-            "id":"role",
-            "name":"Verify",
-            "description":"Click here to get the verify role.",
-            "icon":"👮🏼",
-            "label":"get a role",
+            "id":"example-role",
+            "name":"Update Ping",
+            "description":"Click here to get pinged for updates!",
+            "icon":"📢",
+            "label":"Update Ping",
             "type":"role",
 
             "color":"red",
             "roles":["discord role id"],
             "mode":"add&remove|remove|add",
             "enableDmOnOpen":true
-            
         }
     ],
 
     "messages":[
         {
-            "id":"1",
+            "id":"example-embed",
             "name":"Choose Your Ticket",
             "description":"You can click one of the buttons below!",
             "dropdown":false,
 
             "enableFooter":false,
-            "footer":"Open Ticket v3.5.3 - I'm a footer!",
+            "footer":"Open Ticket v3.5.4 - I'm a footer!",
 
             "enableFooterImage":false,
             "footerImage":"https://www.example.com/catmemes/cat.png",
@@ -125,7 +124,7 @@
             "enableCustomColor":false,
             "color":"#ffffff",
 
-            "options":["general","apply"],
+            "options":["example-ticket","example-website","example-role"],
             
             "other":{
                 "enableTicketExplaination":true,

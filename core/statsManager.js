@@ -220,7 +220,7 @@ const getTicketStats = async (guild,channelid) => {
     /**@type {TextChannel|undefined} */
     const channel = guild.channels.cache.find((c) => c.id == channelid)
     const messageAmount = (channel) ? (await getmessages(channel,5000)).length : 0
-    const participants = (channel) ? channel.members.map((m) => m.user.username) : []
+    const participants = (channel) ? channel.members.map((m) => "<@"+m.user.id+">") : []
 
     //saved data
     const createdAt = getStats("ticket","CREATED_AT",channelid)
@@ -228,7 +228,7 @@ const getTicketStats = async (guild,channelid) => {
 
     const TEMPcreatedBy = getStats("ticket","CREATED_BY",channelid)
     const TEMPcreatedByUser = (TEMPcreatedBy) ? guild.members.cache.find((m) => m.id == TEMPcreatedBy) : undefined
-    const createdBy = (TEMPcreatedByUser) ? TEMPcreatedByUser.user.username : "an unknown person 😄"
+    const createdBy = (TEMPcreatedByUser) ? "<@"+TEMPcreatedByUser.user.id+">" : "an unknown person 😄"
 
     return {
         createdAt: (typeof createdAt == "undefined") ? new Date().getTime() : createdAt,
@@ -316,7 +316,7 @@ const createTicketStatsEmbed = async (guild,channelid) => {
 
     const sentences = [
         `${l.stats.ticketCreatedOn}: <t:${Math.round(stats.createdAt/1000)}:f>`,
-        `${l.stats.ticketCreatedBy}: \`${stats.createdBy}\``,
+        `${l.stats.ticketCreatedBy}: ${stats.createdBy}`,
         `${l.stats.messagesSent}: \`${stats.messageAmount}\``,
         `${l.stats.status}: ${newStatus}`
     ]

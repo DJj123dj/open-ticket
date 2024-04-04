@@ -9,11 +9,10 @@ Below, you can find a list with the status of every open ticket version. This li
 
 | Version   | Supported | Until                       |
 |-----------|-----------|-----------------------------|
-| 3.5.3     | ✅        |                             |
-| 3.5.2     | ✅        | April 2024                  |
-| 3.5.1     | 🟧        | Next Update                 |
-| 3.5.0     | 🟧        | Next Update                 |
-| < 3.5.0   | ❌        |                             |
+| 3.5.4     | ✅        |                             |
+| 3.5.3     | ✅        | May 2024                    |
+| 3.5.2     | 🟧        | Next Update                 |
+| < 3.5.2   | ❌        |                             |
 
 ## Reporting a Vulnerability
 

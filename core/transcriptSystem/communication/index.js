@@ -22,7 +22,7 @@ exports.upload = async (json) => {
         
         resolve(res.data)
         }catch(err){
-            console.log("failed transcript upload!",err.response)
+            console.log("Failed HTML transcript upload! Reached Ratelimit 429!")
             resolve(false)
         }
     })

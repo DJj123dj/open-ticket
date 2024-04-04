@@ -25,7 +25,7 @@
 
     INFORMATION:
     ============
-    Open Ticket v3.5.3  -  © DJdj Development
+    Open Ticket v3.5.4  -  © DJdj Development
 
     discord: https://discord.dj-dj.be
     website: https://www.dj-dj.be
@@ -38,7 +38,7 @@
 
     Send ./openticketdebug.txt when there are errors!
  */
-
+/** discord :)*/
 const discord = require("discord.js")
 const fs = require('fs')
 const {GatewayIntentBits,Partials} = discord
@@ -54,7 +54,7 @@ const client = new discord.Client({
     partials:[Partials.Channel,Partials.Message]
 })
 exports.client = client
-client.setMaxListeners(100)
+client.setMaxListeners(120)
 if (process.argv.some((v) => v == "--debug")) console.log("[TEMP_DEBUG]","created client")
 
 //LOAD CONFIG
@@ -161,6 +161,10 @@ client.on('ready',async () => {
 
         if (config.status.enabled){
             setStatus(config.status.type,config.status.text)
+            //refresh status every 10 minutes
+            setInterval(() => {
+                setStatus(config.status.type,config.status.text)
+            },(60*10*1000))
         }
 
         this.actionRecorder.push({
