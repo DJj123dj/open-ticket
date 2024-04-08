@@ -11,7 +11,7 @@ There will be massive improvements for more stability & features! But the best p
 Open Ticket is the most customisable discord ticket bot that you will ever find! There are more than 150 options to customise in the config! This includes html transcripts, unlimited tickets, custom embeds & more! Did you know that even the html transcripts are highly customisable? Don't wait and check it out! If you're having trouble setting the bot up, feel free to join our support server and we will help you further!
 
 Take a look at all the features and discover the possibilities!
-### [Visit the Documentation!](https://otdocs.dj-dj.be/quick-start)
+### [Visit the Documentation!](https://otdocs.dj-dj.be/)
 
 ## Features
 - **🎉 advanced html transcripts!**
@@ -75,6 +75,6 @@ Take a look at all the features and discover the possibilities!
 ## links
 current version: _v3.5.4_
 </br>changelog: [click here](https://otgithub.dj-dj.be/releases)
-</br>documentation: [click here](https://otdocs.dj-dj.be/quick-start)
+</br>documentation: [click here](https://otdocs.dj-dj.be/)
 
 © 2024 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.dj-dj.be) | [terms of service](https://www.dj-dj.be/terms)
