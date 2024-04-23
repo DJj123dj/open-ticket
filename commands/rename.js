@@ -39,9 +39,9 @@ module.exports = () => {
             }
         })
 
-        if (!prefix) prefix = "noprefix-"
-        msg.channel.setName(prefix+newname)
-        msg.channel.send({embeds:[bot.embeds.commands.renameEmbed(msg.author,prefix+newname)]})
+        if (!prefix) prefix = ""
+        msg.channel.setName(newname)
+        msg.channel.send({embeds:[bot.embeds.commands.renameEmbed(msg.author,newname)]})
 
         log("command","someone used the 'rename' command",[{key:"user",value:msg.author.username}])
         log("system","ticket renamed",[{key:"user",value:msg.author.username},{key:"ticket",value:name},{key:"newname",value:newname}])
@@ -75,10 +75,10 @@ module.exports = () => {
             }
         })
 
-        if (!prefix) prefix = "noprefix-"
+        if (!prefix) prefix = ""
 
-        interaction.channel.setName(prefix+newname)
-        interaction.editReply({embeds:[bot.embeds.commands.renameEmbed(interaction.user,prefix+newname)]})
+        interaction.channel.setName(newname)
+        interaction.editReply({embeds:[bot.embeds.commands.renameEmbed(interaction.user,newname)]})
 
         log("command","someone used the 'rename' command",[{key:"user",value:interaction.user.username}])
         log("system","ticket renamed",[{key:"user",value:interaction.user.username},{key:"ticket",value:name},{key:"newname",value:newname}])
