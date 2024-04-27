@@ -71,6 +71,7 @@ Take a look at all the features and discover the possibilities!
 |Kurdish            |raze.hama                 |🟢 Up To Date  |
 |Hungarian          |Snowy                     |🔴 Outdated    |
 |Persian            |sasanwm                   |🟢 Up To Date  |
+|Latvian            |ronalds1398               |🟢 Up To Date  |
 
 ## links
 current version: _v3.5.4_
