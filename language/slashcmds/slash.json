@@ -13,6 +13,7 @@
         "ru":"russian",
         "tr": "Türkçe",
         "ar": "Arabic",
+        "th": "Thailand",
 
         "MISSING":"portuguese",
         "NOTAVAILABLE":"portuguese,czech"
@@ -31,7 +32,8 @@
             "it":"Una lista di tutti i comandi disponibili.",
             "ru":"Список доступных команд",
             "tr": "Kullanılabilir komutların listesi.",
-            "ar": "قائمة للكوماندات المتاحة"
+            "ar": "قائمة للكوماندات المتاحة",
+            "th": "List คำสั่งที่สามารถใช้งานได้"
         },
         "message":{
             "en-GB":"Spawn an embed with buttons.",
@@ -46,7 +48,8 @@
             "it":"Genera un embed con un pulsante.",
             "ru":"Создать embed с кнопками",
             "tr": "Butonlar ile bir yerleştirme oluşturun.",
-            "ar": "أنشاء أيمبد مع الأزرار."
+            "ar": "أنشاء أيمبد مع الأزرار.",
+            "th": "เรียก Embed และปุ่มต่างๆ"
         },
         "close":{
             "en-GB":"Close a ticket.",
@@ -61,7 +64,8 @@
             "it":"Chiudi un ticket.",
             "ru":"Закрыть тикет",
             "tr": "Bileti kapat.",
-            "ar": "اغلاق تيكت."
+            "ar": "اغلاق تيكت.",
+            "th": "ปิดห้องติดต่อ"
         },
         "delete":{
             "en-GB":"Delete a ticket.",
@@ -76,7 +80,8 @@
             "it":"Elimina un ticket.",
             "ru":"Удалить тикет",
             "tr": "Bileti sil.",
-            "ar": "حذف تيكت."
+            "ar": "حذف تيكت.",
+            "th": "ลบห้องติดต่อ"
         },
         "reopen":{
             "en-GB":"Re-Open a ticket.",
@@ -91,7 +96,8 @@
             "it":"Ri-Apri un ticket.",
             "ru":"Открыть заново тикет",
             "tr": "Bileti yeniden aç.",
-            "ar": "اعادة فتح تيكت."
+            "ar": "اعادة فتح تيكت.",
+            "th": "เปิดห้องติดต่อใหม่อีกครั้ง"
         },
         "add":{
             "en-GB":"Add another user to a ticket.",
@@ -106,7 +112,8 @@
             "it":"Aggiungi un membro al ticket",
             "ru":"Добавить другого пользователя в тикет",
             "tr": "Bilete başka bir kullanıcı ekle.",
-            "ar": "اضافة مستخدم اخر الى تيكت معين."
+            "ar": "اضافة مستخدم اخر الى تيكت معين.",
+            "th": "เพิ่มผู้ใช้เข้ามาในห้องติดต่อ"
         },
         "remove":{
             "en-GB":"Remove a user from a ticket.",
@@ -121,7 +128,8 @@
             "it":"Rimuovi un membro dal ticket",
             "ru":"Удалить пользователя из тикета",
             "tr": "Kullanıcıyı bir biletten kaldır.",
-            "ar": "ازالة مستخدم من تيكت معين."
+            "ar": "ازالة مستخدم من تيكت معين.",
+            "th": "ลบผู้ใช้ออกจากห้องติดต่อ"
         },
         "newticket":{
             "en-GB":"Create a ticket",
@@ -136,7 +144,8 @@
             "it":"Crea un ticket",
             "ru":"Создать тикет",
             "tr": "Bilet oluştur",
-            "ar": "انشاء تيكت."
+            "ar": "انشاء تيكت.",
+            "th": "สร้างห้องติดต่อใหม่"
         },
         "rename":{
             "en-GB":"Rename a ticket channel.",
@@ -151,7 +160,8 @@
             "it":"Rinomina il canale di un ticket.",
             "ru":"Переименовать канал тикета",
             "tr": "Bilet kanalını yeniden adlandır.",
-            "ar": "اعادة تسمية التيكت."
+            "ar": "اعادة تسمية التيكت.",
+            "th": "แก้ไชชื่อห้องติดต่อ"
         },
         "claim":{
             "en-GB":"Claim a ticket.",
@@ -166,7 +176,8 @@
             "it":"  ",
             "ru":"Взять тикет",
             "tr":"Bilet talep et.",
-            "ar": "تعيين التيكت"
+            "ar": "تعيين التيكت",
+            "th": "รับเรื่อง"
         },
         "unclaim":{
             "en-GB":"Un-claim a ticket.",
@@ -181,7 +192,8 @@
             "it":"  ",
             "ru":"Снять тикет",
             "tr":"Bileti iptal et.",
-            "ar": "ازالة التعيين من شخص الى التيكت"
+            "ar": "ازالة التعيين من شخص الى التيكت",
+            "th": "ยกเลิกการรับเรื่อง"
         },
         "category":{
             "en-GB":"Change ticket type.",
@@ -196,7 +208,8 @@
             "it":"  ",
             "ru":"Изменить тип тикета",
             "tr":"Bilet türünü değiştir.",
-            "ar": "تغيير نوع التيكت"
+            "ar": "تغيير نوع التيكت",
+            "th": "เปลี่ยนประเภทห้องติดต่อ"
         }
     }
 }

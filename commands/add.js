@@ -28,7 +28,16 @@ module.exports = () => {
             return
         }
 
-        msg.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
+        /**@type {discord.PermissionOverwriteManager} */
+        const overwrites = msg.channel.permissionOverwrites
+        overwrites.create(user.id,{
+            ViewChannel:true,
+            AddReactions:true,
+            AttachFiles:true,
+            EmbedLinks:true,
+            SendMessages:true,
+            ReadMessageHistory:true
+        },{reason:"Added user to ticket."})
         msg.channel.send({embeds:[bot.embeds.commands.addEmbed(user,msg.author)]})
 
         var loguser = msg.mentions.users.first()
@@ -59,7 +68,16 @@ module.exports = () => {
 
         await interaction.deferReply()
 
-        interaction.channel.permissionOverwrites.create(user.id, { ViewChannel:true, AddReactions:true,AttachFiles:true, EmbedLinks:true, SendMessages:true})
+        /**@type {discord.PermissionOverwriteManager} */
+        const overwrites = interaction.channel.permissionOverwrites
+        overwrites.create(user.id,{
+            ViewChannel:true,
+            AddReactions:true,
+            AttachFiles:true,
+            EmbedLinks:true,
+            SendMessages:true,
+            ReadMessageHistory:true
+        },{reason:"Added user to ticket."})
         interaction.editReply({embeds:[bot.embeds.commands.addEmbed(user,interaction.user)]})
 
         var loguser = user

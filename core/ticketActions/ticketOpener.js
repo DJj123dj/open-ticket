@@ -63,10 +63,11 @@ module.exports = () => {
                 } catch{}
             }
 
-            if (storage.get("amountOfUserTickets",interaction.member.id) == null || storage.get("amountOfUserTickets",interaction.member.id) == "false"|| Number(storage.get("amountOfUserTickets",interaction.member.id)) <= config.system.maxAmountOfTickets){
+            const currentUserTicketAmount = storage.get("amountOfUserTickets",interaction.member.id)
+            if (config.system.maxAmountOfTickets == 0 || !currentUserTicketAmount || currentUserTicketAmount == "false" || Number(currentUserTicketAmount) < config.system.maxAmountOfTickets){
 
                 //update storage
-                storage.set("amountOfUserTickets",interaction.member.id,Number(storage.get("amountOfUserTickets",interaction.member.id))+1)
+                storage.set("amountOfUserTickets",interaction.member.id,Number(currentUserTicketAmount)+1)
                 var ticketNumber = interaction.member.user.username
 
                 //set ticketName
@@ -248,14 +249,13 @@ module.exports = () => {
                     }
                     catch{log("system","failed to send DM")}
 
-                    if ((interaction.isButton() && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()){
+                    if (((interaction.isButton() || interaction.isStringSelectMenu()) && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()){
                         if (interaction.deferred){
                             interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
                         }else{
                             interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
                         }
                     }
-                    
                 })
             }else{
                 interaction.editReply({embeds:[bot.errorLog.warning(l.errors.maxAmountTitle,l.errors.maxAmountDescription)]})
