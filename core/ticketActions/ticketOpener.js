@@ -96,7 +96,7 @@ module.exports = () => {
                 permissionsArray.push({
                     id:interaction.member.user,
                     type:"member",
-                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+                    allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel,pfb.ReadMessageHistory]
                 })
 
                 //add main adminroles
@@ -108,7 +108,7 @@ module.exports = () => {
                         permissionsArray.push({
                             id:adminrole,
                             type:"role",
-                            allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+                            allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel,pfb.ReadMessageHistory]
                         })
                     }catch{}
                 })
@@ -127,7 +127,7 @@ module.exports = () => {
                             permissionsArray.push({
                                 id:adminrole,
                                 type:"role",
-                                allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
+                                allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel,pfb.ReadMessageHistory]
                             })
                         }catch{}
                     }
@@ -144,7 +144,7 @@ module.exports = () => {
                                 permissionsArray.push({
                                     id:adminrole,
                                     type:"role",
-                                    allow:[pfb.AddReactions,pfb.ViewChannel],
+                                    allow:[pfb.AddReactions,pfb.ViewChannel,pfb.ReadMessageHistory],
                                     deny:[pfb.SendMessages,pfb.AttachFiles,pfb.EmbedLinks]
                                 })
                             }catch{}
