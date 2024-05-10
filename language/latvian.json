@@ -1,0 +1,135 @@
+{
+    "_CREDITS":"Ronalds1398",
+    "_INFO":"This file is a translation for open ticket 3.5.5",
+  
+    "errors":{
+        "missingArgsTitle":"Nepareizi argumenti!",
+        "missingArgsDescription":"Trūkst argumentu!",
+        "noPermsTitle":"Nav atļauju!",
+        "noPermsDescription":"Jums ir nepieciešama `ADMINISTRATOR` atļauja vai jābūt atļautajām lomām!",
+        "noPermsDelete":"Tikai administratori var izdzēst biļetes!",
+        "chooseFromListTitle":"Nederīgs ID",
+        "chooseFromListDescription":"Izvēlieties vienu no zemāk esošajiem ID:",
+        "boterror":"Bota kļūda!",
+        "notInTicketTitle":"Jūs neesat biļetē!",
+        "notInTicketDescription":"Šī komanda nedarbojas ārpus biļetēm!",
+        "ticketDoesntExist":"Šāda biļete vairs nepastāv!",
+        "roleDoesntExist":"Šāda loma vairs nepastāv!",
+        "anotherOption":"Tas nav biļete, bet citas veida!",
+        "maxAmountTitle":"Sasniegta maksimālā summa!",
+        "maxAmountDescription":"Jūs esat sasniedzis maksimālo atļauto biļešu skaitu!\nTāpēc jūs nevarat izveidot jaunu!",
+        "somethingWentWrong":"**Kaut kas nogāja greizi!**\nLūdzu, mēģiniet vēlreiz!"
+    },
+    "commands":{
+        "userAddedTitle":"Pievienots {0} šai biļetei!",
+        "userRemovedTitle":"Noņemts {0} no šīs biļetes!",
+        "renameTitle":"Pārdēvēts uz {0}!",
+        "closeTitle":"Biļete aizvērta!",
+        "deleteTitle":"Dzēšam biļeti",
+        "reopenTitle":"Atkārtoti atveram biļeti!",
+        
+        "claimTitle":"Šo biļeti ņēma {0}",
+        "unclaimTitle":"Šī biļete nav piešķirta nevienam!",
+        "changeTitle":"Biļetes veids mainīts uz {0}!",
+
+        "statsTitle":"Šeit ir statistika par {0}!",
+        "autocloseTitle":"Šī biļete tiks automātiski aizvērta pēc {0}!",
+        "autocloseRejectTitle":"Šī biļete vairs netiks automātiski aizvērta!",
+        "autocloseWarn":"Tas attiecas tikai uz neaktīvām biļetēm!",
+
+        "goToTicket":"doties uz biļeti",
+        "ticketWarning":"Iegults ir zemāk esošajā ziņā!",
+        "maxTicketWarning":"**Brīdinājums:** _Jūs varat izveidot tikai tik daudz biļetes vienlaikus: {0}!_"
+    },
+    "helpMenu":{
+        "title":"Pieejamie komandu:",
+        "header1":"**Dodieties uz {0}, lai izveidotu biļeti!**\n\n",
+        "header2":"**Izpildiet komandu `/new` vai `/ticket`, lai izveidotu biļeti!**\n\n",
+
+        "msgCmd":"Izveidojiet iegultni ar pogām. (tikai administratoriem)",
+        "renameCmd":"Pārdēvējiet biļeti. (bez atstarpēm)",
+        "closeCmd":"Aizveriet biļeti.",
+        "deleteCmd":"Dzēst biļeti.",
+        "addCmd":"Pievienojiet lietotāju biļetei.",
+        "removeCmd":"Noņemt lietotāju no biļetes.",
+        "reopenCmd":"Atveriet atkārtoti aizvērtu biļeti.",
+        "changeCmd":"Mainiet biļetes veidu.",
+        "claimCmd":"Paņemiet biļeti.",
+        "unclaimCmd":"Atsakieties no biļetes.",
+        "statsCmd":"Apskatiet biļetes statistiku.",
+        "autocloseCmd":"Iestatiet taimeri, lai automātiski aizvērtu biļeti"
+    },
+    "buttons":{
+        "close":"Aizveriet biļeti",
+        "delete":"Dzēst biļeti",
+        "reopen":"Atveriet biļeti",
+        "closeWithReason":"Aizveriet ar iemeslu"
+    },
+    "messages":{
+        "closedDescription":"Pašlaik šajā biļetē var runāt tikai administratori!\n\n*Nospiediet zemāk esošo pogu, lai dzēstu vai atkārtoti atveriet šo biļeti!*",
+        "createdTitle":"Biļete izveidota!",
+        "createdDescription":"Jūsu biļete ir izveidota, to varat atpazīt, izmantojot pingu!",
+
+        "newTicketDmTitle":"Jauna biļete!",
+        "closedTicketDmTitle":"Biļete aizvērta!",
+        "deletedTicketDmTitle":"Biļete dzēsta!",
+        "closedTicketDmDescription":"Jūsu biļete ir aizvērta!",
+        "deletedTicketDmDescription":"Jūsu biļete ir dzēsta!",
+        "reopenTicketDmTitle":"Biļete atkārtoti atvērta!",
+        "reopenTicketDmDescription":"Jūsu biļete ir atkārtoti atvērta!",
+
+        "chooseCategory":"izvēlieties kategoriju:",
+        "gettingdeleted":"Biļete tiek dzēsta...",
+
+        "none":"nav",
+        "reason":"iemērs",
+        "createdat":"izveidots",
+        "openedby":"atvēris",
+        "deletedby":"dzēsts",
+        "closedby":"aizvērts",
+
+        "modalreason":"Kāds ir šīs biļetes aizvēršanas iemesls?",
+        "chooseATicket": "Izvēlieties biļeti"
+    },
+    "transcripts":{
+        "title":"Transkripcija",
+        "processed":"Šī transkripcija tiek apstrādāta",
+        "wait":"Lūdzu, uzgaidiet!",
+        "estimated":"Apmēramais laiks",
+        "available":"Transkripcija pieejama šeit"
+    },
+    "stats":{
+        "globalTitle":"Globālā statistika",
+        "ticketTitle":"Biļetes statistika priekš {0}",
+        "userTitle":"Lietotāja statistika priekš {0}",
+        "systemTitle":"Sistēmas statistika",
+        "versionTitle":"Bota versija",
+
+        "ticketsCreated":"Biļetes izveidotas",
+        "ticketsClosed":"Biļetes aizvērtas",
+        "ticketsDeleted":"Biļetes dzēstas",
+        "ticketsReopened":"Biļetes atkārtoti atvērtas",
+        "ticketsAutoclosed":"Biļetes automātiski aizvērtas",
+        "transcriptsCreated":"Transkripcijas izveidotas",
+        "startupDate":"Palaišanas datums",
+        "latestUpdate":"Pēdējā atjaunināšana",
+        "ticketCreatedOn":"Biļete izveidota",
+        "ticketCreatedBy":"Biļete izveidota",
+        "messagesSent":"Ziņojumi nosūtīti",
+        "status":"Statuss",
+        "participants":"Dalībnieki",
+        "role":"Loma",
+
+        "switches":{
+            "globalAdmin":"Globālais Administrātors",
+            "ticketAdmin":"Biļešu Administrātors",
+            "member":"Dalībnieks",
+            "open":"Atvērts",
+            "reopened":"Atkārtoti atvērts",
+            "closed":"Aizvērts",
+            "autoclosed":"Automātiski aizvērts"
+        },
+
+        "errorUserNotFound":"Lietotājs nav atrasts mūsu datubāzē!"
+    }
+}

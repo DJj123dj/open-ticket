@@ -28,7 +28,9 @@ module.exports = () => {
             return
         }
 
-        msg.channel.permissionOverwrites.delete(user.id)
+        /**@type {discord.PermissionOverwriteManager} */
+        const overwrites = msg.channel.permissionOverwrites
+        overwrites.delete(user.id,"Removed user from ticket.")
         msg.channel.send({embeds:[bot.embeds.commands.removeEmbed(user,msg.author)]})
 
         var loguser = msg.mentions.users.first()
@@ -59,7 +61,9 @@ module.exports = () => {
 
         await interaction.deferReply()
 
-        interaction.channel.permissionOverwrites.delete(user.id)
+        /**@type {discord.PermissionOverwriteManager} */
+        const overwrites = interaction.channel.permissionOverwrites
+        overwrites.delete(user.id,"Removed user from ticket.")
         interaction.editReply({embeds:[bot.embeds.commands.removeEmbed(user,interaction.user)]})
 
         var loguser = user

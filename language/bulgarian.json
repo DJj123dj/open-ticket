@@ -1,0 +1,135 @@
+{
+    "_CREDITS":"Stragar",
+    "_INFO":"This file is a translation for open ticket 3.5.5",
+
+    "errors":{
+        "missingArgsTitle":"Грешни Аргументи!",
+        "missingArgsDescription":"Липсват Аргументи",
+        "noPermsTitle":"Нямате позволение!",
+        "noPermsDescription":"Трябва ви `ADMINISTRATOR` правомощия или да бъде в списъка с роли!",
+        "noPermsDelete":"Само админ може да изтрива тикети!",
+        "chooseFromListTitle":"Грешно ID",
+        "chooseFromListDescription":"Choose one of the id's below:",
+        "boterror":"Грешка на Бота!",
+        "notInTicketTitle":"Не сте в билет!",
+        "notInTicketDescription":"Тази команда не работи извън тикета!",
+        "ticketDoesntExist":"Този тикет е изтрит!",
+        "roleDoesntExist":"Тази роля вече не съществува!",
+        "anotherOption":"Тази опция не е тикет, а друг вид!",
+        "maxAmountTitle":"Достигнахте максимален лимит!",
+        "maxAmountDescription":"Вече имате прекалено много брой тикети!\nНе може да създадете нов!",
+        "somethingWentWrong":"**Нещо се обърка!**\nОпитай отново след малко!"
+    },
+    "commands":{
+        "userAddedTitle":"Добавен {0} в тикета!",
+        "userRemovedTitle":"Премахнат {0} от тикета!",
+        "renameTitle":"Името е сменено на {0}!",
+        "closeTitle":"Затворете тикета",
+        "deleteTitle":"Изтрийте този тикет...",
+        "reopenTitle":"Отоворете тикета отново!",
+        
+        "claimTitle":"Този тикет е взет от {0}",
+        "unclaimTitle":"Този тикет не може да бъде взет вече!",
+        "changeTitle":"Changed ticket type to {0}!",
+
+        "statsTitle":"Статистика за {0}!",
+        "autocloseTitle":"Този тикет ще се затвори автоматично след {0}!",
+        "autocloseRejectTitle":"Този тикет вече няма да се затваря автоматично!",
+        "autocloseWarn":"Това засяга само неактивни тикети!",
+
+        "goToTicket":"отидете на тикет",
+        "ticketWarning":"Текста е добавен по-долу!",
+        "maxTicketWarning":"**Предопреждение:** _Ти можеш да създадеш {0} тикети(s) време!_"
+    },
+    "helpMenu":{
+        "title":"Налични команди:",
+        "header1":"**Отидете на {0}, за да създадете тикет!**\n\n",
+        "header2":"**Изпълнете командата `/new` или `/ticket`, за да създадете тикет!**\n\n",
+
+        "msgCmd":"Създаване на вградено съобщение с бутони. (само за администратори)",
+        "renameCmd":"Преименувайте билет. (без интервали)",
+        "closeCmd":"Затвори билет.",
+        "deleteCmd":"Изтрий билет.",
+        "addCmd":"Добави потребител към билета.",
+        "removeCmd":"Премахни потребител от билета.",
+        "reopenCmd":"Повторно отваряне на билет след като е затворен.",
+        "changeCmd":"Промени типа на билета.",
+        "claimCmd":"Претендирай за билет.",
+        "unclaimCmd":"Откажи претенцията за билет.",
+        "statsCmd":"Преглед на статистиката на билета.",
+        "autocloseCmd":"Задай таймер за автоматично затваряне на билета"
+    },
+    "buttons":{
+        "close":"Затвори билет",
+        "delete":"Изтрий билет",
+        "reopen":"Повторно отвори билет",
+        "closeWithReason":"затвори с причина"
+    },
+    "messages":{
+        "closedDescription":"Само администраторите могат да говорят в този билет сега!\n\n*Кликнете върху бутона по-долу, за да изтриете или повторно отворите този билет!*",
+        "createdTitle":"Създаден билет!",
+        "createdDescription":"Вашият билет е създаден, можете да го забележите по пинг!",
+
+        "newTicketDmTitle":"Нов билет!",
+        "closedTicketDmTitle":"Билетът е затворен!",
+        "deletedTicketDmTitle":"Билетът е изтрит!",
+        "closedTicketDmDescription":"Вашият билет е затворен!",
+        "deletedTicketDmDescription":"Вашият билет е изтрит!",
+        "reopenTicketDmTitle":"Билетът е повторно отворен!",
+        "reopenTicketDmDescription":"Вашият билет е повторно отворен!",
+
+        "chooseCategory":"изберете категория:",
+        "gettingdeleted":"Билетът се изтрива...",
+
+        "none":"няма",
+        "reason":"причина",
+        "createdat":"създаден на",
+        "openedby":"отворен от",
+        "deletedby":"изтрит от",
+        "closedby":"затворен от",
+        
+        "modalreason":"Каква е причината за затваряне на този билет?",
+        "chooseATicket": "Изберете билет"
+    },
+    "transcripts":{
+        "title":"Транскрипт",
+        "processed":"Този транскрипт се обработва",
+        "wait":"Моля, изчакайте!",
+        "estimated":"Приблизително време",
+        "available":"Транскриптът е достъпен тук"
+    },
+    "stats":{
+        "globalTitle":"Глобална статистика",
+        "ticketTitle":"Статистика на билета за {0}",
+        "userTitle":"Статистика на потребителя за {0}",
+        "systemTitle":"Системна статистика",
+        "versionTitle":"Версия на бота",
+
+        "ticketsCreated":"Създадени билети",
+        "ticketsClosed":"Затворени билети",
+        "ticketsDeleted":"Изтрити билети",
+        "ticketsReopened":"Повторно отворени билети",
+        "ticketsAutoclosed":"Автоматично затворени билети",
+        "transcriptsCreated":"Създадени транскрипти",
+        "startupDate":"Дата на стартиране",
+        "latestUpdate":"Последно обновление",
+        "ticketCreatedOn":"Билет създаден на",
+        "ticketCreatedBy":"Билет създаден от",
+        "messagesSent":"Изпратени съобщения",
+        "status":"Статус",
+        "participants":"Участници",
+        "role":"Роля",
+
+        "switches":{
+            "globalAdmin":"Глобален администратор",
+            "ticketAdmin":"Администратор на билет",
+            "member":"Член",
+            "open":"Отворен",
+            "reopened":"Повторно отворен",
+            "closed":"Затворен",
+            "autoclosed":"Автоматично затворен"
+        },
+
+        "errorUserNotFound":"Този потребител не може да бъде намерен в базата данни за статистика!"
+    }
+}

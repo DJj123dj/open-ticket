@@ -9,9 +9,9 @@ Below, you can find a list with the status of every open ticket version. This li
 
 | Version   | Supported | Until                       |
 |-----------|-----------|-----------------------------|
-| 3.5.4     | ✅        |                             |
-| 3.5.3     | ✅        | May 2024                    |
-| 3.5.2     | 🟧        | Next Update                 |
+| 3.5.5     | ✅        |                             |
+| 3.5.4     | ✅        | June 2024                   |
+| 3.5.3     | 🟧        | Next Update                 |
 | < 3.5.2   | ❌        |                             |
 
 ## Reporting a Vulnerability
@@ -32,7 +32,7 @@ The `openticketdebug.txt` file would also be handy to upload!<br>
 Visit [Contributing.md](/.github/CONTRIBUTING.md) for rules about translating & adding features!
 
 <br>
-SECURITY POLICY - Last updated: 14/12/2023<br>
+SECURITY POLICY - Last updated: 4/5/2024<br>
 © DJdj Development<br><br>
 Website: https://www.dj-dj.be <br>
 Discord: https://discord.dj-dj.be <br>
