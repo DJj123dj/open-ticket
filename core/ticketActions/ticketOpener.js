@@ -49,18 +49,10 @@ module.exports = () => {
             const currentTicketOptions = configParser.getTicketById(customId)
             if (currentTicketOptions == false) return interaction.reply({embeds:[bot.errorLog.serverError(l.errors.anotherOption)]})
 
-            if (interaction.isButton()){
-                try {
+            if (interaction.isButton() || interaction.isStringSelectMenu() || interaction.isChatInputCommand()){
+                try{
                     await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
-                } catch{}
-            }else if (interaction.isChatInputCommand()){
-                try {
-                    await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
-                } catch{}
-            }else if (interaction.isStringSelectMenu()){
-                try {
-                   await interaction.deferUpdate()
-                } catch{}
+                }catch{}
             }
 
             const currentUserTicketAmount = storage.get("amountOfUserTickets",interaction.member.id)
