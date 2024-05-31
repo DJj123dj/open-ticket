@@ -4,8 +4,9 @@
 1. [Check if the language isn't already in open ticket!](/language/)
 2. Check if the current translation is up-to-date!
 3. Can you edit/write JSON?
+4. [Have you read the documentation?](https://otdocs.dj-dj.be)
 
-If there is translation missing & you can write json, then go to the next step!
+If there is translation missing, you go to the next step!
 
 ### Step 2: translating
 **RULES:**
@@ -35,9 +36,9 @@ But don't worry! You can already write some plugins!
 If you want to contribute in another way, feel free to join [our discord server](https://discord.dj-dj.be) & talk about how you are going to do it. We will always help you further!
 
 <br>
-CONTRIBUTING GUIDELINES - Last updated: 23/3/2023<br>
+CONTRIBUTING GUIDELINES - Last updated: 31/5/2024<br>
 © DJdj Development<br><br>
 Website: https://www.dj-dj.be <br>
 Discord: https://discord.dj-dj.be <br>
 Email: support@dj-dj.be <br>
-Open Ticket website: https://openticket.dj-dj.be
+Documentation: https://otdocs.dj-dj.be

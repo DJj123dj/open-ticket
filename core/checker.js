@@ -90,25 +90,25 @@ exports.checker = async () => {
         }
         if (mode == "userid"){
             arrayValue.forEach((value,index) => {
-                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                     createError("'"+path+":"+index+"' | this user id is invalid")
                 }
             })
         }else if (mode == "channelid"){
             arrayValue.forEach((value,index) => {
-                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                     createError("'"+path+":"+index+"' | this channel id is invalid")
                 }
             })
         }else if (mode == "roleid"){
             arrayValue.forEach((value,index) => {
-                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                     createError("'"+path+":"+index+"' | this role id is invalid")
                 }
             })
         }else if (mode == "serverid"){
             arrayValue.forEach((value,index) => {
-                if (value.length < 16 || value.length > 20 || !/^\d+$/.test(value)){
+                if (value.length < 16 || value.length > 40 || !/^\d+$/.test(value)){
                     createError("'"+path+":"+index+"' | this server id is invalid")
                 }
             })
@@ -422,7 +422,7 @@ exports.checker = async () => {
 
     checkType(config.adminRoles,"array","/adminRoles")
     checkDiscordArray("roleid",config.adminRoles,"adminRoles")
-    checkString(config.prefix,1,15,"prefix","prefix")
+    checkString(config.prefix,1,40,"prefix","prefix")
     
     //languagefile
     checkType(config.languageFile,"string","languageFile")

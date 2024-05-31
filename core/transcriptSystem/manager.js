@@ -15,7 +15,7 @@ const checkAvailability = async () => {
     if (process.argv.some((v) => v == "--tsoffline")) return true
     const axios = require("axios").default
     try{
-        const res = await axios.get("https://transcripts.dj-dj.be/api/status.json")
+        const res = await axios.get("https://apis.dj-dj.be/transcripts/status.json")
         if (!res || !(res.status == 200) || !res.data) return false
 
         if (res.data && res.data["v2"] == "online") return true
