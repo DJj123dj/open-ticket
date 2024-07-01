@@ -9,7 +9,7 @@ Below, you can find a list with the status of every open ticket version. This li
 
 | Version   | Supported | Until                       |
 |-----------|-----------|-----------------------------|
-| 3.5.6     | ✅        |                             |
+| 3.5.7     | ✅        |                             |
 | 3.5.5     | ✅        | June 2024                   |
 | 3.5.4     | 🟧        | Next Update                 |
 | < 3.5.4   | ❌        |                             |

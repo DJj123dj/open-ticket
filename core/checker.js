@@ -456,7 +456,10 @@ exports.checker = async () => {
         "japanese",
         "korean",
         "simplifiedchinese",
-        "traditionalchinese"
+        "traditionalchinese",
+        "finnish",
+        "swedish",
+        "vietnamese"
     ]
     if (!languageList.some((l) => config.languageFile.startsWith(l))){
         createError("'languageFile' | invalid language, more info in the wiki")

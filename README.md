@@ -5,7 +5,7 @@ There will be massive improvements for more stability & features! But the best p
 
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket" width="600px">
 
-[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.5.6-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.5.6)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://otdocs.dj-dj.be)
+[![discord](https://img.shields.io/badge/discord-join%20our%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-3.5.7-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v3.5.7)  [![discord.js](https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm)]()  [![license](https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/blob/main/LICENSE) [![stars](https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square)](https://otdocs.dj-dj.be)
 
 ### Open Ticket
 Open Ticket is the most customisable discord ticket bot that you will ever find! There are more than 150 options to customise in the config! This includes html transcripts, unlimited tickets, custom embeds & more! Did you know that even the html transcripts are highly customisable? Don't wait and check it out! If you're having trouble setting the bot up, feel free to join our support server and we will help you further!
@@ -16,7 +16,7 @@ Take a look at all the features and discover the possibilities!
 ## 📌 Features
 - **🎉 advanced html transcripts!**
 - 🔒 close, ❌ delete & ✅ re-open tickets
-- 🇬🇧 translation in more than 30 languages!
+- 🇬🇧 translation in more than 33 languages!
 - 📄 very advanced customisation
 - 🆗 buttons or 🔽 dropdowns!
 - 🆒 custom plugins
@@ -76,9 +76,17 @@ A big thanks to all our sponsors!
 |Hungarian          |Snowy                     |🔴 Outdated    |
 |Persian            |sasanwm                   |🟢 Up To Date  |
 |Latvian            |ronalds1398               |🟢 Up To Date  |
+|Estonian           |iamnotmega                |🟢 Up To Date  |
+|Japanese           |iamnotmega                |🟢 Up To Date  |
+|Korean             |iamnotmega                |🟢 Up To Date  |
+|Simplified Chinese |iamnotmega                |🟢 Up To Date  |
+|Traditional Chinese|iamnotmega                |🟢 Up To Date  |
+|Finnish            |iamnotmega                |🟢 Up To Date  |
+|Swedish            |iamnotmega                |🟢 Up To Date  |
+|Vietnamese         |iamnotmega                |🟢 Up To Date  |
 
 ## 📎 Links
-current version: _v3.5.6_
+current version: _v3.5.7_
 </br>changelog: [click here](https://otgithub.dj-dj.be/releases)
 </br>documentation: [click here](https://otdocs.dj-dj.be/)
 
