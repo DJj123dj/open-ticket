@@ -76,6 +76,14 @@ A big thanks to all our sponsors!
 |Hungarian          |Snowy                     |🔴 Outdated    |
 |Persian            |sasanwm                   |🟢 Up To Date  |
 |Latvian            |ronalds1398               |🟢 Up To Date  |
+|Estonian           |iamnotmega                |🟢 Up To Date  |
+|Simplified Chinese |iamnotmega                |🟢 Up To Date  |
+|Traditional Chinese|iamnotmega                |🟢 Up To Date  |
+|Korean             |iamnotmega                |🟢 Up To Date  |
+|Japanese           |iamnotmega                |🟢 Up To Date  |
+|Swedish            |iamnotmega                |🟢 Up To Date  |
+|Vietnamese         |iamnotmega                |🟢 Up To Date  |
+|Finnish            |iamnotmega                |🟢 Up To Date  |
 
 ## 📎 Links
 current version: _v3.5.6_
