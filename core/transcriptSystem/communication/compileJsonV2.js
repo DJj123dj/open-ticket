@@ -117,7 +117,7 @@ exports.compile = (guild,channel,user,messagesInv,data) => {
                     //custom emoji
                     tempreactions.push({
                         amount:count,
-                        emoji:(emoji.url) ? emoji.url : "",
+                        emoji:emoji.imageURL(),
                         type:(emoji.animated) ? "gif" : "image"
                     })
                 }else if (emoji instanceof discord.ReactionEmoji){
