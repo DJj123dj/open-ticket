@@ -1,45 +1,45 @@
 {
-    "_CREDITS":"Hydra#0009",
+    "_CREDITS":"0x15d3",
     "_INFO":"This file is a translation for open ticket 3.5.7",
 
     "errors":{
         "missingArgsTitle":"Geçersiz argümanlar!",
         "missingArgsDescription":"Eksik argüman!",
         "noPermsTitle":"Bunun için yetkin yok!",
-        "noPermsDescription":"Bunu yapmak için 'ADMİNİSTRAR'rolüne ihtiyacınız var, veya izin verilen roller listesinde olun!",
+        "noPermsDescription":"Bunu yapmak için 'ADMINISTRATOR' rolüne ihtiyacınız var, veya izin verilen roller listesinde olun!",
         "noPermsDelete":"Sadece adminler bileti silebilir!",
-        "chooseFromListTitle":"Geçersiz Kimlik",
+        "chooseFromListTitle":"Geçersiz kimlik",
         "chooseFromListDescription":"Aşağıdaki kimliklerden birini seçin:",
-        "boterror":"Bot Hatası!",
+        "boterror":"Bot hatası!",
         "notInTicketTitle":"Bir biletin yok!",
         "notInTicketDescription":"Bu komut bilet dışında kullanılamaz!",
         "ticketDoesntExist":"Bu bilet artık yok!",
         "roleDoesntExist":"Bu rol artık yok!",
         "anotherOption":"Bu seçenek bir bilet değil, başka bir türdür!",
         "maxAmountTitle":"Ulaşabileceğin maksimum tutara ulaştın!",
-        "maxAmountDescription":"İzin verilen maksimum bilet sayısına ulaştınız!\nHhayır yeni bir tane oluşturamazsın!",
+        "maxAmountDescription":"İzin verilen maksimum bilet sayısına ulaştınız!\nHayır yeni bir tane oluşturamazsın!",
         "somethingWentWrong":"**Bir şeyler ters gitti!**\n lütfen başka bir zaman tekrar deneyin!"
     },
     "commands":{
-        "userAddedTitle":"Bilete {0} adlı kullanıcı eklendi!",
-        "userRemovedTitle":"Biletten {0} adlı kullanıcı çıkarıldı !",
+        "userAddedTitle":"{0} adlı kullanıcı bilete eklendi!",
+        "userRemovedTitle":"{0} adlı kullanıcı biletten çıkarıldı !",
         "renameTitle":"Bilet ismi {0} olarak değştirildi!",
-        "closeTitle":"Bilet Kapatıldı!",
+        "closeTitle":"Bilet kapatıldı!",
         "deleteTitle":"Bilet siliniyor...",
-        "reopenTitle":"Bilet Yeniden Açıldı!",
-        
-        "claimTitle":"Bu bilet artık talep edildi. {0}",
-        "unclaimTitle":"Tu bilet artık talep edilmiyor!",
-        "changeTitle":"Bu bilet türü {0} olarak değiştirildi!",
+        "reopenTitle":"Bilet yeniden açıldı!",
 
-        "statsTitle":"Here are the stats for {0}!",
-        "autocloseTitle":"This ticket will be closed automatically after {0}!",
-        "autocloseRejectTitle":"This ticket will no longer be closed automatically!",
-        "autocloseWarn":"This only affects inactive tickets!",
+        "claimTitle":"Bu bilet {0} tarafından talep edildi.",
+        "unclaimTitle":"Bu bilet artık talep edilmiyor!",
+        "changeTitle":"Bu biletin türü {0} olarak değiştirildi!",
 
-        "goToTicket":"go to ticket",
+        "statsTitle":"{0} için istatistikler!",
+        "autocloseTitle":"Bu bilet {0} sonra otomatik olarak kapatılacaktır!",
+        "autocloseRejectTitle":"Bu bilet artık otomatik olarak kapatılmayacaktır!",
+        "autocloseWarn":"Bu sadece aktif olmayan biletleri etkiler!",
+
+        "goToTicket":"Bilete git",
         "ticketWarning":"Gömme aşağıdaki mesajda yer almaktadır!",
-        "maxTicketWarning":"**Uyarı:** _You can only create {0} ticket(s) at a time!_"
+        "maxTicketWarning":"**Uyarı:** _Bir seferde yalnızca {0} bilet oluşturabilirsiniz!_"
     },
     "helpMenu":{
         "title":"Kullanılabilir Komutlar:",
@@ -48,27 +48,27 @@
 
         "msgCmd":"Gömülü bilet mesajı gönderir. (sadece yöneticiler)",
         "renameCmd":"Bilet adını değiştirir. (boşluk olmadan)",
-        "closeCmd":"Bileti kapatır.",
-        "deleteCmd":"Bileti siler.",
-        "addCmd":"Bilete kullanıcı ekler.",
-        "removeCmd":"Biletten kullanıcı çıkarır.",
-        "reopenCmd":"Bilet kapandıktan sonra tekrar açar.",
-        "changeCmd":"Change ticket type.",
-        "claimCmd":"Claim a ticket.",
-        "unclaimCmd":"Unclaim a ticket.",
-        "statsCmd":"View ticket stats.",
-        "autocloseCmd":"Set timer to automatically close ticket"
+        "closeCmd":"Bileti kapatır",
+        "deleteCmd":"Bileti siler",
+        "addCmd":"Bilete kullanıcı ekler",
+        "removeCmd":"Biletten kullanıcı çıkarır",
+        "reopenCmd":"Bilet kapandıktan sonra tekrar açar",
+        "changeCmd":"Bilet türünü değiştir",
+        "claimCmd":"Bir bileti talep et",
+        "unclaimCmd":"Bir bileti talep etmeyi bırak",
+        "statsCmd":"Bilet istatistiklerini görüntüle",
+        "autocloseCmd":"Bileti otomatik olarak kapatacak zamanlayıcıyı ayarla"
     },
     "buttons":{
         "close":"Bileti Kapat",
         "delete":"Bileti Sil",
         "reopen":"Bileti Yeniden Aç",
-        "closeWithReason":"Bu bileti neden kapatıyorsun ?"
+        "closeWithReason":"Bu bileti neden kapatıyorsun?"
     },
     "messages":{
         "closedDescription":"Bu bilette artık sadece yöneticiler konuşabilir!\n\n* Bu bileti silmek veya yeniden açmak için aşağıdaki butona tıklayın!*",
         "createdTitle":"Talep Oluşturuldu!",
-        "createdDescription":"Your ticket is created, you can detect it by a ping!",
+        "createdDescription":"Biletiniz oluşturuldu, bir bildirimle tespit edebilirsiniz!",
 
         "newTicketDmTitle":"Yeni Bilet!",
         "closedTicketDmTitle":"Bilet Kapatıldı!",
@@ -83,11 +83,11 @@
 
         "none":"yok",
         "reason":"sebep",
-        "createdat":"created at",
-        "openedby":"opened by",
+        "createdat":"oluşturulma tarihi",
+        "openedby":"açan kişi",
         "deletedby":"Silen kişi",
         "closedby":"Kapatan kişi",
-        
+
         "modalreason":"Bu biletin kapanmasının sebebi nedir?",
         "chooseATicket": "Bir bilet seçin"
     },
@@ -99,37 +99,37 @@
         "available":"Transkript burada mevcuttur"
     },
     "stats":{
-        "globalTitle":"Global Stats",
-        "ticketTitle":"Ticket Stats for {0}",
-        "userTitle":"User Stats for {0}",
-        "systemTitle":"System Stats",
-        "versionTitle":"Bot Version",
+        "globalTitle":"Sunucu İstatistikleri",
+        "ticketTitle":"{0} için Bilet İstatistikleri",
+        "userTitle":"{0} için Kullanıcı İstatistikleri",
+        "systemTitle":"Sistem İstatistikleri",
+        "versionTitle":"Bot Sürümü",
 
-        "ticketsCreated":"Tickets Created",
-        "ticketsClosed":"Tickets Closed",
-        "ticketsDeleted":"Tickets Deleted",
-        "ticketsReopened":"Tickets Reopened",
-        "ticketsAutoclosed":"Tickets Autoclosed",
-        "transcriptsCreated":"Transcripts Created",
-        "startupDate":"Startup Date",
-        "latestUpdate":"Latest Update",
-        "ticketCreatedOn":"Ticket Created On",
-        "ticketCreatedBy":"Ticket Created By",
-        "messagesSent":"Messages Sent",
-        "status":"Status",
-        "participants":"Participants",
-        "role":"Role",
+	    "ticketsCreated": "Oluşturulan Biletler",
+    	"ticketsClosed": "Kapatılan Biletler",
+    	"ticketsDeleted": "Silinen Biletler",
+    	"ticketsReopened": "Yeniden Açılan Biletler",
+    	"ticketsAutoclosed": "Otomatik Kapatılan Biletler",
+    	"transcriptsCreated": "Oluşturulan Transkriptler",
+    	"startupDate": "Başlangıç Tarihi",
+    	"latestUpdate": "Son Güncelleme",
+    	"ticketCreatedOn": "Bilet Oluşturulma Tarihi",
+    	"ticketCreatedBy": "Bileti Oluşturan",
+    	"messagesSent": "Gönderilen Mesajlar",
+    	"status": "Durum",
+    	"participants": "Katılımcılar",
+    	"role": "Rol",
 
-        "switches":{
-            "globalAdmin":"Global Admin",
-            "ticketAdmin":"Ticket Admin",
-            "member":"Member",
-            "open":"Open",
-            "reopened":"Reopened",
-            "closed":"Closed",
-            "autoclosed":"Autoclosed"
+    	"switches": {
+        	"globalAdmin": "Küresel Yönetici",
+            "ticketAdmin": "Bilet Yönetici",
+            "member": "Üye",
+            "open": "Açık",
+            "reopened": "Yeniden Açıldı",
+            "closed": "Kapalı",
+            "autoclosed": "Otomatik Kapalı"
         },
 
-        "errorUserNotFound":"This user can't be found in the stats database!"
+        "errorUserNotFound": "Bu kullanıcı istatistikler veritabanında bulunamıyor!"
     }
 }
