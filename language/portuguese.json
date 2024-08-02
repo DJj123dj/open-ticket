@@ -1,6 +1,6 @@
 {
     "_CREDITS":"quiradon",
-    "_INFO":"This file is a translation for open ticket 3.5.7",
+    "_INFO":"This file is a translation for open ticket 3.5.8",
 
     "errors":{
         "missingArgsTitle":"Argumentos inválidos!",
@@ -85,8 +85,8 @@
         "reason":"motivo",
         "createdat":"Criado por:",
         "openedby":"Aberto por:",
-        "deletedby":"deletado por",
-        "closedby":"fechado por",
+        "deletedby":"Deletado por",
+        "closedby":"Fechado por",
         
         "modalreason":"Qual o motivo de fechar o ticket?",
         "chooseATicket": "Fechar Ticket"
@@ -99,37 +99,37 @@
         "available":"A Transcrição está disponível aqui"
     },
     "stats":{
-        "globalTitle":"Global Stats",
-        "ticketTitle":"Ticket Stats for {0}",
-        "userTitle":"User Stats for {0}",
-        "systemTitle":"System Stats",
-        "versionTitle":"Bot Version",
+        "globalTitle":"Status Global",
+        "ticketTitle":"Ticket Status para {0}",
+        "userTitle":"Status do Membro para {0}",
+        "systemTitle":"Sistema de Status",
+        "versionTitle":"Versão do bot",
 
-        "ticketsCreated":"Tickets Created",
-        "ticketsClosed":"Tickets Closed",
-        "ticketsDeleted":"Tickets Deleted",
-        "ticketsReopened":"Tickets Reopened",
-        "ticketsAutoclosed":"Tickets Autoclosed",
-        "transcriptsCreated":"Transcripts Created",
-        "startupDate":"Startup Date",
-        "latestUpdate":"Latest Update",
-        "ticketCreatedOn":"Ticket Created On",
-        "ticketCreatedBy":"Ticket Created By",
-        "messagesSent":"Messages Sent",
+        "ticketsCreated":"Tickets Criados",
+        "ticketsClosed":"Tickets Fechados",
+        "ticketsDeleted":"Tickets Deletados",
+        "ticketsReopened":"Tickets Re-abertos",
+        "ticketsAutoclosed":"Tickets Auto-Fechados",
+        "transcriptsCreated":"Transcrição Criada",
+        "startupDate":"Data de Inicio",
+        "latestUpdate":"Última Atualização",
+        "ticketCreatedOn":"Ticket Criado em",
+        "ticketCreatedBy":"Ticket Criado por",
+        "messagesSent":"Mensagem Enviada",
         "status":"Status",
-        "participants":"Participants",
-        "role":"Role",
+        "participants":"Participantes",
+        "role":"Cargo",
 
         "switches":{
             "globalAdmin":"Global Admin",
             "ticketAdmin":"Ticket Admin",
-            "member":"Member",
-            "open":"Open",
-            "reopened":"Reopened",
-            "closed":"Closed",
-            "autoclosed":"Autoclosed"
+            "member":"Membro",
+            "open":"Abrir",
+            "reopened":"Re-aberto",
+            "closed":"Fechado",
+            "autoclosed":"Auto-Fechado"
         },
 
-        "errorUserNotFound":"This user can't be found in the stats database!"
+        "errorUserNotFound":"Este usuário não pode ser encontrado no banco de dados!"
     }
 }
