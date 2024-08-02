@@ -242,7 +242,7 @@ module.exports = () => {
                     catch{log("system","failed to send DM")}
 
                     if (((interaction.isButton() || interaction.isStringSelectMenu()) && config.system.answerInEphemeralOnOpen) || interaction.isChatInputCommand()){
-                        if (interaction.deferred){
+                        if (interaction.deferred || interaction.replied){
                             interaction.editReply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
                         }else{
                             interaction.reply({embeds:[bot.errorLog.success(l.messages.createdTitle,l.messages.createdDescription)],components:[channelbutton]})
