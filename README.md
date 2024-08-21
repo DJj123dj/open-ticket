@@ -1,9 +1,14 @@
-# Coming Soon: OPEN TICKET v4.0 Beta 🎉
-Open Ticket v4 beta will be released **in a few weeks!** So stay tuned!
+# [Open Ticket v4.0 Beta 🎉](https://github.com/DJj123dj/open-ticket/tree/dev)
+Hey there! Open Ticket v4 is currently in public beta! Be sure to check it out in the dev branch!<br>
+https://github.com/DJj123dj/open-ticket/tree/dev
 
 What is Open Ticket v4? Well, it's a complete rewrite of Open Ticket with the main focus being "plugins".
 There will be massive stability & speed improvements! Hundreds of new features! And obviously very powerful plugins!
 Plugins will be 100x better and advanced than the current system!
+
+> ### Missing Languages
+> Be aware that there are still a lot of languages missing from v3!<br>
+> If your bot is English I recommend checking it out!
 <hr>
 
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket" width="600px">
