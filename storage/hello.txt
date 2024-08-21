@@ -1,3 +1,0 @@
-This file is only here to make sure that this directory exists!
-
-I don't have any other use :)

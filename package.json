@@ -1,28 +1,33 @@
 {
-  "name": "open-ticket",
-  "author": "DJdj Development",
-  "version": "3.5.8",
-  "description": "The most advanced open-source discord ticket bot with HTML transcripts and plugins! It uses discord.js v14 & no database required!",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "node index.js --devconfig --noerrorupload",
-    "slashEnable": "node index.js slash enable",
-    "slashDisable": "node index.js slash disable"
-  },
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^1.6.2",
-    "chalk": "^5.0.1",
-    "discord.js": "^14.15.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DJj123dj/open-ticket.git"
-  },
-  "bugs": {
-    "url": "https://github.com/DJj123dj/open-ticket/issues",
-    "email": "support@dj-dj.be"
-  },
-  "homepage": "https://openticket.dj-dj.be"
+    "name": "open-ticket",
+    "author": "DJdj Development",
+    "version": "4.0.0",
+    "description": "The most advanced open-source discord ticket bot with HTML transcripts, plugins, questions, claiming, pinning & more! Using discord.js v14 & JSON database! ",
+    "keywords": ["ticket-bot","discord","open-ticket","plugins","discord-ticket-bot"],
+    "main": "./src/index.ts",
+    "scripts": {
+        "verify": "tsc -p ./tsconfig.json",
+        "start": "npx tsx ./src/index.ts",
+        "test": "npm run verify && npx tsx ./src/index.ts --dev-config --dev-database"
+    },
+    "type": "commonjs",
+    "license": "GPL-3.0-only",
+    "dependencies": {
+        "ansis": "^2.3.0",
+        "discord.js": "^14.15.3",
+        "formatted-json-stringify": "^1.1.0",
+        "tsx": "^4.17.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DJj123dj/open-ticket.git"
+    },
+    "bugs": {
+        "url": "https://github.com/DJj123dj/open-ticket/issues",
+        "email": "support@dj-dj.be"
+    },
+    "homepage": "https://openticket.dj-dj.be"
 }
