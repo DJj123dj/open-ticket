@@ -1,0 +1,23 @@
+{
+    "name":"Example Plugin",
+    "id":"example-plugin",
+    "version":"1.0.0",
+    "startFile":"index.ts",
+
+    "enabled":false,
+    "priority":0,
+    "events":[],
+
+    "npmDependencies":["discord.js"],
+    "requiredPlugins":[],
+    "incompatiblePlugins":[],
+
+    "details":{
+        "author":"DJj123dj",
+        "shortDescription":"A simple template for an Open Ticket v4 plugin!",
+        "longDescription":"A simple example of an Open Ticket v4 plugin!",
+        "imageUrl":"",
+        "projectUrl":"",
+        "tags":["template","example","default"]
+    }
+}

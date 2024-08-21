@@ -1,0 +1,57 @@
+{
+    "general":{
+        "enabled":false,
+
+        "enableChannel":false,
+        "enableCreatorDM":false,
+        "enableParticipantDM":false,
+        "enableActiveAdminDM":false,
+        "enableEveryAdminDM":false,
+
+        "channel":"transcript channel id (or leave empty)",
+        "mode":"html OR text"
+    },
+    "embedSettings":{
+        "customColor":"#f8ab00 (or leave empty)",
+        "listAllParticipants":false,
+        "includeTicketStats":false
+    },
+    "textTranscriptStyle":{
+        "layout":"simple OR normal OR detailed",
+        "includeStats":true,
+        "includeIds":false,
+        "includeEmbeds":true,
+        "includeFiles":true,
+        "includeBotMessages":true,
+
+        "fileMode":"custom OR channel-name OR channel-id OR user-name OR user-id",
+        "customFileName":"this-is-a-transcript (or leave empty)"
+    },
+    "htmlTranscriptStyle":{
+        "background":{
+            "enableCustomBackground":false,
+            "backgroundColor":"#f8ba00 (or leave empty)",
+            "backgroundImage":"https://www.example.com/image.png (or leave empty)"
+            
+        },
+        "header":{
+            "enableCustomHeader":false,
+            "backgroundColor":"#202225",
+            "decoColor":"#f8ba00",
+            "textColor":"#ffffff"
+            
+        },
+        "stats":{
+            "enableCustomStats":false,
+            "backgroundColor":"#202225",
+            "keyTextColor":"#737373",
+            "valueTextColor":"#ffffff",
+            "hideBackgroundColor":"#40444a",
+            "hideTextColor":"#ffffff"
+        },
+        "favicon":{
+            "enableCustomFavicon":false,
+            "imageUrl":"https://transcripts.dj-dj.be/favicon.png"
+        }
+    }
+}

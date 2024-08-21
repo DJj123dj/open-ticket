@@ -1,0 +1,39 @@
+[
+    {
+        "id":"example-embed",
+        "name":"Example Embed",
+        "dropdown":false,
+        "options":["example-ticket","example-website","example-role"],
+
+        "text":"",
+        "embed":{
+            "enabled":true,
+            "title":"Tickets:",
+            "description":"Create a ticket by clicking one of the buttons below!",
+            
+            "customColor":"#f8ab00 (or leave empty)",
+            "url":"https://openticket.dj-dj.be (or leave empty)",
+
+            "image":"https://www.example.com/image.png (or leave empty)",
+            "thumbnail":"https://www.example.com/image.png (or leave empty)",
+            
+            "footer":"Open Ticket v4.0.0 (or leave empty)",
+            "fields":[
+                {"name":"field name","value":"field value","inline":false}
+            ],
+            "timestamp":false
+        },
+        "settings":{
+            "dropdownPlaceholder":"Create a ticket!",
+
+            "enableMaxTicketsWarningInText":false,
+            "enableMaxTicketsWarningInEmbed":true,
+
+            "describeOptionsLayout":"simple OR normal OR detailed",
+            "describeOptionsCustomTitle":"",
+            "describeOptionsInText":false,
+            "describeOptionsInEmbedFields":true,
+            "describeOptionsInEmbedDescription":false
+        }
+    }
+]

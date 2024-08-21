@@ -1,0 +1,95 @@
+{
+    "_INFO":{
+        "support":"https://otdocs.dj-dj.be",
+        "discord":"https://discord.dj-dj.be",
+        "version":"open-ticket-v4.0.0"
+    },
+    
+    "token":"your bot token here! Or leave empty when you use tokenFromENV",
+    "tokenFromENV":false,
+
+    "mainColor":"#f8ba00",
+    "language":"english",
+    "prefix":"!ticket ",
+    "serverId":"discord server id",
+    "globalAdmins":["discord role id"],
+
+    "slashCommands":true,
+    "textCommands":true,
+
+    "status":{
+        "enabled":true,
+        "type":"listening OR watching OR playing OR custom",
+        "text":"/help",
+        "status":"online OR invisible OR idle OR dnd"
+    },
+
+    "system":{
+        "removeParticipantsOnClose":false,
+        "replyOnTicketCreation":true,
+        "replyOnReactionRole":true,
+        "useTranslatedConfigChecker":true,
+        "preferSlashOverText":true,
+        "sendErrorOnUnknownCommand":true,
+        "questionFieldsInCodeBlock":true,
+        "disableVerifyBars":false,
+        "useRedErrorEmbeds":true,
+        "emojiStyle":"before (OR after OR double OR disabled)",
+
+        "enableTicketClaimButtons":true,
+        "enableTicketCloseButtons":true,
+        "enableTicketPinButtons":true,
+        "enableTicketDeleteButtons":true,
+        "enableTicketActionWithReason":true,
+        "enableDeleteWithoutTranscript":true,
+
+        "logs":{
+            "enabled":false,
+            "channel":"discord channel id"
+        },
+        
+        "limits":{
+            "enabled":true,
+            "globalMaximum":50,
+            "userMaximum":3
+        },
+
+        "permissions":{
+            "help":"everyone (OR admin OR none OR role id)",
+            "panel":"admin (OR everyone OR none OR role id)",
+            "ticket":"none (OR admin OR everyone OR role id)",
+            "close":"everyone (OR admin OR none OR role id)",
+            "delete":"admin (OR everyone OR none OR role id)",
+            "reopen":"everyone (OR admin OR none OR role id)",
+            "claim":"admin (OR everyone OR none OR role id)",
+            "unclaim":"admin (OR everyone OR none OR role id)",
+            "pin":"admin (OR everyone OR none OR role id)",
+            "unpin":"admin (OR everyone OR none OR role id)",
+            "move":"admin (OR everyone OR none OR role id)",
+            "rename":"admin (OR everyone OR none OR role id)",
+            "add":"admin (OR everyone OR none OR role id)",
+            "remove":"admin (OR everyone OR none OR role id)",
+            "blacklist":"admin (OR everyone OR none OR role id)",
+            "stats":"everyone (OR admin OR none OR role id)",
+            "clear":"admin (OR everyone OR none OR role id)",
+            "autoclose":"admin (OR everyone OR none OR role id)",
+            "autodelete":"admin (OR everyone OR none OR role id)"
+        },
+
+        "messages":{
+            "creation":{"dm":false, "logs":true},
+            "closing":{"dm":false, "logs":true},
+            "deleting":{"dm":false, "logs":true},
+            "reopening":{"dm":false, "logs":true},
+            "claiming":{"dm":false, "logs":true},
+            "pinning":{"dm":false, "logs":true},
+            "adding":{"dm":false, "logs":true},
+            "removing":{"dm":false, "logs":true},
+            "renaming":{"dm":false, "logs":true},
+            "moving":{"dm":false, "logs":true},
+            "blacklisting":{"dm":false, "logs":true},
+            "roleAdding":{"dm":false, "logs":true},
+            "roleRemoving":{"dm":false, "logs":true}
+        }
+    }
+}

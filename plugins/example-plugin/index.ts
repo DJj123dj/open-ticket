@@ -1,0 +1,44 @@
+import {api, openticket, utilities} from "../../src/index"
+import * as discord from "discord.js"
+
+/////////////////////////////////////////////
+//// This plugin is not enabled yet!     ////
+//// Enable it in the plugin.json file!  ////
+/////////////////////////////////////////////
+
+if (utilities.project != "openticket") throw new api.ODPluginError("This plugin only works in Open Ticket!")
+if (!utilities.isBeta) throw new api.ODPluginError("This plugin is made for the beta version of Open Ticket!")
+
+//Add Typescript autocomplete support for plugin data. (!!!OPTIONAL!!!)
+declare module "../../src/core/api/api.ts" {
+    export interface ODConfigManagerIds_Default {
+        "example-plugin:config":api.ODJsonConfig
+    }
+}
+
+//Let's register the example config. This way it's available for all plugins & systems.
+openticket.events.get("onConfigLoad").listen((configManager) => {
+    configManager.add(new api.ODJsonConfig("example-plugin:config","config.json","./plugins/example-plugin/"))
+    /*===== What did we do? =====
+    - "example-plugin:config" Is the ID of this config. You can use this id troughout the bot to access this config file. Even in other plugins.
+    - "config.json" Is the FILE of this config. It is just the filename.
+    - "./plugins/example-plugin/" Is the DIRECTORY of this config. By default it's "./config/", but we want to change it to point at the plugin directory.
+    */
+
+    //Let's also log it to the console to let us know it worked!
+    const ourConfig = configManager.get("example-plugin:config")
+    openticket.log("The example config loaded succesfully!","plugin",[
+        {key:"var-1",value:ourConfig.data.testVariable1},
+        {key:"var-2",value:ourConfig.data.testVariable2.toString()},
+        {key:"var-3",value:ourConfig.data.testVariable3.toString()}
+    ])
+})
+
+openticket.events.get("onTicketCreate").listen((creator) => {
+    //This is logged before the ticket is created (after the button is pressed)
+    openticket.log("Ticket is getting created...","plugin")
+})
+openticket.events.get("afterTicketCreated").listen((ticket,creator,channel) => {
+    //This is logged after the ticket is created
+    openticket.log("Ticket ready!","plugin")
+})

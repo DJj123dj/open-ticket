@@ -1,0 +1,28 @@
+[
+    {
+        "id":"example-question-1",
+        "name":"Example Question 1",
+        "type":"short",
+        
+        "required":true,
+        "placeholder":"Insert your short answer here!",
+        "length":{
+            "enabled":false,
+            "min":0,
+            "max":1000
+        }
+    },
+    {
+        "id":"example-question-2",
+        "name":"Example Question 2",
+        "type":"paragraph",
+        
+        "required":false,
+        "placeholder":"Insert your long answer here!",
+        "length":{
+            "enabled":false,
+            "min":0,
+            "max":1000
+        }
+    }
+]

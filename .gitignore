@@ -1,0 +1,13 @@
+node_modules/
+package-lock.json
+devconfig/
+devdatabase/
+otdebug.txt
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+*/*/*/.DS_Store
+TEMP/
+.vscode/
+plugins/*
+!plugins/example-plugin/

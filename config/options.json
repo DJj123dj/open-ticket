@@ -1,0 +1,122 @@
+[
+    {
+        "id":"example-ticket",
+        "name":"Question",
+        "description":"Create this ticket if you have a question! (or leave empty)",
+        "type":"ticket",
+
+        "button":{
+            "emoji":"🎫 (or leave empty)",
+            "label":"question (or leave empty)",
+            "color":"gray OR red OR green OR blue"
+        },
+
+        "ticketAdmins":["discord role id"],
+        "readonlyAdmins":["discord role id"],
+        "allowCreationByBlacklistedUsers":false,
+        "questions":["example-question-1","example-question-2"],
+
+        "channel":{
+            "prefix":"question-",
+            "suffix":"user-name OR user-id OR random-number OR random-hex OR counter-dynamic OR counter-fixed",
+            "category":"category id (or leave empty)",
+            "closedCategory":"category id (or leave empty)",
+            "backupCategory":"category id (or leave empty)",
+            "claimedCategory":[
+                {"user":"user id","category":"category id"}
+            ],
+            "description":"This is a question ticket (or leave empty)"
+        },
+        
+        "dmMessage":{
+            "enabled":false,
+            "text":"Thanks for creating a ticket in our server! (or leave empty)",
+            "embed":{
+                "enabled":false,
+                "title":"Embed Title! (or leave empty)",
+                "description":"Description (or leave empty)",
+                "customColor":"#f8ab00 (or leave empty)",
+
+                "image":"https://www.example.com/image.png (or leave empty)",
+                "thumbnail":"https://www.example.com/image.png (or leave empty)",
+                "fields":[
+                    {"name":"field name","value":"field value","inline":false}
+                ],
+                "timestamp":false
+            }
+        },
+        "ticketMessage":{
+            "enabled":true,
+            "text":"",
+            "embed":{
+                "enabled":true,
+                "title":"Question Ticket",
+                "description":"Thanks for creating a 'Question' ticket in our server!\nOur support team will help you soon!",
+                "customColor":"#f8ab00 (or leave empty)",
+
+                "image":"https://www.example.com/image.png (or leave empty)",
+                "thumbnail":"https://www.example.com/image.png (or leave empty)",
+                "fields":[
+                    {"name":"field name","value":"field value","inline":false}
+                ],
+                "timestamp":false
+            },
+            "ping":{
+                "@here":true,
+                "@everyone":false,
+                "custom":["discord role id"]
+            }
+        },
+        "autoclose":{
+            "enableInactiveHours":false,
+            "inactiveHours":24,
+            "enableUserLeave":true,
+            "disableOnClaim":false
+        },
+        "autodelete":{
+            "enableInactiveDays":false,
+            "inactiveDays":7,
+            "enableUserLeave":true,
+            "disableOnClaim":false
+        },
+        "cooldown":{
+            "enabled":false,
+            "cooldownMinutes":10
+        },
+        "limits":{
+            "enabled":false,
+            "globalMaximum":20,
+            "userMaximum":3
+        }
+    },
+    {
+        "id":"example-website",
+        "name":"Website",
+        "description":"Go to our website.",
+        "type":"website",
+
+        "button":{
+            "emoji":"😃",
+            "label":"Visit our website"
+        },
+
+        "url":"https://www.dj-dj.be"
+    },
+    {
+        "id":"example-role",
+        "name":"Update Ping",
+        "description":"Click here to get notified on updates!",
+        "type":"role",
+
+        "button":{
+            "emoji":"📢",
+            "label":"Update Ping",
+            "color":"gray OR red OR green OR blue"
+        },
+
+        "roles":["discord role id"],
+        "mode":"add&remove OR remove OR add",
+        "removeRolesOnAdd":["discord role id"],
+        "addOnMemberJoin":false
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {"category":"openticket:last-version","key":"openticket:version","value":"v4.0.0"},
+    {"category":"openticket:last-version","key":"openticket:api","value":"v1.0.0"},
+    {"category":"openticket:last-version","key":"openticket:transcripts","value":"v2.0.0"},
+    {"category":"openticket:last-version","key":"openticket:livestatus","value":"v2.0.0"},
+    {"category":"openticket:last-version","key":"openticket:last-version","value":"v4.0.0"}
+]
