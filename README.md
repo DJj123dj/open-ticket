@@ -91,10 +91,10 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇳🇱 Dutch              |djj123dj                  |🟢 Up To Date  |
 |🇵🇹 Portuguese         |quiradon                  |🟢 Up To Date  |
 |🇨🇿 Czech              |spyeye_                   |🟢 Up To Date  |
+|🇩🇪 German             |benzorich                 |🟢 Up To Date  |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
 |🇷🇴 Romanian           |sankedev                  |🟠 Temporary Outdated (beta) |
 |🇪🇸 Spanish            |redactado & josuens       |🟠 Temporary Outdated (beta) |
-|🇩🇪 German             |david.3                   |🟠 Temporary Outdated (beta) |
 |🇮🇹 Italian            |maurizio26                |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
 |🇩🇰 Danish             |.the_gamer                |🟠 Temporary Outdated (beta) |

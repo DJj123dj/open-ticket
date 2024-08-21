@@ -234,7 +234,7 @@ export class ODDefaultsManager {
             languageLoading:true,
             languageSelection:true,
             backupLanguage:"openticket:english",
-            languageList:["custom","english","dutch","portuguese","czech"],
+            languageList:["custom","english","dutch","portuguese","czech","german"],
 
             checkerLoading:true,
             checkerFunctionLoading:true,
