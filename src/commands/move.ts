@@ -66,7 +66,7 @@ export const registerCommandResponders = async () => {
             const option = openticket.options.get(id)
             //return if unknown option
             if (!option || !(option instanceof api.ODTicketOption)){
-                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:"Unknown Option",layout:"simple"}))
+                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:openticket.languages.getTranslation("errors.titles.unknownOption"),layout:"simple"}))
                 return cancel()
             }
             //return if option is the same

@@ -66,7 +66,7 @@ export const registerCommandResponders = async () => {
             //return when user already added to ticket
             const participants = await openticket.tickets.getAllTicketParticipants(ticket)
             if (!participants || participants.find((p) => p.user.id == data.id)){
-                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:"This user is already able to access the ticket!",layout:"simple"}))
+                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:openticket.languages.getTranslation("errors.actionInvalid.add"),layout:"simple"}))
                 return cancel()
             }
 

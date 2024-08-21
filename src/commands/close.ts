@@ -56,7 +56,7 @@ export const registerCommandResponders = async () => {
             }
             //return when already closed
             if (ticket.get("openticket:closed").value){
-                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:"Ticket is already closed!",layout:"simple"}))
+                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:openticket.languages.getTranslation("errors.actionInvalid.close"),layout:"simple"}))
                 return cancel()
             }
             //return when busy

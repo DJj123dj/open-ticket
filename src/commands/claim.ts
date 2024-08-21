@@ -56,7 +56,7 @@ export const registerCommandResponders = async () => {
             }
             //return when already claimed
             if (ticket.get("openticket:claimed").value){
-                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:"Ticket is already claimed!",layout:"simple"}))
+                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:openticket.languages.getTranslation("errors.actionInvalid.claim"),layout:"simple"}))
                 return cancel()
             }
             //return when busy

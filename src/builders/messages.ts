@@ -94,7 +94,7 @@ const verifyBarMessages = () => {
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar}))
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-failure").build("verifybar",{guild,channel,user,verifybar}))
                 if (generalConfig.data.system.enableTicketActionWithReason) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"reason",customEmoji:"✏️",customLabel:lang.getTranslation("actions.buttons.withReason"),customColor:"blue"}))
-                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:"Without Transcript",customColor:"red"}))
+                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:lang.getTranslation("actions.buttons.withoutTranscript"),customColor:"red"}))
             }
         })
     )
@@ -130,7 +130,7 @@ const verifyBarMessages = () => {
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar}))
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-failure").build("verifybar",{guild,channel,user,verifybar}))
                 if (generalConfig.data.system.enableTicketActionWithReason) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"reason",customEmoji:"✏️",customLabel:lang.getTranslation("actions.buttons.withReason"),customColor:"blue"}))
-                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:"Without Transcript",customColor:"red"}))
+                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:lang.getTranslation("actions.buttons.withoutTranscript"),customColor:"red"}))
             }
         })
     )
@@ -166,7 +166,7 @@ const verifyBarMessages = () => {
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar}))
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-failure").build("verifybar",{guild,channel,user,verifybar}))
                 if (generalConfig.data.system.enableTicketActionWithReason) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"reason",customEmoji:"✏️",customLabel:lang.getTranslation("actions.buttons.withReason"),customColor:"blue"}))
-                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:"Without Transcript",customColor:"red"}))
+                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:lang.getTranslation("actions.buttons.withoutTranscript"),customColor:"red"}))
             }
         })
     )
@@ -319,7 +319,7 @@ const verifyBarMessages = () => {
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar}))
                 instance.addComponent(await buttons.getSafe("openticket:verifybar-failure").build("verifybar",{guild,channel,user,verifybar}))
                 if (generalConfig.data.system.enableTicketActionWithReason) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"reason",customEmoji:"✏️",customLabel:lang.getTranslation("actions.buttons.withReason"),customColor:"blue"}))
-                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:"Without Transcript",customColor:"red"}))
+                if (generalConfig.data.system.enableDeleteWithoutTranscript) instance.addComponent(await buttons.getSafe("openticket:verifybar-success").build("verifybar",{guild,channel,user,verifybar,customData:"no-transcript",customEmoji:"📄",customLabel:lang.getTranslation("actions.buttons.withoutTranscript"),customColor:"red"}))
             }
         })
     )

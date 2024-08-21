@@ -56,7 +56,7 @@ export const registerCommandResponders = async () => {
             }
             //return when not pinned yet
             if (!ticket.get("openticket:pinned").value){
-                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:"Ticket is not pinned yet!",layout:"simple"}))
+                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:openticket.languages.getTranslation("errors.actionInvalid.unpin"),layout:"simple"}))
                 return cancel()
             }
             //return when busy

@@ -66,7 +66,7 @@ export const registerCommandResponders = async () => {
             //return when user is not a participant of the ticket (admins & creator can't be removed)
             const participants = await openticket.tickets.getAllTicketParticipants(ticket)
             if (!participants || !participants.find((p) => p.user.id == data.id && p.role == "participant")){
-                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:"Unable to remove this user from the ticket!",layout:"simple"}))
+                instance.reply(await openticket.builders.messages.getSafe("openticket:error").build("button",{guild,channel,user,error:openticket.languages.getTranslation("errors.actionInvalid.remove"),layout:"simple"}))
                 return cancel()
             }
 

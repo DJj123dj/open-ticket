@@ -203,7 +203,7 @@ const errorEmbeds = () => {
             instance.setColor(generalConfig.data.system.useRedErrorEmbeds ? "Red" : generalConfig.data.mainColor)
             instance.setTitle(utilities.emojiTitle("❌",lang.getTranslation("errors.titles.noPermissions")))
             instance.setAuthor(user.displayName,user.displayAvatarURL())
-            instance.setDescription(lang.getTranslation("errors.descriptions.noPermissionsBlacklist"))
+            instance.setDescription(lang.getTranslationWithParams("errors.descriptions.noPermissionsBlacklist",[method]))
         })
     )
 
@@ -834,7 +834,7 @@ const ticketEmbeds = () => {
                 //TODO TRANSLATION!!!
                 {name:"Option"+":",value:"```"+(ticket.option.get("openticket:name").value)+"```",inline:false},
             )
-            if (reason) instance.addFields({name:"Reason:",value:"```"+reason+"```",inline:false})
+            if (reason) instance.addFields({name:lang.getTranslation("params.uppercase.reason")+":",value:"```"+reason+"```",inline:false})
 
             if (mode == "close"){
                 instance.setTitle(utilities.emojiTitle("🔒",lang.getTranslation("actions.titles.close")))

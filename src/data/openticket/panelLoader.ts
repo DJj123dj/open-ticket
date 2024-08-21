@@ -63,6 +63,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
         }
     })
 
+    //TODO TRANSLATION!!!
     const autotitle = (hasTicket && ticketOnly) ? "Select your ticket:" : ((hasRole && roleOnly) ? "Select your role:" : "Select your option:")
     const title = (panel.get("openticket:describe-options-custom-title").value.length < 1) ? "__"+autotitle+"__\n" : "__"+panel.get("openticket:describe-options-custom-title").value+"__\n"
 
@@ -74,10 +75,13 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
             let description = opt.exists("openticket:description") ? opt.get("openticket:description").value : "`<no-description>`"
             
             if (layout == "normal" || layout == "detailed"){
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:cooldown-enabled") && opt.get("openticket:cooldown-enabled").value) description = description + "\nCooldown: `"+opt.get("openticket:cooldown-minutes").value+" min`"
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:limits-enabled") && opt.get("openticket:limits-enabled").value) description = description + "\nMax Tickets: `"+opt.get("openticket:limits-maximum-user").value+"`"
             }
             if (layout == "detailed"){
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:admins")) description = description + "\nAdmins: "+opt.get("openticket:admins").value.map((admin) => discord.roleMention(admin)).join(", ")
             }
             
@@ -98,6 +102,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
             let description = opt.exists("openticket:description") ? opt.get("openticket:description").value : "`<no-description>`"
             
             if (layout == "normal" || layout == "detailed"){
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:roles")) description = description + "\nRoles: "+opt.get("openticket:roles").value.map((admin) => discord.roleMention(admin)).join(", ")
             }
             
@@ -119,10 +124,13 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
             let description = opt.exists("openticket:description") ? opt.get("openticket:description").value : "`<no-description>`"
             
             if (layout == "normal" || layout == "detailed"){
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:cooldown-enabled") && opt.get("openticket:cooldown-enabled").value) description = description + "\nCooldown: `"+opt.get("openticket:cooldown-minutes").value+" min`"
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:limits-enabled") && opt.get("openticket:limits-enabled").value) description = description + "\nMax Tickets: `"+opt.get("openticket:limits-maximum-user").value+"`"
             }
             if (layout == "detailed"){
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:admins")) description = description + "\nAdmins: "+opt.get("openticket:admins").value.map((admin) => discord.roleMention(admin)).join(", ")
             }
             
@@ -145,6 +153,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
             let description = opt.exists("openticket:description") ? opt.get("openticket:description").value : "`<no-description>`"
             
             if (layout == "normal" || layout == "detailed"){
+                //TODO TRANSLATION!!!
                 if (opt.exists("openticket:roles")) description = description + "\nRoles: "+opt.get("openticket:roles").value.map((admin) => discord.roleMention(admin)).join(", ")
             }
             

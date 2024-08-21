@@ -488,7 +488,7 @@ export const defaultTranscriptsStructure = new api.ODCheckerObjectStructure("ope
         {key:"includeFiles",optional:false,priority:0,checker:new api.ODCheckerBooleanStructure("openticket:transcripts-text-include-files",{})},
         {key:"includeBotMessages",optional:false,priority:0,checker:new api.ODCheckerBooleanStructure("openticket:transcripts-text-include-bots",{})},
 
-        {key:"fileMode",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:transcripts-text-file-mode",{choices:["custom","name","id"]})},
+        {key:"fileMode",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:transcripts-text-file-mode",{choices:["custom","channel-name","channel-id","user-name","user-id"]})},
         {key:"customFileName",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:transcripts-file-name",{maxLength:512,regex:/^[^\.#%&{}\\<>*?/!'":@`|=]*$/})},
     ]})},
 
