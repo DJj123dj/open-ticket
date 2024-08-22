@@ -90,8 +90,9 @@ export class ODJsonConfig extends ODConfig {
             const filename = (file.endsWith(".json")) ? file : file+".json"
             this.file = customPath ? nodepath.join("./",customPath,filename) : nodepath.join("./config/",filename)
             this.data = JSON.parse(fs.readFileSync(this.file).toString())
-        }catch{
-            throw new ODSystemError("config \""+nodepath.join("./",customPath ?? "",file)+"\" doesn't exist!")
+        }catch(err){
+            process.emit("uncaughtException",err)
+            throw new ODSystemError("Config \""+nodepath.join("./",customPath ?? "./config/",file)+"\" doesn't exist!")
         }
     }
 }

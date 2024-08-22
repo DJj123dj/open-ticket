@@ -22,8 +22,9 @@ export class ODLanguage extends ODManagerData {
             const filename = (file.endsWith(".json")) ? file : file+".json"
             this.file = customPath ? nodepath.join("./",customPath,filename) : nodepath.join("./languages/",filename)
             this.data = JSON.parse(fs.readFileSync(this.file).toString())
-        }catch{
-            throw new ODSystemError("[API ERROR] Language \""+file+"\" doesn't exist!")
+        }catch(err){
+            process.emit("uncaughtException",err)
+            throw new ODSystemError("Language \""+nodepath.join("./",customPath ?? "./languages/",file)+"\" doesn't exist!")
         }
         if (this.data["_TRANSLATION"]) this.metadata = this.data["_TRANSLATION"]
     }
