@@ -5,7 +5,7 @@ const fs = require("fs")
 const child = require("child_process")
 if (!fs.existsSync("./dist/src/index.js")){
     console.log("Compiling the bot...")
-    child.execSync("npm run build",{timeout:10000})
+    child.execSync("npm run build",{timeout:60000})
     console.log("\n\nFinished compilation!")
 }
 require("./dist/src/index")
