@@ -164,7 +164,7 @@ export const registerActions = async () => {
 
             //manage bot permissions
             await openticket.events.get("onTicketPermissionsCreated").emit([option,openticket.permissions,channel,user])
-            await (await import("../data/framework/permissionLoader.ts")).addTicketPermissions(ticket)
+            await (await import("../data/framework/permissionLoader.js")).addTicketPermissions(ticket)
             await openticket.events.get("afterTicketPermissionsCreated").emit([option,openticket.permissions,channel,user])
 
             //export channel & ticket

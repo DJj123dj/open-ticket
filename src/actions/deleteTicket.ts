@@ -63,7 +63,7 @@ export const registerActions = async () => {
             openticket.tickets.remove(ticket.id)
 
             //delete permissions from manager
-            await (await import("../data/framework/permissionLoader.ts")).removeTicketPermissions(ticket)
+            await (await import("../data/framework/permissionLoader.js")).removeTicketPermissions(ticket)
         }),
         new api.ODWorker("openticket:discord-logs",2,async (instance,params,source,cancel) => {
             //logs before channel deletion => channel might still be used in log embeds
@@ -86,7 +86,7 @@ export const registerActions = async () => {
             await openticket.events.get("afterTicketChannelDeleted").emit([ticket,user])
 
             //delete permissions from manager
-            await (await import("../data/framework/permissionLoader.ts")).removeTicketPermissions(ticket)
+            await (await import("../data/framework/permissionLoader.js")).removeTicketPermissions(ticket)
 
             await openticket.events.get("afterTicketDeleted").emit([ticket,user,reason])
         }),

@@ -569,7 +569,7 @@ const panelMessages = () => {
             const text = panel.get("openticket:text").value
             if (panel.get("openticket:describe-options-in-text").value){
                 //describe options in text
-                const describeText = (await import("../data/openticket/panelLoader.ts")).describePanelOptions("text",panel)
+                const describeText = (await import("../data/openticket/panelLoader.js")).describePanelOptions("text",panel)
                 instance.setContent(text+"\n\n"+describeText)
             }else if (text){
                 instance.setContent(text)

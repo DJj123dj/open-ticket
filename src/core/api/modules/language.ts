@@ -4,6 +4,7 @@
 import { ODId, ODManager, ODManagerData, ODSystemError, ODValidId } from "./base"
 import nodepath from "path"
 import { ODDebugger } from "./console"
+import fs from "fs"
 
 export class ODLanguage extends ODManagerData {
     file: string
@@ -17,10 +18,10 @@ export class ODLanguage extends ODManagerData {
 
     constructor(id:ODValidId, file:string, customPath?:string){
         super(id)
-        this.file = file
         try{
             const filename = (file.endsWith(".json")) ? file : file+".json"
-            this.data = customPath ? require(nodepath.join("../../../../",customPath,filename)) : require(nodepath.join("../../../../languages",filename))
+            this.file = customPath ? nodepath.join("./",customPath,filename) : nodepath.join("./languages/",filename)
+            this.data = JSON.parse(fs.readFileSync(this.file).toString())
         }catch{
             throw new ODSystemError("[API ERROR] Language \""+file+"\" doesn't exist!")
         }

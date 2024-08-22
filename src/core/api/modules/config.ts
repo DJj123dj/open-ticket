@@ -4,6 +4,7 @@
 import { ODId, ODManager, ODManagerData, ODSystemError, ODValidId } from "./base"
 import nodepath from "path"
 import { ODDebugger } from "./console"
+import fs from "fs"
 
 /**## ODConfigManager `class`
  * This is an open ticket config manager.
@@ -88,7 +89,7 @@ export class ODJsonConfig extends ODConfig {
         try {
             const filename = (file.endsWith(".json")) ? file : file+".json"
             this.file = customPath ? nodepath.join("./",customPath,filename) : nodepath.join("./config/",filename)
-            this.data = customPath ? require(nodepath.join("../../../../",customPath,filename)) : require(nodepath.join("../../../../config",filename))
+            this.data = JSON.parse(fs.readFileSync(this.file).toString())
         }catch{
             throw new ODSystemError("config \""+nodepath.join("./",customPath ?? "",file)+"\" doesn't exist!")
         }

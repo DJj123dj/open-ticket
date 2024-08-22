@@ -29,7 +29,7 @@ const moduleInstalled = (id:string, throwError:boolean) => {
 moduleInstalled("discord.js",true)
 moduleInstalled("ansis",true)
 moduleInstalled("formatted-json-stringify",true)
-moduleInstalled("tsx",true)
+moduleInstalled("typescript",true)
 tempError()
 
 //init API

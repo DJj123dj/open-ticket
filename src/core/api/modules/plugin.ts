@@ -84,13 +84,14 @@ export class ODPlugin extends ODManagerData {
 
     //Get the startfile location relative to the ./plugins/ directory
     getStartFile(){
-        return nodepath.join(this.dir,this.data.startFile)
+        const newFile = this.data.startFile.replace(/\.ts$/,".js")
+        return nodepath.join(this.dir,newFile)
     }
     /**Execute this plugin. Returns `false` on crash. */
     async execute(debug:ODDebugger,force?:boolean): Promise<boolean> {
         if ((this.enabled && !this.crashed) || force){
             try{
-                await require(nodepath.join("../../../../plugins/",this.getStartFile()))
+                await import(nodepath.join("../../../../plugins/",this.getStartFile()))
                 debug.console.log("Plugin \""+this.id.value+"\" loaded successfully!","plugin")
                 this.executed = true
                 return true

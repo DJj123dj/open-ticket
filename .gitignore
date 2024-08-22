@@ -11,3 +11,4 @@ TEMP/
 .vscode/
 plugins/*
 !plugins/example-plugin/
+dist/

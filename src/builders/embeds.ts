@@ -500,7 +500,7 @@ const panelEmbeds = () => {
             
             if (panel.get("openticket:describe-options-in-embed-description").value){
                 //describe options in description
-                const text = (await import("../data/openticket/panelLoader.ts")).describePanelOptions("text",panel)
+                const text = (await import("../data/openticket/panelLoader.js")).describePanelOptions("text",panel)
                 instance.setDescription(embedOptions.description+"\n\n"+text)
             }else if (embedOptions.description){
                 instance.setDescription(embedOptions.description)
@@ -512,7 +512,7 @@ const panelEmbeds = () => {
 
             if (panel.get("openticket:describe-options-in-embed-fields").value){
                 //describe options in fields
-                const fields = (await import("../data/openticket/panelLoader.ts")).describePanelOptions("fields",panel)
+                const fields = (await import("../data/openticket/panelLoader.js")).describePanelOptions("fields",panel)
                 instance.setFields(fields)
             }else if(embedOptions.fields.length > 0){
                 instance.setFields(embedOptions.fields)

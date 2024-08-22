@@ -3,13 +3,18 @@
     "author": "DJdj Development",
     "version": "4.0.0",
     "description": "The most advanced open-source discord ticket bot with HTML transcripts, plugins, questions, claiming, pinning & more! Using discord.js v14 & JSON database! ",
-    "keywords": ["ticket-bot","discord","open-ticket","plugins","discord-ticket-bot"],
+    "keywords": [
+        "ticket-bot",
+        "discord",
+        "open-ticket",
+        "plugins",
+        "discord-ticket-bot"
+    ],
     "main": "./src/index.ts",
     "scripts": {
-        "verify": "tsc -p ./tsconfig.json",
-        "start": "npx tsx ./src/index.ts",
-        "backupstart": "node ./src/backupStartup.mjs",
-        "test": "npm run verify && npx tsx ./src/index.ts --dev-config --dev-database"
+        "build": "rm -rf ./dist/ && npx tsc -p ./tsconfig.json",
+        "start": "npm run build && node ./dist/src/index.js",
+        "test": "npm run start -- --dev-config --dev-database"
     },
     "type": "commonjs",
     "license": "GPL-3.0-only",
@@ -17,10 +22,7 @@
         "ansis": "^2.3.0",
         "discord.js": "^14.15.3",
         "formatted-json-stringify": "^1.1.0",
-        "tsx": "^4.17.0"
-    },
-    "devDependencies": {
-        "typescript": "^5.3.3"
+        "typescript": "^5.5.4"
     },
     "repository": {
         "type": "git",

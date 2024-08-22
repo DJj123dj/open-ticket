@@ -33,10 +33,10 @@ export const loadVersionMigrationSystem = async () => {
 
 const preloadMigrationContext = async () => {
     openticket.debug.debug("-- MIGRATION CONTEXT START --")
-    await (await import("../../data/framework/flagLoader.ts")).loadAllFlags()
+    await (await import("../../data/framework/flagLoader.js")).loadAllFlags()
     openticket.flags.init()
-    await (await import("../../data/framework/configLoader.ts")).loadAllConfigs()
-    await (await import("../../data/framework/databaseLoader.ts")).loadAllDatabases()
+    await (await import("../../data/framework/configLoader.js")).loadAllConfigs()
+    await (await import("../../data/framework/databaseLoader.js")).loadAllDatabases()
     openticket.debug.visible = true
 }
 
@@ -58,7 +58,7 @@ const isMigrationRequired = (): false|api.ODVersion => {
 }
 
 const loadAllVersionMigrations = async (lastVersion:api.ODVersion) => {
-    const migrations = (await import("./migration.ts")).migrations
+    const migrations = (await import("./migration.js")).migrations
     migrations.sort((a,b) => {
         const comparison = a.version.compare(b.version)
         if (comparison == "equal") return 0

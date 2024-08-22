@@ -41,7 +41,7 @@ import ansis from "ansis"
 /**The main sequence of Open Ticket. Runs `async` */
 const main = async () => {
     //load all events
-    (await import("./data/framework/eventLoader.ts")).loadAllEvents()
+    (await import("./data/framework/eventLoader.js")).loadAllEvents()
 
     //error handling system
     process.on("uncaughtException",async (error,origin) => {
@@ -76,11 +76,11 @@ const main = async () => {
     })
 
     //handle data migration
-    await (await import("./core/startup/manageMigration.ts")).loadVersionMigrationSystem()
+    await (await import("./core/startup/manageMigration.js")).loadVersionMigrationSystem()
 
     //load plugins
     if (openticket.defaults.getDefault("pluginLoading")){
-        await (await import("./core/startup/pluginLauncher.ts")).loadAllPlugins()
+        await (await import("./core/startup/pluginLauncher.js")).loadAllPlugins()
     }
     await openticket.events.get("afterPluginsLoaded").emit([openticket.plugins])
     
@@ -103,7 +103,7 @@ const main = async () => {
     //load flags
     openticket.log("Loading flags...","system")
     if (openticket.defaults.getDefault("flagLoading")){
-        await (await import("./data/framework/flagLoader.ts")).loadAllFlags()
+        await (await import("./data/framework/flagLoader.js")).loadAllFlags()
     }
     await openticket.events.get("onFlagLoad").emit([openticket.flags])
     await openticket.events.get("afterFlagsLoaded").emit([openticket.flags])
@@ -125,7 +125,7 @@ const main = async () => {
     //load config
     openticket.log("Loading configs...","system")
     if (openticket.defaults.getDefault("configLoading")){
-        await (await import("./data/framework/configLoader.ts")).loadAllConfigs()
+        await (await import("./data/framework/configLoader.js")).loadAllConfigs()
     }
     await openticket.events.get("onConfigLoad").emit([openticket.configs])
     await openticket.events.get("afterConfigsLoaded").emit([openticket.configs])
@@ -136,7 +136,7 @@ const main = async () => {
     //load database
     openticket.log("Loading databases...","system")
     if (openticket.defaults.getDefault("databaseLoading")){
-        await (await import("./data/framework/databaseLoader.ts")).loadAllDatabases()
+        await (await import("./data/framework/databaseLoader.js")).loadAllDatabases()
     }
     await openticket.events.get("onDatabaseLoad").emit([openticket.databases])
     await openticket.events.get("afterDatabasesLoaded").emit([openticket.databases])
@@ -152,7 +152,7 @@ const main = async () => {
     //load language
     openticket.log("Loading languages...","system")
     if (openticket.defaults.getDefault("languageLoading")){
-        await (await import("./data/framework/languageLoader.ts")).loadAllLanguages()
+        await (await import("./data/framework/languageLoader.js")).loadAllLanguages()
     }
     await openticket.events.get("onLanguageLoad").emit([openticket.languages])
     await openticket.events.get("afterLanguagesLoaded").emit([openticket.languages])    
@@ -181,14 +181,14 @@ const main = async () => {
     //load config checker
     openticket.log("Loading config checker...","system")
     if (openticket.defaults.getDefault("checkerLoading")){
-        await (await import("./data/framework/checkerLoader.ts")).loadAllConfigCheckers()
+        await (await import("./data/framework/checkerLoader.js")).loadAllConfigCheckers()
     }
     await openticket.events.get("onCheckerLoad").emit([openticket.checkers])
     await openticket.events.get("afterCheckersLoaded").emit([openticket.checkers])
 
     //load config checker functions
     if (openticket.defaults.getDefault("checkerFunctionLoading")){
-        await (await import("./data/framework/checkerLoader.ts")).loadAllConfigCheckerFunctions()
+        await (await import("./data/framework/checkerLoader.js")).loadAllConfigCheckerFunctions()
     }
     await openticket.events.get("onCheckerFunctionLoad").emit([openticket.checkers.functions,openticket.checkers])
     await openticket.events.get("afterCheckerFunctionsLoaded").emit([openticket.checkers.functions,openticket.checkers])
@@ -202,7 +202,7 @@ const main = async () => {
 
     //load config checker translations
     if (openticket.defaults.getDefault("checkerTranslationLoading")){
-        await (await import("./data/framework/checkerLoader.ts")).loadAllConfigCheckerTranslations()
+        await (await import("./data/framework/checkerLoader.js")).loadAllConfigCheckerTranslations()
     }
     await openticket.events.get("onCheckerTranslationLoad").emit([openticket.checkers.translation,((generalConfig && generalConfig.data.system && generalConfig.data.system.useTranslatedConfigChecker) ? generalConfig.data.system.useTranslatedConfigChecker : false),openticket.checkers])
     await openticket.events.get("afterCheckerTranslationsLoaded").emit([openticket.checkers.translation,openticket.checkers])
@@ -351,7 +351,7 @@ const main = async () => {
             //load slash commands
             openticket.log("Loading slash commands...","system")
             if (openticket.defaults.getDefault("slashCommandLoading")){
-                await (await import("./data/framework/commandLoader.ts")).loadAllSlashCommands()
+                await (await import("./data/framework/commandLoader.js")).loadAllSlashCommands()
             }
             await openticket.events.get("onSlashCommandLoad").emit([openticket.client.slashCommands,openticket.client])
             await openticket.events.get("afterSlashCommandsLoaded").emit([openticket.client.slashCommands,openticket.client])
@@ -377,7 +377,7 @@ const main = async () => {
             //load text commands
             openticket.log("Loading text commands...","system")
             if (openticket.defaults.getDefault("textCommandLoading")){
-                await (await import("./data/framework/commandLoader.ts")).loadAllTextCommands()
+                await (await import("./data/framework/commandLoader.js")).loadAllTextCommands()
             }
             await openticket.events.get("onTextCommandLoad").emit([openticket.client.textCommands,openticket.client])
             await openticket.events.get("afterTextCommandsLoaded").emit([openticket.client.textCommands,openticket.client])
@@ -403,7 +403,7 @@ const main = async () => {
     //load questions
     openticket.log("Loading questions...","system")
     if (openticket.defaults.getDefault("questionLoading")){
-        await (await import("./data/openticket/questionLoader.ts")).loadAllQuestions()
+        await (await import("./data/openticket/questionLoader.js")).loadAllQuestions()
     }
     await openticket.events.get("onQuestionLoad").emit([openticket.questions])
     await openticket.events.get("afterQuestionsLoaded").emit([openticket.questions])
@@ -411,7 +411,7 @@ const main = async () => {
     //load options
     openticket.log("Loading options...","system")
     if (openticket.defaults.getDefault("optionLoading")){
-        await (await import("./data/openticket/optionLoader.ts")).loadAllOptions()
+        await (await import("./data/openticket/optionLoader.js")).loadAllOptions()
     }
     await openticket.events.get("onOptionLoad").emit([openticket.options])
     await openticket.events.get("afterOptionsLoaded").emit([openticket.options])
@@ -419,7 +419,7 @@ const main = async () => {
     //load panels
     openticket.log("Loading panels...","system")
     if (openticket.defaults.getDefault("panelLoading")){
-        await (await import("./data/openticket/panelLoader.ts")).loadAllPanels()
+        await (await import("./data/openticket/panelLoader.js")).loadAllPanels()
     }
     await openticket.events.get("onPanelLoad").emit([openticket.panels])
     await openticket.events.get("afterPanelsLoaded").emit([openticket.panels])
@@ -428,7 +428,7 @@ const main = async () => {
     openticket.log("Loading tickets...","system")
     if (openticket.defaults.getDefault("ticketLoading")){
         openticket.tickets.useGuild(openticket.client.mainServer)
-        await (await import("./data/openticket/ticketLoader.ts")).loadAllTickets()
+        await (await import("./data/openticket/ticketLoader.js")).loadAllTickets()
     }
     await openticket.events.get("onTicketLoad").emit([openticket.tickets])
     await openticket.events.get("afterTicketsLoaded").emit([openticket.tickets])
@@ -436,7 +436,7 @@ const main = async () => {
     //load roles
     openticket.log("Loading roles...","system")
     if (openticket.defaults.getDefault("roleLoading")){
-        await (await import("./data/openticket/roleLoader.ts")).loadAllRoles()
+        await (await import("./data/openticket/roleLoader.js")).loadAllRoles()
     }
     await openticket.events.get("onRoleLoad").emit([openticket.roles])
     await openticket.events.get("afterRolesLoaded").emit([openticket.roles])
@@ -444,7 +444,7 @@ const main = async () => {
     //load blacklist
     openticket.log("Loading blacklist...","system")
     if (openticket.defaults.getDefault("blacklistLoading")){
-        await (await import("./data/openticket/blacklistLoader.ts")).loadAllBlacklistedUsers()
+        await (await import("./data/openticket/blacklistLoader.js")).loadAllBlacklistedUsers()
     }
     await openticket.events.get("onBlacklistLoad").emit([openticket.blacklist])
     await openticket.events.get("afterBlacklistLoaded").emit([openticket.blacklist])
@@ -452,14 +452,14 @@ const main = async () => {
     //load transcript compilers
     openticket.log("Loading transcripts...","system")
     if (openticket.defaults.getDefault("transcriptCompilerLoading")){
-        await (await import("./data/openticket/transcriptLoader.ts")).loadAllTranscriptCompilers()
+        await (await import("./data/openticket/transcriptLoader.js")).loadAllTranscriptCompilers()
     }
     await openticket.events.get("onTranscriptCompilerLoad").emit([openticket.transcripts])
     await openticket.events.get("afterTranscriptCompilersLoaded").emit([openticket.transcripts])
 
     //load transcript history
     if (openticket.defaults.getDefault("transcriptHistoryLoading")){
-        await (await import("./data/openticket/transcriptLoader.ts")).loadTranscriptHistory()
+        await (await import("./data/openticket/transcriptLoader.js")).loadTranscriptHistory()
     }
     await openticket.events.get("onTranscriptHistoryLoad").emit([openticket.transcripts])
     await openticket.events.get("afterTranscriptHistoryLoaded").emit([openticket.transcripts])
@@ -467,7 +467,7 @@ const main = async () => {
     //load button builders
     openticket.log("Loading buttons...","system")
     if (openticket.defaults.getDefault("buttonBuildersLoading")){
-        await (await import("./builders/buttons.ts")).registerAllButtons()
+        await (await import("./builders/buttons.js")).registerAllButtons()
     }
     await openticket.events.get("onButtonBuilderLoad").emit([openticket.builders.buttons,openticket.builders,openticket.actions])
     await openticket.events.get("afterButtonBuildersLoaded").emit([openticket.builders.buttons,openticket.builders,openticket.actions])
@@ -475,7 +475,7 @@ const main = async () => {
     //load dropdown builders
     openticket.log("Loading dropdowns...","system")
     if (openticket.defaults.getDefault("dropdownBuildersLoading")){
-        await (await import("./builders/dropdowns.ts")).registerAllDropdowns()
+        await (await import("./builders/dropdowns.js")).registerAllDropdowns()
     }
     await openticket.events.get("onDropdownBuilderLoad").emit([openticket.builders.dropdowns,openticket.builders,openticket.actions])
     await openticket.events.get("afterDropdownBuildersLoaded").emit([openticket.builders.dropdowns,openticket.builders,openticket.actions])
@@ -483,7 +483,7 @@ const main = async () => {
     //load file builders
     openticket.log("Loading files...","system")
     if (openticket.defaults.getDefault("fileBuildersLoading")){
-        await (await import("./builders/files.ts")).registerAllFiles()
+        await (await import("./builders/files.js")).registerAllFiles()
     }
     await openticket.events.get("onFileBuilderLoad").emit([openticket.builders.files,openticket.builders,openticket.actions])
     await openticket.events.get("afterFileBuildersLoaded").emit([openticket.builders.files,openticket.builders,openticket.actions])
@@ -491,7 +491,7 @@ const main = async () => {
     //load embed builders
     openticket.log("Loading embeds...","system")
     if (openticket.defaults.getDefault("embedBuildersLoading")){
-        await (await import("./builders/embeds.ts")).registerAllEmbeds()
+        await (await import("./builders/embeds.js")).registerAllEmbeds()
     }
     await openticket.events.get("onEmbedBuilderLoad").emit([openticket.builders.embeds,openticket.builders,openticket.actions])
     await openticket.events.get("afterEmbedBuildersLoaded").emit([openticket.builders.embeds,openticket.builders,openticket.actions])
@@ -499,7 +499,7 @@ const main = async () => {
     //load message builders
     openticket.log("Loading messages...","system")
     if (openticket.defaults.getDefault("messageBuildersLoading")){
-        await (await import("./builders/messages.ts")).registerAllMessages()
+        await (await import("./builders/messages.js")).registerAllMessages()
     }
     await openticket.events.get("onMessageBuilderLoad").emit([openticket.builders.messages,openticket.builders,openticket.actions])
     await openticket.events.get("afterMessageBuildersLoaded").emit([openticket.builders.messages,openticket.builders,openticket.actions])
@@ -507,7 +507,7 @@ const main = async () => {
     //load modal builders
     openticket.log("Loading modals...","system")
     if (openticket.defaults.getDefault("modalBuildersLoading")){
-        await (await import("./builders/modals.ts")).registerAllModals()
+        await (await import("./builders/modals.js")).registerAllModals()
     }
     await openticket.events.get("onModalBuilderLoad").emit([openticket.builders.modals,openticket.builders,openticket.actions])
     await openticket.events.get("afterModalBuildersLoaded").emit([openticket.builders.modals,openticket.builders,openticket.actions])
@@ -515,25 +515,25 @@ const main = async () => {
     //load command responders
     openticket.log("Loading command responders...","system")
     if (openticket.defaults.getDefault("commandRespondersLoading")){
-        await (await import("./commands/help.ts")).registerCommandResponders()
-        await (await import("./commands/stats.ts")).registerCommandResponders()
-        await (await import("./commands/panel.ts")).registerCommandResponders()
-        await (await import("./commands/ticket.ts")).registerCommandResponders()
-        await (await import("./commands/blacklist.ts")).registerCommandResponders()
-        await (await import("./commands/close.ts")).registerCommandResponders()
-        await (await import("./commands/reopen.ts")).registerCommandResponders()
-        await (await import("./commands/delete.ts")).registerCommandResponders()
-        await (await import("./commands/claim.ts")).registerCommandResponders()
-        await (await import("./commands/unclaim.ts")).registerCommandResponders()
-        await (await import("./commands/pin.ts")).registerCommandResponders()
-        await (await import("./commands/unpin.ts")).registerCommandResponders()
-        await (await import("./commands/rename.ts")).registerCommandResponders()
-        await (await import("./commands/move.ts")).registerCommandResponders()
-        await (await import("./commands/add.ts")).registerCommandResponders()
-        await (await import("./commands/remove.ts")).registerCommandResponders()
-        await (await import("./commands/clear.ts")).registerCommandResponders()
-        await (await import("./commands/autoclose.ts")).registerCommandResponders()
-        await (await import("./commands/autodelete.ts")).registerCommandResponders()
+        await (await import("./commands/help.js")).registerCommandResponders()
+        await (await import("./commands/stats.js")).registerCommandResponders()
+        await (await import("./commands/panel.js")).registerCommandResponders()
+        await (await import("./commands/ticket.js")).registerCommandResponders()
+        await (await import("./commands/blacklist.js")).registerCommandResponders()
+        await (await import("./commands/close.js")).registerCommandResponders()
+        await (await import("./commands/reopen.js")).registerCommandResponders()
+        await (await import("./commands/delete.js")).registerCommandResponders()
+        await (await import("./commands/claim.js")).registerCommandResponders()
+        await (await import("./commands/unclaim.js")).registerCommandResponders()
+        await (await import("./commands/pin.js")).registerCommandResponders()
+        await (await import("./commands/unpin.js")).registerCommandResponders()
+        await (await import("./commands/rename.js")).registerCommandResponders()
+        await (await import("./commands/move.js")).registerCommandResponders()
+        await (await import("./commands/add.js")).registerCommandResponders()
+        await (await import("./commands/remove.js")).registerCommandResponders()
+        await (await import("./commands/clear.js")).registerCommandResponders()
+        await (await import("./commands/autoclose.js")).registerCommandResponders()
+        await (await import("./commands/autodelete.js")).registerCommandResponders()
     }
     await openticket.events.get("onCommandResponderLoad").emit([openticket.responders.commands,openticket.responders,openticket.actions])
     await openticket.events.get("afterCommandRespondersLoaded").emit([openticket.responders.commands,openticket.responders,openticket.actions])
@@ -541,19 +541,19 @@ const main = async () => {
     //load button responders
     openticket.log("Loading button responders...","system")
     if (openticket.defaults.getDefault("buttonRespondersLoading")){
-        await (await import("./actions/handleVerifyBar.ts")).registerButtonResponders()
-        await (await import("./actions/handleTranscriptErrors.ts")).registerButtonResponders()
-        await (await import("./commands/help.ts")).registerButtonResponders()
-        await (await import("./commands/ticket.ts")).registerButtonResponders()
-        await (await import("./commands/close.ts")).registerButtonResponders()
-        await (await import("./commands/reopen.ts")).registerButtonResponders()
-        await (await import("./commands/delete.ts")).registerButtonResponders()
-        await (await import("./commands/claim.ts")).registerButtonResponders()
-        await (await import("./commands/unclaim.ts")).registerButtonResponders()
-        await (await import("./commands/pin.ts")).registerButtonResponders()
-        await (await import("./commands/unpin.ts")).registerButtonResponders()
-        await (await import("./commands/role.ts")).registerButtonResponders()
-        await (await import("./commands/clear.ts")).registerButtonResponders()
+        await (await import("./actions/handleVerifyBar.js")).registerButtonResponders()
+        await (await import("./actions/handleTranscriptErrors.js")).registerButtonResponders()
+        await (await import("./commands/help.js")).registerButtonResponders()
+        await (await import("./commands/ticket.js")).registerButtonResponders()
+        await (await import("./commands/close.js")).registerButtonResponders()
+        await (await import("./commands/reopen.js")).registerButtonResponders()
+        await (await import("./commands/delete.js")).registerButtonResponders()
+        await (await import("./commands/claim.js")).registerButtonResponders()
+        await (await import("./commands/unclaim.js")).registerButtonResponders()
+        await (await import("./commands/pin.js")).registerButtonResponders()
+        await (await import("./commands/unpin.js")).registerButtonResponders()
+        await (await import("./commands/role.js")).registerButtonResponders()
+        await (await import("./commands/clear.js")).registerButtonResponders()
     }
     await openticket.events.get("onButtonResponderLoad").emit([openticket.responders.buttons,openticket.responders,openticket.actions])
     await openticket.events.get("afterButtonRespondersLoaded").emit([openticket.responders.buttons,openticket.responders,openticket.actions])
@@ -561,7 +561,7 @@ const main = async () => {
     //load dropdown responders
     openticket.log("Loading dropdown responders...","system")
     if (openticket.defaults.getDefault("dropdownRespondersLoading")){
-        await (await import("./commands/ticket.ts")).registerDropdownResponders()
+        await (await import("./commands/ticket.js")).registerDropdownResponders()
     }
     await openticket.events.get("onDropdownResponderLoad").emit([openticket.responders.dropdowns,openticket.responders,openticket.actions])
     await openticket.events.get("afterDropdownRespondersLoaded").emit([openticket.responders.dropdowns,openticket.responders,openticket.actions])
@@ -569,14 +569,14 @@ const main = async () => {
     //load modal responders
     openticket.log("Loading modal responders...","system")
     if (openticket.defaults.getDefault("modalRespondersLoading")){
-        await (await import("./commands/ticket.ts")).registerModalResponders()
-        await (await import("./commands/close.ts")).registerModalResponders()
-        await (await import("./commands/reopen.ts")).registerModalResponders()
-        await (await import("./commands/delete.ts")).registerModalResponders()
-        await (await import("./commands/claim.ts")).registerModalResponders()
-        await (await import("./commands/unclaim.ts")).registerModalResponders()
-        await (await import("./commands/pin.ts")).registerModalResponders()
-        await (await import("./commands/unpin.ts")).registerModalResponders()
+        await (await import("./commands/ticket.js")).registerModalResponders()
+        await (await import("./commands/close.js")).registerModalResponders()
+        await (await import("./commands/reopen.js")).registerModalResponders()
+        await (await import("./commands/delete.js")).registerModalResponders()
+        await (await import("./commands/claim.js")).registerModalResponders()
+        await (await import("./commands/unclaim.js")).registerModalResponders()
+        await (await import("./commands/pin.js")).registerModalResponders()
+        await (await import("./commands/unpin.js")).registerModalResponders()
     }
     await openticket.events.get("onModalResponderLoad").emit([openticket.responders.modals,openticket.responders,openticket.actions])
     await openticket.events.get("afterModalRespondersLoaded").emit([openticket.responders.modals,openticket.responders,openticket.actions])
@@ -584,22 +584,22 @@ const main = async () => {
     //load actions
     openticket.log("Loading actions...","system")
     if (openticket.defaults.getDefault("actionsLoading")){
-        await (await import("./actions/createTicketPermissions.ts")).registerActions()
-        await (await import("./actions/createTranscript.ts")).registerActions()
-        await (await import("./actions/createTicket.ts")).registerActions()
-        await (await import("./actions/closeTicket.ts")).registerActions()
-        await (await import("./actions/deleteTicket.ts")).registerActions()
-        await (await import("./actions/reopenTicket.ts")).registerActions()
-        await (await import("./actions/claimTicket.ts")).registerActions()
-        await (await import("./actions/unclaimTicket.ts")).registerActions()
-        await (await import("./actions/pinTicket.ts")).registerActions()
-        await (await import("./actions/unpinTicket.ts")).registerActions()
-        await (await import("./actions/renameTicket.ts")).registerActions()
-        await (await import("./actions/moveTicket.ts")).registerActions()
-        await (await import("./actions/addTicketUser.ts")).registerActions()
-        await (await import("./actions/removeTicketUser.ts")).registerActions()
-        await (await import("./actions/reactionRole.ts")).registerActions()
-        await (await import("./actions/clearTickets.ts")).registerActions()
+        await (await import("./actions/createTicketPermissions.js")).registerActions()
+        await (await import("./actions/createTranscript.js")).registerActions()
+        await (await import("./actions/createTicket.js")).registerActions()
+        await (await import("./actions/closeTicket.js")).registerActions()
+        await (await import("./actions/deleteTicket.js")).registerActions()
+        await (await import("./actions/reopenTicket.js")).registerActions()
+        await (await import("./actions/claimTicket.js")).registerActions()
+        await (await import("./actions/unclaimTicket.js")).registerActions()
+        await (await import("./actions/pinTicket.js")).registerActions()
+        await (await import("./actions/unpinTicket.js")).registerActions()
+        await (await import("./actions/renameTicket.js")).registerActions()
+        await (await import("./actions/moveTicket.js")).registerActions()
+        await (await import("./actions/addTicketUser.js")).registerActions()
+        await (await import("./actions/removeTicketUser.js")).registerActions()
+        await (await import("./actions/reactionRole.js")).registerActions()
+        await (await import("./actions/clearTickets.js")).registerActions()
     }
     await openticket.events.get("onActionLoad").emit([openticket.actions])
     await openticket.events.get("afterActionsLoaded").emit([openticket.actions])
@@ -607,13 +607,13 @@ const main = async () => {
     //load verifybars
     openticket.log("Loading verifybars...","system")
     if (openticket.defaults.getDefault("verifyBarsLoading")){
-        await (await import("./actions/closeTicket.ts")).registerVerifyBars()
-        await (await import("./actions/deleteTicket.ts")).registerVerifyBars()
-        await (await import("./actions/reopenTicket.ts")).registerVerifyBars()
-        await (await import("./actions/claimTicket.ts")).registerVerifyBars()
-        await (await import("./actions/unclaimTicket.ts")).registerVerifyBars()
-        await (await import("./actions/pinTicket.ts")).registerVerifyBars()
-        await (await import("./actions/unpinTicket.ts")).registerVerifyBars()
+        await (await import("./actions/closeTicket.js")).registerVerifyBars()
+        await (await import("./actions/deleteTicket.js")).registerVerifyBars()
+        await (await import("./actions/reopenTicket.js")).registerVerifyBars()
+        await (await import("./actions/claimTicket.js")).registerVerifyBars()
+        await (await import("./actions/unclaimTicket.js")).registerVerifyBars()
+        await (await import("./actions/pinTicket.js")).registerVerifyBars()
+        await (await import("./actions/unpinTicket.js")).registerVerifyBars()
     }
     await openticket.events.get("onVerifyBarLoad").emit([openticket.verifybars])
     await openticket.events.get("afterVerifyBarsLoaded").emit([openticket.verifybars])
@@ -621,7 +621,7 @@ const main = async () => {
     //load permissions
     openticket.log("Loading permissions...","system")
     if (openticket.defaults.getDefault("permissionsLoading")){
-        await (await import("./data/framework/permissionLoader.ts")).loadAllPermissions()
+        await (await import("./data/framework/permissionLoader.js")).loadAllPermissions()
     }
     await openticket.events.get("onPermissionLoad").emit([openticket.permissions])
     await openticket.events.get("afterPermissionsLoaded").emit([openticket.permissions])
@@ -629,7 +629,7 @@ const main = async () => {
     //load posts
     openticket.log("Loading posts...","system")
     if (openticket.defaults.getDefault("postsLoading")){
-        await (await import("./data/framework/postLoader.ts")).loadAllPosts()
+        await (await import("./data/framework/postLoader.js")).loadAllPosts()
     }
     await openticket.events.get("onPostLoad").emit([openticket.posts])
     await openticket.events.get("afterPostsLoaded").emit([openticket.posts])
@@ -644,7 +644,7 @@ const main = async () => {
     //load cooldowns
     openticket.log("Loading cooldowns...","system")
     if (openticket.defaults.getDefault("cooldownsLoading")){
-        await (await import("./data/framework/cooldownLoader.ts")).loadAllCooldowns()
+        await (await import("./data/framework/cooldownLoader.js")).loadAllCooldowns()
     }
     await openticket.events.get("onCooldownLoad").emit([openticket.cooldowns])
     await openticket.events.get("afterCooldownsLoaded").emit([openticket.cooldowns])
@@ -659,14 +659,14 @@ const main = async () => {
     //load help menu categories
     openticket.log("Loading help menu...","system")
     if (openticket.defaults.getDefault("helpMenuCategoryLoading")){
-        await (await import("./data/framework/helpMenuLoader.ts")).loadAllHelpMenuCategories()
+        await (await import("./data/framework/helpMenuLoader.js")).loadAllHelpMenuCategories()
     }
     await openticket.events.get("onHelpMenuCategoryLoad").emit([openticket.helpmenu])
     await openticket.events.get("afterHelpMenuCategoriesLoaded").emit([openticket.helpmenu])
 
     //load help menu components
     if (openticket.defaults.getDefault("helpMenuComponentLoading")){
-        await (await import("./data/framework/helpMenuLoader.ts")).loadAllHelpMenuComponents()
+        await (await import("./data/framework/helpMenuLoader.js")).loadAllHelpMenuComponents()
     }
     await openticket.events.get("onHelpMenuComponentLoad").emit([openticket.helpmenu])
     await openticket.events.get("afterHelpMenuComponentsLoaded").emit([openticket.helpmenu])
@@ -675,14 +675,14 @@ const main = async () => {
     openticket.log("Loading stats...","system")
     if (openticket.defaults.getDefault("statScopesLoading")){
         openticket.stats.useDatabase(openticket.databases.get("openticket:stats"))
-        await (await import("./data/framework/statLoader.ts")).loadAllStatScopes()
+        await (await import("./data/framework/statLoader.js")).loadAllStatScopes()
     }
     await openticket.events.get("onStatScopeLoad").emit([openticket.stats])
     await openticket.events.get("afterStatScopesLoaded").emit([openticket.stats])
 
     //load stats
     if (openticket.defaults.getDefault("statLoading")){
-        await (await import("./data/framework/statLoader.ts")).loadAllStats()
+        await (await import("./data/framework/statLoader.js")).loadAllStats()
     }
     await openticket.events.get("onStatLoad").emit([openticket.stats])
     await openticket.events.get("afterStatsLoaded").emit([openticket.stats])
@@ -697,7 +697,7 @@ const main = async () => {
     //load code
     openticket.log("Loading code...","system")
     if (openticket.defaults.getDefault("codeLoading")){
-        await (await import("./data/framework/codeLoader.ts")).loadAllCode()
+        await (await import("./data/framework/codeLoader.js")).loadAllCode()
     }
     await openticket.events.get("onCodeLoad").emit([openticket.code])
     await openticket.events.get("afterCodeLoaded").emit([openticket.code])
@@ -715,7 +715,7 @@ const main = async () => {
     //load livestatus sources
     openticket.log("Loading livestatus...","system")
     if (openticket.defaults.getDefault("liveStatusLoading")){
-        await (await import("./data/framework/liveStatusLoader.ts")).loadAllLiveStatusSources()
+        await (await import("./data/framework/liveStatusLoader.js")).loadAllLiveStatusSources()
     }
     await openticket.events.get("onLiveStatusSourceLoad").emit([openticket.livestatus])
     await openticket.events.get("afterLiveStatusSourcesLoaded").emit([openticket.livestatus])
@@ -723,7 +723,7 @@ const main = async () => {
     //load startscreen
     openticket.log("Loading startscreen...","system")
     if (openticket.defaults.getDefault("startScreenLoading")){
-        await (await import("./data/framework/startScreenLoader.ts")).loadAllStartScreenComponents()
+        await (await import("./data/framework/startScreenLoader.js")).loadAllStartScreenComponents()
     }
     await openticket.events.get("onStartScreenLoad").emit([openticket.startscreen])
     await openticket.events.get("afterStartScreensLoaded").emit([openticket.startscreen])
