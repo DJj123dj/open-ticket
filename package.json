@@ -10,10 +10,10 @@
         "plugins",
         "discord-ticket-bot"
     ],
-    "main": "./src/index.ts",
+    "main": "index.js",
     "scripts": {
         "build": "rm -rf ./dist/ && npx tsc -p ./tsconfig.json",
-        "start": "npm run build && node ./dist/src/index.js",
+        "start": "npm run build && node index.js",
         "test": "npm run start -- --dev-config --dev-database"
     },
     "type": "commonjs",
