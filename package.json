@@ -8,6 +8,7 @@
     "scripts": {
         "verify": "tsc -p ./tsconfig.json",
         "start": "npx tsx ./src/index.ts",
+        "backupstart": "node ./src/backupStartup.mjs",
         "test": "npm run verify && npx tsx ./src/index.ts --dev-config --dev-database"
     },
     "type": "commonjs",
