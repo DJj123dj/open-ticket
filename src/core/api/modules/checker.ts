@@ -1160,7 +1160,7 @@ export class ODCheckerCustomStructure_HexColor extends ODCheckerStringStructure 
             if (typeof value != "string") return false
             else if (emptyAllowed && value.length == 0){
                 return true
-            }else if ((!allowShortForm && !/^#[a-f0-9]{6}$/.test(value)) || (allowShortForm && !/^#[a-f0-9]{6}$/.test(value) && !/^#[a-f0-9]{3}$/.test(value))){
+            }else if ((!allowShortForm && !/^#[a-fA-F0-9]{6}$/.test(value)) || (allowShortForm && !/^#[a-fA-F0-9]{6}$/.test(value) && !/^#[a-fA-F0-9]{3}$/.test(value))){
                 checker.createMessage("openticket:color-invalid","error","This is an invalid hex color!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else return true

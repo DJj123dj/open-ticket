@@ -40,7 +40,7 @@ export interface ODDefaults {
     languageSelection:boolean,
     /**Set the backup language when the primary language is missing a property. */
     backupLanguage:string,
-    /****[NOD FOR PLUGIN TRANSLATIONS]** The full list of available languages (used in the default config checker). */
+    /****[NOT FOR PLUGIN TRANSLATIONS]** The full list of available languages (used in the default config checker). */
     languageList:string[],
 
     /**Load the default open ticket config checker. */
@@ -160,6 +160,8 @@ export interface ODDefaults {
     /**Render the default open ticket startscreen. */
     startScreenRendering:boolean,
 
+    /**Load the emoji style from the open ticket general config. */
+    emojiTitleStyleLoading:boolean,
     /**The emoji style to use in embed & message titles using `utilities.emoijTitle()` */
     emojiTitleStyle:"disabled"|"before"|"after"|"double",
     /**The emoji divider to use in embed & message titles using `utilities.emoijTitle()` */
@@ -234,7 +236,7 @@ export class ODDefaultsManager {
             languageLoading:true,
             languageSelection:true,
             backupLanguage:"openticket:english",
-            languageList:["custom","english","dutch","portuguese","czech","german","catalan"],
+            languageList:[],
 
             checkerLoading:true,
             checkerFunctionLoading:true,
@@ -300,6 +302,7 @@ export class ODDefaultsManager {
             startScreenLoading:true,
             startScreenRendering:true,
             
+            emojiTitleStyleLoading:true,
             emojiTitleStyle:"before",
             emojiTitleDivider:" ",
             autocloseCheckInterval:300000, //5 minutes

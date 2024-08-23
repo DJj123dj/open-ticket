@@ -1,6 +1,7 @@
 import {openticket, api, utilities} from "../../index"
 
 export const loadAllLanguages = async () => {
+    //register languages
     openticket.languages.add(new api.ODLanguage("openticket:custom","custom.json"))
     openticket.languages.add(new api.ODLanguage("openticket:english","english.json"))
     openticket.languages.add(new api.ODLanguage("openticket:dutch","dutch.json"))
@@ -8,10 +9,17 @@ export const loadAllLanguages = async () => {
     openticket.languages.add(new api.ODLanguage("openticket:czech","czech.json"))
     openticket.languages.add(new api.ODLanguage("openticket:german","german.json"))
     openticket.languages.add(new api.ODLanguage("openticket:catalan","catalan.json"))
+    openticket.languages.add(new api.ODLanguage("openticket:hungarian","hungarian.json"))
+
+    //list for config checker
+    const languageList = openticket.defaults.getDefault("languageList")
+    languageList.push("custom","english","dutch","portuguese","czech","german","catalan","hungarian")
+    openticket.defaults.setDefault("languageList",languageList)
 
     /** How to add more languages?
-     * - Add the language to the list above
-     * - Add the language to the "languageList" in the "ODDefaultsManager" class
-     * - Add the language to the list in the "ODLanguageManagerIds_Default" interface
+     * - Register the language to the manager (see above)
+     * - Add the language to the list (see above)
+     * - Add the language to the list in the "ODLanguageManagerIds_Default" interface (./src/core/api/defaults/language.ts)
+     * - Add the language to the list in the README.md
      */
 }

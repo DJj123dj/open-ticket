@@ -93,6 +93,7 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇨🇿 Czech              |spyeye_                   |🟢 Up To Date  |
 |🇩🇪 German             |benzorich                 |🟢 Up To Date  |
 |❓ Catalan            |guillee3                  |🟢 Up To Date  |
+|🇭🇺 Hungarian          |kornel0706                |🟢 Up To Date  |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
 |🇷🇴 Romanian           |sankedev                  |🟠 Temporary Outdated (beta) |
 |🇪🇸 Spanish            |redactado & josuens       |🟠 Temporary Outdated (beta) |
@@ -109,7 +110,6 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇬🇷 Greek              |stefanos__.               |🔴 Outdated    |
 |🇮🇩 Indonesian         |erxg                      |🟠 Temporary Outdated (beta) |
 |❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
-|🇭🇺 Hungarian          |kornel0706                |🟠 Temporary Outdated (beta) |
 |❓ Persian            |sasanwm                   |🟠 Temporary Outdated (beta) |
 |🇱🇻 Latvian            |ronalds1398               |🟠 Temporary Outdated (beta) |
 |🇪🇪 Estonian           |iamnotmega                |🟠 Temporary Outdated (beta) |

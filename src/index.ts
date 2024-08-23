@@ -133,6 +133,11 @@ const main = async () => {
     //UTILITY CONFIG
     const generalConfig = openticket.configs.get("openticket:general")
 
+    if (openticket.defaults.getDefault("emojiTitleStyleLoading")){
+        //set emoji style based on config
+        openticket.defaults.setDefault("emojiTitleStyle",generalConfig.data.system.emojiStyle)
+    }
+    
     //load database
     openticket.log("Loading databases...","system")
     if (openticket.defaults.getDefault("databaseLoading")){

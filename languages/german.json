@@ -2,7 +2,7 @@
     "_TRANSLATION":{
         "otversion":"v4.0.0",
         "translator":"benzorich",
-        "lastedited":"21/08/2024",
+        "lastedited":"22/08/2024",
         "language":"German"
     },
     "checker":{
@@ -98,7 +98,7 @@
             "delete":"Ticket löschen",
             "reopen":"Ticket wieder öffnen",
             "claim":"Ticket beanspruchen",
-            "unclaim":"Ticket nicht mehr beanspruchen",
+            "unclaim":"Ticket nicht mehr beansprucht",
             "pin":"Pin Ticket",
             "unpin":"Unpin Ticket",
             "clear":"Tickets löschen",
@@ -112,10 +112,10 @@
             "created":"Ticket erstellt",
             "close":"Ticket geschlossen",
             "delete":"Ticket Gelöscht",
-            "reopen":"Ticket Reopened",
+            "reopen":"Ticket wiedereröffnet",
             "claim":"Ticket beansprucht",
             "unclaim":"Ticket nicht mehr beanspruchen",
-            "pin":"Ticket angeheftet",
+            "pin":"Ticket angepinnt",
             "unpin":"Ticket entpinnt",
             "rename":"Ticket umbenannt",
             "move":"Ticket verschoben",
@@ -144,7 +144,7 @@
             "create":"Ihr Ticket wurde bereits erstellt. Klicken Sie auf die Button unten, um es zu öffnen!",
             "close":"Das Ticket wurde erfolgreich geschlossen!",
             "delete":"Das Ticket wurde erfolgreich gelöscht!",
-            "reopen":"The ticket has been reopened succesfully!",
+            "reopen":"Das Ticket wurde erfolgreich wiedereröffnet!",
             "claim":"Das Ticket wurde erfolgreich beansprucht!",
             "unclaim":"Das Ticket wurde erfolgreich freigegeben!",
             "pin":"Das Ticket ist erfolgreich angepinnt worden!",
@@ -249,7 +249,7 @@
             "optionMissing":"Befehlsoption fehlt",
             "optionInvalid":"Befehlsoption ungültig",
             "unknownCommand":"Unbekannter Befehl",
-            "noPermissions":"Keine Berechtigungen",
+            "noPermissions":"Keine Berechtigung",
             "unknownTicket":"Unbekanntes Ticket",
             "deprecatedTicket":"Veraltetes Ticket",
             "unknownOption":"Unbekannte Option",
@@ -325,7 +325,7 @@
             "ticket":"Ticket",
             "tickets":"Tickets",
             "reason":"Grund",
-            "creator":"Creator",
+            "creator":"Ersteller",
             "remaining":"Verbleibende Zeit",
             "added":"Hinzugefügt",
             "removed":"Entfernt",
@@ -470,7 +470,7 @@
             "ticketsClaimed":"Tickets beansprucht",
             "ticketsPinned":"Tickets angepinnt",
             "ticketsMoved":"Tickets verschoben",
-            "usersBlacklisted":"Nutzer auf der Blacklist gesetzt ",
+            "usersBlacklisted":"Nutzer auf der Blacklist",
             "transcriptsCreated":"Transcripts erstellt"
         }
     }
