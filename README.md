@@ -94,9 +94,9 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇩🇪 German             |benzorich                 |🟢 Up To Date  |
 |❓ Catalan            |guillee3                  |🟢 Up To Date  |
 |🇭🇺 Hungarian          |kornel0706                |🟢 Up To Date  |
+|🇪🇸 Spanish            |redactado & josuens       |🟢 Up To Date  |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
 |🇷🇴 Romanian           |sankedev                  |🟠 Temporary Outdated (beta) |
-|🇪🇸 Spanish            |redactado & josuens       |🟠 Temporary Outdated (beta) |
 |🇮🇹 Italian            |maurizio26                |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
 |🇩🇰 Danish             |.the_gamer                |🟠 Temporary Outdated (beta) |
