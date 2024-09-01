@@ -12,8 +12,9 @@
     ],
     "main": "index.js",
     "scripts": {
-        "start": "node index.js -%-compile && npx tsc -p ./tsconfig.json && node index.js",
-        "test": "npm run start -- --dev-config --dev-database"
+        "build": "node index.js -%-compile",
+        "start": "node index.js",
+        "test": "node index.js --dev-config --dev-database"
     },
     "type": "commonjs",
     "license": "GPL-3.0-only",
