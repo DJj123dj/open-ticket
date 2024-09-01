@@ -92,14 +92,6 @@ const main = async () => {
     await openticket.events.get("onPluginClassLoad").emit([openticket.plugins.classes,openticket.plugins])
     await openticket.events.get("afterPluginClassesLoaded").emit([openticket.plugins.classes,openticket.plugins])
 
-    //load plugin events
-    openticket.log("Loading plugin events...","system")
-    if (openticket.defaults.getDefault("pluginEventLoading")){
-    
-    }
-    await openticket.events.get("onPluginEventLoad").emit([openticket.plugins.events,openticket.plugins])
-    await openticket.events.get("afterPluginEventsLoaded").emit([openticket.plugins.events,openticket.plugins])
-
     //load flags
     openticket.log("Loading flags...","system")
     if (openticket.defaults.getDefault("flagLoading")){
@@ -743,5 +735,6 @@ const main = async () => {
 
     //YIPPPIE!!
     //The startup of Open Ticket is completed :)
+    await openticket.events.get("onReadyForUsage").emit([])
 }
 main()

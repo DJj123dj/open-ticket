@@ -10,8 +10,6 @@ export const loadAllEvents = () => {
         "afterPluginsLoaded",
         "onPluginClassLoad",
         "afterPluginClassesLoaded",
-        "onPluginEventLoad",
-        "afterPluginEventsLoaded",
 
         //flags
         "onFlagLoad",
@@ -230,7 +228,10 @@ export const loadAllEvents = () => {
         "onStartScreenLoad",
         "afterStartScreensLoaded",
         "onStartScreenRender",
-        "afterStartScreensRendered"
+        "afterStartScreensRendered",
+
+        //ready
+        "onReadyForUsage"
     ]
     eventList.forEach((event) => openticket.events.add(new api.ODEvent(event)))
 }

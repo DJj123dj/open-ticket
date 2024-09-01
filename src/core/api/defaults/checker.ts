@@ -65,6 +65,7 @@ export class ODCheckerRenderer_Default extends ODCheckerRenderer {
     horizontalFiller: string = "="
     verticalFiller: string = "|"
     descriptionSeparator: string = " => "
+    headerSeparator: string = " => "
     footerTipPrefix: string = "=> "
 
     disableHeader: boolean = false
@@ -93,7 +94,7 @@ export class ODCheckerRenderer_Default extends ODCheckerRenderer {
 
         if (!renderEmpty && !hasErrors && !hasWarnings && (!hasInfo || compact)) return []
 
-        const headerText = ansis.bold.hex("#f8ba00")(t.headerOpenticket)+" "+t.headerConfigchecker+" => "+ansis.hex("#f8ba00")(t.headerDescription)
+        const headerText = ansis.bold.hex("#f8ba00")(t.headerOpenticket)+" "+t.headerConfigchecker+this.headerSeparator+ansis.hex("#f8ba00")(t.headerDescription)
         const footerErrorText = (hasErrors) ? this.footerTipPrefix+ansis.gray(tm.insertTranslationParams(t.footerError,[ansis.bold.red(t.error)])) : ""
         const footerWarningText = (hasWarnings) ? this.footerTipPrefix+ansis.gray(tm.insertTranslationParams(t.footerWarning,[ansis.bold.yellow(t.warning)])) : ""
         const footerSupportText = tm.insertTranslationParams(t.footerSupport,[ansis.green("https://discord.dj-dj.be"),ansis.green("https://otdocs.dj-dj.be")])

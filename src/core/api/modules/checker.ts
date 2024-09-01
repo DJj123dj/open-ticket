@@ -367,7 +367,7 @@ export class ODChecker extends ODManagerData {
 
             type,message,
             path:this.locationTraceToString(locationTrace),
-            filepath:this.config.file,
+            filepath:this.config.path,
             translationParams,
             
             messageDocs:docs,

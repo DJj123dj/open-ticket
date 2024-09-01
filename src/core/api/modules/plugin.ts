@@ -11,13 +11,11 @@ export interface ODUnknownCrashedPlugin {
 }
 
 export class ODPluginManager extends ODManager<ODPlugin> {
-    events: ODPluginEventManager
     classes: ODPluginClassManager
     unknownCrashedPlugins: ODUnknownCrashedPlugin[] = []
     
     constructor(debug:ODDebugger){
         super(debug,"plugin")
-        this.events = new ODPluginEventManager(debug)
         this.classes = new ODPluginClassManager(debug)
     }
 
@@ -144,91 +142,6 @@ export class ODPlugin extends ODManagerData {
         })
         
         return missing
-    }
-}
-
-export class ODPluginEvent extends ODManagerData {
-    listeners: Function[] = []
-    oncelisteners: Function[] = []
-    
-    getCurrentListeners(){
-        const final: Function[] = []
-        this.oncelisteners.forEach((l) => final.push(l))
-        this.listeners.forEach((l) => final.push(l))
-
-        this.oncelisteners = []
-        return final
-    }
-}
-
-export class ODPluginEventManager extends ODManager<ODPluginEvent> {
-    #debug: ODDebugger
-    listenerLimit: number = 25
-
-    constructor(debug:ODDebugger){
-        super(debug,"plugin event")
-        this.#debug = debug
-    }
-
-    setListenerLimit(limit:number){
-        this.listenerLimit = limit
-    }
-
-    on(event:string, callback:Function){
-        const eventdata = this.get(event)
-        if (eventdata){
-            eventdata.listeners.push(callback)
-
-            if (eventdata.listeners.length > this.listenerLimit){
-                this.#debug.console.log(new ODConsoleWarningMessage("Possible plugin event memory leak detected!",[
-                    {key:"event",value:event},
-                    {key:"listeners",value:eventdata.listeners.length.toString()}
-                ]))
-            }
-        }else{
-            throw new ODSystemError("unknown plugin event \""+event+"\"")
-        }
-    }
-
-    once(event:string, callback:Function){
-        const eventdata = this.get(event)
-        if (eventdata){
-            eventdata.oncelisteners.push(callback)
-
-        }else{
-            throw new ODSystemError("unknown plugin event \""+event+"\"")
-        }
-    }
-
-    wait(event:string): Promise<any[]> {
-        return new Promise((resolve,reject) => {
-            const eventdata = this.get(event)
-            if (eventdata){
-                eventdata.oncelisteners.push((...args:any) => {resolve(args)})
-            }else{
-                reject("unknown plugin event \""+event+"\"")
-            }
-        })
-    }
-
-    emit(event:string, params:any[]): Promise<void> {
-        return new Promise(async (resolve,reject) => {
-            const eventdata = this.get(event)
-            if (eventdata){
-                const listeners = eventdata.getCurrentListeners()
-
-                for (const listener of listeners){
-                    try {
-                        await listener(...params)
-                    }catch(err){
-                        process.emit("uncaughtException",err)
-                    }
-                }
-                resolve()
-            }else{
-                reject("unknown plugin event \""+event+"\"")
-            }
-        })
     }
 }
 

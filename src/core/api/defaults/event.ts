@@ -3,7 +3,6 @@
 ///////////////////////////////////////
 //BASE MODULES
 import { ODPromiseVoid, ODValidId } from "../modules/base"
-import { ODPluginClassManager, ODPluginEventManager, ODPluginManager } from "../modules/plugin"
 import { ODConsoleManager, ODError } from "../modules/console"
 import { ODCheckerResult, ODCheckerStorage } from "../modules/checker"
 import { ODDefaultsManager } from "../modules/defaults"
@@ -13,7 +12,7 @@ import { ODEvent, ODEventManager } from "../modules/event"
 import * as discord from "discord.js"
 
 //DEFAULT MODULES
-import { ODVersionManager_Default } from "./base"
+import { ODPluginClassManager_Default, ODPluginManager_Default } from "./plugin"
 import { ODConfigManager_Default} from "./config"
 import { ODDatabaseManager_Default } from "./database"
 import { ODFlagManager_Default } from "./flag"
@@ -53,12 +52,9 @@ export interface ODEventIds_Default {
     "afterErrorHandling": ODEvent_Default<(error:Error, origin:NodeJS.UncaughtExceptionOrigin, message:ODError) => ODPromiseVoid>
 
     //plugins
-    "afterPluginsLoaded": ODEvent_Default<(plugins:ODPluginManager) => ODPromiseVoid>
-    "onPluginClassLoad": ODEvent_Default<(classes:ODPluginClassManager, plugins:ODPluginManager) => ODPromiseVoid>
-    "afterPluginClassesLoaded": ODEvent_Default<(classes:ODPluginClassManager, plugins:ODPluginManager) => ODPromiseVoid>
-    "onPluginEventLoad": ODEvent_Default<(classes:ODPluginEventManager, plugins:ODPluginManager) => ODPromiseVoid>
-    "afterPluginEventsLoaded": ODEvent_Default<(classes:ODPluginEventManager, plugins:ODPluginManager) => ODPromiseVoid>
-
+    "afterPluginsLoaded": ODEvent_Default<(plugins:ODPluginManager_Default) => ODPromiseVoid>
+    "onPluginClassLoad": ODEvent_Default<(classes:ODPluginClassManager_Default, plugins:ODPluginManager_Default) => ODPromiseVoid>
+    "afterPluginClassesLoaded": ODEvent_Default<(classes:ODPluginClassManager_Default, plugins:ODPluginManager_Default) => ODPromiseVoid>
 
     "onFlagLoad": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
     "afterFlagsLoaded": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
@@ -277,6 +273,9 @@ export interface ODEventIds_Default {
     "afterStartScreensLoaded": ODEvent_Default<(startscreen:ODStartScreenManager_Default) => ODPromiseVoid>
     "onStartScreenRender": ODEvent_Default<(startscreen:ODStartScreenManager_Default) => ODPromiseVoid>
     "afterStartScreensRendered": ODEvent_Default<(startscreen:ODStartScreenManager_Default) => ODPromiseVoid>
+
+    //ready
+    "onReadyForUsage": ODEvent_Default<() => ODPromiseVoid>
 }
 
 /**## ODEventManager_Default `default_class`

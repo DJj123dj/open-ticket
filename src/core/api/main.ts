@@ -1,12 +1,12 @@
 //BASE MODULES
 import { ODEnvHelper, ODVersion } from "./modules/base"
-import { ODPluginManager } from "./modules/plugin"
 import { ODConsoleManager, ODConsoleMessage, ODConsoleMessageParam, ODConsoleMessageTypes, ODDebugFileManager, ODDebugger, ODError } from "./modules/console"
 import { ODCheckerStorage } from "./modules/checker"
 import { ODDefaultsManager } from "./modules/defaults"
 
 //DEFAULT MODULES
 import { ODVersionManager_Default } from "./defaults/base"
+import { ODPluginManager_Default } from "./defaults/plugin"
 import { ODEventManager_Default } from "./defaults/event"
 import { ODConfigManager_Default} from "./defaults/config"
 import { ODDatabaseManager_Default } from "./defaults/database"
@@ -57,7 +57,7 @@ export class ODMain {
     events: ODEventManager_Default
 
     /**The manager that handles & executes all plugins in the bot. */
-    plugins: ODPluginManager
+    plugins: ODPluginManager_Default
     /**The manager that manages & checks all the console flags of the bot. (like `--debug`) */
     flags: ODFlagManager_Default
     /**The manager that manages & contains all the config files of the bot. (like `config/general.json`) */
@@ -132,7 +132,7 @@ export class ODMain {
         this.debug = new ODDebugger(this.console)
         this.events  = new ODEventManager_Default(this.debug)
 
-        this.plugins = new ODPluginManager(this.debug)
+        this.plugins = new ODPluginManager_Default(this.debug)
         this.flags = new ODFlagManager_Default(this.debug)
         this.configs = new ODConfigManager_Default(this.debug)
         this.databases = new ODDatabaseManager_Default(this.debug)

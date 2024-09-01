@@ -20,8 +20,6 @@ export interface ODDefaults {
 
     /**Load the default open ticket plugin classes. */
     pluginClassLoading:boolean,
-    /**Load the default open ticket plugin events. */
-    pluginEventLoading:boolean,
 
     /**Load the default open ticket flags. */
     flagLoading:boolean,
@@ -225,7 +223,6 @@ export class ODDefaultsManager {
             softPluginLoading:false,
 
             pluginClassLoading:true,
-            pluginEventLoading:true,
 
             flagLoading:true,
             flagInitiating:true,

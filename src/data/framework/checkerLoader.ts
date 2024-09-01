@@ -18,17 +18,14 @@ export const loadAllConfigCheckerFunctions = async () => {
 
 export const loadAllConfigCheckerTranslations = async () => {
     if ((generalConfig && generalConfig.data.system && generalConfig.data.system.useTranslatedConfigChecker) ? generalConfig.data.system.useTranslatedConfigChecker : false){
-        registerDefaultCheckerSystemTranslations() //translate checker system text
-        registerDefaultCheckerMessageTranslations() //translate checker messages
-        registerDefaultCheckerCustomTranslations() //translate custom checker messages
+        registerDefaultCheckerSystemTranslations(openticket.checkers.translation,openticket.languages) //translate checker system text
+        registerDefaultCheckerMessageTranslations(openticket.checkers.translation,openticket.languages) //translate checker messages
+        registerDefaultCheckerCustomTranslations(openticket.checkers.translation,openticket.languages) //translate custom checker messages
     }
 }
 
 //GLOBAL FUNCTIONS
-export const registerDefaultCheckerSystemTranslations = () => {
-    const tm = openticket.checkers.translation
-    const lm = openticket.languages
-
+export const registerDefaultCheckerSystemTranslations = (tm:api.ODCheckerTranslationRegister_Default,lm:api.ODLanguageManager_Default) => {
     //SYSTEM
     //tm.quickTranslate(lm,"checker.system.headerOpenTicket","other","openticket:header-openticket") //OPEN TICKET (ignore)
     tm.quickTranslate(lm,"checker.system.typeError","other","openticket:type-error") // [ERROR] (ignore)
@@ -45,10 +42,7 @@ export const registerDefaultCheckerSystemTranslations = () => {
     tm.quickTranslate(lm,"checker.system.dataMessages","other","openticket:data-message") // message
 }
 
-export const registerDefaultCheckerMessageTranslations = () => {
-    const tm = openticket.checkers.translation
-    const lm = openticket.languages
-
+export const registerDefaultCheckerMessageTranslations = (tm:api.ODCheckerTranslationRegister_Default,lm:api.ODLanguageManager_Default) => {
     //STRUCTURES
     tm.quickTranslate(lm,"checker.messages.invalidType","message","openticket:invalid-type") // This property needs to be the type: {0}!
     tm.quickTranslate(lm,"checker.messages.propertyMissing","message","openticket:property-missing") // The property {0} is missing from this object!
@@ -113,10 +107,7 @@ export const registerDefaultCheckerMessageTranslations = () => {
     tm.quickTranslate(lm,"checker.messages.idNonExistent","message","openticket:id-non-existent") // The id {0} doesn't exist!
 }
 
-export const registerDefaultCheckerCustomTranslations = () => {
-    const tm = openticket.checkers.translation
-    const lm = openticket.languages
-
+export const registerDefaultCheckerCustomTranslations = (tm:api.ODCheckerTranslationRegister_Default,lm:api.ODLanguageManager_Default) => {
     //CUSTOM
     tm.quickTranslate(lm,"checker.messages.invalidLanguage","message","openticket:invalid-language") // This is an invalid language!
     tm.quickTranslate(lm,"checker.messages.invalidButton","message","openticket:invalid-button") // This button needs to have at least an {0} or {1}!

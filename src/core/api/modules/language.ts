@@ -7,7 +7,10 @@ import { ODDebugger } from "./console"
 import fs from "fs"
 
 export class ODLanguage extends ODManagerData {
+    /**The name of the file with `.json` extension. */
     file: string
+    /**The path to the file relative to the main directory. */
+    path: string
     data: any
     metadata: {
         otversion:string,
@@ -19,9 +22,9 @@ export class ODLanguage extends ODManagerData {
     constructor(id:ODValidId, file:string, customPath?:string){
         super(id)
         try{
-            const filename = (file.endsWith(".json")) ? file : file+".json"
-            this.file = customPath ? nodepath.join("./",customPath,filename) : nodepath.join("./languages/",filename)
-            this.data = JSON.parse(fs.readFileSync(this.file).toString())
+            this.file = (file.endsWith(".json")) ? file : file+".json"
+            this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./languages/",this.file)
+            this.data = JSON.parse(fs.readFileSync(this.path).toString())
         }catch(err){
             process.emit("uncaughtException",err)
             throw new ODSystemError("Language \""+nodepath.join("./",customPath ?? "./languages/",file)+"\" doesn't exist!")

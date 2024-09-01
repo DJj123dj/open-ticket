@@ -14,7 +14,8 @@
     "scripts": {
         "build": "node index.js -%-compile",
         "start": "node index.js",
-        "test": "node index.js --dev-config --dev-database"
+        "test": "node index.js --dev-config --dev-database",
+        "testnc": "node index.js --no-compile --dev-config --dev-database"
     },
     "type": "commonjs",
     "license": "GPL-3.0-only",
