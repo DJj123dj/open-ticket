@@ -18,7 +18,8 @@ This includes new features, translations & bug fixes.
 1. If your language doesn't exist yet, copy the [`english.json`](./../languages/english.json) file and rename it to your language.
 2. You are allowed to use a little bit of `Google Translate` or `DeepL` when mentioned in the upload. (❌ Not Recommended)
 3. Only translate existing values in the json file. Don't add or remove any values from the file.
-4. If you are unable to translate something, leave it in `English`.
+4. You're **NOT REQUIRED** to translate everything! If you only want to translate a part of it, it's okay!
+5. If you are unable to translate something, leave it in `English`.
 
 #### Step 3: Metadata
 Metadata can be found in the `_TRANSLATION` variable.

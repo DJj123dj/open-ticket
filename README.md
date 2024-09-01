@@ -89,19 +89,19 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |---------------------|--------------------------|---------------|
 |🇬🇧 English            |djj123dj                  |🟢 Up To Date  |
 |🇳🇱 Dutch              |djj123dj                  |🟢 Up To Date  |
-|🇵🇹 Portuguese         |quiradon                  |🟢 Up To Date  |
-|🇨🇿 Czech              |spyeye_                   |🟢 Up To Date  |
 |🇩🇪 German             |benzorich                 |🟢 Up To Date  |
-|❓ Catalan            |guillee3                  |🟢 Up To Date  |
-|🇭🇺 Hungarian          |kornel0706                |🟢 Up To Date  |
 |🇪🇸 Spanish            |redactado & josuens       |🟢 Up To Date  |
+|🇵🇹 Portuguese         |quiradon                  |🟢 Up To Date  |
+|❓ Catalan            |guillee3                  |🟢 Up To Date  |
+|🇨🇿 Czech              |spyeye_                   |🟢 Up To Date  |
+|🇭🇺 Hungarian          |kornel0706                |🟢 Up To Date  |
+|🇷🇴 Romanian           |sankedev                  |🟢 Up To Date  |
+|🇺🇦 Ukrainian          |anderskiy                 |🟢 Up To Date  |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
-|🇷🇴 Romanian           |sankedev                  |🟠 Temporary Outdated (beta) |
 |🇮🇹 Italian            |maurizio26                |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
 |🇩🇰 Danish             |.the_gamer                |🟠 Temporary Outdated (beta) |
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
-|🇺🇦 Ukrainian          |ander                     |🟠 Temporary Outdated (beta) |
 |🇹🇷 Turkish            |0x15d3                    |🟠 Temporary Outdated (beta) |
 |🇵🇱 Polish             |mkevas                    |🟠 Temporary Outdated (beta) |
 |🇸🇮 Slovenian          |n1kkec                    |🔴 Outdated    |
