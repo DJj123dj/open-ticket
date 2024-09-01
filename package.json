@@ -12,8 +12,7 @@
     ],
     "main": "index.js",
     "scripts": {
-        "build": "node index.js -%-compile && npx tsc -p ./tsconfig.json",
-        "start": "npm run build && node ./dist/src/index.js",
+        "start": "node index.js -%-compile && npx tsc -p ./tsconfig.json && node index.js",
         "test": "npm run start -- --dev-config --dev-database"
     },
     "type": "commonjs",
