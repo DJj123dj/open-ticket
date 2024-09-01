@@ -13,4 +13,6 @@ export const loadAllFlags = async () => {
     openticket.flags.add(new api.ODFlag("openticket:no-plugins","No Plugins","Disable all Open Ticket plugins!","--no-plugins",["-np"]))
     openticket.flags.add(new api.ODFlag("openticket:soft-plugins","Soft Plugins","Don't crash the bot when a plugin crashes!","--soft-plugins",["-sp"]))
     openticket.flags.add(new api.ODFlag("openticket:force-slash-update","Force Slash Update","Force update all slash commands.","--force-slash",["-fs"]))
+    openticket.flags.add(new api.ODFlag("openticket:no-compile","No Compile","Disable compilation of plugins & bot before starting.","--no-compile",[]))
+    openticket.flags.add(new api.ODFlag("openticket:compile-only","Compile Only","This description will never be shown because the bot wouldn't run when this flag is enabled :)","--compile-only",[]))
 }

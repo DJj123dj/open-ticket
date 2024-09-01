@@ -12,6 +12,7 @@ export const loadAllConfigCheckers = async () => {
 
 export const loadAllConfigCheckerFunctions = async () => {
     openticket.checkers.functions.add(new api.ODCheckerFunction("openticket:unused-options",defaultUnusedOptionsFunction))
+    openticket.checkers.functions.add(new api.ODCheckerFunction("openticket:unused-questions",defaultUnusedQuestionsFunction))
     openticket.checkers.functions.add(new api.ODCheckerFunction("openticket:dropdown-options",defaultDropdownOptionsFunction))
 }
 

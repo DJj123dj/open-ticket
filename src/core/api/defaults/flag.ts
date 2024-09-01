@@ -21,6 +21,8 @@ export interface ODFlagManagerIds_Default {
     "openticket:no-plugins":ODFlag,
     "openticket:soft-plugins":ODFlag,
     "openticket:force-slash-update":ODFlag,
+    "openticket:no-compile":ODFlag,
+    "openticket:compile-only":ODFlag,
 }
 
 /**## ODFlagManager_Default `default_class`

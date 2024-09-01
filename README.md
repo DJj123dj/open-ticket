@@ -80,9 +80,22 @@ The team behind Open Ticket!
 ### ❤️ Sponsors
 A big thanks to all our sponsors! Without them, it wouldn't be possible to create this project!
 
-|<img src="https://github.com/SpyEye2.png" alt="Profile Picture" width="80px"></img>|<img src="https://github.com/DOSEV5.png" alt="Profile Picture" width="80px"></img>|<img src="https://github.com/mods-hd.png" alt="Profile Picture" width="80px"></img>|
-|----|-|-|
-|**[SpyEye](https://github.com/SpyEye2)**|**[DOSEV5](https://github.com/DOSEV5)**|**[Mods HD](https://github.com/mods-hd)**|
+<table>
+<tr>
+<td><img src="https://github.com/DOSEV5.png" alt="Profile Picture" width="80px"></td>
+<td><img src="https://github.com/roppl3r.png" alt="Profile Picture" width="80px"></td>
+</tr>
+<tr>
+<th><a href="https://github.com/DOSEV5">DOSEV5</a></th>
+<th><a href="https://github.com/roppl3r">roppl3r</a></th>
+</tr>
+</table>
+
+**Past Sponsors:**<br>
+<a href="https://github.com/sponsors/DJj123dj">
+<img src="https://github.com/SpyEye2.png" alt="SpyEye" width="40px">
+<img src="https://github.com/mods-hd.png" alt="Mods HD" width="40px">
+</a>
 
 ### 💬 Translators
 |Language             |Maintainer (discord name) |Status         |

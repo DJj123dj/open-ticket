@@ -1192,12 +1192,20 @@ export class ODCheckerCustomStructure_EmojiString extends ODCheckerStringStructu
         const newOptions = options ?? {}
         newOptions.custom = (checker,value,locationTrace,locationId,locationDocs) => {
             const lt = checker.locationTraceDeref(locationTrace)
-
             if (typeof value != "string") return false
-            else if ([...value].length < minLength){
+
+            const emojis: string[] = []
+            const emojiSplitRegex = /(?:(?:\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])|(?:<a?:[^:]*:[0-9]+>))/g
+            let emoji = emojiSplitRegex.exec(value)
+            while (emoji != null){
+                emojis.push(emoji[0])
+                emoji = emojiSplitRegex.exec(value)
+            }
+            
+            if (emojis.length < minLength){
                 checker.createMessage("openticket:emoji-too-short","error",`This string needs to have at least ${minLength} emoji's!`,lt,null,[maxLength.toString()],this.id,(this.options.docs ?? null))
                 return false
-            }else if ([...value].length > maxLength){
+            }else if (emojis.length > maxLength){
                 checker.createMessage("openticket:emoji-too-long","error",`This string needs to have at most ${maxLength} emoji's!`,lt,null,[maxLength.toString()],this.id,(this.options.docs ?? null))
                 return false
             }else if (!allowCustomDiscordEmoji && /<a?:[^:]*:[0-9]+>/.test(value)){

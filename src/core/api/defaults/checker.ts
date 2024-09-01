@@ -345,6 +345,7 @@ export class ODCheckerTranslationRegister_Default extends ODCheckerTranslationRe
  */
 export interface ODCheckerFunctionManagerIds_Default {
     "openticket:unused-options":ODCheckerFunction,
+    "openticket:unused-questions":ODCheckerFunction,
     "openticket:dropdown-options":ODCheckerFunction
 }
 
@@ -355,14 +356,14 @@ export interface ODCheckerFunctionManagerIds_Default {
  * This default class is made for the global variable `openticket.checkers.functions`!
  */
 export class ODCheckerFunctionManager_Default extends ODCheckerFunctionManager {
-    get<CheckerFunctionId extends keyof ODCheckerManagerIds_Default>(id:CheckerFunctionId): ODCheckerManagerIds_Default[CheckerFunctionId]
+    get<CheckerFunctionId extends keyof ODCheckerFunctionManagerIds_Default>(id:CheckerFunctionId): ODCheckerFunctionManagerIds_Default[CheckerFunctionId]
     get(id:ODValidId): ODCheckerFunction|null
     
     get(id:ODValidId): ODCheckerFunction|null {
         return super.get(id)
     }
 
-    remove<CheckerFunctionId extends keyof ODCheckerManagerIds_Default>(id:CheckerFunctionId): ODCheckerManagerIds_Default[CheckerFunctionId]
+    remove<CheckerFunctionId extends keyof ODCheckerFunctionManagerIds_Default>(id:CheckerFunctionId): ODCheckerFunctionManagerIds_Default[CheckerFunctionId]
     remove(id:ODValidId): ODCheckerFunction|null
     
     remove(id:ODValidId): ODCheckerFunction|null {
