@@ -12,7 +12,7 @@
             "typeWarning":"[AVERTISMENT]",
             "typeInfo":"[INFO]",
             "headerConfigChecker":"VALIDATOR CONFIGURATIE",
-            "headerDescription":"verifica daca sunt erori in configuratia botului",
+            "headerDescription":"verifica daca sunt erori in configuratia botului!",
             "footerError":"botul nu va porni pana cand toate cele {0} erori sunt reparate!",
             "footerWarning":"este recomandat sa repari toate {0}'s inainte de pornire!",
             "footerSupport":"SUPORT: {0} - DOCS: {1}",

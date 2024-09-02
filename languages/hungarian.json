@@ -14,7 +14,7 @@
             "headerConfigChecker":"KONFIGURÁCIÓ ELLENŐRZÉS",
             "headerDescription":"hibaellenőrzés a konfigurációdban!",
             "footerError":"a bot nem indul el, amíg a következőket nem javítod ki: {0}!",
-            "footerWarning":"ajánlott javítani a következőket az indítás előtt: {0}",
+            "footerWarning":"ajánlott javítani a következőket az indítás előtt: {0}!",
             "footerSupport":"SUPPORT: {0} - DOKUMENTÁCIÓ: {1}",
             "compactInformation":"használd a következőt: {0} további információkért!",
             "dataPath":"útvonal",
