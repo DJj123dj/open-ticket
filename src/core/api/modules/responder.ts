@@ -325,7 +325,7 @@ export class ODCommandResponderInstance {
                     this.didReply = true
                     return {success:true,message:await sent.fetch()}
                 }
-            }else if (this.type == "message" && this.interaction instanceof discord.Message){
+            }else if (this.type == "message" && this.interaction instanceof discord.Message && this.interaction.channel.type != discord.ChannelType.GroupDM){
                 const sent = await this.interaction.channel.send(msg.message)
                 this.didReply = true
                 return {success:true,message:sent}

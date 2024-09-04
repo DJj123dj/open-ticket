@@ -373,6 +373,9 @@ const main = async () => {
 
             //load text commands
             openticket.log("Loading text commands...","system")
+            if (openticket.defaults.getDefault("allowDumpCommand")){
+                (await import("./core/startup/dump.js")).loadDumpCommand()
+            }
             if (openticket.defaults.getDefault("textCommandLoading")){
                 await (await import("./data/framework/commandLoader.js")).loadAllTextCommands()
             }

@@ -25,6 +25,7 @@ export const loadCommandErrorHandlingCode = async () => {
     openticket.code.add(new api.ODCode("openticket:command-error-handling",14,() => {
         //invalid/missing options
         openticket.client.textCommands.onError(async (error) => {
+            if (error.msg.channel.type == discord.ChannelType.GroupDM) return
             if (error.type == "invalid_option"){
                 error.msg.channel.send((await openticket.builders.messages.getSafe("openticket:error-option-invalid").build("text",{guild:error.msg.guild,channel:error.msg.channel,user:error.msg.author,error})).message)
             }else if (error.type == "missing_option"){

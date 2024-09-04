@@ -82,6 +82,7 @@ export class ODSlashCommandManager_Default extends ODSlashCommandManager {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTextCommandManagerIds_Default {
+    "openticket:dump":ODTextCommand,
     "openticket:help":ODTextCommand,
     "openticket:panel":ODTextCommand,
     "openticket:close":ODTextCommand,
@@ -137,9 +138,6 @@ export class ODTextCommandManager_Default extends ODTextCommandManager {
     exists(id:ODValidId): boolean {
         return super.exists(id)
     }
-
-    onInteraction(prefix:string, id:keyof ODTextCommandManagerIds_Default, callback:ODTextCommandInteractionCallback): void
-    onInteraction(commandPrefix:string, commandName:string|RegExp, callback:ODTextCommandInteractionCallback): void
 
     onInteraction(commandPrefix:string, commandName:string|RegExp, callback:ODTextCommandInteractionCallback): void {
         return super.onInteraction(commandPrefix,commandName,callback)

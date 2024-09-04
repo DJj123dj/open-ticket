@@ -46,7 +46,7 @@ export const registerCommandResponders = async () => {
         }),
         new api.ODWorker("openticket:panel",0,async (instance,params,source,cancel) => {
             const {guild,channel,user} = instance
-            if (!guild){
+            if (!guild || instance.channel.type == discord.ChannelType.GroupDM){
                 //error
                 instance.reply(await openticket.builders.messages.getSafe("openticket:error-not-in-guild").build(source,{channel:instance.channel,user:instance.user}))
                 return cancel()

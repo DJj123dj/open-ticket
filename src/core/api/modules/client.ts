@@ -996,7 +996,7 @@ export class ODTextCommandManager extends ODManager<ODTextCommand> {
         //filter commands for correct name
         const validNameCommands: {cmd:ODTextCommand,newContent:string}[] = []
         validPrefixCommands.forEach((cmd) => {
-            if (cmd.newContent.startsWith(cmd.cmd.builder.name)) validNameCommands.push({
+            if (cmd.newContent.startsWith(cmd.cmd.builder.name+" ") || cmd.newContent == cmd.cmd.builder.name) validNameCommands.push({
                 cmd:cmd.cmd,
                 newContent:cmd.newContent.substring(cmd.cmd.builder.name.length+1) //+1 because of space after command name
             })
