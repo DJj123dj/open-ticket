@@ -54,9 +54,13 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 View all available Open Ticket plugins in our [Official Plugin Repository](https://github.com/DJj123dj/open-discord-plugins)!
 
 ### 📦 Official *(made by us)*
-|Name                  |Description              |
-|----------------------|-------------------------|
-|`nothing yet :)`      |Lorem Ipsum Beta 4.0 🙃  |
+|Name                                                                 |Category                 |Description              |
+|---------------------------------------------------------------------|-------------------------|-------------------------|
+|[`example-plugin`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-plugin/)                    |Example                  |This is just an example plugin for people that want to create their own plugin. |
+|[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)      |Channel Management       |Simple plugin to keep the channel prefix when using the /rename command. |
+
+
+
 
 ### ✅ Verified *(made by community)*
 |Name                  |Description              |
