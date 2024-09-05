@@ -47,7 +47,7 @@ try{
     openticket.debug.debug("Using discord.js "+packageJson.dependencies["discord.js"]+"!")
     openticket.debug.debug("Using ansis "+packageJson.dependencies["ansis"]+"!")
     openticket.debug.debug("Using formatted-json-stringify "+packageJson.dependencies["formatted-json-stringify"]+"!")
-    openticket.debug.debug("Using tsx "+packageJson.dependencies["tsx"]+"!")
+    openticket.debug.debug("Using typescript "+packageJson.dependencies["typescript"]+"!")
 }catch{
     openticket.debug.debug("Failed to fetch module versions!")
 }
