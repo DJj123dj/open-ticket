@@ -45,7 +45,9 @@ const verifyBarMessages = () => {
 
             //add pings
             const pingOptions = option.get("openticket:ticket-message-ping").value
-            const pings: string[] = [discord.userMention(user.id)]
+            const pings: string[] = []
+            const creator = ticket.get("openticket:opened-by").value
+            if (creator) pings.push(discord.userMention(creator))
             if (pingOptions["@everyone"]) pings.push("@everyone")
             if (pingOptions["@here"]) pings.push("@here")
             pingOptions.custom.forEach((ping) => pings.push(discord.roleMention(ping)))
@@ -669,7 +671,9 @@ const ticketMessages = () => {
 
             //add pings
             const pingOptions = ticket.option.get("openticket:ticket-message-ping").value
-            const pings: string[] = [discord.userMention(user.id)]
+            const pings: string[] = []
+            const creator = ticket.get("openticket:opened-by").value
+            if (creator) pings.push(discord.userMention(creator))
             if (pingOptions["@everyone"]) pings.push("@everyone")
             if (pingOptions["@here"]) pings.push("@here")
             pingOptions.custom.forEach((ping) => pings.push(discord.roleMention(ping)))
@@ -682,8 +686,6 @@ const ticketMessages = () => {
 
             //add embed
             if (ticket.option.get("openticket:ticket-message-embed").value.enabled) instance.addEmbed(await embeds.getSafe("openticket:ticket-message").build(source,{guild,channel,user,ticket}))
-        
-            
         }),
         new api.ODWorker("openticket:ticket-message-components",1,async (instance,params,source) => {
             const {guild,channel,user,ticket} = params

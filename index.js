@@ -3,6 +3,13 @@ const fs = require("fs")
 const ts = require("typescript")
 const nodepath = require('path')
 
+/////////////// STARTUP FLAGS ///////////////
+const flags = [
+    //add startup flags here (e.g. "--no-compile")
+]
+process.argv.push(...flags)
+/////////////// STARTUP FLAGS ///////////////
+
 if (!process.argv.includes("--no-compile")){
     //REMOVE EXISTING BUILDS
     console.log("OT: Removing Prebuilds...")
