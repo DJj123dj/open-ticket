@@ -398,8 +398,8 @@ const loadAutoCode = () => {
                     }
                 }
             }
-            openticket.log("Finished autoclose timeout cycle!","system",[
-                {key:"interval",value:openticket.defaults.getDefault("autocloseCheckInterval").toString(),hidden:true},
+            openticket.debug.debug("Finished autoclose timeout cycle!",[
+                {key:"interval",value:openticket.defaults.getDefault("autocloseCheckInterval").toString()},
                 {key:"closed",value:count.toString()}
             ])
         },openticket.defaults.getDefault("autocloseCheckInterval"))
@@ -451,8 +451,8 @@ const loadAutoCode = () => {
                     }
                 }
             }
-            openticket.log("Finished autodelete timeout cycle!","system",[
-                {key:"interval",value:openticket.defaults.getDefault("autodeleteCheckInterval").toString(),hidden:true},
+            openticket.debug.debug("Finished autodelete timeout cycle!",[
+                {key:"interval",value:openticket.defaults.getDefault("autodeleteCheckInterval").toString()},
                 {key:"deleted",value:count.toString()}
             ])
         },openticket.defaults.getDefault("autodeleteCheckInterval"))

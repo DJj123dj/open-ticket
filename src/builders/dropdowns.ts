@@ -17,12 +17,14 @@ const panelDropdowns = () => {
         new api.ODWorker("openticket:panel-dropdown-tickets",0,async (instance,params) => {
             const {panel,options} = params
             
-            const parsedOptions = options.map((option) => {
+
+            const parsedOptions: api.ODDropdownData["options"] = options.map((option) => {
+                const desc = option.get("openticket:description").value.substring(0,100)
                 return {
                     label:option.get("openticket:button-label").value.substring(0,100),
                     value:"od:ticket-option_"+panel.id.value+"_"+option.id.value,
                     emoji:option.get("openticket:button-emoji").value,
-                    description:option.get("openticket:description").value.substring(0,100)
+                    description:(desc.length > 0) ? desc : undefined
                 }
             })
 
