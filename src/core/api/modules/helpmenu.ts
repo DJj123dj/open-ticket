@@ -141,7 +141,7 @@ export class ODHelpMenuCategory extends ODManager<ODHelpMenuComponent> {
 }
 
 /**## ODHelpMenuRenderResult `type`
- * This is the array returned when the help menu has been rendered succesfully.
+ * This is the array returned when the help menu has been rendered successfully.
  * 
  * It contains a list of pages, which contain categories by name & value (content).
  */

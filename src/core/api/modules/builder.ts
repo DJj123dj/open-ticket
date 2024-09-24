@@ -892,7 +892,7 @@ export interface ODMessageBuildResult {
  * This interface contains the result from a sent built message. This can be used to edit, view & save the message that got created.
  */
 export interface ODMessageBuildSentResult<InGuild extends boolean> {
-    /**Did the message get sent succesfully? */
+    /**Did the message get sent successfully? */
     success:boolean,
     /**The message that got sent. */
     message:discord.Message<InGuild>|null

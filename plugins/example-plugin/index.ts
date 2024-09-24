@@ -27,7 +27,7 @@ openticket.events.get("onConfigLoad").listen((configManager) => {
 
     //Let's also log it to the console to let us know it worked!
     const ourConfig = configManager.get("example-plugin:config")
-    openticket.log("The example config loaded succesfully!","plugin",[
+    openticket.log("The example config loaded successfully!","plugin",[
         {key:"var-1",value:ourConfig.data.testVariable1},
         {key:"var-2",value:ourConfig.data.testVariable2.toString()},
         {key:"var-3",value:ourConfig.data.testVariable3.toString()}
