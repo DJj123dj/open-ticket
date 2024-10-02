@@ -114,8 +114,8 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇷🇴 Romanian           |sankedev                  |🟢 Up To Date  |
 |🇺🇦 Ukrainian          |anderskiy                 |🟢 Up To Date  |
 |🇮🇩 Indonesian         |erxg                      |🟢 Up To Date  |
+|🇮🇹 Italian            |fraden1mvp.               |🟢 Up To Date  |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
-|🇮🇹 Italian            |maurizio26                |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
 |🇩🇰 Danish             |.the_gamer                |🟠 Temporary Outdated (beta) |
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |

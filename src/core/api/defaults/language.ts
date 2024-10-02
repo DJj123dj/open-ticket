@@ -456,6 +456,7 @@ export interface ODLanguageManagerIds_Default {
     "openticket:romanian":ODLanguage,
     "openticket:ukrainian":ODLanguage,
     "openticket:indonesian":ODLanguage,
+    "openticket:italian":ODLanguage,
     //ADD NEW LANGUAGES HERE!!!
 }
 

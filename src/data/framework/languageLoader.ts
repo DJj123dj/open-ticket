@@ -14,10 +14,11 @@ export const loadAllLanguages = async () => {
     openticket.languages.add(new api.ODLanguage("openticket:romanian","romanian.json"))
     openticket.languages.add(new api.ODLanguage("openticket:ukrainian","ukrainian.json"))
     openticket.languages.add(new api.ODLanguage("openticket:indonesian","indonesian.json"))
+    openticket.languages.add(new api.ODLanguage("openticket:italian","italian.json"))
 
     //list for config checker
     const languageList = openticket.defaults.getDefault("languageList")
-    languageList.push("custom","english","dutch","portuguese","czech","german","catalan","hungarian","spanish","romanian","ukrainian","indonesian")
+    languageList.push("custom","english","dutch","portuguese","czech","german","catalan","hungarian","spanish","romanian","ukrainian","indonesian","italian")
     openticket.defaults.setDefault("languageList",languageList)
 
     /** How to add more languages?
