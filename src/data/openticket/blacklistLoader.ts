@@ -6,7 +6,6 @@ export const loadAllBlacklistedUsers = async () => {
     
     const users = userDatabase.getCategory("openticket:blacklist") ?? []
     users.forEach((user) => {
-        if (typeof user.value != "string") return
-        openticket.blacklist.add(new api.ODBlacklist(user.key,user.value))
+        if (typeof user.value == "string" || user.value === null) openticket.blacklist.add(new api.ODBlacklist(user.key,user.value))
     })
 }
