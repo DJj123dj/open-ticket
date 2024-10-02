@@ -86,15 +86,46 @@ export class ODConfig extends ODManagerData {
  * const config = new api.ODJsonConfig("plugin-config","test.json","./plugins/testplugin/")
  */
 export class ODJsonConfig extends ODConfig {
+    /**An array of listeners to run when the config gets reloaded. These are not executed on the initial loading. */
+    #reloadListeners: Function[] = []
+
     constructor(id:ODValidId, file:string, customPath?:string){
         super(id)
-        try {
-            this.file = (file.endsWith(".json")) ? file : file+".json"
-            this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./config/",this.file)
+        this.file = (file.endsWith(".json")) ? file : file+".json"
+        this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./config/",this.file)
+            
+        if (!fs.existsSync(this.path)) throw new ODSystemError("Unable to parse config \""+nodepath.join("./",this.path)+"\", the file doesn't exist!")
+        try{
             this.data = JSON.parse(fs.readFileSync(this.path).toString())
         }catch(err){
             process.emit("uncaughtException",err)
-            throw new ODSystemError("Config \""+nodepath.join("./",customPath ?? "./config/",file)+"\" doesn't exist!")
+            throw new ODSystemError("Unable to parse config \""+nodepath.join("./",this.path)+"\"!")
         }
+    }
+
+    /**Reload the JSON file. Be aware that this doesn't update classes that used individual parts of the config data! */
+    reload(){
+        if (!fs.existsSync(this.path)) throw new ODSystemError("Unable to reload config \""+nodepath.join("./",this.path)+"\", the file doesn't exist!")
+        try{
+            this.data = JSON.parse(fs.readFileSync(this.path).toString())
+            this.#reloadListeners.forEach((cb) => {
+                try{
+                    cb()
+                }catch(err){
+                    process.emit("uncaughtException",err)
+                }
+            })
+        }catch(err){
+            process.emit("uncaughtException",err)
+            throw new ODSystemError("Unable to reload config \""+nodepath.join("./",this.path)+"\"!")
+        }
+    }
+    /**Listen for a reload of this JSON file! */
+    onReload(cb:Function){
+        this.#reloadListeners.push(cb)
+    }
+    /**Remove all reload listeners. Not recommended! */
+    removeAllReloadListeners(){
+        this.#reloadListeners = []
     }
 }

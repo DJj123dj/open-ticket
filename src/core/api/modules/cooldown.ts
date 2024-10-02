@@ -139,7 +139,7 @@ export class ODCounterCooldown extends ODCooldown<{value:number}> {
     async init(){
         if (this.ready) return
         setInterval(() => {
-            this.data.getAll().forEach((cooldown) => {
+            this.data.forEach((cooldown) => {
                 cooldown.data.value = cooldown.data.value - this.decrement
                 if (cooldown.data.value <= this.cancelLimit){
                     cooldown.active = false
@@ -217,7 +217,7 @@ export class ODIncrementalCounterCooldown extends ODCooldown<{value:number}> {
     async init(){
         if (this.ready) return
         setInterval(() => {
-            this.data.getAll().forEach((cooldown) => {
+            this.data.forEach((cooldown) => {
                 cooldown.data.value = cooldown.data.value - this.decrement
                 if (cooldown.data.value <= this.cancelLimit){
                     cooldown.active = false

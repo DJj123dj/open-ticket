@@ -42,9 +42,9 @@ const preloadMigrationContext = async () => {
 
 const unloadMigrationContext = async () => {
     openticket.debug.visible = false
-    openticket.databases.getAll().forEach((database) => openticket.databases.remove(database.id))
-    openticket.configs.getAll().forEach((config) => openticket.configs.remove(config.id))
-    openticket.flags.getAll().forEach((flag) => openticket.flags.remove(flag.id))
+    openticket.databases.forEach((database,id) => {openticket.databases.remove(id)})
+    openticket.configs.forEach((config,id) => {openticket.configs.remove(id)})
+    openticket.flags.forEach((flag,id) => {openticket.flags.remove(id)})
     openticket.debug.debug("-- MIGRATION CONTEXT END --")
 }
 
@@ -78,7 +78,7 @@ const loadAllVersionMigrations = async (lastVersion:api.ODVersion) => {
 const saveAllVersionsToDatabase = async () => {
     const globalDatabase = openticket.databases.get("openticket:global")
 
-    openticket.versions.getAll().forEach((version) => {
-        globalDatabase.set("openticket:last-version",version.id.value,version.toString())    
+    openticket.versions.forEach((version,id) => {
+        globalDatabase.set("openticket:last-version",id.value,version.toString())    
     })
 }

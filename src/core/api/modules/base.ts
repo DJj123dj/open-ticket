@@ -370,6 +370,12 @@ export class ODManager<DataType extends ODManagerData> extends ODManagerChangeHe
     getIds(): ODId[] {
         return this.#data.map((d) => d.id)
     }
+    /**Run an iterator over all data in this manager. This method also supports async-await behaviour!*/
+    async forEach(cb:(data:DataType,id:ODId) => ODPromiseVoid): Promise<void> {
+        for (const data of this.getAll()){
+            await cb(data,data.id)
+        }
+    }
     /**Use the open ticket debugger in this manager for logs*/
     useDebug(debug?:ODDebugger, debugname?:string){
         this.#debug = debug

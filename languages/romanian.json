@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"SankeDev",
+        "translators":["SankeDev"],
         "lastedited":"27/08/2024",
-        "language":"Romanian"
+        "language":"Romanian",
+        "automated":false
     },
     "checker":{
         "system":{

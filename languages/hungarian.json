@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"Kornel0706",
+        "translators":["Kornel0706"],
         "lastedited":"22/08/2024",
-        "language":"Hungarian"
+        "language":"Hungarian",
+        "automated":false
     },
     "checker":{
         "system":{

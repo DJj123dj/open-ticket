@@ -15,6 +15,42 @@ export const loadAllOptions = async () => {
             openticket.options.add(loadRoleOption(option))
         }
     })
+
+    //update options on config reload
+    optionConfig.onReload(async () => {
+        //clear previous options
+        openticket.options.forEach((data,id) => {openticket.options.remove(id)})
+
+        //add new options
+        optionConfig.data.forEach((option) => {
+            if (option.type == "ticket"){
+                const loadedOption = loadTicketOption(option)
+                openticket.options.add(loadedOption)
+                openticket.options.suffix.add(loadTicketOptionSuffix(loadedOption))
+            }else if (option.type == "website"){
+                openticket.options.add(loadWebsiteOption(option))
+            }else if (option.type == "role"){
+                openticket.options.add(loadRoleOption(option))
+            }
+        })
+
+        //update options in tickets
+        openticket.tickets.forEach((ticket) => {
+            const optionId = ticket.option.id
+            const option = openticket.options.get(optionId)
+            if (option && option instanceof api.ODTicketOption) ticket.option = option
+            else{
+                openticket.log("Unable to move ticket to unexisting option due to config reload!","warning",[
+                    {key:"channelid",value:ticket.id.value},
+                    {key:"option",value:optionId.value}
+                ])
+            }
+        })
+
+        //update roles on config reload
+        openticket.roles.forEach((data,id) => {openticket.roles.remove(id)})
+        await (await import("./roleLoader.js")).loadAllRoles()
+    })
 }
 
 export const loadTicketOption = (option:api.ODJsonConfig_DefaultOptionTicketType): api.ODTicketOption => {

@@ -1,7 +1,7 @@
 import {openticket, api, utilities} from "../../index"
 
 export const loadAllRoles = async () => {
-    openticket.options.getAll().forEach((opt) => {
+    openticket.options.forEach((opt) => {
         if (opt instanceof api.ODRoleOption){
             openticket.roles.add(loadRole(opt))
         }

@@ -6,28 +6,33 @@ import nodepath from "path"
 import { ODDebugger } from "./console"
 import fs from "fs"
 
+export interface ODLanguageMetadata {
+    otversion:string,
+    language:string,
+    translators:string[],
+    lastedited:string,
+    automated:boolean
+}
+
 export class ODLanguage extends ODManagerData {
     /**The name of the file with `.json` extension. */
     file: string
     /**The path to the file relative to the main directory. */
     path: string
     data: any
-    metadata: {
-        otversion:string,
-        language:string,
-        translator:string,
-        lastedited:string
-    }|null = null
+    metadata: ODLanguageMetadata|null = null
 
     constructor(id:ODValidId, file:string, customPath?:string){
         super(id)
+        this.file = (file.endsWith(".json")) ? file : file+".json"
+        this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./languages/",this.file)
+        
+        if (!fs.existsSync(this.path)) throw new ODSystemError("Unable to parse language \""+nodepath.join("./",this.path)+"\", the file doesn't exist!")
         try{
-            this.file = (file.endsWith(".json")) ? file : file+".json"
-            this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./languages/",this.file)
             this.data = JSON.parse(fs.readFileSync(this.path).toString())
         }catch(err){
             process.emit("uncaughtException",err)
-            throw new ODSystemError("Language \""+nodepath.join("./",customPath ?? "./languages/",file)+"\" doesn't exist!")
+            throw new ODSystemError("Unable to parse language \""+nodepath.join("./",this.path)+"\"!")
         }
         if (this.data["_TRANSLATION"]) this.metadata = this.data["_TRANSLATION"]
     }
@@ -36,27 +41,41 @@ export class ODLanguage extends ODManagerData {
 export class ODLanguageManager extends ODManager<ODLanguage> {
     current: ODLanguage|null = null
     backup: ODLanguage|null = null
+    #debug: ODDebugger
     
     constructor(debug:ODDebugger, presets:boolean){
         super(debug,"language")
         if (presets) this.add(new ODLanguage("english","english.json"))
         this.current = presets ? new ODLanguage("english","english.json") : null
         this.backup = presets ? new ODLanguage("english","english.json") : null
+        this.#debug = debug
     }
 
     setCurrentLanguage(id:ODValidId){
         this.current = this.get(id)
+        const languageId = this.current?.id.value ?? "<unknown-id>"
+        const languageAutomated = this.current?.metadata?.automated.toString() ?? "<unknown-metadata>"
+        this.#debug.debug("Selected current language",[
+            {key:"id",value:languageId},
+            {key:"automated",value:languageAutomated},
+        ])
     }
     getCurrentLanguage(){
         return (this.current) ? this.current : null
     }
     setBackupLanguage(id:ODValidId){
         this.backup = this.get(id)
+        const languageId = this.backup?.id.value ?? "<unknown-id>"
+        const languageAutomated = this.backup?.metadata?.automated.toString() ?? "<unknown-metadata>"
+        this.#debug.debug("Selected backup language",[
+            {key:"id",value:languageId},
+            {key:"automated",value:languageAutomated},
+        ])
     }
     getBackupLanguage(){
         return (this.backup) ? this.backup : null
     }
-    getLanguageMetadata(frombackup?:boolean){
+    getLanguageMetadata(frombackup?:boolean): ODLanguageMetadata|null {
         if (frombackup) return (this.backup) ? this.backup.metadata : null
         return (this.current) ? this.current.metadata : null
     }

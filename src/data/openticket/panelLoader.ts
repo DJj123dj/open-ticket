@@ -8,6 +8,17 @@ export const loadAllPanels = async () => {
     panelConfig.data.forEach((panel) => {
         openticket.panels.add(loadPanel(panel))
     })
+
+    //update panels on config reload
+    panelConfig.onReload(async () => {
+        //clear previous panels
+        openticket.panels.forEach((data,id) => {openticket.panels.remove(id)})
+
+        //add new panels
+        panelConfig.data.forEach((panel) => {
+            openticket.panels.add(loadPanel(panel))
+        })
+    })
 }
 
 export const loadPanel = (panel:api.ODJsonConfig_DefaultPanelType) => {

@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"benzorich",
+        "translators":["benzorich"],
         "lastedited":"22/08/2024",
-        "language":"German"
+        "language":"German",
+        "automated":false
     },
     "checker":{
         "system":{

@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"erxg",
+        "translators":["erxg"],
         "lastedited":"25/08/2024",
-        "language":"Indonesian"
+        "language":"Indonesian",
+        "automated":false
     },
     "checker":{
         "system":{

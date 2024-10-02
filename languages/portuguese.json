@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"quiradon",
+        "translators":["quiradon"],
         "lastedited":"20/08/2024",
-        "language":"Portuguese"
+        "language":"Portuguese",
+        "automated":false
     },
     "checker":{
         "system":{

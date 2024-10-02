@@ -11,6 +11,21 @@ export const loadAllQuestions = async () => {
             openticket.questions.add(loadParagraphQuestion(question))
         }
     })
+
+    //update questions on config reload
+    questionConfig.onReload(() => {
+        //clear previous questions
+        openticket.questions.forEach((data,id) => {openticket.questions.remove(id)})
+
+        //add new questions
+        questionConfig.data.forEach((question) => {
+            if (question.type == "short"){
+                openticket.questions.add(loadShortQuestion(question))
+            }else if (question.type == "paragraph"){
+                openticket.questions.add(loadParagraphQuestion(question))
+            }
+        })
+    })
 }
 
 export const loadShortQuestion = (option:api.ODJsonConfig_DefaultShortQuestionType) => {

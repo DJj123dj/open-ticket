@@ -65,7 +65,7 @@ export class ODCheckerManager extends ODManager<ODChecker> {
             if (!res.valid) isValid = false
         })
 
-        this.functions.getAll().forEach((func) => {
+        this.functions.forEach((func) => {
             const res = func.func(this,this.functions)
             final.push(...res.messages)
 
@@ -1209,7 +1209,7 @@ export class ODCheckerCustomStructure_EmojiString extends ODCheckerStringStructu
             }else if (!allowCustomDiscordEmoji && /<a?:[^:]*:[0-9]+>/.test(value)){
                 checker.createMessage("openticket:emoji-custom","error",`This emoji can't be a custom discord emoji!`,lt,null,[],this.id,(this.options.docs ?? null))
                 return false
-            }else if (!/^(?:(?:\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])|(?:<a?:[^:]*:[0-9]+>))*$/.test(value)){
+            }else if (!/^(?:\p{Emoji}|\p{Emoji_Component}|(?:<a?:[^:]*:[0-9]+>))*$/u.test(value)){
                 checker.createMessage("openticket:emoji-invalid","error","This is an invalid emoji!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }

@@ -357,7 +357,7 @@ export class ODClientActivityManager {
         this.status = status
     }
 
-    /**When initiating the status, the bot starts updating the status using `discord.js`. Returns if succesfull or not. */
+    /**When initiating the status, the bot starts updating the status using `discord.js`. Returns `true` when successfull. */
     initStatus(): boolean {
         if (this.initiated || !this.manager.ready) return false
         this.#updateClientActivity(this.type,this.text)
@@ -496,7 +496,7 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
         const existing: {cmd:ODSlashCommand, requiresUpdate:boolean}[] = []
         const nonExisting: ODSlashCommand[] = []
 
-        this.getAll().forEach((cmd) => {
+        this.forEach((cmd) => {
             if (guildId && cmd.guildId != guildId) return
             const result = cmds.find((cmddata) => cmddata.name == cmd.name)
             if (result){
@@ -977,7 +977,7 @@ export class ODTextCommandManager extends ODManager<ODTextCommand> {
 
         //filter commands for correct prefix
         const validPrefixCommands: {cmd:ODTextCommand,newContent:string}[] = []
-        this.getAll().forEach((cmd) => {
+        this.forEach((cmd) => {
             if (msg.content.startsWith(cmd.builder.prefix)) validPrefixCommands.push({
                 cmd:cmd,
                 newContent:msg.content.substring(cmd.builder.prefix.length)

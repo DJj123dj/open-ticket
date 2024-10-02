@@ -1,7 +1,7 @@
 import {openticket, api, utilities} from "../../index"
 
 export const loadAllCooldowns = async () => {
-    openticket.options.getAll().forEach((option) => {
+    openticket.options.forEach((option) => {
         if (!(option instanceof api.ODTicketOption)) return
         loadTicketOptionCooldown(option)
     })

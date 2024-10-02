@@ -882,7 +882,7 @@ const blacklistEmbeds = () => {
             const {user} = params
 
             const renderedUsers: string[] = []
-            openticket.blacklist.getAll().forEach((blacklist) => renderedUsers.push(discord.userMention(blacklist.id.value)+" - "+(blacklist.reason ? blacklist.reason : "/")))
+            openticket.blacklist.forEach((blacklist,id) => {renderedUsers.push(discord.userMention(id.value)+" - "+(blacklist.reason ? blacklist.reason : "/"))})
 
             instance.setAuthor(user.displayName,user.displayAvatarURL())
             instance.setColor(generalConfig.data.mainColor)

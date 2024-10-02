@@ -135,9 +135,9 @@ export const loadDatabaseCleanersCode = async () => {
     //OPTION DATABASE CLEANER
     openticket.code.add(new api.ODCode("openticket:option-database-cleaner",10,() => {
         //delete all unused options
-        openticket.options.getAll().forEach((option) => {
-            if (optionDatabase.exists("openticket:used-option",option.id.value) && !openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
-                optionDatabase.delete("openticket:used-option",option.id.value)
+        openticket.options.forEach((option,id) => {
+            if (optionDatabase.exists("openticket:used-option",id.value) && !openticket.tickets.getAll().some((ticket) => ticket.id.value == id.value)){
+                optionDatabase.delete("openticket:used-option",id.value)
             }
         })
     }))
@@ -331,9 +331,9 @@ export const loadDatabaseSaversCode = async () => {
             }
 
             //delete all unused options on ticket move
-            openticket.options.getAll().forEach((option) => {
-                if (optionDatabase.exists("openticket:used-option",option.id.value) && !openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
-                    optionDatabase.delete("openticket:used-option",option.id.value)
+            openticket.options.forEach((option,id) => {
+                if (optionDatabase.exists("openticket:used-option",id.value) && !openticket.tickets.getAll().some((ticket) => ticket.id.value == id.value)){
+                    optionDatabase.delete("openticket:used-option",id.value)
                 }
             })
         })

@@ -1,4 +1,3 @@
-//@ts-check
 const fs = require("fs")
 const ts = require("typescript")
 const nodepath = require('path')

@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"Anderskiy",
+        "translators":["Anderskiy"],
         "lastedited":"31/08/2024",
-        "language":"Ukrainian"
+        "language":"Ukrainian",
+        "automated":false
     },
     "checker":{
         "system":{

@@ -2,8 +2,8 @@ import {openticket, api, utilities} from "../../index"
 
 export const loadAllFlags = async () => {
     openticket.flags.add(new api.ODFlag("openticket:no-migration","No Migration","Disable Open Ticket data migration on update!","--no-migration",["-nm"]))
-    openticket.flags.add(new api.ODFlag("openticket:dev-config","Developer Config","Use the configs in /devconfig instead of /config!","--dev-config",["-dc"]))
-    openticket.flags.add(new api.ODFlag("openticket:dev-database","Developer Database","Use the databases in /devdatabase instead of /database!","--dev-database",["-nd"]))
+    openticket.flags.add(new api.ODFlag("openticket:dev-config","Developer Config","Use the configs in /devconfig/ instead of /config/!","--dev-config",["-dc"]))
+    openticket.flags.add(new api.ODFlag("openticket:dev-database","Developer Database","Use the databases in /devdatabase/ instead of /database/!","--dev-database",["-nd"]))
     openticket.flags.add(new api.ODFlag("openticket:debug","Debug Mode","Couldn't you find the error? Try to check this out!","--debug",["-d"]))
     openticket.flags.add(new api.ODFlag("openticket:crash","Crash On Error","Crash the bot on an unknown error!","--crash",["-cr"]))
     openticket.flags.add(new api.ODFlag("openticket:no-transcripts","No HTML Transcripts","Disable uploading HTML transcripts (for debugging)","--no-transcripts",["-nt"]))

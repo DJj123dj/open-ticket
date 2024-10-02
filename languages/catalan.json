@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"guillee3",
+        "translators":["guillee3"],
         "lastedited":"21/08/2024",
-        "language":"Catalan"
+        "language":"Catalan",
+        "automated":false
     },
     "checker":{
         "system":{

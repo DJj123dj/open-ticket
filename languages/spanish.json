@@ -1,9 +1,10 @@
 {
     "_TRANSLATION":{
         "otversion":"v4.0.0",
-        "translator":"Redactado & Josuens",
+        "translators":["Redactado","Josuens"],
         "lastedited":"22/08/2024",
-        "language":"Spanish"
+        "language":"Spanish",
+        "automated":false
     },
     "checker":{
         "system":{
