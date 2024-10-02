@@ -101,30 +101,30 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 </a>
 
 ### 💬 Translators
-|Language             |Maintainer (discord name) |Status         |
-|---------------------|--------------------------|---------------|
-|🇬🇧 English            |djj123dj                  |🟢 Up To Date  |
-|🇳🇱 Dutch              |djj123dj                  |🟢 Up To Date  |
-|🇩🇪 German             |benzorich                 |🟢 Up To Date  |
-|🇪🇸 Spanish            |redactado & josuens       |🟢 Up To Date  |
-|🇵🇹 Portuguese         |quiradon                  |🟢 Up To Date  |
-|❓ Catalan            |guillee3                  |🟢 Up To Date  |
-|🇨🇿 Czech              |spyeye_                   |🟢 Up To Date  |
-|🇭🇺 Hungarian          |kornel0706                |🟢 Up To Date  |
-|🇷🇴 Romanian           |sankedev                  |🟢 Up To Date  |
-|🇺🇦 Ukrainian          |anderskiy                 |🟢 Up To Date  |
-|🇮🇩 Indonesian         |erxg                      |🟢 Up To Date  |
-|🇮🇹 Italian            |fraden1mvp.               |🟢 Up To Date  |
+|Language             |Maintainer (discord name) |Status                       |
+|---------------------|--------------------------|-----------------------------|
+|🇬🇧 English            |djj123dj                  |🟢 Up To Date                |
+|🇳🇱 Dutch              |djj123dj                  |🟢 Up To Date                |
+|🇩🇪 German             |benzorich                 |🟢 Up To Date                |
+|🇪🇸 Spanish            |redactado & josuens       |🟢 Up To Date                |
+|🇵🇹 Portuguese         |quiradon                  |🟢 Up To Date                |
+|❓ Catalan            |guillee3                  |🟢 Up To Date                |
+|🇨🇿 Czech              |spyeye_                   |🟢 Up To Date                |
+|🇭🇺 Hungarian          |kornel0706                |🟢 Up To Date                |
+|🇷🇴 Romanian           |sankedev                  |🟢 Up To Date                |
+|🇺🇦 Ukrainian          |anderskiy                 |🟢 Up To Date                |
+|🇮🇩 Indonesian         |erxg                      |🟢 Up To Date                |
+|🇮🇹 Italian            |fraden1mvp. & ChatGPT     |🔵 Up To Date (ChatGPT)      |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
 |🇩🇰 Danish             |.the_gamer                |🟠 Temporary Outdated (beta) |
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
 |🇹🇷 Turkish            |0x15d3                    |🟠 Temporary Outdated (beta) |
 |🇵🇱 Polish             |mkevas                    |🟠 Temporary Outdated (beta) |
-|🇸🇮 Slovenian          |n1kkec                    |🔴 Outdated    |
+|🇸🇮 Slovenian          |n1kkec                    |🔴 Outdated                  |
 |🇹🇭 Thai               |modshd                    |🟠 Temporary Outdated (beta) |
 |🇳🇴 Norwegian          |noonenook                 |🟠 Temporary Outdated (beta) |
-|🇬🇷 Greek              |stefanos__.               |🔴 Outdated    |
+|🇬🇷 Greek              |stefanos__.               |🔴 Outdated                  |
 |❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
 |❓ Persian            |sasanwm                   |🟠 Temporary Outdated (beta) |
 |🇱🇻 Latvian            |ronalds1398               |🟠 Temporary Outdated (beta) |
