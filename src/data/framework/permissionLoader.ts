@@ -30,7 +30,7 @@ export const loadAllPermissions = async () => {
     })
 
     //TICKET ADMINS
-    openticket.tickets.forEach(async (ticket) => {
+    openticket.tickets.loopAll(async (ticket) => {
         try {
             const channel = await openticket.client.fetchGuildTextChannel(mainServer,ticket.id.value)
             if (!channel) return

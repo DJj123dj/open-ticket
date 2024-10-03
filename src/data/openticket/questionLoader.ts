@@ -13,9 +13,9 @@ export const loadAllQuestions = async () => {
     })
 
     //update questions on config reload
-    questionConfig.onReload(() => {
+    questionConfig.onReload(async () => {
         //clear previous questions
-        openticket.questions.forEach((data,id) => {openticket.questions.remove(id)})
+        await openticket.questions.loopAll((data,id) => {openticket.questions.remove(id)})
 
         //add new questions
         questionConfig.data.forEach((question) => {

@@ -12,7 +12,7 @@ export const loadAllPanels = async () => {
     //update panels on config reload
     panelConfig.onReload(async () => {
         //clear previous panels
-        openticket.panels.forEach((data,id) => {openticket.panels.remove(id)})
+        await openticket.panels.loopAll((data,id) => {openticket.panels.remove(id)})
 
         //add new panels
         panelConfig.data.forEach((panel) => {

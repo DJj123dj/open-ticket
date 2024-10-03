@@ -65,7 +65,7 @@ export class ODCheckerManager extends ODManager<ODChecker> {
             if (!res.valid) isValid = false
         })
 
-        this.functions.forEach((func) => {
+        this.functions.loopAll((func) => {
             const res = func.func(this,this.functions)
             final.push(...res.messages)
 

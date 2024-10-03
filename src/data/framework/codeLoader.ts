@@ -135,7 +135,7 @@ export const loadDatabaseCleanersCode = async () => {
     //OPTION DATABASE CLEANER
     openticket.code.add(new api.ODCode("openticket:option-database-cleaner",10,() => {
         //delete all unused options
-        openticket.options.forEach((option,id) => {
+        openticket.options.loopAll((option,id) => {
             if (optionDatabase.exists("openticket:used-option",id.value) && !openticket.tickets.getAll().some((ticket) => ticket.id.value == id.value)){
                 optionDatabase.delete("openticket:used-option",id.value)
             }
@@ -331,7 +331,7 @@ export const loadDatabaseSaversCode = async () => {
             }
 
             //delete all unused options on ticket move
-            openticket.options.forEach((option,id) => {
+            openticket.options.loopAll((option,id) => {
                 if (optionDatabase.exists("openticket:used-option",id.value) && !openticket.tickets.getAll().some((ticket) => ticket.id.value == id.value)){
                     optionDatabase.delete("openticket:used-option",id.value)
                 }

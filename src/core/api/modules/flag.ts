@@ -66,7 +66,7 @@ export class ODFlagManager extends ODManager<ODFlag> {
 
     /**Set all flags to their `process.argv` value. */
     init(){
-        this.forEach((flag) => {
+        this.loopAll((flag) => {
             flag.detectProcessParams(false)
         })
     }

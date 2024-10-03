@@ -496,7 +496,7 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
         const existing: {cmd:ODSlashCommand, requiresUpdate:boolean}[] = []
         const nonExisting: ODSlashCommand[] = []
 
-        this.forEach((cmd) => {
+        this.loopAll((cmd) => {
             if (guildId && cmd.guildId != guildId) return
             const result = cmds.find((cmddata) => cmddata.name == cmd.name)
             if (result){
@@ -977,7 +977,7 @@ export class ODTextCommandManager extends ODManager<ODTextCommand> {
 
         //filter commands for correct prefix
         const validPrefixCommands: {cmd:ODTextCommand,newContent:string}[] = []
-        this.forEach((cmd) => {
+        this.loopAll((cmd) => {
             if (msg.content.startsWith(cmd.builder.prefix)) validPrefixCommands.push({
                 cmd:cmd,
                 newContent:msg.content.substring(cmd.builder.prefix.length)

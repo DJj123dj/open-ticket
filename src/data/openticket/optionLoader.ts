@@ -19,8 +19,8 @@ export const loadAllOptions = async () => {
     //update options on config reload
     optionConfig.onReload(async () => {
         //clear previous options & suffixes
-        openticket.options.forEach((data,id) => {openticket.options.remove(id)})
-        openticket.options.suffix.forEach((data,id) => {openticket.options.suffix.remove(id)})
+        await openticket.options.loopAll((data,id) => {openticket.options.remove(id)})
+        await openticket.options.suffix.loopAll((data,id) => {openticket.options.suffix.remove(id)})
 
         //add new options
         optionConfig.data.forEach((option) => {
@@ -36,7 +36,7 @@ export const loadAllOptions = async () => {
         })
 
         //update options in tickets
-        openticket.tickets.forEach((ticket) => {
+        await openticket.tickets.loopAll((ticket) => {
             const optionId = ticket.option.id
             const option = openticket.options.get(optionId)
             if (option && option instanceof api.ODTicketOption) ticket.option = option
@@ -49,7 +49,7 @@ export const loadAllOptions = async () => {
         })
 
         //update roles on config reload
-        openticket.roles.forEach((data,id) => {openticket.roles.remove(id)})
+        await openticket.roles.loopAll((data,id) => {openticket.roles.remove(id)})
         await (await import("./roleLoader.js")).loadAllRoles()
     })
 }

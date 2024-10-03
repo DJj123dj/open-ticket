@@ -371,7 +371,7 @@ export class ODManager<DataType extends ODManagerData> extends ODManagerChangeHe
         return this.#data.map((d) => d.id)
     }
     /**Run an iterator over all data in this manager. This method also supports async-await behaviour!*/
-    async forEach(cb:(data:DataType,id:ODId) => ODPromiseVoid): Promise<void> {
+    async loopAll(cb:(data:DataType,id:ODId) => ODPromiseVoid): Promise<void> {
         for (const data of this.getAll()){
             await cb(data,data.id)
         }
