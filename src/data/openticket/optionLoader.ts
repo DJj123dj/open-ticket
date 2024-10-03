@@ -18,8 +18,9 @@ export const loadAllOptions = async () => {
 
     //update options on config reload
     optionConfig.onReload(async () => {
-        //clear previous options
+        //clear previous options & suffixes
         openticket.options.forEach((data,id) => {openticket.options.remove(id)})
+        openticket.options.suffix.forEach((data,id) => {openticket.options.suffix.remove(id)})
 
         //add new options
         optionConfig.data.forEach((option) => {

@@ -137,8 +137,6 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇸🇪 Swedish            |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇻🇳 Vietnamese         |iamnotmega                |🟠 Temporary Outdated (beta) |
 
-
-
 ## ⭐️ Star History
 Please help us grow by giving a star! It would help us a lot!
 
