@@ -1,0 +1,9 @@
+# Docker Compose for Open Ticket v4
+version: '3'
+services:
+  openticket:
+    build: .
+    volumes:
+      - .:/app
+    environment: NODE_ENV=production
+    restart: unless-stopped

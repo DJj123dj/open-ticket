@@ -12,8 +12,9 @@ import ansis from "ansis"
  */
 export interface ODCheckerManagerIds_Default {
     "openticket:general":ODChecker,
+    "openticket:questions":ODChecker,
     "openticket:options":ODChecker,
-    "openticket:messages":ODChecker,
+    "openticket:panels":ODChecker,
     "openticket:transcripts":ODChecker
 }
 
