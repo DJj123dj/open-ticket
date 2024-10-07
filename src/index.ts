@@ -103,7 +103,7 @@ const main = async () => {
     //initiate flags
     await openticket.events.get("onFlagInit").emit([openticket.flags])
     if (openticket.defaults.getDefault("flagInitiating")){
-        openticket.flags.init()
+        await openticket.flags.init()
         openticket.debugfile.writeText("\n[ENABLED FLAGS]:\n"+openticket.flags.getFiltered((flag) => (flag.value == true)).map((flag) => flag.id.value).join("\n")+"\n")
         await openticket.events.get("afterFlagsInitiated").emit([openticket.flags])
     }

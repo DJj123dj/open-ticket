@@ -496,7 +496,7 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
         const existing: {cmd:ODSlashCommand, requiresUpdate:boolean}[] = []
         const nonExisting: ODSlashCommand[] = []
 
-        this.loopAll((cmd) => {
+        await this.loopAll((cmd) => {
             if (guildId && cmd.guildId != guildId) return
             const result = cmds.find((cmddata) => cmddata.name == cmd.name)
             if (result){
@@ -977,7 +977,7 @@ export class ODTextCommandManager extends ODManager<ODTextCommand> {
 
         //filter commands for correct prefix
         const validPrefixCommands: {cmd:ODTextCommand,newContent:string}[] = []
-        this.loopAll((cmd) => {
+        await this.loopAll((cmd) => {
             if (msg.content.startsWith(cmd.builder.prefix)) validPrefixCommands.push({
                 cmd:cmd,
                 newContent:msg.content.substring(cmd.builder.prefix.length)
@@ -1403,7 +1403,7 @@ export class ODTextCommandManager extends ODManager<ODTextCommand> {
                         }
                     }
                 }else if (option.required){
-                    //REQUIRED => ERROR IF NOD EXISTING
+                    //REQUIRED => ERROR IF NOT EXISTING
                     const invalidRegex = /^[^ ]+/
                     const invalidRes = invalidRegex.exec(tempContent)
                     if (invalidRes) optionError("invalid_option",option,location,invalidRes[0],"mentionable_not_found")
