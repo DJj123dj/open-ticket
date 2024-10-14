@@ -296,7 +296,7 @@ export const loadPanelAutoUpdateCode = async () => {
                 const channel = await openticket.client.fetchGuildTextChannel(mainServer,splittedId[0])
                 if (!channel) return
                 const message = await openticket.client.fetchGuildChannelMessage(mainServer,channel,splittedId[1])
-                if (!message) return
+                if (!message || !message.editable) return
                 
                 message.edit((await openticket.builders.messages.getSafe("openticket:panel").build("auto-update",{guild:mainServer,channel,user:openticket.client.client.user,panel})).message)
                 openticket.log("Panel in server got auto-updated!","info",[

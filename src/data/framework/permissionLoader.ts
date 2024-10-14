@@ -62,7 +62,7 @@ export const addTicketPermissions = async (ticket:api.ODTicket) => {
     const admins = ticket.option.exists("openticket:admins") ? ticket.option.get("openticket:admins").value : []
     const readAdmins = ticket.option.exists("openticket:admins-readonly") ? ticket.option.get("openticket:admins-readonly").value : []
 
-    admins.concat(readAdmins).forEach(async (admin) => {
+    for (const admin of admins.concat(readAdmins)){
         if (openticket.permissions.exists("openticket:ticket-admin_"+ticket.id.value+"_"+admin)) return
         const role = await mainServer.roles.fetch(admin)
         if (!role) return openticket.log("Unable to register permission for ticket admin!","error",[
@@ -70,7 +70,7 @@ export const addTicketPermissions = async (ticket:api.ODTicket) => {
         ])
         
         openticket.permissions.add(new api.ODPermission("openticket:ticket-admin_"+ticket.id.value+"_"+admin,"channel-role","support",role,channel))
-    })
+    }
 }
 
 export const removeTicketPermissions = async (ticket:api.ODTicket) => {
