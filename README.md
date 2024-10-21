@@ -88,13 +88,13 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |❓ Persian            |sasanwm                   |🟢 Up To Date  |
 |🇱🇻 Latvian            |ronalds1398               |🟢 Up To Date  |
 |🇪🇪 Estonian           |iamnotmega                |🟢 Up To Date  |
-|🇯🇵 Japanese           |iamnotmega                |🟢 Up To Date  |
-|🇰🇷 Korean             |iamnotmega                |🟢 Up To Date  |
-|🇨🇳 Simplified Chinese |iamnotmega                |🟢 Up To Date  |
-|🇨🇳 Traditional Chinese|iamnotmega                |🟢 Up To Date  |
-|🇫🇮 Finnish            |iamnotmega                |🟢 Up To Date  |
-|🇸🇪 Swedish            |iamnotmega                |🟢 Up To Date  |
-|🇻🇳 Vietnamese         |iamnotmega                |🟢 Up To Date  |
+|🇯🇵 Japanese           |iamnotmega+chatgpt        |🟢 Up To Date  |
+|🇰🇷 Korean             |iamnotmega+chatgpt        |🟢 Up To Date  |
+|🇨🇳 Simplified Chinese |iamnotmega+chatgpt        |🟢 Up To Date  |
+|🇨🇳 Traditional Chinese|iamnotmega+chatgpt        |🟢 Up To Date  |
+|🇫🇮 Finnish            |iamnotmega+chatgpt        |🟢 Up To Date  |
+|🇸🇪 Swedish            |iamnotmega+chatgpt        |🟢 Up To Date  |
+|🇻🇳 Vietnamese         |iamnotmega+chatgpt        |🟢 Up To Date  |
 
 ## ⭐️ Star History
 Please help us grow by giving a star! It would help us a lot!
