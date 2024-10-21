@@ -21,3 +21,4 @@ test.js
 devtsconfig.json
 plugins/*
 !plugins/example.plugin.js
+.idea/
