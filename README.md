@@ -48,23 +48,29 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 > <a href="https://github.com/DJj123dj/open-discord-plugins"><img src="https://apis.dj-dj.be/cdn/openticket/open-ticket-plugins.png" alt="Open Ticket Plugins" width="180px"></a>
 
 ## 📸 Preview
-*Previews are not available yet in the beta release!*
+<img alt="Ticket Message" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/ticket.png">
+<img alt="Ticket Stats Message" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/stats.png">
+<img alt="Example Panel 1" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/panel-1.png">
+<img alt="Example Panel 2" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/panel-2.png">
 
 ## 🧩 Plugins
 View all available Open Ticket plugins in our [Official Plugin Repository](https://github.com/DJj123dj/open-discord-plugins)!
 
-### 📦 Official *(made by us)*
-|Name                                                                 |Category                 |Description              |
-|---------------------------------------------------------------------|-------------------------|-------------------------|
+### 📦 Official *(made by DJdj Development)*
+|Name                                                                 |Category                    |Description              |
+|---------------------------------------------------------------------|----------------------------|-------------------------|
 |[`example-plugin`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-plugin/)                    |Example                     |This is just an example plugin for people that want to create their own plugin. |
-|[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)      |Channel Management          |Simple plugin to keep the channel prefix when using the /rename command. |
+|[`example-command`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-command/)                  |Example                     |Sample custom command using the Open Discord system. |
 |[`ot-jump-to-top`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-jump-to-top/)                    |Command                     |Add a simple command to jump to the top of the ticket. |
-|[`ot-no-slash-clear`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-no-slash-clear/)              |Development & Compatibility |Disable the automatic removal of slash commands that aren't used by Open Ticket. |
+|[`ot-kill-switch`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-kill-switch/)                    |Command                     |Temporarily disable the ticket system using a kill switch. |
+|[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)      |Channel Management          |Simple plugin to keep the channel prefix when using the /rename command. |
+|[`ot-no-slash-clear`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-no-slash-clear/)              |Development                 |Disable the automatic removal of slash commands that aren't used by Open Ticket. |
+|[`ot-better-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-better-status/)                |Client Activity             |An advanced status plugin to rotate between states. It also allows for the use of variables. |
 
 ### ✅ Verified *(made by community)*
-|Name                  |Description              |
-|----------------------|-------------------------|
-|`nothing yet :)`      |Lorem Ipsum Beta 4.0 🙃  |
+|Name                                                                 |Author                      |Category                    |Description              |
+|---------------------------------------------------------------------|----------------------------|----------------------------|-------------------------|
+|[`ot-config-reload`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-config-reload/)                |guillee.3                   |Config                      |This plugin adds a new command that allows reloading the Open Ticket config files without the need for a restart. |
 
 ## 🛠️ Contributors
 ### 🖥️ Team
@@ -85,11 +91,9 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 
 <table>
 <tr>
-<td><img src="https://github.com/DOSEV5.png" alt="Profile Picture" width="80px"></td>
 <td><img src="https://github.com/roppl3r.png" alt="Profile Picture" width="80px"></td>
 </tr>
 <tr>
-<th><a href="https://github.com/DOSEV5">DOSEV5</a></th>
 <th><a href="https://github.com/roppl3r">roppl3r</a></th>
 </tr>
 </table>
@@ -98,6 +102,7 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 <a href="https://github.com/sponsors/DJj123dj">
 <img src="https://github.com/SpyEye2.png" alt="SpyEye" width="40px">
 <img src="https://github.com/mods-hd.png" alt="Mods HD" width="40px">
+<img src="https://github.com/DOSEV5.png" alt="DOSEV5" width="40px">
 </a>
 
 ### 💬 Translators
@@ -123,10 +128,8 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
 |🇹🇷 Turkish            |0x15d3                    |🟠 Temporary Outdated (beta) |
 |🇵🇱 Polish             |mkevas                    |🟠 Temporary Outdated (beta) |
-|🇸🇮 Slovenian          |n1kkec                    |🔴 Outdated                  |
 |🇹🇭 Thai               |modshd                    |🟠 Temporary Outdated (beta) |
 |🇳🇴 Norwegian          |noonenook                 |🟠 Temporary Outdated (beta) |
-|🇬🇷 Greek              |stefanos__.               |🔴 Outdated                  |
 |❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
 |❓ Persian            |sasanwm                   |🟠 Temporary Outdated (beta) |
 |🇱🇻 Latvian            |ronalds1398               |🟠 Temporary Outdated (beta) |
@@ -136,6 +139,8 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇨🇳 Traditional Chinese|iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇸🇪 Swedish            |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇻🇳 Vietnamese         |iamnotmega                |🟠 Temporary Outdated (beta) |
+|🇸🇮 Slovenian          |n1kkec                    |🔴 Outdated                  |
+|🇬🇷 Greek              |stefanos__.               |🔴 Outdated                  |
 
 ## ⭐️ Star History
 Please help us grow by giving a star! It would help us a lot!
