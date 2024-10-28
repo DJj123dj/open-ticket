@@ -115,6 +115,8 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇺🇦 Ukrainian          |anderskiy                 |🟢 Up To Date                |
 |🇮🇩 Indonesian         |erxg                      |🟢 Up To Date                |
 |🇮🇹 Italian            |fraden1mvp.               |🟢 Up To Date                |
+|🇪🇪 Estonian           |iamnotmega                |🔵 Up To Date (ChatGPT)      |
+|🇫🇮 Finnish            |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
 |🇩🇰 Danish             |.the_gamer                |🟠 Temporary Outdated (beta) |
@@ -128,12 +130,10 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
 |❓ Persian            |sasanwm                   |🟠 Temporary Outdated (beta) |
 |🇱🇻 Latvian            |ronalds1398               |🟠 Temporary Outdated (beta) |
-|🇪🇪 Estonian           |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇯🇵 Japanese           |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇰🇷 Korean             |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇨🇳 Simplified Chinese |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇨🇳 Traditional Chinese|iamnotmega                |🟠 Temporary Outdated (beta) |
-|🇫🇮 Finnish            |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇸🇪 Swedish            |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇻🇳 Vietnamese         |iamnotmega                |🟠 Temporary Outdated (beta) |
 

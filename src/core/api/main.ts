@@ -47,6 +47,11 @@ export class ODMain {
     /**The manager that handles all versions in the bot. */
     versions: ODVersionManager_Default
 
+    /**The timestamp that the (node.js) process of the bot started. */
+    processStartupDate: Date = new Date()
+    /**The timestamp that the bot finished loading and is ready for usage. */
+    readyStartupDate: Date|null = null
+
     /**The manager responsible for the debug file. (`otdebug.txt`) */
     debugfile: ODDebugFileManager
     /**The manager responsible for the console system. (logs, errors, etc) */

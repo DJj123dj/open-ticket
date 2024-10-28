@@ -34,13 +34,13 @@ export class ODClientManager {
     /**Alias to open ticket debugger. */
     #debug: ODDebugger
 
-    /**List of required bot intents. Add intents to this list using the `onClientConfiguration` event. */
+    /**List of required bot intents. Add intents to this list using the `onClientLoad` event. */
     intents: ODClientIntents[] = []
-    /**List of required bot privileged intents. Add intents to this list using the `onClientConfiguration` event. */
+    /**List of required bot privileged intents. Add intents to this list using the `onClientLoad` event. */
     privileges: ODClientPriviligedIntents[] = []
-    /**List of required bot partials. Add intents to this list using the `onClientConfiguration` event. **❌ Only use when neccessery!** */
+    /**List of required bot partials. Add intents to this list using the `onClientLoad` event. **❌ Only use when neccessery!** */
     partials: ODClientPartials[] = []
-    /**List of required bot permissions. Add permissions to this list using the `onClientConfiguration` event. */
+    /**List of required bot permissions. Add permissions to this list using the `onClientLoad` event. */
     permissions: ODClientPermissions[] = []
     /**The bot token, empty by default. */
     token: string = ""
@@ -340,7 +340,7 @@ export class ODClientActivityManager {
 
     /**The timer responsible for refreshing the status. Stop it using `clearInterval(interval)` */
     interval?: NodeJS.Timeout
-    /**status refresh interval in seconds*/
+    /**status refresh interval in seconds (5 minutes by default)*/
     refreshInterval: number = 600
     /**Is the status already initiated? */
     initiated: boolean = false
@@ -351,10 +351,11 @@ export class ODClientActivityManager {
     }
 
     /**Update the status. When already initiated, it can take up to 10min to see the updated status in discord. */
-    setStatus(type:ODClientActivityType,text:string,status:ODClientActivityStatus){
+    setStatus(type:ODClientActivityType, text:string, status:ODClientActivityStatus, forceUpdate?:boolean){
         this.type = type
         this.text = text
         this.status = status
+        if (forceUpdate) this.#updateClientActivity(this.type,this.text)
     }
 
     /**When initiating the status, the bot starts updating the status using `discord.js`. Returns `true` when successfull. */

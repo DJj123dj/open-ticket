@@ -34,7 +34,7 @@ export const loadAllStats = async () => {
     const system = stats.get("openticket:system")
     if (system){
         system.add(new api.ODDynamicStat("openticket:startup-date",1,() => {
-            return lang.getTranslation("params.uppercase.startupDate")+": "+discord.time(new Date(),"f")
+            return lang.getTranslation("params.uppercase.startupDate")+": "+discord.time(openticket.processStartupDate,"f")
         }))
         system.add(new api.ODDynamicStat("openticket:version",0,() => {
             return lang.getTranslation("params.uppercase.version")+": `"+openticket.versions.get("openticket:version").toString()+"`"

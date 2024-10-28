@@ -742,6 +742,7 @@ const main = async () => {
 
     //YIPPPIE!!
     //The startup of Open Ticket is completed :)
+    openticket.readyStartupDate = new Date()
     await openticket.events.get("onReadyForUsage").emit([])
 }
 main()
