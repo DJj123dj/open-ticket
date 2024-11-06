@@ -220,6 +220,10 @@ const main = async () => {
         //render
         openticket.debugfile.writeText("\n[CONFIG CHECKER RESULT]:\n"+ansis.strip(components.join("\n"))+"\n")
         openticket.checkers.renderer.render(components)
+
+        //wait 5 seconds when there are warnings (not for errors & info)
+        if (result.messages.length > 0 && result.messages.every((message) => message.type != "error")) await utilities.timer(5000)
+
         await openticket.events.get("afterCheckersRendered").emit([openticket.checkers.renderer,openticket.checkers])
     }
 

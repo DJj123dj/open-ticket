@@ -1,7 +1,7 @@
 ///////////////////////////////////////
 //DATABASE MODULE
 ///////////////////////////////////////
-import { ODId, ODManager, ODManagerData, ODValidId, ODValidJsonType } from "./base"
+import { ODId, ODManager, ODManagerData, ODSystemError, ODValidId, ODValidJsonType } from "./base"
 import fs from "fs"
 import nodepath from "path"
 import { ODDebugger } from "./console"
@@ -203,7 +203,12 @@ export class ODJsonDatabase extends ODDatabase {
         /**Read parsed data from the json file */
         getData: (): ODJsonDatabaseStructure => {
             if (fs.existsSync(this.file)){
-                return JSON.parse(fs.readFileSync(this.file).toString())
+                try{
+                    return JSON.parse(fs.readFileSync(this.file).toString())
+                }catch(err){
+                    process.emit("uncaughtException",err)
+                    throw new ODSystemError("Unable to read database "+this.file+"! getData() read error. (see error above)")
+                }
             }else{
                 fs.writeFileSync(this.file,"[]")
                 return []

@@ -16,19 +16,20 @@ This includes new features, translations & bug fixes.
 
 #### Step 2: Translation
 1. If your language doesn't exist yet, copy the [`english.json`](./../languages/english.json) file and rename it to your language.
-2. You are allowed to use a little bit of `Google Translate` or `DeepL` when mentioned in the upload. (❌ Not Recommended)
+2. **(❌ Not Recommended)** You are allowed to use `Google Translate` or `DeepL`, but only when you say it in the pull request and enable the `"automated"` boolean.
 3. Only translate existing values in the json file. Don't add or remove any values from the file.
 4. You're **NOT REQUIRED** to translate everything! If you only want to translate a part of it, it's okay!
 5. If you are unable to translate something, leave it in `English`.
 
 #### Step 3: Metadata
 Metadata can be found in the `_TRANSLATION` variable.
-|Value        |Notes                                                                                            |
-|-------------|-------------------------------------------------------------------------------------------------|
-|`otversion`  |The Open Ticket version of this translation. Don't edit this!                                    |
-|`translator` |The translator discord username. When improving existing translation, add your name to the list. |
-|`lastedited` |The last edited date in the `DD/MM/YYYY` format.                                                 |
-|`language`   |The full name of the language with capital letter.                                               |
+|Value         |Notes                                                                                            |
+|--------------|-------------------------------------------------------------------------------------------------|
+|`otversion`   |The Open Ticket version of this translation. **❌ DON'T EDIT!**                                  |
+|`translators` |The discord usernames from the translators. Add your name to the list when you've contributed.   |
+|`lastedited`  |The last edited date in the `DD/MM/YYYY` format.                                                 |
+|`language`    |The full name of the language with capital letter.                                               |
+|`automated`   |Enable this boolean when this translation has been made using ChatGPT, Google Translate, ...     |
 
 > #### ✅ You are also allowed to add your username to the [`README.md`](./../README.md) translator list!
 
@@ -46,20 +47,41 @@ Translators get some rewards for translating Open Ticket!
 - ✅ Credits in the changelog!
 - ✅ Credits in the documentation!
 - ✅ Credits in the translation JSON file!
-- ✅ A special role in our [discord server](https://discord.dj-dj.be)!
+- ✅ A special role in our [Discord server](https://discord.dj-dj.be)!
 
-### 🧩 Plugins (temporary)
-Currently plugins can only be added to the list via our [discord server](https://discord.dj-dj.be)!
+### 🧩 Plugins
+#### Step 1: Creating Plugins
+The documentation for creating plugins will be ready soon!<br>
+In the meantime, you can already look at existing plugins or try it at your own!
 
-### 📦 Features (temporary)
-Currently features can only be suggested in our [discord server](https://discord.dj-dj.be)!
+#### Step 2: Uploading Plugins
+Create a pull request in the [**`open-discord-plugins`**](https://odplugins.dj-dj.be/) repository or contact DJj123dj in our [Discord server](https://discord.dj-dj.be)!
 
-### 🕷️ Bug Fixes (temporary)
-Currently bug fixes can only be reported in the following ways:
-- Create an issue in the repository!
-- Create a ticket in our [discord server](https://discord.dj-dj.be)!
+### 📦 Features
+Feature requests are required to be made in one of the following ways:
+- ✅ In our [Discord server](https://discord.dj-dj.be)
+- ✅ Create an issue on GitHub
+- ✅ Message DJj123dj in DM on Discord
+- ✅ Email to support@dj-dj.be
 
-#### Please try to always include the `otdebug.txt` file!
+> **We won't accept pull requests for features. Only for bugs, small fixes, translation and plugins!**
+
+### 🕷️ Bug Fixes
+You are able to report bugs in one of the following ways:
+- ✅ In our [Discord server](https://discord.dj-dj.be)
+- ✅ Create an issue on GitHub
+- ✅ Message DJj123dj in DM on Discord
+- ✅ Email to support@dj-dj.be
+
+📌 **If you want, you can also create a pull request to fix the bug yourself :)**
+
+#### 🔴 Security Vulnerabilities
+If you've found a bug which could affect the **SECURITY OF THE BOT** or may be potentially dangerous to the users of the bot,
+you are **REQUIRED to send the bug privately via one of the following methods:**
+- 🔴 Message DJj123dj in DM on Discord
+- 🔴 Email to support@dj-dj.be
+
+> ### Please try to always include the `otdebug.txt` file!
 
 ---
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket Logo" width="170px">

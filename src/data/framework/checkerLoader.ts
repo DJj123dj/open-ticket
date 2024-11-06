@@ -114,6 +114,9 @@ export const registerDefaultCheckerCustomTranslations = (tm:api.ODCheckerTransla
     tm.quickTranslate(lm,"checker.messages.unusedOption","message","openticket:unused-option") // The option {0} isn't used anywhere!
     tm.quickTranslate(lm,"checker.messages.unusedQuestion","message","openticket:unused-question") // The question {0} isn't used anywhere!
     tm.quickTranslate(lm,"checker.messages.dropdownOption","message","openticket:dropdown-option") // A panel with dropdown enabled can only contain options of the 'ticket' type!
+    
+    //TODO TRANSLATION!!!
+    //tm.quickTranslate(lm,"checker.messages.TODO","message","openticket:invalid-version") // The version specified in your config is invalid! Make sure you have updated it to the latest version!
 }
 
 //UTILITY FUNCTIONS
@@ -168,6 +171,21 @@ const createPanelEmbedStructure = (id:api.ODValidId) => {
 
 //STRUCTURES
 export const defaultGeneralStructure = new api.ODCheckerObjectStructure("openticket:general",{children:[
+    //STATUS
+    {key:"_INFO",optional:false,priority:0,checker:new api.ODCheckerObjectStructure("openticket:info",{children:[
+        {key:"support",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:info-support",{choices:["https://otdocs.dj-dj.be"]})},
+        {key:"discord",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:info-discord",{choices:["https://discord.dj-dj.be"]})},
+        {key:"version",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:info-version",{custom(checker,value,locationTrace,locationId,locationDocs) {
+            const lt = checker.locationTraceDeref(locationTrace)
+            
+            if (typeof value != "string") return false
+            else if (value != "open-ticket-"+openticket.versions.get("openticket:version").toString()){
+                checker.createMessage("openticket:invalid-version","warning","The version specified in your config is invalid! Make sure you have updated it to the latest version!",lt,null,[],locationId,locationDocs)
+                return false
+            }else return true
+        },})},
+    ]})},
+
     //BASIC
     {key:"token",optional:false,priority:0,checker:new api.ODCheckerCustomStructure_DiscordToken("openticket:token")},
     {key:"tokenFromENV",optional:false,priority:0,checker:new api.ODCheckerBooleanStructure("openticket:token-env",{})},
@@ -439,7 +457,7 @@ export const defaultPanelsStructure = new api.ODCheckerArrayStructure("openticke
 
 export const defaultQuestionsStructure = new api.ODCheckerArrayStructure("openticket:questions",{allowedTypes:["object"],propertyChecker:new api.ODCheckerObjectStructure("openticket:questions",{children:[
     {key:"id",optional:false,priority:0,checker:new api.ODCheckerCustomStructure_UniqueId("openticket:question-id","openticket","question-ids",{regex:/^[A-Za-z0-9-éèçàêâôûî]+$/,minLength:3,maxLength:40})},
-    {key:"name",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:question-name",{minLength:3,maxLength:50})},
+    {key:"name",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:question-name",{minLength:3,maxLength:45})},
     {key:"type",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:question-type",{choices:["short","paragraph"]})},
     
     {key:"required",optional:false,priority:0,checker:new api.ODCheckerBooleanStructure("openticket:question-required",{})},

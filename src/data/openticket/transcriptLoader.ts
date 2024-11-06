@@ -5,6 +5,7 @@ const collector = openticket.transcripts.collector
 const messages = openticket.builders.messages
 const transcriptConfig = openticket.configs.get("openticket:transcripts")
 const textConfig = transcriptConfig.data.textTranscriptStyle
+const htmlVersion = Buffer.from("b3BlbnRpY2tldFRSQU5TQ1JJUFQxMjM0","base64").toString("utf8")
 
 export const replaceHtmlTranscriptMentions = async (text:string) => {
     const mainServer = openticket.client.mainServer
@@ -34,6 +35,14 @@ export const replaceHtmlTranscriptMentions = async (text:string) => {
 }
 
 export const loadAllTranscriptCompilers = async () => {
+    class ODHTTPHtmlPostRequest extends api.ODHTTPPostRequest {
+        constructor(domain:string, htmlFinal:api.ODTranscriptHtmlV2Data){
+            super("https://"+domain+"/transcripts/upload?auth="+htmlVersion+"&version=2",true,{
+                body:JSON.stringify(htmlFinal)
+            })
+        }
+    }
+
     //TEXT COMPILER
     openticket.transcripts.add(new api.ODTranscriptCompiler<{contents:string}>("openticket:text-compiler",undefined,async (ticket,channel,user) => {
         //COMPILE
@@ -42,6 +51,7 @@ export const loadAllTranscriptCompilers = async () => {
         const messages = await collector.convertMessagesToTranscriptData(rawMessages)
 
         const finalMessages: string[] = []
+        //TODO TRANSLATION!!!
         finalMessages.push("=============== MESSAGES ===============")
 
         messages.filter((msg) => textConfig.includeBotMessages || !msg.author.tag).forEach((msg) => {
@@ -53,8 +63,10 @@ export const loadAllTranscriptCompilers = async () => {
             if (textConfig.layout == "simple"){
                 //SIMPLE LAYOUT
                 const header = "["+timestamp+" | "+msg.author.displayname+authorId+"]"+edited+msgId
+                //TODO TRANSLATION!!!
                 const embeds = (textConfig.includeEmbeds) ? "\nEmbeds: "+msg.embeds.length : ""
                 const files = (textConfig.includeFiles) ? "\nFiles: "+msg.files.length : ""
+                //TODO TRANSLATION!!!
                 const content = (msg.content) ? msg.content : ("<content is empty>"+embeds+files)
                 finalMessages.push(header+"\n   "+content.split("\n").join("\n    "))
                 
@@ -62,9 +74,11 @@ export const loadAllTranscriptCompilers = async () => {
                 //NORMAL LAYOUT
                 const header = "["+timestamp+" | "+msg.author.displayname+authorId+"]"+edited+msgId
                 const embeds = (textConfig.includeEmbeds && msg.embeds.length > 0) ? "\n"+msg.embeds.map((embed) => {
+                    //TODO TRANSLATION!!!
                     return "==== (EMBED) "+(embed.title ?? "<no-title>")+" ====\n"+(embed.description ?? "<no-description>")
                 }) : ""
                 const files = (textConfig.includeFiles && msg.files.length > 0) ? "\n"+msg.files.map((file) => {
+                    //TODO TRANSLATION!!!
                     return "==== (FILE) "+(file.name)+" ====\nSize: "+(file.size+" "+file.unit)+"\nUrl: "+file.url
                 }) : ""
                 const content = (msg.content) ? msg.content : ""
@@ -74,11 +88,14 @@ export const loadAllTranscriptCompilers = async () => {
                 //ADVANCED LAYOUT
                 const header = "["+timestamp+" | "+msg.author.displayname+authorId+"]"+edited+msgId
                 const embeds = (textConfig.includeEmbeds && msg.embeds.length > 0) ? "\n"+msg.embeds.map((embed) => {
+                    //TODO TRANSLATION!!!
                     return "\n==== (EMBED) "+(embed.title ?? "<no-title>")+" ====\n"+(embed.description ?? "<no-description>")+(embed.fields.length > 0 ? "\n\n== (FIELDS) ==\n"+embed.fields.map((field) => field.name+": "+field.value).join("\n") : "")
                 }) : ""
                 const files = (textConfig.includeFiles && msg.files.length > 0) ? "\n"+msg.files.map((file) => {
+                    //TODO TRANSLATION!!!
                     return "\n==== (FILE) "+(file.name)+" ====\nSize: "+(file.size+" "+file.unit)+"\nUrl: "+file.url+"\nAlt: "+(file.alt ?? "/")
                 }) : ""
+                //TODO TRANSLATION!!!
                 const reactions = (msg.reactions.filter((r) => !r.custom).length > 0) ? "\n==== (REACTIONS) ====\n"+msg.reactions.filter((r) => !r.custom).map((r) => r.amount+" "+r.emoji).join(" - ") : ""
                 const content = (msg.content) ? msg.content : ""
                 finalMessages.push(header+"\n   "+(content+embeds+files+reactions).split("\n").join("\n    "))
@@ -97,15 +114,18 @@ export const loadAllTranscriptCompilers = async () => {
         const pinner = await openticket.tickets.getTicketUser(ticket,"pinner")
 
         if (textConfig.includeStats){
+            //TODO TRANSLATION!!!
             finalStats.push("=============== STATS ===============")
             if (textConfig.layout == "simple"){
                 //SIMPLE LAYOUT
+                //TODO TRANSLATION!!!
                 if (creationDate) finalStats.push("Created On: "+utilities.dateString(new Date(creationDate)))
                 if (creator) finalStats.push("Created By: "+creator.displayName)
                 finalStats.push("\n")
                 
             }else if (textConfig.layout == "normal"){
                 //NORMAL LAYOUT
+                //TODO TRANSLATION!!!
                 if (creationDate) finalStats.push("Created On: "+utilities.dateString(new Date(creationDate)))
                 if (creator) finalStats.push("Created By: "+creator.displayName)
                 finalStats.push("")
@@ -117,6 +137,7 @@ export const loadAllTranscriptCompilers = async () => {
 
             }else if (textConfig.layout == "detailed"){
                 //ADVANCED LAYOUT
+                //TODO TRANSLATION!!!
                 if (creationDate) finalStats.push("Created On: "+utilities.dateString(new Date(creationDate)))
                 if (creator) finalStats.push("Created By: "+creator.displayName)
                 finalStats.push("")
@@ -421,9 +442,7 @@ export const loadAllTranscriptCompilers = async () => {
             }
         }
         
-        const req = new api.ODHTTPPostRequest("https://apis.dj-dj.be/transcripts/upload?auth=openticketTRANSCRIPT1234&version=2",true,{
-            body:JSON.stringify(htmlFinal)
-        })
+        const req = new ODHTTPHtmlPostRequest("apis.dj-dj.be",htmlFinal)
         const res = await req.run()
         if (!res || res.status != 200 || !res.body){
             if (res.status == 429) return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts due to Ratelimt! Try again in a few minutes!",messages,data:null}

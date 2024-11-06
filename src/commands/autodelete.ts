@@ -77,6 +77,22 @@ export const registerCommandResponders = async () => {
                 ticket.get("openticket:autodelete-days").value = time
                 await instance.reply(await openticket.builders.messages.getSafe("openticket:autodelete-enable").build(source,{guild,channel,user,ticket,reason,time}))
             }
+
+            //update ticket message
+            const ticketMessage = await openticket.tickets.getTicketMessage(ticket)
+            if (ticketMessage){
+                try{
+                    ticketMessage.edit((await openticket.builders.messages.getSafe("openticket:ticket-message").build("other",{guild,channel,user,ticket})).message)
+                }catch(e){
+                    openticket.log("Unable to edit ticket message on autodelete "+scope+"!","error",[
+                        {key:"channel",value:"#"+channel.name},
+                        {key:"channelid",value:channel.id,hidden:true},
+                        {key:"messageid",value:ticketMessage.id},
+                        {key:"option",value:ticket.option.id.value}
+                    ])
+                    openticket.debugfile.writeErrorMessage(new api.ODError(e,"uncaughtException"))
+                }
+            }
         }),
         new api.ODWorker("openticket:logs",-1,(instance,params,source,cancel) => {
             const scope = instance.options.getSubCommand()
