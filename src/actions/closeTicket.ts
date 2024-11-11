@@ -87,7 +87,7 @@ export const registerActions = async () => {
                 if (participant.type == "user"){
                     permissions.push({
                         type:discord.OverwriteType.Member,
-                        id:user.id,
+                        id:participant.id,
                         allow:["ViewChannel","ReadMessageHistory"],
                         deny:["SendMessages","AddReactions","AttachFiles","SendPolls"]
                     })

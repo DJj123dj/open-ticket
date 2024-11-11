@@ -229,6 +229,7 @@
             "ready":"Trascrizione Creata",
             "textFileDescription":"Questa è la trascrizione testuale di un ticket eliminato!",
             "htmlProgress":"Attendere mentre questa trascrizione html viene elaborata...",
+            
             "createdChannel":"Una nuova trascrizione di {0} è stata creata nel server!",
             "createdCreator":"Una nuova trascrizione di {0} è stata creata per uno dei tuoi ticket!",
             "createdParticipant":"Una nuova trascrizione di {0} è stata creata in uno dei ticket a cui hai partecipato!",

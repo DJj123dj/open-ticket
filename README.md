@@ -120,11 +120,11 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇺🇦 Ukrainian          |anderskiy                 |🟢 Up To Date                |
 |🇮🇩 Indonesian         |erxg                      |🟢 Up To Date                |
 |🇮🇹 Italian            |fraden1mvp.               |🟢 Up To Date                |
+|🇩🇰 Danish             |the_gamer                 |🟢 Up To Date                |
 |🇪🇪 Estonian           |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇮 Finnish            |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
-|🇩🇰 Danish             |.the_gamer                |🟠 Temporary Outdated (beta) |
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
 |🇹🇷 Turkish            |0x15d3                    |🟠 Temporary Outdated (beta) |
 |🇵🇱 Polish             |mkevas                    |🟠 Temporary Outdated (beta) |
