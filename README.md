@@ -121,6 +121,7 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇮🇩 Indonesian         |erxg                      |🟢 Up To Date                |
 |🇮🇹 Italian            |fraden1mvp.               |🟢 Up To Date                |
 |🇩🇰 Danish             |the_gamer                 |🟢 Up To Date                |
+|🇹🇭 Thai               |modshd                    |🟢 Up To Date                |
 |🇪🇪 Estonian           |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇮 Finnish            |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
@@ -128,7 +129,6 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
 |🇹🇷 Turkish            |0x15d3                    |🟠 Temporary Outdated (beta) |
 |🇵🇱 Polish             |mkevas                    |🟠 Temporary Outdated (beta) |
-|🇹🇭 Thai               |modshd                    |🟠 Temporary Outdated (beta) |
 |🇳🇴 Norwegian          |noonenook                 |🟠 Temporary Outdated (beta) |
 |❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
 |❓ Persian            |sasanwm                   |🟠 Temporary Outdated (beta) |
@@ -140,7 +140,7 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇸🇪 Swedish            |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇻🇳 Vietnamese         |iamnotmega                |🟠 Temporary Outdated (beta) |
 |🇸🇮 Slovenian          |n1kkec                    |🔴 Outdated                  |
-|🇬🇷 Greek              |stefanos__.               |🔴 Outdated                  |
+|🇬🇷 Greek              |stefanos                  |🔴 Outdated                  |
 
 ## ⭐️ Star History
 Please help us grow by giving a star! It would help us a lot!
