@@ -637,8 +637,6 @@ export type ODSlashCommandUpdateFunction = (current:ODSlashCommandBuilder) => bo
 export class ODSlashCommand extends ODManagerData {
     /**The discord.js builder for this slash command. */
     builder: ODSlashCommandBuilder
-    /**The name of this slash command. */
-    name: string
     /**The id of the guild this command is for. Null when not set. */
     guildId: string|null
     /**Function to check if the slash command requires to be updated (when it already exists). */
@@ -649,9 +647,16 @@ export class ODSlashCommand extends ODManagerData {
         if (builder.type != discord.ApplicationCommandType.ChatInput) throw new ODSystemError("ApplicationCommandData is required to be the 'ChatInput' type!")
         
         this.builder = builder
-        this.name = builder.name
         this.guildId = guildId ?? null
         this.requiresUpdate = requiresUpdate ?? null
+    }
+
+    /**The name of this slash command. */
+    get name(): string {
+        return this.builder.name
+    }
+    set name(name:string){
+        this.builder.name = name
     }
 }
 
