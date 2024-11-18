@@ -80,7 +80,7 @@ export class ODPlugin extends ODManagerData {
         this.crashed = false
     }
 
-    //Get the startfile location relative to the ./plugins/ directory
+    /**Get the startfile location relative to the `./plugins/` directory. (`./dist/plugins/`) when compiled) */
     getStartFile(){
         const newFile = this.data.startFile.replace(/\.ts$/,".js")
         return nodepath.join(this.dir,newFile)
@@ -113,6 +113,7 @@ export class ODPlugin extends ODManagerData {
         }else return true
     }
 
+    /**Check if a npm dependency exists. */
     #checkDependency(id:string){
         try{
             require.resolve(id)
@@ -122,6 +123,7 @@ export class ODPlugin extends ODManagerData {
         }
     }
 
+    /**Get a list of all missing npm dependencies that are required for this plugin. */
     dependenciesInstalled(){
         const missing: string[] = []
         this.data.npmDependencies.forEach((d) => {
@@ -132,6 +134,7 @@ export class ODPlugin extends ODManagerData {
         
         return missing
     }
+    /**Get a list of all missing plugins that are required for this plugin. */
     pluginsInstalled(manager:ODPluginManager){
         const missing: string[] = []
         this.data.requiredPlugins.forEach((p) => {
@@ -142,6 +145,18 @@ export class ODPlugin extends ODManagerData {
         })
         
         return missing
+    }
+    /**Get a list of all enabled incompatible plugins that interfere with this plugin. */
+    pluginsIncompatible(manager:ODPluginManager){
+        const incompatible: string[] = []
+        this.data.incompatiblePlugins.forEach((p) => {
+            const plugin = manager.get(p)
+            if (plugin && plugin.enabled){
+                incompatible.push(p)
+            }
+        })
+        
+        return incompatible
     }
 }
 

@@ -91,22 +91,20 @@ export const loadAllPlugins = async () => {
     const missingDependencies: {id:string,missing:string}[] = []
     const missingPlugins: {id:string,missing:string}[] = []
 
-    //go trough all plugins for errors
-    sortedPlugins.forEach((plugin) => {
+    //go through all plugins for errors
+    sortedPlugins.filter((plugin) => plugin.enabled).forEach((plugin) => {
         const from = plugin.id.value
-        plugin.data.incompatiblePlugins.forEach((to) => {
-            //deny incompatibility if it already exists
-            if (incompatibilities.find((p) => (p.from == from && p.to == to) || (p.to == from && p.from == to))) return
-
-            //check for existence of both plugins => add to list
-            if (openticket.plugins.exists(to)) incompatibilities.push({from,to})
-        })
         plugin.dependenciesInstalled().forEach((missing) => missingDependencies.push({id:from,missing}))
+        plugin.pluginsIncompatible(openticket.plugins).forEach((incompatible) => incompatibilities.push({from,to:incompatible}))
         plugin.pluginsInstalled(openticket.plugins).forEach((missing) => missingPlugins.push({id:from,missing}))
     })
 
     //handle all incompatibilities
+    const alreadyLoggedCompatPlugins: string[] = []
     incompatibilities.forEach((match) => {
+        if (alreadyLoggedCompatPlugins.includes(match.from) || alreadyLoggedCompatPlugins.includes(match.to)) return
+        else alreadyLoggedCompatPlugins.push(match.from,match.to)
+
         const fromPlugin = openticket.plugins.get(match.from)
         if (fromPlugin && !fromPlugin.crashed){
             fromPlugin.crashed = true

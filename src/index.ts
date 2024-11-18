@@ -737,8 +737,10 @@ const main = async () => {
     if (openticket.defaults.getDefault("startScreenRendering")){
         await openticket.startscreen.renderAllComponents()
         if (openticket.languages.getLanguageMetadata(false)?.automated){
+            console.log("===================")
             openticket.log("You are currently using a language which has been translated by Google Translate!","warning")
             openticket.log("Please help us improve the translation by contributing to our project!","warning")
+            console.log("===================")
         }
 
         await openticket.events.get("afterStartScreensRendered").emit([openticket.startscreen])
