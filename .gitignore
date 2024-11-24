@@ -13,3 +13,4 @@ TEMP/
 plugins/*
 !plugins/example-plugin/
 dist/
+database/openticket.sqlite

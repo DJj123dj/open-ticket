@@ -26,6 +26,8 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 > The translation count may not be accurate!
 
 ### 📌 Features
+- **💩 no bloat/credits** - Your Open Ticket bot doesn't contain any form of bloat or credits!
+- **📈 scalable** - Open Ticket is made to handle huge servers! Even if your server contains more than 100k members!
 - **📄 html transcripts** - Make use of the most customisable, beautiful and easy-to-use HTML Transcripts!
 - **✅ ticket actions** - Close, Reopen, Delete, Rename & Move all your tickets!
 - **🇬🇧 translation** - Open Ticket has been translated in more than **32 languages** by our community!
@@ -40,6 +42,7 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 - **📦 commands** - Open Ticket supports both slash & text commands!
 - **📥 extra types** - The bot also supports Reaction Roles & Url Buttons, because why not ¯\\_(ツ)_/¯
 - **🎛️ dependencies** - We try to use as little external dependencies as needed!
+- **📢 commands** - The bot contains more than 25 commands! And it's expandable with plugins!
 
 > ### 📦 Resources
 > Resources might not be accurate yet! *(because v4 is still in beta)*<br>

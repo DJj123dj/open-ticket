@@ -4,7 +4,7 @@ export const loadVersionMigrationSystem = async () => {
     //ENTER MIGRATION CONTEXT
     await preloadMigrationContext()
 
-    const lastVersion = isMigrationRequired()
+    const lastVersion = await isMigrationRequired()
     openticket.versions.add(lastVersion ? lastVersion : api.ODVersion.fromString("openticket:last-version",openticket.versions.get("openticket:version").toString()))
     if (lastVersion && !openticket.flags.get("openticket:no-migration").value){
         //MIGRATION IS REQUIRED
@@ -48,8 +48,8 @@ const unloadMigrationContext = async () => {
     openticket.debug.debug("-- MIGRATION CONTEXT END --")
 }
 
-const isMigrationRequired = (): false|api.ODVersion => {
-    const rawVersion = openticket.databases.get("openticket:global").get("openticket:last-version","openticket:version")
+const isMigrationRequired = async (): Promise<false|api.ODVersion> => {
+    const rawVersion = await openticket.databases.get("openticket:global").get("openticket:last-version","openticket:version")
     if (!rawVersion) return false
     const version = api.ODVersion.fromString("openticket:last-version",rawVersion)
     if (openticket.versions.get("openticket:version").compare(version) == "higher"){

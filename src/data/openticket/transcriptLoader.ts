@@ -178,12 +178,16 @@ export const loadAllTranscriptCompilers = async () => {
         const req = new api.ODHTTPGetRequest("https://apis.dj-dj.be/transcripts/status.json",false)
         const res = await req.run()
         if (!res || res.status != 200 || !res.body){
+            openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+            process.emit("uncaughtException",new api.ODSystemError("HTML Transcripts INIT_COMMUNICATON error! (check otdebug.txt for details)"))
             return {success:false,errorReason:"HTML Transcripts are currently unavailable!",pendingMessage:null}
         }
         try{
             const data = JSON.parse(res.body)
             if (!data || data["v2"] != "online") return {success:false,errorReason:"HTML Transcripts are currently unavailable due to maintenance!",pendingMessage:null}
         }catch{
+            openticket.debugfile.writeNote("HTML Transcripts Error => unable to parse status! body:\n"+res.body)
+            process.emit("uncaughtException",new api.ODSystemError("HTML Transcripts INIT_STATUS_PARSE error! (check otdebug.txt for details)"))
             return {success:false,errorReason:"HTML Transcripts are currently unavailable due to JSON parse error!",pendingMessage:null}
         }
         

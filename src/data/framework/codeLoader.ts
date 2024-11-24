@@ -73,7 +73,7 @@ export const loadDatabaseCleanersCode = async () => {
         const validPanels: string[] = []
 
         //check global database for valid panel embeds
-        for (const panel of (globalDatabase.getCategory("openticket:panel-update") ?? [])){
+        for (const panel of (await globalDatabase.getCategory("openticket:panel-update") ?? [])){
             if (!validPanels.includes(panel.key)){
                 try{
                     const splittedId = panel.key.split("_")
@@ -84,7 +84,7 @@ export const loadDatabaseCleanersCode = async () => {
         }
 
         //remove all unused panels
-        for (const panel of (globalDatabase.getCategory("openticket:panel-update") ?? [])){
+        for (const panel of (await globalDatabase.getCategory("openticket:panel-update") ?? [])){
             if (!validPanels.includes(panel.key)){
                 globalDatabase.delete("openticket:panel-update",panel.key)
             }
@@ -104,28 +104,28 @@ export const loadDatabaseCleanersCode = async () => {
         const validSuffixHistories: string[] = []
 
         //check global database for valid option suffix counters
-        for (const counter of (globalDatabase.getCategory("openticket:option-suffix-counter") ?? [])){
+        for (const counter of (await globalDatabase.getCategory("openticket:option-suffix-counter") ?? [])){
             if (!validSuffixCounters.includes(counter.key)){
                 if (openticket.options.exists(counter.key)) validSuffixCounters.push(counter.key)
             }
         }
 
         //check global database for valid option suffix histories
-        for (const history of (globalDatabase.getCategory("openticket:option-suffix-history") ?? [])){
+        for (const history of (await globalDatabase.getCategory("openticket:option-suffix-history") ?? [])){
             if (!validSuffixHistories.includes(history.key)){
                 if (openticket.options.exists(history.key)) validSuffixHistories.push(history.key)
             }
         }
 
         //remove all unused suffix counters
-        for (const counter of (globalDatabase.getCategory("openticket:option-suffix-counter") ?? [])){
+        for (const counter of (await globalDatabase.getCategory("openticket:option-suffix-counter") ?? [])){
             if (!validSuffixCounters.includes(counter.key)){
                 globalDatabase.delete("openticket:option-suffix-counter",counter.key)
             }
         }
 
         //remove all unused suffix histories
-        for (const history of (globalDatabase.getCategory("openticket:option-suffix-history") ?? [])){
+        for (const history of (await globalDatabase.getCategory("openticket:option-suffix-history") ?? [])){
             if (!validSuffixHistories.includes(history.key)){
                 globalDatabase.delete("openticket:option-suffix-history",history.key)
             }
@@ -148,7 +148,7 @@ export const loadDatabaseCleanersCode = async () => {
             const validUsers: string[] = []
 
             //check user database for valid users
-            for (const user of userDatabase.getAll()){
+            for (const user of (await userDatabase.getAll())){
                 if (!validUsers.includes(user.key)){
                     try{
                         const member = await mainServer.members.fetch(user.key)
@@ -158,7 +158,7 @@ export const loadDatabaseCleanersCode = async () => {
             }
 
             //check stats database for valid users
-            for (const stat of statsDatabase.getAll()){
+            for (const stat of (await statsDatabase.getAll())){
                 if (stat.category.startsWith("openticket:user_")){
                     if (!validUsers.includes(stat.key)){
                         try{
@@ -170,14 +170,14 @@ export const loadDatabaseCleanersCode = async () => {
             }
 
             //remove all unused users
-            for (const user of userDatabase.getAll()){
+            for (const user of (await userDatabase.getAll())){
                 if (!validUsers.includes(user.key)){
                     userDatabase.delete(user.category,user.key)
                 }
             }
 
             //remove all unused stats
-            for (const stat of statsDatabase.getAll()){
+            for (const stat of (await statsDatabase.getAll())){
                 if (stat.category.startsWith("openticket:user_")){
                     if (!validUsers.includes(stat.key)){
                         statsDatabase.delete(stat.category,stat.key)
@@ -187,18 +187,18 @@ export const loadDatabaseCleanersCode = async () => {
         })
 
         //delete user from database on leave
-        openticket.client.client.on("guildMemberRemove",(member) => {
+        openticket.client.client.on("guildMemberRemove",async (member) => {
             if (member.guild.id != mainServer.id) return
 
             //remove unused user
-            for (const user of userDatabase.getAll()){
+            for (const user of (await userDatabase.getAll())){
                 if (user.key == member.id){
                     userDatabase.delete(user.category,user.key)
                 }
             }
 
             //remove unused stats
-            for (const stat of statsDatabase.getAll()){
+            for (const stat of (await statsDatabase.getAll())){
                 if (stat.category.startsWith("openticket:user_")){
                     if (stat.key == member.id){
                         statsDatabase.delete(stat.category,stat.key)
@@ -213,7 +213,7 @@ export const loadDatabaseCleanersCode = async () => {
         const validTickets: string[] = []
 
         //check ticket database for valid tickets
-        for (const ticket of ticketDatabase.getAll()){
+        for (const ticket of (await ticketDatabase.getAll())){
             if (!validTickets.includes(ticket.key)){
                 try{
                     const channel = await openticket.client.fetchGuildTextChannel(mainServer,ticket.key)
@@ -223,7 +223,7 @@ export const loadDatabaseCleanersCode = async () => {
         }
 
         //check stats database for valid tickets
-        for (const stat of statsDatabase.getAll()){
+        for (const stat of (await statsDatabase.getAll())){
             if (stat.category.startsWith("openticket:ticket_")){
                 if (!validTickets.includes(stat.key)){
                     try{
@@ -235,7 +235,7 @@ export const loadDatabaseCleanersCode = async () => {
         }
 
         //remove all unused tickets
-        for (const ticket of ticketDatabase.getAll()){
+        for (const ticket of (await ticketDatabase.getAll())){
             if (!validTickets.includes(ticket.key)){
                 ticketDatabase.delete(ticket.category,ticket.key)
                 openticket.tickets.remove(ticket.key)
@@ -243,7 +243,7 @@ export const loadDatabaseCleanersCode = async () => {
         }
 
         //remove all unused stats
-        for (const stat of statsDatabase.getAll()){
+        for (const stat of (await statsDatabase.getAll())){
             if (stat.category.startsWith("openticket:ticket_")){
                 if (!validTickets.includes(stat.key)){
                     statsDatabase.delete(stat.category,stat.key)
@@ -252,11 +252,11 @@ export const loadDatabaseCleanersCode = async () => {
         }
 
         //delete ticket from database on delete
-        openticket.client.client.on("channelDelete",(channel) => {
+        openticket.client.client.on("channelDelete",async (channel) => {
             if (channel.isDMBased() || channel.guild.id != mainServer.id) return
 
             //remove unused ticket
-            for (const ticket of ticketDatabase.getAll()){
+            for (const ticket of (await ticketDatabase.getAll())){
                 if (ticket.key == channel.id){
                     ticketDatabase.delete(ticket.category,ticket.key)
                     openticket.tickets.remove(ticket.key)
@@ -264,7 +264,7 @@ export const loadDatabaseCleanersCode = async () => {
             }
 
             //remove unused stats
-            for (const stat of statsDatabase.getAll()){
+            for (const stat of (await statsDatabase.getAll())){
                 if (stat.category.startsWith("openticket:ticket_")){
                     if (stat.key == channel.id){
                         statsDatabase.delete(stat.category,stat.key)
@@ -279,7 +279,7 @@ export const loadPanelAutoUpdateCode = async () => {
     //PANEL AUTO UPDATE
     openticket.code.add(new api.ODCode("openticket:panel-auto-update",7,async () => {
         const globalDatabase = openticket.databases.get("openticket:global")
-        const panelIds = globalDatabase.getCategory("openticket:panel-update") ?? []
+        const panelIds = await globalDatabase.getCategory("openticket:panel-update") ?? []
         if (!mainServer) return
 
         for (const panelId of panelIds){

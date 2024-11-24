@@ -1,7 +1,7 @@
 ///////////////////////////////////////
 //DEFAULT DATABASE MODULE
 ///////////////////////////////////////
-import { ODValidId, ODValidJsonType } from "../modules/base"
+import { ODOptionalPromise, ODValidId, ODValidJsonType } from "../modules/base"
 import { ODDatabaseManager, ODDatabase, ODFormattedJsonDatabase } from "../modules/database"
 import { ODTicketJson } from "../openticket/ticket"
 import { ODOptionJson } from "../openticket/option"
@@ -65,38 +65,38 @@ export interface ODFormattedJsonDatabaseIds_DefaultGlobal {
  * This default class is made for the `global.json` database!
  */
 export class ODFormattedJsonDatabase_DefaultGlobal extends ODFormattedJsonDatabase {
-    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultGlobal[CategoryId]): boolean
-    set(category:string, key:string, value:ODValidJsonType): boolean
+    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultGlobal[CategoryId]): ODOptionalPromise<boolean>
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean>
     
-    set(category:string, key:string, value:ODValidJsonType): boolean {
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean> {
         return super.set(category,key,value)
     }
 
-    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId, key:string): ODFormattedJsonDatabaseIds_DefaultGlobal[CategoryId]|undefined
-    get(category:string, key:string): ODValidJsonType|undefined
+    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId, key:string): ODOptionalPromise<ODFormattedJsonDatabaseIds_DefaultGlobal[CategoryId]|undefined>
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined>
 
-    get(category:string, key:string): ODValidJsonType|undefined {
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined> {
         return super.get(category,key)
     }
 
-    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId, key:string): boolean
-    delete(category:string, key:string): boolean
+    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId, key:string): ODOptionalPromise<boolean>
+    delete(category:string, key:string): ODOptionalPromise<boolean>
 
-    delete(category:string, key:string): boolean {
+    delete(category:string, key:string): ODOptionalPromise<boolean> {
         return super.delete(category,key)
     }
 
-    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultGlobal, key:string): boolean
-    exists(category:string, key:string): boolean
+    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultGlobal, key:string): ODOptionalPromise<boolean>
+    exists(category:string, key:string): ODOptionalPromise<boolean>
 
-    exists(category:string, key:string): boolean {
+    exists(category:string, key:string): ODOptionalPromise<boolean> {
         return super.exists(category,key)
     }
 
-    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId): {key:string, value:ODFormattedJsonDatabaseIds_DefaultGlobal[CategoryId]}[]|undefined
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined
+    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultGlobal>(category:CategoryId): ODOptionalPromise<{key:string, value:ODFormattedJsonDatabaseIds_DefaultGlobal[CategoryId]}[]|undefined>
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined>
     
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined {
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined> {
         return super.getCategory(category)
     }
 }
@@ -116,38 +116,38 @@ export interface ODFormattedJsonDatabaseIds_DefaultTickets {
  * This default class is made for the `tickets.json` database!
  */
 export class ODFormattedJsonDatabase_DefaultTickets extends ODFormattedJsonDatabase {
-    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultTickets[CategoryId]): boolean
-    set(category:string, key:string, value:ODValidJsonType): boolean
+    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultTickets[CategoryId]): ODOptionalPromise<boolean>
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean>
     
-    set(category:string, key:string, value:ODValidJsonType): boolean {
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean> {
         return super.set(category,key,value)
     }
 
-    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId, key:string): ODFormattedJsonDatabaseIds_DefaultTickets[CategoryId]|undefined
-    get(category:string, key:string): ODValidJsonType|undefined
+    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId, key:string): ODOptionalPromise<ODFormattedJsonDatabaseIds_DefaultTickets[CategoryId]|undefined>
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined>
 
-    get(category:string, key:string): ODValidJsonType|undefined {
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined> {
         return super.get(category,key)
     }
 
-    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId, key:string): boolean
-    delete(category:string, key:string): boolean
+    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId, key:string): ODOptionalPromise<boolean>
+    delete(category:string, key:string): ODOptionalPromise<boolean>
 
-    delete(category:string, key:string): boolean {
+    delete(category:string, key:string): ODOptionalPromise<boolean> {
         return super.delete(category,key)
     }
 
-    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultTickets, key:string): boolean
-    exists(category:string, key:string): boolean
+    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultTickets, key:string): ODOptionalPromise<boolean>
+    exists(category:string, key:string): ODOptionalPromise<boolean>
 
-    exists(category:string, key:string): boolean {
+    exists(category:string, key:string): ODOptionalPromise<boolean> {
         return super.exists(category,key)
     }
 
-    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId): {key:string, value:ODFormattedJsonDatabaseIds_DefaultTickets[CategoryId]}[]|undefined
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined
+    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultTickets>(category:CategoryId): ODOptionalPromise<{key:string, value:ODFormattedJsonDatabaseIds_DefaultTickets[CategoryId]}[]|undefined>
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined>
     
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined {
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined> {
         return super.getCategory(category)
     }
 }
@@ -167,38 +167,38 @@ export interface ODFormattedJsonDatabaseIds_DefaultUsers {
  * This default class is made for the `users.json` database!
  */
 export class ODFormattedJsonDatabase_DefaultUsers extends ODFormattedJsonDatabase {
-    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultUsers[CategoryId]): boolean
-    set(category:string, key:string, value:ODValidJsonType): boolean
+    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultUsers[CategoryId]): ODOptionalPromise<boolean>
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean>
     
-    set(category:string, key:string, value:ODValidJsonType): boolean {
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean> {
         return super.set(category,key,value)
     }
 
-    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId, key:string): ODFormattedJsonDatabaseIds_DefaultUsers[CategoryId]|undefined
-    get(category:string, key:string): ODValidJsonType|undefined
+    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId, key:string): ODOptionalPromise<ODFormattedJsonDatabaseIds_DefaultUsers[CategoryId]|undefined>
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined>
 
-    get(category:string, key:string): ODValidJsonType|undefined {
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined> {
         return super.get(category,key)
     }
 
-    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId, key:string): boolean
-    delete(category:string, key:string): boolean
+    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId, key:string): ODOptionalPromise<boolean>
+    delete(category:string, key:string): ODOptionalPromise<boolean>
 
-    delete(category:string, key:string): boolean {
+    delete(category:string, key:string): ODOptionalPromise<boolean> {
         return super.delete(category,key)
     }
 
-    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultUsers, key:string): boolean
-    exists(category:string, key:string): boolean
+    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultUsers, key:string): ODOptionalPromise<boolean>
+    exists(category:string, key:string): ODOptionalPromise<boolean>
 
-    exists(category:string, key:string): boolean {
+    exists(category:string, key:string): ODOptionalPromise<boolean> {
         return super.exists(category,key)
     }
 
-    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId): {key:string, value:ODFormattedJsonDatabaseIds_DefaultUsers[CategoryId]}[]|undefined
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined
+    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultUsers>(category:CategoryId): ODOptionalPromise<{key:string, value:ODFormattedJsonDatabaseIds_DefaultUsers[CategoryId]}[]|undefined>
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined>
     
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined {
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined> {
         return super.getCategory(category)
     }
 }
@@ -219,38 +219,38 @@ export interface ODFormattedJsonDatabaseIds_DefaultOptions {
  * This default class is made for the `options.json` database!
  */
 export class ODFormattedJsonDatabase_DefaultOptions extends ODFormattedJsonDatabase {
-    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultOptions[CategoryId]): boolean
-    set(category:string, key:string, value:ODValidJsonType): boolean
+    set<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId, key:string, value:ODFormattedJsonDatabaseIds_DefaultOptions[CategoryId]): ODOptionalPromise<boolean>
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean>
     
-    set(category:string, key:string, value:ODValidJsonType): boolean {
+    set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean> {
         return super.set(category,key,value)
     }
 
-    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId, key:string): ODFormattedJsonDatabaseIds_DefaultOptions[CategoryId]|undefined
-    get(category:string, key:string): ODValidJsonType|undefined
+    get<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId, key:string): ODOptionalPromise<ODFormattedJsonDatabaseIds_DefaultOptions[CategoryId]|undefined>
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined>
 
-    get(category:string, key:string): ODValidJsonType|undefined {
+    get(category:string, key:string): ODOptionalPromise<ODValidJsonType|undefined> {
         return super.get(category,key)
     }
 
-    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId, key:string): boolean
-    delete(category:string, key:string): boolean
+    delete<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId, key:string): ODOptionalPromise<boolean>
+    delete(category:string, key:string): ODOptionalPromise<boolean>
 
-    delete(category:string, key:string): boolean {
+    delete(category:string, key:string): ODOptionalPromise<boolean> {
         return super.delete(category,key)
     }
 
-    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultOptions, key:string): boolean
-    exists(category:string, key:string): boolean
+    exists(category:keyof ODFormattedJsonDatabaseIds_DefaultOptions, key:string): ODOptionalPromise<boolean>
+    exists(category:string, key:string): ODOptionalPromise<boolean>
 
-    exists(category:string, key:string): boolean {
+    exists(category:string, key:string): ODOptionalPromise<boolean> {
         return super.exists(category,key)
     }
 
-    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId): {key:string, value:ODFormattedJsonDatabaseIds_DefaultOptions[CategoryId]}[]|undefined
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined
+    getCategory<CategoryId extends keyof ODFormattedJsonDatabaseIds_DefaultOptions>(category:CategoryId): ODOptionalPromise<{key:string, value:ODFormattedJsonDatabaseIds_DefaultOptions[CategoryId]}[]|undefined>
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined>
     
-    getCategory(category:string): {key:string, value:ODValidJsonType}[]|undefined {
+    getCategory(category:string): ODOptionalPromise<{key:string, value:ODValidJsonType}[]|undefined> {
         return super.getCategory(category)
     }
 }

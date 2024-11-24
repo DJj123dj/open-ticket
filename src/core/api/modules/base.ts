@@ -9,6 +9,12 @@ import { ODConsoleWarningMessage, ODDebugger } from "./console"
  */
 export type ODPromiseVoid = void|Promise<void>
 
+/**## ODOptionalPromise `type`
+ * This is a simple type to represent a type as normal value or a promise value.
+ */
+export type ODOptionalPromise<T> = T|Promise<T>
+
+
 /**## ODValidButtonColor `type`
  * This is a collection of all the possible button colors.
  */

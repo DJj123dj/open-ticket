@@ -6,7 +6,7 @@ export const loadAllTickets = async () => {
     const ticketDatabase = openticket.databases.get("openticket:tickets")
     if (!ticketDatabase) return
 
-    const tickets = ticketDatabase.getCategory("openticket:ticket")
+    const tickets = await ticketDatabase.getCategory("openticket:ticket")
     if (!tickets) return
     tickets.forEach((ticket) => {
         try {

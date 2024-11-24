@@ -87,7 +87,7 @@ interface ODUtilities {
      */
     emojiTitle(emoji:string, text:string): string
     /**## runAsync `utility function`
-     * Use this function to run a piece of code asyncronous without creating a separate function for it!
+     * Use this function to run a snippet of code asyncronous without creating a separate function for it!
      */
     runAsync(func:() => Promise<void>): void
     /**## timedAwait `utility function`

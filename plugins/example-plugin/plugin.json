@@ -1,5 +1,5 @@
 {
-    "name":"OT Example Plugin",
+    "name":"Example Plugin",
     "id":"example-plugin",
     "version":"1.0.0",
     "startFile":"index.ts",

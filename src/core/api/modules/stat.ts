@@ -42,13 +42,14 @@ export class ODStatsManager extends ODManager<ODStatScope> {
 
         //filter out the deletable stats
         const deletableStats: ODJsonDatabaseStructure = []
-        this.database.getAll().forEach((data) => {
+        const data = await this.database.getAll()
+        data.forEach((data) => {
             if (!validCategories.includes(data.category)) deletableStats.push(data)
         })
 
         //do additional deletion
         for (const cb of this.#initListeners){
-            await cb(this.database.getAll(),deletableStats)
+            await cb(data,deletableStats)
         }
         
         //delete all deletable stats
@@ -57,9 +58,10 @@ export class ODStatsManager extends ODManager<ODStatScope> {
             this.database.delete(data.category,data.key)
         })
     }
-    reset(){
+    async reset(){
         if (!this.database) return
-        this.database.getAll().forEach((data) => {
+        const data = await this.database.getAll()
+        data.forEach((data) => {
             if (!this.database) return
             this.database.delete(data.category,data.key)
         })

@@ -391,9 +391,9 @@ export class ODDebugFileManager {
     writeText(text:string){
         this.#writeDebugFile(text)
     }
-    /**Write a custom note to the debug file (starting with `[NODE]:`) */
+    /**Write a custom note to the debug file (starting with `[NOTE]:`) */
     writeNote(text:string){
-        this.#writeDebugFile("[NODE]: "+text)
+        this.#writeDebugFile("[NOTE]: "+text)
     }
 }
 

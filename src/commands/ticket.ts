@@ -215,7 +215,7 @@ export const registerModalResponders = async () => {
     openticket.responders.modals.get("openticket:ticket-questions").workers.add([
         new api.ODWorker("openticket:ticket-questions",0,async (instance,params,source,cancel) => {
             const {guild,channel,user} = instance
-            if (!channel) throw new api.ODSystemError("The 'Ticket Questions' modal Requires a channel for responding!")
+            if (!channel) throw new api.ODSystemError("The 'Ticket Questions' modal requires a channel for responding!")
             if (!guild){
                 //error
                 instance.reply(await openticket.builders.messages.getSafe("openticket:error-not-in-guild").build(source,{channel,user:instance.user}))

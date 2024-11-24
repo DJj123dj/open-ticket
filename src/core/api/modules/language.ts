@@ -19,7 +19,9 @@ export class ODLanguage extends ODManagerData {
     file: string
     /**The path to the file relative to the main directory. */
     path: string
+    /**The raw object data of the translation. */
     data: any
+    /**The metadata of the language if available. */
     metadata: ODLanguageMetadata|null = null
 
     constructor(id:ODValidId, file:string, customPath?:string){
