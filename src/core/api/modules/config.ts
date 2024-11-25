@@ -1,7 +1,7 @@
 ///////////////////////////////////////
 //CONFIG MODULE
 ///////////////////////////////////////
-import { ODId, ODManager, ODManagerData, ODSystemError, ODValidId } from "./base"
+import { ODId, ODManager, ODManagerData, ODPromiseVoid, ODSystemError, ODValidId } from "./base"
 import nodepath from "path"
 import { ODDebugger } from "./console"
 import fs from "fs"
@@ -12,51 +12,20 @@ import fs from "fs"
  * It manages all config files in the bot and allows plugins to access config files from open ticket & other plugins!
  * 
  * You will use this class to get/add a config file (`ODConfig`) in your plugin!
- * @example
- * //get ./config/general.json => ODConfig class
- * const generalConfig = openticket.configs.get("openticket:general")
- * 
- * //add a new config with id "test" => ./config/test.json
- * const testConfig = new api.ODConfig("test","test.json")
- * openticket.configs.add(testConfig)
  */
 export class ODConfigManager extends ODManager<ODConfig> {
     constructor(debug:ODDebugger){
         super(debug,"config")
     }
-
-    /**Add data to the manager. The id will be fetched from the data class! You can optionally select to overwrite existing data!
-     * @example
-     * //add a new config with id "test" => ./config/test.json
-     * const testConfig = new api.ODConfig("test","test.json")
-     * openticket.configs.add(testConfig)
-    */
-    add(data:ODConfig, overwrite?:boolean): boolean {
-        return super.add(data,overwrite)
-    }
-    /**Get data that matches the `ODId`. Returns the found data.
-     * @example
-     * //get "./config/general.json" (ot-general) => ODConfig class
-     * const generalConfig = openticket.configs.get("openticket:general")
-     */
-    get(id:ODValidId): ODConfig|null {
-        return super.get(id)
-    }
-    /**Remove data that matches the `ODId`. Returns the removed data.
-     * @example
-     * //remove the "test" config
-     * openticket.configs.remove("test") //returns null if non-existing
-     */
-    remove(id:ODValidId): ODConfig|null {
-        return super.remove(id)
-    }
-    /**Check if data that matches the `ODId` exists. Returns a boolean.
-     * @example
-     * //check if "./config/general.json" (ot-general) exists => boolean
-     * const exists = openticket.configs.exists("openticket:general")
-     */
-    exists(id:ODValidId): boolean {
-        return super.exists(id)
+    /**Init all config files. */
+    async init(){
+        for (const config of this.getAll()){
+            try{
+                await config.init()
+            }catch(err){
+                process.emit("uncaughtException",new ODSystemError(err))
+            }
+        }
     }
 }
 
@@ -72,7 +41,17 @@ export class ODConfig extends ODManagerData {
     /**The path to the file relative to the main directory. */
     path: string = ""
     /**An object/array of the entire config file! Variables inside it can be edited while the bot is running! */
-    data: any = undefined
+    data: any
+
+    constructor(id:ODValidId, data:any){
+        super(id)
+        this.data = data
+    }
+
+    /**Init the config. */
+    init(): ODPromiseVoid {
+        //nothing
+    }
 }
 
 /**## ODJsonConfig `class`
@@ -90,10 +69,13 @@ export class ODJsonConfig extends ODConfig {
     #reloadListeners: Function[] = []
 
     constructor(id:ODValidId, file:string, customPath?:string){
-        super(id)
+        super(id,{})
         this.file = (file.endsWith(".json")) ? file : file+".json"
         this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./config/",this.file)
-            
+    }
+
+    /**Init the config. */
+    init(): ODPromiseVoid {
         if (!fs.existsSync(this.path)) throw new ODSystemError("Unable to parse config \""+nodepath.join("./",this.path)+"\", the file doesn't exist!")
         try{
             this.data = JSON.parse(fs.readFileSync(this.path).toString())
@@ -102,7 +84,6 @@ export class ODJsonConfig extends ODConfig {
             throw new ODSystemError("Unable to parse config \""+nodepath.join("./",this.path)+"\"!")
         }
     }
-
     /**Reload the JSON file. Be aware that this doesn't update classes that used individual parts of the config data! */
     reload(){
         if (!fs.existsSync(this.path)) throw new ODSystemError("Unable to reload config \""+nodepath.join("./",this.path)+"\", the file doesn't exist!")

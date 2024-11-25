@@ -64,10 +64,14 @@ export interface ODEventIds_Default {
     //configs
     "onConfigLoad": ODEvent_Default<(configs:ODConfigManager_Default) => ODPromiseVoid>
     "afterConfigsLoaded": ODEvent_Default<(configs:ODConfigManager_Default) => ODPromiseVoid>
+    "onConfigInit": ODEvent_Default<(configs:ODConfigManager_Default) => ODPromiseVoid>
+    "afterConfigsInitiated": ODEvent_Default<(configs:ODConfigManager_Default) => ODPromiseVoid>
 
     //databases
     "onDatabaseLoad": ODEvent_Default<(databases:ODDatabaseManager_Default) => ODPromiseVoid>
     "afterDatabasesLoaded": ODEvent_Default<(databases:ODDatabaseManager_Default) => ODPromiseVoid>
+    "onDatabaseInit": ODEvent_Default<(databases:ODDatabaseManager_Default) => ODPromiseVoid>
+    "afterDatabasesInitiated": ODEvent_Default<(databases:ODDatabaseManager_Default) => ODPromiseVoid>
 
     //languages
     "onLanguageLoad": ODEvent_Default<(languages:ODLanguageManager_Default) => ODPromiseVoid>

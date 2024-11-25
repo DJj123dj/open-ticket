@@ -328,9 +328,12 @@ export class ODOptionCounterDynamicSuffix extends ODOptionSuffix {
     constructor(id:ODValidId, option:ODTicketOption, database:ODDatabase){
         super(id,option)
         this.database = database
-        if (!this.database.exists("openticket:option-suffix-counter",option.id.value)) this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
+        this.#init()
     }
-    
+
+    async #init(){
+        if (!await this.database.exists("openticket:option-suffix-counter",this.option.id.value)) await this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
+    }
     getSuffix(user:discord.User): string {
         const rawCurrentValue = this.database.get("openticket:option-suffix-counter",this.option.id.value)
         const currentValue = (typeof rawCurrentValue != "number") ? 0 : rawCurrentValue
@@ -347,9 +350,12 @@ export class ODOptionCounterFixedSuffix extends ODOptionSuffix {
     constructor(id:ODValidId, option:ODTicketOption, database:ODDatabase){
         super(id,option)
         this.database = database
-        if (!this.database.exists("openticket:option-suffix-counter",option.id.value)) this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
+        this.#init()
     }
     
+    async #init(){
+        if (!await this.database.exists("openticket:option-suffix-counter",this.option.id.value)) await this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
+    }
     getSuffix(user:discord.User): string {
         const rawCurrentValue = this.database.get("openticket:option-suffix-counter",this.option.id.value)
         const currentValue = (typeof rawCurrentValue != "number") ? 0 : rawCurrentValue
@@ -370,9 +376,12 @@ export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
     constructor(id:ODValidId, option:ODTicketOption, database:ODDatabase){
         super(id,option)
         this.database = database
-        if (!this.database.exists("openticket:option-suffix-history",option.id.value)) this.database.set("openticket:option-suffix-history",this.option.id.value,[])
+        this.#init()
     }
 
+    async #init(){
+        if (!await this.database.exists("openticket:option-suffix-history",this.option.id.value)) await this.database.set("openticket:option-suffix-history",this.option.id.value,[])
+    }
     #generateUniqueValue(history:string[]): string {
         const rawNumber = Math.round(Math.random()*1000).toString()
         let number = rawNumber
@@ -401,9 +410,13 @@ export class ODOptionRandomHexSuffix extends ODOptionSuffix {
     constructor(id:ODValidId, option:ODTicketOption, database:ODDatabase){
         super(id,option)
         this.database = database
-        if (!this.database.exists("openticket:option-suffix-history",option.id.value)) this.database.set("openticket:option-suffix-history",this.option.id.value,[])
+        this.#init()
     }
 
+    async #init(){
+        if (!await this.database.exists("openticket:option-suffix-history",this.option.id.value)) await this.database.set("openticket:option-suffix-history",this.option.id.value,[])
+
+    }
     #generateUniqueValue(history:string[]): string {
         const hex = crypto.randomBytes(2).toString("hex")
         if (history.includes(hex)) return this.#generateUniqueValue(history)

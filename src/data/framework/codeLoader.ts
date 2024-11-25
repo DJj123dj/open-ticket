@@ -86,14 +86,14 @@ export const loadDatabaseCleanersCode = async () => {
         //remove all unused panels
         for (const panel of (await globalDatabase.getCategory("openticket:panel-update") ?? [])){
             if (!validPanels.includes(panel.key)){
-                globalDatabase.delete("openticket:panel-update",panel.key)
+                await globalDatabase.delete("openticket:panel-update",panel.key)
             }
         }
 
         //delete panel from database on delete
-        openticket.client.client.on("messageDelete",(msg) => {
-            if (globalDatabase.exists("openticket:panel-update",msg.channel.id+"_"+msg.id)){
-                globalDatabase.delete("openticket:panel-update",msg.channel.id+"_"+msg.id)
+        openticket.client.client.on("messageDelete",async (msg) => {
+            if (await globalDatabase.exists("openticket:panel-update",msg.channel.id+"_"+msg.id)){
+                await globalDatabase.delete("openticket:panel-update",msg.channel.id+"_"+msg.id)
             }
         })
     }))
@@ -120,24 +120,24 @@ export const loadDatabaseCleanersCode = async () => {
         //remove all unused suffix counters
         for (const counter of (await globalDatabase.getCategory("openticket:option-suffix-counter") ?? [])){
             if (!validSuffixCounters.includes(counter.key)){
-                globalDatabase.delete("openticket:option-suffix-counter",counter.key)
+                await globalDatabase.delete("openticket:option-suffix-counter",counter.key)
             }
         }
 
         //remove all unused suffix histories
         for (const history of (await globalDatabase.getCategory("openticket:option-suffix-history") ?? [])){
             if (!validSuffixHistories.includes(history.key)){
-                globalDatabase.delete("openticket:option-suffix-history",history.key)
+                await globalDatabase.delete("openticket:option-suffix-history",history.key)
             }
         }
     }))
 
     //OPTION DATABASE CLEANER
     openticket.code.add(new api.ODCode("openticket:option-database-cleaner",10,() => {
-        //delete all unused options
-        openticket.options.getAll().forEach((option) => {
-            if (optionDatabase.exists("openticket:used-option",option.id.value) && !openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
-                optionDatabase.delete("openticket:used-option",option.id.value)
+        //delete all unused options (async)
+        openticket.options.getAll().forEach(async (option) => {
+            if (await optionDatabase.exists("openticket:used-option",option.id.value) && !openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
+                await optionDatabase.delete("openticket:used-option",option.id.value)
             }
         })
     }))
@@ -172,7 +172,7 @@ export const loadDatabaseCleanersCode = async () => {
             //remove all unused users
             for (const user of (await userDatabase.getAll())){
                 if (!validUsers.includes(user.key)){
-                    userDatabase.delete(user.category,user.key)
+                    await userDatabase.delete(user.category,user.key)
                 }
             }
 
@@ -180,7 +180,7 @@ export const loadDatabaseCleanersCode = async () => {
             for (const stat of (await statsDatabase.getAll())){
                 if (stat.category.startsWith("openticket:user_")){
                     if (!validUsers.includes(stat.key)){
-                        statsDatabase.delete(stat.category,stat.key)
+                        await statsDatabase.delete(stat.category,stat.key)
                     }
                 }
             }
@@ -193,7 +193,7 @@ export const loadDatabaseCleanersCode = async () => {
             //remove unused user
             for (const user of (await userDatabase.getAll())){
                 if (user.key == member.id){
-                    userDatabase.delete(user.category,user.key)
+                    await userDatabase.delete(user.category,user.key)
                 }
             }
 
@@ -201,7 +201,7 @@ export const loadDatabaseCleanersCode = async () => {
             for (const stat of (await statsDatabase.getAll())){
                 if (stat.category.startsWith("openticket:user_")){
                     if (stat.key == member.id){
-                        statsDatabase.delete(stat.category,stat.key)
+                        await statsDatabase.delete(stat.category,stat.key)
                     }
                 }
             }
@@ -237,7 +237,7 @@ export const loadDatabaseCleanersCode = async () => {
         //remove all unused tickets
         for (const ticket of (await ticketDatabase.getAll())){
             if (!validTickets.includes(ticket.key)){
-                ticketDatabase.delete(ticket.category,ticket.key)
+                await ticketDatabase.delete(ticket.category,ticket.key)
                 openticket.tickets.remove(ticket.key)
             }
         }
@@ -246,7 +246,7 @@ export const loadDatabaseCleanersCode = async () => {
         for (const stat of (await statsDatabase.getAll())){
             if (stat.category.startsWith("openticket:ticket_")){
                 if (!validTickets.includes(stat.key)){
-                    statsDatabase.delete(stat.category,stat.key)
+                    await statsDatabase.delete(stat.category,stat.key)
                 }
             }
         }
@@ -258,7 +258,7 @@ export const loadDatabaseCleanersCode = async () => {
             //remove unused ticket
             for (const ticket of (await ticketDatabase.getAll())){
                 if (ticket.key == channel.id){
-                    ticketDatabase.delete(ticket.category,ticket.key)
+                    await ticketDatabase.delete(ticket.category,ticket.key)
                     openticket.tickets.remove(ticket.key)
                 }
             }
@@ -267,7 +267,7 @@ export const loadDatabaseCleanersCode = async () => {
             for (const stat of (await statsDatabase.getAll())){
                 if (stat.category.startsWith("openticket:ticket_")){
                     if (stat.key == channel.id){
-                        statsDatabase.delete(stat.category,stat.key)
+                        await statsDatabase.delete(stat.category,stat.key)
                     }
                 }
             }
@@ -314,49 +314,49 @@ export const loadDatabaseSaversCode = async () => {
     openticket.code.add(new api.ODCode("openticket:ticket-saver",6,() => {
         const mainVersion = openticket.versions.get("openticket:version")
 
-        openticket.tickets.onAdd((ticket) => {
-            ticketDatabase.set("openticket:ticket",ticket.id.value,ticket.toJson(mainVersion))
+        openticket.tickets.onAdd(async (ticket) => {
+            await ticketDatabase.set("openticket:ticket",ticket.id.value,ticket.toJson(mainVersion))
 
             //add option to database if non-existent
-            if (!optionDatabase.exists("openticket:used-option",ticket.option.id.value)){
-                optionDatabase.set("openticket:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
+            if (!(await optionDatabase.exists("openticket:used-option",ticket.option.id.value))){
+                await optionDatabase.set("openticket:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
             }
         })
-        openticket.tickets.onChange((ticket) => {
-            ticketDatabase.set("openticket:ticket",ticket.id.value,ticket.toJson(mainVersion))
+        openticket.tickets.onChange(async (ticket) => {
+            await ticketDatabase.set("openticket:ticket",ticket.id.value,ticket.toJson(mainVersion))
 
             //add option to database if non-existent
-            if (!optionDatabase.exists("openticket:used-option",ticket.option.id.value)){
-                optionDatabase.set("openticket:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
+            if (!(await optionDatabase.exists("openticket:used-option",ticket.option.id.value))){
+                await optionDatabase.set("openticket:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
             }
 
             //delete all unused options on ticket move
-            openticket.options.getAll().forEach((option) => {
-                if (optionDatabase.exists("openticket:used-option",option.id.value) && !openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
-                    optionDatabase.delete("openticket:used-option",option.id.value)
+            for (const option of openticket.options.getAll()){
+                if (await optionDatabase.exists("openticket:used-option",option.id.value) && !openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
+                    await optionDatabase.delete("openticket:used-option",option.id.value)
                 }
-            })
+            }
         })
-        openticket.tickets.onRemove((ticket) => {
-            ticketDatabase.delete("openticket:ticket",ticket.id.value)
+        openticket.tickets.onRemove(async (ticket) => {
+            await ticketDatabase.delete("openticket:ticket",ticket.id.value)
 
             //remove option from database if unused
             if (!openticket.tickets.getAll().some((ticket) => ticket.option.id.value == ticket.option.id.value)){
-                optionDatabase.delete("openticket:used-option",ticket.option.id.value)
+                await optionDatabase.delete("openticket:used-option",ticket.option.id.value)
             }
         })
     }))
 
     //BLACKLIST SAVER
     openticket.code.add(new api.ODCode("openticket:blacklist-saver",5,() => {
-        openticket.blacklist.onAdd((blacklist) => {
-            userDatabase.set("openticket:blacklist",blacklist.id.value,blacklist.reason)
+        openticket.blacklist.onAdd(async (blacklist) => {
+            await userDatabase.set("openticket:blacklist",blacklist.id.value,blacklist.reason)
         })
-        openticket.blacklist.onChange((blacklist) => {
-            userDatabase.set("openticket:blacklist",blacklist.id.value,blacklist.reason)
+        openticket.blacklist.onChange(async (blacklist) => {
+            await userDatabase.set("openticket:blacklist",blacklist.id.value,blacklist.reason)
         })
-        openticket.blacklist.onRemove((blacklist) => {
-            userDatabase.delete("openticket:blacklist",blacklist.id.value)
+        openticket.blacklist.onRemove(async (blacklist) => {
+            await userDatabase.delete("openticket:blacklist",blacklist.id.value)
         })
     }))
 

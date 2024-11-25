@@ -78,7 +78,7 @@ const loadAllVersionMigrations = async (lastVersion:api.ODVersion) => {
 const saveAllVersionsToDatabase = async () => {
     const globalDatabase = openticket.databases.get("openticket:global")
 
-    await openticket.versions.loopAll((version,id) => {
-        globalDatabase.set("openticket:last-version",id.value,version.toString())    
+    await openticket.versions.loopAll(async (version,id) => {
+        await globalDatabase.set("openticket:last-version",id.value,version.toString())    
     })
 }

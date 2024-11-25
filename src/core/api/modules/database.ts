@@ -1,7 +1,7 @@
 ///////////////////////////////////////
 //DATABASE MODULE
 ///////////////////////////////////////
-import { ODId, ODManager, ODManagerData, ODOptionalPromise, ODSystemError, ODValidId, ODValidJsonType } from "./base"
+import { ODId, ODManager, ODManagerData, ODOptionalPromise, ODPromiseVoid, ODSystemError, ODValidId, ODValidJsonType } from "./base"
 import fs from "fs"
 import nodepath from "path"
 import { ODDebugger } from "./console"
@@ -13,51 +13,21 @@ import * as fjs from "formatted-json-stringify"
  * It manages all databases in the bot and allows to permanently store data from the bot!
  * 
  * You will use this class to get/add a database (`ODDatabase`) in your plugin!
- * @example
- * //get ./database/ot-global.json => ODDatabase class
- * const globalDB = openticket.databases.get("openticket:global")
- * 
- * //add a new database with id "test" => ./database/idk-test.json
- * const testDatabase = new api.ODDatabase("test","idk-test.json")
- * openticket.databases.add(testDatabase)
  */
 export class ODDatabaseManager extends ODManager<ODDatabase> {
     constructor(debug:ODDebugger){
         super(debug,"database")
     }
     
-    /**Add data to the manager. The id will be fetched from the data class! You can optionally select to overwrite existing data!
-     * @example
-     * //add a new database with id "test" => ./database/idk-test.json
-     * const testDatabase = new api.ODDatabase("test","idk-test.json")
-     * openticket.databases.add(testDatabase)
-    */
-    add(data:ODDatabase, overwrite?:boolean): boolean {
-        return super.add(data,overwrite)
-    }
-    /**Get data that matches the `ODId`. Returns the found data.
-     * @example
-     * //get ./database/ot-global.json => ODDatabase class
-     * const globalDB = openticket.databases.get("openticket:global")
-     */
-    get(id:ODValidId): ODDatabase|null {
-        return super.get(id)
-    }
-    /**Remove data that matches the `ODId`. Returns the removed data.
-     * @example
-     * //remove the "test" database
-     * openticket.databases.remove("test") //returns null if non-existing
-     */
-    remove(id:ODValidId): ODDatabase|null {
-        return super.remove(id)
-    }
-    /**Check if data that matches the `ODId` exists. Returns a boolean.
-     * @example
-     * //check if "./database/idk-test.json" (test) exists => boolean
-     * const exists = openticket.databases.exists("test")
-     */
-    exists(id:ODValidId): boolean {
-        return super.exists(id)
+    /**Init all database files. */
+    async init(){
+        for (const database of this.getAll()){
+            try{
+                await database.init()
+            }catch(err){
+                process.emit("uncaughtException",new ODSystemError(err))
+            }
+        }
     }
 }
 
@@ -66,26 +36,17 @@ export class ODDatabaseManager extends ODManager<ODDatabase> {
  * This class doesn't do anything at all, it just gives a template & basic methods for a database. Use `ODJsonDatabase` instead!
  * 
  * You will only use this class if you want to create your own database implementation (e.g. `mongodb`, `mysql`,...)!
- * @example
- * class SomeDatabase extends ODDatabase {
- *   //override this method
- *   setData(category:string, key:string, value:ODValidJsonType): boolean {
- *     return false
- *   }
- *   //override this method
- *   getData(category:string, key:string): ODValidJsonType|undefined {
- *     return undefined
- *   }
- *   //override this method
- *   deleteData(category:string, key:string): boolean {
- *     return false
- *   }
- * }
  */
 export class ODDatabase extends ODManagerData {
-    /**The full path to this database with extension */
+    /**The name of the file with extension. */
     file: string = ""
+    /**The path to the file relative to the main directory. */
+    path: string = ""
 
+    /**Init the database. */
+    init(): ODPromiseVoid {
+        //nothing
+    }
     /**Add/Overwrite a specific category & key in the database. Returns `true` when overwritten. */
     set(category:string, key:string, value:ODValidJsonType): ODOptionalPromise<boolean> {
         return false
@@ -122,24 +83,19 @@ export type ODJsonDatabaseStructure = {category:string, key:string, value:ODVali
  * It stores data in a `json` file as a large `Array` using the `category`, `key`, `value` strategy.
  * You can store the following types: `string`, `number`, `boolean`, `array`, `object` & `null`!
  * 
- * You will only use this class if you want to create your own database or use an existing one!
- * @example
- * //get,set & delete data
- * const data = database.getData("category","key") //data will be the value
- * const didOverwrite = database.setData("category","key","value") //value can be any of the valid types
- * const didExist = database.deleteData("category","key") //delete this value
- * //You need an ODJsonDatabase class named "database" for this example to work!
+ * You will use this class if you want to create your own database or use an existing one!
  */
 export class ODJsonDatabase extends ODDatabase {
     constructor(id:ODValidId, file:string, customPath?:string){
         super(id)
-        const filename = (file.endsWith(".json")) ? file : file+".json"
-        this.file = customPath ? nodepath.join("./",customPath,filename) : nodepath.join("./database/",filename)
-        
-        //init file if it doesn't exist yet
-        this.#system.getData()
+        this.file = (file.endsWith(".json")) ? file : file+".json"
+        this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./database/",this.file)
     }
 
+    /**Init the database. */
+    init(): ODPromiseVoid {
+        this.#system.getData()
+    }
     /**Set/overwrite the value of `category` & `key`. Returns `true` when overwritten!
      * @example
      * const didOverwrite = database.setData("category","key","value") //value can be any of the valid types
@@ -202,21 +158,21 @@ export class ODJsonDatabase extends ODDatabase {
     #system = {
         /**Read parsed data from the json file */
         getData: (): ODJsonDatabaseStructure => {
-            if (fs.existsSync(this.file)){
+            if (fs.existsSync(this.path)){
                 try{
-                    return JSON.parse(fs.readFileSync(this.file).toString())
+                    return JSON.parse(fs.readFileSync(this.path).toString())
                 }catch(err){
                     process.emit("uncaughtException",err)
-                    throw new ODSystemError("Unable to read database "+this.file+"! getData() read error. (see error above)")
+                    throw new ODSystemError("Unable to read database "+this.path+"! getData() read error. (see error above)")
                 }
             }else{
-                fs.writeFileSync(this.file,"[]")
+                fs.writeFileSync(this.path,"[]")
                 return []
             }
         },
         /**Write parsed data to the json file */
         setData: (data:ODJsonDatabaseStructure) => {
-            fs.writeFileSync(this.file,JSON.stringify(data,null,"\t"))
+            fs.writeFileSync(this.path,JSON.stringify(data,null,"\t"))
         }
     }
 }
@@ -236,14 +192,15 @@ export class ODFormattedJsonDatabase extends ODDatabase {
 
     constructor(id:ODValidId, file:string, formatter:fjs.ArrayFormatter, customPath?:string){
         super(id)
-        const filename = (file.endsWith(".json")) ? file : file+".json"
-        this.file = customPath ? nodepath.join("./",customPath,filename) : nodepath.join("./database/",filename)
+        this.file = (file.endsWith(".json")) ? file : file+".json"
+        this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./database/",this.file)
         this.formatter = formatter
-
-        //init file if it doesn't exist yet
-        this.#system.getData()
     }
 
+    /**Init the database. */
+    init(): ODPromiseVoid {
+        this.#system.getData()
+    }
     /**Set/overwrite the value of `category` & `key`. Returns `true` when overwritten!
      * @example
      * const didOverwrite = database.setData("category","key","value") //value can be any of the valid types
@@ -306,16 +263,16 @@ export class ODFormattedJsonDatabase extends ODDatabase {
     #system = {
         /**Read parsed data from the json file */
         getData: (): ODJsonDatabaseStructure => {
-            if (fs.existsSync(this.file)){
-                return JSON.parse(fs.readFileSync(this.file).toString())
+            if (fs.existsSync(this.path)){
+                return JSON.parse(fs.readFileSync(this.path).toString())
             }else{
-                fs.writeFileSync(this.file,"[]")
+                fs.writeFileSync(this.path,"[]")
                 return []
             }
         },
         /**Write parsed data to the json file */
         setData: (data:ODJsonDatabaseStructure) => {
-            fs.writeFileSync(this.file,this.formatter.stringify(data))
+            fs.writeFileSync(this.path,this.formatter.stringify(data))
         }
     }
 }

@@ -29,8 +29,12 @@ export interface ODDefaults {
     flagInitiating:boolean,
     /**Load the default open ticket configs. */
     configLoading:boolean,
+    /**Enable the default initializer for open ticket config. */
+    configInitiating:boolean,
     /**Load the default open ticket databases. */
     databaseLoading:boolean,
+    /**Enable the default initializer for open ticket database. */
+    databaseInitiating:boolean,
     /**Load the default open ticket sessions. */
     sessionLoading:boolean,
 
@@ -230,7 +234,9 @@ export class ODDefaultsManager {
             flagLoading:true,
             flagInitiating:true,
             configLoading:true,
+            configInitiating:true,
             databaseLoading:true,
+            databaseInitiating:true,
             sessionLoading:true,
 
             languageLoading:true,

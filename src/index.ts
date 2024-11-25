@@ -122,6 +122,13 @@ const main = async () => {
     await openticket.events.get("onConfigLoad").emit([openticket.configs])
     await openticket.events.get("afterConfigsLoaded").emit([openticket.configs])
 
+    //initiate config
+    await openticket.events.get("onConfigInit").emit([openticket.configs])
+    if (openticket.defaults.getDefault("configInitiating")){
+        await openticket.configs.init()
+        await openticket.events.get("afterConfigsInitiated").emit([openticket.configs])
+    }
+
     //UTILITY CONFIG
     const generalConfig = openticket.configs.get("openticket:general")
 
@@ -137,6 +144,13 @@ const main = async () => {
     }
     await openticket.events.get("onDatabaseLoad").emit([openticket.databases])
     await openticket.events.get("afterDatabasesLoaded").emit([openticket.databases])
+
+    //initiate database
+    await openticket.events.get("onDatabaseInit").emit([openticket.databases])
+    if (openticket.defaults.getDefault("databaseInitiating")){
+        await openticket.databases.init()
+        await openticket.events.get("afterDatabasesInitiated").emit([openticket.databases])
+    }
 
     //load sessions
     openticket.log("Loading sessions...","system")

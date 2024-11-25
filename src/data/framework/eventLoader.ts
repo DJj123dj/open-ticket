@@ -20,10 +20,14 @@ export const loadAllEvents = () => {
         //configs
         "onConfigLoad",
         "afterConfigsLoaded",
+        "onConfigInit",
+        "afterConfigsInitiated",
 
         //databases
         "onDatabaseLoad",
         "afterDatabasesLoaded",
+        "onDatabaseInit",
+        "afterDatabasesInitiated",
 
         //languages
         "onLanguageLoad",

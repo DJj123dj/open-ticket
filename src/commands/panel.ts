@@ -67,7 +67,7 @@ export const registerCommandResponders = async () => {
             //add panel to database on auto-update
             if (instance.options.getBoolean("auto-update",false)){
                 const globalDatabase = openticket.databases.get("openticket:global")
-                globalDatabase.set("openticket:panel-update",panelMessage.channel.id+"_"+panelMessage.id,panel.id.value)
+                await globalDatabase.set("openticket:panel-update",panelMessage.channel.id+"_"+panelMessage.id,panel.id.value)
             }
         }),
         new api.ODWorker("openticket:logs",-1,(instance,params,source,cancel) => {
