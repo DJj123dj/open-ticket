@@ -23,6 +23,7 @@ export const loadAllLanguages = async () => {
     /** How to add more languages?
      * - Register the language to the manager (see above)
      * - Add the language to the list in the "ODLanguageManagerIds_Default" interface (./src/core/api/defaults/language.ts)
-     * - Add the language to the list in the README.md
+     * - Update the language list in the README.md translator list
+     * - Update the language counter in the README.md features list
      */
 }

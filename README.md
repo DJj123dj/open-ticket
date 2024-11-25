@@ -30,7 +30,7 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 - **📈 scalable** - Open Ticket is made to handle huge servers! Even if your server contains more than 100k members!
 - **📄 html transcripts** - Make use of the most customisable, beautiful and easy-to-use HTML Transcripts!
 - **✅ ticket actions** - Close, Reopen, Delete, Rename & Move all your tickets!
-- **🇬🇧 translation** - Open Ticket has been translated in more than **32 languages** by our community!
+- **🇬🇧 translation** - Open Ticket has been translated in more than **16 languages** by our community!
 - **🎨 customisation** - Open Ticket has been created around customisation, everything can be customised!
 - **🖥️ interactions** - The bot has full support for Buttons, Dropdowns, Slash Commands and Modals!
 - **∞ unlimited everywhere** - Create an infinite amount of tickets & panels!
@@ -62,18 +62,22 @@ View all available Open Ticket plugins in our [Official Plugin Repository](https
 ### 📦 Official *(made by DJdj Development)*
 |Name                                                                 |Category                    |Description              |
 |---------------------------------------------------------------------|----------------------------|-------------------------|
-|[`example-plugin`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-plugin/)                    |Example                     |This is just an example plugin for people that want to create their own plugin. |
-|[`example-command`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-command/)                  |Example                     |Sample custom command using the Open Discord system. |
-|[`ot-jump-to-top`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-jump-to-top/)                    |Command                     |Add a simple command to jump to the top of the ticket. |
-|[`ot-kill-switch`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-kill-switch/)                    |Command                     |Temporarily disable the ticket system using a kill switch. |
-|[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)      |Channel Management          |Simple plugin to keep the channel prefix when using the /rename command. |
-|[`ot-no-slash-clear`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-no-slash-clear/)              |Development                 |Disable the automatic removal of slash commands that aren't used by Open Ticket. |
-|[`ot-better-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-better-status/)                |Client Activity             |An advanced status plugin to rotate between states. It also allows for the use of variables. |
+|[`example-plugin`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-plugin/)                     |Example                     |This is just an example plugin for people that want to create their own plugin. |
+|[`example-command`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-command/)                   |Example                     |Sample custom command using the Open Discord system. |
+|[`ot-jump-to-top`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-jump-to-top/)                     |Command                     |Add a simple command to jump to the top of the ticket. |
+|[`ot-kill-switch`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-kill-switch/)                     |Command                     |Temporarily disable the ticket system using a kill switch. |
+|[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)       |Channel Management          |Simple plugin to keep the channel prefix when using the /rename command. |
+|[`ot-no-slash-clear`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-no-slash-clear/)               |Development                 |Disable the automatic removal of slash commands that aren't used by Open Ticket. |
+|[`ot-better-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-better-status/)                 |Client Activity             |An advanced status plugin to rotate between states. It also allows for the use of variables. |
+|[`ot-sqlite-database`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-sqlite-database/)             |Database                    |With this plugin, the database will be an SQLite file. It's a must-have for large servers! |
+|[`ot-ticket-message-extras`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-ticket-message-extras/) |Customisation               |A plugin which adds a few little features to the ticket message. |
+
 
 ### ✅ Verified *(made by community)*
 |Name                                                                 |Author                      |Category                    |Description              |
 |---------------------------------------------------------------------|----------------------------|----------------------------|-------------------------|
 |[`ot-config-reload`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-config-reload/)                |guillee.3                   |Config                      |This plugin adds a new command that allows reloading the Open Ticket config files without the need for a restart. |
+|[`ot-feedback`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-feedback/)                          |an_developer                |Feedback System             |A plugin to gather feedback of your support service. |
 
 ## 🛠️ Contributors
 ### 🖥️ Team
