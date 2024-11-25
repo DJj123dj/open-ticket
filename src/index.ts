@@ -166,13 +166,31 @@ const main = async () => {
         await (await import("./data/framework/languageLoader.js")).loadAllLanguages()
     }
     await openticket.events.get("onLanguageLoad").emit([openticket.languages])
-    await openticket.events.get("afterLanguagesLoaded").emit([openticket.languages])    
+    await openticket.events.get("afterLanguagesLoaded").emit([openticket.languages])   
+    
+    //initiate language
+    await openticket.events.get("onLanguageInit").emit([openticket.languages])
+    if (openticket.defaults.getDefault("languageInitiating")){
+        await openticket.languages.init()
+        await openticket.events.get("afterLanguagesInitiated").emit([openticket.languages])
+
+        //add available languages to list for config checker
+        const languageList = openticket.defaults.getDefault("languageList")
+        const languageIds = openticket.languages.getIds().map((id) => {
+            if (id.value.startsWith("openticket:")){
+                //is open ticket language => return without prefix
+                return id.value.split("openticket:")[1]
+            }else return id.value
+        })
+        languageList.push(...languageIds)
+        openticket.defaults.setDefault("languageList",languageList)
+    }
 
     //select language
     await openticket.events.get("onLanguageSelect").emit([openticket.languages])
     if (openticket.defaults.getDefault("languageSelection")){
         //set current language
-        const languageId = (generalConfig && generalConfig.data.language) ? generalConfig.data.language  : "english"
+        const languageId = (generalConfig?.data?.language) ? generalConfig.data.language  : "english"
         if (languageId.includes(":")){
             openticket.languages.setCurrentLanguage(languageId)
         }else{

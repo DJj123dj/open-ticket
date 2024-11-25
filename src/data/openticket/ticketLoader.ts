@@ -9,7 +9,6 @@ export const loadAllTickets = async () => {
     const tickets = await ticketDatabase.getCategory("openticket:ticket")
     if (!tickets) return
     for (const ticket of tickets){
-        console.log(ticket.value)
         try {
             openticket.tickets.add(await loadTicket(ticket.value))
         }catch (err){

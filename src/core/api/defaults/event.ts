@@ -76,6 +76,8 @@ export interface ODEventIds_Default {
     //languages
     "onLanguageLoad": ODEvent_Default<(languages:ODLanguageManager_Default) => ODPromiseVoid>
     "afterLanguagesLoaded": ODEvent_Default<(languages:ODLanguageManager_Default) => ODPromiseVoid>
+    "onLanguageInit": ODEvent_Default<(languages:ODLanguageManager_Default) => ODPromiseVoid>
+    "afterLanguagesInitiated": ODEvent_Default<(languages:ODLanguageManager_Default) => ODPromiseVoid>
     "onLanguageSelect": ODEvent_Default<(languages:ODLanguageManager_Default) => ODPromiseVoid>
     "afterLanguagesSelected": ODEvent_Default<(main:ODLanguage|null, backup:ODLanguage|null, languages:ODLanguageManager_Default) => ODPromiseVoid>
 

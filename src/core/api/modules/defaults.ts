@@ -40,6 +40,8 @@ export interface ODDefaults {
 
     /**Load the default open ticket languages. */
     languageLoading:boolean,
+    /**Enable the default initializer for open ticket languages. */
+    languageInitiating:boolean,
     /**Enable selecting the current language from `config/general.json`. */
     languageSelection:boolean,
     /**Set the backup language when the primary language is missing a property. */
@@ -240,6 +242,7 @@ export class ODDefaultsManager {
             sessionLoading:true,
 
             languageLoading:true,
+            languageInitiating:true,
             languageSelection:true,
             backupLanguage:"openticket:english",
             languageList:[],

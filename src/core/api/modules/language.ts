@@ -1,7 +1,7 @@
 ///////////////////////////////////////
 //LANGUAGE MODULE
 ///////////////////////////////////////
-import { ODId, ODManager, ODManagerData, ODSystemError, ODValidId } from "./base"
+import { ODId, ODManager, ODManagerData, ODPromiseVoid, ODSystemError, ODValidId } from "./base"
 import nodepath from "path"
 import { ODDebugger } from "./console"
 import fs from "fs"
@@ -12,32 +12,6 @@ export interface ODLanguageMetadata {
     translators:string[],
     lastedited:string,
     automated:boolean
-}
-
-export class ODLanguage extends ODManagerData {
-    /**The name of the file with `.json` extension. */
-    file: string
-    /**The path to the file relative to the main directory. */
-    path: string
-    /**The raw object data of the translation. */
-    data: any
-    /**The metadata of the language if available. */
-    metadata: ODLanguageMetadata|null = null
-
-    constructor(id:ODValidId, file:string, customPath?:string){
-        super(id)
-        this.file = (file.endsWith(".json")) ? file : file+".json"
-        this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./languages/",this.file)
-        
-        if (!fs.existsSync(this.path)) throw new ODSystemError("Unable to parse language \""+nodepath.join("./",this.path)+"\", the file doesn't exist!")
-        try{
-            this.data = JSON.parse(fs.readFileSync(this.path).toString())
-        }catch(err){
-            process.emit("uncaughtException",err)
-            throw new ODSystemError("Unable to parse language \""+nodepath.join("./",this.path)+"\"!")
-        }
-        if (this.data["_TRANSLATION"]) this.metadata = this.data["_TRANSLATION"]
-    }
 }
 
 export class ODLanguageManager extends ODManager<ODLanguage> {
@@ -129,5 +103,57 @@ export class ODLanguageManager extends ODManager<ODLanguage> {
             translation = translation.replace(`{${index}}`,value)
         })
         return translation
+    }
+
+    /**Init all language files. */
+    async init(){
+        for (const language of this.getAll()){
+            try{
+                await language.init()
+            }catch(err){
+                process.emit("uncaughtException",new ODSystemError(err))
+            }
+        }
+    }
+}
+
+export class ODLanguage extends ODManagerData {
+    /**The name of the file with extension. */
+    file: string = ""
+    /**The path to the file relative to the main directory. */
+    path: string = ""
+    /**The raw object data of the translation. */
+    data: any
+    /**The metadata of the language if available. */
+    metadata: ODLanguageMetadata|null = null
+
+    constructor(id:ODValidId, data:any){
+        super(id)
+        this.data = data
+    }
+
+    /**Init the language. */
+    init(): ODPromiseVoid {
+        //nothing
+    }
+}
+
+export class ODJsonLanguage extends ODLanguage {
+    constructor(id:ODValidId, file:string, customPath?:string){
+        super(id,{})
+        this.file = (file.endsWith(".json")) ? file : file+".json"
+        this.path = customPath ? nodepath.join("./",customPath,this.file) : nodepath.join("./languages/",this.file)
+    }
+
+    /**Init the langauge. */
+    init(): ODPromiseVoid {
+        if (!fs.existsSync(this.path)) throw new ODSystemError("Unable to parse language \""+nodepath.join("./",this.path)+"\", the file doesn't exist!")
+        try{
+            this.data = JSON.parse(fs.readFileSync(this.path).toString())
+        }catch(err){
+            process.emit("uncaughtException",err)
+            throw new ODSystemError("Unable to parse language \""+nodepath.join("./",this.path)+"\"!")
+        }
+        if (this.data["_TRANSLATION"]) this.metadata = this.data["_TRANSLATION"]
     }
 }

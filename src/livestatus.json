@@ -1,0 +1,42 @@
+[
+    {
+        "message":{
+            "title":"Open Ticket Beta",
+            "titleColor":"red",
+            "description":"Hi there! You're using a beta version of the bot! Please report all bugs and errors to our discord server!",
+            "descriptionColor":"normal"
+        },
+        "active":{
+            "versions":["4.0.0"],
+            "languages":[],
+            "allLanguages":true,
+            "usingPlugins":true,
+            "notUsingPlugins":true,
+            "usingSlashCommands":true,
+            "notUsingSlashCommands":true,
+            "notUsingTranscripts":true,
+            "usingTextTranscripts":true,
+            "usingHtmlTranscripts":true
+        }
+    },
+    {
+        "message":{
+            "title":"Documentation",
+            "titleColor":"blue",
+            "description":"Currently there is no documentation available yet for this version of the bot.",
+            "descriptionColor":"normal"
+        },
+        "active":{
+            "versions":["4.0.0"],
+            "languages":[],
+            "allLanguages":true,
+            "usingPlugins":true,
+            "notUsingPlugins":true,
+            "usingSlashCommands":true,
+            "notUsingSlashCommands":true,
+            "notUsingTranscripts":true,
+            "usingTextTranscripts":true,
+            "usingHtmlTranscripts":true
+        }
+    }
+]

@@ -32,6 +32,8 @@ export const loadAllEvents = () => {
         //languages
         "onLanguageLoad",
         "afterLanguagesLoaded",
+        "onLanguageInit",
+        "afterLanguagesInitiated",
         "onLanguageSelect",
         "afterLanguagesSelected",
 
