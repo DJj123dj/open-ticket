@@ -24,8 +24,8 @@ export const registerActions = async () => {
             ticket.get("openticket:busy").value = true
 
             //update stats
-            openticket.stats.get("openticket:global").setStat("openticket:tickets-closed",1,"increase")
-            openticket.stats.get("openticket:user").setStat("openticket:tickets-closed",user.id,1,"increase")
+            await openticket.stats.get("openticket:global").setStat("openticket:tickets-closed",1,"increase")
+            await openticket.stats.get("openticket:user").setStat("openticket:tickets-closed",user.id,1,"increase")
 
             //update category
             const closeCategory = ticket.option.get("openticket:channel-category-closed").value

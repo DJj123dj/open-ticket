@@ -22,8 +22,8 @@ export const registerActions = async () => {
             ticket.get("openticket:busy").value = true
 
             //update stats
-            openticket.stats.get("openticket:global").setStat("openticket:tickets-claimed",1,"increase")
-            openticket.stats.get("openticket:user").setStat("openticket:tickets-claimed",user.id,1,"increase")
+            await openticket.stats.get("openticket:global").setStat("openticket:tickets-claimed",1,"increase")
+            await openticket.stats.get("openticket:user").setStat("openticket:tickets-claimed",user.id,1,"increase")
 
             //update category
             const rawClaimCategory = ticket.option.get("openticket:channel-categories-claimed").value.find((c) => c.user == user.id)

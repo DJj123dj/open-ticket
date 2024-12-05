@@ -74,8 +74,8 @@ export const registerCommandResponders = async () => {
                 ])
 
                 //manage stats
-                openticket.stats.get("openticket:global").setStat("openticket:users-blacklisted",1,"increase")
-                openticket.stats.get("openticket:user").setStat("openticket:users-blacklisted",user.id,1,"increase")
+                await openticket.stats.get("openticket:global").setStat("openticket:users-blacklisted",1,"increase")
+                await openticket.stats.get("openticket:user").setStat("openticket:users-blacklisted",user.id,1,"increase")
 
                 await instance.reply(await openticket.builders.messages.getSafe("openticket:blacklist-add").build(source,{guild,channel,user,data,reason}))
 

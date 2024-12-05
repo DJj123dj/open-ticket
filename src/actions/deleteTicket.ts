@@ -56,8 +56,8 @@ export const registerActions = async () => {
             }
 
             //update stats
-            openticket.stats.get("openticket:global").setStat("openticket:tickets-deleted",1,"increase")
-            openticket.stats.get("openticket:user").setStat("openticket:tickets-deleted",user.id,1,"increase")
+            await openticket.stats.get("openticket:global").setStat("openticket:tickets-deleted",1,"increase")
+            await openticket.stats.get("openticket:user").setStat("openticket:tickets-deleted",user.id,1,"increase")
 
             //delete ticket from manager
             openticket.tickets.remove(ticket.id)

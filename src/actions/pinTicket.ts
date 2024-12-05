@@ -22,8 +22,8 @@ export const registerActions = async () => {
             ticket.get("openticket:busy").value = true
             
             //update stats
-            openticket.stats.get("openticket:global").setStat("openticket:tickets-pinned",1,"increase")
-            openticket.stats.get("openticket:user").setStat("openticket:tickets-pinned",user.id,1,"increase")
+            await openticket.stats.get("openticket:global").setStat("openticket:tickets-pinned",1,"increase")
+            await openticket.stats.get("openticket:user").setStat("openticket:tickets-pinned",user.id,1,"increase")
 
             //move to top of category
             if (channel.parent){

@@ -17,8 +17,8 @@ export const registerActions = async () => {
             ticket.option = data
 
             //update stats
-            openticket.stats.get("openticket:global").setStat("openticket:tickets-moved",1,"increase")
-            openticket.stats.get("openticket:user").setStat("openticket:tickets-moved",user.id,1,"increase")
+            await openticket.stats.get("openticket:global").setStat("openticket:tickets-moved",1,"increase")
+            await openticket.stats.get("openticket:user").setStat("openticket:tickets-moved",user.id,1,"increase")
 
             //get new channel properties
             const channelPrefix = ticket.option.get("openticket:channel-prefix").value

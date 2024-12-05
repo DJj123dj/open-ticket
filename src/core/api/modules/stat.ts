@@ -53,18 +53,18 @@ export class ODStatsManager extends ODManager<ODStatScope> {
         }
         
         //delete all deletable stats
-        deletableStats.forEach((data) => {
+        for (const data of deletableStats){
             if (!this.database) return
-            this.database.delete(data.category,data.key)
-        })
+            await this.database.delete(data.category,data.key)
+        }
     }
     async reset(){
         if (!this.database) return
         const data = await this.database.getAll()
-        data.forEach((data) => {
+        for (const d of data){
             if (!this.database) return
-            this.database.delete(data.category,data.key)
-        })
+            await this.database.delete(d.category,d.key)
+        }
     }
     onInit(callback:ODStatsManagerInitCallback){
         this.#initListeners.push(callback)
@@ -90,10 +90,10 @@ export class ODStatScope extends ODManager<ODStat> {
     useDatabase(database:ODDatabase){
         this.database = database
     }
-    getStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    async getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         if (!this.database) return null
         const newId = new ODId(id)
-        const data = this.database.get(this.id.value+"_"+newId.value,scopeId)
+        const data = await this.database.get(this.id.value+"_"+newId.value,scopeId)
 
         if (typeof data == "undefined"){
             //set stats to default value & return
@@ -105,28 +105,28 @@ export class ODStatScope extends ODManager<ODStat> {
         //return null on error
         return null
     }
-    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean {
+    async setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         if (!this.database) return false
         const stat = this.get(id)
         if (!stat) return false
         if (mode == "set" || typeof value != "number"){
-            this.database.set(this.id.value+"_"+stat.id.value,scopeId,value)
+            await this.database.set(this.id.value+"_"+stat.id.value,scopeId,value)
         }else if (mode == "increase"){
             const currentValue = this.getStat(id,scopeId)
-            if (typeof currentValue != "number") this.database.set(this.id.value+"_"+stat.id.value,scopeId,0)
-            else this.database.set(this.id.value+"_"+stat.id.value,scopeId,currentValue+value)
+            if (typeof currentValue != "number") await this.database.set(this.id.value+"_"+stat.id.value,scopeId,0)
+            else await this.database.set(this.id.value+"_"+stat.id.value,scopeId,currentValue+value)
         }else if (mode == "decrease"){
             const currentValue = this.getStat(id,scopeId)
-            if (typeof currentValue != "number") this.database.set(this.id.value+"_"+stat.id.value,scopeId,0)
-            else this.database.set(this.id.value+"_"+stat.id.value,scopeId,currentValue-value)
+            if (typeof currentValue != "number") await this.database.set(this.id.value+"_"+stat.id.value,scopeId,0)
+            else await this.database.set(this.id.value+"_"+stat.id.value,scopeId,currentValue-value)
         }
         return true
     }
-    resetStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    async resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         if (!this.database) return null
         const stat = this.get(id)
         if (!stat) return null
-        if (stat.value != null) this.database.set(this.id.value+"_"+stat.id.value,scopeId,stat.value)
+        if (stat.value != null) await this.database.set(this.id.value+"_"+stat.id.value,scopeId,stat.value)
         return stat.value
     }
     init(): string[] {
@@ -149,7 +149,7 @@ export class ODStatScope extends ODManager<ODStat> {
                     result.push(await stat.render("",scopeId,guild,channel,user))
                 }else{
                     //normal render (with value)
-                    const value = this.getStat(stat.id,scopeId)
+                    const value = await this.getStat(stat.id,scopeId)
                     if (value != null) result.push(await stat.render(value,scopeId,guild,channel,user))
                 }
                 
@@ -163,13 +163,13 @@ export class ODStatScope extends ODManager<ODStat> {
 }
 
 export class ODStatGlobalScope extends ODStatScope {
-    getStat(id:ODValidId): ODValidStatValue|null {
+    getStat(id:ODValidId): Promise<ODValidStatValue|null> {
         return super.getStat(id,"GLOBAL")
     }
-    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean {
+    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         return super.setStat(id,"GLOBAL",value,mode)
     }
-    resetStat(id:ODValidId): ODValidStatValue|null {
+    resetStat(id:ODValidId): Promise<ODValidStatValue|null> {
         return super.resetStat(id,"GLOBAL")
     }
     render(scopeId:"GLOBAL", guild:discord.Guild, channel:discord.TextBasedChannel, user: discord.User): Promise<string> {

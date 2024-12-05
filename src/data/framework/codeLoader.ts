@@ -394,7 +394,7 @@ const loadAutoCode = () => {
                         await openticket.actions.get("openticket:close-ticket").run("autoclose",{guild:channel.guild,channel,user:openticket.client.client.user,ticket,reason:"Autoclose",sendMessage:false})
                         await channel.send((await openticket.builders.messages.getSafe("openticket:autoclose-message").build("timeout",{guild:channel.guild,channel,user:openticket.client.client.user,ticket})).message)
                         count++
-                        openticket.stats.get("openticket:global").setStat("openticket:tickets-autoclosed",1,"increase")
+                        await openticket.stats.get("openticket:global").setStat("openticket:tickets-autoclosed",1,"increase")
                     }
                 }
             }
@@ -420,7 +420,7 @@ const loadAutoCode = () => {
                         //autoclose ticket
                         await openticket.actions.get("openticket:close-ticket").run("autoclose",{guild:channel.guild,channel,user:openticket.client.client.user,ticket,reason:"Autoclose",sendMessage:false})
                         await channel.send((await openticket.builders.messages.getSafe("openticket:autoclose-message").build("leave",{guild:channel.guild,channel,user:openticket.client.client.user,ticket})).message)
-                        openticket.stats.get("openticket:global").setStat("openticket:tickets-autoclosed",1,"increase")
+                        await openticket.stats.get("openticket:global").setStat("openticket:tickets-autoclosed",1,"increase")
                     }
                 }
             }
@@ -447,7 +447,7 @@ const loadAutoCode = () => {
                         await channel.send((await openticket.builders.messages.getSafe("openticket:autodelete-message").build("timeout",{guild:channel.guild,channel,user:openticket.client.client.user,ticket})).message)
                         await openticket.actions.get("openticket:delete-ticket").run("autodelete",{guild:channel.guild,channel,user:openticket.client.client.user,ticket,reason:"Autodelete",sendMessage:false,withoutTranscript:false})
                         count++
-                        openticket.stats.get("openticket:global").setStat("openticket:tickets-autodeleted",1,"increase")
+                        await openticket.stats.get("openticket:global").setStat("openticket:tickets-autodeleted",1,"increase")
                     }
                 }
             }
@@ -473,7 +473,7 @@ const loadAutoCode = () => {
                         //autodelete ticket
                         await channel.send((await openticket.builders.messages.getSafe("openticket:autodelete-message").build("leave",{guild:channel.guild,channel,user:openticket.client.client.user,ticket})).message)
                         await openticket.actions.get("openticket:delete-ticket").run("autodelete",{guild:channel.guild,channel,user:openticket.client.client.user,ticket,reason:"Autodelete",sendMessage:false,withoutTranscript:false})
-                        openticket.stats.get("openticket:global").setStat("openticket:tickets-autodeleted",1,"increase")
+                        await openticket.stats.get("openticket:global").setStat("openticket:tickets-autodeleted",1,"increase")
                     }
                 }
             }

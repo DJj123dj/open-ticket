@@ -145,8 +145,8 @@ export const registerActions = async () => {
             })
 
             //update stats
-            openticket.stats.get("openticket:global").setStat("openticket:transcripts-created",1,"increase")
-            openticket.stats.get("openticket:user").setStat("openticket:transcripts-created",params.user.id,1,"increase")
+            await openticket.stats.get("openticket:global").setStat("openticket:transcripts-created",1,"increase")
+            await openticket.stats.get("openticket:user").setStat("openticket:transcripts-created",params.user.id,1,"increase")
             await openticket.events.get("afterTranscriptCreated").emit([openticket.transcripts,instance.result.ticket,instance.result.channel,instance.result.user])
         }),
         new api.ODWorker("openticket:logs",0,(instance,params,source,cancel) => {

@@ -92,24 +92,24 @@ export class ODStatGlobalScope_DefaultGlobal extends ODStatGlobalScope {
         return super.exists(id)
     }
 
-    getStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultGlobal>(id:StatsId): ODValidStatValue|null
-    getStat(id:ODValidId): ODValidStatValue|null
+    getStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultGlobal>(id:StatsId): Promise<ODValidStatValue|null>
+    getStat(id:ODValidId): Promise<ODValidStatValue|null>
 
-    getStat(id:ODValidId): ODValidStatValue|null {
+    getStat(id:ODValidId): Promise<ODValidStatValue|null> {
         return super.getStat(id)
     }
 
-    setStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultGlobal>(id:StatsId, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
-    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
+    setStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultGlobal>(id:StatsId, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
+    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
 
-    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean {
+    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         return super.setStat(id,value,mode)
     }
 
-    resetStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultGlobal>(id:ODValidId): ODValidStatValue|null
-    resetStat(id:ODValidId): ODValidStatValue|null
+    resetStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultGlobal>(id:ODValidId): Promise<ODValidStatValue|null>
+    resetStat(id:ODValidId): Promise<ODValidStatValue|null>
 
-    resetStat(id:ODValidId): ODValidStatValue|null {
+    resetStat(id:ODValidId): Promise<ODValidStatValue|null> {
         return super.resetStat(id)
     }
 }
@@ -151,24 +151,24 @@ export class ODStatGlobalScope_DefaultSystem extends ODStatGlobalScope {
         return super.exists(id)
     }
 
-    getStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultSystem>(id:StatsId): ODValidStatValue|null
-    getStat(id:ODValidId): ODValidStatValue|null
+    getStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultSystem>(id:StatsId): Promise<ODValidStatValue|null>
+    getStat(id:ODValidId): Promise<ODValidStatValue|null>
 
-    getStat(id:ODValidId): ODValidStatValue|null {
+    getStat(id:ODValidId): Promise<ODValidStatValue|null> {
         return super.getStat(id)
     }
 
-    setStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultSystem>(id:StatsId, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
-    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
+    setStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultSystem>(id:StatsId, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
+    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
 
-    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean {
+    setStat(id:ODValidId, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         return super.setStat(id,value,mode)
     }
 
-    resetStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultSystem>(id:ODValidId): ODValidStatValue|null
-    resetStat(id:ODValidId): ODValidStatValue|null
+    resetStat<StatsId extends keyof ODStatGlobalScopeIds_DefaultSystem>(id:ODValidId): Promise<ODValidStatValue|null>
+    resetStat(id:ODValidId): Promise<ODValidStatValue|null>
 
-    resetStat(id:ODValidId): ODValidStatValue|null {
+    resetStat(id:ODValidId): Promise<ODValidStatValue|null> {
         return super.resetStat(id)
     }
 }
@@ -219,24 +219,24 @@ export class ODStatScope_DefaultUser extends ODStatScope {
         return super.exists(id)
     }
 
-    getStat<StatsId extends keyof ODStatScopeIds_DefaultUser>(id:StatsId, scopeId:string): ODValidStatValue|null
-    getStat(id:ODValidId, scopeId:string): ODValidStatValue|null
+    getStat<StatsId extends keyof ODStatScopeIds_DefaultUser>(id:StatsId, scopeId:string): Promise<ODValidStatValue|null>
+    getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
 
-    getStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         return super.getStat(id,scopeId)
     }
 
-    setStat<StatsId extends keyof ODStatScopeIds_DefaultUser>(id:StatsId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
-    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
+    setStat<StatsId extends keyof ODStatScopeIds_DefaultUser>(id:StatsId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
+    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
 
-    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean {
+    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         return super.setStat(id,scopeId,value,mode)
     }
 
-    resetStat<StatsId extends keyof ODStatScopeIds_DefaultUser>(id:ODValidId, scopeId:string): ODValidStatValue|null
-    resetStat(id:ODValidId, scopeId:string): ODValidStatValue|null
+    resetStat<StatsId extends keyof ODStatScopeIds_DefaultUser>(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
+    resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
 
-    resetStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         return super.resetStat(id,scopeId)
     }
 }
@@ -282,24 +282,24 @@ export class ODStatScope_DefaultTicket extends ODStatScope {
         return super.exists(id)
     }
 
-    getStat<StatsId extends keyof ODStatScopeIds_DefaultTicket>(id:StatsId, scopeId:string): ODValidStatValue|null
-    getStat(id:ODValidId, scopeId:string): ODValidStatValue|null
+    getStat<StatsId extends keyof ODStatScopeIds_DefaultTicket>(id:StatsId, scopeId:string): Promise<ODValidStatValue|null>
+    getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
 
-    getStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         return super.getStat(id,scopeId)
     }
 
-    setStat<StatsId extends keyof ODStatScopeIds_DefaultTicket>(id:StatsId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
-    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
+    setStat<StatsId extends keyof ODStatScopeIds_DefaultTicket>(id:StatsId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
+    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
 
-    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean {
+    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         return super.setStat(id,scopeId,value,mode)
     }
 
-    resetStat<StatsId extends keyof ODStatScopeIds_DefaultTicket>(id:ODValidId, scopeId:string): ODValidStatValue|null
-    resetStat(id:ODValidId, scopeId:string): ODValidStatValue|null
+    resetStat<StatsId extends keyof ODStatScopeIds_DefaultTicket>(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
+    resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
 
-    resetStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         return super.resetStat(id,scopeId)
     }
 }
@@ -340,24 +340,24 @@ export class ODStatScope_DefaultParticipants extends ODStatScope {
         return super.exists(id)
     }
 
-    getStat<StatsId extends keyof ODStatScopeIds_DefaultParticipants>(id:StatsId, scopeId:string): ODValidStatValue|null
-    getStat(id:ODValidId, scopeId:string): ODValidStatValue|null
+    getStat<StatsId extends keyof ODStatScopeIds_DefaultParticipants>(id:StatsId, scopeId:string): Promise<ODValidStatValue|null>
+    getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
 
-    getStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         return super.getStat(id,scopeId)
     }
 
-    setStat<StatsId extends keyof ODStatScopeIds_DefaultParticipants>(id:StatsId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
-    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean
+    setStat<StatsId extends keyof ODStatScopeIds_DefaultParticipants>(id:StatsId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
+    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean>
 
-    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): boolean {
+    setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         return super.setStat(id,scopeId,value,mode)
     }
 
-    resetStat<StatsId extends keyof ODStatScopeIds_DefaultParticipants>(id:ODValidId, scopeId:string): ODValidStatValue|null
-    resetStat(id:ODValidId, scopeId:string): ODValidStatValue|null
+    resetStat<StatsId extends keyof ODStatScopeIds_DefaultParticipants>(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
+    resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null>
 
-    resetStat(id:ODValidId, scopeId:string): ODValidStatValue|null {
+    resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         return super.resetStat(id,scopeId)
     }
 }

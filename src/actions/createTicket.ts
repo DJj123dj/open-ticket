@@ -159,8 +159,8 @@ export const registerActions = async () => {
             ])
 
             //manage stats
-            openticket.stats.get("openticket:global").setStat("openticket:tickets-created",1,"increase")
-            openticket.stats.get("openticket:user").setStat("openticket:tickets-created",user.id,1,"increase")
+            await openticket.stats.get("openticket:global").setStat("openticket:tickets-created",1,"increase")
+            await openticket.stats.get("openticket:user").setStat("openticket:tickets-created",user.id,1,"increase")
 
             //manage bot permissions
             await openticket.events.get("onTicketPermissionsCreated").emit([option,openticket.permissions,channel,user])
@@ -187,7 +187,7 @@ export const registerActions = async () => {
                 ticket.get("openticket:ticket-message").value = msg.id
                 
                 //manage stats
-                openticket.stats.get("openticket:ticket").setStat("openticket:messages-sent",ticket.id.value,1,"increase")
+                await openticket.stats.get("openticket:ticket").setStat("openticket:messages-sent",ticket.id.value,1,"increase")
                 
                 await openticket.events.get("afterTicketMainMessageCreated").emit([ticket,msg,channel,user])
         }catch(err){
