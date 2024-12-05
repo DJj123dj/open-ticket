@@ -94,7 +94,7 @@
     },
     "actions":{
         "buttons":{
-            "create":"Visitar Ticket",
+            "create":"Veure Ticket",
             "close":"Tancar Ticket",
             "delete":"Eliminar Ticket",
             "reopen":"Reobrir Ticket",
@@ -207,8 +207,8 @@
             "pinDm":"El teu ticket ha estat fixat al nostre servidor!",
             "unpinLog":"Aquest ticket ha estat desfixat per {0}!",
             "unpinDm":"El teu ticket ha estat desfixat al nostre servidor!",
-            "renameLog":"Aquest ticket ha estat renomenat a {0} per {1}!",
-            "renameDm":"El teu ticket ha estat renomenat a {0} al nostre servidor!",
+            "renameLog":"Aquest ticket ha estat renombrat a {0} per {1}!",
+            "renameDm":"El teu ticket ha estat renombrat a {0} al nostre servidor!",
             "moveLog":"Aquest ticket ha estat mogut a {0} per {1}!",
             "moveDm":"El teu ticket ha estat mogut a {0} al nostre servidor!",
             "addLog":"{0} ha estat afegit a aquest ticket per {1}!",
@@ -225,7 +225,7 @@
     },
     "transcripts":{
         "success":{
-            "visit":"Visitar Transcripció",
+            "visit":"Veure Transcripció",
             "ready":"Transcripció Creada",
             "textFileDescription":"Aquesta és la transcripció de text d'un ticket eliminat!",
             "htmlProgress":"Si us plau, espera mentre aquesta transcripció html es processa...",
