@@ -16,7 +16,7 @@
 
 <p align="center">
 Open Ticket is the most advanced & customisable discord ticket bot that you will ever find! You can customise up to 300+ variables! This includes <code>Html Transcripts</code>, <code>Advanced Plugins</code>, <code>Custom Embeds</code>, <code>Questions/Modals</code>, <code>Stats</code> & more!
-You're also able to customise every little aspect of the bot! From embeds to transcripts. Open Ticket is also translated in more than <code>32 Languages</code>! If you need any help, feel free to join our <a href="https://discord.dj-dj.be">discord server</a>!
+You're also able to customise every little aspect of the bot! From embeds to transcripts. Open Ticket is also translated in more than <code>18 Languages</code>! If you need any help, feel free to join our <a href="https://discord.dj-dj.be">discord server</a>!
 </p>
 
 <p align="center"><b>⭐️ Help us grow by giving a star! ⭐️</b></p>
@@ -129,12 +129,12 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |🇮🇹 Italian            |fraden1mvp.               |🟢 Up To Date                |
 |🇩🇰 Danish             |the_gamer                 |🟢 Up To Date                |
 |🇹🇭 Thai               |modshd                    |🟢 Up To Date                |
+|🇹🇷 Turkish            |palestinian               |🟢 Up To Date                |
+|🇫🇷 French             |guillee.3                 |🟢 Up To Date                |
 |🇪🇪 Estonian           |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇮 Finnish            |iamnotmega                |🔵 Up To Date (ChatGPT)      |
-|🇫🇷 French             |sankedev & tostam         |🟠 Temporary Outdated (beta) |
 |🇦🇪 Arabic             |deqressing                |🟠 Temporary Outdated (beta) |
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
-|🇹🇷 Turkish            |0x15d3                    |🟠 Temporary Outdated (beta) |
 |🇵🇱 Polish             |mkevas                    |🟠 Temporary Outdated (beta) |
 |🇳🇴 Norwegian          |noonenook                 |🟠 Temporary Outdated (beta) |
 |❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
