@@ -21,6 +21,7 @@ export const loadAllLanguages = async () => {
     openticket.languages.add(new api.ODJsonLanguage("openticket:thai","thai.json"))
     openticket.languages.add(new api.ODJsonLanguage("openticket:turkish","turkish.json"))
     openticket.languages.add(new api.ODJsonLanguage("openticket:french","french.json"))
+    openticket.languages.add(new api.ODJsonLanguage("openticket:arabic","arabic.json"))
 
     /** How to add more languages?
      * - Register the language to the manager (see above)

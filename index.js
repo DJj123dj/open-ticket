@@ -4,7 +4,8 @@ const nodepath = require('path')
 
 /////////////// STARTUP FLAGS ///////////////
 const flags = [
-    //add startup flags here (e.g. "--no-compile")
+    //PTERODACTYL PANEL
+    //add startup flags here (e.g. "--no-compile") when running via the panel
 ]
 process.argv.push(...flags)
 /////////////// STARTUP FLAGS ///////////////
