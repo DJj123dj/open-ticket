@@ -83,9 +83,15 @@ export const registerActions = async () => {
                 })
             })
             ticket.get("openticket:participants").value.forEach((participant) => {
-                //all participants that aren't roles/admins => readonly
+                //all participants that aren't roles/admins => readonly (OR non-viewable when enabled)
                 if (participant.type == "user"){
-                    permissions.push({
+                    if (generalConfig.data.system.removeParticipantsOnClose) permissions.push({
+                        type:discord.OverwriteType.Member,
+                        id:participant.id,
+                        allow:[],
+                        deny:["SendMessages","AddReactions","AttachFiles","SendPolls","ViewChannel","ReadMessageHistory"]
+                    })
+                    else permissions.push({
                         type:discord.OverwriteType.Member,
                         id:participant.id,
                         allow:["ViewChannel","ReadMessageHistory"],
