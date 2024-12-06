@@ -133,13 +133,17 @@ export const loadDatabaseCleanersCode = async () => {
     }))
 
     //OPTION DATABASE CLEANER
-    openticket.code.add(new api.ODCode("openticket:option-database-cleaner",10,() => {
+    openticket.code.add(new api.ODCode("openticket:option-database-cleaner",10,async () => {
         //delete all unused options (async)
-        openticket.options.getAll().forEach(async (option) => {
-            if (await optionDatabase.exists("openticket:used-option",option.id.value) && !openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
-                await optionDatabase.delete("openticket:used-option",option.id.value)
+        for (const option of (await optionDatabase.getCategory("openticket:used-option") ?? [])){
+            if (!openticket.options.exists(option.key)){
+                //remove because option isn't loaded into memory (0 tickets require it)
+                await optionDatabase.delete("openticket:used-option",option.key)
+            }else if (!openticket.tickets.getAll().some((ticket) => ticket.option.id.value == option.key)){
+                //remove when loaded into memory (0 tickets require it)
+                await optionDatabase.delete("openticket:used-option",option.key)
             }
-        })
+        }
     }))
 
     //USER DATABASE CLEANER (full async/parallel because it takes a lot of time)
