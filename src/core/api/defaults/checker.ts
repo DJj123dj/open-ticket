@@ -77,7 +77,7 @@ export class ODCheckerRenderer_Default extends ODCheckerRenderer {
         const t = {
             headerOpenticket:tm.get("other","openticket:header-openticket") ?? "OPEN TICKET",
             headerConfigchecker:tm.get("other","openticket:header-configchecker") ?? "CONFIG CHECKER",
-            headerDescription:tm.get("other","openticket:header-description") ?? "check for errors in you config files!",
+            headerDescription:tm.get("other","openticket:header-description") ?? "check for errors in your config files!",
             footerError:tm.get("other","openticket:footer-error") ?? "the bot won't start until all {0}'s are fixed!",
             footerWarning:tm.get("other","openticket:footer-warning") ?? "it's recommended to fix all {0}'s before starting!",
             footerSupport:tm.get("other","openticket:footer-support") ?? "SUPPORT: {0} - DOCS: {1}",

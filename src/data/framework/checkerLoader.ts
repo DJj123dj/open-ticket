@@ -32,7 +32,7 @@ export const registerDefaultCheckerSystemTranslations = (tm:api.ODCheckerTransla
     tm.quickTranslate(lm,"checker.system.typeWarning","other","openticket:type-warning") // [WARNING] (ignore)
     tm.quickTranslate(lm,"checker.system.typeInfo","other","openticket:type-info") // [INFO] (ignore)
     tm.quickTranslate(lm,"checker.system.headerConfigChecker","other","openticket:header-configchecker") // CONFIG CHECKER
-    tm.quickTranslate(lm,"checker.system.headerDescription","other","openticket:header-description") // check for errors in you config files!
+    tm.quickTranslate(lm,"checker.system.headerDescription","other","openticket:header-description") // check for errors in your config files!
     tm.quickTranslate(lm,"checker.system.footerError","other","openticket:footer-error") // the bot won't start until all {0}'s are fixed!
     tm.quickTranslate(lm,"checker.system.footerWarning","other","openticket:footer-warning") // it's recommended to fix all {0}'s before starting!
     tm.quickTranslate(lm,"checker.system.footerSupport","other","openticket:footer-support") // SUPPORT: {0} - DOCS: {1}

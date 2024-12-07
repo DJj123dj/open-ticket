@@ -34,9 +34,11 @@ export const loadVersionMigrationSystem = async () => {
 const preloadMigrationContext = async () => {
     openticket.debug.debug("-- MIGRATION CONTEXT START --")
     await (await import("../../data/framework/flagLoader.js")).loadAllFlags()
-    openticket.flags.init()
+    await openticket.flags.init()
     await (await import("../../data/framework/configLoader.js")).loadAllConfigs()
+    await openticket.configs.init()
     await (await import("../../data/framework/databaseLoader.js")).loadAllDatabases()
+    await openticket.databases.init()
     openticket.debug.visible = true
 }
 

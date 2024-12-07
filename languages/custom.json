@@ -13,7 +13,7 @@
             "typeWarning":"[WARNING]",
             "typeInfo":"[INFO]",
             "headerConfigChecker":"CONFIG CHECKER",
-            "headerDescription":"check for errors in you config files!",
+            "headerDescription":"check for errors in your config files!",
             "footerError":"the bot won't start until all {0}'s are fixed!",
             "footerWarning":"it's recommended to fix all {0}'s before starting!",
             "footerSupport":"SUPPORT: {0} - DOCS: {1}",
