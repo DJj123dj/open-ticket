@@ -7,7 +7,6 @@ import * as discord from "discord.js"
 /////////////////////////////////////////////
 
 if (utilities.project != "openticket") throw new api.ODPluginError("This plugin only works in Open Ticket!")
-if (!utilities.isBeta) throw new api.ODPluginError("This plugin is made for the beta version of Open Ticket!")
 
 //Add Typescript autocomplete support for plugin data. (!!!OPTIONAL!!!)
 declare module "../../src/core/api/api.js" {
