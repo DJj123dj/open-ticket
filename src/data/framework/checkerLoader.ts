@@ -301,7 +301,7 @@ export const defaultOptionsStructure = new api.ODCheckerArrayStructure("opentick
         //TICKET BUTTON
         {key:"button",optional:false,priority:0,checker:new api.ODCheckerObjectStructure("openticket:ticket-button",{children:[
             {key:"emoji",optional:false,priority:0,checker:new api.ODCheckerCustomStructure_EmojiString("openticket:ticket-button-emoji",0,1,true)},
-            {key:"label",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-label",{maxLength:50})},
+            {key:"label",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-label",{maxLength:80})},
             {key:"color",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-color",{choices:["gray","red","green","blue"]})},
         ],custom:(checker,value,locationTrace,locationId,locationDocs) => {
             const lt = checker.locationTraceDeref(locationTrace)
@@ -385,7 +385,7 @@ export const defaultOptionsStructure = new api.ODCheckerArrayStructure("opentick
         //WEBSITE BUTTON
         {key:"button",optional:false,priority:0,checker:new api.ODCheckerObjectStructure("openticket:ticket-button",{children:[
             {key:"emoji",optional:false,priority:0,checker:new api.ODCheckerCustomStructure_EmojiString("openticket:ticket-button-emoji",0,1,true)},
-            {key:"label",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-label",{maxLength:50})},
+            {key:"label",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-label",{maxLength:80})},
         ],custom:(checker,value,locationTrace,locationId,locationDocs) => {
             const lt = checker.locationTraceDeref(locationTrace)
             //check if emoji & label exists
@@ -410,7 +410,7 @@ export const defaultOptionsStructure = new api.ODCheckerArrayStructure("opentick
         //ROLE BUTTON
         {key:"button",optional:false,priority:0,checker:new api.ODCheckerObjectStructure("openticket:ticket-button",{children:[
             {key:"emoji",optional:false,priority:0,checker:new api.ODCheckerCustomStructure_EmojiString("openticket:ticket-button-emoji",0,1,true)},
-            {key:"label",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-label",{maxLength:50})},
+            {key:"label",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-label",{maxLength:80})},
             {key:"color",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:ticket-button-color",{choices:["gray","red","green","blue"]})},
         ],custom:(checker,value,locationTrace,locationId,locationDocs) => {
             const lt = checker.locationTraceDeref(locationTrace)

@@ -398,7 +398,7 @@ export interface ODCheckerMessage {
  * This interface has the basic options for the `ODCheckerStructure`!
  */
 export interface ODCheckerStructureOptions {
-    /**Add a custom checker function */
+    /**Add a custom checker function. Returns `true` when valid. */
     custom?:(checker:ODChecker, value:ODValidJsonType, locationTrace:ODCheckerLocationTrace, locationId:ODId, locationDocs:string|null) => boolean,
     /**Set the url to the documentation of this variable. */
     docs?:string
