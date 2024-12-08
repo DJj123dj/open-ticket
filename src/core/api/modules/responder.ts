@@ -217,8 +217,8 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
-    getMentionable(name:string,required:true): discord.User|discord.Role
-    getMentionable(name:string,required:false): discord.User|discord.Role|null
+    getMentionable(name:string,required:true): discord.User|discord.GuildMember|discord.Role
+    getMentionable(name:string,required:false): discord.User|discord.GuildMember|discord.Role|null
     getMentionable(name:string,required:boolean){
         if (this.#interaction instanceof discord.ChatInputCommandInteraction){
             try {
@@ -229,7 +229,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else if (this.#interaction instanceof discord.Message){
             const opt = this.#options.find((opt) => opt.type == "mentionable" && opt.name == name)
-            if (opt && (opt.value instanceof discord.User || opt.value instanceof discord.Role)) return opt.value
+            if (opt && (opt.value instanceof discord.User || opt.value instanceof discord.GuildMember || opt.value instanceof discord.Role)) return opt.value
             else return null
 
         }else return null
