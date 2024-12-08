@@ -57,27 +57,41 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 <img alt="Example Panel 2" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/panel-2.png">
 
 ## 🧩 Plugins
-View all available Open Ticket plugins in our [Official Plugin Repository](https://github.com/DJj123dj/open-discord-plugins)!
+**Download all plugins in our [Official Plugin Repository](https://github.com/DJj123dj/open-discord-plugins)!**
 
 ### 📦 Official *(made by DJdj Development)*
-|Name                                                                 |Category                    |Description              |
-|---------------------------------------------------------------------|----------------------------|-------------------------|
-|[`example-plugin`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-plugin/)                     |Example                     |This is just an example plugin for people that want to create their own plugin. |
-|[`example-command`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-command/)                   |Example                     |Sample custom command using the Open Discord system. |
-|[`ot-jump-to-top`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-jump-to-top/)                     |Command                     |Add a simple command to jump to the top of the ticket. |
-|[`ot-kill-switch`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-kill-switch/)                     |Command                     |Temporarily disable the ticket system using a kill switch. |
-|[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)       |Channel Management          |Simple plugin to keep the channel prefix when using the /rename command. |
-|[`ot-no-slash-clear`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-no-slash-clear/)               |Development                 |Disable the automatic removal of slash commands that aren't used by Open Ticket. |
-|[`ot-better-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-better-status/)                 |Client Activity             |An advanced status plugin to rotate between states. It also allows for the use of variables. |
-|[`ot-sqlite-database`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-sqlite-database/)             |Database                    |With this plugin, the database will be an SQLite file. It's a must-have for large servers! |
-|[`ot-ticket-message-extras`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-ticket-message-extras/) |Customisation               |A plugin which adds a few little features to the ticket message. |
-
+|Name                                                                  |Category                    |Description              |
+|----------------------------------------------------------------------|----------------------------|-------------------------|
+|[`example-plugin`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-plugin/)                     |📄 Example                  |This is just an example plugin for people that want to create their own plugin. |
+|[`example-command`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/example-command/)                   |📄 Example                  |Sample custom command using the Open Discord system. |
+|[`ot-jump-to-top`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-jump-to-top/)                     |📢 Command                  |Add a simple command to jump to the top of the ticket. |
+|[`ot-kill-switch`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-kill-switch/)                     |📢 Command                  |Temporarily disable the ticket system using a kill switch. |
+|[`ot-hosting-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-hosting-status/)               |📢 Command                  |A simple command to send hosting status updates to a channel. |
+|[`ot-sqlite-database`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-sqlite-database/)             |⚙️ Utility                  |With this plugin, the database will be an SQLite file. It's a must-have for large servers! |
+|[`ot-no-slash-clear`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-no-slash-clear/)               |⚙️ Utility                  |Disable the automatic removal of slash commands that aren't used by Open Ticket. |
+|[`ot-migrate-v3`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-migrate-v3/)                       |⚙️ Utility                  |Use this plugin to migrate all tickets from Open Ticket v3 to v4. |
+|[`ot-ticket-message-extras`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-ticket-message-extras/) |🎨 Customisation            |A plugin which adds a few little features to the ticket message. |
+|[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)       |🎨 Customisation            |Simple plugin to keep the channel prefix when using the /rename command. |
+|[`ot-customise-buttons`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-customise-buttons/)         |🎨 Customisation            |Customise almost all built-in buttons. This includes the claim, reopen, close & delete buttons. |
+|[`ot-alt-detector`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-alt-detector/)                   |💼 Management               |Use the discord-alt-detector npm package by DJdj Development in your ticket bot. |
+|[`ot-alt-detector`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-alt-detector/)                   |💼 Management               |Use the discord-alt-detector npm package by DJdj Development in your ticket bot. |
+|[`ot-embeds`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-embeds/)                               |💼 Management               |Create custom premade embeds in the config or use the command to create one from scratch. |
+|[`ot-better-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-better-status/)                 |🤖 Client                   |An advanced status plugin to rotate between states. It also allows for the use of variables. |
 
 ### ✅ Verified *(made by community)*
 |Name                                                                 |Author                      |Category                    |Description              |
 |---------------------------------------------------------------------|----------------------------|----------------------------|-------------------------|
-|[`ot-config-reload`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-config-reload/)                |guillee.3                   |Config                      |This plugin adds a new command that allows reloading the Open Ticket config files without the need for a restart. |
-|[`ot-feedback`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-feedback/)                          |an_developer                |Feedback System             |A plugin to gather feedback of your support service. |
+|[`ot-config-reload`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-config-reload/)                |guillee.3                   |⚙️ Utility                  |This plugin adds a new command that allows reloading the Open Ticket config files without the need for a restart. |
+|[`ot-feedback`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-feedback/)                          |an_developer                |💼 Management               |A plugin to gather feedback of your support service. |
+|[`ot-assign-role`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-assign-role/)                    |rapid.fast                  |💼 Management               |This plugin assigns a predefined role to a user upon creating a ticket. |
+
+### 📢 Categories
+- **📄 Example** - These plugins serve as an example or starting template.
+- **📢 Command** - These plugins add new commands to the bot.
+- **⚙️ Utility** - These plugins help with backend & systems. You won't notice it in discord itself.
+- **🎨 Customisation** - These plugins help you customise the bot even further.
+- **💼 Management** - These plugins add features that help you manage your server.
+- **🤖 Client** - These plugins add features affecting the discord client or bot itself.
 
 ## 🛠️ Contributors
 ### 🖥️ Team
