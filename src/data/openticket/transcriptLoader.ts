@@ -448,15 +448,24 @@ export const loadAllTranscriptCompilers = async () => {
         
         const req = new ODHTTPHtmlPostRequest("apis.dj-dj.be",htmlFinal)
         const res = await req.run()
+        //check status
         if (!res || res.status != 200 || !res.body){
-            if (res.status == 429) return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts due to Ratelimt! Try again in a few minutes!",messages,data:null}
-            else return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts!",messages,data:null}
+            //ratelimit error
+            if (res.status == 429) return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (Ratelimit)\nTry again in a few minutes!",messages,data:null}
+            
+            //unknown status error
+            openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+            return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (Unknown Error)",messages,data:null}
         }
+        //check body
         try{
             var data: api.ODTranscriptHtmlV2Response = JSON.parse(res.body)
-            if (!data || data["status"] != "success") return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (Status: Error)",messages,data:null}
+            if (!data || data["status"] != "success"){
+                openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+                return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (Server 500 Error)",messages,data:null}}
         }catch{
-            return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts due to JSON parse error!",messages,data:null}
+            openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+            return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (JSON parse error)",messages,data:null}
         }
 
         const url = "https://transcripts.dj-dj.be/v2/"+data.time+"_"+data.id+".html"

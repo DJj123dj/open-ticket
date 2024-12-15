@@ -246,6 +246,8 @@ export class ODTranscriptCollector {
                         }
                     }
                 }catch{}
+            
+            //DEPRECATED WARNING!!! => msg.interaction might break in a future version of discord.js => required for slash command name
             }else if (msg.interaction && msg.interaction.type == discord.InteractionType.ApplicationCommand){
                 //slash command reply
                 const member = await msg.guild.members.fetch(msg.interaction.user.id)
