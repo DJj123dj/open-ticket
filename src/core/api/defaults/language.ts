@@ -464,6 +464,7 @@ export interface ODLanguageManagerIds_Default {
     "openticket:turkish":ODLanguage,
     "openticket:french":ODLanguage,
     "openticket:arabic":ODLanguage,
+    "openticket:hindi":ODLanguage,
     //ADD NEW LANGUAGES HERE!!!
 }
 
