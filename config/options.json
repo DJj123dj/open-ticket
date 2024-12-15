@@ -70,13 +70,13 @@
         "autoclose":{
             "enableInactiveHours":false,
             "inactiveHours":24,
-            "enableUserLeave":true,
+            "enableUserLeave":false,
             "disableOnClaim":false
         },
         "autodelete":{
             "enableInactiveDays":false,
             "inactiveDays":7,
-            "enableUserLeave":true,
+            "enableUserLeave":false,
             "disableOnClaim":false
         },
         "cooldown":{
