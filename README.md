@@ -95,15 +95,17 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 
 ## 🛠️ Contributors
 ### 🖥️ Team
-The team behind Open Ticket!
+This is the main team working on Open Ticket. Don't forget to check their profiles!
 <table>
 <tr>
 <td><img src="https://github.com/DJj123dj.png" alt="Profile Picture" width="80px"></td>
 <td><img src="https://github.com/Sank34.png" alt="Profile Picture" width="80px"></td>
+<td><img src="https://github.com/smetsliam.png" alt="Profile Picture" width="80px"></td>
 </tr>
 <tr>
-<th><a href="https://github.com/DJj123dj">DJj123dj</a></th>
-<th><a href="https://github.com/Sank34">Sanke</a></th>
+<th><a href="https://github.com/DJj123dj">💻 DJj123dj</a></th>
+<th><a href="https://github.com/Sank34">💬 Sanke</a></th>
+<th><a href="https://github.com/smetsliam">💬 DevBack</a></th>
 </tr>
 </table>
 
