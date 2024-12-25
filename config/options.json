@@ -30,7 +30,7 @@
         
         "dmMessage":{
             "enabled":false,
-            "text":"Thanks for creating a ticket in our server! (or leave empty)",
+            "text":"Thank you for creating a ticket in our server! (or leave empty)",
             "embed":{
                 "enabled":false,
                 "title":"Embed Title! (or leave empty)",
@@ -51,7 +51,7 @@
             "embed":{
                 "enabled":true,
                 "title":"Question Ticket",
-                "description":"Thanks for creating a 'Question' ticket in our server!\nOur support team will help you soon!",
+                "description":"Thank you for creating a 'Question' ticket in our server!\nOur support team will help you as soon as possible!",
                 "customColor":"#f8ab00 (or leave empty)",
 
                 "image":"https://www.example.com/image.png (or leave empty)",
