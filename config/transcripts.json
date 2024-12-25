@@ -31,15 +31,13 @@
         "background":{
             "enableCustomBackground":false,
             "backgroundColor":"#f8ba00 (or leave empty)",
-            "backgroundImage":"https://www.example.com/image.png (or leave empty)"
-            
+            "backgroundImage":"https://www.example.com/image.png (or leave empty)" 
         },
         "header":{
             "enableCustomHeader":false,
             "backgroundColor":"#202225",
             "decoColor":"#f8ba00",
             "textColor":"#ffffff"
-            
         },
         "stats":{
             "enableCustomStats":false,
