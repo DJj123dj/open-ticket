@@ -35,5 +35,9 @@
         "url": "https://github.com/DJj123dj/open-ticket/issues",
         "email": "support@dj-dj.be"
     },
-    "homepage": "https://openticket.dj-dj.be"
+    "homepage": "https://openticket.dj-dj.be",
+    "imports": {
+        "#opendiscord":"./dist/src/index.js",
+        "#opendiscord-types":"./dist/src/core/api/api.js"
+    }
 }

@@ -1,4 +1,4 @@
-import {api, openticket, utilities} from "../../src/index"
+import {api, openticket, utilities} from "#opendiscord"
 import * as discord from "discord.js"
 
 /////////////////////////////////////////////
@@ -9,7 +9,7 @@ import * as discord from "discord.js"
 if (utilities.project != "openticket") throw new api.ODPluginError("This plugin only works in Open Ticket!")
 
 //Add Typescript autocomplete support for plugin data. (!!!OPTIONAL!!!)
-declare module "../../src/core/api/api.js" {
+declare module "#opendiscord-types" {
     export interface ODConfigManagerIds_Default {
         "example-plugin:config":api.ODJsonConfig
     }
