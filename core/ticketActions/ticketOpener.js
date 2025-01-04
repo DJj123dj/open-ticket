@@ -79,7 +79,7 @@ module.exports = () => {
 
                 //set @everyone no ticket access
                 permissionsArray.push({
-                    id:interaction.guild.roles.everyone,
+                    id:interaction.guild.roles.everyone.id,
                     type:"role",
                     allow:[],
                     deny:[pfb.ViewChannel]
@@ -87,7 +87,7 @@ module.exports = () => {
 
                 //add the user that created the ticket
                 permissionsArray.push({
-                    id:interaction.member.user,
+                    id:interaction.member.id,
                     type:"member",
                     allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel,pfb.ReadMessageHistory]
                 })
@@ -99,7 +99,7 @@ module.exports = () => {
                         if (!adminrole) return
 
                         permissionsArray.push({
-                            id:adminrole,
+                            id:adminrole.id,
                             type:"role",
                             allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel,pfb.ReadMessageHistory]
                         })
@@ -118,7 +118,7 @@ module.exports = () => {
                             if (!adminrole) return
                         
                             permissionsArray.push({
-                                id:adminrole,
+                                id:adminrole.id,
                                 type:"role",
                                 allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel,pfb.ReadMessageHistory]
                             })
@@ -135,7 +135,7 @@ module.exports = () => {
                                 if (!adminrole) return
 
                                 permissionsArray.push({
-                                    id:adminrole,
+                                    id:adminrole.id,
                                     type:"role",
                                     allow:[pfb.AddReactions,pfb.ViewChannel,pfb.ReadMessageHistory],
                                     deny:[pfb.SendMessages,pfb.AttachFiles,pfb.EmbedLinks]
@@ -151,7 +151,7 @@ module.exports = () => {
                         const userrole = guild.roles.cache.find(r => r.id == config.system.memberRole)
                         if (userrole){
                             permissionsArray.push({
-                                id:userrole,
+                                id:userrole.id,
                                 type:"role",
                                 deny:[pfb.ViewChannel]
                             })
