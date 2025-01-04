@@ -415,7 +415,7 @@ exports.checker = async () => {
         }
     })
     
-    checkHexColor(config.color,"main_color")
+    checkHexColor(config.color,"color")
     checkDiscord("serverid",config.serverId,"serverId")
 
     if (!require("./api/api.json").disable.checkerjs.token && !config.token.fromENV) checkToken(config.token.value)
@@ -462,7 +462,7 @@ exports.checker = async () => {
         "vietnamese"
     ]
     if (!languageList.some((l) => config.languageFile.startsWith(l))){
-        createError("'languageFile' | invalid language, more info in the wiki")
+        createError("'languageFile' | invalid language, more info in the documentation")
     }
 
     //status:
