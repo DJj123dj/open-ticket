@@ -72,7 +72,7 @@ module.exports = () => {
 
         if (!permsChecker.ticket(interaction.user.id,interaction.guild.id,ticketId)){
             permsChecker.sendUserNoPerms(interaction.user)
-            return interaction.reply({content:":x: "+l.errors.noPermsTitle,ephemeral:true})
+            return interaction.reply({content:":x: "+l.errors.noPermsTitle,flags:["Ephemeral"]})
         }
 
         await interaction.deferReply()

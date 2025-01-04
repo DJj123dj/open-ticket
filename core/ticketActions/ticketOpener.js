@@ -51,7 +51,7 @@ module.exports = () => {
 
             if (interaction.isButton() || interaction.isStringSelectMenu() || interaction.isChatInputCommand()){
                 try{
-                    await interaction.deferReply({ephemeral:config.system.answerInEphemeralOnOpen})
+                    await interaction.deferReply({flags:config.system.answerInEphemeralOnOpen ? ["Ephemeral"] : undefined})
                 }catch{}
             }
 
