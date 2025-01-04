@@ -116,14 +116,14 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
         const pfb = discord.PermissionFlagsBits
 
         if (!isDatabaseError) permissionArray.push({
-            id:ticketOpener,
+            id:ticketOpener.id,
             type:"member",
             allow:[pfb.ViewChannel],
             deny:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages]
         })
 
         permissionArray.push({
-            id:guild.roles.everyone,
+            id:guild.roles.everyone.id,
             type:"role",
             deny:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel]
         })
@@ -135,7 +135,7 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
                 if (!adminrole) return
 
                 permissionArray.push({
-                    id:adminrole,
+                    id:adminrole.id,
                     type:"role",
                     allow:[pfb.AddReactions,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages,pfb.ViewChannel],
                     deny:[]
@@ -163,7 +163,7 @@ exports.closeManager = async (member,channel,prefix,mode,reason,nomessage) => {
                     if (!adminrole) return
                 
                     permissionArray.push({
-                        id:adminrole,
+                        id:adminrole.id,
                         type:"role",
                         allow:[pfb.AddReactions,pfb.ViewChannel,pfb.AttachFiles,pfb.EmbedLinks,pfb.SendMessages],
                         deny:[]
