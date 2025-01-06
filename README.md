@@ -27,6 +27,7 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 
 ### 📌 Features
 - **💩 no bloat/credits** - Your Open Ticket bot doesn't contain any form of bloat or credits!
+- **🔒 tested & secure** - Open Ticket has been tested by thousands of servers and is very secure!
 - **📈 scalable** - Open Ticket is made to handle huge servers! Even if your server contains more than 100k members!
 - **📄 html transcripts** - Make use of the most customisable, beautiful and easy-to-use HTML Transcripts!
 - **✅ ticket actions** - Close, Reopen, Delete, Rename & Move all your tickets!
@@ -183,4 +184,4 @@ Please help us grow by giving a star! It would help us a lot!
 **README.md**<br>
 [changelog](https://otgithub.dj-dj.be/releases) - [documentation](https://otdocs.dj-dj.be) - [tutorial](https://www.youtube.com/watch?v=2jK9kAf6ASU) - [website](https://openticket.dj-dj.be) - [discord](https://discord.dj-dj.be)<br>
 
-© 2024 - [DJdj Development](https://www.dj-dj.be) - [Terms](https://www.dj-dj.be/terms#terms) - [Privacy Policy](https://www.dj-dj.be/terms#privacy)
+© 2025 - [DJdj Development](https://www.dj-dj.be) - [Terms](https://www.dj-dj.be/terms#terms) - [Privacy Policy](https://www.dj-dj.be/terms#privacy)
