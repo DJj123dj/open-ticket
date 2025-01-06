@@ -112,12 +112,12 @@ export class ODStatScope extends ODManager<ODStat> {
         if (mode == "set" || typeof value != "number"){
             await this.database.set(this.id.value+"_"+stat.id.value,scopeId,value)
         }else if (mode == "increase"){
-            const currentValue = this.getStat(id,scopeId)
-            if (typeof currentValue != "number") await this.database.set(this.id.value+"_"+stat.id.value,scopeId,0)
+            const currentValue = await this.getStat(id,scopeId)
+            if (typeof currentValue != "number") await this.database.set(this.id.value+"_"+stat.id.value,scopeId,0+value)
             else await this.database.set(this.id.value+"_"+stat.id.value,scopeId,currentValue+value)
         }else if (mode == "decrease"){
-            const currentValue = this.getStat(id,scopeId)
-            if (typeof currentValue != "number") await this.database.set(this.id.value+"_"+stat.id.value,scopeId,0)
+            const currentValue = await this.getStat(id,scopeId)
+            if (typeof currentValue != "number") await this.database.set(this.id.value+"_"+stat.id.value,scopeId,0-value)
             else await this.database.set(this.id.value+"_"+stat.id.value,scopeId,currentValue-value)
         }
         return true
