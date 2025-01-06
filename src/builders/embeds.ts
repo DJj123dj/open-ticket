@@ -490,7 +490,7 @@ const panelEmbeds = () => {
             if (!panel.exists("openticket:embed")) return
             const embedOptions = panel.get("openticket:embed").value
             
-            instance.setColor(embedOptions.customColor ? (embedOptions.customColor as discord.ColorResolvable) : generalConfig.data.mainColor)
+            instance.setColor(embedOptions.customColor ? embedOptions.customColor : generalConfig.data.mainColor)
             instance.setTitle(embedOptions.title)
             if (embedOptions.thumbnail) instance.setThumbnail(embedOptions.thumbnail)
             if (embedOptions.image) instance.setImage(embedOptions.image)
@@ -586,7 +586,7 @@ const ticketEmbeds = () => {
             const {user,ticket} = params
             const embedOptions = ticket.option.get("openticket:ticket-message-embed").value
             
-            instance.setColor(embedOptions.customColor ? (embedOptions.customColor as discord.ColorResolvable) : generalConfig.data.mainColor)
+            instance.setColor(embedOptions.customColor ? embedOptions.customColor : generalConfig.data.mainColor)
             if (embedOptions.title) instance.setTitle(embedOptions.title)
             if (embedOptions.thumbnail) instance.setThumbnail(embedOptions.thumbnail)
             if (embedOptions.image) instance.setImage(embedOptions.image)
@@ -985,8 +985,9 @@ const transcriptEmbeds = () => {
     embeds.get("openticket:transcript-text-ready").workers.add(
         new api.ODWorker("openticket:transcript-text-ready",0,async (instance,params,source) => {
             const {guild,channel,user,ticket,compiler} = params
+            const transcriptConfig = openticket.configs.get("openticket:transcripts")
             
-            instance.setColor(generalConfig.data.mainColor)
+            instance.setColor(transcriptConfig.data.embedSettings.customColor ? transcriptConfig.data.embedSettings.customColor : generalConfig.data.mainColor)
             instance.setTitle(utilities.emojiTitle("📄",lang.getTranslation("transcripts.success.ready")))
             instance.setTimestamp(new Date())
             instance.addFields({name:lang.getTranslation("params.uppercase.ticket")+":",value:"#"+channel.name,inline:false})
@@ -1014,8 +1015,9 @@ const transcriptEmbeds = () => {
     embeds.get("openticket:transcript-html-ready").workers.add(
         new api.ODWorker("openticket:transcript-html-ready",0,async (instance,params,source) => {
             const {guild,channel,user,ticket,compiler,result} = params
+            const transcriptConfig = openticket.configs.get("openticket:transcripts")
             
-            instance.setColor(generalConfig.data.mainColor)
+            instance.setColor(transcriptConfig.data.embedSettings.customColor ? transcriptConfig.data.embedSettings.customColor : generalConfig.data.mainColor)
             instance.setTitle(utilities.emojiTitle("📄",lang.getTranslation("transcripts.success.ready")))
             instance.setTimestamp(new Date())
             instance.addFields({name:lang.getTranslation("params.uppercase.ticket")+":",value:"#"+channel.name,inline:false})
@@ -1161,25 +1163,6 @@ const clearEmbeds = () => {
         })
     )
 }
-
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE 
-//TRANSLATION FINISHED UNTIL HERE  
 
 const autoEmbeds = () => {
     //AUTOCLOSE MESSAGE

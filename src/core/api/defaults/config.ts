@@ -200,7 +200,7 @@ export interface ODJsonConfig_DefaultOptionEmbedSettingsType {
     enabled:boolean,
     title:string,
     description:string,
-    customColor:string,
+    customColor:discord.ColorResolvable,
 
     image:string,
     thumbnail:string,
@@ -312,7 +312,7 @@ export interface ODJsonConfig_DefaultPanelEmbedSettingsType {
     title:string,
     description:string,
     
-    customColor:string,
+    customColor:discord.ColorResolvable,
     url:string,
 
     image:string,
@@ -426,7 +426,7 @@ export class ODJsonConfig_DefaultTranscripts extends ODJsonConfig {
             mode:"html"|"text"
         },
         embedSettings:{
-            customColor:string,
+            customColor:discord.ColorResolvable,
             listAllParticipants:boolean,
             includeTicketStats:boolean
         },
