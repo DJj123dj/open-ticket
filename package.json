@@ -23,7 +23,7 @@
     "dependencies": {
         "@types/node": "^22.5.0",
         "ansis": "^2.3.0",
-        "discord.js": "^14.16.1",
+        "discord.js": "^14.17.2",
         "formatted-json-stringify": "^1.1.0",
         "typescript": "^5.5.4"
     },
@@ -37,7 +37,7 @@
     },
     "homepage": "https://openticket.dj-dj.be",
     "imports": {
-        "#opendiscord":"./dist/src/index.js",
-        "#opendiscord-types":"./dist/src/core/api/api.js"
+        "#opendiscord": "./dist/src/index.js",
+        "#opendiscord-types": "./dist/src/core/api/api.js"
     }
 }
