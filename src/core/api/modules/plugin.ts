@@ -20,10 +20,10 @@ export class ODPluginManager extends ODManager<ODPlugin> {
     }
 
     /**Check if a plugin has loaded successfully.*/
-    isPluginLoaded(id:ODValidId){
+    isPluginLoaded(id:ODValidId): boolean {
         const newId = new ODId(id)
         const plugin = this.get(newId)
-        return (plugin && plugin.executed)
+        return (plugin !== null && plugin.executed)
     }
 }
 

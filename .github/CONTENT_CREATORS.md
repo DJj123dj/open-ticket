@@ -1,6 +1,6 @@
 # 🎥 Content Creators
 Hi there! We're searching for content creators to create tutorials & setup guides for Open Ticket.
-You can get many great rewards from helpin us!
+You can get many great rewards from helping us!
 
 You can choose which type of tutorial you want to make. You can create a quick setup, full setup, plugin tutorial or something else!
 You are not required to talk in the video, but make sure it has some kind of subtitles instead.
