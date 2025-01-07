@@ -1,14 +1,18 @@
-# [Open Ticket v4.0 Beta 🎉](https://github.com/DJj123dj/open-ticket/tree/dev)
-Hey there! Open Ticket v4 is currently in public beta! Be sure to check it out in the dev branch!<br>
+# [📌 Open Ticket v4.0 Beta (STABLE)](https://github.com/DJj123dj/open-ticket/tree/dev)
+Hey there! Open Ticket v4 is available in public beta! Be sure to check it out in the [dev-branch](https://github.com/DJj123dj/open-ticket/tree/dev)!<br>
 https://github.com/DJj123dj/open-ticket/tree/dev
 
-What is Open Ticket v4? Well, it's a complete rewrite of Open Ticket with the main focus being "plugins".
-There will be massive stability & speed improvements! Hundreds of new features! And obviously very powerful plugins!
-Plugins will be 100x better and advanced than the current system!
+What is Open Ticket v4? Well, it's a complete rewrite of Open Ticket with the main focus being `plugins`.
+There are massive stability & speed improvements, hundreds of new features and very powerful plugins!
+There is already a [large ecosystem of plugins](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket) available right now! Don't wait and check them out!
 
-> ### Missing Languages
-> Be aware that there are still a lot of languages missing from v3!<br>
-> If your bot is English I recommend checking it out!
+> ### Stability & Translation
+> V4 is more stable than v3 at the moment! It has also been **battle-tested** for huge discord servers (>=10k users) and should provide no real issues.
+> **70% of all languages** in v3 are already available in v4.
+>
+> ### Migrating From v3
+> To migrate tickets from Open Ticket v3 to v4, you can use the **[ot-migrate-v3](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-migrate-v3) plugin**.
+> Instructions are available in the README.md from the plugin.
 <hr>
 
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket" width="600px">
@@ -112,4 +116,4 @@ current version: _v3.5.9_
 </br>Changelog: [click here](https://otgithub.dj-dj.be/releases)
 </br>Documentation: [click here](https://otdocs.dj-dj.be/)
 
-© 2024 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.dj-dj.be) | [terms of service](https://www.dj-dj.be/terms#terms) | [privacy policy](https://www.dj-dj.be/terms#privacy)
+© 2025 - DJdj Development | [website](https://www.dj-dj.be) | [discord](https://discord.dj-dj.be) | [terms of service](https://www.dj-dj.be/terms#terms) | [privacy policy](https://www.dj-dj.be/terms#privacy)
