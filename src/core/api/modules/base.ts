@@ -45,7 +45,7 @@ export type ODInterfaceWithPartialProperty<Interface,Key extends keyof Interface
  * 
  * It can only contain the following characters: `a-z`, `A-Z`, `0-9`, `:`, `-` & `_`
  * 
- * You will use this class to assign a unique id when creating configs, databases, languages & more!
+ * You can use this class to assign a unique id when creating configs, databases, languages & more!
  * @example
  * const id = new api.ODId("openticket:test-id") //this is valid
  * const id = new api.ODId("example%id?") //this is invalid
@@ -102,7 +102,7 @@ export class ODId {
  * This is an open ticket manager change helper.
  * 
  * It is used to let the "onChange" event in the `ODManager` class work.
- * You will probably use this class when extending your own `ODManager`
+ * You can use this class when extending your own `ODManager`
  */
 export class ODManagerChangeHelper {
     #change: (() => void)|null = null
@@ -192,10 +192,11 @@ export type ODManagerAddCallback<DataType extends ODManagerData> = (data:DataTyp
 /**## ODManager `class`
  * This is an open ticket manager.
  * 
- * It can be used to store & manage different aspects of the bot!
- * You will probably to extend this class when creating your own classes & managers.
+ * It can be used to store & manage classes based on their `ODId`.
+ * It is somewhat the same as the default JS `Map()`.
+ * You can extend this class when creating your own classes & managers.
  * 
- * This class has many useful functions based on `ODId` (add, get, remove, getAll, getFiltered, exists)
+ * This class has many useful functions based on `ODId` (add, get, remove, getAll, getFiltered, exists, loopAll, ...)
  */
 export class ODManager<DataType extends ODManagerData> extends ODManagerChangeHelper {
     /**Alias to open ticket debugger. */

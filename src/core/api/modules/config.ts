@@ -9,9 +9,9 @@ import fs from "fs"
 /**## ODConfigManager `class`
  * This is an open ticket config manager.
  * 
- * It manages all config files in the bot and allows plugins to access config files from open ticket & other plugins!
+ * It manages all config files in the bot and allows plugins to access config files from Open Ticket & other plugins!
  * 
- * You will use this class to get/add a config file (`ODConfig`) in your plugin!
+ * You can use this class to get/change/add a config file (`ODConfig`) in your plugin!
  */
 export class ODConfigManager extends ODManager<ODConfig> {
     constructor(debug:ODDebugger){
@@ -33,7 +33,7 @@ export class ODConfigManager extends ODManager<ODConfig> {
  * This is an open ticket config helper.
  * This class doesn't do anything at all, it just gives a template & basic methods for a config. Use `ODJsonConfig` instead!
  * 
- * You will only use this class if you want to create your own config implementation (e.g. `yml`, `xml`,...)!
+ * You can use this class if you want to create your own config implementation (e.g. `yml`, `xml`,...)!
  */
 export class ODConfig extends ODManagerData {
     /**The name of the file with extension. */
@@ -55,8 +55,8 @@ export class ODConfig extends ODManagerData {
 }
 
 /**## ODJsonConfig `class`
- * This is an open ticket config helper.
- * You will use this class to get & edit variables from the config files or to create your own config!
+ * This is an open ticket JSON config.
+ * You can use this class to get & edit variables from the config files or to create your own JSON config!
  * @example
  * //create a config from: ./config/test.json with the id "some-config"
  * const config = new api.ODJsonConfig("some-config","test.json")
