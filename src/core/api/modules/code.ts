@@ -8,11 +8,14 @@ import { ODDebugger } from "./console"
 /**## ODCode `class`
  * This is an open ticket code runner.
  * 
- * It is just a function that will run just before the bot has started completely! 
- * This can be used for code that needs to run at startup, but isn't really time dependent.
- * 
- * - It has an `id` for identification of the function
- * - A `priority` to know when to execute this function (related to others)
+ * Using this, you're able to execute a function just before the startup screen. (90% of the code is already loaded)
+ * You can also specify a priority to change the execution order.
+ * In Open Ticket, this is used for the following processes:
+ * - Autoclose/delete
+ * - Database syncronisation (with tickets, stats & used options)
+ * - Panel auto-update
+ * - Database Garbage Collection (removing tickets that don't exist anymore)
+ * - And more!
  */
 export class ODCode extends ODManagerData {
     /**The priority of this code */
@@ -32,14 +35,14 @@ export class ODCode extends ODManagerData {
  * 
  * It manages & executes `ODCode`'s in the correct order.
  * 
- * You will probably register a function/code in this class for something that doesn't really need to be timed.
+ * Use this to register a function/code which executes just before the startup screen. (90% is already loaded)
  */
 export class ODCodeManager extends ODManager<ODCode> {
     constructor(debug:ODDebugger){
         super(debug,"code")
     }
     
-    /**Execute all functions or code. */
+    /**Execute all `ODCode` functions in order of their priority (high to low). */
     async execute(){
         const derefArray = [...this.getAll()]
         const workers = derefArray.sort((a,b) => b.priority-a.priority)

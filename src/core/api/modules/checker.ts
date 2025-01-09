@@ -19,7 +19,7 @@ export interface ODCheckerResult {
  * 
  * It manages all config checkers in the bot and allows plugins to access config checkers from open ticket & other plugins!
  * 
- * You will use this class to get/add a config checker (`ODChecker`) in your plugin!
+ * You can use this class to get/add a config checker (`ODChecker`) in your plugin!
  * @example
  * //get checker for ./config/general.json => ODChecker class
  * const testChecker = openticket.checkers.get("openticket:general")
@@ -99,7 +99,7 @@ export class ODCheckerManager extends ODManager<ODChecker> {
  * (e.g. The `messages.json` needs to access the `"id"` from `options.json`)
  * 
  * 
- * You will probably use this class when you create your own config checker!
+ * You can use this class when you create your own config checker implementation! (not required for using the built-in config checker)
  */
 export class ODCheckerStorage {
     /**This is the array that stores all the data. ❌ **(don't edit unless really needed!)***/
@@ -150,7 +150,7 @@ export class ODCheckerStorage {
  * It's responsible for rendering the config checker result in the console.
  * This class doesn't provide any components! You need to create them by extending this class
  * 
- * You will only use this class if you want to change how the config checker looks!
+ * You can use this class if you want to change how the config checker looks!
  */
 export class ODCheckerRenderer {
     /**Get all components */
@@ -174,7 +174,7 @@ export class ODCheckerRenderer {
  * It's used to store & manage the translation for each message from the config checker!
  * Most translations are stored by message id, but there are some exceptions like the additional text on the checker report.
  * 
- * You will use this class if you want to translate your config checker messages! **This is optional & isn't required for the checker to work!**
+ * You can use this class if you want to translate your config checker messages! **This is optional & isn't required for the checker to work!**
  */
 export class ODCheckerTranslationRegister {
     /**This is the array that stores all the data. ❌ **(don't edit unless really needed!)***/
@@ -298,7 +298,7 @@ export type ODCheckerLocationTrace = (string|number)[]
  * It checks a specific config file for invalid/missing configurations. This data can then be used to show to the user what's wrong!
  * You can check for example if a string is longer/shorter than a certain amount of characters & more!
  * 
- * You will use this class when you create your own custom config file & you want to check it for syntax errors.
+ * You can use this class when you create your own custom config file & you want to check it for syntax errors.
  * @example
  * //create a new checker with id "test" => ./config/test.json
  * const testConfig = new api.ODConfig("test","test.json")
@@ -410,7 +410,7 @@ export interface ODCheckerStructureOptions {
  * This class will check for a single variable in a config file, customise it in the settings!
  * If you want prebuilt checkers (for strings, booleans, numbers, ...), check the other `ODCheckerStructure`'s!
  * 
- * You will almost never use this class! It's better if you extend on another `ODConfigCheckerStructure`!
+ * **Not recommended to use!** It's recommended to extend from another `ODConfigCheckerStructure` class!
  */
 export class ODCheckerStructure {
     /**The id of this checker structure */

@@ -36,7 +36,7 @@ export class ODWorker<Instance, Source extends string, Params> extends ODManager
  * 
  * It manages & executes `ODWorker`'s in the correct order.
  * 
- * You will probably register a custom worker in this class to create a message or button.
+ * You can register a custom worker in this class to create a message or button.
  */
 export class ODWorkerManager<Instance, Source extends string, Params> extends ODManager<ODWorker<Instance,Source,Params>> {
     /**The order of execution for workers inside this manager. */

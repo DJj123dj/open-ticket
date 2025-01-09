@@ -12,7 +12,7 @@ import * as fjs from "formatted-json-stringify"
  * 
  * It manages all databases in the bot and allows to permanently store data from the bot!
  * 
- * You will use this class to get/add a database (`ODDatabase`) in your plugin!
+ * You can use this class to get/add a database (`ODDatabase`) in your plugin!
  */
 export class ODDatabaseManager extends ODManager<ODDatabase> {
     constructor(debug:ODDebugger){
@@ -35,7 +35,7 @@ export class ODDatabaseManager extends ODManager<ODDatabase> {
  * This is an open ticket database template.
  * This class doesn't do anything at all, it just gives a template & basic methods for a database. Use `ODJsonDatabase` instead!
  * 
- * You will only use this class if you want to create your own database implementation (e.g. `mongodb`, `mysql`,...)!
+ * You can use this class if you want to create your own database implementation (e.g. `mongodb`, `mysql`,...)!
  */
 export class ODDatabase extends ODManagerData {
     /**The name of the file with extension. */
@@ -83,7 +83,7 @@ export type ODJsonDatabaseStructure = {category:string, key:string, value:ODVali
  * It stores data in a `json` file as a large `Array` using the `category`, `key`, `value` strategy.
  * You can store the following types: `string`, `number`, `boolean`, `array`, `object` & `null`!
  * 
- * You will use this class if you want to create your own database or use an existing one!
+ * You can use this class if you want to add your own database or to use an existing one!
  */
 export class ODJsonDatabase extends ODDatabase {
     constructor(id:ODValidId, file:string, customPath?:string){

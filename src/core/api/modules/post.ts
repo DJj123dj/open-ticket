@@ -11,7 +11,7 @@ import * as discord from "discord.js"
  * 
  * It manages `ODPosts`'s for you.
  * 
- * You will probably use this to get the logs channel of the bot (or some other static channel/category).
+ * You can use this to get the logs channel of the bot (or some other static channel/category).
  */
 export class ODPostManager extends ODManager<ODPost<discord.GuildBasedChannel>> {
     /**A reference to the main server of the bot */

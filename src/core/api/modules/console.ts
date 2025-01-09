@@ -583,7 +583,7 @@ export class ODLiveStatusUrlSource extends ODLiveStatusSource {
  * 
  * It manages all LiveStatus sources and has the renderer for all LiveStatus messages.
  * 
- * You will probably use this to customise or add stuff to the LiveStatus system.
+ * You can use this to customise or add stuff to the LiveStatus system.
  * Access it in the global `openticket.startscreen.livestatus` variable!
  */
 export class ODLiveStatusManager extends ODManager<ODLiveStatusSource> {
