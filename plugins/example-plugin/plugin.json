@@ -8,7 +8,7 @@
     "priority":0,
     "events":[],
 
-    "npmDependencies":["discord.js"],
+    "npmDependencies":[],
     "requiredPlugins":[],
     "incompatiblePlugins":[],
 
