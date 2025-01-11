@@ -26,24 +26,32 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 > The translation count may not be accurate!
 
 ### 📌 Features
-- **💩 no bloat/credits** - Your Open Ticket bot doesn't contain any form of bloat or credits!
+- **💩 no bloat** - Your Open Ticket bot doesn't contain any form of bloat or credits!
 - **🔒 tested & secure** - Open Ticket has been tested by thousands of servers and is very secure!
-- **📈 scalable** - Open Ticket is made to handle huge servers! Even if your server contains more than 100k members!
-- **📄 html transcripts** - Make use of the most customisable, beautiful and easy-to-use HTML Transcripts!
+- **📈 scalable** - Open Ticket is made to handle huge servers! (Already tested in **servers with 100k members**)
+- **📄 HTML transcripts** - Make use of the most customisable, beautiful and easy-to-use HTML Transcripts!
 - **✅ ticket actions** - Close, Reopen, Delete, Rename & Move all your tickets!
-- **🇬🇧 translation** - Open Ticket has been translated in more than **16 languages** by our community!
+- **🇬🇧 translation** - Open Ticket has been translated in more than **20 languages** by our community!
 - **🎨 customisation** - Open Ticket has been created around customisation, everything can be customised!
 - **🖥️ interactions** - The bot has full support for Buttons, Dropdowns, Slash Commands and Modals!
-- **∞ unlimited everywhere** - Create an infinite amount of tickets & panels!
-- **📝 advanced plugins** - Create the most advanced plugins that you want or use premade ones by our community! 
+- **∞ unlimited** - Create an infinite amount of tickets & panels!
+- **📝 advanced plugins** - Create advanced plugins or use pre-made ones by our community!
 - **👥 user management** - Add & Remove users from all tickets!
 - **📊 detailed stats** - Open Ticket has ticket, user & global staticstics available for everyone!
 - **🚫 blacklist** - Blacklist users to prevent them from creating a ticket!
 - **❓ questions** - Let users answer questions in a modal before the ticket is created!
 - **📦 commands** - Open Ticket supports both slash & text commands!
-- **📥 extra types** - The bot also supports Reaction Roles & Url Buttons, because why not ¯\\_(ツ)_/¯
-- **🎛️ dependencies** - We try to use as little external dependencies as needed!
-- **📢 commands** - The bot contains more than 25 commands! And it's expandable with plugins!
+- **📥 extra buttons** - The bot also supports Reaction Roles & Url Buttons, because why not ¯\\_(ツ)_/¯
+- **✨ commands** - The bot contains more than 25 commands!
+
+#### And more using plugins!
+  - **💬 reviews** - Create & customise your own review system!
+  - **📢 feedback** - Collect feedback & create forms for people to answer!
+  - **🔄 rotating status** - Create a rotating bot status & use dynamic variables from the bot!
+  - **💾 sqlite database** - Use an `sqlite` database for increased performances!
+  - **🎉 custom embeds** - Create your own embeds and use them in your server!
+  - **🎨 customisation** - Yep, you heard it right! Even more customisation!
+  - **😁 And so much more...**
 
 > ### 📦 Resources
 > Resources might not be accurate yet! *(because v4 is still in beta)*<br>
@@ -52,13 +60,19 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 > <a href="https://github.com/DJj123dj/open-discord-plugins"><img src="https://apis.dj-dj.be/cdn/openticket/open-ticket-plugins.png" alt="Open Ticket Plugins" width="180px"></a>
 
 ## 📸 Preview
-<img alt="Ticket Message" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/ticket.png">
-<img alt="Ticket Stats Message" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/stats.png">
-<img alt="Example Panel 1" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/panel-1.png">
-<img alt="Example Panel 2" width="550px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/panel-2.png">
+<img alt="Ticket Message" width="350px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/ticket.png">
+<img alt="Ticket Stats Message" width="350px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/stats.png">
+<img alt="Example Panel 1" width="350px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/panel-1.png">
+<img alt="Example Panel 2" width="350px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/panel-2.png">
 
 ## 🧩 Plugins
-**Download all plugins in our [Official Plugin Repository](https://github.com/DJj123dj/open-discord-plugins)!**
+**Download all plugins in our [Official Plugin Repository](https://github.com/DJj123dj/open-discord-plugins)!**<br>
+> #### ⭐ Featured Plugins (Top 5 Most Used)
+> **[`ot-sqlite-database`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-sqlite-database/),
+> [`ot-migrate-v3`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-migrate-v3/),
+> [`ot-reviews`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-reviews/),
+> [`ot-feedback`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-feedback/),
+> [`ot-customise-buttons`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-customise-buttons/)**
 
 ### 📦 Official *(made by DJdj Development)*
 |Name                                                                  |Category                    |Description              |
@@ -68,15 +82,18 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 |[`ot-jump-to-top`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-jump-to-top/)                     |📢 Command                  |Add a simple command to jump to the top of the ticket. |
 |[`ot-kill-switch`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-kill-switch/)                     |📢 Command                  |Temporarily disable the ticket system using a kill switch. |
 |[`ot-hosting-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-hosting-status/)               |📢 Command                  |A simple command to send hosting status updates to a channel. |
+|[`ot-shutdown`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-shutdown/)                           |📢 Command                  |A simple command to turn off the bot from a slash command (server & bot owner only). |
 |[`ot-sqlite-database`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-sqlite-database/)             |⚙️ Utility                  |With this plugin, the database will be an SQLite file. It's a must-have for large servers! |
 |[`ot-no-slash-clear`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-no-slash-clear/)               |⚙️ Utility                  |Disable the automatic removal of slash commands that aren't used by Open Ticket. |
 |[`ot-migrate-v3`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-migrate-v3/)                       |⚙️ Utility                  |Use this plugin to migrate all tickets from Open Ticket v3 to v4. |
 |[`ot-ticket-message-extras`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-ticket-message-extras/) |🎨 Customisation            |A plugin which adds a few little features to the ticket message. |
 |[`ot-rename-keep-prefix`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-rename-keep-prefix/)       |🎨 Customisation            |Simple plugin to keep the channel prefix when using the /rename command. |
 |[`ot-customise-buttons`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-customise-buttons/)         |🎨 Customisation            |Customise almost all built-in buttons. This includes the claim, reopen, close & delete buttons. |
-|[`ot-alt-detector`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-alt-detector/)                   |💼 Management               |Use the discord-alt-detector npm package by DJdj Development in your ticket bot. |
+|[`ot-ephemeral-messages`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-ephemeral-messages/)       |🎨 Customisation            |Customise for every messages if it needs to be ephemeral or not. |
 |[`ot-alt-detector`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-alt-detector/)                   |💼 Management               |Use the discord-alt-detector npm package by DJdj Development in your ticket bot. |
 |[`ot-embeds`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-embeds/)                               |💼 Management               |Create custom premade embeds in the config or use the command to create one from scratch. |
+|[`ot-move-actions`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-move-actions/)                   |💼 Management               |Automatically unclaim/unpin a ticket when it's moved using `/move`. |
+|[`ot-reviews`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-reviews/)                             |💼 Management               |Review system for Open Ticket! It is very customisable and has lots of features. |
 |[`ot-better-status`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-better-status/)                 |🤖 Client                   |An advanced status plugin to rotate between states. It also allows for the use of variables. |
 
 ### ✅ Verified *(made by community)*
@@ -182,6 +199,6 @@ Please help us grow by giving a star! It would help us a lot!
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket Logo" width="170px">
 
 **README.md**<br>
-[changelog](https://otgithub.dj-dj.be/releases) - [documentation](https://otdocs.dj-dj.be) - [tutorial](https://www.youtube.com/watch?v=2jK9kAf6ASU) - [website](https://openticket.dj-dj.be) - [discord](https://discord.dj-dj.be)<br>
+[changelog](https://otgithub.dj-dj.be/releases) - [documentation](https://otdocs.dj-dj.be) - [tutorial](https://www.youtube.com/watch?v=2jK9kAf6ASU) - [website](https://openticket.dj-dj.be) - [discord](https://discord.dj-dj.be) - [license](./LICENSE.md)<br>
 
 © 2025 - [DJdj Development](https://www.dj-dj.be) - [Terms](https://www.dj-dj.be/terms#terms) - [Privacy Policy](https://www.dj-dj.be/terms#privacy)
