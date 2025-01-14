@@ -59,6 +59,25 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 > <a href="https:/otdocs.dj-dj.be"><img src="https://apis.dj-dj.be/cdn/openticket/open-ticket-docs.png" alt="Open Ticket Docs" width="180px"></a>
 > <a href="https://github.com/DJj123dj/open-discord-plugins"><img src="https://apis.dj-dj.be/cdn/openticket/open-ticket-plugins.png" alt="Open Ticket Plugins" width="180px"></a>
 
+### ❤️ Sponsors
+A big thanks to all our sponsors! Without them, it wouldn't be possible to create this project!
+
+<table>
+<tr>
+<td><img src="https://github.com/roppl3r.png" alt="Profile Picture" width="80px"></td>
+</tr>
+<tr>
+<th><a href="https://github.com/roppl3r">roppl3r</a></th>
+</tr>
+</table>
+
+**Past Sponsors:**<br>
+<a href="https://github.com/sponsors/DJj123dj">
+<img src="https://github.com/SpyEye2.png" alt="SpyEye" width="40px">
+<img src="https://github.com/mods-hd.png" alt="Mods HD" width="40px">
+<img src="https://github.com/DOSEV5.png" alt="DOSEV5" width="40px">
+</a>
+
 ## 📸 Preview
 <img alt="Ticket Message" width="350px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/ticket.png">
 <img alt="Ticket Stats Message" width="350px" src="https://apis.dj-dj.be/cdn/openticket/preview-v4/stats.png">
@@ -126,25 +145,6 @@ This is the main team working on Open Ticket. Don't forget to check their profil
 <th><a href="https://github.com/smetsliam">💬 DevBack</a></th>
 </tr>
 </table>
-
-### ❤️ Sponsors
-A big thanks to all our sponsors! Without them, it wouldn't be possible to create this project!
-
-<table>
-<tr>
-<td><img src="https://github.com/roppl3r.png" alt="Profile Picture" width="80px"></td>
-</tr>
-<tr>
-<th><a href="https://github.com/roppl3r">roppl3r</a></th>
-</tr>
-</table>
-
-**Past Sponsors:**<br>
-<a href="https://github.com/sponsors/DJj123dj">
-<img src="https://github.com/SpyEye2.png" alt="SpyEye" width="40px">
-<img src="https://github.com/mods-hd.png" alt="Mods HD" width="40px">
-<img src="https://github.com/DOSEV5.png" alt="DOSEV5" width="40px">
-</a>
 
 ### 💬 Translators
 |Language             |Maintainer (discord name) |Status                       |
