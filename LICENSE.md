@@ -1,3 +1,7 @@
+# Open Ticket (License)
+© 2025 - DJj123dj & Contributors
+
+```
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
@@ -70,7 +74,7 @@ modification follow.
 
                        TERMS AND CONDITIONS
 
-  0. Definitions.
+  1. Definitions.
 
   "This License" refers to version 3 of the GNU General Public License.
 
@@ -672,3 +676,15 @@ may consider it more useful to permit linking proprietary applications with
 the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
+```
+
+### Additional Terms for Open Ticket
+The following additional terms apply to the use of this software:
+
+1. This software may not be used as part of a public Discord bot service that is monetized (e.g., generating revenue through subscriptions, donations, or other forms of payment) without the prior written permission of the original author.
+
+2. This software may not be used as part of a public Discord bot service on multiple Discord servers without attribution to the original author.
+
+3. You are allowed to use this bot in a Discord server that makes money or is for-profit, provided that the income is not generated directly from the ticket bot or its functionality.
+
+These additional terms are an extension to the GNU GPL v3 and must be followed alongside the original license terms. In case of any conflict between these additional terms and the GNU GPL v3, the additional terms shall take precedence.
