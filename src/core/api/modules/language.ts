@@ -143,6 +143,14 @@ export class ODLanguageManager extends ODManager<ODLanguage> {
     }
 }
 
+/**## ODLanguage `class`
+ * This is an open ticket language file.
+ * 
+ * It contains metadata and all translation strings available in this language.
+ * Register this class to an `ODLanguageManager` to use it!
+ * 
+ * JSON languages should be created using the `ODJsonLanguage` class instead!
+ */
 export class ODLanguage extends ODManagerData {
     /**The name of the file with extension. */
     file: string = ""
@@ -164,6 +172,14 @@ export class ODLanguage extends ODManagerData {
     }
 }
 
+/**## ODJsonLanguage `class`
+ * This is an open ticket JSON language file.
+ * 
+ * It contains metadata and all translation strings from a certain JSON file (in `./languages/`).
+ * Register this class to an `ODLanguageManager` to use it!
+ * 
+ * Use the `ODLanguage` class to use translations from non-JSON files!
+ */
 export class ODJsonLanguage extends ODLanguage {
     constructor(id:ODValidId, file:string, customPath?:string){
         super(id,{})
