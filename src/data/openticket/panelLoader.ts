@@ -96,6 +96,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
                 if (opt.exists("openticket:admins")) description = description + "\nAdmins: "+opt.get("openticket:admins").value.map((admin) => discord.roleMention(admin)).join(", ")
             }
             
+            if (description == "") description = "`<no-description>`"
             return {name:utilities.emojiTitle(emoji,name),value:description}
 
         }else if (opt instanceof api.ODWebsiteOption){
@@ -104,6 +105,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
             const name = opt.exists("openticket:name") ? opt.get("openticket:name").value : "`<unnamed-website>`"
             let description = opt.exists("openticket:description") ? opt.get("openticket:description").value : "`<no-description>`"
             
+            if (description == "") description = "`<no-description>`"
             return {name:utilities.emojiTitle(emoji,name),value:description}
 
         }else if (opt instanceof api.ODRoleOption){
@@ -117,6 +119,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
                 if (opt.exists("openticket:roles")) description = description + "\nRoles: "+opt.get("openticket:roles").value.map((admin) => discord.roleMention(admin)).join(", ")
             }
             
+            if (description == "") description = "`<no-description>`"
             return {name:utilities.emojiTitle(emoji,name),value:description}
             
         }else{
@@ -124,7 +127,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
             const emoji = opt.get("openticket:button-emoji") as api.ODOptionData<string>|null
             const name = opt.get("openticket:name") as api.ODOptionData<string>|null
             const description = opt.get("openticket:description") as api.ODOptionData<string>|null
-            return {name:utilities.emojiTitle((emoji ? emoji.value : ""),(name ? name.value : "`"+opt.id+"`")),value:(description ? description.value : "`<no-description>`")}
+            return {name:utilities.emojiTitle((emoji ? emoji.value : ""),(name ? name.value : "`"+opt.id+"`")),value:((description && description.value) ? description.value : "`<no-description>`")}
         }
     })
     else if (mode == "text") return title+options.map((opt) => {
