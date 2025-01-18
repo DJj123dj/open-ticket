@@ -83,6 +83,8 @@ export interface ODDefaults {
     slashCommandRegistering:boolean,
     /**When enabled, the bot is forced to re-register all slash commands in the server. This can be used in case of a auto-update malfunction. */
     forceSlashCommandRegistration:boolean,
+    /**When enabled, the bot is allowed to unregister all slash commands which aren't used in Open Ticket. Disable this if you don't want to use the Open Ticket `ODSlashCommand` classes. */
+    allowSlashCommandRemoval:boolean,
     /**Load the default open ticket text commands. */
     textCommandLoading:boolean,
 
@@ -265,6 +267,7 @@ export class ODDefaultsManager {
             slashCommandLoading:true,
             slashCommandRegistering:true,
             forceSlashCommandRegistration:false,
+            allowSlashCommandRemoval:true,
             textCommandLoading:true,
 
             questionLoading:true,

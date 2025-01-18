@@ -394,15 +394,13 @@ const main = async () => {
             openticket.log("Registering slash commands... (this can take up to 2 minutes)","system")
             await openticket.events.get("onSlashCommandRegister").emit([openticket.client.slashCommands,openticket.client])
             if (openticket.defaults.getDefault("slashCommandRegistering")){
-                //GLOBAL
-                await openticket.client.slashCommands.removeUnusedCommands() //remove all commands that aren't used
-                await openticket.client.slashCommands.createNewCommands() //create all new commands that don't exist yet
-                await openticket.client.slashCommands.updateExistingCommands(undefined,openticket.defaults.getDefault("forceSlashCommandRegistration")) //update all commands that need to be re-registered
+                //get all commands that are already registered in the bot
+                const cmds = await openticket.client.slashCommands.getAllRegisteredCommands()
 
-                //DEFAULT SERVER
-                await openticket.client.slashCommands.removeUnusedCommands(serverId) //remove all commands that aren't used
-                await openticket.client.slashCommands.createNewCommands(serverId) //create all new commands that don't exist yet
-                await openticket.client.slashCommands.updateExistingCommands(serverId) //update all commands that need to be re-registered
+                //remove unused cmds, create new cmds & update existing cmds
+                if (openticket.defaults.getDefault("allowSlashCommandRemoval")) await openticket.client.slashCommands.removeUnusedCommands(cmds.unused.map((cmd) => cmd.cmd))
+                await openticket.client.slashCommands.createNewCommands(cmds.unregistered.map((cmd) => cmd.instance))
+                await openticket.client.slashCommands.updateExistingCommands(cmds.registered.filter((cmd) => cmd.requiresUpdate || openticket.defaults.getDefault("forceSlashCommandRegistration")).map((cmd) => cmd.instance))
                 
                 await openticket.events.get("afterSlashCommandsRegistered").emit([openticket.client.slashCommands,openticket.client])
             }

@@ -402,10 +402,353 @@ export class ODClientActivityManager {
     }
 }
 
+/**## ODSlashCommandUniversalTranslation `interface`
+ * A universal template for a slash command translation. (used in names & descriptions)
+ * 
+ * Why universal? Both **existing slash commands** & **unregistered templates** can be converted to this type.
+ */
+export interface ODSlashCommandUniversalTranslation {
+    /**The language code or locale of this language. */
+    language:`${discord.Locale}`,
+    /**The translation of the name in this language. */
+    value:string
+}
+
+/**## ODSlashCommandUniversalOptionChoice `interface`
+ * A universal template for a slash command option choice. (used in `string` options)
+ * 
+ * Why universal? Both **existing slash commands** & **unregistered templates** can be converted to this type.
+ */
+export interface ODSlashCommandUniversalOptionChoice {
+    /**The name of this choice. */
+    name:string,
+    /**All localized names of this choice. */
+    nameLocalizations:readonly ODSlashCommandUniversalTranslation[],
+    /**The value of this choice. */
+    value:string
+}
+
+/**## ODSlashCommandUniversalOption `interface`
+ * A universal template for a slash command option.
+ * 
+ * Why universal? Both **existing slash commands** & **unregistered templates** can be converted to this type.
+ */
+export interface ODSlashCommandUniversalOption {
+    /**The type of this option. */
+    type:discord.ApplicationCommandOptionType,
+    /**The name of this option. */
+    name:string,
+    /**All localized names of this option. */
+    nameLocalizations:readonly ODSlashCommandUniversalTranslation[],
+    /**The description of this option. */
+    description:string,
+    /**All localized descriptions of this option. */
+    descriptionLocalizations:readonly ODSlashCommandUniversalTranslation[],
+    /**Is this option required? */
+    required:boolean,
+
+    /**Is autocomplete enabled in this option? */
+    autocomplete:boolean|null,
+    /**Choices for this option (only when type is `string`) */
+    choices:ODSlashCommandUniversalOptionChoice[],
+    /**A list of sub-options for this option (only when type is `subCommand` or `subCommandGroup`) */
+    options:readonly ODSlashCommandUniversalOption[],
+    /**A list of allowed channel types for this option (only when type is `channel`) */
+    channelTypes:readonly discord.ChannelType[],
+    /**The minimum amount required for this option (only when type is `number` or `integer`) */
+    minValue:number|null,
+    /**The maximum amount required for this option (only when type is `number` or `integer`) */
+    maxValue:number|null,
+    /**The minimum length required for this option (only when type is `string`) */
+    minLength:number|null,
+    /**The maximum length required for this option (only when type is `string`) */
+    maxLength:number|null
+}
+
+/**## ODSlashCommandUniversalCommand `interface`
+ * A universal template for a slash command.
+ * 
+ * Why universal? Both **existing slash commands** & **unregistered templates** can be converted to this type.
+ */
+export interface ODSlashCommandUniversalCommand {
+    /**The type of this command. (required => `ChatInput`) */
+    type:discord.ApplicationCommandType.ChatInput,
+    /**The name of this command. */
+    name:string,
+    /**All localized names of this command. */
+    nameLocalizations:readonly ODSlashCommandUniversalTranslation[],
+    /**The description of this command. */
+    description:string,
+    /**All localized descriptions of this command. */
+    descriptionLocalizations:readonly ODSlashCommandUniversalTranslation[],
+    /**The id of the guild this command is registered in. */
+    guildId:string|null,
+    /**Is this command for 18+ users only? */
+    nsfw:boolean,
+    /**A list of options for this command. */
+    options:readonly ODSlashCommandUniversalOption[],
+    /**A bitfield of the user permissions required to use this command. */
+    defaultMemberPermissions:bigint,
+    /**Is this command available in DM? */
+    dmPermission:boolean,
+    /**A list of contexts where you can install this command. */
+    integrationTypes:readonly discord.ApplicationIntegrationType[],
+    /**A list of contexts where you can use this command. */
+    contexts:readonly discord.InteractionContextType[]
+}
+
+/**## ODSlashCommandBuilder `interface`
+ * The builder for slash commands. Here you can add options to the command.
+ */
+export interface ODSlashCommandBuilder extends discord.ChatInputApplicationCommandData {
+    /**@deprecated `dmPermission` is deprecated. Use `context` instead! (Not using contexts might result in the slash command being re-registered on every startup!) */
+    dmPermission?:boolean
+    /**This field is required in Open Ticket for future compatibility. */
+    integrationTypes:discord.ApplicationIntegrationType[],
+    /**This field is required in Open Ticket for future compatibility. */
+    contexts:discord.InteractionContextType[]
+}
+
+export class ODSlashCommandComparator {
+    /**Convert a `discord.ApplicationCommandOptionChoiceData<string>` to a universal Open Ticket slash command option choice object for comparison. */
+    #convertOptionChoice(choice:discord.ApplicationCommandOptionChoiceData<string>): ODSlashCommandUniversalOptionChoice {
+        const nameLoc = choice.nameLocalizations ?? {}
+        return {
+            name:choice.name,
+            nameLocalizations:Object.keys(nameLoc).map((key) => {return {language:key as `${discord.Locale}`,value:nameLoc[key]}}),
+            value:choice.value
+        }
+    }
+    /**Convert a `discord.ApplicationCommandOptionData` to a universal Open Ticket slash command option object for comparison. */
+    #convertBuilderOption(option:discord.ApplicationCommandOptionData): ODSlashCommandUniversalOption {
+        const nameLoc = option.nameLocalizations ?? {}
+        const descLoc = option.descriptionLocalizations ?? {}
+        return {
+            type:option.type,
+            name:option.name,
+            nameLocalizations:Object.keys(nameLoc).map((key) => {return {language:key as `${discord.Locale}`,value:nameLoc[key]}}),
+            description:option.description,
+            descriptionLocalizations:Object.keys(descLoc).map((key) => {return {language:key as `${discord.Locale}`,value:descLoc[key]}}),
+            required:(option.type != discord.ApplicationCommandOptionType.SubcommandGroup && option.type != discord.ApplicationCommandOptionType.Subcommand && option.required) ? true : false,
+
+            autocomplete:option.autocomplete ?? false,
+            choices:(option.type == discord.ApplicationCommandOptionType.String && !option.autocomplete && option.choices) ? option.choices.map((choice) => this.#convertOptionChoice(choice)) : [],
+            options:((option.type == discord.ApplicationCommandOptionType.SubcommandGroup || option.type == discord.ApplicationCommandOptionType.Subcommand) && option.options) ? option.options.map((opt) => this.#convertBuilderOption(opt)) : [],
+            channelTypes:(option.type == discord.ApplicationCommandOptionType.Channel && option.channelTypes) ? option.channelTypes : [],
+            minValue:(option.type == discord.ApplicationCommandOptionType.Number && option.minValue) ? option.minValue : null,
+            maxValue:(option.type == discord.ApplicationCommandOptionType.Number && option.maxValue) ? option.maxValue : null,
+            minLength:(option.type == discord.ApplicationCommandOptionType.String && option.minLength) ? option.minLength : null,
+            maxLength:(option.type == discord.ApplicationCommandOptionType.String && option.maxLength) ? option.maxLength : null
+        }
+    }
+    /**Convert a `discord.ApplicationCommandOption` to a universal Open Ticket slash command option object for comparison. */
+    #convertCommandOption(option:discord.ApplicationCommandOption): ODSlashCommandUniversalOption {
+        const nameLoc = option.nameLocalizations ?? {}
+        const descLoc = option.descriptionLocalizations ?? {}
+
+        return {
+            type:option.type,
+            name:option.name,
+            nameLocalizations:Object.keys(nameLoc).map((key) => {return {language:key as `${discord.Locale}`,value:nameLoc[key]}}),
+            description:option.description,
+            descriptionLocalizations:Object.keys(descLoc).map((key) => {return {language:key as `${discord.Locale}`,value:descLoc[key]}}),
+            required:(option.type != discord.ApplicationCommandOptionType.SubcommandGroup && option.type != discord.ApplicationCommandOptionType.Subcommand && option.required) ? true : false,
+
+            autocomplete:option.autocomplete ?? false,
+            choices:(option.type == discord.ApplicationCommandOptionType.String && !option.autocomplete && option.choices) ? option.choices.map((choice) => this.#convertOptionChoice(choice)) : [],
+            options:((option.type == discord.ApplicationCommandOptionType.SubcommandGroup || option.type == discord.ApplicationCommandOptionType.Subcommand) && option.options) ? option.options.map((opt) => this.#convertBuilderOption(opt)) : [],
+            channelTypes:(option.type == discord.ApplicationCommandOptionType.Channel && option.channelTypes) ? option.channelTypes : [],
+            minValue:(option.type == discord.ApplicationCommandOptionType.Number && option.minValue) ? option.minValue : null,
+            maxValue:(option.type == discord.ApplicationCommandOptionType.Number && option.maxValue) ? option.maxValue : null,
+            minLength:(option.type == discord.ApplicationCommandOptionType.String && option.minLength) ? option.minLength : null,
+            maxLength:(option.type == discord.ApplicationCommandOptionType.String && option.maxLength) ? option.maxLength : null
+        }
+    }
+    /**Convert a `ODSlashCommandBuilder` to a universal Open Ticket slash command object for comparison. */
+    convertBuilder(builder:ODSlashCommandBuilder,guildId:string|null): ODSlashCommandUniversalCommand {
+        if (builder.type != discord.ApplicationCommandType.ChatInput) throw new ODSystemError("ODSlashCommandComparator:convertBuilder() is not supported for other types than 'ChatInput'!")
+        const nameLoc = builder.nameLocalizations ?? {}
+        const descLoc = builder.descriptionLocalizations ?? {}
+        return {
+            type:1,
+            name:builder.name,
+            nameLocalizations:Object.keys(nameLoc).map((key) => {return {language:key as `${discord.Locale}`,value:nameLoc[key]}}),
+            description:builder.description,
+            descriptionLocalizations:Object.keys(descLoc).map((key) => {return {language:key as `${discord.Locale}`,value:descLoc[key]}}),
+            guildId:guildId,
+            nsfw:builder.nsfw ?? false,
+            options:builder.options ? builder.options.map((opt) => this.#convertBuilderOption(opt)) : [],
+            defaultMemberPermissions:discord.PermissionsBitField.resolve(builder.defaultMemberPermissions ?? ["ViewChannel"]),
+            dmPermission:(builder.contexts && builder.contexts.includes(discord.InteractionContextType.BotDM)) ?? false,
+            integrationTypes:builder.integrationTypes ?? [discord.ApplicationIntegrationType.GuildInstall],
+            contexts:builder.contexts ?? []
+        }
+    }
+    /**Convert a `discord.ApplicationCommand` to a universal Open Ticket slash command object for comparison. */
+    convertCommand(cmd:discord.ApplicationCommand): ODSlashCommandUniversalCommand {
+        if (cmd.type != discord.ApplicationCommandType.ChatInput) throw new ODSystemError("ODSlashCommandComparator:convertCommand() is not supported for other types than 'ChatInput'!")
+        const nameLoc = cmd.nameLocalizations ?? {}
+        const descLoc = cmd.descriptionLocalizations ?? {}
+        return {
+            type:1,
+            name:cmd.name,
+            nameLocalizations:Object.keys(nameLoc).map((key) => {return {language:key as `${discord.Locale}`,value:nameLoc[key]}}),
+            description:cmd.description,
+            descriptionLocalizations:Object.keys(descLoc).map((key) => {return {language:key as `${discord.Locale}`,value:descLoc[key]}}),
+            guildId:cmd.guildId,
+            nsfw:cmd.nsfw,
+            options:cmd.options ? cmd.options.map((opt) => this.#convertCommandOption(opt)) : [],
+            defaultMemberPermissions:discord.PermissionsBitField.resolve(cmd.defaultMemberPermissions ?? ["ViewChannel"]),
+            dmPermission:(cmd.contexts && cmd.contexts.includes(discord.InteractionContextType.BotDM)) ? true : false,
+            integrationTypes:cmd.integrationTypes ?? [discord.ApplicationIntegrationType.GuildInstall],
+            contexts:cmd.contexts ?? []
+        }
+    }
+    /**Returns `true` when the 2 slash command options are the same. */
+    compareOption(optA:ODSlashCommandUniversalOption,optB:ODSlashCommandUniversalOption): boolean {
+        if (optA.name != optB.name) return false
+        if (optA.description != optB.description) return false
+        if (optA.type != optB.type) return false
+        if (optA.required != optB.required) return false
+        if (optA.autocomplete != optB.autocomplete) return false
+        if (optA.minValue != optB.minValue) return false
+        if (optA.maxValue != optB.maxValue) return false
+        if (optA.minLength != optB.minLength) return false
+        if (optA.maxLength != optB.maxLength) return false
+
+        //nameLocalizations
+        if (optA.nameLocalizations.length != optB.nameLocalizations.length) return false
+        if (!optA.nameLocalizations.every((nameA) => {
+            const nameB = optB.nameLocalizations.find((nameB) => nameB.language == nameA.language)
+            if (!nameB || nameA.value != nameB.value) return false
+            else return true
+        })) return false
+        
+        //descriptionLocalizations
+        if (optA.descriptionLocalizations.length != optB.descriptionLocalizations.length) return false
+        if (!optA.descriptionLocalizations.every((descA) => {
+            const descB = optB.descriptionLocalizations.find((descB) => descB.language == descA.language)
+            if (!descB || descA.value != descB.value) return false
+            else return true
+        })) return false
+
+        //choices
+        if (optA.choices.length != optB.choices.length) return false
+        if (!optA.choices.every((choiceA,index) => {
+            const choiceB = optB.choices[index]
+            if (choiceA.name != choiceB.name) return false
+            if (choiceA.value != choiceB.value) return false
+
+            //nameLocalizations
+            if (choiceA.nameLocalizations.length != choiceB.nameLocalizations.length) return false
+            if (!choiceA.nameLocalizations.every((nameA) => {
+                const nameB = choiceB.nameLocalizations.find((nameB) => nameB.language == nameA.language)
+                if (!nameB || nameA.value != nameB.value) return false
+                else return true
+            })) return false
+
+            return true
+        })) return false
+
+        //channelTypes
+        if (optA.channelTypes.length != optB.channelTypes.length) return false
+        if (!optA.channelTypes.every((typeA) => {
+            return optB.channelTypes.includes(typeA)
+        })) return false
+
+        //options
+        if (optA.options.length != optB.options.length) return false
+        if (!optA.options.every((subOptA,index) => {
+            return this.compareOption(subOptA,optB.options[index])
+        })) return false
+
+        return true
+    }
+    /**Returns `true` when the 2 slash commands are the same. */
+    compare(cmdA:ODSlashCommandUniversalCommand,cmdB:ODSlashCommandUniversalCommand): boolean {
+        if (cmdA.name != cmdB.name) return false
+        if (cmdA.description != cmdB.description) return false
+        if (cmdA.type != cmdB.type) return false
+        if (cmdA.nsfw != cmdB.nsfw) return false
+        if (cmdA.guildId != cmdB.guildId) return false
+        if (cmdA.dmPermission != cmdB.dmPermission) return false
+        if (cmdA.defaultMemberPermissions != cmdB.defaultMemberPermissions) return false
+
+        //nameLocalizations
+        if (cmdA.nameLocalizations.length != cmdB.nameLocalizations.length) return false
+        if (!cmdA.nameLocalizations.every((nameA) => {
+            const nameB = cmdB.nameLocalizations.find((nameB) => nameB.language == nameA.language)
+            if (!nameB || nameA.value != nameB.value) return false
+            else return true
+        })) return false
+        
+        //descriptionLocalizations
+        if (cmdA.descriptionLocalizations.length != cmdB.descriptionLocalizations.length) return false
+        if (!cmdA.descriptionLocalizations.every((descA) => {
+            const descB = cmdB.descriptionLocalizations.find((descB) => descB.language == descA.language)
+            if (!descB || descA.value != descB.value) return false
+            else return true
+        })) return false
+
+        //contexts
+        if (cmdA.contexts.length != cmdB.contexts.length) return false
+        if (!cmdA.contexts.every((contextA) => {
+            return cmdB.contexts.includes(contextA)
+        })) return false
+
+        //integrationTypes
+        if (cmdA.integrationTypes.length != cmdB.integrationTypes.length) return false
+        if (!cmdA.integrationTypes.every((integrationA) => {
+            return cmdB.integrationTypes.includes(integrationA)
+        })) return false
+
+        //options
+        if (cmdA.options.length != cmdB.options.length) return false
+        if (!cmdA.options.every((optA,index) => {
+            return this.compareOption(optA,cmdB.options[index])
+        })) return false
+
+        return true
+    }
+}
+
 /**## ODSlashCommandInteractionCallback `type`
  * Callback for the slash command interaction listener.
  */
 export type ODSlashCommandInteractionCallback = (interaction:discord.ChatInputCommandInteraction,cmd:ODSlashCommand) => void
+
+/**## ODSlashCommandRegisteredResult `type`
+ * The result which will be returned when getting all (un)registered slash commands from the manager.
+ */
+export type ODSlashCommandRegisteredResult = {
+    /**A list of all registered commands. */
+    registered:{
+        /**The instance (`ODSlashCommand`) from this command. */
+        instance:ODSlashCommand,
+        /**The (universal) slash command object/template of this command. */
+        cmd:ODSlashCommandUniversalCommand,
+        /**Does this command require an update? */
+        requiresUpdate:boolean
+    }[],
+    /**A list of all unregistered commands. */
+    unregistered:{
+        /**The instance (`ODSlashCommand`) from this command. */
+        instance:ODSlashCommand,
+        /**The (universal) slash command object/template of this command. */
+        cmd:null,
+        /**Does this command require an update? */
+        requiresUpdate:true
+    }[],
+    /**A list of all unused commands (not found in `ODSlashCommandManager`). */
+    unused:{
+        /**The instance (`ODSlashCommand`) from this command. */
+        instance:null,
+        /**The (universal) slash command object/template of this command. */
+        cmd:ODSlashCommandUniversalCommand,
+        /**Does this command require an update? */
+        requiresUpdate:false
+    }[]
+}
 
 /**## ODSlashCommandManager `class`
  * This is an open ticket client slash manager.
@@ -418,7 +761,7 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
     /**Alias to open ticket debugger. */
     #debug: ODDebugger
     
-    /**Copy of discord.js client. */
+    /**Refrerence to discord.js client. */
     manager: ODClientManager
     /**Discord.js application commands manager. */
     commandManager: discord.ApplicationCommandManager|null
@@ -426,6 +769,8 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
     #interactionListeners: {name:string|RegExp, callback:ODSlashCommandInteractionCallback}[] = []
     /**Set the soft limit for maximum amount of listeners. A warning will be shown when there are more listeners than this limit. */
     listenerLimit: number = 100
+    /**A utility class used to compare 2 slash commands with each other. */
+    comparator: ODSlashCommandComparator = new ODSlashCommandComparator()
 
     constructor(debug:ODDebugger, manager:ODClientManager){
         super(debug,"slash command")
@@ -434,41 +779,83 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
         this.commandManager = (manager.client.application) ? manager.client.application.commands : null
     }
 
-    /**Create all commands that don't exist yet. (global by default OR guildId for per-server) */
-    async createNewCommands(guildId?:string){
-        if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
-        const cmds = await this.#existsCmd(guildId)
-
-        let i = 0
-        while (i < cmds.nonExisting.length){
-            await this.#createCmd(cmds.nonExisting[i])
-            this.#debug.debug("Created new slash command",[{key:"id",value:cmds.nonExisting[i].id.value},{key:"name",value:cmds.nonExisting[i].name}])
-            i++
-        }
-    }
-    /**Update all commands that already exist. (global by default OR guildId for per-server) */
-    async updateExistingCommands(guildId?:string,force?:boolean){
-        if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
-        const cmds = await this.#existsCmd(guildId)
-        const filtered = cmds.existing.filter((cmd) => (cmd.requiresUpdate == true || force))
+    /**Get all registered & unregistered slash commands. */
+    async getAllRegisteredCommands(guildId?:string): Promise<ODSlashCommandRegisteredResult> {
+        if (!this.commandManager) throw new ODSystemError("Couldn't get client application to register slash commands!")
         
-        for (const cmd of filtered){
-            await this.#createCmd(cmd.cmd)
-            this.#debug.debug("Updated existing slash command",[
-                {key:"id",value:cmd.cmd.id.value},
-                {key:"name",value:cmd.cmd.name},
-                {key:"force",value:force ? "true" : "false"}
+        const cmds = (await this.commandManager.fetch({guildId})).toJSON()
+        const registered: {instance:ODSlashCommand, cmd:ODSlashCommandUniversalCommand, requiresUpdate:boolean}[] = []
+        const unregistered: {instance:ODSlashCommand, cmd:null, requiresUpdate:true}[] = []
+        const unused: {instance:null, cmd:ODSlashCommandUniversalCommand, requiresUpdate:false}[] = []
+
+        await this.loopAll((instance) => {
+            if (guildId && instance.guildId != guildId) return
+            
+            const index = cmds.findIndex((cmd) => cmd.name == instance.name)
+            const cmd = cmds[index]
+            cmds.splice(index,1)
+            if (cmd){
+                //command is registered (and may need to be updated)
+                const universalBuilder = this.comparator.convertBuilder(instance.builder,instance.guildId)
+                const universalCmd = this.comparator.convertCommand(cmd)
+                const didChange = !this.comparator.compare(universalBuilder,universalCmd)
+                const requiresUpdate = didChange || (instance.requiresUpdate ? instance.requiresUpdate(universalCmd) : false)
+                registered.push({instance,cmd:universalCmd,requiresUpdate})
+                
+                //command is not registered
+            }else unregistered.push({instance,cmd:null,requiresUpdate:true})
+        })
+
+        cmds.forEach((cmd) => {
+            //command does not exist in the manager
+            unused.push({instance:null,cmd:this.comparator.convertCommand(cmd),requiresUpdate:false})
+        })
+
+        return {registered,unregistered,unused}
+    }
+    /**Create all commands that are not registered yet.*/
+    async createNewCommands(instances:ODSlashCommand[]){
+        if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
+
+        for (const instance of instances){
+            await this.createCmd(instance)
+            this.#debug.debug("Created new slash command",[
+                {key:"id",value:instance.id.value},
+                {key:"name",value:instance.name}
             ])
         }
     }
-    /**Remove all commands that exist but aren't used by open ticket. (global by default OR guildId for per-server) */
-    async removeUnusedCommands(guildId?:string){
+    /**Update all commands that are already registered. */
+    async updateExistingCommands(instances:ODSlashCommand[]){
         if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
-        const cmds = (await this.#unusedCmd(guildId)).map((cmd) => cmd.name)
-        await this.#removeCmd(cmds,guildId)
+        
+        for (const instance of instances){
+            await this.createCmd(instance)
+            this.#debug.debug("Updated existing slash command",[{key:"id",value:instance.id.value},{key:"name",value:instance.name}])
+        }
     }
-    /**Create a slash command from an `ODSlashCommand` class */
-    async #createCmd(cmd:ODSlashCommand){
+    /**Remove all commands that are registered but unused by Open Ticket. */
+    async removeUnusedCommands(instances:ODSlashCommandUniversalCommand[],guildId?:string){
+        if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
+        if (!this.commandManager) throw new ODSystemError("Couldn't get client application to register slash commands!")
+        
+        const cmds = await this.commandManager.fetch({guildId})
+        
+        for (const instance of instances){
+            const cmd = cmds.find((cmd) => cmd.name == instance.name)
+            if (cmd){
+                try {
+                    await cmd.delete()
+                    this.#debug.debug("Removed existing slash command",[{key:"name",value:cmd.name},{key:"guildId",value:guildId ?? "/"}])
+                }catch(err){
+                    process.emit("uncaughtException",err)
+                    throw new ODSystemError("Failed to delete slash command '/"+cmd.name+"'!")
+                }
+            }
+        }
+    }
+    /**Create a slash command. **(SYSTEM ONLY)** => Use `ODSlashCommandManager` for registering commands the default way! */
+    async createCmd(cmd:ODSlashCommand){
         if (!this.commandManager) throw new ODSystemError("Couldn't get client application to register slash commands!")
         try {
             await this.commandManager.create(cmd.builder,(cmd.guildId ?? undefined))
@@ -476,107 +863,6 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
             process.emit("uncaughtException",err)
             throw new ODSystemError("Failed to register slash command '/"+cmd.name+"'!")
         }
-    }
-    /**Remove slash cmds by name */
-    async #removeCmd(names:string[],guildId?:string){
-        if (!this.commandManager) throw new ODSystemError("Couldn't get client application to register slash commands!")
-
-        const cmds = await this.commandManager.fetch({guildId})
-        
-        cmds?.forEach((cmd) => {
-            if (!names.includes(cmd.name)) return
-            cmd.delete()
-            this.#debug.debug("Removed existing slash command",[{key:"name",value:cmd.name}])
-        })
-    }
-    /**Get all existing & non-existing slash commands. */
-    async #existsCmd(guildId?:string){
-        if (!this.commandManager) throw new ODSystemError("Couldn't get client application to register slash commands!")
-        
-        const cmds = await this.commandManager.fetch({guildId})
-        const existing: {cmd:ODSlashCommand, requiresUpdate:boolean}[] = []
-        const nonExisting: ODSlashCommand[] = []
-
-        await this.loopAll((cmd) => {
-            if (guildId && cmd.guildId != guildId) return
-            const result = cmds.find((cmddata) => cmddata.name == cmd.name)
-            if (result){
-                //command already exists (and may need to be updated)
-                const requiresUpdate = cmd.requiresUpdate ? cmd.requiresUpdate({
-                    name:result.name,
-                    description:result.description,
-                    options:result.options as readonly discord.ApplicationCommandOptionData[],
-                    nsfw:result.nsfw,
-                    dmPermission:result.dmPermission ?? undefined,
-                    defaultMemberPermissions:result.defaultMemberPermissions,
-                    nameLocalizations:result.nameLocalizations ?? undefined,
-                    descriptionLocalizations:result.descriptionLocalizations ?? undefined
-                }) : false
-                existing.push({cmd,requiresUpdate})
-                
-                //command doesn't exists yet
-            }else nonExisting.push(cmd)
-        })
-
-        return {existing,nonExisting}
-    }
-    /**Get all unused slash commands. */
-    async #unusedCmd(guildId?:string){
-        if (!this.commandManager) throw new ODSystemError("Couldn't get client application to register slash commands!")
-        
-        const cmds = await this.commandManager.fetch({guildId})
-        const unused: discord.ApplicationCommand[] = []
-
-        const allCommands = this.getAll()
-        cmds.forEach((cmddata) => {
-            if (guildId && cmddata.guildId != guildId) return
-            
-            if (!allCommands.find((cmd) => {
-                if (cmd.name != cmddata.name) return false
-                if (cmd.builder.description != cmddata.description) return false
-                return this.#checkUnusedOptions(cmddata.options,cmd.builder.options ?? [])
-
-            })) unused.push(cmddata)
-        })
-
-        return unused
-    }
-    /**Returns `true` if the options are the same in both arrays. It will work recursively! */
-    #checkUnusedOptions(currentOptions:readonly discord.ApplicationCommandOption[], newOptions:readonly discord.ApplicationCommandOptionData[]){
-        if ((!newOptions || newOptions.length == 0) && currentOptions.length == 0) return true
-        else if (newOptions && newOptions.length != currentOptions.length) return false
-
-        if (!currentOptions.every((currentOpt,index) => {
-            const newOpt = newOptions[index]
-            if (newOpt.name != currentOpt.name) return false
-            if (newOpt.type != currentOpt.type) return false
-            if (newOpt.description != currentOpt.description) return false
-            
-            if (newOpt.type == discord.ApplicationCommandOptionType.Number && currentOpt.type == discord.ApplicationCommandOptionType.Number){
-                //check for min & max values when type is number
-                if (newOpt.minValue != currentOpt.minValue) return false
-                if (newOpt.maxValue != currentOpt.maxValue) return false
-            }
-            if (newOpt.type == discord.ApplicationCommandOptionType.String && currentOpt.type == discord.ApplicationCommandOptionType.String){
-                //check for min & max length values when type is string
-                if (newOpt.minLength != currentOpt.minLength) return false
-                if (newOpt.maxLength != currentOpt.maxLength) return false
-            }
-
-            //check for required normal options
-            if (currentOpt.type != discord.ApplicationCommandOptionType.SubcommandGroup && currentOpt.type != discord.ApplicationCommandOptionType.Subcommand && newOpt.type != discord.ApplicationCommandOptionType.SubcommandGroup && newOpt.type != discord.ApplicationCommandOptionType.Subcommand){
-                if (currentOpt.required != newOpt.required) return false
-            
-            //check for sub-options in subcommands
-            }else if ((currentOpt.type == discord.ApplicationCommandOptionType.SubcommandGroup && newOpt.type == discord.ApplicationCommandOptionType.SubcommandGroup) || (currentOpt.type == discord.ApplicationCommandOptionType.Subcommand && newOpt.type == discord.ApplicationCommandOptionType.Subcommand)){
-                if (currentOpt.options && newOpt.options){
-                    return this.#checkUnusedOptions(currentOpt.options,newOpt.options)
-                }
-            }
-
-            return true
-        })) return false
-        return true
     }
     /**Start listening to the discord.js client `interactionCreate` event. */
     startListeningToInteractions(){
@@ -612,15 +898,10 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
     }
 }
 
-/**## ODSlashCommandBuilder `interface`
- * The builder for slash commands. Here you can add options to the command.
- */
-export interface ODSlashCommandBuilder extends discord.ChatInputApplicationCommandData {}
-
 /**## ODSlashCommandUpdateFunction `type`
  * The function responsible for updating slash commands when they already exist.
  */
-export type ODSlashCommandUpdateFunction = (current:ODSlashCommandBuilder) => boolean
+export type ODSlashCommandUpdateFunction = (command:ODSlashCommandUniversalCommand) => boolean
 
 /**## ODSlashCommand `class`
  * This is an open ticket slash command.
