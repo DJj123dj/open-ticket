@@ -36,7 +36,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"help",
         description:lang.getTranslation("commands.help"),
-        dmPermission:true
+        contexts:[discord.InteractionContextType.BotDM,discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
     }))
 
     //PANEL
@@ -44,7 +45,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"panel",
         description:lang.getTranslation("commands.panel"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"id",
@@ -62,15 +64,12 @@ export const loadAllSlashCommands = async () => {
         ]
     },(current) => {
         //check if this slash command needs to be updated
-        if (!current.options) return true
-        const idOption = current.options.find((opt) => opt.name == "id" && opt.type == acot.String) as discord.ApplicationCommandStringOptionData|undefined
-        if (!idOption || !idOption.choices || idOption.choices.length != panelChoices.length) return true
-        else if (!panelChoices.every((panel) => {
-            if (!idOption.choices) return false
-            else if (!idOption.choices.find((choice) => choice.value == panel.value && choice.name == panel.name)) return false
-            else return true
+        const idOption = current.options.find((opt) => opt.name == "id" && opt.type == acot.String)
+        if (!idOption || idOption.choices.length != panelChoices.length) return true
+        if (!panelChoices.every((panel) => {
+            return (idOption.choices.find((c) => c.value == panel.value && c.name == panel.name)) ? true : false
         })) return true
-        else return false
+        return false
     }))
 
     //TICKET (when enabled)
@@ -78,7 +77,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"ticket",
         description:lang.getTranslation("commands.ticket"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"id",
@@ -90,15 +90,12 @@ export const loadAllSlashCommands = async () => {
         ]
     },(current) => {
         //check if this slash command needs to be updated
-        if (!current.options) return true
-        const idOption = current.options.find((opt) => opt.name == "id" && opt.type == acot.String) as discord.ApplicationCommandStringOptionData|undefined
-        if (!idOption || !idOption.choices || idOption.choices.length != ticketChoices.length) return true
-        else if (!ticketChoices.every((ticket) => {
-            if (!idOption.choices) return false
-            else if (!idOption.choices.find((choice) => choice.value == ticket.value && choice.name == ticket.name)) return false
-            else return true
+        const idOption = current.options.find((opt) => opt.name == "id" && opt.type == acot.String)
+        if (!idOption || idOption.choices.length != ticketChoices.length) return true
+        if (!ticketChoices.every((ticket) => {
+            return (idOption.choices.find((c) => c.value == ticket.value && c.name == ticket.name)) ? true : false
         })) return true
-        else return false
+        return false
     }))
 
     //CLOSE
@@ -106,7 +103,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"close",
         description:lang.getTranslation("commands.close"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reason",
@@ -122,7 +120,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"delete",
         description:lang.getTranslation("commands.delete"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reason",
@@ -142,7 +141,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"delete",
         description:lang.getTranslation("commands.delete"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reason",
@@ -158,7 +158,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"reopen",
         description:lang.getTranslation("commands.reopen"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reason",
@@ -174,7 +175,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"claim",
         description:lang.getTranslation("commands.claim"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"user",
@@ -196,7 +198,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"unclaim",
         description:lang.getTranslation("commands.unclaim"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reason",
@@ -212,7 +215,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"pin",
         description:lang.getTranslation("commands.pin"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reason",
@@ -228,7 +232,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"unpin",
         description:lang.getTranslation("commands.unpin"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reason",
@@ -244,7 +249,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"move",
         description:lang.getTranslation("commands.move"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"id",
@@ -262,15 +268,12 @@ export const loadAllSlashCommands = async () => {
         ]
     },(current) => {
         //check if this slash command needs to be updated
-        if (!current.options) return true
-        const idOption = current.options.find((opt) => opt.name == "id" && opt.type == acot.String) as discord.ApplicationCommandStringOptionData|undefined
-        if (!idOption || !idOption.choices || idOption.choices.length != ticketChoices.length) return true
-        else if (!ticketChoices.every((ticket) => {
-            if (!idOption.choices) return false
-            else if (!idOption.choices.find((choice) => choice.value == ticket.value && choice.name == ticket.name)) return false
-            else return true
+        const idOption = current.options.find((opt) => opt.name == "id" && opt.type == acot.String)
+        if (!idOption || idOption.choices.length != ticketChoices.length) return true
+        if (!ticketChoices.every((ticket) => {
+            return (idOption.choices.find((c) => c.value == ticket.value && c.name == ticket.name)) ? true : false
         })) return true
-        else return false
+        return false
     }))
 
     //RENAME
@@ -278,7 +281,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"rename",
         description:lang.getTranslation("commands.rename"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"name",
@@ -301,7 +305,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"add",
         description:lang.getTranslation("commands.add"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"user",
@@ -323,7 +328,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"remove",
         description:lang.getTranslation("commands.remove"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"user",
@@ -345,7 +351,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"blacklist",
         description:lang.getTranslation("commands.blacklist"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"view",
@@ -411,7 +418,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"stats",
         description:lang.getTranslation("commands.stats"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"reset",
@@ -465,7 +473,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"clear",
         description:lang.getTranslation("commands.clear"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"filter",
@@ -491,7 +500,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"autoclose",
         description:lang.getTranslation("commands.autoclose"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"disable",
@@ -534,7 +544,8 @@ export const loadAllSlashCommands = async () => {
         type:act.ChatInput,
         name:"autodelete",
         description:lang.getTranslation("commands.autodelete"),
-        dmPermission:false,
+        contexts:[discord.InteractionContextType.Guild],
+        integrationTypes:[discord.ApplicationIntegrationType.GuildInstall],
         options:[
             {
                 name:"disable",
