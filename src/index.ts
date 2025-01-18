@@ -254,7 +254,7 @@ const main = async () => {
         openticket.checkers.renderer.render(components)
 
         //wait 5 seconds when there are warnings (not for errors & info)
-        if (result.messages.length > 0 && result.messages.every((message) => message.type != "error")) await utilities.timer(5000)
+        if (result.messages.length > 0 && result.messages.some((msg) => msg.type == "warning") && result.messages.every((msg) => msg.type != "error")) await utilities.timer(5000)
 
         await openticket.events.get("afterCheckersRendered").emit([openticket.checkers.renderer,openticket.checkers])
     }
