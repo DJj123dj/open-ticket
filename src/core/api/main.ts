@@ -25,6 +25,7 @@ import { ODCodeManager_Default } from "./defaults/code"
 import { ODCooldownManager_Default } from "./defaults/cooldown"
 import { ODPostManager_Default } from "./defaults/post"
 import { ODVerifyBarManager_Default } from "./defaults/verifybar"
+import { ODProgressBarManager_Default } from "./defaults/progressbar"
 import { ODStartScreenManager_Default } from "./defaults/startscreen"
 import { ODLiveStatusManager_Default } from "./defaults/console"
 
@@ -65,6 +66,8 @@ export class ODMain {
     plugins: ODPluginManager_Default
     /**The manager that manages & checks all the console flags of the bot. (like `--debug`) */
     flags: ODFlagManager_Default
+    /**The manager responsible for progress bars in the console. */
+    progressbars: ODProgressBarManager_Default
     /**The manager that manages & contains all the config files of the bot. (like `config/general.json`) */
     configs: ODConfigManager_Default
     /**The manager that manages & contains all the databases of the bot. (like `database/global.json`) */
@@ -136,9 +139,10 @@ export class ODMain {
         this.console = new ODConsoleManager(100,this.debugfile)
         this.debug = new ODDebugger(this.console)
         this.events  = new ODEventManager_Default(this.debug)
-
+        
         this.plugins = new ODPluginManager_Default(this.debug)
         this.flags = new ODFlagManager_Default(this.debug)
+        this.progressbars = new ODProgressBarManager_Default(this.debug)
         this.configs = new ODConfigManager_Default(this.debug)
         this.databases = new ODDatabaseManager_Default(this.debug)
         this.sessions = new ODSessionManager_Default(this.debug)

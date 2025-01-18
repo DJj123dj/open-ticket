@@ -32,6 +32,7 @@ import { ODPostManager_Default } from "./post"
 import { ODVerifyBarManager_Default } from "./verifybar"
 import { ODStartScreenManager_Default } from "./startscreen"
 import { ODLiveStatusManager_Default } from "./console"
+import { ODProgressBarManager_Default, ODProgressBarRendererManager_Default } from "./progressbar"
 
 //OPEN TICKET MODULES
 import { ODOptionManager, ODTicketOption } from "../openticket/option"
@@ -56,10 +57,17 @@ export interface ODEventIds_Default {
     "onPluginClassLoad": ODEvent_Default<(classes:ODPluginClassManager_Default, plugins:ODPluginManager_Default) => ODPromiseVoid>
     "afterPluginClassesLoaded": ODEvent_Default<(classes:ODPluginClassManager_Default, plugins:ODPluginManager_Default) => ODPromiseVoid>
 
+    //flags
     "onFlagLoad": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
     "afterFlagsLoaded": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
     "onFlagInit": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
     "afterFlagsInitiated": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
+
+    //progres bars
+    "onProgressBarRendererLoad": ODEvent_Default<(renderers:ODProgressBarRendererManager_Default) => ODPromiseVoid>
+    "afterProgressBarRenderersLoaded": ODEvent_Default<(renderers:ODProgressBarRendererManager_Default) => ODPromiseVoid>
+    "onProgressBarLoad": ODEvent_Default<(progressbars:ODProgressBarManager_Default) => ODPromiseVoid>
+    "afterProgressBarsLoaded": ODEvent_Default<(progressbars:ODProgressBarManager_Default) => ODPromiseVoid>
 
     //configs
     "onConfigLoad": ODEvent_Default<(configs:ODConfigManager_Default) => ODPromiseVoid>

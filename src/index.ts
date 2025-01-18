@@ -114,6 +114,21 @@ const main = async () => {
         openticket.debug.visible = (debugFlag) ? debugFlag.value : false
     }
 
+    //load progress bar renderers
+    openticket.log("Loading progress bars...","system")
+    if (openticket.defaults.getDefault("progressBarRendererLoading")){
+        await (await import("./data/framework/progressBarLoader.js")).loadAllProgressBarRenderers()
+    }
+    await openticket.events.get("onProgressBarRendererLoad").emit([openticket.progressbars.renderers])
+    await openticket.events.get("afterProgressBarRenderersLoaded").emit([openticket.progressbars.renderers])
+    
+    //load progress bars
+    if (openticket.defaults.getDefault("progressBarLoading")){
+        await (await import("./data/framework/progressBarLoader.js")).loadAllProgressBars()
+    }
+    await openticket.events.get("onProgressBarLoad").emit([openticket.progressbars])
+    await openticket.events.get("afterProgressBarsLoaded").emit([openticket.progressbars])
+
     //load config
     openticket.log("Loading configs...","system")
     if (openticket.defaults.getDefault("configLoading")){

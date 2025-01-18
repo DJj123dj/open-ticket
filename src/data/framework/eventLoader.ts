@@ -17,6 +17,12 @@ export const loadAllEvents = () => {
         "onFlagInit",
         "afterFlagsInitiated",
 
+        //progress bars
+        "onProgressBarRendererLoad",
+        "afterProgressBarRenderersLoaded",
+        "onProgressBarLoad",
+        "afterProgressBarsLoaded",
+
         //configs
         "onConfigLoad",
         "afterConfigsLoaded",

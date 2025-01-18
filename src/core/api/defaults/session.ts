@@ -9,7 +9,7 @@ import { ODSession, ODSessionManager } from "../modules/session"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODSessionManagerIds_Default {
-    "test-session":ODSession
+    //"test-session":ODSession
 }
 
 /**## ODSessionManager_Default `default_class`

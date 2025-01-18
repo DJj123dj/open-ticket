@@ -25,6 +25,7 @@ export * from "./modules/code"
 export * from "./modules/cooldown"
 export * from "./modules/post"
 export * from "./modules/verifybar"
+export * from "./modules/progressbar"
 export * from "./modules/startscreen"
 
 //OPENTICKET DEFAULT MODULES
@@ -48,6 +49,7 @@ export * from "./defaults/worker"
 export * from "./defaults/code"
 export * from "./defaults/cooldown"
 export * from "./defaults/post"
+export * from "./defaults/progressbar"
 export * from "./defaults/startscreen"
 export * from "./defaults/console"
 

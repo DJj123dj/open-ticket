@@ -27,6 +27,10 @@ export interface ODDefaults {
     flagLoading:boolean,
     /**Enable the default initializer for open ticket flags. */
     flagInitiating:boolean,
+    /**Load the default open ticket progress bar renderers. */
+    progressBarRendererLoading:boolean,
+    /**Load the default open ticket progress bars. */
+    progressBarLoading:boolean,
     /**Load the default open ticket configs. */
     configLoading:boolean,
     /**Enable the default initializer for open ticket config. */
@@ -237,6 +241,8 @@ export class ODDefaultsManager {
 
             flagLoading:true,
             flagInitiating:true,
+            progressBarRendererLoading:true,
+            progressBarLoading:true,
             configLoading:true,
             configInitiating:true,
             databaseLoading:true,
