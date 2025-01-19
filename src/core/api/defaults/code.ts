@@ -4,8 +4,8 @@
 import { ODValidId } from "../modules/base"
 import { ODCode, ODCodeManager } from "../modules/code"
 
-/**## ODCodeManagerIds_Default `type`
- * This type is an array of ids available in the `ODCodeManager_Default` class.
+/**## ODCodeManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODCodeManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCodeManagerIds_Default {

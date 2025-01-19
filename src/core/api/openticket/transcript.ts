@@ -61,7 +61,7 @@ export class ODTranscriptCompiler<Data extends object> extends ODManagerData {
 }
 
 /**## ODTranscriptCompilerIds `type`
- * This type is an array of ids available in the `ODTranscriptCompiler` class.
+ * This interface is a list of ids available in the `ODTranscriptCompiler` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTranscriptCompilerIds {

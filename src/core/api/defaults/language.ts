@@ -5,7 +5,7 @@ import { ODValidId } from "../modules/base"
 import { ODLanguageManager, ODLanguage } from "../modules/language"
 
 /**## ODLanguageManagerTranslations_Default `type`
- * This type is an array of ids available in the `ODLanguageManager_Default` class.
+ * This interface is a list of ids available in the `ODLanguageManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export type ODLanguageManagerTranslations_Default = (
@@ -439,8 +439,8 @@ export type ODLanguageManagerTranslations_Default = (
     "stats.properties.transcriptsCreated"
 )
 
-/**## ODLanguageManagerIds_Default `type`
- * This type is an array of ids available in the `ODLanguageManager_Default` class.
+/**## ODLanguageManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODLanguageManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODLanguageManagerIds_Default {

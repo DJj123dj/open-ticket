@@ -5,8 +5,8 @@ import { ODValidId } from "../modules/base"
 import { ODProgressBar, ODProgressBarManager, ODProgressBarRenderer, ODProgressBarRendererManager } from "../modules/progressbar"
 
 
-/**## ODProgressBarRendererManagerIds_Default `type`
- * This type is an array of ids available in the `ODProgressBarRendererManager_Default` class.
+/**## ODProgressBarRendererManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODProgressBarRendererManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODProgressBarRendererManagerIds_Default {
@@ -42,8 +42,8 @@ export class ODProgressBarRendererManager_Default extends ODProgressBarRendererM
     }
 }
 
-/**## ODProgressBarManagerIds_Default `type`
- * This type is an array of ids available in the `ODProgressBarManager_Default` class.
+/**## ODProgressBarManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODProgressBarManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODProgressBarManagerIds_Default {

@@ -4,8 +4,8 @@
 import { ODValidId, ODManagerData } from "../modules/base"
 import { ODPlugin, ODPluginClassManager, ODPluginManager } from "../modules/plugin"
 
-/**## ODPluginManagerIds_Default `type`
- * This type is an array of ids available in the `ODPluginManager_Default` class.
+/**## ODPluginManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODPluginManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODPluginManagerIds_Default {}
@@ -41,8 +41,8 @@ export class ODPluginManager_Default extends ODPluginManager {
     }
 }
 
-/**## ODPluginClassManagerIds_Default `type`
- * This type is an array of ids available in the `ODPluginClassManager_Default` class.
+/**## ODPluginClassManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODPluginClassManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODPluginClassManagerIds_Default {}

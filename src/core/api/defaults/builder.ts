@@ -29,8 +29,8 @@ export class ODBuilderManager_Default extends ODBuilderManager {
     declare modals: ODModalManager_Default
 }
 
-/**## ODButtonManagerIds_Default `type`
- * This type is an array of ids available in the `ODButtonManager_Default` class.
+/**## ODButtonManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODButtonManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODButtonManagerIds_Default {
@@ -111,8 +111,8 @@ export class ODButton_Default<Source extends string, Params, WorkerIds extends s
     declare workers: ODWorkerManager_Default<ODButtonInstance,Source,Params,WorkerIds>
 }
 
-/**## ODDropdownManagerIds_Default `type`
- * This type is an array of ids available in the `ODDropdownManager_Default` class.
+/**## ODDropdownManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODDropdownManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODDropdownManagerIds_Default {
@@ -165,8 +165,8 @@ export class ODDropdown_Default<Source extends string, Params, WorkerIds extends
     declare workers: ODWorkerManager_Default<ODDropdownInstance,Source,Params,WorkerIds>
 }
 
-/**## ODFileManagerIds_Default `type`
- * This type is an array of ids available in the `ODFileManager_Default` class.
+/**## ODFileManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODFileManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFileManagerIds_Default {
@@ -219,8 +219,8 @@ export class ODFile_Default<Source extends string, Params, WorkerIds extends str
     declare workers: ODWorkerManager_Default<ODFileInstance,Source,Params,WorkerIds>
 }
 
-/**## ODEmbedManagerIds_Default `type`
- * This type is an array of ids available in the `ODEmbedManager_Default` class.
+/**## ODEmbedManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODEmbedManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODEmbedManagerIds_Default {
@@ -339,8 +339,8 @@ export class ODEmbed_Default<Source extends string, Params, WorkerIds extends st
     declare workers: ODWorkerManager_Default<ODEmbedInstance,Source,Params,WorkerIds>
 }
 
-/**## ODMessageManagerIds_Default `type`
- * This type is an array of ids available in the `ODMessageManager_Default` class.
+/**## ODMessageManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODMessageManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODMessageManagerIds_Default {
@@ -470,8 +470,8 @@ export class ODMessage_Default<Source extends string, Params, WorkerIds extends 
     declare workers: ODWorkerManager_Default<ODMessageInstance,Source,Params,WorkerIds>
 }
 
-/**## ODModalManagerIds_Default `type`
- * This type is an array of ids available in the `ODModalManager_Default` class.
+/**## ODModalManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODModalManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODModalManagerIds_Default {

@@ -3,8 +3,8 @@
 ///////////////////////////////////////
 import { ODVersion, ODVersionManager, ODValidId } from "../modules/base"
 
-/**## ODVersionManagerIds_Default `type`
- * This type is an array of ids available in the `ODVersionManager` class.
+/**## ODVersionManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODVersionManager` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODVersionManagerIds_Default {

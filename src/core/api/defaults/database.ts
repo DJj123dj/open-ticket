@@ -6,8 +6,8 @@ import { ODDatabaseManager, ODDatabase, ODFormattedJsonDatabase } from "../modul
 import { ODTicketJson } from "../openticket/ticket"
 import { ODOptionJson } from "../openticket/option"
 
-/**## ODDatabaseManagerIds_Default `type`
- * This type is an array of ids available in the `ODDatabaseManager_Default` class.
+/**## ODDatabaseManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODDatabaseManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODDatabaseManagerIds_Default {
@@ -48,7 +48,7 @@ export class ODDatabaseManager_Default extends ODDatabaseManager {
 }
 
 /**## ODFormattedJsonDatabaseIds_DefaultGlobal `type`
- * This type is an array of ids available in the `ODFormattedJsonDatabase_DefaultGlobal` class.
+ * This interface is a list of ids available in the `ODFormattedJsonDatabase_DefaultGlobal` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultGlobal {
@@ -102,7 +102,7 @@ export class ODFormattedJsonDatabase_DefaultGlobal extends ODFormattedJsonDataba
 }
 
 /**## ODFormattedJsonDatabaseIds_DefaultTickets `type`
- * This type is an array of ids available in the `ODDatabaseManager_Default` class.
+ * This interface is a list of ids available in the `ODDatabaseManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultTickets {
@@ -153,7 +153,7 @@ export class ODFormattedJsonDatabase_DefaultTickets extends ODFormattedJsonDatab
 }
 
 /**## ODFormattedJsonDatabaseIds_DefaultUsers `type`
- * This type is an array of ids available in the `ODDatabaseManager_Default` class.
+ * This interface is a list of ids available in the `ODDatabaseManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultUsers {
@@ -205,7 +205,7 @@ export class ODFormattedJsonDatabase_DefaultUsers extends ODFormattedJsonDatabas
 
 
 /**## ODFormattedJsonDatabaseIds_DefaultOptions `type`
- * This type is an array of ids available in the `ODDatabaseManager_Default` class.
+ * This interface is a list of ids available in the `ODDatabaseManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultOptions {

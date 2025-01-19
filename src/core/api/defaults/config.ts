@@ -7,8 +7,8 @@ import { ODConfigManager, ODConfig, ODJsonConfig } from "../modules/config"
 import { ODClientActivityStatus, ODClientActivityType } from "../modules/client"
 import { OTRoleUpdateMode } from "../openticket/role"
 
-/**## ODConfigManagerIds_Default `type`
- * This type is an array of ids available in the `ODConfigManager_Default` class.
+/**## ODConfigManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODConfigManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODConfigManagerIds_Default {

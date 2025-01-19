@@ -4,8 +4,8 @@
 import { ODValidId } from "../modules/base"
 import { ODStartScreenCategoryComponent, ODStartScreenComponent, ODStartScreenFlagsCategoryComponent, ODStartScreenHeaderComponent, ODStartScreenLiveStatusCategoryComponent, ODStartScreenLogoComponent, ODStartScreenManager, ODStartScreenPluginsCategoryComponent, ODStartScreenPropertiesCategoryComponent } from "../modules/startscreen"
 
-/**## ODStartScreenManagerIds_Default `type`
- * This type is an array of ids available in the `ODStartScreenManager_Default` class.
+/**## ODStartScreenManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODStartScreenManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStartScreenManagerIds_Default {

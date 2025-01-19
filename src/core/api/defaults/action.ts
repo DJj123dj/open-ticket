@@ -11,8 +11,8 @@ import { ODTranscriptCompiler, ODTranscriptCompilerCompileResult } from "../open
 import { ODMessageBuildSentResult } from "../modules/builder"
 import { ODRole, OTRoleUpdateMode, OTRoleUpdateResult } from "../openticket/role"
 
-/**## ODActionManagerIds_Default `type`
- * This type is an array of ids available in the `ODActionManager_Default` class.
+/**## ODActionManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODActionManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODActionManagerIds_Default {

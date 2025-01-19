@@ -31,7 +31,7 @@ export interface ODPanelJson {
 }
 
 /**## ODPanelIds `type`
- * This type is an array of ids available in the `ODPanel` class.
+ * This interface is a list of ids available in the `ODPanel` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODPanelIds {

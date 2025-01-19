@@ -15,8 +15,8 @@ export class ODClientManager_Default extends ODClientManager {
     declare textCommands: ODTextCommandManager_Default
 }
 
-/**## ODSlashCommandManagerIds_Default `type`
- * This type is an array of ids available in the `ODSlashCommandManager_Default` class.
+/**## ODSlashCommandManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODSlashCommandManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODSlashCommandManagerIds_Default {
@@ -77,8 +77,8 @@ export class ODSlashCommandManager_Default extends ODSlashCommandManager {
     }
 }
 
-/**## ODTextCommandManagerIds_Default `type`
- * This type is an array of ids available in the `ODTextCommandManager_Default` class.
+/**## ODTextCommandManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODTextCommandManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTextCommandManagerIds_Default {

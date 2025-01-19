@@ -93,7 +93,7 @@ export class ODOptionData<DataType extends ODValidJsonType> extends ODManagerDat
 }
 
 /**## ODTicketOptionIds `type`
- * This type is an array of ids available in the `ODTicketOption` class.
+ * This interface is a list of ids available in the `ODTicketOption` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTicketOptionIds {
@@ -178,7 +178,7 @@ export class ODTicketOption extends ODOption {
 }
 
 /**## ODWebsiteOptionIds `type`
- * This type is an array of ids available in the `ODWebsiteOption` class.
+ * This interface is a list of ids available in the `ODWebsiteOption` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODWebsiteOptionIds {
@@ -225,7 +225,7 @@ export class ODWebsiteOption extends ODOption {
 }
 
 /**## ODRoleOptionIds `type`
- * This type is an array of ids available in the `ODRoleOption` class.
+ * This interface is a list of ids available in the `ODRoleOption` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODRoleOptionIds {

@@ -5,8 +5,8 @@ import { Guild, TextBasedChannel, User } from "discord.js"
 import { ODValidId } from "../modules/base"
 import { ODStatScope, ODStatGlobalScope, ODStatsManager, ODStat, ODBasicStat, ODDynamicStat, ODValidStatValue, ODStatScopeSetMode } from "../modules/stat"
 
-/**## ODStatsManagerIds_Default `type`
- * This type is an array of ids available in the `ODStatsManager_Default` class.
+/**## ODStatsManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODStatsManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatsManagerIds_Default {
@@ -47,7 +47,7 @@ export class ODStatsManager_Default extends ODStatsManager {
 }
 
 /**## ODStatGlobalScopeIds_DefaultGlobal `type`
- * This type is an array of ids available in the `ODStatGlobalScope_DefaultGlobal` class.
+ * This interface is a list of ids available in the `ODStatGlobalScope_DefaultGlobal` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatGlobalScopeIds_DefaultGlobal {
@@ -115,7 +115,7 @@ export class ODStatGlobalScope_DefaultGlobal extends ODStatGlobalScope {
 }
 
 /**## ODStatGlobalScopeIds_DefaultSystem `type`
- * This type is an array of ids available in the `ODStatScope_DefaultSystem` class.
+ * This interface is a list of ids available in the `ODStatScope_DefaultSystem` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatGlobalScopeIds_DefaultSystem {
@@ -174,7 +174,7 @@ export class ODStatGlobalScope_DefaultSystem extends ODStatGlobalScope {
 }
 
 /**## ODStatScopeIds_DefaultUser `type`
- * This type is an array of ids available in the `ODStatScope_DefaultUser` class.
+ * This interface is a list of ids available in the `ODStatScope_DefaultUser` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatScopeIds_DefaultUser {
@@ -242,7 +242,7 @@ export class ODStatScope_DefaultUser extends ODStatScope {
 }
 
 /**## ODStatScopeIds_DefaultTicket `type`
- * This type is an array of ids available in the `ODStatScope_DefaultTicket` class.
+ * This interface is a list of ids available in the `ODStatScope_DefaultTicket` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatScopeIds_DefaultTicket {
@@ -305,7 +305,7 @@ export class ODStatScope_DefaultTicket extends ODStatScope {
 }
 
 /**## ODStatScopeIds_DefaultParticipants `type`
- * This type is an array of ids available in the `ODStatScope_DefaultParticipants` class.
+ * This interface is a list of ids available in the `ODStatScope_DefaultParticipants` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatScopeIds_DefaultParticipants {

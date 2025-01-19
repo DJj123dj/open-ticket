@@ -43,8 +43,8 @@ import { ODBlacklistManager } from "../openticket/blacklist"
 import { ODTranscriptManager_Default } from "../openticket/transcript"
 import { ODRole, ODRoleManager } from "../openticket/role"
 
-/**## ODEventIds_Default `type`
- * This type is an array of ids available in the `ODEvent_Default` class.
+/**## ODEventIds_Default `interface`
+ * This interface is a list of ids available in the `ODEvent_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODEventIds_Default {

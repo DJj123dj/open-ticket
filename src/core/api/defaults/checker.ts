@@ -6,8 +6,8 @@ import { ODValidId } from "../modules/base"
 import { ODCheckerManager, ODChecker, ODCheckerTranslationRegister, ODCheckerRenderer, ODCheckerFunctionManager, ODCheckerResult, ODCheckerFunction } from "../modules/checker"
 import ansis from "ansis"
 
-/**## ODCheckerManagerIds_Default `type`
- * This type is an array of ids available in the `ODCheckerManager_Default` class.
+/**## ODCheckerManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODCheckerManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCheckerManagerIds_Default {
@@ -208,8 +208,8 @@ export class ODCheckerRenderer_Default extends ODCheckerRenderer {
     }
 }
 
-/**## ODCheckerTranslationRegisterOtherIds_Default `type`
- * This type is an array of ids available in the `ODCheckerTranslationRegister_Default` class.
+/**## ODCheckerTranslationRegisterOtherIds_Default `interface`
+ * This interface is a list of ids available in the `ODCheckerTranslationRegister_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export type ODCheckerTranslationRegisterOtherIds_Default = (
@@ -228,8 +228,8 @@ export type ODCheckerTranslationRegisterOtherIds_Default = (
     "openticket:footer-support"
 )
 
-/**## ODCheckerTranslationRegisterMessageIds_Default `type`
- * This type is an array of ids available in the `ODCheckerTranslationRegister_Default` class.
+/**## ODCheckerTranslationRegisterMessageIds_Default `interface`
+ * This interface is a list of ids available in the `ODCheckerTranslationRegister_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export type ODCheckerTranslationRegisterMessageIds_Default = (
@@ -341,8 +341,8 @@ export class ODCheckerTranslationRegister_Default extends ODCheckerTranslationRe
     }
 }
 
-/**## ODCheckerFunctionManagerIds_Default `type`
- * This type is an array of ids available in the `ODCheckerFunctionManager_Default` class.
+/**## ODCheckerFunctionManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODCheckerFunctionManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCheckerFunctionManagerIds_Default {

@@ -52,7 +52,7 @@ export class ODRoleData<DataType extends ODValidJsonType> extends ODManagerData 
 }
 
 /**## ODRoleIds `type`
- * This type is an array of ids available in the `ODRole` class.
+ * This interface is a list of ids available in the `ODRole` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODRoleIds {

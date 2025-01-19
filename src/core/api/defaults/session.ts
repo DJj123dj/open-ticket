@@ -4,8 +4,8 @@
 import { ODValidId } from "../modules/base"
 import { ODSession, ODSessionManager } from "../modules/session"
 
-/**## ODSessionManagerIds_Default `type`
- * This type is an array of ids available in the `ODSessionManager_Default` class.
+/**## ODSessionManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODSessionManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODSessionManagerIds_Default {

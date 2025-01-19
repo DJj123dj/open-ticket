@@ -129,7 +129,7 @@ export interface ODTicketJson {
 }
 
 /**## ODTicketIds `type`
- * This type is an array of ids available in the `ODTicket` class.
+ * This interface is a list of ids available in the `ODTicket` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTicketIds {

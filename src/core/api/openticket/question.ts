@@ -86,7 +86,7 @@ export class ODQuestionData<DataType extends ODValidJsonType> extends ODManagerD
 }
 
 /**## ODShortQuestionIds `type`
- * This type is an array of ids available in the `ODShortQuestion` class.
+ * This interface is a list of ids available in the `ODShortQuestion` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODShortQuestionIds {
@@ -133,7 +133,7 @@ export class ODShortQuestion extends ODQuestion {
 }
 
 /**## ODParagraphQuestionIds `type`
- * This type is an array of ids available in the `ODParagraphQuestion` class.
+ * This interface is a list of ids available in the `ODParagraphQuestion` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODParagraphQuestionIds {

@@ -18,8 +18,8 @@ export class ODResponderManager_Default extends ODResponderManager {
     declare modals: ODModalResponderManager_Default
 }
 
-/**## ODCommandResponderManagerIds_Default `type`
- * This type is an array of ids available in the `ODCommandResponderManager_Default` class.
+/**## ODCommandResponderManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODCommandResponderManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCommandResponderManagerIds_Default {
@@ -86,8 +86,8 @@ export class ODCommandResponder_Default<Source extends "slash"|"text", Params, W
     declare workers: ODWorkerManager_Default<ODCommandResponderInstance,Source,Params,WorkerIds>
 }
 
-/**## ODButtonResponderManagerIds_Default `type`
- * This type is an array of ids available in the `ODButtonResponderManager_Default` class.
+/**## ODButtonResponderManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODButtonResponderManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODButtonResponderManagerIds_Default {
@@ -153,8 +153,8 @@ export class ODButtonResponder_Default<Source extends string, Params, WorkerIds 
     declare workers: ODWorkerManager_Default<ODButtonResponderInstance,Source,Params,WorkerIds>
 }
 
-/**## ODDropdownResponderManagerIds_Default `type`
- * This type is an array of ids available in the `ODDropdownResponderManager_Default` class.
+/**## ODDropdownResponderManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODDropdownResponderManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODDropdownResponderManagerIds_Default {
@@ -200,8 +200,8 @@ export class ODDropdownResponder_Default<Source extends string, Params, WorkerId
     declare workers: ODWorkerManager_Default<ODDropdownResponderInstance,Source,Params,WorkerIds>
 }
 
-/**## ODModalResponderManagerIds_Default `type`
- * This type is an array of ids available in the `ODModalResponderManager_Default` class.
+/**## ODModalResponderManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODModalResponderManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODModalResponderManagerIds_Default {

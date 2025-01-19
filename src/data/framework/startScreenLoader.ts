@@ -2,13 +2,6 @@ import {openticket, api, utilities} from "../../index"
 import ansis from "ansis"
 
 export const loadAllStartScreenComponents = async () => {
-    /**
-    "openticket:flags":ODStartScreenFlagsCategoryComponent,
-    "openticket:plugins":ODStartScreenPluginsCategoryComponent,
-
-    "openticket:livestatus":ODStartScreenLiveStatusCategoryComponent,
-    */
-
     //LOGO
     openticket.startscreen.add(new api.ODStartScreenLogoComponent("openticket:logo",1000,[
         "   ██████╗ ██████╗ ███████╗███╗   ██╗    ████████╗██╗ ██████╗██╗  ██╗███████╗████████╗  ",

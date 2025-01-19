@@ -4,8 +4,8 @@
 import { ODValidId } from "../modules/base"
 import { ODCooldown, ODCooldownManager } from "../modules/cooldown"
 
-/**## ODCooldownManagerIds_Default `type`
- * This type is an array of ids available in the `ODCooldownManager_Default` class.
+/**## ODCooldownManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODCooldownManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCooldownManagerIds_Default {

@@ -4,8 +4,8 @@
 import { ODValidId } from "../modules/base"
 import { ODFlagManager, ODFlag } from "../modules/flag"
 
-/**## ODFlagManagerIds_Default `type`
- * This type is an array of ids available in the `ODFlagManager_Default` class.
+/**## ODFlagManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODFlagManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFlagManagerIds_Default {

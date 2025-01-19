@@ -5,8 +5,8 @@ import { ODValidId } from "../modules/base"
 import { ODPost, ODPostManager } from "../modules/post"
 import * as discord from "discord.js"
 
-/**## ODPostManagerIds_Default `type`
- * This type is an array of ids available in the `ODPostManager_Default` class.
+/**## ODPostManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODPostManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODPostManagerIds_Default {

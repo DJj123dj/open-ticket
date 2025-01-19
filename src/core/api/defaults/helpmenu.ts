@@ -4,8 +4,8 @@
 import { ODValidId } from "../modules/base"
 import { ODHelpMenuCategory, ODHelpMenuCommandComponent, ODHelpMenuComponent, ODHelpMenuManager } from "../modules/helpmenu"
 
-/**## ODHelpMenuManagerIds_Default `type`
- * This type is an array of ids available in the `ODHelpMenuManager_Default` class.
+/**## ODHelpMenuManagerIds_Default `interface`
+ * This interface is a list of ids available in the `ODHelpMenuManager_Default` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerIds_Default {
@@ -48,7 +48,7 @@ export class ODHelpMenuManager_Default extends ODHelpMenuManager {
 }
 
 /**## ODHelpMenuManagerCategoryIds_DefaultGeneral `type`
- * This type is an array of ids available in the `ODHelpMenuCategory_DefaultGeneral` class.
+ * This interface is a list of ids available in the `ODHelpMenuCategory_DefaultGeneral` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerCategoryIds_DefaultGeneral {
@@ -86,7 +86,7 @@ export class ODHelpMenuCategory_DefaultGeneral extends ODHelpMenuCategory {
 }
 
 /**## ODHelpMenuManagerCategoryIds_DefaultTicketBasic `type`
- * This type is an array of ids available in the `ODHelpMenuCategory_DefaultTicketBasic` class.
+ * This interface is a list of ids available in the `ODHelpMenuCategory_DefaultTicketBasic` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerCategoryIds_DefaultTicketBasic {
@@ -125,7 +125,7 @@ export class ODHelpMenuCategory_DefaultTicketBasic extends ODHelpMenuCategory {
 }
 
 /**## ODHelpMenuManagerCategoryIds_DefaultTicketAdvanced `type`
- * This type is an array of ids available in the `ODHelpMenuCategory_DefaultTicketAdvanced` class.
+ * This interface is a list of ids available in the `ODHelpMenuCategory_DefaultTicketAdvanced` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerCategoryIds_DefaultTicketAdvanced {
@@ -165,7 +165,7 @@ export class ODHelpMenuCategory_DefaultTicketAdvanced extends ODHelpMenuCategory
 }
 
 /**## ODHelpMenuManagerCategoryIds_DefaultTicketUser `type`
- * This type is an array of ids available in the `ODHelpMenuCategory_DefaultTicketUser` class.
+ * This interface is a list of ids available in the `ODHelpMenuCategory_DefaultTicketUser` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerCategoryIds_DefaultTicketUser {
@@ -205,7 +205,7 @@ export class ODHelpMenuCategory_DefaultTicketUser extends ODHelpMenuCategory {
 }
 
 /**## ODHelpMenuManagerCategoryIds_DefaultAdmin `type`
- * This type is an array of ids available in the `ODHelpMenuCategory_DefaultAdmin` class.
+ * This interface is a list of ids available in the `ODHelpMenuCategory_DefaultAdmin` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerCategoryIds_DefaultAdmin {
@@ -246,7 +246,7 @@ export class ODHelpMenuCategory_DefaultAdmin extends ODHelpMenuCategory {
 }
 
 /**## ODHelpMenuManagerCategoryIds_DefaultAdvanced `type`
- * This type is an array of ids available in the `ODHelpMenuCategory_DefaultAdvanced` class.
+ * This interface is a list of ids available in the `ODHelpMenuCategory_DefaultAdvanced` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerCategoryIds_DefaultAdvanced {
@@ -288,7 +288,7 @@ export class ODHelpMenuCategory_DefaultAdvanced extends ODHelpMenuCategory {
 }
 
 /**## ODHelpMenuManagerCategoryIds_DefaultExtra `type`
- * This type is an array of ids available in the `ODHelpMenuCategory_DefaultExtra` class.
+ * This interface is a list of ids available in the `ODHelpMenuCategory_DefaultExtra` class.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODHelpMenuManagerCategoryIds_DefaultExtra {}
