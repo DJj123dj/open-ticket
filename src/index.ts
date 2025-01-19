@@ -411,11 +411,19 @@ const main = async () => {
             if (openticket.defaults.getDefault("slashCommandRegistering")){
                 //get all commands that are already registered in the bot
                 const cmds = await openticket.client.slashCommands.getAllRegisteredCommands()
+                const removableCmds = cmds.unused.map((cmd) => cmd.cmd)
+                const newCmds = cmds.unregistered.map((cmd) => cmd.instance)
+                const updatableCmds = cmds.registered.filter((cmd) => cmd.requiresUpdate || openticket.defaults.getDefault("forceSlashCommandRegistration")).map((cmd) => cmd.instance)
+
+                //init progress bars
+                const removeProgress = openticket.progressbars.get("openticket:slash-command-remove")
+                const createProgress = openticket.progressbars.get("openticket:slash-command-create")
+                const updateProgress = openticket.progressbars.get("openticket:slash-command-update")
 
                 //remove unused cmds, create new cmds & update existing cmds
-                if (openticket.defaults.getDefault("allowSlashCommandRemoval")) await openticket.client.slashCommands.removeUnusedCommands(cmds.unused.map((cmd) => cmd.cmd))
-                await openticket.client.slashCommands.createNewCommands(cmds.unregistered.map((cmd) => cmd.instance))
-                await openticket.client.slashCommands.updateExistingCommands(cmds.registered.filter((cmd) => cmd.requiresUpdate || openticket.defaults.getDefault("forceSlashCommandRegistration")).map((cmd) => cmd.instance))
+                if (openticket.defaults.getDefault("allowSlashCommandRemoval")) await openticket.client.slashCommands.removeUnusedCommands(removableCmds,undefined,removeProgress)
+                await openticket.client.slashCommands.createNewCommands(newCmds,createProgress)
+                await openticket.client.slashCommands.updateExistingCommands(updatableCmds,updateProgress)
                 
                 await openticket.events.get("afterSlashCommandsRegistered").emit([openticket.client.slashCommands,openticket.client])
             }

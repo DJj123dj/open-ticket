@@ -5,6 +5,7 @@ import { ODId, ODManager, ODManagerData, ODSystemError, ODValidId } from "./base
 import * as discord from "discord.js"
 import { ODConsoleWarningMessage, ODDebugger } from "./console"
 import { ODMessageBuildResult, ODMessageBuildSentResult } from "./builder"
+import { ODManualProgressBar } from "./progressbar"
 
 /**## ODClientIntents `type`
  * A list of intents required when inviting the bot.
@@ -814,8 +815,12 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
         return {registered,unregistered,unused}
     }
     /**Create all commands that are not registered yet.*/
-    async createNewCommands(instances:ODSlashCommand[]){
+    async createNewCommands(instances:ODSlashCommand[],progress?:ODManualProgressBar){
         if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
+        if (instances.length > 0 && progress){
+            progress.max = instances.length
+            progress.start()
+        }
 
         for (const instance of instances){
             await this.createCmd(instance)
@@ -823,22 +828,32 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
                 {key:"id",value:instance.id.value},
                 {key:"name",value:instance.name}
             ])
+            if (progress) progress.increase(1)
         }
     }
     /**Update all commands that are already registered. */
-    async updateExistingCommands(instances:ODSlashCommand[]){
+    async updateExistingCommands(instances:ODSlashCommand[],progress?:ODManualProgressBar){
         if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
-        
+        if (instances.length > 0 && progress){
+            progress.max = instances.length
+            progress.start()
+        }
+
         for (const instance of instances){
             await this.createCmd(instance)
             this.#debug.debug("Updated existing slash command",[{key:"id",value:instance.id.value},{key:"name",value:instance.name}])
+            if (progress) progress.increase(1)
         }
     }
     /**Remove all commands that are registered but unused by Open Ticket. */
-    async removeUnusedCommands(instances:ODSlashCommandUniversalCommand[],guildId?:string){
+    async removeUnusedCommands(instances:ODSlashCommandUniversalCommand[],guildId?:string,progress?:ODManualProgressBar){
         if (!this.manager.ready) throw new ODSystemError("Client isn't ready yet! Unable to register slash commands!")
         if (!this.commandManager) throw new ODSystemError("Couldn't get client application to register slash commands!")
-        
+        if (instances.length > 0 && progress){
+            progress.max = instances.length
+            progress.start()
+        }
+
         const cmds = await this.commandManager.fetch({guildId})
         
         for (const instance of instances){
@@ -852,6 +867,7 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
                     throw new ODSystemError("Failed to delete slash command '/"+cmd.name+"'!")
                 }
             }
+            if (progress) progress.increase(1)
         }
     }
     /**Create a slash command. **(SYSTEM ONLY)** => Use `ODSlashCommandManager` for registering commands the default way! */

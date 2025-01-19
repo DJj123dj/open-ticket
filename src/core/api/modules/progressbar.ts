@@ -37,7 +37,7 @@ export class ODProgressBarManager extends ODManager<ODProgressBar> {
 /**## ODProgressBarRenderFunc `type`
  * This is the render function for an Open Ticket console progress bar.
  */
-export type ODProgressBarRenderFunc<Settings extends {}> = (settings:Settings,min:number,max:number,value:number) => string
+export type ODProgressBarRenderFunc<Settings extends {}> = (settings:Settings,min:number,max:number,value:number,prefix:string|null,suffix:string|null) => string
 
 /**## ODProgressBarRenderer `class`
  * This is an open ticket console progress bar renderer.
@@ -57,13 +57,21 @@ export class ODProgressBarRenderer<Settings extends {}> extends ODManagerData {
     }
 
     /**Render a progress bar using this renderer. */
-    render(min:number,max:number,value:number){
+    render(min:number,max:number,value:number,prefix:string|null,suffix:string|null){
         try {
-            return this.#render(this.settings,min,max,value)
+            return this.#render(this.settings,min,max,value,prefix,suffix)
         }catch(err){
             process.emit("uncaughtException",err)
             return "<PROGRESS-BAR-ERROR>"
         }
+    }
+
+    withAdditionalSettings(settings:Partial<Settings>): ODProgressBarRenderer<Settings> {
+        const newSettings: Settings = {...this.settings}
+        for (const key of Object.keys(settings)){
+            if (typeof settings[key] != "undefined") newSettings[key] = settings[key]
+        }
+        return new ODProgressBarRenderer(this.id,this.#render,newSettings)
     }
 }
 
@@ -90,11 +98,15 @@ export class ODProgressBar extends ODManagerData {
     max: number
     /**The initial value of the progress bar. */
     initialValue: number
+    /**The prefix displayed in the progress bar. */
+    prefix:string|null
+    /**The prefix displayed in the progress bar. */
+    suffix:string|null
     
     /**Enable automatic stopping when reaching `min` or `max`. */
     autoStop: null|"min"|"max"
 
-    constructor(id:ODValidId,renderer:ODProgressBarRenderer<{}>,min:number,max:number,value:number,autoStop:null|"min"|"max"){
+    constructor(id:ODValidId,renderer:ODProgressBarRenderer<{}>,min:number,max:number,value:number,autoStop:null|"min"|"max",prefix:string|null,suffix:string|null){
         super(id)
         this.renderer = renderer
         this.min = min
@@ -102,6 +114,8 @@ export class ODProgressBar extends ODManagerData {
         this.initialValue = this.#parseValue(value)
         this.value = this.#parseValue(value)
         this.autoStop = autoStop
+        this.prefix = prefix
+        this.suffix = suffix
     }
     /**Parse a value in such a way that it doesn't go below/above the min/max limits. */
     #parseValue(value:number){
@@ -114,18 +128,19 @@ export class ODProgressBar extends ODManagerData {
         if (!this.#active) return
         readline.clearLine(process.stdout,0)
         readline.cursorTo(process.stdout,0)
-        process.stdout.write(this.renderer.render(this.min,this.max,this.value))
+        process.stdout.write(this.renderer.render(this.min,this.max,this.value,this.prefix,this.suffix))
     }
     /**Start showing this progress bar in the console. */
-    start(){
-        if (this.#active) throw new ODSystemError("ODProgressBar => unable to start when already active!")
+    start(): boolean {
+        if (this.#active) return false
         this.value = this.#parseValue(this.initialValue)
         this.#active = true
         this.#renderStdout() 
+        return true
     }
     /**Update this progress bar while active. (will automatically update the progress bar in the console) */
-    protected update(value:number,stop?:boolean){
-        if (!this.#active) throw new ODSystemError("ODProgressBar => unable to update when not active yet!")
+    protected update(value:number,stop?:boolean): boolean {
+        if (!this.#active) return false
         this.value = this.#parseValue(value)
         this.#renderStdout()
         if (stop || (this.autoStop == "max" && this.value  == this.max) || (this.autoStop == "min" && this.value  == this.min)){
@@ -134,6 +149,7 @@ export class ODProgressBar extends ODManagerData {
             this.#stopListeners.forEach((cb) => cb())
             this.#stopListeners = []
         }
+        return true
     }
     /**Wait for the progress bar to finish. */
     finished(): Promise<void> {
@@ -155,8 +171,8 @@ export class ODTimedProgressBar extends ODProgressBar {
     /**The mode of the timer. */
     mode: "increasing"|"decreasing"
 
-    constructor(id:ODValidId,renderer:ODProgressBarRenderer<{}>,time:number,mode:"increasing"|"decreasing"){
-        super(id,renderer,0,time,0,(mode == "increasing") ? "max" : "min")
+    constructor(id:ODValidId,renderer:ODProgressBarRenderer<{}>,time:number,mode:"increasing"|"decreasing",prefix:string|null,suffix:string|null){
+        super(id,renderer,0,time,0,(mode == "increasing") ? "max" : "min",prefix,suffix)
         this.time = time
         this.mode = mode
     }
@@ -180,8 +196,10 @@ export class ODTimedProgressBar extends ODProgressBar {
         }
     }
     start(){
-        super.start()
+        const res = super.start()
+        if (!res) return false
         this.#execute()
+        return true
     }
 }
 
@@ -192,11 +210,8 @@ export class ODTimedProgressBar extends ODProgressBar {
  * You can update the progress manually using `update()`.
  */
 export class ODManualProgressBar extends ODProgressBar {
-    constructor(id:ODValidId,renderer:ODProgressBarRenderer<{}>,amount:number,autoStop:null|"min"|"max"){
-        super(id,renderer,0,amount,0,autoStop)
-    }
-    start(){
-        super.start()
+    constructor(id:ODValidId,renderer:ODProgressBarRenderer<{}>,amount:number,autoStop:null|"min"|"max",prefix:string|null,suffix:string|null){
+        super(id,renderer,0,amount,0,autoStop,prefix,suffix)
     }
     /**Set the value of the progress bar. */
     set(value:number,stop?:boolean){
