@@ -91,14 +91,14 @@ export const loadAllStats = async () => {
             if (!ticket) return ""
             
             const claimed = ticket.exists("openticket:claimed") ? ticket.get("openticket:claimed").value : false
-            return claimed ? lang.getTranslation("params.uppercase.claimed")+": 🟢 `Yes`" : lang.getTranslation("params.uppercase.claimed")+": 🔴 `No`"
+            return claimed ? lang.getTranslation("params.uppercase.claimed")+": 🟢 `Yes`" : lang.getTranslation("params.uppercase.claimed")+": 🔴 `No`" //TODO TRANSLATION!!!
         }))
         ticket.add(new api.ODDynamicStat("openticket:pinned",2,async (scopeId,guild,channel,user) => {
             const ticket = openticket.tickets.get(scopeId)
             if (!ticket) return ""
             
             const pinned = ticket.exists("openticket:pinned") ? ticket.get("openticket:pinned").value : false
-            return pinned ? lang.getTranslation("params.uppercase.pinned")+": 🟢 `Yes`" : lang.getTranslation("params.uppercase.pinned")+": 🔴 `No`"
+            return pinned ? lang.getTranslation("params.uppercase.pinned")+": 🟢 `Yes`" : lang.getTranslation("params.uppercase.pinned")+": 🔴 `No`" //TODO TRANSLATION!!!
         }))
         ticket.add(new api.ODDynamicStat("openticket:creation-date",1,async (scopeId,guild,channel,user) => {
             const ticket = openticket.tickets.get(scopeId)
