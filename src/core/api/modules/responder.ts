@@ -33,12 +33,33 @@ export class ODResponderImplementation<Instance,Source extends string,Params> ex
     }
 }
 
+/**## ODResponderTimeoutErrorCallback `type`
+ * This is the callback for the responder timeout function. It will be executed when something went wrong or the action takes too much time.
+ */
 export type ODResponderTimeoutErrorCallback<Instance, Source extends "slash"|"text"|"button"|"dropdown"|"modal"|"other"> = (instance:Instance, source:Source) => void|Promise<void>
 
+/**## ODResponderManager `class`
+ * This is an open ticket responder manager.
+ * 
+ * It contains all Open Ticket responders. Responders can respond to an interaction, button, dropdown, modal or command.
+ * 
+ * Using the Open Ticket responder system has a few advantages compared to vanilla discord.js:
+ * - plugins can extend/edit replies
+ * - automatically reply on error
+ * - independent workers (with priority)
+ * - fail-safe design using try-catch
+ * - write code once => reply to both slash & text commands at the same time!
+ * - know where the request came from & parse options/subcommands & without errors!
+ * - And so much more!
+ */
 export class ODResponderManager {
+    /**A manager for all (text & slash) command responders. */
     commands: ODCommandResponderManager
+    /**A manager for all button responders. */
     buttons: ODButtonResponderManager
+    /**A manager for all dropdown/select menu responders. */
     dropdowns: ODDropdownResponderManager
+    /**A manager for all modal responders. */
     modals: ODModalResponderManager
 
     constructor(debug:ODDebugger, client:ODClientManager){
@@ -49,9 +70,26 @@ export class ODResponderManager {
     }
 }
 
+/**## ODCommandResponderManager `class`
+ * This is an open ticket command responder manager.
+ * 
+ * It contains all Open Ticket command responders. These can respond to text & slash commands.
+ * 
+ * Using the Open Ticket responder system has a few advantages compared to vanilla discord.js:
+ * - plugins can extend/edit replies
+ * - automatically reply on error
+ * - independent workers (with priority)
+ * - fail-safe design using try-catch
+ * - write code once => reply to both slash & text commands at the same time!
+ * - know where the request came from & parse options/subcommands & without errors!
+ * - And so much more!
+ */
 export class ODCommandResponderManager extends ODManager<ODCommandResponder<"slash"|"text",any>> {
+    /**An alias to the Open Ticket client manager. */
     #client: ODClientManager
+    /**The callback executed when the default workers take too much time to reply. */
     #timeoutErrorCallback: ODResponderTimeoutErrorCallback<ODCommandResponderInstance,"slash"|"text">|null = null
+    /**The amount of milliseconds before the timeout error callback is executed. */
     #timeoutMs: number|null = null
     
     constructor(debug:ODDebugger, debugname:string, client:ODClientManager){
@@ -86,9 +124,17 @@ export class ODCommandResponderManager extends ODManager<ODCommandResponder<"sla
     }
 }
 
+/**## ODCommandResponderInstanceOptions `class`
+ * This is an open ticket command responder instance options manager.
+ * 
+ * This class will manage all options & subcommands from slash & text commands.
+ */
 export class ODCommandResponderInstanceOptions {
+    /**The interaction to get data from. */
     #interaction:discord.ChatInputCommandInteraction|discord.Message
+    /**The command which is related to the interaction. */
     #cmd:ODSlashCommand|ODTextCommand
+    /**A list of options which have been parsed by the text command parser. */
     #options: ODTextCommandInteractionOption[]
 
     constructor(interaction:discord.ChatInputCommandInteraction|discord.Message, cmd:ODSlashCommand|ODTextCommand, options?:ODTextCommandInteractionOption[]){
@@ -96,6 +142,8 @@ export class ODCommandResponderInstanceOptions {
         this.#cmd = cmd
         this.#options = options ?? []
     }
+
+    /**Get a string option. */
     getString(name:string,required:true): string
     getString(name:string,required:false): string|null
     getString(name:string,required:boolean){
@@ -113,6 +161,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a boolean option. */
     getBoolean(name:string,required:true): boolean
     getBoolean(name:string,required:false): boolean|null
     getBoolean(name:string,required:boolean){
@@ -130,6 +179,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a number option. */
     getNumber(name:string,required:true): number
     getNumber(name:string,required:false): number|null
     getNumber(name:string,required:boolean){
@@ -147,6 +197,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a channel option. */
     getChannel(name:string,required:true): discord.TextChannel|discord.VoiceChannel|discord.StageChannel|discord.NewsChannel|discord.MediaChannel|discord.ForumChannel|discord.CategoryChannel
     getChannel(name:string,required:false): discord.TextChannel|discord.VoiceChannel|discord.StageChannel|discord.NewsChannel|discord.MediaChannel|discord.ForumChannel|discord.CategoryChannel|null
     getChannel(name:string,required:boolean){
@@ -164,6 +215,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a role option. */
     getRole(name:string,required:true): discord.Role
     getRole(name:string,required:false): discord.Role|null
     getRole(name:string,required:boolean){
@@ -181,6 +233,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a user option. */
     getUser(name:string,required:true): discord.User
     getUser(name:string,required:false): discord.User|null
     getUser(name:string,required:boolean){
@@ -198,6 +251,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a guild member option. */
     getGuildMember(name:string,required:true): discord.GuildMember
     getGuildMember(name:string,required:false): discord.GuildMember|null
     getGuildMember(name:string,required:boolean){
@@ -217,6 +271,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a mentionable option. */
     getMentionable(name:string,required:true): discord.User|discord.GuildMember|discord.Role
     getMentionable(name:string,required:false): discord.User|discord.GuildMember|discord.Role|null
     getMentionable(name:string,required:boolean){
@@ -234,6 +289,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a subgroup. */
     getSubGroup(): string|null
     getSubGroup(){
         if (this.#interaction instanceof discord.ChatInputCommandInteraction){
@@ -250,6 +306,7 @@ export class ODCommandResponderInstanceOptions {
 
         }else return null
     }
+    /**Get a subcommand. */
     getSubCommand(): string|null
     getSubCommand(){
         if (this.#interaction instanceof discord.ChatInputCommandInteraction){
@@ -272,15 +329,30 @@ export class ODCommandResponderInstanceOptions {
     }
 }
 
+
+/**## ODCommandResponderInstance `class`
+ * This is an open ticket command responder instance.
+ * 
+ * An instance is an interaction or used text command. You can reply to the command using `reply()` for both slash & text commands.
+ */
 export class ODCommandResponderInstance {
+    /**The interaction which is the source of this instance. */
     interaction:discord.ChatInputCommandInteraction|discord.Message
+    /**The command wich is the source of this instance. */
     cmd:ODSlashCommand|ODTextCommand
+    /**The type/source of instance. (from text or slash command) */
     type: "message"|"interaction"
+    /**Did a worker already reply to this instance/interaction? */
     didReply: boolean = false
+    /**The manager for all options of this command. */
     options: ODCommandResponderInstanceOptions
+    /**The user who triggered this command. */
     user: discord.User
+    /**The guild member who triggered this command. */
     member: discord.GuildMember|null
+    /**The guild where this command was triggered. */
     guild: discord.Guild|null
+    /**The channel where this command was triggered. */
     channel: discord.TextBasedChannel
 
     constructor(interaction:discord.ChatInputCommandInteraction|discord.Message, cmd:ODSlashCommand|ODTextCommand, errorCallback:ODResponderTimeoutErrorCallback<ODCommandResponderInstance,"slash"|"text">|null, timeoutMs:number|null, options?:ODTextCommandInteractionOption[]){
