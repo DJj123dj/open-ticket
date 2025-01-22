@@ -65,9 +65,11 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 <table>
 <tr>
 <td><img src="https://github.com/roppl3r.png" alt="Profile Picture" width="80px"></td>
+<td><img src="https://github.com/BENZORICH.png" alt="Profile Picture" width="80px"></td>
 </tr>
 <tr>
 <th><a href="https://github.com/roppl3r">roppl3r</a></th>
+<th><a href="https://github.com/BENZORICH">BENZORICH</a></th>
 </tr>
 </table>
 
