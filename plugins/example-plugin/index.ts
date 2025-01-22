@@ -10,6 +10,9 @@ if (utilities.project != "openticket") throw new api.ODPluginError("This plugin 
 
 //Add Typescript autocomplete support for plugin data. (!!!OPTIONAL!!!)
 declare module "#opendiscord-types" {
+    export interface ODPluginManagerIds_Default {
+        "example-plugin":api.ODPlugin
+    }
     export interface ODConfigManagerIds_Default {
         "example-plugin:config":api.ODJsonConfig
     }
