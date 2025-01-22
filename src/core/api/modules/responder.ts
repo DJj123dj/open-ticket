@@ -131,7 +131,7 @@ export class ODCommandResponderManager extends ODManager<ODCommandResponder<"sla
  */
 export class ODCommandResponderInstanceOptions {
     /**The interaction to get data from. */
-    #interaction:discord.ChatInputCommandInteraction|discord.Message
+    #interaction: discord.ChatInputCommandInteraction|discord.Message
     /**The command which is related to the interaction. */
     #cmd:ODSlashCommand|ODTextCommand
     /**A list of options which have been parsed by the text command parser. */
@@ -333,11 +333,11 @@ export class ODCommandResponderInstanceOptions {
 /**## ODCommandResponderInstance `class`
  * This is an open ticket command responder instance.
  * 
- * An instance is an interaction or used text command. You can reply to the command using `reply()` for both slash & text commands.
+ * An instance is an active slash interaction or used text command. You can reply to the command using `reply()` for both slash & text commands.
  */
 export class ODCommandResponderInstance {
     /**The interaction which is the source of this instance. */
-    interaction:discord.ChatInputCommandInteraction|discord.Message
+    interaction: discord.ChatInputCommandInteraction|discord.Message
     /**The command wich is the source of this instance. */
     cmd:ODSlashCommand|ODTextCommand
     /**The type/source of instance. (from text or slash command) */
@@ -385,6 +385,7 @@ export class ODCommandResponderInstance {
         },timeoutMs ?? 2500)
     }
 
+    /**Reply to this command. */
     async reply(msg:ODMessageBuildResult): Promise<ODMessageBuildSentResult<boolean>> {
         try {
             const msgFlags: number[] = msg.ephemeral ? [discord.MessageFlags.Ephemeral] : []
@@ -407,6 +408,7 @@ export class ODCommandResponderInstance {
             return {success:false,message:null}
         }
     }
+    /**Defer this command. */
     async defer(ephemeral:boolean){
         if (this.type != "interaction" || !(this.interaction instanceof discord.ChatInputCommandInteraction)) return false
         if (this.interaction.deferred) return false
@@ -415,6 +417,7 @@ export class ODCommandResponderInstance {
         this.didReply = true
         return true
     }
+    /**Show a modal as reply to this command. */
     async modal(modal:ODModalBuildResult){
         if (this.type != "interaction" || !(this.interaction instanceof discord.ChatInputCommandInteraction)) return false
         this.interaction.showModal(modal.modal)
@@ -423,6 +426,11 @@ export class ODCommandResponderInstance {
     }
 }
 
+/**## ODCommandResponder `class`
+ * This is an open ticket command responder.
+ * 
+ * This class manages all workers which are executed when the related command is triggered.
+ */
 export class ODCommandResponder<Source extends "slash"|"text",Params> extends ODResponderImplementation<ODCommandResponderInstance,Source,Params> {
     /**The prefix of the text command needs to match this */
     prefix: string
@@ -439,10 +447,27 @@ export class ODCommandResponder<Source extends "slash"|"text",Params> extends OD
     }
 }
 
+/**## ODButtonResponderManager `class`
+ * This is an open ticket button responder manager.
+ * 
+ * It contains all Open Ticket button responders. These can respond to button interactions.
+ * 
+ * Using the Open Ticket responder system has a few advantages compared to vanilla discord.js:
+ * - plugins can extend/edit replies
+ * - automatically reply on error
+ * - independent workers (with priority)
+ * - fail-safe design using try-catch
+ * - know where the request came from!
+ * - And so much more!
+ */
 export class ODButtonResponderManager extends ODManager<ODButtonResponder<"button",any>> {
+    /**An alias to the Open Ticket client manager. */
     #client: ODClientManager
+    /**The callback executed when the default workers take too much time to reply. */
     #timeoutErrorCallback: ODResponderTimeoutErrorCallback<ODButtonResponderInstance,"button">|null = null
+    /**The amount of milliseconds before the timeout error callback is executed. */
     #timeoutMs: number|null = null
+    /**A list of listeners which will listen to the raw interactionCreate event from discord.js */
     #listeners: ((interaction:discord.ButtonInteraction) => void)[] = []
 
     constructor(debug:ODDebugger, debugname:string, client:ODClientManager){
@@ -474,13 +499,25 @@ export class ODButtonResponderManager extends ODManager<ODButtonResponder<"butto
     }
 }
 
+/**## ODButtonResponderInstance `class`
+ * This is an open ticket button responder instance.
+ * 
+ * An instance is an active button interaction. You can reply to the button using `reply()`.
+ */
 export class ODButtonResponderInstance {
-    interaction:discord.ButtonInteraction
+    /**The interaction which is the source of this instance. */
+    interaction: discord.ButtonInteraction
+    /**Did a worker already reply to this instance/interaction? */
     didReply: boolean = false
+    /**The user who triggered this button. */
     user: discord.User
+    /**The guild member who triggered this button. */
     member: discord.GuildMember|null
+    /**The guild where this button was triggered. */
     guild: discord.Guild|null
+    /**The channel where this button was triggered. */
     channel: discord.TextBasedChannel
+    /**The message this button originates from. */
     message: discord.Message
 
     constructor(interaction:discord.ButtonInteraction, errorCallback:ODResponderTimeoutErrorCallback<ODButtonResponderInstance,"button">|null, timeoutMs:number|null){
@@ -510,6 +547,7 @@ export class ODButtonResponderInstance {
         },timeoutMs ?? 2500)
     }
 
+    /**Reply to this button. */
     async reply(msg:ODMessageBuildResult): Promise<ODMessageBuildSentResult<boolean>> {
         try{
             const msgFlags: number[] = msg.ephemeral ? [discord.MessageFlags.Ephemeral] : []
@@ -526,6 +564,7 @@ export class ODButtonResponderInstance {
             return {success:false,message:null}
         }
     }
+    /**Update the message of this button. */
     async update(msg:ODMessageBuildResult): Promise<ODMessageBuildSentResult<boolean>> {
         try{
             const msgFlags: number[] = msg.ephemeral ? [discord.MessageFlags.Ephemeral] : []
@@ -542,6 +581,7 @@ export class ODButtonResponderInstance {
             return {success:false,message:null}
         }
     }
+    /**Defer this button. */
     async defer(type:"reply"|"update", ephemeral:boolean){
         if (this.interaction.deferred) return false
         if (type == "reply"){
@@ -553,12 +593,14 @@ export class ODButtonResponderInstance {
         this.didReply = true
         return true
     }
+    /**Show a modal as reply to this button. */
     async modal(modal:ODModalBuildResult){
         this.interaction.showModal(modal.modal)
         this.didReply = true
         return true
     }
 
+    /**Get a component from the original message of this button. */
     getMessageComponent(type:"button",id:string|RegExp): discord.ButtonComponent|null
     getMessageComponent(type:"string-dropdown",id:string|RegExp): discord.StringSelectMenuComponent|null
     getMessageComponent(type:"user-dropdown",id:string|RegExp): discord.UserSelectMenuComponent|null
@@ -582,11 +624,17 @@ export class ODButtonResponderInstance {
         return result
     }
 
+    /**Get the first embed of the original message if it exists. */
     getMessageEmbed(): discord.Embed|null {
         return this.message.embeds[0] ?? null
     }
 }
 
+/**## ODButtonResponder `class`
+ * This is an open ticket button responder.
+ * 
+ * This class manages all workers which are executed when the related button is triggered.
+ */
 export class ODButtonResponder<Source extends string,Params> extends ODResponderImplementation<ODButtonResponderInstance,Source,Params> {
     /**Respond to this button */
     async respond(instance:ODButtonResponderInstance, source:Source, params:Params){
@@ -595,10 +643,27 @@ export class ODButtonResponder<Source extends string,Params> extends ODResponder
     }
 }
 
+/**## ODDropdownResponderManager `class`
+ * This is an open ticket dropdown responder manager.
+ * 
+ * It contains all Open Ticket dropdown responders. These can respond to dropdown interactions.
+ * 
+ * Using the Open Ticket responder system has a few advantages compared to vanilla discord.js:
+ * - plugins can extend/edit replies
+ * - automatically reply on error
+ * - independent workers (with priority)
+ * - fail-safe design using try-catch
+ * - know where the request came from!
+ * - And so much more!
+ */
 export class ODDropdownResponderManager extends ODManager<ODDropdownResponder<"dropdown",any>> {
+    /**An alias to the Open Ticket client manager. */
     #client: ODClientManager
+    /**The callback executed when the default workers take too much time to reply. */
     #timeoutErrorCallback: ODResponderTimeoutErrorCallback<ODDropdownResponderInstance,"dropdown">|null = null
+    /**The amount of milliseconds before the timeout error callback is executed. */
     #timeoutMs: number|null = null
+    /**A list of listeners which will listen to the raw interactionCreate event from discord.js */
     #listeners: ((interaction:discord.AnySelectMenuInteraction) => void)[] = []
 
     constructor(debug:ODDebugger, debugname:string, client:ODClientManager){
@@ -630,8 +695,15 @@ export class ODDropdownResponderManager extends ODManager<ODDropdownResponder<"d
     }
 }
 
+/**## ODDropdownResponderInstanceValues `class`
+ * This is an open ticket dropdown responder instance values manager.
+ * 
+ * This class will manage all values from the dropdowns & select menus.
+ */
 export class ODDropdownResponderInstanceValues {
-    #interaction:discord.AnySelectMenuInteraction
+    /**The interaction to get data from. */
+    #interaction: discord.AnySelectMenuInteraction
+    /**The type of this dropdown. */
     #type: ODDropdownData["type"]
 
     constructor(interaction:discord.AnySelectMenuInteraction, type:ODDropdownData["type"]){
@@ -642,6 +714,8 @@ export class ODDropdownResponderInstanceValues {
             interaction.values
         }
     }
+
+    /**Get the selected values. */
     getStringValues(): string[] {
         try {
             return this.#interaction.values
@@ -649,6 +723,7 @@ export class ODDropdownResponderInstanceValues {
             throw new ODSystemError("ODDropdownResponderInstanceValues:getStringValues() invalid values!")
         }
     }
+    /**Get the selected roles. */
     async getRoleValues(): Promise<discord.Role[]> {
         if (this.#type != "role") throw new ODSystemError("ODDropdownResponderInstanceValues:getRoleValues() dropdown type isn't role!")
         try {
@@ -663,6 +738,7 @@ export class ODDropdownResponderInstanceValues {
             throw new ODSystemError("ODDropdownResponderInstanceValues:getRoleValues() invalid values!")
         }
     }
+    /**Get the selected users. */
     async getUserValues(): Promise<discord.User[]> {
         if (this.#type != "role") throw new ODSystemError("ODDropdownResponderInstanceValues:getUserValues() dropdown type isn't user!")
         try {
@@ -676,6 +752,7 @@ export class ODDropdownResponderInstanceValues {
             throw new ODSystemError("ODDropdownResponderInstanceValues:getUserValues() invalid values!")
         }
     }
+    /**Get the selected channels. */
     async getChannelValues(): Promise<discord.GuildBasedChannel[]> {
         if (this.#type != "role") throw new ODSystemError("ODDropdownResponderInstanceValues:getChannelValues() dropdown type isn't channel!")
         try {
@@ -692,15 +769,29 @@ export class ODDropdownResponderInstanceValues {
     }
 }
 
+/**## ODDropdownResponderInstance `class`
+ * This is an open ticket dropdown responder instance.
+ * 
+ * An instance is an active dropdown interaction. You can reply to the dropdown using `reply()`.
+ */
 export class ODDropdownResponderInstance {
-    interaction:discord.AnySelectMenuInteraction
+    /**The interaction which is the source of this instance. */
+    interaction: discord.AnySelectMenuInteraction
+    /**Did a worker already reply to this instance/interaction? */
     didReply: boolean = false
+    /**The dropdown type. */
     type: ODDropdownData["type"]
+    /**The manager for all values of this dropdown. */
     values: ODDropdownResponderInstanceValues
+    /**The user who triggered this dropdown. */
     user: discord.User
+    /**The guild member who triggered this dropdown. */
     member: discord.GuildMember|null
+    /**The guild where this dropdown was triggered. */
     guild: discord.Guild|null
+    /**The channel where this dropdown was triggered. */
     channel: discord.TextBasedChannel
+    /**The message this dropdown originates from. */
     message: discord.Message
 
     constructor(interaction:discord.AnySelectMenuInteraction, errorCallback:ODResponderTimeoutErrorCallback<ODDropdownResponderInstance,"dropdown">|null, timeoutMs:number|null){
@@ -743,6 +834,7 @@ export class ODDropdownResponderInstance {
         },timeoutMs ?? 2500)
     }
 
+    /**Reply to this dropdown. */
     async reply(msg:ODMessageBuildResult): Promise<ODMessageBuildSentResult<boolean>> {
         try {
             const msgFlags: number[] = msg.ephemeral ? [discord.MessageFlags.Ephemeral] : []
@@ -759,6 +851,7 @@ export class ODDropdownResponderInstance {
             return {success:false,message:null}
         }
     }
+    /**Update the message of this dropdown. */
     async update(msg:ODMessageBuildResult): Promise<ODMessageBuildSentResult<boolean>> {
         try{
             const msgFlags: number[] = msg.ephemeral ? [discord.MessageFlags.Ephemeral] : []
@@ -775,6 +868,7 @@ export class ODDropdownResponderInstance {
             return {success:false,message:null}
         }
     }
+    /**Defer this dropdown. */
     async defer(type:"reply"|"update", ephemeral:boolean){
         if (this.interaction.deferred) return false
         if (type == "reply"){
@@ -786,12 +880,14 @@ export class ODDropdownResponderInstance {
         this.didReply = true
         return true
     }
+    /**Show a modal as reply to this dropdown. */
     async modal(modal:ODModalBuildResult){
         this.interaction.showModal(modal.modal)
         this.didReply = true
         return true
     }
 
+    /**Get a component from the original message of this dropdown. */
     getMessageComponent(type:"button",id:string|RegExp): discord.ButtonComponent|null
     getMessageComponent(type:"string-dropdown",id:string|RegExp): discord.StringSelectMenuComponent|null
     getMessageComponent(type:"user-dropdown",id:string|RegExp): discord.UserSelectMenuComponent|null
@@ -815,11 +911,17 @@ export class ODDropdownResponderInstance {
         return result
     }
 
+    /**Get the first embed of the original message if it exists. */
     getMessageEmbed(): discord.Embed|null {
         return this.message.embeds[0] ?? null
     }
 }
 
+/**## ODDropdownResponder `class`
+ * This is an open ticket dropdown responder.
+ * 
+ * This class manages all workers which are executed when the related dropdown is triggered.
+ */
 export class ODDropdownResponder<Source extends string,Params> extends ODResponderImplementation<ODDropdownResponderInstance,Source,Params> {
     /**Respond to this dropdown */
     async respond(instance:ODDropdownResponderInstance, source:Source, params:Params){
@@ -828,10 +930,27 @@ export class ODDropdownResponder<Source extends string,Params> extends ODRespond
     }
 }
 
+/**## ODModalResponderManager `class`
+ * This is an open ticket modal responder manager.
+ * 
+ * It contains all Open Ticket modal responders. These can respond to modal interactions.
+ * 
+ * Using the Open Ticket responder system has a few advantages compared to vanilla discord.js:
+ * - plugins can extend/edit replies
+ * - automatically reply on error
+ * - independent workers (with priority)
+ * - fail-safe design using try-catch
+ * - know where the request came from!
+ * - And so much more!
+ */
 export class ODModalResponderManager extends ODManager<ODModalResponder<"modal",any>> {
+    /**An alias to the Open Ticket client manager. */
     #client: ODClientManager
+    /**The callback executed when the default workers take too much time to reply. */
     #timeoutErrorCallback: ODResponderTimeoutErrorCallback<ODModalResponderInstance,"modal">|null = null
+    /**The amount of milliseconds before the timeout error callback is executed. */
     #timeoutMs: number|null = null
+    /**A list of listeners which will listen to the raw interactionCreate event from discord.js */
     #listeners: ((interaction:discord.ModalSubmitInteraction) => void)[] = []
 
     constructor(debug:ODDebugger, debugname:string, client:ODClientManager){
@@ -863,12 +982,20 @@ export class ODModalResponderManager extends ODManager<ODModalResponder<"modal",
     }
 }
 
+/**## ODModalResponderInstanceValues `class`
+ * This is an open ticket modal responder instance values manager.
+ * 
+ * This class will manage all fields from the modals.
+ */
 export class ODModalResponderInstanceValues {
-    #interaction:discord.ModalSubmitInteraction
+    /**The interaction to get data from. */
+    #interaction: discord.ModalSubmitInteraction
 
     constructor(interaction:discord.ModalSubmitInteraction){
         this.#interaction = interaction
     }
+
+    /**Get the value of a text field. */
     getTextField(name:string,required:true): string
     getTextField(name:string,required:false): string|null
     getTextField(name:string,required:boolean){
@@ -882,13 +1009,25 @@ export class ODModalResponderInstanceValues {
     }
 }
 
+/**## ODModalResponderInstance `class`
+ * This is an open ticket modal responder instance.
+ * 
+ * An instance is an active modal interaction. You can reply to the modal using `reply()`.
+ */
 export class ODModalResponderInstance {
-    interaction:discord.ModalSubmitInteraction
+    /**The interaction which is the source of this instance. */
+    interaction: discord.ModalSubmitInteraction
+    /**Did a worker already reply to this instance/interaction? */
     didReply: boolean = false
+    /**The manager for all fields of this modal. */
     values: ODModalResponderInstanceValues
+    /**The user who triggered this modal. */
     user: discord.User
+    /**The guild member who triggered this modal. */
     member: discord.GuildMember|null
+    /**The guild where this modal was triggered. */
     guild: discord.Guild|null
+    /**The channel where this modal was triggered. */
     channel: discord.TextBasedChannel|null
 
     constructor(interaction:discord.ModalSubmitInteraction, errorCallback:ODResponderTimeoutErrorCallback<ODModalResponderInstance,"modal">|null, timeoutMs:number|null){
@@ -917,6 +1056,7 @@ export class ODModalResponderInstance {
         },timeoutMs ?? 2500)
     }
 
+    /**Reply to this modal. */
     async reply(msg:ODMessageBuildResult): Promise<ODMessageBuildSentResult<boolean>> {
         try{
             const msgFlags: number[] = msg.ephemeral ? [discord.MessageFlags.Ephemeral] : []
@@ -933,6 +1073,7 @@ export class ODModalResponderInstance {
             return {success:false,message:null}
         }
     }
+    /**Update the message of this modal. */
     async update(msg:ODMessageBuildResult): Promise<ODMessageBuildSentResult<boolean>> {
         try{
             const msgFlags: number[] = msg.ephemeral ? [discord.MessageFlags.Ephemeral] : []
@@ -945,6 +1086,7 @@ export class ODModalResponderInstance {
             return {success:false,message:null}
         }
     }
+    /**Defer this modal. */
     async defer(type:"reply"|"update", ephemeral:boolean){
         if (this.interaction.deferred) return false
         if (type == "reply"){
@@ -958,6 +1100,11 @@ export class ODModalResponderInstance {
     }
 }
 
+/**## ODModalResponder `class`
+ * This is an open ticket modal responder.
+ * 
+ * This class manages all workers which are executed when the related modal is triggered.
+ */
 export class ODModalResponder<Source extends string,Params> extends ODResponderImplementation<ODModalResponderInstance,Source,Params> {
     /**Respond to this modal */
     async respond(instance:ODModalResponderInstance, source:Source, params:Params){

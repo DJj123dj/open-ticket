@@ -6,10 +6,31 @@ import { ODDebugger } from "./console"
 import { ODDatabase, ODJsonDatabaseStructure } from "./database"
 import * as discord from "discord.js"
 
+/**## ODValidStatValue `type`
+ * These are the only allowed types for a stat value to improve compatibility with different database systems.
+ */
 export type ODValidStatValue = string|number|boolean
+
+/**## ODStatsManagerInitCallback `type`
+ * This callback can be used to execute something when the stats have been initiated.
+ * 
+ * By default this is used to clear stats from users that left the server or tickets which don't exist anymore.
+ */
 export type ODStatsManagerInitCallback = (database:ODJsonDatabaseStructure, deletables:ODJsonDatabaseStructure) => void|Promise<void>
+
+/**## ODStatScopeSetMode `type`
+ * This type contains all valid methods for changing the value of a stat.
+ */
 export type ODStatScopeSetMode = "set"|"increase"|"decrease"
 
+/**## ODStatsManager `class`
+ * This is an open ticket stats manager.
+ * 
+ * This class is responsible for managing all stats of the bot.
+ * Stats are categorized in "scopes" which can be accessed in this manager.
+ * 
+ * Stats can be accessed in the individual scopes.
+ */
 export class ODStatsManager extends ODManager<ODStatScope> {
     /**Alias to open ticket debugger. */
     #debug: ODDebugger
@@ -23,6 +44,7 @@ export class ODStatsManager extends ODManager<ODStatScope> {
         this.#debug = debug
     }
 
+    /**Select the database to use to read/write all stats from/to. */
     useDatabase(database:ODDatabase){
         this.database = database
     }
@@ -31,6 +53,7 @@ export class ODStatsManager extends ODManager<ODStatScope> {
         if (this.database) data.useDatabase(this.database)
         return super.add(data,overwrite)
     }
+    /**Init all stats and run `onInit()` listeners. */
     async init(){
         if (!this.database) throw new ODSystemError("Unable to initialize stats scopes due to missing database!")
 
@@ -58,6 +81,7 @@ export class ODStatsManager extends ODManager<ODStatScope> {
             await this.database.delete(data.category,data.key)
         }
     }
+    /**Reset all stats. (clears the entire database) */
     async reset(){
         if (!this.database) return
         const data = await this.database.getAll()
@@ -66,11 +90,20 @@ export class ODStatsManager extends ODManager<ODStatScope> {
             await this.database.delete(d.category,d.key)
         }
     }
+    /**Run a function when the stats are initialized. This can be used to clear stats from users that left the server or tickets which don't exist anymore. */
     onInit(callback:ODStatsManagerInitCallback){
         this.#initListeners.push(callback)
     }
 }
 
+/**## ODStatScope `class`
+ * This is an open ticket stat scope.
+ * 
+ * A scope can contain multiple stats. Every scope is seperated from other scopes.
+ * Here, you can read & write the values of all stats.
+ * 
+ * The built-in Open Ticket scopes are: `global`, `user`, `ticket`
+ */
 export class ODStatScope extends ODManager<ODStat> {
     /**The id of this statistics scope. */
     id: ODId
@@ -87,9 +120,11 @@ export class ODStatScope extends ODManager<ODStat> {
         this.name = name
     }
 
+    /**Select the database to use to read/write all stats from/to. (Automatically assigned when used in `ODStatsManager`) */
     useDatabase(database:ODDatabase){
         this.database = database
     }
+    /**Get the value of a statistic. The `scopeId` is the unique id of the user, channel, role, etc that the stats are related to. */
     async getStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         if (!this.database) return null
         const newId = new ODId(id)
@@ -105,6 +140,7 @@ export class ODStatScope extends ODManager<ODStat> {
         //return null on error
         return null
     }
+    /**Set, increase or decrease the value of a statistic. The `scopeId` is the unique id of the user, channel, role, etc that the stats are related to. */
     async setStat(id:ODValidId, scopeId:string, value:ODValidStatValue, mode:ODStatScopeSetMode): Promise<boolean> {
         if (!this.database) return false
         const stat = this.get(id)
@@ -122,6 +158,7 @@ export class ODStatScope extends ODManager<ODStat> {
         }
         return true
     }
+    /**Reset the value of a statistic to the initial value. The `scopeId` is the unique id of the user, channel, role, etc that the stats are related to. */
     async resetStat(id:ODValidId, scopeId:string): Promise<ODValidStatValue|null> {
         if (!this.database) return null
         const stat = this.get(id)
@@ -129,11 +166,13 @@ export class ODStatScope extends ODManager<ODStat> {
         if (stat.value != null) await this.database.set(this.id.value+"_"+stat.id.value,scopeId,stat.value)
         return stat.value
     }
+    /**Initialize this stat scope & return a list of all statistic ids in the following format: `<scopeid>_<statid>`  */
     init(): string[] {
         //get all valid stats categories
         this.ready = true
         return this.getAll().map((stat) => this.id.value+"_"+stat.id.value)
     }
+    /**Render all stats in this scope for usage in a discord message/embed. */
     async render(scopeId:string, guild:discord.Guild, channel:discord.TextBasedChannel, user:discord.User): Promise<string> {
         //sort from high priority to low
         const derefArray = [...this.getAll()]
@@ -162,6 +201,14 @@ export class ODStatScope extends ODManager<ODStat> {
     }
 }
 
+/**## ODStatGlobalScope `class`
+ * This is an open ticket stat global scope.
+ * 
+ * A scope can contain multiple stats. Every scope is seperated from other scopes.
+ * Here, you can read & write the values of all stats.
+ * 
+ * This scope is made specifically for the global stats of Open Ticket.
+ */
 export class ODStatGlobalScope extends ODStatScope {
     getStat(id:ODValidId): Promise<ODValidStatValue|null> {
         return super.getStat(id,"GLOBAL")
@@ -177,11 +224,25 @@ export class ODStatGlobalScope extends ODStatScope {
     }
 }
 
+/**## ODStatRenderer `type`
+ * This callback will render a single statistic for a discord embed/message.
+ */
 export type ODStatRenderer = (value:ODValidStatValue, scopeId:string, guild:discord.Guild, channel:discord.TextBasedChannel, user:discord.User) => string|Promise<string>
 
+/**## ODStat `class`
+ * This is an open ticket statistic.
+ * 
+ * This single statistic doesn't do anything except defining the rules of this statistic.
+ * Use it in a stats scope to register a new statistic. A statistic can also include a priority to choose the render priority.
+ * 
+ * It's recommended to use the `ODBasicStat` & `ODDynamicStat` classes instead of this one!
+ */
 export class ODStat extends ODManagerData {
+    /**The priority of this statistic. */
     priority: number
+    /**The render function of this statistic. */
     render: ODStatRenderer
+    /**The value of this statistic. */
     value: ODValidStatValue|null
 
     constructor(id:ODValidId, priority:number, render:ODStatRenderer, value?:ODValidStatValue){
@@ -192,7 +253,14 @@ export class ODStat extends ODManagerData {
     }
 }
 
+/**## ODBasicStat `class`
+ * This is an open ticket basic statistic.
+ * 
+ * This single statistic will store a number, boolean or string in the database.
+ * Use it to create a simple statistic for any stats scope.
+ */
 export class ODBasicStat extends ODStat {
+    /**The name of this stat. Rendered in discord embeds/messages. */
     name: string
 
     constructor(id:ODValidId, priority:number, name:string, value:ODValidStatValue){
@@ -203,8 +271,19 @@ export class ODBasicStat extends ODStat {
     }
 }
 
+/**## ODDynamicStatRenderer `type`
+ * This callback will render a single dynamic statistic for a discord embed/message.
+ */
 export type ODDynamicStatRenderer = (scopeId:string, guild:discord.Guild, channel:discord.TextBasedChannel, user:discord.User) => string|Promise<string>
 
+/**## ODDynamicStat `class`
+ * This is an open ticket dynamic statistic.
+ * 
+ * A dynamic statistic does not store anything in the database! Instead, it will execute a function to return a custom result.
+ * This can be used to show statistics which are not stored in the database.
+ * 
+ * This is used in Open Ticket for the live ticket status, participants & system status.
+ */
 export class ODDynamicStat extends ODStat {
     constructor(id:ODValidId, priority:number, render:ODDynamicStatRenderer){
         super(id,priority,(value,scopeId,guild,channel,user) => {

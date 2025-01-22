@@ -276,16 +276,10 @@ export class ODRoleOption extends ODOption {
 }
 
 export class ODOptionSuffixManager extends ODManager<ODOptionSuffix> {
-    /**Alias to open ticket global database. */
-    database: ODDatabase|null = null
-
     constructor(debug:ODDebugger){
         super(debug,"ticket suffix")
     }
 
-    useDatabase(database:ODDatabase){
-        this.database = database
-    }
     /**Instantly get the suffix from an option. */
     getSuffixFromOption(option:ODTicketOption,user:discord.User): string|null {
         const suffix = this.getAll().find((suffix) => suffix.option.id.value == option.id.value)
