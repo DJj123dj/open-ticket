@@ -5,7 +5,7 @@
         "version":"open-ticket-v4.0.0"
     },
     
-    "token":"your bot token here! Or leave empty when you use tokenFromENV",
+    "token":"your bot token here! (or leave empty when using 'tokenFromENV')",
     "tokenFromENV":false,
 
     "mainColor":"#f8ba00",

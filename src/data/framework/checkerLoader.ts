@@ -169,6 +169,12 @@ const createPanelEmbedStructure = (id:api.ODValidId) => {
     ]})})
 }
 
+function loadFromEnv(){
+    const generalConfig = openticket.configs.get("openticket:general")
+    if (generalConfig.data && generalConfig.data.tokenFromENV && typeof generalConfig.data.tokenFromENV == "boolean") return generalConfig.data.tokenFromENV
+    else return false
+}
+
 //STRUCTURES
 export const defaultGeneralStructure = new api.ODCheckerObjectStructure("openticket:general",{children:[
     //STATUS
@@ -187,7 +193,7 @@ export const defaultGeneralStructure = new api.ODCheckerObjectStructure("opentic
     ]})},
 
     //BASIC
-    {key:"token",optional:false,priority:0,checker:new api.ODCheckerCustomStructure_DiscordToken("openticket:token")},
+    {key:"token",optional:false,priority:0,checker:(loadFromEnv()) ? new api.ODCheckerStringStructure("openticket:token-disabled",{}) : new api.ODCheckerCustomStructure_DiscordToken("openticket:token")},
     {key:"tokenFromENV",optional:false,priority:0,checker:new api.ODCheckerBooleanStructure("openticket:token-env",{})},
     {key:"mainColor",optional:false,priority:0,checker:new api.ODCheckerCustomStructure_HexColor("openticket:main-color",true,false)},
     {key:"language",optional:false,priority:0,checker:new api.ODCheckerStringStructure("openticket:language",{
