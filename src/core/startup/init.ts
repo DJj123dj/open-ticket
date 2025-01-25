@@ -26,6 +26,7 @@ const moduleInstalled = (id:string, throwError:boolean) => {
     }
 }
 
+moduleInstalled("@discordjs/rest",true)
 moduleInstalled("discord.js",true)
 moduleInstalled("ansis",true)
 moduleInstalled("formatted-json-stringify",true)

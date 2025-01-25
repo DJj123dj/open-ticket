@@ -21,6 +21,7 @@
     "type": "commonjs",
     "license": "GPL-3.0-only",
     "dependencies": {
+        "@discordjs/rest": "^2.4.2",
         "@types/node": "^22.5.0",
         "ansis": "^2.3.0",
         "discord.js": "^14.17.2",
@@ -39,5 +40,9 @@
     "imports": {
         "#opendiscord": "./dist/src/index.js",
         "#opendiscord-types": "./dist/src/core/api/api.js"
+    },
+    "funding":{
+        "type": "individual",
+        "url": "https://github.com/sponsors/DJj123dj"
     }
 }

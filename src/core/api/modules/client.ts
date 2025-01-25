@@ -3,6 +3,7 @@
 ///////////////////////////////////////
 import { ODId, ODManager, ODManagerData, ODSystemError, ODValidId } from "./base"
 import * as discord from "discord.js"
+import {REST} from "@discordjs/rest"
 import { ODConsoleWarningMessage, ODDebugger } from "./console"
 import { ODMessageBuildResult, ODMessageBuildSentResult } from "./builder"
 import { ODManualProgressBar } from "./progressbar"
@@ -43,11 +44,21 @@ export class ODClientManager {
     partials: ODClientPartials[] = []
     /**List of required bot permissions. Add permissions to this list using the `onClientLoad` event. */
     permissions: ODClientPermissions[] = []
-    /**The bot token, empty by default. */
-    token: string = ""
+    /**The discord bot token, empty by default. */
+    set token(value:string){
+        this.#token = value
+        this.rest.setToken(value)
+    }
+    get token(){
+        return this.#token
+    }
+    /**The discord  bot token. **DON'T USE THIS!!!** (use `ODClientManager.token` instead) */
+    #token: string = ""
     
     /**The discord.js `discord.Client`. Only use it when initiated! */
     client: discord.Client<true> = new discord.Client({intents:[]}) //temporary client
+    /**The discord.js REST client. Used for stuff that discord.js can't handle :) */
+    rest: discord.REST = new REST({version:"10"})
     /**Is the bot initiated? */
     initiated: boolean = false
     /**Is the bot logged in? */

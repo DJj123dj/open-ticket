@@ -5,15 +5,19 @@ import { ODId, ODManager, ODValidJsonType, ODValidId, ODManagerData, ODValidButt
 import { ODDebugger } from "../modules/console"
 import { ODTicket, ODTicketManager } from "./ticket"
 import { ODMessageBuildResult } from "../modules/builder"
+import { ODClientManager } from "../modules/client"
 import * as discord from "discord.js"
 
 export class ODTranscriptManager extends ODManager<ODTranscriptCompiler<any>> {
     /**The manager responsible for collecting all messages in a channel. */
     collector: ODTranscriptCollector
+    /**Alias for the client manager. */
+    #client: ODClientManager
 
-    constructor(debug:ODDebugger, tickets:ODTicketManager){
+    constructor(debug:ODDebugger, tickets:ODTicketManager, client:ODClientManager){
         super(debug,"transcript compiler")
-        this.collector = new ODTranscriptCollector(tickets)
+        this.#client = client
+        this.collector = new ODTranscriptCollector(tickets,client)
     }
 }
 
@@ -101,9 +105,12 @@ export class ODTranscriptManager_Default extends ODTranscriptManager {
 export class ODTranscriptCollector {
     /**Alias for the ticket manager. */
     #tickets: ODTicketManager
+    /**Alias for the client manager. */
+    #client: ODClientManager
 
-    constructor(tickets:ODTicketManager){
+    constructor(tickets:ODTicketManager,client:ODClientManager){
         this.#tickets = tickets
+        this.#client = client
     }
     
     /**Collect all messages from a given ticket channel. It may not include all messages depending on the ratelimit. */
@@ -247,14 +254,20 @@ export class ODTranscriptCollector {
                     }
                 }catch{}
             
-            //DEPRECATED WARNING!!! => msg.interaction might break in a future version of discord.js => required for slash command name
-            }else if (msg.interaction && msg.interaction.type == discord.InteractionType.ApplicationCommand){
-                //slash command reply
-                const member = await msg.guild.members.fetch(msg.interaction.user.id)
-                reply = {
-                    type:"interaction",
-                    name:msg.interaction.commandName,
-                    user:this.#handleUserData(msg.interaction.user,member)
+            }else if (msg.interactionMetadata){
+                try{
+                    //get slash command name from undocumented property in discord REST API
+                    const restMsg = await this.#client.rest.get(discord.Routes.channelMessage(msg.channelId,msg.id)) as discord.APIMessage & {interaction_metadata:{name:string}}
+                    const commandName = restMsg.interaction_metadata.name ?? "unknown-command"
+                    //slash command reply
+                    const member = await msg.guild.members.fetch(msg.interactionMetadata.user.id)
+                    reply = {
+                        type:"interaction",
+                        name:commandName,
+                        user:this.#handleUserData(msg.interactionMetadata.user,member)
+                    }
+                }catch(err){
+                    process.emit("uncaughtException",err)
                 }
             }
 
