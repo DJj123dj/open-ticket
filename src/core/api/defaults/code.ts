@@ -23,7 +23,8 @@ export interface ODCodeManagerIds_Default {
     "openticket:autoclose-timeout":ODCode,
     "openticket:autoclose-leave":ODCode,
     "openticket:autodelete-timeout":ODCode,
-    "openticket:autodelete-leave":ODCode
+    "openticket:autodelete-leave":ODCode,
+    "openticket:ticket-anti-busy":ODCode,
 }
 
 /**## ODCodeManager_Default `default_class`

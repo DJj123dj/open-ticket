@@ -483,4 +483,12 @@ const loadAutoCode = () => {
             }
         })
     }))
+
+    //TICKET ANTI BUSY
+    openticket.code.add(new api.ODCode("openticket:ticket-anti-busy",-1,() => {
+        for (const ticket of openticket.tickets.getAll()){
+            //free tickets from corruption due to openticket:busy variable
+            ticket.get("openticket:busy").value = false
+        }
+    }))
 }
