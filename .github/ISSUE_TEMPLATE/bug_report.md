@@ -1,9 +1,7 @@
 ---
 name: Bug Report
 about: Report bugs to help us improve Open Ticket!
-title: "[BUG] Your Bug"
-labels: bug
-assignees: DJj123dj
+title: "Your Bug Name"
 ---
 
 ### Bug Description:
