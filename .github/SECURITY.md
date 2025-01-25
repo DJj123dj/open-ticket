@@ -1,7 +1,7 @@
 # Security Policy
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket Logo" width="500px">
 
-[![discord](https://img.shields.io/badge/discord-support%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-4.0.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v4.0.0)
+[![discord](https://img.shields.io/badge/discord-support%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)  [![version](https://img.shields.io/badge/version-4.0.0-brightgreen.svg?style=flat-square)](https://github.com/DJj123dj/open-ticket/releases/tag/v4.0.0)  [![Sponsor DJj123dj](https://img.shields.io/badge/sponsor-DJj123dj-ea4aaa?style=flat-square&logo=githubsponsors)](https://github.com/sponsors/DJj123dj)
 
 This is the Security Policy of Open Ticket!<br>
 Here you can find a list of all supported & deprecated versions of the bot.<br>

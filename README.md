@@ -12,6 +12,7 @@
 <a href="https://otdocs.dj-dj.be"><img alt="Open Ticket Documentation" src="https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm"></img></a>
 <a href="https://github.com/DJj123dj/open-ticket/blob/main/LICENSE"><img alt="Open Ticket License" src="https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square"></img></a>
 <a href="https://otdocs.dj-dj.be"><img alt="Open Ticket Stars" src="https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square"></img></a>
+<a href="https://github.com/sponsors/DJj123dj"><img alt="Sponsor DJj123dj" src="https://img.shields.io/badge/sponsor-DJj123dj-ea4aaa?style=flat-square&logo=githubsponsors"></img></a>
 </p>
 
 <p align="center">
@@ -203,4 +204,4 @@ Please help us grow by giving a star! It would help us a lot!
 **README.md**<br>
 [changelog](https://otgithub.dj-dj.be/releases) - [documentation](https://otdocs.dj-dj.be) - [tutorial](https://www.youtube.com/watch?v=2jK9kAf6ASU) - [website](https://openticket.dj-dj.be) - [discord](https://discord.dj-dj.be) - [license](./LICENSE.md)<br>
 
-© 2025 - [DJdj Development](https://www.dj-dj.be) - [Terms](https://www.dj-dj.be/terms#terms) - [Privacy Policy](https://www.dj-dj.be/terms#privacy)
+© 2025 - [DJdj Development](https://www.dj-dj.be) - [Terms](https://www.dj-dj.be/terms#terms) - [Privacy Policy](https://www.dj-dj.be/terms#privacy) - [Support Us](https://github.com/sponsors/DJj123dj)
