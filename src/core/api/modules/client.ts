@@ -384,7 +384,7 @@ export class ODClientActivityManager {
         this.manager.client.user.setPresence({
             activities:[{
                 type:this.#getStatusTypeEnum(type),
-                state:text,
+                state:undefined,
                 name:text,
             }],
             status:this.status
