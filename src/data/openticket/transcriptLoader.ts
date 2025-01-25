@@ -47,7 +47,7 @@ export const loadAllTranscriptCompilers = async () => {
     openticket.transcripts.add(new api.ODTranscriptCompiler<{contents:string}>("openticket:text-compiler",undefined,async (ticket,channel,user) => {
         //COMPILE
         const rawMessages = await collector.collectAllMessages(ticket)
-        if (!rawMessages) return {ticket,channel,user,success:false,errorReason:"Unable to collect messages!",messages:null,data:null}
+        if (!rawMessages) return {ticket,channel,user,success:false,errorReason:"Unable to collect messages! Channel not found!",messages:null,data:null}
         const messages = await collector.convertMessagesToTranscriptData(rawMessages)
 
         const finalMessages: string[] = []
@@ -195,7 +195,7 @@ export const loadAllTranscriptCompilers = async () => {
     },async (ticket,channel,user) => {
         //COMPILE
         const rawMessages = await collector.collectAllMessages(ticket)
-        if (!rawMessages) return {ticket,channel,user,success:false,errorReason:"Unable to collect messages!",messages:null,data:null}
+        if (!rawMessages) return {ticket,channel,user,success:false,errorReason:"Unable to collect messages! Channel not found!",messages:null,data:null}
         const messages = await collector.convertMessagesToTranscriptData(rawMessages)
 
         const htmlMessages: api.ODTranscriptHtmlV2Data["messages"] = []

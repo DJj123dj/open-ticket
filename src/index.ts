@@ -20,8 +20,9 @@
 
     INFORMATION:
     ============
-    Open Ticket v4.0.0  -  © DJdj Development
+    Open Ticket v4.0.0 - © DJdj Development
 
+    support us: https://github.com/sponsors/DJj123dj
     discord: https://discord.dj-dj.be
     website: https://openticket.dj-dj.be
     github: https://otgithub.dj-dj.be

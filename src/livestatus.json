@@ -38,5 +38,25 @@
             "usingTextTranscripts":true,
             "usingHtmlTranscripts":true
         }
+    },
+    {
+        "message":{
+            "title":"Support Us",
+            "titleColor":"magenta",
+            "description":"Support our development at https://github.com/sponsors/DJj123dj/",
+            "descriptionColor":"normal"
+        },
+        "active":{
+            "versions":["4.0.0"],
+            "languages":[],
+            "allLanguages":true,
+            "usingPlugins":true,
+            "notUsingPlugins":true,
+            "usingSlashCommands":true,
+            "notUsingSlashCommands":true,
+            "notUsingTranscripts":true,
+            "usingTextTranscripts":true,
+            "usingHtmlTranscripts":true
+        }
     }
 ]

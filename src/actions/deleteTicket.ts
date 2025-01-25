@@ -40,9 +40,11 @@ export const registerActions = async () => {
             //create transcript
             if (!params.withoutTranscript){
                 const transcriptRes = await openticket.actions.get("openticket:create-transcript").run(source,{guild,channel,user,ticket})
+                //transcript failure
                 if (typeof transcriptRes.success == "boolean" && !transcriptRes.success && transcriptRes.compiler){
                     const {compiler} = transcriptRes
                     await channel.send((await openticket.builders.messages.getSafe("openticket:transcript-error").build(source,{guild,channel,user,ticket,compiler,reason:transcriptRes.errorReason ?? null})).message)
+                        .catch((reason) => openticket.log("Unable to send transcript failure to ticket channel!","error",[{key:"id",value:channel.id}]))
                 
                     //undo deletion
                     ticket.get("openticket:for-deletion").value = false
@@ -83,7 +85,7 @@ export const registerActions = async () => {
             const {guild,channel,user,ticket,reason} = params
             //delete channel & events
             await openticket.events.get("onTicketChannelDeletion").emit([ticket,channel,user])
-            await channel.delete("Ticket Deleted")
+            await channel.delete("Ticket Deleted").catch((reason) => openticket.log("Unable to delete ticket channel!","error",[{key:"id",value:channel.id}]))
             await openticket.events.get("afterTicketChannelDeleted").emit([ticket,user])
 
             //delete permissions from manager

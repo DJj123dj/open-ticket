@@ -73,7 +73,7 @@ export class ODConsoleMessage {
         })
         const pstring = (pstrings.length > 0) ? " ("+pstrings.join(", ")+")" : ""
         const date = new Date()
-        const dstring = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        const dstring = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         return `[${dstring} ${this.prefix}] ${this.message}${pstring}`
     }
     /**Render the parameters of this message in a specific color. */
@@ -348,7 +348,7 @@ export class ODDebugFileManager {
     /**Generate the stats/header of the debug file (containing the version) */
     #createStatsText(){
         const date = new Date()
-        const dstring = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        const dstring = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         return [
             "=========================",
             "OPEN TICKET DEBUG FILE:",
