@@ -76,7 +76,8 @@ export const registerActions = async () => {
             }
 
             //to dm
-            if (generalConfig.data.system.messages.deleting.dm) await openticket.client.sendUserDm(user,await openticket.builders.messages.getSafe("openticket:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"delete",reason,additionalData:null}))
+            const creator = await openticket.tickets.getTicketUser(ticket,"creator")
+            if (creator && generalConfig.data.system.messages.deleting.dm) await openticket.client.sendUserDm(creator,await openticket.builders.messages.getSafe("openticket:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"delete",reason,additionalData:null}))
         }),
         new api.ODWorker("openticket:delete-channel",1,async (instance,params,source,cancel) => {
             const {guild,channel,user,ticket,reason} = params

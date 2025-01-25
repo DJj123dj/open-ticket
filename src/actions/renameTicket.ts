@@ -56,7 +56,8 @@ export const registerActions = async () => {
             }
 
             //to dm
-            if (generalConfig.data.system.messages.renaming.dm) await openticket.client.sendUserDm(user,await openticket.builders.messages.getSafe("openticket:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"rename",reason,additionalData:data}))
+            const creator = await openticket.tickets.getTicketUser(ticket,"creator")
+            if (creator && generalConfig.data.system.messages.renaming.dm) await openticket.client.sendUserDm(creator,await openticket.builders.messages.getSafe("openticket:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"rename",reason,additionalData:data}))
         }),
         new api.ODWorker("openticket:logs",0,(instance,params,source,cancel) => {
             const {guild,channel,user,ticket} = params

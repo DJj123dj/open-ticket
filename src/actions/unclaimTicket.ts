@@ -103,7 +103,8 @@ export const registerActions = async () => {
             }
 
             //to dm
-            if (generalConfig.data.system.messages.claiming.dm) await openticket.client.sendUserDm(user,await openticket.builders.messages.getSafe("openticket:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"unclaim",reason,additionalData:null}))
+            const creator = await openticket.tickets.getTicketUser(ticket,"creator")
+            if (creator && generalConfig.data.system.messages.claiming.dm) await openticket.client.sendUserDm(creator,await openticket.builders.messages.getSafe("openticket:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"unclaim",reason,additionalData:null}))
         }),
         new api.ODWorker("openticket:logs",0,(instance,params,source,cancel) => {
             const {guild,channel,user,ticket} = params
