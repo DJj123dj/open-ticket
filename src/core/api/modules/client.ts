@@ -147,9 +147,11 @@ export class ODClientManager {
                 this.#debug.debug("Finished discord.js client.login()")
                 this.loggedIn = true
             }catch(err){
-                if (err.message.toLowerCase() == "used disallowed intents"){
+                if (err.message.toLowerCase().includes("used disallowed intents")){
                     process.emit("uncaughtException",new ODSystemError("Used disallowed intents"))
-                }else reject("login error: "+err)
+                }else if (err.message.toLowerCase().includes("tokeninvalid") || err.message.toLowerCase().includes("an invalid token was provided")){
+                    process.emit("uncaughtException",new ODSystemError("Invalid discord bot token provided"))
+                }else reject("OT Login Error: "+err)
             }
         })
     }

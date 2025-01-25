@@ -49,16 +49,16 @@ const main = async () => {
             await openticket.events.get("onErrorHandling").emit([error,origin])
             if (openticket.defaults.getDefault("errorHandling")){
                 //custom error messages for known errors
-                if (error.message == "Used disallowed intents"){
+                if (error.message.toLowerCase().includes("used disallowed intents")){
                     //invalid intents
                     openticket.log("Open Ticket doesn't work without Privileged Gateway Intents enabled!","error")
                     openticket.log("Enable them in the discord developer portal!","info")
                     console.log("\n")
                     process.exit(1)
-                }else if (error.message == "An invalid token was provided."){
+                }else if (error.message.toLowerCase().includes("invalid discord bot token provided")){
                     //invalid token
                     openticket.log("An invalid discord auth token was provided!","error")
-                    openticket.log("Check the config if you have copied the token correctly!","info")
+                    openticket.log("Check the config if you have inserted the bot token correctly!","info")
                     console.log("\n")
                     process.exit(1)
                 }else{
@@ -453,7 +453,7 @@ const main = async () => {
         await openticket.events.get("afterClientInitiated").emit([openticket.client])
 
         //client login
-        await openticket.client.login()
+        await openticket.client.login().catch((reason) => process.emit("uncaughtException",new api.ODSystemError(reason)))
         openticket.log("discord.js client ready!","info")
     }
 
