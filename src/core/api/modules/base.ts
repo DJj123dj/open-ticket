@@ -51,11 +51,11 @@ export type ODInterfaceWithPartialProperty<Interface,Key extends keyof Interface
  * const id = new api.ODId("example%id?") //this is invalid
  */
 export class ODId {
-    /**The full value of this `ODId` as a `string` */
+    /**The full value of this `ODId` as a `string`. */
     value: string
-    /**The source of the id (part before `:`). For example `openticket` for all built-in ids! */
+    /**The source of the id (text before `:`). (e.g. `openticket` for all built-in ids) */
     source: string
-    /**The identifier of the id (part after `:`). */
+    /**The identifier of the id (text after `:`). */
     identifier: string
 
     constructor(id:ODValidId){
@@ -117,7 +117,7 @@ export class ODManagerChangeHelper {
             }
         }
     }
-    /****(❌ SYSTEM ONLY!!)** Set the callback executed when a value inside this class changes */
+    /****(❌ SYSTEM ONLY!!)** Set the callback executed when a value inside this class changes. */
     changed(callback:(() => void)|null){
         this.#change = callback
     }
@@ -170,7 +170,7 @@ export class ODManagerRedirectHelper {
  * There is an `id:ODId` property & also some events used in the manager.
  */
 export class ODManagerData extends ODManagerChangeHelper {
-    /**The id of this data */
+    /**The id of this data. */
     id: ODId
 
     constructor(id:ODValidId){

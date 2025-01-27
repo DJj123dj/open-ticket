@@ -9,8 +9,17 @@ import * as discord from "discord.js"
 import * as crypto from "crypto"
 import { OTRoleUpdateMode } from "./role"
 
+/**## ODOptionManager `class`
+ * This is an open ticket option manager.
+ * 
+ * This class manages all registered options in the bot. This also includes temporary options generated from tickets where the original option got deleted.
+ * 
+ * All option types including: tickets, websites & reaction roles are stored here.
+ */
 export class ODOptionManager extends ODManager<ODOption> {
+    /**A reference to the Open Ticket debugger. */
     #debug: ODDebugger
+    /**The option suffix manager used to generate channel suffixes for ticket names. */
     suffix: ODOptionSuffixManager
 
     constructor(debug:ODDebugger){
@@ -25,20 +34,41 @@ export class ODOptionManager extends ODManager<ODOption> {
     }
 }
 
+/**## ODOptionDataJson `interface`
+ * The JSON representatation from a single option property.
+ */
 export interface ODOptionDataJson {
+    /**The id of this property. */
     id:string,
+    /**The value of this property. */
     value:ODValidJsonType
 }
 
+/**## ODOptionDataJson `interface`
+ * The JSON representatation from a single option.
+ */
 export interface ODOptionJson {
+    /**The id of this option. */
     id:string,
+    /**The type of this option. (e.g. `openticket:ticket`, `openticket:website`, `openticket:role`) */
     type:string,
+    /**The version of Open Ticket used to create this option & store it in the database. */
     version:string,
+    /**The full list of properties/variables related to this option. */
     data:ODOptionDataJson[]
 }
 
+/**## ODOption `class`
+ * This is an open ticket option.
+ * 
+ * This class contains all data related to this option (parsed from the config).
+ * 
+ * It's recommended to use `ODTicketOption`, `ODWebsiteOption` or `ODRoleOption` instead!
+ */
 export class ODOption extends ODManager<ODOptionData<ODValidJsonType>> {
+    /**The id of this option. (from the config) */
     id:ODId
+    /**The type of this option. (e.g. `openticket:ticket`, `openticket:website`, `openticket:role`) */
     type: string
 
     constructor(id:ODValidId, type:string, data:ODOptionData<ODValidJsonType>[]){
@@ -50,6 +80,7 @@ export class ODOption extends ODManager<ODOptionData<ODValidJsonType>> {
         })
     }
 
+    /**Convert this option to a JSON object for storing this option in the database. */
     toJson(version:ODVersion): ODOptionJson {
         const data = this.getAll().map((data) => {
             return {
@@ -66,12 +97,21 @@ export class ODOption extends ODManager<ODOptionData<ODValidJsonType>> {
         }
     }
 
+    /**Create an option from a JSON object in the database. */
     static fromJson(json:ODOptionJson): ODOption {
         return new ODOption(json.id,json.type,json.data.map((data) => new ODOptionData(data.id,data.value)))
     }
 }
 
+/**## ODOptionData `class`
+ * This is open ticket option data.
+ * 
+ * This class contains a single property for a ticket option. (string, number, boolean, object, array, null)
+ * 
+ * When this property is edited, the database will be updated automatically.
+ */
 export class ODOptionData<DataType extends ODValidJsonType> extends ODManagerData {
+    /**The value of this property. */
     #value: DataType
 
     constructor(id:ODValidId, value:DataType){
@@ -79,6 +119,7 @@ export class ODOptionData<DataType extends ODValidJsonType> extends ODManagerDat
         this.#value = value
     }
 
+    /**The value of this property. */
     set value(value:DataType){
         this.#value = value
         this._change()
@@ -144,6 +185,13 @@ export interface ODTicketOptionIds {
     "openticket:limits-maximum-user":ODOptionData<number>
 }
 
+/**## ODTicketOption `class`
+ * This is an open ticket ticket option.
+ * 
+ * This class contains all data related to an Open Ticket ticket option (parsed from the config).
+ * 
+ * Use this option to create a new ticket!
+ */
 export class ODTicketOption extends ODOption {
     type: "openticket:ticket" = "openticket:ticket"
 
@@ -191,6 +239,13 @@ export interface ODWebsiteOptionIds {
     "openticket:url":ODOptionData<string>,
 }
 
+/**## ODWebsiteOption `class`
+ * This is an open ticket website option.
+ * 
+ * This class contains all data related to an Open Ticket website option (parsed from the config).
+ * 
+ * Use this option to create a button which links to a website!
+ */
 export class ODWebsiteOption extends ODOption {
     type: "openticket:website" = "openticket:website"
 
@@ -242,6 +297,13 @@ export interface ODRoleOptionIds {
     "openticket:add-on-join":ODOptionData<boolean>
 }
 
+/**## ODRoleOption `class`
+ * This is an open ticket role option.
+ * 
+ * This class contains all data related to an Open Ticket role option (parsed from the config).
+ * 
+ * Use this option to create a button for reaction roles!
+ */
 export class ODRoleOption extends ODOption {
     type: "openticket:role" = "openticket:role"
 
