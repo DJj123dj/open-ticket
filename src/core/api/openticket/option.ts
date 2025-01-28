@@ -337,12 +337,19 @@ export class ODRoleOption extends ODOption {
     }
 }
 
+/**## ODOptionSuffixManager `class`
+ * This is an open ticket option suffix manager.
+ * 
+ * This class manages all suffixes from option in the bot. The id of an option suffix is the same as the option id.
+ * 
+ * All ticket options should have a corresponding option suffix class.
+ */
 export class ODOptionSuffixManager extends ODManager<ODOptionSuffix> {
     constructor(debug:ODDebugger){
         super(debug,"ticket suffix")
     }
 
-    /**Instantly get the suffix from an option. */
+    /**Instantly get the suffix from an `ODTicketOption`. */
     getSuffixFromOption(option:ODTicketOption,user:discord.User): string|null {
         const suffix = this.getAll().find((suffix) => suffix.option.id.value == option.id.value)
         if (!suffix) return null
@@ -350,6 +357,13 @@ export class ODOptionSuffixManager extends ODManager<ODOptionSuffix> {
     }
 }
 
+/**## ODOptionSuffix `class`
+ * This is an open ticket option suffix.
+ * 
+ * This class can generate a suffix for a discord channel name from a specific option.
+ * 
+ * Use `getSuffix()` to get the new suffix!
+ */
 export class ODOptionSuffix extends ODManagerData {
     /**The option of this suffix. */
     option: ODTicketOption
