@@ -55,23 +55,49 @@ export interface ODTranscriptCompilerInitResult {
     pendingMessage:ODMessageBuildResult|null
 }
 
+/**## ODTranscriptCompilerCompileResult `interface`
+ * This is the result which is returned by the `compile()` function.
+ */
 export interface ODTranscriptCompilerCompileResult<Data extends object> {
+    /**The ticket this transcript is being created for. */
     ticket:ODTicket,
+    /**The channel this transcript is being created for. */
     channel:discord.TextChannel,
+    /**The user who created the transcript. */
     user:discord.User
+    /**Was the compilation successfull? */
     success:boolean,
+    /**When not successfull, what was the reason? This will also be shown to the user. */
     errorReason:string|null,
+    /**A list of all messages sent in the ticket channel. */
     messages:ODTranscriptMessageData[]|null,
+    /**The result returned by the `compiler()` function. Contains the transcript contents, url or something else. */
     data:Data|null
 }
+
+/**## ODTranscriptCompilerReadyResult `interface`
+ * This is the result which is returned by the `ready()` function.
+ */
 export interface ODTranscriptCompilerReadyResult {
+    /**The message to be sent in the specified channel in the server. */
     channelMessage?:ODMessageBuildResult,
+    /**The message to be sent to the DM of the ticket creator. */
     creatorDmMessage?:ODMessageBuildResult,
+    /**The message to be sent to the DM of all participants. */
     participantDmMessage?:ODMessageBuildResult,
+    /**The message to be sent to the DM of all admins who actively participated in the ticket. */
     activeAdminDmMessage?:ODMessageBuildResult,
+    /**The message to be sent to the DM of all admins who were assigned to this ticket. */
     everyAdminDmMessage?:ODMessageBuildResult
 }
 
+/**## ODTranscriptCompiler `class`
+ * This is an Open Ticket transcript compiler.
+ * 
+ * This class manages all functions to generate a transcript.
+ * 
+ * These functions should be defined when creating this compiler. Existing compilers already exist for html & text transcripts.
+ */
 export class ODTranscriptCompiler<Data extends object> extends ODManagerData {
     /*Initialise the system every time a transcript is created. Returns optional "pending" message to display while the transcript is being compiled. */
     init: ODTranscriptCompilerInitFunction|null
@@ -126,6 +152,13 @@ export class ODTranscriptManager_Default extends ODTranscriptManager {
     }
 }
 
+/**## ODTranscriptCollector `class`
+ * This is an Open Ticket transcript collector.
+ * 
+ * The only goal of this class is to collect & parse all messages from a ticket channel.
+ * 
+ * It also contains utility functions for counting all messages, calculating file sizes & more!
+ */
 export class ODTranscriptCollector {
     /**Alias for the ticket manager. */
     #tickets: ODTicketManager
@@ -169,6 +202,7 @@ export class ODTranscriptCollector {
         if (!messages) return null
         return messages.length
     }
+    /**Convert an array of discord messages to an array of `ODTranscriptMessageData`'s. This is used to simplify the process of the transcript compilers. */
     async convertMessagesToTranscriptData(messages:discord.Message<true>[]): Promise<ODTranscriptMessageData[]> {
         const final: ODTranscriptMessageData[] = []
         for (const msg of messages){
@@ -401,6 +435,9 @@ export class ODTranscriptCollector {
     }
 }
 
+/**## ODTranscriptCollectorIncludeSettings `interface`
+ * Additional settings for the `ODTranscriptCollector`
+ */
 export interface ODTranscriptCollectorIncludeSettings {
     /**Collect messages from normal discord users. */
     users: boolean,
@@ -410,6 +447,9 @@ export interface ODTranscriptCollectorIncludeSettings {
     client: boolean
 }
 
+/**## ODTranscriptMessageData `interface`
+ * A universal representatation of a discord message for transcripts. 
+ */
 export interface ODTranscriptMessageData {
     /**The message author. */
     author: ODTranscriptUserData,
@@ -439,8 +479,14 @@ export interface ODTranscriptMessageData {
     reactions: ODTranscriptReactionData[]
 }
 
+/**## ODTranscriptMessageType `type`
+ * A message type for the `ODTranscriptMessageData` interface.
+ */
 export type ODTranscriptMessageType = "default"|"important"|"ephemeral"|"pinned.message"|"welcome.message"|"boost.message"|"thread.message"
 
+/**## ODTranscriptUserData `interface`
+ * A universal representatation of a discord user for transcripts. 
+ */
 export interface ODTranscriptUserData {
     /**The id of this user. */
     id: string,
@@ -456,6 +502,9 @@ export interface ODTranscriptUserData {
     color: discord.HexColorString
 }
 
+/**## ODTranscriptEmbedData `interface`
+ * A universal representatation of a discord embed for transcripts. 
+ */
 export interface ODTranscriptEmbedData {
     /**The title of this embed. */
     title: string|null,
@@ -481,6 +530,9 @@ export interface ODTranscriptEmbedData {
     fields: ODTranscriptEmbedFieldData[]
 }
 
+/**## ODTranscriptEmbedFieldData `interface`
+ * A universal representatation of a discord embed field for transcripts. 
+ */
 export interface ODTranscriptEmbedFieldData {
     /**The name of this embed field. */
     name: string,
@@ -490,6 +542,9 @@ export interface ODTranscriptEmbedFieldData {
     inline: boolean
 }
 
+/**## ODTranscriptFileData `interface`
+ * A universal representatation of a discord message attachment for transcripts. 
+ */
 export interface ODTranscriptFileData {
     /**The file type or extension. */
     type: string,
@@ -507,11 +562,17 @@ export interface ODTranscriptFileData {
     alt: string|null
 }
 
+/**## ODTranscriptComponentRowData `interface`
+ * A universal representatation of a discord message action row for transcripts. 
+ */
 export interface ODTranscriptComponentRowData {
     /**All components (buttons & dropdowns) present in this action row. */
     components: (ODTranscriptButtonComponentData|ODTranscriptDropdownComponentData)[]
 }
 
+/**## ODTranscriptComponentData `interface`
+ * A universal representatation of a discord message action row component for transcripts. 
+ */
 export interface ODTranscriptComponentData {
     /**The custom id of this component. */
     id: string|null,
@@ -521,6 +582,9 @@ export interface ODTranscriptComponentData {
     type: "button"|"dropdown"
 }
 
+/**## ODTranscriptButtonComponentData `interface`
+ * A universal representatation of a discord message button for transcripts. 
+ */
 export interface ODTranscriptButtonComponentData extends ODTranscriptComponentData {
     /**The type of this component. */
     type: "button"
@@ -536,6 +600,9 @@ export interface ODTranscriptButtonComponentData extends ODTranscriptComponentDa
     url: string|null
 }
 
+/**## ODTranscriptDropdownComponentData `interface`
+ * A universal representatation of a discord message dropdown for transcripts. 
+ */
 export interface ODTranscriptDropdownComponentData extends ODTranscriptComponentData {
     /**The type of this component. */
     type: "dropdown"
@@ -545,6 +612,9 @@ export interface ODTranscriptDropdownComponentData extends ODTranscriptComponent
     options: ODTranscriptDropdownComponentOptionData[]
 }
 
+/**## ODTranscriptDropdownComponentOptionData `interface`
+ * A universal representatation of a discord message dropdown option for transcripts. 
+ */
 export interface ODTranscriptDropdownComponentOptionData {
     /**The custom id of this dropdown option. */
     id: string,
@@ -556,11 +626,17 @@ export interface ODTranscriptDropdownComponentOptionData {
     emoji: ODTranscriptEmojiData|null
 }
 
+/**## ODTranscriptReplyData `interface`
+ * A universal representatation of a discord reply/interaction for transcripts. 
+ */
 export interface ODTranscriptReplyData {
     /**The type of reply. */
     type: "interaction"|"message",
 }
 
+/**## ODTranscriptReplyData `interface`
+ * A universal representatation of a discord interaction reply for transcripts. 
+ */
 export interface ODTranscriptInteractionReplyData extends ODTranscriptReplyData {
     /**The type of reply. */
     type: "interaction",
@@ -570,6 +646,9 @@ export interface ODTranscriptInteractionReplyData extends ODTranscriptReplyData 
     name: string
 }
 
+/**## ODTranscriptReplyData `interface`
+ * A universal representatation of a discord message reply for transcripts. 
+ */
 export interface ODTranscriptMessageReplyData extends ODTranscriptReplyData {
     /**The type of reply. */
     type: "message",
@@ -585,6 +664,9 @@ export interface ODTranscriptMessageReplyData extends ODTranscriptReplyData {
     content: string|null
 }
 
+/**## ODTranscriptEmojiData `interface`
+ * A universal representatation of a discord emoji for transcripts.
+ */
 export interface ODTranscriptEmojiData {
     /**The id of this emoji. */
     id: string|null,
@@ -598,6 +680,9 @@ export interface ODTranscriptEmojiData {
     emoji: string,
 }
 
+/**## ODTranscriptReactionData `interface`
+ * A universal representatation of a discord message reaction for transcripts.
+ */
 export interface ODTranscriptReactionData extends ODTranscriptEmojiData {
     /**The amount of emojis for this reaction.  */
     amount: number,
@@ -605,6 +690,9 @@ export interface ODTranscriptReactionData extends ODTranscriptEmojiData {
     super: boolean
 }
 
+/**## ODTranscriptHtmlV2Data `interface`
+ * The structure of the data sent to the Open Ticket HTML Transcripts v2 API.
+ */
 export interface ODTranscriptHtmlV2Data {
     version:"2",
     otversion:string,
@@ -792,6 +880,7 @@ export interface ODTranscriptHtmlV2Data {
             }
         }
     }[],
+    //sadly enough, no premium yet :)
     premium:{
         enabled:boolean,
         premiumToken:string,
@@ -818,6 +907,9 @@ export interface ODTranscriptHtmlV2Data {
     }
 }
 
+/**## ODTranscriptHtmlV2Response `interface`
+ * The structure of the response received from the Open Ticket HTML Transcripts v2 API.
+ */
 export interface ODTranscriptHtmlV2Response {
     status:"success"|"error",
     id:string,
