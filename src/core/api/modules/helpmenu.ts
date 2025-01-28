@@ -10,7 +10,7 @@ import { ODDebugger } from "./console"
 export type ODHelpMenuComponentRenderer = (page:number, category:number, location:number, mode:"slash"|"text") => string|Promise<string>
 
 /**## ODHelpMenuComponent `class`
- * This is an open ticket help menu component.
+ * This is an Open Ticket help menu component.
  * 
  * It can render something on the Open Ticket help menu.
  */
@@ -28,7 +28,7 @@ export class ODHelpMenuComponent extends ODManagerData {
 }
 
 /**## ODHelpMenuTextComponent `class`
- * This is an open ticket help menu text component.
+ * This is an Open Ticket help menu text component.
  * 
  * It can render a static piece of text on the Open Ticket help menu.
  */
@@ -69,7 +69,7 @@ export interface ODHelpMenuCommandComponentSettings {
 }
 
 /**## ODHelpMenuCommandComponent `class`
- * This is an open ticket help menu command component.
+ * This is an Open Ticket help menu command component.
  * 
  * It contains a useful helper to render a command in the Open Ticket help menu.
  */
@@ -93,7 +93,7 @@ export class ODHelpMenuCommandComponent extends ODHelpMenuComponent {
 }
 
 /**## ODHelpMenuCategory `class`
- * This is an open ticket help menu category.
+ * This is an Open Ticket help menu category.
  * 
  * Every category in the help menu is an embed field by default.
  * Try to limit the amount of components per category.
@@ -148,7 +148,7 @@ export class ODHelpMenuCategory extends ODManager<ODHelpMenuComponent> {
 export type ODHelpMenuRenderResult = {name:string, value:string}[][]
 
 /**## ODHelpMenuManager `class`
- * This is an open ticket help menu manager.
+ * This is an Open Ticket help menu manager.
  * 
  * It is responsible for rendering the entire help menu content.
  * You are also able to configure the amount of categories per page here.
@@ -156,7 +156,7 @@ export type ODHelpMenuRenderResult = {name:string, value:string}[][]
  * Fewer Categories == More Clean Menu
  */
 export class ODHelpMenuManager extends ODManager<ODHelpMenuCategory> {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug: ODDebugger
     /**The amount of categories per-page. */
     categoriesPerPage: number = 3

@@ -5,7 +5,7 @@ import { ODId, ODValidId, ODManager, ODManagerData } from "./base"
 import { ODDebugger } from "./console"
 
 /**## ODFlag `class`
- * This is an open ticket flag.
+ * This is an Open Ticket flag.
  * 
  * A flag is a boolean that can be specified by a parameter in the console.
  * It's useful for small settings that are only required once in a while.
@@ -54,7 +54,7 @@ export class ODFlag extends ODManagerData {
 }
 
 /**## ODFlagManager `class`
- * This is an open ticket flag manager.
+ * This is an Open Ticket flag manager.
  * 
  * This class is responsible for managing & initiating all flags of the bot.
  * It also contains a shortcut for initiating all flags.

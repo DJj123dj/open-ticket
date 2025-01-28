@@ -13,7 +13,7 @@ import ansis from "ansis"
 export type ODStartScreenComponentRenderCallback = (location:number) => string|Promise<string>
 
 /**## ODStartScreenManager `class`
- * This is an open ticket startscreen manager.
+ * This is an Open Ticket startscreen manager.
  * 
  * This class is responsible for managing & rendering the startscreen of the bot.
  * The startscreen is the part you see when the bot has started up successfully. (e.g. the Open Ticket logo, logs, livestatus, flags, ...)
@@ -57,7 +57,7 @@ export class ODStartScreenManager extends ODManager<ODStartScreenComponent> {
 }
 
 /**## ODStartScreenComponent `class`
- * This is an open ticket startscreen component.
+ * This is an Open Ticket startscreen component.
  * 
  * This component can be rendered to the start screen of the bot.
  * An optional priority can be specified to choose the location of the component.
@@ -100,7 +100,7 @@ export interface ODStartScreenProperty {
 }
 
 /**## ODStartScreenLogoComponent `class`
- * This is an open ticket startscreen logo component.
+ * This is an Open Ticket startscreen logo component.
  * 
  * This component will render an ASCII art logo (from an array) to the startscreen. Every property in the array is another row.
  * An optional priority can be specified to choose the location of the component.
@@ -140,7 +140,7 @@ export interface ODStartScreenHeaderAlignmentSettings {
 }
 
 /**## ODStartScreenHeaderComponent `class`
- * This is an open ticket startscreen header component.
+ * This is an Open Ticket startscreen header component.
  * 
  * This component will render a header to the startscreen. Properties can be aligned left, right or centered.
  * An optional priority can be specified to choose the location of the component.
@@ -192,7 +192,7 @@ export class ODStartScreenHeaderComponent extends ODStartScreenComponent {
 }
 
 /**## ODStartScreenCategoryComponent `class`
- * This is an open ticket startscreen category component.
+ * This is an Open Ticket startscreen category component.
  * 
  * This component will render a category to the startscreen. This will only render the category name. You'll need to provide your own renderer for the contents.
  * An optional priority can be specified to choose the location of the component.
@@ -216,7 +216,7 @@ export class ODStartScreenCategoryComponent extends ODStartScreenComponent {
 }
 
 /**## ODStartScreenPropertiesCategoryComponent `class`
- * This is an open ticket startscreen properties category component.
+ * This is an Open Ticket startscreen properties category component.
  * 
  * This component will render a properties category to the startscreen. This will list the properties in the category.
  * An optional priority can be specified to choose the location of the component.
@@ -238,7 +238,7 @@ export class ODStartScreenPropertiesCategoryComponent extends ODStartScreenCateg
 }
 
 /**## ODStartScreenFlagsCategoryComponent `class`
- * This is an open ticket startscreen flags category component.
+ * This is an Open Ticket startscreen flags category component.
  * 
  * This component will render a flags category to the startscreen. This will list the enabled flags in the category.
  * An optional priority can be specified to choose the location of the component.
@@ -256,7 +256,7 @@ export class ODStartScreenFlagsCategoryComponent extends ODStartScreenCategoryCo
 }
 
 /**## ODStartScreenPluginsCategoryComponent `class`
- * This is an open ticket startscreen plugins category component.
+ * This is an Open Ticket startscreen plugins category component.
  * 
  * This component will render a plugins category to the startscreen. This will list the enabled, disabled & crashed plugins in the category.
  * An optional priority can be specified to choose the location of the component.
@@ -283,7 +283,7 @@ export class ODStartScreenPluginsCategoryComponent extends ODStartScreenCategory
 }
 
 /**## ODStartScreenLiveStatusCategoryComponent `class`
- * This is an open ticket startscreen livestatus category component.
+ * This is an Open Ticket startscreen livestatus category component.
  * 
  * This component will render a livestatus category to the startscreen. This will list the livestatus messages in the category.
  * An optional priority can be specified to choose the location of the component.
@@ -302,7 +302,7 @@ export class ODStartScreenLiveStatusCategoryComponent extends ODStartScreenCateg
 }
 
 /**## ODStartScreenLogsCategoryComponent `class`
- * This is an open ticket startscreen logs category component.
+ * This is an Open Ticket startscreen logs category component.
  * 
  * This component will render a logs category to the startscreen. This will only render the logs category name.
  * An optional priority can be specified to choose the location of the component.

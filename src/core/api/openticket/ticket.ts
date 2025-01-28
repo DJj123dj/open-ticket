@@ -8,7 +8,7 @@ import { ODTicketOption } from "./option"
 import * as discord from "discord.js"
 
 /**## ODTicketManager `class`
- * This is an open ticket ticket manager.
+ * This is an Open Ticket ticket manager.
  * 
  * This class manages all currently created tickets in the bot.
  * 
@@ -261,7 +261,7 @@ export class ODTicket extends ODManager<ODTicketData<ODValidJsonType>> {
 }
 
 /**## ODTicketData `class`
- * This is open ticket ticket data.
+ * This is Open Ticket ticket data.
  * 
  * This class contains a single property for a ticket. (string, number, boolean, object, array, null)
  * 

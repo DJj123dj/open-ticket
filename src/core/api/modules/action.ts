@@ -6,7 +6,7 @@ import { ODWorkerManager, ODWorkerCallback, ODWorker } from "./worker"
 import { ODDebugger } from "./console"
 
 /**## ODActionImplementation `class`
- * This is an open ticket action implementation.
+ * This is an Open Ticket action implementation.
  * 
  * It is a basic implementation of the `ODWorkerManager` used by all `ODAction` classes.
  * 
@@ -28,7 +28,7 @@ export class ODActionImplementation<Source extends string,Params extends object,
 }
 
 /**## ODActionManager `class`
- * This is an open ticket action manager.
+ * This is an Open Ticket action manager.
  * 
  * It contains all Open Ticket actions. You can compare actions with some sort of "procedure".
  * It's a complicated task that is divided into multiple functions.

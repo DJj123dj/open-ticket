@@ -25,7 +25,7 @@ export interface ODConsoleMessageParam {
 }
 
 /**## ODConsoleMessage `class`
- * This is an open ticket console message.
+ * This is an Open Ticket console message.
  * 
  * It is used to create beautiful & styled logs in the console with a prefix, message & parameters.
  * It also has full color support using `ansis` and parameters are parsed for you!
@@ -117,7 +117,7 @@ export class ODConsoleMessage {
 }
 
 /**## ODConsoleInfoMessage `class`
- * This is an open ticket console info message.
+ * This is an Open Ticket console info message.
  * 
  * It is the same as a normal `ODConsoleMessage`, but it has a predefined prefix & color scheme for the "INFO" messages!
  */
@@ -128,7 +128,7 @@ export class ODConsoleInfoMessage extends ODConsoleMessage {
 }
 
 /**## ODConsoleSystemMessage `class`
- * This is an open ticket console system message.
+ * This is an Open Ticket console system message.
  * 
  * It is the same as a normal `ODConsoleMessage`, but it has a predefined prefix & color scheme for the "SYSTEM" messages!
  */
@@ -139,7 +139,7 @@ export class ODConsoleSystemMessage extends ODConsoleMessage {
 }
 
 /**## ODConsolePluginMessage `class`
- * This is an open ticket console plugin message.
+ * This is an Open Ticket console plugin message.
  * 
  * It is the same as a normal `ODConsoleMessage`, but it has a predefined prefix & color scheme for the "PLUGIN" messages!
  */
@@ -150,7 +150,7 @@ export class ODConsolePluginMessage extends ODConsoleMessage {
 }
 
 /**## ODConsoleDebugMessage `class`
- * This is an open ticket console debug message.
+ * This is an Open Ticket console debug message.
  * 
  * It is the same as a normal `ODConsoleMessage`, but it has a predefined prefix & color scheme for the "DEBUG" messages!
  */
@@ -161,7 +161,7 @@ export class ODConsoleDebugMessage extends ODConsoleMessage {
 }
 
 /**## ODConsoleWarningMessage `class`
- * This is an open ticket console warning message.
+ * This is an Open Ticket console warning message.
  * 
  * It is the same as a normal `ODConsoleMessage`, but it has a predefined prefix & color scheme for the "WARNING" messages!
  */
@@ -172,7 +172,7 @@ export class ODConsoleWarningMessage extends ODConsoleMessage {
 }
 
 /**## ODConsoleErrorMessage `class`
- * This is an open ticket console error message.
+ * This is an Open Ticket console error message.
  * 
  * It is the same as a normal `ODConsoleMessage`, but it has a predefined prefix & color scheme for the "ERROR" messages!
  */
@@ -183,7 +183,7 @@ export class ODConsoleErrorMessage extends ODConsoleMessage {
 }
 
 /**## ODError `class`
- * This is an open ticket error.
+ * This is an Open Ticket error.
  * 
  * It is used to render and log Node.js errors & crashes in a styled way to the console & `otdebug.txt` file!
  */
@@ -227,7 +227,7 @@ export class ODError {
 export type ODConsoleMessageTypes = "info"|"system"|"plugin"|"debug"|"warning"|"error"
 
 /**## ODConsoleManager `class`
- * This is the open ticket console manager.
+ * This is the Open Ticket console manager.
  * 
  * It handles the entire console system of Open Ticket. It's also the place where you need to log `ODConsoleMessage`'s.
  * This manager keeps a short history of messages sent to the console which is configurable by plugins.
@@ -285,7 +285,7 @@ export class ODConsoleManager {
 }
 
 /**## ODDebugFileManager `class`
- * This is the open ticket debug file manager.
+ * This is the Open Ticket debug file manager.
  * 
  * It manages the Open Ticket debug file (`otdebug.txt`) which keeps a history of all system logs.
  * There are even internal logs that aren't logged to the console which are available in this file!
@@ -398,7 +398,7 @@ export class ODDebugFileManager {
 }
 
 /**## ODDebugger `class`
- * This is the open ticket debugger.
+ * This is the Open Ticket debugger.
  * 
  * It is a simple wrapper around the `ODConsoleManager` to handle debugging (primarily for `ODManagers`).
  * Messages created using this debugger are only logged to the debug file unless specified otherwise.
@@ -408,7 +408,7 @@ export class ODDebugFileManager {
  * Using this system, all additions & removals inside a manager are logged to the debug file. This makes searching for errors a lot easier!
  */
 export class ODDebugger {
-    /**An alias to the open ticket console manager. */
+    /**An alias to the Open Ticket console manager. */
     console: ODConsoleManager
     /**When enabled, debug logs are also shown in the console. */
     visible: boolean = false
@@ -475,7 +475,7 @@ export interface ODLiveStatusSourceData {
 }
 
 /**## ODLiveStatusSource `class`
- * This is the open ticket livestatus source.
+ * This is the Open Ticket livestatus source.
  * 
  * It is an empty template for a livestatus source.
  * By default, you should use `ODLiveStatusUrlSource` or `ODLiveStatusFileSource`,
@@ -526,7 +526,7 @@ export class ODLiveStatusSource extends ODManagerData {
 }
 
 /**## ODLiveStatusFileSource `class`
- * This is the open ticket livestatus file source.
+ * This is the Open Ticket livestatus file source.
  * 
  * It is a LiveStatus source that will read the data from a local file.
  * 
@@ -545,7 +545,7 @@ export class ODLiveStatusFileSource extends ODLiveStatusSource {
 }
 
 /**## ODLiveStatusUrlSource `class`
- * This is the open ticket livestatus url source.
+ * This is the Open Ticket livestatus url source.
  * 
  * It is a LiveStatus source that will read the data from a http URL (json file).
  * 
@@ -579,7 +579,7 @@ export class ODLiveStatusUrlSource extends ODLiveStatusSource {
 }
 
 /**## ODLiveStatusManager `class`
- * This is the open ticket livestatus manager.
+ * This is the Open Ticket livestatus manager.
  * 
  * It manages all LiveStatus sources and has the renderer for all LiveStatus messages.
  * 
@@ -611,7 +611,7 @@ export class ODLiveStatusManager extends ODManager<ODLiveStatusSource> {
 }
 
 /**## ODLiveStatusRenderer `class`
- * This is the open ticket livestatus renderer.
+ * This is the Open Ticket livestatus renderer.
  * 
  * It's responsible for rendering all LiveStatus messages to the console.
  */

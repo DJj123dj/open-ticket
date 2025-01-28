@@ -5,7 +5,7 @@ import { ODId, ODManager, ODValidJsonType, ODValidId, ODVersion, ODManagerData }
 import { ODDebugger } from "../modules/console"
 
 /**## ODQuestionManager `class`
- * This is an open ticket question manager.
+ * This is an Open Ticket question manager.
  * 
  * This class manages all registered questions in the bot. Only questions which are available in this manager can be used in options.
  * 
@@ -51,7 +51,7 @@ export interface ODQuestionJson {
 }
 
 /**## ODQuestion `class`
- * This is an open ticket question.
+ * This is an Open Ticket question.
  * 
  * This class contains all data related to this question (parsed from the config).
  * 
@@ -96,7 +96,7 @@ export class ODQuestion extends ODManager<ODQuestionData<ODValidJsonType>> {
 }
 
 /**## ODQuestionData `class`
- * This is open ticket question data.
+ * This is Open Ticket question data.
  * 
  * This class contains a single property for a question. (string, number, boolean, object, array, null)
  * 
@@ -140,7 +140,7 @@ export interface ODShortQuestionIds {
 }
 
 /**## ODShortQuestion `class`
- * This is an open ticket short question.
+ * This is an Open Ticket short question.
  * 
  * This class contains all data related to an Open Ticket short question (parsed from the config).
  * 
@@ -194,7 +194,7 @@ export interface ODParagraphQuestionIds {
 }
 
 /**## ODParagraphQuestion `class`
- * This is an open ticket paragraph question.
+ * This is an Open Ticket paragraph question.
  * 
  * This class contains all data related to an Open Ticket paragraph question (parsed from the config).
  * 

@@ -20,31 +20,31 @@ export interface ODDefaults {
     /**Don't crash the bot when a plugin crashes! */
     softPluginLoading:boolean,
 
-    /**Load the default open ticket plugin classes. */
+    /**Load the default Open Ticket plugin classes. */
     pluginClassLoading:boolean,
 
-    /**Load the default open ticket flags. */
+    /**Load the default Open Ticket flags. */
     flagLoading:boolean,
-    /**Enable the default initializer for open ticket flags. */
+    /**Enable the default initializer for Open Ticket flags. */
     flagInitiating:boolean,
-    /**Load the default open ticket progress bar renderers. */
+    /**Load the default Open Ticket progress bar renderers. */
     progressBarRendererLoading:boolean,
-    /**Load the default open ticket progress bars. */
+    /**Load the default Open Ticket progress bars. */
     progressBarLoading:boolean,
-    /**Load the default open ticket configs. */
+    /**Load the default Open Ticket configs. */
     configLoading:boolean,
-    /**Enable the default initializer for open ticket config. */
+    /**Enable the default initializer for Open Ticket config. */
     configInitiating:boolean,
-    /**Load the default open ticket databases. */
+    /**Load the default Open Ticket databases. */
     databaseLoading:boolean,
-    /**Enable the default initializer for open ticket database. */
+    /**Enable the default initializer for Open Ticket database. */
     databaseInitiating:boolean,
-    /**Load the default open ticket sessions. */
+    /**Load the default Open Ticket sessions. */
     sessionLoading:boolean,
 
-    /**Load the default open ticket languages. */
+    /**Load the default Open Ticket languages. */
     languageLoading:boolean,
-    /**Enable the default initializer for open ticket languages. */
+    /**Enable the default initializer for Open Ticket languages. */
     languageInitiating:boolean,
     /**Enable selecting the current language from `config/general.json`. */
     languageSelection:boolean,
@@ -53,13 +53,13 @@ export interface ODDefaults {
     /****[NOT FOR PLUGIN TRANSLATIONS]** The full list of available languages (used in the default config checker). */
     languageList:string[],
 
-    /**Load the default open ticket config checker. */
+    /**Load the default Open Ticket config checker. */
     checkerLoading:boolean,
-    /**Load the default open ticket config checker functions. */
+    /**Load the default Open Ticket config checker functions. */
     checkerFunctionLoading:boolean,
     /**Enable the default execution of the config checkers. */
     checkerExecution:boolean,
-    /**Load the default open ticket config checker translations. */
+    /**Load the default Open Ticket config checker translations. */
     checkerTranslationLoading:boolean,
     /**Enable the default rendering of the config checkers. */
     checkerRendering:boolean,
@@ -68,111 +68,111 @@ export interface ODDefaults {
     /**Render the checker even when there are no errors & warnings. */
     checkerRenderEmpty:boolean,
 
-    /**Load the default open ticket client configuration. */
+    /**Load the default Open Ticket client configuration. */
     clientLoading:boolean,
-    /**Load the default open ticket client initialization. */
+    /**Load the default Open Ticket client initialization. */
     clientInitiating:boolean,
-    /**Load the default open ticket client ready actions (status, commands, permissions, ...). */
+    /**Load the default Open Ticket client ready actions (status, commands, permissions, ...). */
     clientReady:boolean,
     /**Create a warning when the bot is present in multiple guilds. */
     clientMultiGuildWarning:boolean,
-    /**Load the default open ticket client activity (from `config/general.json`). */
+    /**Load the default Open Ticket client activity (from `config/general.json`). */
     clientActivityLoading:boolean,
-    /**Load the default open ticket client activity initialization (& status refresh). */
+    /**Load the default Open Ticket client activity initialization (& status refresh). */
     clientActivityInitiating:boolean,
 
-    /**Load the default open ticket slash commands. */
+    /**Load the default Open Ticket slash commands. */
     slashCommandLoading:boolean,
-    /**Load the default open ticket slash command registerer (register slash cmds in discord). */
+    /**Load the default Open Ticket slash command registerer (register slash cmds in discord). */
     slashCommandRegistering:boolean,
     /**When enabled, the bot is forced to re-register all slash commands in the server. This can be used in case of a auto-update malfunction. */
     forceSlashCommandRegistration:boolean,
     /**When enabled, the bot is allowed to unregister all slash commands which aren't used in Open Ticket. Disable this if you don't want to use the Open Ticket `ODSlashCommand` classes. */
     allowSlashCommandRemoval:boolean,
-    /**Load the default open ticket text commands. */
+    /**Load the default Open Ticket text commands. */
     textCommandLoading:boolean,
 
-    /**Load the default open ticket questions (from `config/questions.json`) */
+    /**Load the default Open Ticket questions (from `config/questions.json`) */
     questionLoading:boolean,
-    /**Load the default open ticket options (from `config/options.json`) */
+    /**Load the default Open Ticket options (from `config/options.json`) */
     optionLoading:boolean,
-    /**Load the default open ticket panels (from `config/panels.json`) */
+    /**Load the default Open Ticket panels (from `config/panels.json`) */
     panelLoading:boolean,
-    /**Load the default open ticket tickets (from `database/tickets.json`) */
+    /**Load the default Open Ticket tickets (from `database/tickets.json`) */
     ticketLoading:boolean,
-    /**Load the default open ticket reaction roles (from `config/options.json`) */
+    /**Load the default Open Ticket reaction roles (from `config/options.json`) */
     roleLoading:boolean,
-    /**Load the default open ticket blacklist (from `database/users.json`) */
+    /**Load the default Open Ticket blacklist (from `database/users.json`) */
     blacklistLoading:boolean,
-    /**Load the default open ticket transcript compilers. */
+    /**Load the default Open Ticket transcript compilers. */
     transcriptCompilerLoading:boolean,
-    /**Load the default open ticket transcript history (from `database/transcripts.json`) */
+    /**Load the default Open Ticket transcript history (from `database/transcripts.json`) */
     transcriptHistoryLoading:boolean,
 
-    /**Load the default open ticket button builders. */
+    /**Load the default Open Ticket button builders. */
     buttonBuildersLoading:boolean,
-    /**Load the default open ticket dropdown builders. */
+    /**Load the default Open Ticket dropdown builders. */
     dropdownBuildersLoading:boolean,
-    /**Load the default open ticket file builders. */
+    /**Load the default Open Ticket file builders. */
     fileBuildersLoading:boolean,
-    /**Load the default open ticket embed builders. */
+    /**Load the default Open Ticket embed builders. */
     embedBuildersLoading:boolean,
-    /**Load the default open ticket message builders. */
+    /**Load the default Open Ticket message builders. */
     messageBuildersLoading:boolean,
-    /**Load the default open ticket modal builders. */
+    /**Load the default Open Ticket modal builders. */
     modalBuildersLoading:boolean,
 
-    /**Load the default open ticket command responders. */
+    /**Load the default Open Ticket command responders. */
     commandRespondersLoading:boolean,
-    /**Load the default open ticket button responders. */
+    /**Load the default Open Ticket button responders. */
     buttonRespondersLoading:boolean,
-    /**Load the default open ticket dropdown responders. */
+    /**Load the default Open Ticket dropdown responders. */
     dropdownRespondersLoading:boolean,
-    /**Load the default open ticket modal responders. */
+    /**Load the default Open Ticket modal responders. */
     modalRespondersLoading:boolean,
-    /**Set the time (in ms) before open ticket sends an error message when no reply is sent in a responder. */
+    /**Set the time (in ms) before Open Ticket sends an error message when no reply is sent in a responder. */
     responderTimeoutMs:number,
 
-    /**Load the default open ticket actions. */
+    /**Load the default Open Ticket actions. */
     actionsLoading:boolean,
 
-    /**Load the default open ticket verify bars. */
+    /**Load the default Open Ticket verify bars. */
     verifyBarsLoading:boolean,
-    /**Load the default open ticket permissions. */
+    /**Load the default Open Ticket permissions. */
     permissionsLoading:boolean,
-    /**Load the default open ticket posts. */
+    /**Load the default Open Ticket posts. */
     postsLoading:boolean,
-    /**Initiate the default open ticket posts. */
+    /**Initiate the default Open Ticket posts. */
     postsInitiating:boolean,
-    /**Load the default open ticket cooldowns. */
+    /**Load the default Open Ticket cooldowns. */
     cooldownsLoading:boolean,
-    /**Initiate the default open ticket cooldowns. */
+    /**Initiate the default Open Ticket cooldowns. */
     cooldownsInitiating:boolean,
-    /**Load the default open ticket help menu categories. */
+    /**Load the default Open Ticket help menu categories. */
     helpMenuCategoryLoading:boolean,
-    /**Load the default open ticket help menu components. */
+    /**Load the default Open Ticket help menu components. */
     helpMenuComponentLoading:boolean,
 
-    /**Load the default open ticket stat scopes. */
+    /**Load the default Open Ticket stat scopes. */
     statScopesLoading:boolean,
-    /**Load the default open ticket stats. */
+    /**Load the default Open Ticket stats. */
     statLoading:boolean,
-    /**Initiate the default open ticket stats. */
+    /**Initiate the default Open Ticket stats. */
     statInitiating:boolean,
 
-    /**Load the default open ticket code/functions. */
+    /**Load the default Open Ticket code/functions. */
     codeLoading:boolean,
-    /**Execute the default open ticket code/functions. */
+    /**Execute the default Open Ticket code/functions. */
     codeExecution:boolean,
 
-    /**Load the default open ticket livestatus. */
+    /**Load the default Open Ticket livestatus. */
     liveStatusLoading:boolean,
-    /**Load the default open ticket startscreen. */
+    /**Load the default Open Ticket startscreen. */
     startScreenLoading:boolean,
-    /**Render the default open ticket startscreen. */
+    /**Render the default Open Ticket startscreen. */
     startScreenRendering:boolean,
 
-    /**Load the emoji style from the open ticket general config. */
+    /**Load the emoji style from the Open Ticket general config. */
     emojiTitleStyleLoading:boolean,
     /**The emoji style to use in embed & message titles using `utilities.emoijTitle()` */
     emojiTitleStyle:"disabled"|"before"|"after"|"double",
@@ -217,9 +217,9 @@ export type ODDefaultsStringArray = {
 }[keyof ODDefaults]
 
 /**## ODDefaultsManager `class`
- * This is an open ticket defaults manager.
+ * This is an Open Ticket defaults manager.
  * 
- * It manages all settings in open ticket that are not meant to be in the config.
+ * It manages all settings in Open Ticket that are not meant to be in the config.
  * Here you can disable certain default features to replace them or to specifically enable them!
  * 
  * You are unable to add your own defaults, you can only edit Open Ticket defaults!

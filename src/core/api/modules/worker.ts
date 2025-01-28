@@ -9,7 +9,7 @@ import { ODId, ODManager, ODManagerData, ODValidId } from "./base"
 export type ODWorkerCallback<Instance, Source extends string, Params> = (instance:Instance, params:Params, source:Source, cancel:() => void) => void|Promise<void>
 
 /**## ODWorker `class`
- * This is an open ticket worker.
+ * This is an Open Ticket worker.
  * 
  * You can compare it with a normal javascript callback, but slightly more advanced!
  * 
@@ -32,7 +32,7 @@ export class ODWorker<Instance, Source extends string, Params> extends ODManager
 }
 
 /**## ODWorker `class`
- * This is an open ticket worker manager.
+ * This is an Open Ticket worker manager.
  * 
  * It manages & executes `ODWorker`'s in the correct order.
  * 

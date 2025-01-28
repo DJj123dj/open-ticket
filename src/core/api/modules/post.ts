@@ -7,7 +7,7 @@ import { ODDebugger } from "./console"
 import * as discord from "discord.js"
 
 /**## ODPostManager `class`
- * This is an open ticket post manager.
+ * This is an Open Ticket post manager.
  * 
  * It manages `ODPosts`'s for you.
  * 
@@ -36,7 +36,7 @@ export class ODPostManager extends ODManager<ODPost<discord.GuildBasedChannel>> 
 }
 
 /**## ODPost `class`
- * This is an open ticket post class.
+ * This is an Open Ticket post class.
  * 
  * A post is just a shortcut to a static discord channel or category.
  * This can be used to get a specific channel over and over again!

@@ -10,7 +10,7 @@ import * as crypto from "crypto"
 import { ODRoleUpdateMode } from "./role"
 
 /**## ODOptionManager `class`
- * This is an open ticket option manager.
+ * This is an Open Ticket option manager.
  * 
  * This class manages all registered options in the bot. This also includes temporary options generated from tickets where the original option got deleted.
  * 
@@ -59,7 +59,7 @@ export interface ODOptionJson {
 }
 
 /**## ODOption `class`
- * This is an open ticket option.
+ * This is an Open Ticket option.
  * 
  * This class contains all data related to this option (parsed from the config).
  * 
@@ -104,7 +104,7 @@ export class ODOption extends ODManager<ODOptionData<ODValidJsonType>> {
 }
 
 /**## ODOptionData `class`
- * This is open ticket option data.
+ * This is Open Ticket option data.
  * 
  * This class contains a single property for an option. (string, number, boolean, object, array, null)
  * 
@@ -186,7 +186,7 @@ export interface ODTicketOptionIds {
 }
 
 /**## ODTicketOption `class`
- * This is an open ticket ticket option.
+ * This is an Open Ticket ticket option.
  * 
  * This class contains all data related to an Open Ticket ticket option (parsed from the config).
  * 
@@ -240,7 +240,7 @@ export interface ODWebsiteOptionIds {
 }
 
 /**## ODWebsiteOption `class`
- * This is an open ticket website option.
+ * This is an Open Ticket website option.
  * 
  * This class contains all data related to an Open Ticket website option (parsed from the config).
  * 
@@ -298,7 +298,7 @@ export interface ODRoleOptionIds {
 }
 
 /**## ODRoleOption `class`
- * This is an open ticket role option.
+ * This is an Open Ticket role option.
  * 
  * This class contains all data related to an Open Ticket role option (parsed from the config).
  * 
@@ -338,7 +338,7 @@ export class ODRoleOption extends ODOption {
 }
 
 /**## ODOptionSuffixManager `class`
- * This is an open ticket option suffix manager.
+ * This is an Open Ticket option suffix manager.
  * 
  * This class manages all suffixes from option in the bot. The id of an option suffix is the same as the option id.
  * 
@@ -358,7 +358,7 @@ export class ODOptionSuffixManager extends ODManager<ODOptionSuffix> {
 }
 
 /**## ODOptionSuffix `class`
- * This is an open ticket option suffix.
+ * This is an Open Ticket option suffix.
  * 
  * This class can generate a suffix for a discord channel name from a specific option.
  * 
@@ -380,7 +380,7 @@ export class ODOptionSuffix extends ODManagerData {
 }
 
 /**## ODOptionUserNameSuffix `class`
- * This is an open ticket user-name option suffix.
+ * This is an Open Ticket user-name option suffix.
  * 
  * This class can generate a user-name suffix for a discord channel name from a specific option.
  * 
@@ -393,7 +393,7 @@ export class ODOptionUserNameSuffix extends ODOptionSuffix {
 }
 
 /**## ODOptionUserIdSuffix `class`
- * This is an open ticket user-id option suffix.
+ * This is an Open Ticket user-id option suffix.
  * 
  * This class can generate a user-id suffix for a discord channel name from a specific option.
  * 
@@ -406,7 +406,7 @@ export class ODOptionUserIdSuffix extends ODOptionSuffix {
 }
 
 /**## ODOptionCounterDynamicSuffix `class`
- * This is an open ticket counter-dynamic option suffix.
+ * This is an Open Ticket counter-dynamic option suffix.
  * 
  * This class can generate a counter-dynamic suffix for a discord channel name from a specific option.
  * 
@@ -436,7 +436,7 @@ export class ODOptionCounterDynamicSuffix extends ODOptionSuffix {
 }
 
 /**## ODOptionCounterFixedSuffix `class`
- * This is an open ticket counter-fixed option suffix.
+ * This is an Open Ticket counter-fixed option suffix.
  * 
  * This class can generate a counter-fixed suffix for a discord channel name from a specific option.
  * 
@@ -470,7 +470,7 @@ export class ODOptionCounterFixedSuffix extends ODOptionSuffix {
 }
 
 /**## ODOptionRandomNumberSuffix `class`
- * This is an open ticket random-number option suffix.
+ * This is an Open Ticket random-number option suffix.
  * 
  * This class can generate a random-number suffix for a discord channel name from a specific option.
  * 
@@ -513,7 +513,7 @@ export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
 }
 
 /**## ODOptionRandomHexSuffix `class`
- * This is an open ticket random-hex option suffix.
+ * This is an Open Ticket random-hex option suffix.
  * 
  * This class can generate a random-hex suffix for a discord channel name from a specific option.
  * 

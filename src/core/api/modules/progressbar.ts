@@ -6,7 +6,7 @@ import { ODDebugger } from "./console"
 import readline from "readline"
 
 /**## ODProgressBarRendererManager `class`
- * This is an open ticket progress bar renderer manager.
+ * This is an Open Ticket progress bar renderer manager.
  * 
  * It is responsible for managing all console progress bar renderers in Open Ticket.
  * 
@@ -19,7 +19,7 @@ export class ODProgressBarRendererManager extends ODManager<ODProgressBarRendere
 }
 
 /**## ODProgressBarManager `class`
- * This is an open ticket progress bar manager.
+ * This is an Open Ticket progress bar manager.
  * 
  * It is responsible for managing all console progress bars in Open Ticket. An example of this is the slash command registration progress bar.
  * 
@@ -40,7 +40,7 @@ export class ODProgressBarManager extends ODManager<ODProgressBar> {
 export type ODProgressBarRenderFunc<Settings extends {}> = (settings:Settings,min:number,max:number,value:number,prefix:string|null,suffix:string|null) => string
 
 /**## ODProgressBarRenderer `class`
- * This is an open ticket console progress bar renderer.
+ * This is an Open Ticket console progress bar renderer.
  * 
  * It is used to render a progress bar in the console of the bot.
  * 
@@ -76,7 +76,7 @@ export class ODProgressBarRenderer<Settings extends {}> extends ODManagerData {
 }
 
 /**## ODProgressBar `class`
- * This is an open ticket console progress bar.
+ * This is an Open Ticket console progress bar.
  * 
  * It is used to create a simple or advanced progress bar in the console of the bot.
  * These progress bars are not visible in the `otdebug.txt` file and should only be used as extra visuals.
@@ -160,7 +160,7 @@ export class ODProgressBar extends ODManagerData {
 }
 
 /**## ODTimedProgressBar `class`
- * This is an open ticket timed console progress bar.
+ * This is an Open Ticket timed console progress bar.
  * 
  * It is used to create a simple timed progress bar in the console.
  * You can set a fixed duration (milliseconds) in the constructor.
@@ -204,7 +204,7 @@ export class ODTimedProgressBar extends ODProgressBar {
 }
 
 /**## ODManualProgressBar `class`
- * This is an open ticket manual console progress bar.
+ * This is an Open Ticket manual console progress bar.
  * 
  * It is used to create a simple manual progress bar in the console.
  * You can update the progress manually using `update()`.

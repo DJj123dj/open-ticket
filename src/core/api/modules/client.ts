@@ -26,14 +26,14 @@ export type ODClientPartials = ("User"|"Channel"|"GuildMember"|"Message"|"Reacti
 export type ODClientPermissions = ("CreateInstantInvite"|"KickMembers"|"BanMembers"|"Administrator"|"ManageChannels"|"ManageGuild"|"AddReactions"|"ViewAuditLog"|"PrioritySpeaker"|"Stream"|"ViewChannel"|"SendMessages"|"SendTTSMessages"|"ManageMessages"|"EmbedLinks"|"AttachFiles"|"ReadMessageHistory"|"MentionEveryone"|"UseExternalEmojis"|"ViewGuildInsights"|"Connect"|"Speak"|"MuteMembers"|"DeafenMembers"|"MoveMembers"|"UseVAD"|"ChangeNickname"|"ManageNicknames"|"ManageRoles"|"ManageWebhooks"|"ManageGuildExpressions"|"UseApplicationCommands"|"RequestToSpeak"|"ManageEvents"|"ManageThreads"|"CreatePublicThreads"|"CreatePrivateThreads"|"UseExternalStickers"|"SendMessagesInThreads"|"UseEmbeddedActivities"|"ModerateMembers"|"ViewCreatorMonetizationAnalytics"|"UseSoundboard"|"UseExternalSounds"|"SendVoiceMessages")
 
 /**## ODClientManager `class`
- * This is an open ticket client manager.
+ * This is an Open Ticket client manager.
  * 
  * It is responsible for managing the discord.js client. Here, you can set the status, register slash commands and much more!
  * 
  * If you want, you can also listen for custom events on the `ODClientManager.client` variable (`discord.Client`)
  */
 export class ODClientManager {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug: ODDebugger
 
     /**List of required bot intents. Add intents to this list using the `onClientLoad` event. */
@@ -68,7 +68,7 @@ export class ODClientManager {
 
     /**The main server of the bot. Provided by serverId in the config */
     mainServer: discord.Guild|null = null
-    /**(❌ DO NOD OVERWRITE ❌) Internal open ticket function to continue the startup when the client is ready! */
+    /**(❌ DO NOD OVERWRITE ❌) Internal Open Ticket function to continue the startup when the client is ready! */
     readyListener: (() => Promise<void>)|null = null
     /**The status manager is responsible for setting the bot status. */
     activity: ODClientActivityManager
@@ -333,14 +333,14 @@ export type ODClientActivityStatus = ("online"|"invisible"|"idle"|"dnd")
 
 
 /**## ODClientActivityManager `class`
- * This is an open ticket client activity manager.
+ * This is an Open Ticket client activity manager.
  * 
  * It's responsible for managing the client status. Here, you can set the activity & status of the bot.
  * 
  * It also has a built-in refresh function, so the status will refresh every 10 minutes to keep it visible.
  */
 export class ODClientActivityManager {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug: ODDebugger
 
     /**Copy of discord.js client */
@@ -765,14 +765,14 @@ export type ODSlashCommandRegisteredResult = {
 }
 
 /**## ODSlashCommandManager `class`
- * This is an open ticket client slash manager.
+ * This is an Open Ticket client slash manager.
  * 
  * It's responsible for managing all the slash commands from the client.
  * 
  * Here, you can add & remove slash commands & the bot will do the (de)registering.
  */
 export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug: ODDebugger
     
     /**Refrerence to discord.js client. */
@@ -933,7 +933,7 @@ export class ODSlashCommandManager extends ODManager<ODSlashCommand> {
 export type ODSlashCommandUpdateFunction = (command:ODSlashCommandUniversalCommand) => boolean
 
 /**## ODSlashCommand `class`
- * This is an open ticket slash command.
+ * This is an Open Ticket slash command.
  * 
  * When registered, you can listen for this command using the `ODCommandResponder`. The advantages of using this class for creating a slash command are:
  * - automatic option parsing (even for channels, users, roles & mentions)!
@@ -1106,7 +1106,7 @@ export interface ODTextCommandBuilder {
 }
 
 /**## ODTextCommand `class`
- * This is an open ticket text command.
+ * This is an Open Ticket text command.
  * 
  * When registered, you can listen for this command using the `ODCommandResponder`. The advantages of using this class for creating a text command are:
  * - automatic option parsing (even for channels, users, roles & mentions)!
@@ -1263,14 +1263,14 @@ export type ODTextCommandError = (
 export type ODTextCommandErrorCallback = (error:ODTextCommandError) => void
 
 /**## ODTextCommandManager `class`
- * This is an open ticket client text manager.
+ * This is an Open Ticket client text manager.
  * 
  * It's responsible for managing all the text commands from the client.
  * 
  * Here, you can add & remove text commands & the bot will do the (de)registering.
  */
 export class ODTextCommandManager extends ODManager<ODTextCommand> {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug: ODDebugger
     /**Copy of discord.js client. */
     manager: ODClientManager

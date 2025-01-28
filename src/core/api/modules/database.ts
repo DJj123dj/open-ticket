@@ -8,7 +8,7 @@ import { ODDebugger } from "./console"
 import * as fjs from "formatted-json-stringify"
 
 /**## ODDatabaseManager `class`
- * This is an open ticket database manager.
+ * This is an Open Ticket database manager.
  * 
  * It manages all databases in the bot and allows to permanently store data from the bot!
  * 
@@ -32,7 +32,7 @@ export class ODDatabaseManager extends ODManager<ODDatabase> {
 }
 
 /**## ODDatabase `class`
- * This is an open ticket database template.
+ * This is an Open Ticket database template.
  * This class doesn't do anything at all, it just gives a template & basic methods for a database. Use `ODJsonDatabase` instead!
  * 
  * You can use this class if you want to create your own database implementation (e.g. `mongodb`, `mysql`,...)!
@@ -79,7 +79,7 @@ export class ODDatabase extends ODManagerData {
 export type ODJsonDatabaseStructure = {category:string, key:string, value:ODValidJsonType}[]
 
 /**## ODJsonDatabase `class`
- * This is an open ticket JSON database.
+ * This is an Open Ticket JSON database.
  * It stores data in a `json` file as a large `Array` using the `category`, `key`, `value` strategy.
  * You can store the following types: `string`, `number`, `boolean`, `array`, `object` & `null`!
  * 
@@ -179,7 +179,7 @@ export class ODJsonDatabase extends ODDatabase {
 
 
 /**## ODFormattedJsonDatabase `class`
- * This is an open ticket Formatted JSON database.
+ * This is an Open Ticket Formatted JSON database.
  * It stores data in a `json` file as a large `Array` using the `category`, `key`, `value` strategy.
  * You can store the following types: `string`, `number`, `boolean`, `array`, `object` & `null`!
  * 

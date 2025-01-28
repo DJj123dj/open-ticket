@@ -6,7 +6,7 @@ import { ODId, ODManager, ODValidJsonType, ODValidId, ODVersion, ODValidButtonCo
 import { ODDebugger } from "../modules/console"
 
 /**## ODPanelManager `class`
- * This is an open ticket panel manager.
+ * This is an Open Ticket panel manager.
  * 
  * This class manages all registered panels in the bot. Only panels which are available in this manager can be auto-updated.
  * 
@@ -74,7 +74,7 @@ export interface ODPanelIds {
 }
 
 /**## ODPanel `class`
- * This is an open ticket panel.
+ * This is an Open Ticket panel.
  * 
  * This class contains all data related to this panel (parsed from the config).
  */
@@ -134,7 +134,7 @@ export class ODPanel extends ODManager<ODPanelData<ODValidJsonType>> {
 }
 
 /**## ODPanelData `class`
- * This is open ticket panel data.
+ * This is Open Ticket panel data.
  * 
  * This class contains a single property for a panel. (string, number, boolean, object, array, null)
  * 

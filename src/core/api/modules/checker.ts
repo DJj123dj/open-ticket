@@ -15,9 +15,9 @@ export interface ODCheckerResult {
 }
 
 /**## ODCheckerManager `class`
- * This is an open ticket checker manager.
+ * This is an Open Ticket checker manager.
  * 
- * It manages all config checkers in the bot and allows plugins to access config checkers from open ticket & other plugins!
+ * It manages all config checkers in the bot and allows plugins to access config checkers from Open Ticket & other plugins!
  * 
  * You can use this class to get/add a config checker (`ODChecker`) in your plugin!
  * @example
@@ -93,7 +93,7 @@ export class ODCheckerManager extends ODManager<ODChecker> {
 }
 
 /**## ODCheckerStorage `class`
- * This is an open ticket checker storage. 
+ * This is an Open Ticket checker storage. 
  * 
  * It stores temporary data to share between config checkers!
  * (e.g. The `messages.json` needs to access the `"id"` from `options.json`)
@@ -145,7 +145,7 @@ export class ODCheckerStorage {
 }
 
 /**## ODCheckerRenderer `class`
- * This is an open ticket checker renderer. 
+ * This is an Open Ticket checker renderer. 
  * 
  * It's responsible for rendering the config checker result in the console.
  * This class doesn't provide any components! You need to create them by extending this class
@@ -169,7 +169,7 @@ export class ODCheckerRenderer {
 }
 
 /**## ODCheckerTranslationRegister `class`
- * This is an open ticket checker translation register. 
+ * This is an Open Ticket checker translation register. 
  * 
  * It's used to store & manage the translation for each message from the config checker!
  * Most translations are stored by message id, but there are some exceptions like the additional text on the checker report.
@@ -227,7 +227,7 @@ export class ODCheckerTranslationRegister {
 }
 
 /**## ODCheckerFunction `class`
- * This is an open ticket config checker function.
+ * This is an Open Ticket config checker function.
  * 
  * It is a global function that will be executed after all config checkers. It can do additional checks for invalid/missing configurations.
  * It's mostly used for things that need to be checked globally!
@@ -243,7 +243,7 @@ export class ODCheckerFunction extends ODManagerData {
 }
 
 /**## ODCheckerFunctionManager `class`
- * This is an open ticket config checker function manager.
+ * This is an Open Ticket config checker function manager.
  * 
  * It manages all `ODCheckerFunction`'s and it has some extra shortcuts for frequently used methods.
  */
@@ -293,7 +293,7 @@ export class ODCheckerFunctionManager extends ODManager<ODCheckerFunction> {
 export type ODCheckerLocationTrace = (string|number)[]
 
 /**## ODChecker `class`
- * This is an open ticket config checker.
+ * This is an Open Ticket config checker.
  * 
  * It checks a specific config file for invalid/missing configurations. This data can then be used to show to the user what's wrong!
  * You can check for example if a string is longer/shorter than a certain amount of characters & more!
@@ -405,7 +405,7 @@ export interface ODCheckerStructureOptions {
 }
 
 /**## ODCheckerStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will check for a single variable in a config file, customise it in the settings!
  * If you want prebuilt checkers (for strings, booleans, numbers, ...), check the other `ODCheckerStructure`'s!
@@ -423,7 +423,7 @@ export class ODCheckerStructure {
         this.options = options
     }
 
-    /**Check a variable if it matches all settings in this checker. This function is automatically executed by open ticket! */
+    /**Check a variable if it matches all settings in this checker. This function is automatically executed by Open Ticket! */
     check(checker:ODChecker, value:ODValidJsonType, locationTrace:ODCheckerLocationTrace): boolean {
         if (typeof this.options.custom != "undefined"){
             return this.options.custom(checker,value,locationTrace,this.id,(this.options.docs ?? null))
@@ -440,7 +440,7 @@ export interface ODCheckerObjectStructureOptions extends ODCheckerStructureOptio
 }
 
 /**## ODCheckerObjectStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will check for an object variable in a config file, customise it in the settings!
  * A checker for the children can be set in the settings.
@@ -514,7 +514,7 @@ export interface ODCheckerStringStructureOptions extends ODCheckerStructureOptio
 }
 
 /**## ODCheckerStringStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will check for a string variable in a config file, customise it in the settings!
  */
@@ -599,7 +599,7 @@ export interface ODCheckerNumberStructureOptions extends ODCheckerStructureOptio
 }
 
 /**## ODCheckerNumberStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will check for a number variable in a config file, customise it in the settings!
  */
@@ -681,7 +681,7 @@ export interface ODCheckerBooleanStructureOptions extends ODCheckerStructureOpti
 }
 
 /**## ODCheckerBooleanStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will check for a boolean variable in a config file, customise it in the settings!
  */
@@ -732,7 +732,7 @@ export interface ODCheckerArrayStructureOptions extends ODCheckerStructureOption
 }
 
 /**## ODCheckerArrayStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will check for an array variable in a config file, customise it in the settings!
  */
@@ -835,7 +835,7 @@ export interface ODCheckerNullStructureOptions extends ODCheckerStructureOptions
 }
 
 /**## ODCheckerNullStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will check for a null variable in a config file, customise it in the settings!
  */
@@ -885,7 +885,7 @@ export interface ODCheckerTypeSwitchStructureOptions extends ODCheckerStructureO
 }
 
 /**## ODCheckerTypeSwitchStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will switch checkers based on the type of the variable in a config file, customise it in the settings!
  */
@@ -948,7 +948,7 @@ export interface ODCheckerObjectSwitchStructureOptions extends ODCheckerStructur
 }
 
 /**## ODCheckerObjectSwitchStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will switch object checkers based on a variable match in one of the objects, customise it in the settings!
  */
@@ -1011,7 +1011,7 @@ export interface ODCheckerEnabledObjectStructureOptions extends ODCheckerStructu
 }
 
 /**## ODCheckerEnabledObjectStructure `class`
- * This is an open ticket config checker structure.
+ * This is an Open Ticket config checker structure.
  * 
  * This class will enable an object checker based on a variable match in the object, customise it in the settings!
  */
@@ -1049,7 +1049,7 @@ export class ODCheckerEnabledObjectStructure extends ODCheckerStructure {
 }
 
 /**## ODCheckerCustomStructure_DiscordId `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.
@@ -1089,7 +1089,7 @@ export class ODCheckerCustomStructure_DiscordId extends ODCheckerStringStructure
 }
 
 /**## ODCheckerCustomStructure_DiscordIdArray `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.
@@ -1113,7 +1113,7 @@ export class ODCheckerCustomStructure_DiscordIdArray extends ODCheckerArrayStruc
 }
 
 /**## ODCheckerCustomStructure_DiscordToken `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.
@@ -1138,7 +1138,7 @@ export class ODCheckerCustomStructure_DiscordToken extends ODCheckerStringStruct
 }
 
 /**## ODCheckerCustomStructure_DiscordToken `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.
@@ -1172,7 +1172,7 @@ export class ODCheckerCustomStructure_HexColor extends ODCheckerStringStructure 
 }
 
 /**## ODCheckerCustomStructure_EmojiString `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.
@@ -1239,7 +1239,7 @@ export interface ODCheckerCustomStructureOptions_UrlString {
 }
 
 /**## ODCheckerCustomStructure_UrlString `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.
@@ -1343,7 +1343,7 @@ export class ODCheckerCustomStructure_UrlString extends ODCheckerStringStructure
 }
 
 /**## ODCheckerCustomStructure_UniqueId `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.
@@ -1382,7 +1382,7 @@ export class ODCheckerCustomStructure_UniqueId extends ODCheckerStringStructure 
 }
 
 /**## ODCheckerCustomStructure_UniqueIdArray `class`
- * This is an open ticket custom checker structure.
+ * This is an Open Ticket custom checker structure.
  * 
  * This class extends a primitive config checker & adds another layer of checking in the `custom` function.
  * You can compare it to a blueprint for a specific checker.

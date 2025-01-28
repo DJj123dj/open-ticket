@@ -9,7 +9,7 @@ import { ODClientManager, ODSlashCommand, ODTextCommand, ODTextCommandInteractio
 import { ODDropdownData, ODMessageBuildResult, ODMessageBuildSentResult, ODModalBuildResult } from "./builder"
 
 /**## ODResponderImplementation `class`
- * This is an open ticket responder implementation.
+ * This is an Open Ticket responder implementation.
  * 
  * It is a basic implementation of the `ODWorkerManager` used by all `ODResponder` classes.
  * 
@@ -39,7 +39,7 @@ export class ODResponderImplementation<Instance,Source extends string,Params> ex
 export type ODResponderTimeoutErrorCallback<Instance, Source extends "slash"|"text"|"button"|"dropdown"|"modal"|"other"> = (instance:Instance, source:Source) => void|Promise<void>
 
 /**## ODResponderManager `class`
- * This is an open ticket responder manager.
+ * This is an Open Ticket responder manager.
  * 
  * It contains all Open Ticket responders. Responders can respond to an interaction, button, dropdown, modal or command.
  * 
@@ -71,7 +71,7 @@ export class ODResponderManager {
 }
 
 /**## ODCommandResponderManager `class`
- * This is an open ticket command responder manager.
+ * This is an Open Ticket command responder manager.
  * 
  * It contains all Open Ticket command responders. These can respond to text & slash commands.
  * 
@@ -125,7 +125,7 @@ export class ODCommandResponderManager extends ODManager<ODCommandResponder<"sla
 }
 
 /**## ODCommandResponderInstanceOptions `class`
- * This is an open ticket command responder instance options manager.
+ * This is an Open Ticket command responder instance options manager.
  * 
  * This class will manage all options & subcommands from slash & text commands.
  */
@@ -331,7 +331,7 @@ export class ODCommandResponderInstanceOptions {
 
 
 /**## ODCommandResponderInstance `class`
- * This is an open ticket command responder instance.
+ * This is an Open Ticket command responder instance.
  * 
  * An instance is an active slash interaction or used text command. You can reply to the command using `reply()` for both slash & text commands.
  */
@@ -427,7 +427,7 @@ export class ODCommandResponderInstance {
 }
 
 /**## ODCommandResponder `class`
- * This is an open ticket command responder.
+ * This is an Open Ticket command responder.
  * 
  * This class manages all workers which are executed when the related command is triggered.
  */
@@ -448,7 +448,7 @@ export class ODCommandResponder<Source extends "slash"|"text",Params> extends OD
 }
 
 /**## ODButtonResponderManager `class`
- * This is an open ticket button responder manager.
+ * This is an Open Ticket button responder manager.
  * 
  * It contains all Open Ticket button responders. These can respond to button interactions.
  * 
@@ -500,7 +500,7 @@ export class ODButtonResponderManager extends ODManager<ODButtonResponder<"butto
 }
 
 /**## ODButtonResponderInstance `class`
- * This is an open ticket button responder instance.
+ * This is an Open Ticket button responder instance.
  * 
  * An instance is an active button interaction. You can reply to the button using `reply()`.
  */
@@ -631,7 +631,7 @@ export class ODButtonResponderInstance {
 }
 
 /**## ODButtonResponder `class`
- * This is an open ticket button responder.
+ * This is an Open Ticket button responder.
  * 
  * This class manages all workers which are executed when the related button is triggered.
  */
@@ -644,7 +644,7 @@ export class ODButtonResponder<Source extends string,Params> extends ODResponder
 }
 
 /**## ODDropdownResponderManager `class`
- * This is an open ticket dropdown responder manager.
+ * This is an Open Ticket dropdown responder manager.
  * 
  * It contains all Open Ticket dropdown responders. These can respond to dropdown interactions.
  * 
@@ -696,7 +696,7 @@ export class ODDropdownResponderManager extends ODManager<ODDropdownResponder<"d
 }
 
 /**## ODDropdownResponderInstanceValues `class`
- * This is an open ticket dropdown responder instance values manager.
+ * This is an Open Ticket dropdown responder instance values manager.
  * 
  * This class will manage all values from the dropdowns & select menus.
  */
@@ -770,7 +770,7 @@ export class ODDropdownResponderInstanceValues {
 }
 
 /**## ODDropdownResponderInstance `class`
- * This is an open ticket dropdown responder instance.
+ * This is an Open Ticket dropdown responder instance.
  * 
  * An instance is an active dropdown interaction. You can reply to the dropdown using `reply()`.
  */
@@ -918,7 +918,7 @@ export class ODDropdownResponderInstance {
 }
 
 /**## ODDropdownResponder `class`
- * This is an open ticket dropdown responder.
+ * This is an Open Ticket dropdown responder.
  * 
  * This class manages all workers which are executed when the related dropdown is triggered.
  */
@@ -931,7 +931,7 @@ export class ODDropdownResponder<Source extends string,Params> extends ODRespond
 }
 
 /**## ODModalResponderManager `class`
- * This is an open ticket modal responder manager.
+ * This is an Open Ticket modal responder manager.
  * 
  * It contains all Open Ticket modal responders. These can respond to modal interactions.
  * 
@@ -983,7 +983,7 @@ export class ODModalResponderManager extends ODManager<ODModalResponder<"modal",
 }
 
 /**## ODModalResponderInstanceValues `class`
- * This is an open ticket modal responder instance values manager.
+ * This is an Open Ticket modal responder instance values manager.
  * 
  * This class will manage all fields from the modals.
  */
@@ -1010,7 +1010,7 @@ export class ODModalResponderInstanceValues {
 }
 
 /**## ODModalResponderInstance `class`
- * This is an open ticket modal responder instance.
+ * This is an Open Ticket modal responder instance.
  * 
  * An instance is an active modal interaction. You can reply to the modal using `reply()`.
  */
@@ -1101,7 +1101,7 @@ export class ODModalResponderInstance {
 }
 
 /**## ODModalResponder `class`
- * This is an open ticket modal responder.
+ * This is an Open Ticket modal responder.
  * 
  * This class manages all workers which are executed when the related modal is triggered.
  */

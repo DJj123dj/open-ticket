@@ -9,7 +9,7 @@ import * as discord from "discord.js"
 import { ODWorkerManager } from "./worker"
 
 /**## ODVerifyBar `class`
- * This is an open ticket verifybar.
+ * This is an Open Ticket verifybar.
  * 
  * It is contains 2 sets of workers and a lot of utilities for the (✅ ❌) verifybars in the bot.
  * 
@@ -47,7 +47,7 @@ export class ODVerifyBar extends ODManagerData {
 }
 
 /**## ODVerifyBarManager `class`
- * This is an open ticket verifybar manager.
+ * This is an Open Ticket verifybar manager.
  * 
  * It contains all (✅ ❌) verifybars in the bot.
  * The `ODVerifyBar` classes contain `ODWorkerManager`'s that will be fired when the continue/stop buttons are pressed.

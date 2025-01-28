@@ -6,7 +6,7 @@ import { ODDebugger } from "../modules/console"
 import * as discord from "discord.js"
 
 /**## ODRoleManager `class`
- * This is an open ticket role manager.
+ * This is an Open Ticket role manager.
  * 
  * This class manages all registered reaction roles in the bot.
  * 
@@ -61,7 +61,7 @@ export interface ODRoleIds {
 }
 
 /**## ODRole `class`
- * This is an open ticket role.
+ * This is an Open Ticket role.
  * 
  * This class contains all data related to this role (parsed from the config).
  * 
@@ -123,7 +123,7 @@ export class ODRole extends ODManager<ODRoleData<ODValidJsonType>> {
 }
 
 /**## ODRoleData `class`
- * This is open ticket role data.
+ * This is Open Ticket role data.
  * 
  * This class contains a single property for a role. (string, number, boolean, object, array, null)
  * 

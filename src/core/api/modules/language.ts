@@ -23,7 +23,7 @@ export interface ODLanguageMetadata {
 }
 
 /**## ODLanguageManager `class`
- * This is an open ticket language manager.
+ * This is an Open Ticket language manager.
  * 
  * It manages all languages in the bot and manages translation for you!
  * Get a translation via the `getTranslation()` or `getTranslationWithParams()` methods.
@@ -144,7 +144,7 @@ export class ODLanguageManager extends ODManager<ODLanguage> {
 }
 
 /**## ODLanguage `class`
- * This is an open ticket language file.
+ * This is an Open Ticket language file.
  * 
  * It contains metadata and all translation strings available in this language.
  * Register this class to an `ODLanguageManager` to use it!
@@ -173,7 +173,7 @@ export class ODLanguage extends ODManagerData {
 }
 
 /**## ODJsonLanguage `class`
- * This is an open ticket JSON language file.
+ * This is an Open Ticket JSON language file.
  * 
  * It contains metadata and all translation strings from a certain JSON file (in `./languages/`).
  * Register this class to an `ODLanguageManager` to use it!

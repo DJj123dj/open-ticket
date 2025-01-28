@@ -7,7 +7,7 @@ import { ODDebugger } from "./console"
 import fs from "fs"
 
 /**## ODConfigManager `class`
- * This is an open ticket config manager.
+ * This is an Open Ticket config manager.
  * 
  * It manages all config files in the bot and allows plugins to access config files from Open Ticket & other plugins!
  * 
@@ -30,7 +30,7 @@ export class ODConfigManager extends ODManager<ODConfig> {
 }
 
 /**## ODConfig `class`
- * This is an open ticket config helper.
+ * This is an Open Ticket config helper.
  * This class doesn't do anything at all, it just gives a template & basic methods for a config. Use `ODJsonConfig` instead!
  * 
  * You can use this class if you want to create your own config implementation (e.g. `yml`, `xml`,...)!
@@ -55,7 +55,7 @@ export class ODConfig extends ODManagerData {
 }
 
 /**## ODJsonConfig `class`
- * This is an open ticket JSON config.
+ * This is an Open Ticket JSON config.
  * You can use this class to get & edit variables from the config files or to create your own JSON config!
  * @example
  * //create a config from: ./config/test.json with the id "some-config"
