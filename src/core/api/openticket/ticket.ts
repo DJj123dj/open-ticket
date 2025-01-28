@@ -4,13 +4,22 @@
 import { ODId, ODManager, ODValidJsonType, ODValidId, ODVersion, ODManagerData } from "../modules/base"
 import { ODDebugger } from "../modules/console"
 import { ODClientManager_Default } from "../defaults/client"
-import { ODOption, ODOptionJson, ODTicketOption } from "./option"
+import { ODTicketOption } from "./option"
 import * as discord from "discord.js"
 
+/**## ODTicketManager `class`
+ * This is an Open Ticket ticket manager.
+ * 
+ * This class manages all currently created tickets in the bot.
+ * 
+ * All tickets which are added, removed or modified in this manager will be updated automatically in the database.
+ */
 export class ODTicketManager extends ODManager<ODTicket> {
     /**A reference to the main server of the bot */
     #guild: discord.Guild|null = null
+    /**A reference to the Open Ticket client manager. */
     #client: ODClientManager_Default
+    /**A reference to the Open Ticket debugger. */
     #debug: ODDebugger
 
     constructor(debug:ODDebugger, client:ODClientManager_Default){
@@ -116,15 +125,27 @@ export class ODTicketManager extends ODManager<ODTicket> {
     }
 }
 
+/**## ODTicketDataJson `interface`
+ * The JSON representatation from a single ticket property.
+ */
 export interface ODTicketDataJson {
+    /**The id of this property. */
     id:string,
+    /**The value of this property. */
     value:ODValidJsonType
 }
 
+/**## ODTicketDataJson `interface`
+ * The JSON representatation from a single ticket.
+ */
 export interface ODTicketJson {
+    /**The id of this ticket. */
     id:string,
+    /**The option id related to this ticket. */
     option:string,
+    /**The version of Open Ticket used to create this ticket. */
     version:string,
+    /**The full list of properties/variables related to this ticket. */
     data:ODTicketDataJson[]
 }
 
@@ -164,8 +185,17 @@ export interface ODTicketIds {
     "openticket:answers":ODTicketData<{id:string,name:string,type:"short"|"paragraph",value:string|null}[]>,
 }
 
+/**## ODTicket `class`
+ * This is an Open Ticket ticket.
+ * 
+ * This class contains all data related to this ticket (parsed from the database).
+ * 
+ * These properties contain the current state of the ticket & are used by actions like claiming, pinning, closing, ...
+ */
 export class ODTicket extends ODManager<ODTicketData<ODValidJsonType>> {
+    /**The id of this ticket. (discord channel id) */
     id:ODId
+    /**The option related to this ticket. */
     #option: ODTicketOption
 
     constructor(id:ODValidId, option:ODTicketOption, data:ODTicketData<ODValidJsonType>[]){
@@ -177,6 +207,7 @@ export class ODTicket extends ODManager<ODTicketData<ODValidJsonType>> {
         })
     }
 
+    /**The option related to this ticket. */
     set option(option:ODTicketOption){
         this.#option = option
         this._change()
@@ -185,6 +216,7 @@ export class ODTicket extends ODManager<ODTicketData<ODValidJsonType>> {
         return this.#option
     }
     
+    /**Convert this ticket to a JSON object for storing this ticket in the database. */
     toJson(version:ODVersion): ODTicketJson {
         const data = this.getAll().map((data) => {
             return {
@@ -201,6 +233,7 @@ export class ODTicket extends ODManager<ODTicketData<ODValidJsonType>> {
         }
     }
 
+    /**Create a ticket from a JSON object in the database. */
     static fromJson(json:ODTicketJson, option:ODTicketOption): ODTicket {
         return new ODTicket(json.id,option,json.data.map((data) => new ODTicketData(data.id,data.value)))
     }
@@ -227,7 +260,15 @@ export class ODTicket extends ODManager<ODTicketData<ODValidJsonType>> {
     }
 }
 
+/**## ODTicketData `class`
+ * This is Open Ticket ticket data.
+ * 
+ * This class contains a single property for a ticket. (string, number, boolean, object, array, null)
+ * 
+ * When this property is edited, the database will be updated automatically.
+ */
 export class ODTicketData<DataType extends ODValidJsonType> extends ODManagerData {
+    /**The value of this property. */
     #value: DataType
 
     constructor(id:ODValidId, value:DataType){
@@ -235,6 +276,7 @@ export class ODTicketData<DataType extends ODValidJsonType> extends ODManagerDat
         this.#value = value
     }
 
+    /**The value of this property. */
     set value(value:DataType){
         this.#value = value
         this._change()
@@ -248,4 +290,7 @@ export class ODTicketData<DataType extends ODValidJsonType> extends ODManagerDat
     }
 }
 
+/**## ODTicketClearFilter `type`
+ * This type contains all possible "clear filters" for the `/clear` command.
+ */
 export type ODTicketClearFilter = "all"|"open"|"closed"|"claimed"|"unclaimed"|"pinned"|"unpinned"|"autoclosed"

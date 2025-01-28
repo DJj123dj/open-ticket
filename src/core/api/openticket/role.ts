@@ -5,7 +5,15 @@ import { ODId, ODManager, ODValidJsonType, ODValidId, ODVersion, ODManagerData }
 import { ODDebugger } from "../modules/console"
 import * as discord from "discord.js"
 
+/**## ODRoleManager `class`
+ * This is an Open Ticket role manager.
+ * 
+ * This class manages all registered reaction roles in the bot.
+ * 
+ * Roles are not stored in the database and will be parsed from the config every startup.
+ */
 export class ODRoleManager extends ODManager<ODRole> {
+    /**A reference to the Open Ticket debugger. */
     #debug: ODDebugger
 
     constructor(debug:ODDebugger){
@@ -19,36 +27,26 @@ export class ODRoleManager extends ODManager<ODRole> {
     }
 }
 
+/**## ODRoleDataJson `interface`
+ * The JSON representatation from a single role property.
+ */
 export interface ODRoleDataJson {
+    /**The id of this property. */
     id:string,
+    /**The value of this property. */
     value:ODValidJsonType
 }
 
+/**## ODRoleDataJson `interface`
+ * The JSON representatation from a single role.
+ */
 export interface ODRoleJson {
+    /**The id of this role. */
     id:string,
+    /**The version of Open Ticket used to create this role. */
     version:string,
+    /**The full list of properties/variables related to this role. */
     data:ODRoleDataJson[]
-}
-
-export class ODRoleData<DataType extends ODValidJsonType> extends ODManagerData {
-    #value: DataType
-
-    constructor(id:ODValidId, value:DataType){
-        super(id)
-        this.#value = value
-    }
-
-    set value(value:DataType){
-        this.#value = value
-        this._change()
-    }
-    get value(): DataType {
-        return this.#value
-    }
-    /**Refresh the database. Is only required to be used when updating `ODRoleData` with an object/array as value. */
-    refreshDatabase(){
-        this._change()
-    }
 }
 
 /**## ODRoleIds `type`
@@ -57,12 +55,20 @@ export class ODRoleData<DataType extends ODValidJsonType> extends ODManagerData 
  */
 export interface ODRoleIds {
     "openticket:roles":ODRoleData<string[]>,
-    "openticket:mode":ODRoleData<OTRoleUpdateMode>,
+    "openticket:mode":ODRoleData<ODRoleUpdateMode>,
     "openticket:remove-roles-on-add":ODRoleData<string[]>,
     "openticket:add-on-join":ODRoleData<boolean>
 }
 
+/**## ODRole `class`
+ * This is an Open Ticket role.
+ * 
+ * This class contains all data related to this role (parsed from the config).
+ * 
+ * These properties will be used to handle reaction role options.
+ */
 export class ODRole extends ODManager<ODRoleData<ODValidJsonType>> {
+    /**The id of this role. (from the config) */
     id:ODId
 
     constructor(id:ODValidId, data:ODRoleData<ODValidJsonType>[]){
@@ -73,6 +79,7 @@ export class ODRole extends ODManager<ODRoleData<ODValidJsonType>> {
         })
     }
 
+    /**Convert this role to a JSON object for storing this role in the database. */
     toJson(version:ODVersion): ODRoleJson {
         const data = this.getAll().map((data) => {
             return {
@@ -88,6 +95,7 @@ export class ODRole extends ODManager<ODRoleData<ODValidJsonType>> {
         }
     }
 
+    /**Create a role from a JSON object in the database. */
     static fromJson(json:ODRoleJson): ODRole {
         return new ODRole(json.id,json.data.map((data) => new ODRoleData(data.id,data.value)))
     }
@@ -114,9 +122,47 @@ export class ODRole extends ODManager<ODRoleData<ODValidJsonType>> {
     }
 }
 
-export interface OTRoleUpdateResult {
+/**## ODRoleData `class`
+ * This is Open Ticket role data.
+ * 
+ * This class contains a single property for a role. (string, number, boolean, object, array, null)
+ * 
+ * When this property is edited, the database will be updated automatically.
+ */
+export class ODRoleData<DataType extends ODValidJsonType> extends ODManagerData {
+    /**The value of this property. */
+    #value: DataType
+
+    constructor(id:ODValidId, value:DataType){
+        super(id)
+        this.#value = value
+    }
+
+    /**The value of this property. */
+    set value(value:DataType){
+        this.#value = value
+        this._change()
+    }
+    get value(): DataType {
+        return this.#value
+    }
+    /**Refresh the database. Is only required to be used when updating `ODRoleData` with an object/array as value. */
+    refreshDatabase(){
+        this._change()
+    }
+}
+
+/**## ODRoleUpdateResult `interface`
+ * This interface represents the result of a single role when the roles of users are updated.
+ */
+export interface ODRoleUpdateResult {
+    /**The role which was affected. */
     role:discord.Role,
+    /**The action which was done. `null` when nothing happend. */
     action:"added"|"removed"|null
 }
 
-export type OTRoleUpdateMode = "add&remove"|"add"|"remove"
+/**## ODRoleUpdateMode `type`
+ * This is the mode of the reaction role option in the config.
+ */
+export type ODRoleUpdateMode = "add&remove"|"add"|"remove"

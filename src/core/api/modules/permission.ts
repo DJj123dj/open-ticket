@@ -48,7 +48,7 @@ export enum ODPermissionLevel {
 }
 
 /**## ODPermission `class`
- * This is an open ticket permission.
+ * This is an Open Ticket permission.
  * 
  * It defines a single permission level for a specific scope (global/channel & user/role)
  * These permissions only apply to commands & interactions.
@@ -101,7 +101,7 @@ export interface ODPermissionSettings {
 export type ODPermissionCalculationCallback = (user:discord.User, channel?:discord.Channel|null, guild?:discord.Guild|null, settings?:ODPermissionSettings|null) => Promise<ODPermissionResult>
 
 /**## ODPermissionManager `class`
- * This is an open ticket permission manager.
+ * This is an Open Ticket permission manager.
  * 
  * It manages all permissions in the bot!
  * Use the `getPermissions()` and `hasPermissions()` methods to get user perms.

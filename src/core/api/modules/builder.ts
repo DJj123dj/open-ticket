@@ -7,7 +7,7 @@ import { ODWorkerManager, ODWorkerCallback, ODWorker } from "./worker"
 import { ODDebugger } from "./console"
 
 /**## ODBuilderImplementation `class`
- * This is an open ticket builder implementation.
+ * This is an Open Ticket builder implementation.
  * 
  * It is a basic implementation of the `ODWorkerManager` used by all `ODBuilder` classes.
  * 
@@ -48,7 +48,7 @@ export class ODBuilderImplementation<Instance,Source extends string,Params,Build
 }
 
 /**## ODBuilderManager `class`
- * This is an open ticket builder manager.
+ * This is an Open Ticket builder manager.
  * 
  * It contains all Open Ticket builders. You can find messages, embeds, files & dropdowns, buttons & modals all here!
  * 
@@ -96,7 +96,7 @@ export interface ODComponentBuildResult {
 }
 
 /**## ODButtonManager `class`
- * This is an open ticket button manager.
+ * This is an Open Ticket button manager.
  * 
  * It contains all Open Ticket button builders. Here, you can add your own buttons or edit existing ones!
  * 
@@ -147,7 +147,7 @@ export interface ODButtonData {
 }
 
 /**## ODButtonInstance `class`
- * This is an open ticket button instance.
+ * This is an Open Ticket button instance.
  * 
  * It contains all properties & functions to build a button!
  */
@@ -201,7 +201,7 @@ export class ODButtonInstance {
 }
 
 /**## ODButton `class`
- * This is an open ticket button builder.
+ * This is an Open Ticket button builder.
  * 
  * With this class, you can create a button to use in a message.
  * The only difference with normal buttons is that this one can be edited by Open Ticket plugins!
@@ -246,7 +246,7 @@ export class ODButton<Source extends string,Params> extends ODBuilderImplementat
 }
 
 /**## ODDropdownManager `class`
- * This is an open ticket dropdown manager.
+ * This is an Open Ticket dropdown manager.
  * 
  * It contains all Open Ticket dropdown builders. Here, you can add your own dropdowns or edit existing ones!
  * 
@@ -309,7 +309,7 @@ export interface ODDropdownData {
 }
 
 /**## ODDropdownInstance `class`
- * This is an open ticket dropdown instance.
+ * This is an Open Ticket dropdown instance.
  * 
  * It contains all properties & functions to build a dropdown!
  */
@@ -394,7 +394,7 @@ export class ODDropdownInstance {
 }
 
 /**## ODDropdown `class`
- * This is an open ticket dropdown builder.
+ * This is an Open Ticket dropdown builder.
  * 
  * With this class, you can create a dropdown to use in a message.
  * The only difference with normal dropdowns is that this one can be edited by Open Ticket plugins!
@@ -500,7 +500,7 @@ export class ODDropdown<Source extends string,Params> extends ODBuilderImplement
 }
 
 /**## ODFileManager `class`
- * This is an open ticket file manager.
+ * This is an Open Ticket file manager.
  * 
  * It contains all Open Ticket file builders. Here, you can add your own files or edit existing ones!
  * 
@@ -544,7 +544,7 @@ export interface ODFileBuildResult {
 }
 
 /**## ODFileInstance `class`
- * This is an open ticket file instance.
+ * This is an Open Ticket file instance.
  * 
  * It contains all properties & functions to build a file!
  */
@@ -585,7 +585,7 @@ export class ODFileInstance {
 }
 
 /**## ODFile `class`
- * This is an open ticket file builder.
+ * This is an Open Ticket file builder.
  * 
  * With this class, you can create a file to use in a message.
  * The only difference with normal files is that this one can be edited by Open Ticket plugins!
@@ -623,7 +623,7 @@ export class ODFile<Source extends string,Params> extends ODBuilderImplementatio
 }
 
 /**## ODEmbedManager `class`
- * This is an open ticket embed manager.
+ * This is an Open Ticket embed manager.
  * 
  * It contains all Open Ticket embed builders. Here, you can add your own embeds or edit existing ones!
  * 
@@ -686,7 +686,7 @@ export interface ODEmbedBuildResult {
 }
 
 /**## ODEmbedInstance `class`
- * This is an open ticket embed instance.
+ * This is an Open Ticket embed instance.
  * 
  * It contains all properties & functions to build an embed!
  */
@@ -786,7 +786,7 @@ export class ODEmbedInstance {
 }
 
 /**## ODEmbed `class`
- * This is an open ticket embed builder.
+ * This is an Open Ticket embed builder.
  * 
  * With this class, you can create a embed to use in a message.
  * The only difference with normal embeds is that this one can be edited by Open Ticket plugins!
@@ -837,7 +837,7 @@ export class ODEmbed<Source extends string,Params> extends ODBuilderImplementati
 }
 
 /**## ODMessageManager `class`
- * This is an open ticket message manager.
+ * This is an Open Ticket message manager.
  * 
  * It contains all Open Ticket message builders. Here, you can add your own messages or edit existing ones!
  * 
@@ -899,7 +899,7 @@ export interface ODMessageBuildSentResult<InGuild extends boolean> {
 }
 
 /**## ODMessageInstance `class`
- * This is an open ticket message instance.
+ * This is an Open Ticket message instance.
  * 
  * It contains all properties & functions to build a message!
  */
@@ -1002,7 +1002,7 @@ export class ODMessageInstance {
 }
 
 /**## ODMessage `class`
- * This is an open ticket message builder.
+ * This is an Open Ticket message builder.
  * 
  * With this class, you can create a message to send in a discord channel.
  * The only difference with normal messages is that this one can be edited by Open Ticket plugins!
@@ -1078,7 +1078,7 @@ export class ODMessage<Source extends string,Params> extends ODBuilderImplementa
 }
 
 /**## ODModalManager `class`
- * This is an open ticket modal manager.
+ * This is an Open Ticket modal manager.
  * 
  * It contains all Open Ticket modal builders. Here, you can add your own modals or edit existing ones!
  * 
@@ -1149,7 +1149,7 @@ export interface ODModalBuildResult {
 }
 
 /**## ODModalInstance `class`
- * This is an open ticket modal instance.
+ * This is an Open Ticket modal instance.
  * 
  * It contains all properties & functions to build a modal!
  */
@@ -1196,7 +1196,7 @@ export class ODModalInstance {
 }
 
 /**## ODModal `class`
- * This is an open ticket modal builder.
+ * This is an Open Ticket modal builder.
  * 
  * With this class, you can create a modal to use as response in interactions.
  * The only difference with normal modals is that this one can be edited by Open Ticket plugins!

@@ -5,7 +5,7 @@ import { ODId, ODValidId, ODManager, ODSystemError, ODManagerData } from "./base
 import { ODDebugger } from "./console"
 
 /**## ODCooldownManager `class`
- * This is an open ticket cooldown manager.
+ * This is an Open Ticket cooldown manager.
  * 
  * It is responsible for managing all cooldowns in Open Ticket. An example of this is the ticket creation cooldown.
  * 
@@ -24,7 +24,7 @@ export class ODCooldownManager extends ODManager<ODCooldown<object>> {
 }
 
 /**## ODCooldownData `class`
- * This is open ticket cooldown data.
+ * This is Open Ticket cooldown data.
  * 
  * It contains the instance of an active cooldown (e.g. for a user). It is handled by the cooldown itself.
  */
@@ -42,7 +42,7 @@ export class ODCooldownData<Data extends object> extends ODManagerData {
 }
 
 /**## ODCooldown `class`
- * This is an open ticket cooldown.
+ * This is an Open Ticket cooldown.
  * 
  * It doesn't do anything on it's own, but it provides the methods that are used to interact with a cooldown.
  * This class can be extended from to create a working cooldown.
@@ -77,7 +77,7 @@ export class ODCooldown<Data extends object> extends ODManagerData {
 }
 
 /**## ODCounterCooldown `class`
- * This is an open ticket counter cooldown.
+ * This is an Open Ticket counter cooldown.
  * 
  * It is is a cooldown based on a counter. When the number exceeds the limit, the cooldown is activated.
  * The number will automatically be decreased with a set amount & interval.
@@ -154,7 +154,7 @@ export class ODCounterCooldown extends ODCooldown<{value:number}> {
 }
 
 /**## ODIncrementalCounterCooldown `class`
- * This is an open ticket incremental counter cooldown.
+ * This is an Open Ticket incremental counter cooldown.
  * 
  * It is is a cooldown based on an incremental counter. It is exactly the same as the normal counter,
  * with the only difference being that it still increments when the limit is already exeeded.
@@ -232,7 +232,7 @@ export class ODIncrementalCounterCooldown extends ODCooldown<{value:number}> {
 }
 
 /**## ODTimeoutCooldown `class`
- * This is an open ticket timeout cooldown.
+ * This is an Open Ticket timeout cooldown.
  * 
  * It is a cooldown based on a timer. When triggered/updated, the cooldown is activated for the set amount of time.
  * After the timer has timed out, the cooldown will be deleted.
@@ -288,7 +288,7 @@ export class ODTimeoutCooldown extends ODCooldown<{date:number}> {
 }
 
 /**## ODIncrementalTimeoutCooldown `class`
- * This is an open ticket incremental timeout cooldown.
+ * This is an Open Ticket incremental timeout cooldown.
  * 
  * It is is a cooldown based on an incremental timer. It is exactly the same as the normal timer,
  * with the only difference being that it adds additional time when triggered/updated while the cooldown is already active.

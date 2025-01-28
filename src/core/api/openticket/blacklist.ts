@@ -5,7 +5,7 @@ import { ODManager, ODManagerData, ODValidId } from "../modules/base"
 import { ODDebugger } from "../modules/console"
 
 /**## ODBlacklist `class`
- * This is an open ticket blacklisted user.
+ * This is an Open Ticket blacklisted user.
  * 
  * This class contains the id of the user this class belongs to & an optional reason for being blacklisted.
  * 
@@ -31,7 +31,7 @@ export class ODBlacklist extends ODManagerData {
 }
 
 /**## ODBlacklistManager `class`
- * This is an open ticket blacklist manager.
+ * This is an Open Ticket blacklist manager.
  * 
  * This class manages all blacklisted users & their reason. Check if someone is blacklisted using their ID in the `exists()` method.
  * 

@@ -16,7 +16,7 @@ export interface ODUnknownCrashedPlugin {
 }
 
 /**## ODPluginManager `class`
- * This is an open ticket plugin manager.
+ * This is an Open Ticket plugin manager.
  * 
  * It manages all active plugins in the bot!
  * It also contains all "plugin classes" which are managers registered by plugins.
@@ -93,7 +93,7 @@ export interface ODPluginDetails {
 }
 
 /**## ODPlugin `class`
- * This is an open ticket plugin.
+ * This is an Open Ticket plugin.
  * 
  * It represents a single plugin in the `./plugins/` directory.
  * All plugins are accessible via the `openticket.plugins` global.
@@ -218,7 +218,7 @@ export class ODPlugin extends ODManagerData {
 }
 
 /**## ODPluginClassManager `class`
- * This is an open ticket plugin class manager.
+ * This is an Open Ticket plugin class manager.
  * 
  * It manages all managers registered by plugins!
  * Plugins are able to register their own managers, handlers, functions, classes, ... here.

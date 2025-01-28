@@ -24,7 +24,7 @@ export type ODStatsManagerInitCallback = (database:ODJsonDatabaseStructure, dele
 export type ODStatScopeSetMode = "set"|"increase"|"decrease"
 
 /**## ODStatsManager `class`
- * This is an open ticket stats manager.
+ * This is an Open Ticket stats manager.
  * 
  * This class is responsible for managing all stats of the bot.
  * Stats are categorized in "scopes" which can be accessed in this manager.
@@ -32,9 +32,9 @@ export type ODStatScopeSetMode = "set"|"increase"|"decrease"
  * Stats can be accessed in the individual scopes.
  */
 export class ODStatsManager extends ODManager<ODStatScope> {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug: ODDebugger
-    /**Alias to open ticket stats database. */
+    /**Alias to Open Ticket stats database. */
     database: ODDatabase|null = null
     /**All the listeners for the init event. */
     #initListeners: ODStatsManagerInitCallback[] = []
@@ -97,7 +97,7 @@ export class ODStatsManager extends ODManager<ODStatScope> {
 }
 
 /**## ODStatScope `class`
- * This is an open ticket stat scope.
+ * This is an Open Ticket stat scope.
  * 
  * A scope can contain multiple stats. Every scope is seperated from other scopes.
  * Here, you can read & write the values of all stats.
@@ -109,7 +109,7 @@ export class ODStatScope extends ODManager<ODStat> {
     id: ODId
     /**Is this stat scope already initialized? */
     ready: boolean = false
-    /**Alias to open ticket stats database. */
+    /**Alias to Open Ticket stats database. */
     database: ODDatabase|null = null
     /**The name of this scope (used in embed title) */
     name:string
@@ -202,7 +202,7 @@ export class ODStatScope extends ODManager<ODStat> {
 }
 
 /**## ODStatGlobalScope `class`
- * This is an open ticket stat global scope.
+ * This is an Open Ticket stat global scope.
  * 
  * A scope can contain multiple stats. Every scope is seperated from other scopes.
  * Here, you can read & write the values of all stats.
@@ -230,7 +230,7 @@ export class ODStatGlobalScope extends ODStatScope {
 export type ODStatRenderer = (value:ODValidStatValue, scopeId:string, guild:discord.Guild, channel:discord.TextBasedChannel, user:discord.User) => string|Promise<string>
 
 /**## ODStat `class`
- * This is an open ticket statistic.
+ * This is an Open Ticket statistic.
  * 
  * This single statistic doesn't do anything except defining the rules of this statistic.
  * Use it in a stats scope to register a new statistic. A statistic can also include a priority to choose the render priority.
@@ -254,7 +254,7 @@ export class ODStat extends ODManagerData {
 }
 
 /**## ODBasicStat `class`
- * This is an open ticket basic statistic.
+ * This is an Open Ticket basic statistic.
  * 
  * This single statistic will store a number, boolean or string in the database.
  * Use it to create a simple statistic for any stats scope.
@@ -277,7 +277,7 @@ export class ODBasicStat extends ODStat {
 export type ODDynamicStatRenderer = (scopeId:string, guild:discord.Guild, channel:discord.TextBasedChannel, user:discord.User) => string|Promise<string>
 
 /**## ODDynamicStat `class`
- * This is an open ticket dynamic statistic.
+ * This is an Open Ticket dynamic statistic.
  * 
  * A dynamic statistic does not store anything in the database! Instead, it will execute a function to return a custom result.
  * This can be used to show statistics which are not stored in the database.

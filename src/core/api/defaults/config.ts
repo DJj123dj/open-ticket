@@ -5,7 +5,7 @@ import { ODValidButtonColor, ODValidId } from "../modules/base"
 import * as discord from "discord.js"
 import { ODConfigManager, ODConfig, ODJsonConfig } from "../modules/config"
 import { ODClientActivityStatus, ODClientActivityType } from "../modules/client"
-import { OTRoleUpdateMode } from "../openticket/role"
+import { ODRoleUpdateMode } from "../openticket/role"
 
 /**## ODConfigManagerIds_Default `interface`
  * This interface is a list of ids available in the `ODConfigManager_Default` class.
@@ -405,7 +405,7 @@ export interface ODJsonConfig_DefaultOptionRoleType extends ODJsonConfig_Default
     /**All roles which will be affected by this button. */
     roles:string[],
     /**The mode determines what will happen with the affected roles on the user. */
-    mode:OTRoleUpdateMode,
+    mode:ODRoleUpdateMode,
     /**A list of roles to remove from the user when given at least one of the affected roles. */
     removeRolesOnAdd:string[],
     /**Automatically add these roles when the user joins the server. */

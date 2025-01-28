@@ -5,13 +5,13 @@ import { ODManagerData, ODManager, ODValidId } from "./base"
 import { ODConsoleWarningMessage, ODDebugger } from "./console"
 
 /**## ODEvent `class`
- * This is an open ticket event.
+ * This is an Open Ticket event.
  * 
  * This class is made to work with the `ODEventManager` to handle events.
  * The function of this specific class is to manage all listeners for a specifc event!
  */
 export class ODEvent extends ODManagerData {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug?: ODDebugger
     /**The list of permanent listeners. */
     listeners: Function[] = []
@@ -20,7 +20,7 @@ export class ODEvent extends ODManagerData {
     /**The max listener limit before a possible memory leak will be announced */
     listenerLimit: number = 25
 
-    /**Use the open ticket debugger in this manager for logs*/
+    /**Use the Open Ticket debugger in this manager for logs*/
     useDebug(debug:ODDebugger|null){
         this.#debug = debug ?? undefined
     }
@@ -71,7 +71,7 @@ export class ODEvent extends ODManagerData {
 }
 
 /**## ODEventManager `class`
- * This is an open ticket event manager.
+ * This is an Open Ticket event manager.
  * 
  * This class is made to manage all events in the bot. You can compare it with the built-in node.js `EventEmitter`
  * 

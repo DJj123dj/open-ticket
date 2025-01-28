@@ -6,9 +6,9 @@ import { ODDebugger } from "./console"
 import * as crypto from "crypto"
 
 /**## ODSessionManager `class`
- * This is an open ticket session manager.
+ * This is an Open Ticket session manager.
  * 
- * It contains all sessions in open ticket. Sessions are a sort of temporary storage which will be cleared when the bot stops.
+ * It contains all sessions in Open Ticket. Sessions are a sort of temporary storage which will be cleared when the bot stops.
  * Data in sessions have a randomly generated key which will always be unique.
  * 
  * Visit the `ODSession` class for more info
@@ -39,7 +39,7 @@ export interface ODSessionInstance {
 export type ODSessionTimeoutCallback = (id:string, timeout:"default"|"custom", data:any, creation:Date) => void
 
 /**## ODSession `class`
- * This is an open ticket session.
+ * This is an Open Ticket session.
  * 
  * It can be used to create 100% unique id's for usage in the bot. An id can also store additional data which isn't saved to the filesystem.
  * You can almost compare it to the PHP session system.

@@ -9,7 +9,7 @@ import { ODRoleOption, ODTicketOption } from "../openticket/option"
 import { ODTicket, ODTicketClearFilter } from "../openticket/ticket"
 import { ODTranscriptCompiler, ODTranscriptCompilerCompileResult } from "../openticket/transcript"
 import { ODMessageBuildSentResult } from "../modules/builder"
-import { ODRole, OTRoleUpdateMode, OTRoleUpdateResult } from "../openticket/role"
+import { ODRole, ODRoleUpdateMode, ODRoleUpdateResult } from "../openticket/role"
 
 /**## ODActionManagerIds_Default `interface`
  * This interface is a list of ids available in the `ODActionManager_Default` class.
@@ -102,8 +102,8 @@ export interface ODActionManagerIds_Default {
     },
     "openticket:reaction-role":{
         source:"panel-button"|"other",
-        params:{guild:discord.Guild,user:discord.User,option:ODRoleOption,overwriteMode:OTRoleUpdateMode|null},
-        result:{result:OTRoleUpdateResult[],role:ODRole},
+        params:{guild:discord.Guild,user:discord.User,option:ODRoleOption,overwriteMode:ODRoleUpdateMode|null},
+        result:{result:ODRoleUpdateResult[],role:ODRole},
         workers:"openticket:reaction-role"|"openticket:logs"
     },
     "openticket:clear-tickets":{

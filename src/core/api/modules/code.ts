@@ -6,7 +6,7 @@ import { ODDebugger } from "./console"
 
 
 /**## ODCode `class`
- * This is an open ticket code runner.
+ * This is an Open Ticket code runner.
  * 
  * Using this, you're able to execute a function just before the startup screen. (90% of the code is already loaded)
  * You can also specify a priority to change the execution order.
@@ -31,7 +31,7 @@ export class ODCode extends ODManagerData {
 }
 
 /**## ODCodeManager `class`
- * This is an open ticket code manager.
+ * This is an Open Ticket code manager.
  * 
  * It manages & executes `ODCode`'s in the correct order.
  * 

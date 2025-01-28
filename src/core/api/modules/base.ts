@@ -21,9 +21,9 @@ export type ODOptionalPromise<T> = T|Promise<T>
 export type ODValidButtonColor = "gray"|"red"|"green"|"blue"
 
 /**## ODValidId `type`
- * This is a valid open ticket identifier. It can be an `ODId` or `string`!
+ * This is a valid Open Ticket identifier. It can be an `ODId` or `string`!
  * 
- * You will see this type in many functions from open ticket.
+ * You will see this type in many functions from Open Ticket.
  */
 export type ODValidId = string|ODId
 
@@ -41,7 +41,7 @@ export type ODValidJsonType = string|number|boolean|object|ODValidJsonType[]|nul
 export type ODInterfaceWithPartialProperty<Interface,Key extends keyof Interface> = Omit<Interface,Key> & Partial<Pick<Interface,Key>>
 
 /**## ODId `class`
- * This is an open ticket identifier.
+ * This is an Open Ticket identifier.
  * 
  * It can only contain the following characters: `a-z`, `A-Z`, `0-9`, `:`, `-` & `_`
  * 
@@ -99,7 +99,7 @@ export class ODId {
 }
 
 /**## ODManagerChangeHelper `class`
- * This is an open ticket manager change helper.
+ * This is an Open Ticket manager change helper.
  * 
  * It is used to let the "onChange" event in the `ODManager` class work.
  * You can use this class when extending your own `ODManager`
@@ -124,7 +124,7 @@ export class ODManagerChangeHelper {
 }
 
 /**## ODManagerRedirectHelper `class`
- * This is open ticket ticket manager redirect helper.
+ * This is Open Ticket ticket manager redirect helper.
  * 
  * It is used to redirect a source to another source when the id isn't found.
  * 
@@ -163,7 +163,7 @@ export class ODManagerRedirectHelper {
 }
 
 /**## ODManagerData `class`
- * This is open ticket manager data.
+ * This is Open Ticket manager data.
  * 
  * It provides a template for all classes that are used in the `ODManager`.
  * 
@@ -190,7 +190,7 @@ export type ODManagerCallback<DataType extends ODManagerData> = (data:DataType) 
 export type ODManagerAddCallback<DataType extends ODManagerData> = (data:DataType, overwritten:boolean) => void 
 
 /**## ODManager `class`
- * This is an open ticket manager.
+ * This is an Open Ticket manager.
  * 
  * It can be used to store & manage classes based on their `ODId`.
  * It is somewhat the same as the default JS `Map()`.
@@ -199,7 +199,7 @@ export type ODManagerAddCallback<DataType extends ODManagerData> = (data:DataTyp
  * This class has many useful functions based on `ODId` (add, get, remove, getAll, getFiltered, exists, loopAll, ...)
  */
 export class ODManager<DataType extends ODManagerData> extends ODManagerChangeHelper {
-    /**Alias to open ticket debugger. */
+    /**Alias to Open Ticket debugger. */
     #debug?: ODDebugger
     /**The message to send when debugging this manager. */
     #debugname?: string
@@ -383,7 +383,7 @@ export class ODManager<DataType extends ODManagerData> extends ODManagerChangeHe
             await cb(data,data.id)
         }
     }
-    /**Use the open ticket debugger in this manager for logs*/
+    /**Use the Open Ticket debugger in this manager for logs*/
     useDebug(debug?:ODDebugger, debugname?:string){
         this.#debug = debug
         this.#debugname = debugname
@@ -403,7 +403,7 @@ export class ODManager<DataType extends ODManagerData> extends ODManagerChangeHe
 }
 
 /**## ODManagerWithSafety `class`
- * This is an open ticket safe manager.
+ * This is an Open Ticket safe manager.
  * 
  * It functions exactly the same as a normal `ODManager`, but it has 1 function extra!
  * The `getSafe()` function will always return data, because when it doesn't find an id, it returns pre-configured backup data.
@@ -435,7 +435,7 @@ export class ODManagerWithSafety<DataType extends ODManagerData> extends ODManag
 }
 
 /**## ODVersionManager `class`
- * A open ticket version manager.
+ * A Open Ticket version manager.
  * 
  * It is used to manage different `ODVersion`'s from the bot. You will use it to check which version of the bot is used.
  */
@@ -446,11 +446,11 @@ export class ODVersionManager extends ODManager<ODVersion> {
 }
 
 /**## ODVersion `class`
- * This is an open ticket version.
+ * This is an Open Ticket version.
  * 
  * It has many features like comparing versions & checking if they are compatible.
  * 
- * You can use it in your own plugin, but most of the time you will use it to check the open ticket version!
+ * You can use it in your own plugin, but most of the time you will use it to check the Open Ticket version!
  */
 export class ODVersion extends ODManagerData {
     /**The first number of the version (example: `v1.2.3` => `1`) */
@@ -726,7 +726,7 @@ export class ODEnvHelper {
 /**## ODSystemError `class`
  * A wrapper for the node.js `Error` class that makes the error look better in the console!
  * 
- * This wrapper is made for open ticket system errors! **It can only be used by open ticket itself!**
+ * This wrapper is made for Open Ticket system errors! **It can only be used by Open Ticket itself!**
  */
 export class ODSystemError extends Error {
     /**This variable gets detected by the error handling system to know how to render it */
@@ -742,7 +742,7 @@ export class ODSystemError extends Error {
 /**## ODPluginError `class`
  * A wrapper for the node.js `Error` class that makes the error look better in the console!
  * 
- * This wrapper is made for open ticket plugin errors! **It can only be used by plugins!**
+ * This wrapper is made for Open Ticket plugin errors! **It can only be used by plugins!**
  */
 export class ODPluginError extends Error {
     /**This variable gets detected by the error handling system to know how to render it */
