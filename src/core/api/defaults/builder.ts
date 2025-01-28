@@ -12,7 +12,7 @@ import { ODRoleOption, ODTicketOption, ODWebsiteOption } from "../openticket/opt
 import { ODVerifyBar } from "../modules/verifybar"
 import * as discord from "discord.js"
 import { ODTranscriptCompiler, ODTranscriptCompilerCompileResult } from "../openticket/transcript"
-import { ODRole, OTRoleUpdateResult } from "../openticket/role"
+import { ODRole, ODRoleUpdateResult } from "../openticket/role"
 
 /**## ODBuilderManager_Default `default_class`
  * This is a special class that adds type definitions & typescript to the ODBuilderManager class.
@@ -280,7 +280,7 @@ export interface ODEmbedManagerIds_Default {
     "openticket:transcript-html-progress":{source:"channel"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,compiler:ODTranscriptCompiler<{url:string}>,remaining:number},workers:"openticket:transcript-html-progress"},
     "openticket:transcript-error":{source:"slash"|"text"|"ticket-message"|"reopen-message"|"close-message"|"autoclose-message"|"autodelete"|"clear"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,compiler:ODTranscriptCompiler<any>,reason:string|null},workers:"openticket:transcript-error"},
 
-    "openticket:reaction-role":{source:"panel-button"|"other",params:{guild:discord.Guild,user:discord.User,role:ODRole,result:OTRoleUpdateResult[]},workers:"openticket:reaction-role"},
+    "openticket:reaction-role":{source:"panel-button"|"other",params:{guild:discord.Guild,user:discord.User,role:ODRole,result:ODRoleUpdateResult[]},workers:"openticket:reaction-role"},
     "openticket:clear-verify-message":{source:"slash"|"text"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,filter:ODTicketClearFilter,list:string[]},workers:"openticket:clear-verify-message"},
     "openticket:clear-message":{source:"slash"|"text"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,filter:ODTicketClearFilter,list:string[]},workers:"openticket:clear-message"},
     "openticket:clear-logs":{source:"slash"|"text"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,filter:ODTicketClearFilter,list:string[]},workers:"openticket:clear-logs"},
@@ -411,7 +411,7 @@ export interface ODMessageManagerIds_Default {
     "openticket:transcript-html-progress":{source:"channel"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,compiler:ODTranscriptCompiler<{url:string}>,remaining:number},workers:"openticket:transcript-html-progress"},
     "openticket:transcript-error":{source:"slash"|"text"|"ticket-message"|"reopen-message"|"close-message"|"autoclose-message"|"autodelete"|"clear"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,compiler:ODTranscriptCompiler<any>,reason:string|null},workers:"openticket:transcript-error"},
 
-    "openticket:reaction-role":{source:"panel-button"|"other",params:{guild:discord.Guild,user:discord.User,role:ODRole,result:OTRoleUpdateResult[]},workers:"openticket:reaction-role"},
+    "openticket:reaction-role":{source:"panel-button"|"other",params:{guild:discord.Guild,user:discord.User,role:ODRole,result:ODRoleUpdateResult[]},workers:"openticket:reaction-role"},
     "openticket:clear-verify-message":{source:"slash"|"text"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,filter:ODTicketClearFilter,list:string[]},workers:"openticket:clear-verify-message"},
     "openticket:clear-message":{source:"slash"|"text"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,filter:ODTicketClearFilter,list:string[]},workers:"openticket:clear-message"},
     "openticket:clear-logs":{source:"slash"|"text"|"other",params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,filter:ODTicketClearFilter,list:string[]},workers:"openticket:clear-logs"},

@@ -5,7 +5,15 @@ import { ODJsonConfig_DefaultPanelEmbedSettingsType } from "../defaults/config"
 import { ODId, ODManager, ODValidJsonType, ODValidId, ODVersion, ODValidButtonColor, ODManagerData } from "../modules/base"
 import { ODDebugger } from "../modules/console"
 
+/**## ODPanelManager `class`
+ * This is an open ticket panel manager.
+ * 
+ * This class manages all registered panels in the bot. Only panels which are available in this manager can be auto-updated.
+ * 
+ * Panels are not stored in the database and will be parsed from the config every startup.
+ */
 export class ODPanelManager extends ODManager<ODPanel> {
+    /**A reference to the Open Ticket debugger. */
     #debug: ODDebugger
 
     constructor(debug:ODDebugger){
@@ -19,14 +27,25 @@ export class ODPanelManager extends ODManager<ODPanel> {
     }
 }
 
+/**## ODPanelDataJson `interface`
+ * The JSON representatation from a single panel property.
+ */
 export interface ODPanelDataJson {
+    /**The id of this property. */
     id:string,
+    /**The value of this property. */
     value:ODValidJsonType
 }
 
+/**## ODPanelDataJson `interface`
+ * The JSON representatation from a single panel.
+ */
 export interface ODPanelJson {
+    /**The id of this panel. */
     id:string,
+    /**The version of Open Ticket used to create this panel. */
     version:string,
+    /**The full list of properties/variables related to this panel. */
     data:ODPanelDataJson[]
 }
 
@@ -54,7 +73,13 @@ export interface ODPanelIds {
     "openticket:describe-options-in-embed-description":ODPanelData<boolean>
 }
 
+/**## ODPanel `class`
+ * This is an open ticket panel.
+ * 
+ * This class contains all data related to this panel (parsed from the config).
+ */
 export class ODPanel extends ODManager<ODPanelData<ODValidJsonType>> {
+    /**The id of this panel. (from the config) */
     id:ODId
 
     constructor(id:ODValidId, data:ODPanelData<ODValidJsonType>[]){
@@ -65,6 +90,7 @@ export class ODPanel extends ODManager<ODPanelData<ODValidJsonType>> {
         })
     }
 
+    /**Convert this panel to a JSON object for storing this panel in the database. */
     toJson(version:ODVersion): ODPanelJson {
         const data = this.getAll().map((data) => {
             return {
@@ -80,6 +106,7 @@ export class ODPanel extends ODManager<ODPanelData<ODValidJsonType>> {
         }
     }
 
+    /**Create a panel from a JSON object in the database. */
     static fromJson(json:ODPanelJson): ODPanel {
         return new ODPanel(json.id,json.data.map((data) => new ODPanelData(data.id,data.value)))
     }
@@ -106,7 +133,15 @@ export class ODPanel extends ODManager<ODPanelData<ODValidJsonType>> {
     }
 }
 
+/**## ODPanelData `class`
+ * This is open ticket panel data.
+ * 
+ * This class contains a single property for a panel. (string, number, boolean, object, array, null)
+ * 
+ * When this property is edited, the database will be updated automatically.
+ */
 export class ODPanelData<DataType extends ODValidJsonType> extends ODManagerData {
+    /**The value of this property. */
     #value: DataType
 
     constructor(id:ODValidId, value:DataType){
@@ -114,6 +149,7 @@ export class ODPanelData<DataType extends ODValidJsonType> extends ODManagerData
         this.#value = value
     }
 
+    /**The value of this property. */
     set value(value:DataType){
         this.#value = value
         this._change()

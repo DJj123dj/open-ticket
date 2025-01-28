@@ -7,7 +7,7 @@ import { ODId, ODManager, ODValidJsonType, ODValidId, ODVersion, ODValidButtonCo
 import { ODDebugger } from "../modules/console"
 import * as discord from "discord.js"
 import * as crypto from "crypto"
-import { OTRoleUpdateMode } from "./role"
+import { ODRoleUpdateMode } from "./role"
 
 /**## ODOptionManager `class`
  * This is an open ticket option manager.
@@ -106,7 +106,7 @@ export class ODOption extends ODManager<ODOptionData<ODValidJsonType>> {
 /**## ODOptionData `class`
  * This is open ticket option data.
  * 
- * This class contains a single property for a ticket option. (string, number, boolean, object, array, null)
+ * This class contains a single property for an option. (string, number, boolean, object, array, null)
  * 
  * When this property is edited, the database will be updated automatically.
  */
@@ -292,7 +292,7 @@ export interface ODRoleOptionIds {
     "openticket:button-color":ODOptionData<ODValidButtonColor>,
     
     "openticket:roles":ODOptionData<string[]>,
-    "openticket:mode":ODOptionData<OTRoleUpdateMode>,
+    "openticket:mode":ODOptionData<ODRoleUpdateMode>,
     "openticket:remove-roles-on-add":ODOptionData<string[]>,
     "openticket:add-on-join":ODOptionData<boolean>
 }
@@ -379,18 +379,39 @@ export class ODOptionSuffix extends ODManagerData {
     }
 }
 
+/**## ODOptionUserNameSuffix `class`
+ * This is an open ticket user-name option suffix.
+ * 
+ * This class can generate a user-name suffix for a discord channel name from a specific option.
+ * 
+ * Use `getSuffix()` to get the new suffix!
+ */
 export class ODOptionUserNameSuffix extends ODOptionSuffix {
     getSuffix(user:discord.User): string {
         return user.username
     }
 }
 
+/**## ODOptionUserIdSuffix `class`
+ * This is an open ticket user-id option suffix.
+ * 
+ * This class can generate a user-id suffix for a discord channel name from a specific option.
+ * 
+ * Use `getSuffix()` to get the new suffix!
+ */
 export class ODOptionUserIdSuffix extends ODOptionSuffix {
     getSuffix(user:discord.User): string {
         return user.id
     }
 }
 
+/**## ODOptionCounterDynamicSuffix `class`
+ * This is an open ticket counter-dynamic option suffix.
+ * 
+ * This class can generate a counter-dynamic suffix for a discord channel name from a specific option.
+ * 
+ * Use `getSuffix()` to get the new suffix!
+ */
 export class ODOptionCounterDynamicSuffix extends ODOptionSuffix {
     /**The database where the value of this counter is stored. */
     database: ODDatabase
@@ -401,6 +422,7 @@ export class ODOptionCounterDynamicSuffix extends ODOptionSuffix {
         this.#init()
     }
 
+    /**Initialize the database for this suffix. */
     async #init(){
         if (!await this.database.exists("openticket:option-suffix-counter",this.option.id.value)) await this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
     }
@@ -413,6 +435,13 @@ export class ODOptionCounterDynamicSuffix extends ODOptionSuffix {
     }
 }
 
+/**## ODOptionCounterFixedSuffix `class`
+ * This is an open ticket counter-fixed option suffix.
+ * 
+ * This class can generate a counter-fixed suffix for a discord channel name from a specific option.
+ * 
+ * Use `getSuffix()` to get the new suffix!
+ */
 export class ODOptionCounterFixedSuffix extends ODOptionSuffix {
     /**The database where the value of this counter is stored. */
     database: ODDatabase
@@ -423,6 +452,7 @@ export class ODOptionCounterFixedSuffix extends ODOptionSuffix {
         this.#init()
     }
     
+    /**Initialize the database for this suffix. */
     async #init(){
         if (!await this.database.exists("openticket:option-suffix-counter",this.option.id.value)) await this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
     }
@@ -439,6 +469,13 @@ export class ODOptionCounterFixedSuffix extends ODOptionSuffix {
     }
 }
 
+/**## ODOptionRandomNumberSuffix `class`
+ * This is an open ticket random-number option suffix.
+ * 
+ * This class can generate a random-number suffix for a discord channel name from a specific option.
+ * 
+ * Use `getSuffix()` to get the new suffix!
+ */
 export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
     /**The database where previous random numbers are stored. */
     database: ODDatabase
@@ -449,9 +486,11 @@ export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
         this.#init()
     }
 
+    /**Initialize the database for this suffix. */
     async #init(){
         if (!await this.database.exists("openticket:option-suffix-history",this.option.id.value)) await this.database.set("openticket:option-suffix-history",this.option.id.value,[])
     }
+    /**Get a unique number for this suffix. */
     #generateUniqueValue(history:string[]): string {
         const rawNumber = Math.round(Math.random()*1000).toString()
         let number = rawNumber
@@ -473,6 +512,13 @@ export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
     }
 }
 
+/**## ODOptionRandomHexSuffix `class`
+ * This is an open ticket random-hex option suffix.
+ * 
+ * This class can generate a random-hex suffix for a discord channel name from a specific option.
+ * 
+ * Use `getSuffix()` to get the new suffix!
+ */
 export class ODOptionRandomHexSuffix extends ODOptionSuffix {
     /**The database where previous random hexes are stored. */
     database: ODDatabase
@@ -483,10 +529,11 @@ export class ODOptionRandomHexSuffix extends ODOptionSuffix {
         this.#init()
     }
 
+    /**Initialize the database for this suffix. */
     async #init(){
         if (!await this.database.exists("openticket:option-suffix-history",this.option.id.value)) await this.database.set("openticket:option-suffix-history",this.option.id.value,[])
-
     }
+    /**Get a unique hex-string for this suffix. */
     #generateUniqueValue(history:string[]): string {
         const hex = crypto.randomBytes(2).toString("hex")
         if (history.includes(hex)) return this.#generateUniqueValue(history)

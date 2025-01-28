@@ -32,7 +32,7 @@ export const registerActions = async () => {
             }
 
             //update roles of user
-            const result: api.OTRoleUpdateResult[] = []
+            const result: api.ODRoleUpdateResult[] = []
             for (const r of roles){
                 try{
                     if (r.members.has(user.id) && (mode == "add&remove" || mode == "remove")){
