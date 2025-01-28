@@ -8,6 +8,13 @@ import { ODMessageBuildResult } from "../modules/builder"
 import { ODClientManager } from "../modules/client"
 import * as discord from "discord.js"
 
+/**## ODTranscriptManager `class`
+ * This is an Open Ticket transcript manager.
+ * 
+ * This class manages all transcript generators in the bot.
+ * 
+ * The 2 default built-in transcript generators are: `openticket:html-compiler` & `openticket:text-compiler`.
+ */
 export class ODTranscriptManager extends ODManager<ODTranscriptCompiler<any>> {
     /**The manager responsible for collecting all messages in a channel. */
     collector: ODTranscriptCollector
@@ -21,13 +28,30 @@ export class ODTranscriptManager extends ODManager<ODTranscriptCompiler<any>> {
     }
 }
 
+/**## ODTranscriptCompilerInitFunction `type`
+ * This function will initiate/prepare the transcript system for an incoming transcript.
+ */
 export type ODTranscriptCompilerInitFunction = (ticket:ODTicket, channel:discord.TextChannel, user:discord.User) => (ODTranscriptCompilerInitResult)|Promise<ODTranscriptCompilerInitResult>
+
+/**## ODTranscriptCompilerCompileFunction `type`
+ * This function will generate/compile the transcript itself.
+ */
 export type ODTranscriptCompilerCompileFunction<Data extends object> = (ticket:ODTicket, channel:discord.TextChannel, user:discord.User) => ODTranscriptCompilerCompileResult<Data>|Promise<ODTranscriptCompilerCompileResult<Data>>
+
+/**## ODTicketClearFilter `type`
+ * This function will finish, clear-up & shut-down the transcript system. This will also initiate the sending of the messages to all recipients.
+ */
 export type ODTranscriptCompilerReadyFunction<Data extends object> = (result:ODTranscriptCompilerCompileResult<Data>) => ODTranscriptCompilerReadyResult|Promise<ODTranscriptCompilerReadyResult>
 
+/**## ODTranscriptCompilerInitResult `interface`
+ * This is the result which is returned by the `init()` function.
+ */
 export interface ODTranscriptCompilerInitResult {
+    /**Was the initialization successfull? */
     success:boolean,
+    /**When not successfull, what was the reason? This will also be shown to the user. */
     errorReason:string|null,
+    /**An optional message which will be sent while the transcript is being generated. */
     pendingMessage:ODMessageBuildResult|null
 }
 
