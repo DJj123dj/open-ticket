@@ -41,7 +41,7 @@ You're also able to customise every little aspect of the bot! From embeds to tra
 - **📊 detailed stats** - Open Ticket has ticket, user & global staticstics available for everyone!
 - **🚫 blacklist** - Blacklist users to prevent them from creating a ticket!
 - **❓ questions** - Let users answer questions in a modal before the ticket is created!
-- **📦 commands** - Open Ticket supports both slash & text commands!
+- **📦 slash & text** - Open Ticket supports both slash & text commands!
 - **📥 extra buttons** - The bot also supports Reaction Roles & Url Buttons, because why not ¯\\_(ツ)_/¯
 - **✨ commands** - The bot contains more than 25 commands!
 
