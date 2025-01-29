@@ -1194,10 +1194,6 @@ export class ODCheckerCustomStructure_EmojiString extends ODCheckerStringStructu
             const lt = checker.locationTraceDeref(locationTrace)
             if (typeof value != "string") return false
 
-            // check if the string is a valid custom emoji
-            const customEmojiFormat = /^[\w-]+:\d+$/
-            if (customEmojiFormat.test(value)) return true
-
             const discordEmojiSplitter = /(?:<a?:[^:]*:[0-9]+>)/g
             const splitted = value.split(discordEmojiSplitter)
             const discordEmojiAmount = splitted.length-1
