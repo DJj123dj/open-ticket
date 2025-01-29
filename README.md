@@ -177,10 +177,10 @@ This is the main team working on Open Ticket. Don't forget to check their profil
 |🇦🇪 Arabic             |palestinian               |🟢 Up To Date                |
 |🇮🇳 Hindi              |an_developer              |🟢 Up To Date                |
 |🇱🇹 Lithuanian         |tsgindrius                |🟢 Up To Date                |
+|🇵🇱 Polish             |danoglez                  |🟢 Up To Date                |
 |🇪🇪 Estonian           |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇮 Finnish            |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
-|🇵🇱 Polish             |danoglez                  |🟢 Up To Date                |
 |🇳🇴 Norwegian          |noonenook                 |🟠 Temporary Outdated (beta) |
 |❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
 |❓ Persian            |sasanwm                   |🟠 Temporary Outdated (beta) |
