@@ -1,0 +1,13 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": [
+        "../src/core/api/modules/",
+        "../src/core/api/defaults/",
+        "../src/core/api/openticket/",
+        "../src/core/api/main.ts",
+        "../src/core/startup/init.ts",
+    ],
+    "entryPointStrategy": "expand",
+    "json": "./typedoc-result.json",
+    "basePath": "../"
+}

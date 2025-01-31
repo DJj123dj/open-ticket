@@ -61,7 +61,7 @@ const timer = (ms:number): Promise<void> => {
     })
 }
 
-interface ODUtilities {
+export interface ODUtilities {
     /**## project `utility variable`
      * This is the name of the project you are currently in.
      * 
@@ -120,7 +120,7 @@ interface ODUtilities {
  * 
  * It shouldn't be used by plugins because this is an internal API feature!
  */
-class ODVersionMigration {
+export class ODVersionMigration {
     /**The version to migrate data to */
     version: api.ODVersion
     /**The migration function */
