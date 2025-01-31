@@ -153,6 +153,11 @@ for (const file of result.children){
                     //CLASS => METHOD
                     memberDetails = handleFunction(member)
                     memberComment = memberDetails.comment
+                    
+                }else if (memberType == "constructor"){
+                    //CLASS => CONSTRUCTOR
+                    memberDetails = handleFunction(member)
+                    memberComment = memberDetails.comment
                 }
 
                 declarationChildren.push({
@@ -211,7 +216,7 @@ for (const file of result.children){
 
                 let memberDetails = null
                 if (memberType == "enumerable"){
-                    //INTERFACE => PROPERTY
+                    //ENUM => ENUMERABLE
                     memberDetails = handleType(member.type)
                 }
 
@@ -227,7 +232,6 @@ for (const file of result.children){
             //VARIABLE
             declarationChildren.push(handleType(declaration.type))
 
-        }else if (declarationType == "other"){
         }
 
         exported.push({
