@@ -1,14 +1,14 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 import fs from "fs"
 import { ODPluginError } from "../api/api"
 
 export const loadAllPlugins = async () => {
     //start launching plugins
-    openticket.log("Loading plugins...","system")
+    opendiscord.log("Loading plugins...","system")
     let initPluginError: boolean = false
 
     if (!fs.existsSync("./plugins")){
-        openticket.log("Couldn't find ./plugins directory, canceling all plugin execution!","error")
+        opendiscord.log("Couldn't find ./plugins directory, canceling all plugin execution!","error")
         return
     }
     const plugins = fs.readdirSync("./plugins")
@@ -16,12 +16,12 @@ export const loadAllPlugins = async () => {
     //check & validate
     plugins.forEach(async (p) => {
         //prechecks
-        if (!fs.statSync("./plugins/"+p).isDirectory()) return openticket.log("Plugin is not a directory, canceling plugin execution...","plugin",[
+        if (!fs.statSync("./plugins/"+p).isDirectory()) return opendiscord.log("Plugin is not a directory, canceling plugin execution...","plugin",[
             {key:"plugin",value:"./plugins/"+p}
         ])
         if (!fs.existsSync("./plugins/"+p+"/plugin.json")){
             initPluginError = true
-            openticket.log("Plugin doesn't have a plugin.json, canceling plugin execution...","plugin",[
+            opendiscord.log("Plugin doesn't have a plugin.json, canceling plugin execution...","plugin",[
                 {key:"plugin",value:"./plugins/"+p}
             ])
             return
@@ -55,25 +55,25 @@ export const loadAllPlugins = async () => {
             
             if (rawplugindata.id != p) throw new ODPluginError("Failed to load plugin, directory name is required to match the id")
             
-            if (openticket.plugins.exists(rawplugindata.id)) throw new ODPluginError("Failed to load plugin, this id already exists in another plugin")
+            if (opendiscord.plugins.exists(rawplugindata.id)) throw new ODPluginError("Failed to load plugin, this id already exists in another plugin")
 
             //plugin.json is valid => load plugin
             const plugin = new api.ODPlugin(p,rawplugindata)
-            openticket.plugins.add(plugin)
+            opendiscord.plugins.add(plugin)
 
         }catch(e){
             //when any of the above errors happen, crash the bot when soft mode isn't enabled
             initPluginError = true
-            openticket.log(e.message+", canceling plugin execution...","plugin",[
+            opendiscord.log(e.message+", canceling plugin execution...","plugin",[
                 {key:"path",value:"./plugins/"+p}
             ])
-            openticket.log("You can see more about this error in the ./otdebug.txt file!","info")
-            openticket.debugfile.writeText(e.stack)
+            opendiscord.log("You can see more about this error in the ./otdebug.txt file!","info")
+            opendiscord.debugfile.writeText(e.stack)
             
             //try to get some crashed plugin data
             try{
                 const rawplugindata: api.ODPluginData = JSON.parse(fs.readFileSync("./plugins/"+p+"/plugin.json").toString())
-                openticket.plugins.unknownCrashedPlugins.push({
+                opendiscord.plugins.unknownCrashedPlugins.push({
                     name:rawplugindata.name ?? "./plugins/"+p,
                     description:(rawplugindata.details && rawplugindata.details.shortDescription) ? rawplugindata.details.shortDescription : "This plugin crashed :(",
                 })
@@ -82,7 +82,7 @@ export const loadAllPlugins = async () => {
     })
 
     //sorted plugins (based on priority)
-    const sortedPlugins = openticket.plugins.getAll().sort((a,b) => {
+    const sortedPlugins = opendiscord.plugins.getAll().sort((a,b) => {
         return (b.priority - a.priority)
     })
 
@@ -95,8 +95,8 @@ export const loadAllPlugins = async () => {
     sortedPlugins.filter((plugin) => plugin.enabled).forEach((plugin) => {
         const from = plugin.id.value
         plugin.dependenciesInstalled().forEach((missing) => missingDependencies.push({id:from,missing}))
-        plugin.pluginsIncompatible(openticket.plugins).forEach((incompatible) => incompatibilities.push({from,to:incompatible}))
-        plugin.pluginsInstalled(openticket.plugins).forEach((missing) => missingPlugins.push({id:from,missing}))
+        plugin.pluginsIncompatible(opendiscord.plugins).forEach((incompatible) => incompatibilities.push({from,to:incompatible}))
+        plugin.pluginsInstalled(opendiscord.plugins).forEach((missing) => missingPlugins.push({id:from,missing}))
     })
 
     //handle all incompatibilities
@@ -105,18 +105,18 @@ export const loadAllPlugins = async () => {
         if (alreadyLoggedCompatPlugins.includes(match.from) || alreadyLoggedCompatPlugins.includes(match.to)) return
         else alreadyLoggedCompatPlugins.push(match.from,match.to)
 
-        const fromPlugin = openticket.plugins.get(match.from)
+        const fromPlugin = opendiscord.plugins.get(match.from)
         if (fromPlugin && !fromPlugin.crashed){
             fromPlugin.crashed = true
             fromPlugin.crashReason = "incompatible.plugin"
         }
-        const toPlugin = openticket.plugins.get(match.to)
+        const toPlugin = opendiscord.plugins.get(match.to)
         if (toPlugin && !toPlugin.crashed){
             toPlugin.crashed = true
             toPlugin.crashReason = "incompatible.plugin"
         }
 
-        openticket.log(`Incompatible plugins => "${match.from}" & "${match.to}", canceling plugin execution...`,"plugin",[
+        opendiscord.log(`Incompatible plugins => "${match.from}" & "${match.to}", canceling plugin execution...`,"plugin",[
             {key:"path1",value:"./plugins/"+match.from},
             {key:"path2",value:"./plugins/"+match.to}
         ])
@@ -125,13 +125,13 @@ export const loadAllPlugins = async () => {
 
     //handle all missing dependencies
     missingDependencies.forEach((match) => {
-        const plugin = openticket.plugins.get(match.id)
+        const plugin = opendiscord.plugins.get(match.id)
         if (plugin && !plugin.crashed){
             plugin.crashed = true
             plugin.crashReason = "missing.dependency"
         }
 
-        openticket.log(`Missing npm dependency "${match.missing}", canceling plugin execution...`,"plugin",[
+        opendiscord.log(`Missing npm dependency "${match.missing}", canceling plugin execution...`,"plugin",[
             {key:"path",value:"./plugins/"+match.id}
         ])
         initPluginError = true
@@ -139,45 +139,45 @@ export const loadAllPlugins = async () => {
 
     //handle all missing plugins
     missingPlugins.forEach((match) => {
-        const plugin = openticket.plugins.get(match.id)
+        const plugin = opendiscord.plugins.get(match.id)
         if (plugin && !plugin.crashed){
             plugin.crashed = true
             plugin.crashReason = "missing.plugin"
         }
 
-        openticket.log(`Missing required plugin "${match.missing}", canceling plugin execution...`,"plugin",[
+        opendiscord.log(`Missing required plugin "${match.missing}", canceling plugin execution...`,"plugin",[
             {key:"path",value:"./plugins/"+match.id}
         ])
         initPluginError = true
     })
 
     //exit on error (when soft mode disabled)
-    if (!openticket.defaults.getDefault("softPluginLoading") && initPluginError){
+    if (!opendiscord.defaults.getDefault("softPluginLoading") && initPluginError){
         console.log("")
-        openticket.log("Please fix all plugin errors above & try again!","error")
+        opendiscord.log("Please fix all plugin errors above & try again!","error")
         process.exit(1)
     }
 
     //preload all events required for every plugin
     for (const plugin of sortedPlugins){
-        if (plugin.enabled) plugin.data.events.forEach((event) => openticket.events.add(new api.ODEvent(event)))
+        if (plugin.enabled) plugin.data.events.forEach((event) => opendiscord.events.add(new api.ODEvent(event)))
     }
     
     //execute all working plugins
     for (const plugin of sortedPlugins){
-        const status = await plugin.execute(openticket.debug,false)
+        const status = await plugin.execute(opendiscord.debug,false)
         
         //exit on error (when soft mode disabled)
-        if (!status && !openticket.defaults.getDefault("softPluginLoading")){
+        if (!status && !opendiscord.defaults.getDefault("softPluginLoading")){
             console.log("")
-            openticket.log("Please fix all plugin errors above & try again!","error")
+            opendiscord.log("Please fix all plugin errors above & try again!","error")
             process.exit(1)
         }
     }
 
     for (const plugin of sortedPlugins){
         if (plugin.enabled){
-            openticket.debug.debug("Plugin \""+plugin.id.value+"\" loaded",[
+            opendiscord.debug.debug("Plugin \""+plugin.id.value+"\" loaded",[
                 {key:"status",value:(plugin.crashed ? "crashed" : "success")},
                 {key:"crashReason",value:(plugin.crashed ? (plugin.crashReason ?? "/") : "/")},
                 {key:"author",value:plugin.details.author},
@@ -185,7 +185,7 @@ export const loadAllPlugins = async () => {
                 {key:"priority",value:plugin.priority.toString()}
             ])
         }else{
-            openticket.debug.debug("Plugin \""+plugin.id.value+"\" disabled",[
+            opendiscord.debug.debug("Plugin \""+plugin.id.value+"\" disabled",[
                 {key:"author",value:plugin.details.author},
                 {key:"version",value:plugin.version.toString()},
                 {key:"priority",value:plugin.priority.toString()}

@@ -296,7 +296,7 @@ export interface ODEventIds_Default {
  * This is a special class that adds type definitions & typescript to the ODEvent class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.events`!
+ * This default class is made for the global variable `opendiscord.events`!
  */
 export class ODEventManager_Default extends ODEventManager {
     get<StartScreenId extends keyof ODEventIds_Default>(id:StartScreenId): ODEventIds_Default[StartScreenId]
@@ -325,7 +325,7 @@ export class ODEventManager_Default extends ODEventManager {
  * This is a special class that adds type definitions & typescript to the ODEvent class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.events`!
+ * This default class is made for the global variable `opendiscord.events`!
  */
 export class ODEvent_Default<Callback extends ((...args:any) => ODPromiseVoid)> extends ODEvent {
     listen(callback:Callback): void {

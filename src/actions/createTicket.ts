@@ -1,26 +1,26 @@
 ///////////////////////////////////////
 //TICKET CREATION SYSTEM
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const generalConfig = openticket.configs.get("openticket:general")
+const generalConfig = opendiscord.configs.get("openticket:general")
 
 export const registerActions = async () => {
-    openticket.actions.add(new api.ODAction("openticket:create-ticket"))
-    openticket.actions.get("openticket:create-ticket").workers.add([
+    opendiscord.actions.add(new api.ODAction("openticket:create-ticket"))
+    opendiscord.actions.get("openticket:create-ticket").workers.add([
         new api.ODWorker("openticket:create-ticket",3,async (instance,params,source,cancel) => {
             const {guild,user,answers,option} = params
 
-            await openticket.events.get("onTicketCreate").emit([user])
-            await openticket.events.get("onTicketChannelCreation").emit([option,user])
+            await opendiscord.events.get("onTicketCreate").emit([user])
+            await opendiscord.events.get("onTicketChannelCreation").emit([option,user])
 
             //get channel properties
             const channelPrefix = option.get("openticket:channel-prefix").value
             const channelCategory = option.get("openticket:channel-category").value
             const channelBackupCategory = option.get("openticket:channel-category-backup").value
             const channelDescription = option.get("openticket:channel-description").value
-            const channelSuffix = openticket.options.suffix.getSuffixFromOption(option,user)
+            const channelSuffix = opendiscord.options.suffix.getSuffixFromOption(option,user)
             const channelName = channelPrefix+channelSuffix
 
             //handle category
@@ -28,10 +28,10 @@ export const registerActions = async () => {
             let categoryMode: "backup"|"normal"|null = null
             if (channelCategory != ""){
                 //category enabled
-                const normalCategory = await openticket.client.fetchGuildCategoryChannel(guild,channelCategory)
+                const normalCategory = await opendiscord.client.fetchGuildCategoryChannel(guild,channelCategory)
                 if (!normalCategory){
                     //default category was not found
-                    openticket.log("Ticket Creation Error: Unable to find category! #1","error",[
+                    opendiscord.log("Ticket Creation Error: Unable to find category! #1","error",[
                         {key:"categoryid",value:channelCategory},
                         {key:"backup",value:"false"}
                     ])
@@ -39,10 +39,10 @@ export const registerActions = async () => {
                     //default category was found
                     if (normalCategory.children.cache.size >= 50 && channelBackupCategory != ""){
                         //use backup category
-                        const backupCategory = await openticket.client.fetchGuildCategoryChannel(guild,channelBackupCategory)
+                        const backupCategory = await opendiscord.client.fetchGuildCategoryChannel(guild,channelBackupCategory)
                         if (!backupCategory){
                             //default category was not found
-                            openticket.log("Ticket Creation Error: Unable to find category! #2","error",[
+                            opendiscord.log("Ticket Creation Error: Unable to find category! #2","error",[
                                 {key:"categoryid",value:channelBackupCategory},
                                 {key:"backup",value:"true"}
                             ])
@@ -65,7 +65,7 @@ export const registerActions = async () => {
                 allow:[],
                 deny:["ViewChannel","SendMessages","ReadMessageHistory"]
             }]
-            const globalAdmins = openticket.configs.get("openticket:general").data.globalAdmins
+            const globalAdmins = opendiscord.configs.get("openticket:general").data.globalAdmins
             const optionAdmins = option.get("openticket:admins").value
             const readonlyAdmins = option.get("openticket:admins-readonly").value
 
@@ -114,7 +114,7 @@ export const registerActions = async () => {
                 permissionOverwrites:permissions
             })
 
-            await openticket.events.get("afterTicketChannelCreated").emit([option,channel,user])
+            await opendiscord.events.get("afterTicketChannelCreated").emit([option,channel,user])
 
             //create participants
             const participants: {type:"role"|"user",id:string}[] = []
@@ -159,43 +159,43 @@ export const registerActions = async () => {
             ])
 
             //manage stats
-            await openticket.stats.get("openticket:global").setStat("openticket:tickets-created",1,"increase")
-            await openticket.stats.get("openticket:user").setStat("openticket:tickets-created",user.id,1,"increase")
+            await opendiscord.stats.get("openticket:global").setStat("openticket:tickets-created",1,"increase")
+            await opendiscord.stats.get("openticket:user").setStat("openticket:tickets-created",user.id,1,"increase")
 
             //manage bot permissions
-            await openticket.events.get("onTicketPermissionsCreated").emit([option,openticket.permissions,channel,user])
+            await opendiscord.events.get("onTicketPermissionsCreated").emit([option,opendiscord.permissions,channel,user])
             await (await import("../data/framework/permissionLoader.js")).addTicketPermissions(ticket)
-            await openticket.events.get("afterTicketPermissionsCreated").emit([option,openticket.permissions,channel,user])
+            await opendiscord.events.get("afterTicketPermissionsCreated").emit([option,opendiscord.permissions,channel,user])
 
             //export channel & ticket
             instance.channel = channel
             instance.ticket = ticket
-            openticket.tickets.add(ticket)
+            opendiscord.tickets.add(ticket)
         }),
         new api.ODWorker("openticket:send-ticket-message",2,async (instance,params,source,cancel) => {
             const {guild,user,answers,option} = params
             const {ticket,channel} = instance
 
-            if (!ticket || !channel) return openticket.log("Ticket Creation Error: Unable to send ticket message. Previous worker failed!","error")
+            if (!ticket || !channel) return opendiscord.log("Ticket Creation Error: Unable to send ticket message. Previous worker failed!","error")
             
-            await openticket.events.get("onTicketMainMessageCreated").emit([ticket,channel,user])
+            await opendiscord.events.get("onTicketMainMessageCreated").emit([ticket,channel,user])
             //check if ticket message is enabled
             if (!option.get("openticket:ticket-message-enabled").value) return
             try {
-                const msg = await channel.send((await openticket.builders.messages.getSafe("openticket:ticket-message").build(source,{guild,channel,user,ticket})).message)
+                const msg = await channel.send((await opendiscord.builders.messages.getSafe("openticket:ticket-message").build(source,{guild,channel,user,ticket})).message)
                 
                 ticket.get("openticket:ticket-message").value = msg.id
                 
                 //manage stats
-                await openticket.stats.get("openticket:ticket").setStat("openticket:messages-sent",ticket.id.value,1,"increase")
+                await opendiscord.stats.get("openticket:ticket").setStat("openticket:messages-sent",ticket.id.value,1,"increase")
                 
-                await openticket.events.get("afterTicketMainMessageCreated").emit([ticket,msg,channel,user])
+                await opendiscord.events.get("afterTicketMainMessageCreated").emit([ticket,msg,channel,user])
         }catch(err){
                 process.emit("uncaughtException",err)
                 //something went wrong while sending the ticket message
-                channel.send((await openticket.builders.messages.getSafe("openticket:error").build("other",{guild,channel,user,error:"Ticket Message: Creation Error!\n=> Ticket Is Still Created Succesfully",layout:"advanced"})).message)
+                channel.send((await opendiscord.builders.messages.getSafe("openticket:error").build("other",{guild,channel,user,error:"Ticket Message: Creation Error!\n=> Ticket Is Still Created Succesfully",layout:"advanced"})).message)
             }
-            await openticket.events.get("afterTicketCreated").emit([ticket,user,channel])
+            await opendiscord.events.get("afterTicketCreated").emit([ticket,user,channel])
         }),
         new api.ODWorker("openticket:discord-logs",1,async (instance,params,source,cancel) => {
             const {guild,user,answers,option} = params
@@ -203,20 +203,20 @@ export const registerActions = async () => {
 
             //to logs
             if (generalConfig.data.system.logs.enabled && generalConfig.data.system.messages.creation.logs){
-                const logChannel = openticket.posts.get("openticket:logs")
-                if (logChannel) logChannel.send(await openticket.builders.messages.getSafe("openticket:ticket-created-logs").build(source,{guild,channel,user,ticket}))
+                const logChannel = opendiscord.posts.get("openticket:logs")
+                if (logChannel) logChannel.send(await opendiscord.builders.messages.getSafe("openticket:ticket-created-logs").build(source,{guild,channel,user,ticket}))
             }
 
             //to dm
-            if (generalConfig.data.system.messages.creation.dm) await openticket.client.sendUserDm(user,await openticket.builders.messages.getSafe("openticket:ticket-created-dm").build(source,{guild,channel,user,ticket}))
+            if (generalConfig.data.system.messages.creation.dm) await opendiscord.client.sendUserDm(user,await opendiscord.builders.messages.getSafe("openticket:ticket-created-dm").build(source,{guild,channel,user,ticket}))
         }),
         new api.ODWorker("openticket:logs",0,(instance,params,source,cancel) => {
             const {guild,user,answers,option} = params
             const {ticket,channel} = instance
 
-            if (!ticket || !channel) return openticket.log("Ticket Creation Error: Unable to create logs. Previous worker failed!","error")
+            if (!ticket || !channel) return opendiscord.log("Ticket Creation Error: Unable to create logs. Previous worker failed!","error")
 
-            openticket.log(user.displayName+" created a ticket!","info",[
+            opendiscord.log(user.displayName+" created a ticket!","info",[
                 {key:"user",value:user.username},
                 {key:"userid",value:user.id,hidden:true},
                 {key:"channel",value:"#"+channel.name},

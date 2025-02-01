@@ -18,7 +18,7 @@ export interface ODPostManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODPostManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.code`!
+ * This default class is made for the global variable `opendiscord.code`!
  */
 export class ODPostManager_Default extends ODPostManager {
     get<PostId extends keyof ODPostManagerIds_Default>(id:PostId): ODPostManagerIds_Default[PostId]

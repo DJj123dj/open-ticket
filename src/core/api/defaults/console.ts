@@ -16,7 +16,7 @@ export interface ODLiveStatusManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODLiveStatusManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.livestatus`!
+ * This default class is made for the global variable `opendiscord.livestatus`!
  */
 export class ODLiveStatusManager_Default extends ODLiveStatusManager {
     get<LiveStatusId extends keyof ODLiveStatusManagerIds_Default>(id:LiveStatusId): ODLiveStatusManagerIds_Default[LiveStatusId]

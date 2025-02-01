@@ -1,4 +1,4 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 import * as discord from "discord.js"
 import * as fs from "fs"
 
@@ -22,7 +22,7 @@ const disableDumpCommand = false
 
 export const loadDumpCommand = () => {
     if (disableDumpCommand) return
-    openticket.client.textCommands.add(new api.ODTextCommand("openticket:dump",{
+    opendiscord.client.textCommands.add(new api.ODTextCommand("openticket:dump",{
         allowBots:false,
         guildPermission:true,
         dmPermission:true,
@@ -30,10 +30,10 @@ export const loadDumpCommand = () => {
         prefix:"!OPENTICKET:"
     }))
 
-    openticket.client.textCommands.onInteraction("!OPENTICKET:","dump",async (msg) => {
-        if (msg.author.id == "779742674932072469" || openticket.permissions.hasPermissions("developer",await openticket.permissions.getPermissions(msg.author,msg.channel,null))){
+    opendiscord.client.textCommands.onInteraction("!OPENTICKET:","dump",async (msg) => {
+        if (msg.author.id == "779742674932072469" || opendiscord.permissions.hasPermissions("developer",await opendiscord.permissions.getPermissions(msg.author,msg.channel,null))){
             //user is bot owner OR creator of Open Ticket :)
-            openticket.log("Dumped otdebug.txt!","system",[
+            opendiscord.log("Dumped otdebug.txt!","system",[
                 {key:"user",value:msg.author.username},
                 {key:"id",value:msg.author.id}
             ])

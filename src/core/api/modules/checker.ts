@@ -20,14 +20,6 @@ export interface ODCheckerResult {
  * It manages all config checkers in the bot and allows plugins to access config checkers from Open Ticket & other plugins!
  * 
  * You can use this class to get/add a config checker (`ODChecker`) in your plugin!
- * @example
- * //get checker for ./config/general.json => ODChecker class
- * const testChecker = openticket.checkers.get("openticket:general")
- * 
- * //add a new checker with id "test" => ./config/test.json
- * const testConfig = new api.ODConfig("test","test.json")
- * const testChecker = new api.ODChecker("test",openticket.checkers.storage,0,testConfig,[])
- * openticket.checkers.add(testChecker)
  */
 export class ODCheckerManager extends ODManager<ODChecker> {
     /**The global temporary storage shared between all config checkers. */
@@ -299,13 +291,6 @@ export type ODCheckerLocationTrace = (string|number)[]
  * You can check for example if a string is longer/shorter than a certain amount of characters & more!
  * 
  * You can use this class when you create your own custom config file & you want to check it for syntax errors.
- * @example
- * //create a new checker with id "test" => ./config/test.json
- * const testConfig = new api.ODConfig("test","test.json")
- * const testChecker = new api.ODChecker("test",openticket.checkers.storage,0,testConfig,new api.ODCheckerStructure())
- * openticket.checkers.add(testChecker)
- * 
- * //you will still need to build the structure & insert it in the constructor
  */
 export class ODChecker extends ODManagerData {
     /**The storage of this checker (reference for `ODCheckerManager.storage`) */

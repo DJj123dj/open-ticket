@@ -19,7 +19,7 @@ export interface ODVersionManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODFlagManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.flags`!
+ * This default class is made for the global variable `opendiscord.flags`!
  */
 export class ODVersionManager_Default extends ODVersionManager {
     get<VersionId extends keyof ODVersionManagerIds_Default>(id:VersionId): ODVersionManagerIds_Default[VersionId]

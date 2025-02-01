@@ -1,10 +1,10 @@
 ///////////////////////////////////////
 //DROPDOWN BUILDERS
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const dropdowns = openticket.builders.dropdowns
+const dropdowns = opendiscord.builders.dropdowns
 
 export const registerAllDropdowns = async () => {
     panelDropdowns()

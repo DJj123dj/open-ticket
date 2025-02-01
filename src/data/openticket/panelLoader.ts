@@ -1,22 +1,22 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 import * as discord from "discord.js"
 
 export const loadAllPanels = async () => {
-    const panelConfig = openticket.configs.get("openticket:panels")
+    const panelConfig = opendiscord.configs.get("openticket:panels")
     if (!panelConfig) return
 
     panelConfig.data.forEach((panel) => {
-        openticket.panels.add(loadPanel(panel))
+        opendiscord.panels.add(loadPanel(panel))
     })
 
     //update panels on config reload
     panelConfig.onReload(async () => {
         //clear previous panels
-        await openticket.panels.loopAll((data,id) => {openticket.panels.remove(id)})
+        await opendiscord.panels.loopAll((data,id) => {opendiscord.panels.remove(id)})
 
         //add new panels
         panelConfig.data.forEach((panel) => {
-            openticket.panels.add(loadPanel(panel))
+            opendiscord.panels.add(loadPanel(panel))
         })
     })
 }
@@ -53,7 +53,7 @@ export function describePanelOptions(mode:"fields"|"text", panel:api.ODPanel): {
     let websiteOnly = true
     let roleOnly = true
     panel.get("openticket:options").value.forEach((id) => {
-        const opt = openticket.options.get(id)
+        const opt = opendiscord.options.get(id)
         if (opt){
             if (opt instanceof api.ODTicketOption){
                 options.push(opt)

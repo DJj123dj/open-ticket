@@ -22,7 +22,7 @@ export interface ODStartScreenManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODStartScreenManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.startscreen`!
+ * This default class is made for the global variable `opendiscord.startscreen`!
  */
 export class ODStartScreenManager_Default extends ODStartScreenManager {
     get<StartScreenId extends keyof ODStartScreenManagerIds_Default>(id:StartScreenId): ODStartScreenManagerIds_Default[StartScreenId]

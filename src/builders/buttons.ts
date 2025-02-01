@@ -1,12 +1,12 @@
 ///////////////////////////////////////
 //BUTTON BUILDERS
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const buttons = openticket.builders.buttons
-const lang = openticket.languages
-const generalConfig = openticket.configs.get("openticket:general")
+const buttons = opendiscord.builders.buttons
+const lang = opendiscord.languages
+const generalConfig = opendiscord.configs.get("openticket:general")
 
 export const registerAllButtons = async () => {
     verifybarButtons()
@@ -83,7 +83,7 @@ const helpMenuButtons = () => {
     buttons.get("openticket:help-menu-page").workers.add(
         new api.ODWorker("openticket:help-menu-page",0,async (instance,params) => {
             const {mode,page} = params
-            const totalPages = (await openticket.helpmenu.render(mode)).length
+            const totalPages = (await opendiscord.helpmenu.render(mode)).length
             const pageText = (page+1).toString()+"/"+totalPages.toString()
 
             instance.setCustomId("od:help-menu-page_"+page.toString())
@@ -127,7 +127,7 @@ const helpMenuButtons = () => {
     buttons.get("openticket:help-menu-next").workers.add(
         new api.ODWorker("openticket:help-menu-next",0,async (instance,params) => {
             const {mode,page} = params
-            const totalPages = (await openticket.helpmenu.render(mode)).length
+            const totalPages = (await opendiscord.helpmenu.render(mode)).length
             
             instance.setCustomId("od:help-menu-next")
             instance.setMode("button")

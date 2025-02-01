@@ -1,11 +1,11 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 import * as discord from "discord.js"
 
-const lang = openticket.languages
+const lang = opendiscord.languages
 
 export const loadAllSlashCommands = async () => {
-    const commands = openticket.client.slashCommands
-    const generalConfig = openticket.configs.get("openticket:general")
+    const commands = opendiscord.client.slashCommands
+    const generalConfig = opendiscord.configs.get("openticket:general")
     if (!generalConfig) return
 
     const act = discord.ApplicationCommandType
@@ -15,13 +15,13 @@ export const loadAllSlashCommands = async () => {
 
     //create panel choices
     const panelChoices : {name:string, value:string}[] = []
-    openticket.configs.get("openticket:panels").data.forEach((panel) => {
+    opendiscord.configs.get("openticket:panels").data.forEach((panel) => {
         panelChoices.push({name:panel.name, value:panel.id})
     })
 
     //create ticket choices
     const ticketChoices : {name:string, value:string}[] = []
-    openticket.configs.get("openticket:options").data.forEach((option) => {
+    opendiscord.configs.get("openticket:options").data.forEach((option) => {
         if (option.type != "ticket") return
         ticketChoices.push({name:option.name, value:option.id})
     })
@@ -585,8 +585,8 @@ export const loadAllSlashCommands = async () => {
 }
 
 export const loadAllTextCommands = async () => {
-    const commands = openticket.client.textCommands
-    const generalConfig = openticket.configs.get("openticket:general")
+    const commands = opendiscord.client.textCommands
+    const generalConfig = opendiscord.configs.get("openticket:general")
     if (!generalConfig) return
 
     if (!generalConfig.data.textCommands) return
@@ -594,13 +594,13 @@ export const loadAllTextCommands = async () => {
     
     //create panel choices
     const panelChoices : string[] = []
-    openticket.configs.get("openticket:panels").data.forEach((panel) => {
+    opendiscord.configs.get("openticket:panels").data.forEach((panel) => {
         panelChoices.push(panel.id)
     })
 
     //create ticket choices
     const ticketChoices : string[] = []
-    openticket.configs.get("openticket:options").data.forEach((option) => {
+    opendiscord.configs.get("openticket:options").data.forEach((option) => {
         if (option.type != "ticket") return
         ticketChoices.push(option.id)
     })

@@ -1,4 +1,4 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 
 export const migrations = [
     //MIGRATE TO v4.0.0

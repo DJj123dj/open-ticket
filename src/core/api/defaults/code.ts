@@ -31,7 +31,7 @@ export interface ODCodeManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODCodeManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.code`!
+ * This default class is made for the global variable `opendiscord.code`!
  */
 export class ODCodeManager_Default extends ODCodeManager {
     get<CodeId extends keyof ODCodeManagerIds_Default>(id:CodeId): ODCodeManagerIds_Default[CodeId]

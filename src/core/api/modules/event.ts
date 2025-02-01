@@ -76,7 +76,7 @@ export class ODEvent extends ODManagerData {
  * This class is made to manage all events in the bot. You can compare it with the built-in node.js `EventEmitter`
  * 
  * It's not recommended to create this class yourself. Plugin events should be registered in their `plugin.json` file instead.
- * All events are available in the `openticket.events` global!
+ * All events are available in the `opendiscord.events` global!
  */
 export class ODEventManager extends ODManager<ODEvent> {
     /**Reference to the Open Ticket debugger */

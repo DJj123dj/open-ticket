@@ -8,7 +8,7 @@ import { ODPermissionManager } from "../modules/permission"
  * This is a special class that adds type definitions & typescript to the ODPermissionManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.permissions`!
+ * This default class is made for the global variable `opendiscord.permissions`!
  */
 export class ODPermissionManager_Default extends ODPermissionManager {
     constructor(debug:ODDebugger){

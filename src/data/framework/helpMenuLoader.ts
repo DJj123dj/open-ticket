@@ -1,9 +1,9 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 
-const lang = openticket.languages
+const lang = opendiscord.languages
 
 export const loadAllHelpMenuCategories = async () => {
-    const helpmenu = openticket.helpmenu
+    const helpmenu = opendiscord.helpmenu
 
     helpmenu.add(new api.ODHelpMenuCategory("openticket:general",5,utilities.emojiTitle("📎","General Commands"))) //TODO TRANSLATION!!!
     helpmenu.add(new api.ODHelpMenuCategory("openticket:ticket-basic",4,utilities.emojiTitle("🎫","Basic Ticket Commands"))) //TODO TRANSLATION!!!
@@ -15,8 +15,8 @@ export const loadAllHelpMenuCategories = async () => {
 }
 
 export const loadAllHelpMenuComponents = async () => {
-    const helpmenu = openticket.helpmenu
-    const generalConfig = openticket.configs.get("openticket:general")
+    const helpmenu = opendiscord.helpmenu
+    const generalConfig = opendiscord.configs.get("openticket:general")
     if (!generalConfig) return
 
     const prefix = generalConfig.data.prefix

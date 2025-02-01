@@ -1,28 +1,28 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 
 export const loadAllQuestions = async () => {
-    const questionConfig = openticket.configs.get("openticket:questions")
+    const questionConfig = opendiscord.configs.get("openticket:questions")
     if (!questionConfig) return
     
     questionConfig.data.forEach((question) => {
         if (question.type == "short"){
-            openticket.questions.add(loadShortQuestion(question))
+            opendiscord.questions.add(loadShortQuestion(question))
         }else if (question.type == "paragraph"){
-            openticket.questions.add(loadParagraphQuestion(question))
+            opendiscord.questions.add(loadParagraphQuestion(question))
         }
     })
 
     //update questions on config reload
     questionConfig.onReload(async () => {
         //clear previous questions
-        await openticket.questions.loopAll((data,id) => {openticket.questions.remove(id)})
+        await opendiscord.questions.loopAll((data,id) => {opendiscord.questions.remove(id)})
 
         //add new questions
         questionConfig.data.forEach((question) => {
             if (question.type == "short"){
-                openticket.questions.add(loadShortQuestion(question))
+                opendiscord.questions.add(loadShortQuestion(question))
             }else if (question.type == "paragraph"){
-                openticket.questions.add(loadParagraphQuestion(question))
+                opendiscord.questions.add(loadParagraphQuestion(question))
             }
         })
     })

@@ -1,47 +1,47 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 
 export const loadAllOptions = async () => {
-    const optionConfig = openticket.configs.get("openticket:options")
+    const optionConfig = opendiscord.configs.get("openticket:options")
     if (!optionConfig) return
     
     optionConfig.data.forEach((option) => {
         if (option.type == "ticket"){
             const loadedOption = loadTicketOption(option)
-            openticket.options.add(loadedOption)
-            openticket.options.suffix.add(loadTicketOptionSuffix(loadedOption))
+            opendiscord.options.add(loadedOption)
+            opendiscord.options.suffix.add(loadTicketOptionSuffix(loadedOption))
         }else if (option.type == "website"){
-            openticket.options.add(loadWebsiteOption(option))
+            opendiscord.options.add(loadWebsiteOption(option))
         }else if (option.type == "role"){
-            openticket.options.add(loadRoleOption(option))
+            opendiscord.options.add(loadRoleOption(option))
         }
     })
 
     //update options on config reload
     optionConfig.onReload(async () => {
         //clear previous options & suffixes
-        await openticket.options.loopAll((data,id) => {openticket.options.remove(id)})
-        await openticket.options.suffix.loopAll((data,id) => {openticket.options.suffix.remove(id)})
+        await opendiscord.options.loopAll((data,id) => {opendiscord.options.remove(id)})
+        await opendiscord.options.suffix.loopAll((data,id) => {opendiscord.options.suffix.remove(id)})
 
         //add new options
         optionConfig.data.forEach((option) => {
             if (option.type == "ticket"){
                 const loadedOption = loadTicketOption(option)
-                openticket.options.add(loadedOption)
-                openticket.options.suffix.add(loadTicketOptionSuffix(loadedOption))
+                opendiscord.options.add(loadedOption)
+                opendiscord.options.suffix.add(loadTicketOptionSuffix(loadedOption))
             }else if (option.type == "website"){
-                openticket.options.add(loadWebsiteOption(option))
+                opendiscord.options.add(loadWebsiteOption(option))
             }else if (option.type == "role"){
-                openticket.options.add(loadRoleOption(option))
+                opendiscord.options.add(loadRoleOption(option))
             }
         })
 
         //update options in tickets
-        await openticket.tickets.loopAll((ticket) => {
+        await opendiscord.tickets.loopAll((ticket) => {
             const optionId = ticket.option.id
-            const option = openticket.options.get(optionId)
+            const option = opendiscord.options.get(optionId)
             if (option && option instanceof api.ODTicketOption) ticket.option = option
             else{
-                openticket.log("Unable to move ticket to unexisting option due to config reload!","warning",[
+                opendiscord.log("Unable to move ticket to unexisting option due to config reload!","warning",[
                     {key:"channelid",value:ticket.id.value},
                     {key:"option",value:optionId.value}
                 ])
@@ -49,7 +49,7 @@ export const loadAllOptions = async () => {
         })
 
         //update roles on config reload
-        await openticket.roles.loopAll((data,id) => {openticket.roles.remove(id)})
+        await opendiscord.roles.loopAll((data,id) => {opendiscord.roles.remove(id)})
         await (await import("./roleLoader.js")).loadAllRoles()
     })
 }
@@ -134,7 +134,7 @@ export const loadRoleOption = (opt:api.ODJsonConfig_DefaultOptionRoleType): api.
 
 export const loadTicketOptionSuffix = (option:api.ODTicketOption): api.ODOptionSuffix => {
     const mode = option.get("openticket:channel-suffix").value
-    const globalDatabase = openticket.databases.get("openticket:global")
+    const globalDatabase = opendiscord.databases.get("openticket:global")
     if (mode == "user-name") return new api.ODOptionUserNameSuffix(option.id.value,option)
     else if (mode == "random-number") return new api.ODOptionRandomNumberSuffix(option.id.value,option,globalDatabase)
     else if (mode == "random-hex") return new api.ODOptionRandomHexSuffix(option.id.value,option,globalDatabase)

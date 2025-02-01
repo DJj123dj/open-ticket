@@ -14,7 +14,7 @@ export interface ODPluginManagerIds_Default {}
  * This is a special class that adds type definitions & typescript to the ODPluginManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.plugins`!
+ * This default class is made for the global variable `opendiscord.plugins`!
  */
 export class ODPluginManager_Default extends ODPluginManager {
     declare classes: ODPluginClassManager_Default
@@ -51,7 +51,7 @@ export interface ODPluginClassManagerIds_Default {}
  * This is a special class that adds type definitions & typescript to the ODPluginClassManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.plugins.classes`!
+ * This default class is made for the global variable `opendiscord.plugins.classes`!
  */
 export class ODPluginClassManager_Default extends ODPluginClassManager {
     get<PluginClassId extends keyof ODPluginClassManagerIds_Default>(id:PluginClassId): ODPluginClassManagerIds_Default[PluginClassId]

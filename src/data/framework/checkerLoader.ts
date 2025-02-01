@@ -1,26 +1,26 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 
-const generalConfig = openticket.configs.get("openticket:general")
+const generalConfig = opendiscord.configs.get("openticket:general")
 
 export const loadAllConfigCheckers = async () => {
-    openticket.checkers.add(new api.ODChecker("openticket:general",openticket.checkers.storage,0,openticket.configs.get("openticket:general"),defaultGeneralStructure))
-        openticket.checkers.add(new api.ODChecker("openticket:options",openticket.checkers.storage,1,openticket.configs.get("openticket:options"),defaultOptionsStructure))
-        openticket.checkers.add(new api.ODChecker("openticket:panels",openticket.checkers.storage,0,openticket.configs.get("openticket:panels"),defaultPanelsStructure))
-        openticket.checkers.add(new api.ODChecker("openticket:questions",openticket.checkers.storage,2,openticket.configs.get("openticket:questions"),defaultQuestionsStructure))
-        openticket.checkers.add(new api.ODChecker("openticket:transcripts",openticket.checkers.storage,0,openticket.configs.get("openticket:transcripts"),defaultTranscriptsStructure))
+    opendiscord.checkers.add(new api.ODChecker("openticket:general",opendiscord.checkers.storage,0,opendiscord.configs.get("openticket:general"),defaultGeneralStructure))
+        opendiscord.checkers.add(new api.ODChecker("openticket:options",opendiscord.checkers.storage,1,opendiscord.configs.get("openticket:options"),defaultOptionsStructure))
+        opendiscord.checkers.add(new api.ODChecker("openticket:panels",opendiscord.checkers.storage,0,opendiscord.configs.get("openticket:panels"),defaultPanelsStructure))
+        opendiscord.checkers.add(new api.ODChecker("openticket:questions",opendiscord.checkers.storage,2,opendiscord.configs.get("openticket:questions"),defaultQuestionsStructure))
+        opendiscord.checkers.add(new api.ODChecker("openticket:transcripts",opendiscord.checkers.storage,0,opendiscord.configs.get("openticket:transcripts"),defaultTranscriptsStructure))
 }
 
 export const loadAllConfigCheckerFunctions = async () => {
-    openticket.checkers.functions.add(new api.ODCheckerFunction("openticket:unused-options",defaultUnusedOptionsFunction))
-    openticket.checkers.functions.add(new api.ODCheckerFunction("openticket:unused-questions",defaultUnusedQuestionsFunction))
-    openticket.checkers.functions.add(new api.ODCheckerFunction("openticket:dropdown-options",defaultDropdownOptionsFunction))
+    opendiscord.checkers.functions.add(new api.ODCheckerFunction("openticket:unused-options",defaultUnusedOptionsFunction))
+    opendiscord.checkers.functions.add(new api.ODCheckerFunction("openticket:unused-questions",defaultUnusedQuestionsFunction))
+    opendiscord.checkers.functions.add(new api.ODCheckerFunction("openticket:dropdown-options",defaultDropdownOptionsFunction))
 }
 
 export const loadAllConfigCheckerTranslations = async () => {
     if ((generalConfig && generalConfig.data.system && generalConfig.data.system.useTranslatedConfigChecker) ? generalConfig.data.system.useTranslatedConfigChecker : false){
-        registerDefaultCheckerSystemTranslations(openticket.checkers.translation,openticket.languages) //translate checker system text
-        registerDefaultCheckerMessageTranslations(openticket.checkers.translation,openticket.languages) //translate checker messages
-        registerDefaultCheckerCustomTranslations(openticket.checkers.translation,openticket.languages) //translate custom checker messages
+        registerDefaultCheckerSystemTranslations(opendiscord.checkers.translation,opendiscord.languages) //translate checker system text
+        registerDefaultCheckerMessageTranslations(opendiscord.checkers.translation,opendiscord.languages) //translate checker messages
+        registerDefaultCheckerCustomTranslations(opendiscord.checkers.translation,opendiscord.languages) //translate custom checker messages
     }
 }
 
@@ -170,7 +170,7 @@ const createPanelEmbedStructure = (id:api.ODValidId) => {
 }
 
 function loadFromEnv(){
-    const generalConfig = openticket.configs.get("openticket:general")
+    const generalConfig = opendiscord.configs.get("openticket:general")
     if (generalConfig.data && generalConfig.data.tokenFromENV && typeof generalConfig.data.tokenFromENV == "boolean") return generalConfig.data.tokenFromENV
     else return false
 }
@@ -185,7 +185,7 @@ export const defaultGeneralStructure = new api.ODCheckerObjectStructure("opentic
             const lt = checker.locationTraceDeref(locationTrace)
             
             if (typeof value != "string") return false
-            else if (value != "open-ticket-"+openticket.versions.get("openticket:version").toString()){
+            else if (value != "open-ticket-"+opendiscord.versions.get("openticket:version").toString()){
                 checker.createMessage("openticket:invalid-version","warning","The version specified in your config is invalid! Make sure you have updated it to the latest version!",lt,null,[],locationId,locationDocs)
                 return false
             }else return true
@@ -201,7 +201,7 @@ export const defaultGeneralStructure = new api.ODCheckerObjectStructure("opentic
             const lt = checker.locationTraceDeref(locationTrace)
 
             if (typeof value != "string") return false
-            else if (!openticket.defaults.getDefault("languageList").includes(value)){
+            else if (!opendiscord.defaults.getDefault("languageList").includes(value)){
                 checker.createMessage("openticket:invalid-language","error","This is an invalid language!",lt,null,[],locationId,locationDocs)
                 return false
             }else return true
@@ -582,10 +582,10 @@ export const defaultDropdownOptionsFunction = (manager:api.ODCheckerManager, fun
     const panelList: string[] = manager.storage.get("openticket","panel-ids")
     if (!panelList) return {valid:true,messages:[]}
 
-    const panelConfig = openticket.configs.get("openticket:panels")
+    const panelConfig = opendiscord.configs.get("openticket:panels")
     if (!panelConfig) return {valid:true,messages:[]}
     
-    const optionConfig = openticket.configs.get("openticket:options")
+    const optionConfig = opendiscord.configs.get("openticket:options")
     if (!optionConfig) return {valid:true,messages:[]}
 
     const final: api.ODCheckerMessage[] = []

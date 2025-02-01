@@ -1,4 +1,4 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 
 export const loadAllEvents = () => {
     const eventList: (keyof api.ODEventIds_Default)[] = [
@@ -245,5 +245,5 @@ export const loadAllEvents = () => {
         //ready
         "onReadyForUsage"
     ]
-    eventList.forEach((event) => openticket.events.add(new api.ODEvent(event)))
+    eventList.forEach((event) => opendiscord.events.add(new api.ODEvent(event)))
 }

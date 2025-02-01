@@ -1,16 +1,16 @@
 ///////////////////////////////////////
 //MESSAGE BUILDERS
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const messages = openticket.builders.messages
-const buttons = openticket.builders.buttons
-const dropdowns = openticket.builders.dropdowns
-const files = openticket.builders.files
-const embeds = openticket.builders.embeds
-const lang = openticket.languages
-const generalConfig = openticket.configs.get("openticket:general")
+const messages = opendiscord.builders.messages
+const buttons = opendiscord.builders.buttons
+const dropdowns = opendiscord.builders.dropdowns
+const files = opendiscord.builders.files
+const embeds = opendiscord.builders.embeds
+const lang = opendiscord.languages
+const generalConfig = opendiscord.configs.get("openticket:general")
 
 export const registerAllMessages = async () => {
     verifyBarMessages()
@@ -36,7 +36,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-ticket-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-ticket-message`")
                 return
@@ -110,7 +110,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-close-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-close-message`")
                 return
@@ -146,7 +146,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-reopen-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-reopen-message`")
                 return
@@ -182,7 +182,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-claim-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-claim-message`")
                 return
@@ -212,7 +212,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-unclaim-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-unclaim-message`")
                 return
@@ -242,7 +242,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-pin-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-pin-message`")
                 return
@@ -272,7 +272,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-unpin-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-unpin-message`")
                 return
@@ -302,7 +302,7 @@ const verifyBarMessages = () => {
                 instance.setContent("ODError: Not In Guild => `openticket:verifybar-autoclose-message`")
                 return
             }
-            const ticket = openticket.tickets.get(channel.id)
+            const ticket = opendiscord.tickets.get(channel.id)
             if (!ticket){
                 instance.setContent("ODError: Unknown Ticket => `openticket:verifybar-autoclose-message`")
                 return
@@ -496,7 +496,7 @@ const helpMenuMessages = () => {
     messages.get("openticket:help-menu").workers.add(
         new api.ODWorker("openticket:help-menu",0,async (instance,params,source) => {
             const {mode,page} = params
-            const totalPages = (await openticket.helpmenu.render(mode)).length
+            const totalPages = (await opendiscord.helpmenu.render(mode)).length
             
             const embed = await embeds.getSafe("openticket:help-menu").build(source,{mode,page})
             instance.addEmbed(embed)
@@ -589,7 +589,7 @@ const panelMessages = () => {
             const {guild,channel,user,panel} = params
             const options: api.ODOption[] = []
             panel.get("openticket:options").value.forEach((id) => {
-                const opt = openticket.options.get(id)
+                const opt = opendiscord.options.get(id)
                 if (opt) options.push(opt)
             })
 

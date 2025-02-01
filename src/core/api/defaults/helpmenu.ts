@@ -22,7 +22,7 @@ export interface ODHelpMenuManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.helpmenu`!
+ * This default class is made for the global variable `opendiscord.helpmenu`!
  */
 export class ODHelpMenuManager_Default extends ODHelpMenuManager {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerIds_Default>(id:HelpMenuCategoryId): ODHelpMenuManagerIds_Default[HelpMenuCategoryId]
@@ -60,7 +60,7 @@ export interface ODHelpMenuManagerCategoryIds_DefaultGeneral {
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:general` category in `openticket.helpmenu`!
+ * This default class is made for the `openticket:general` category in `opendiscord.helpmenu`!
  */
 export class ODHelpMenuCategory_DefaultGeneral extends ODHelpMenuCategory {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerCategoryIds_DefaultGeneral>(id:HelpMenuCategoryId): ODHelpMenuManagerCategoryIds_DefaultGeneral[HelpMenuCategoryId]
@@ -99,7 +99,7 @@ export interface ODHelpMenuManagerCategoryIds_DefaultTicketBasic {
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:ticket` category in `openticket.helpmenu`!
+ * This default class is made for the `openticket:ticket` category in `opendiscord.helpmenu`!
  */
 export class ODHelpMenuCategory_DefaultTicketBasic extends ODHelpMenuCategory {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerCategoryIds_DefaultTicketBasic>(id:HelpMenuCategoryId): ODHelpMenuManagerCategoryIds_DefaultTicketBasic[HelpMenuCategoryId]
@@ -139,7 +139,7 @@ export interface ODHelpMenuManagerCategoryIds_DefaultTicketAdvanced {
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:ticket` category in `openticket.helpmenu`!
+ * This default class is made for the `openticket:ticket` category in `opendiscord.helpmenu`!
  */
 export class ODHelpMenuCategory_DefaultTicketAdvanced extends ODHelpMenuCategory {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerCategoryIds_DefaultTicketAdvanced>(id:HelpMenuCategoryId): ODHelpMenuManagerCategoryIds_DefaultTicketAdvanced[HelpMenuCategoryId]
@@ -179,7 +179,7 @@ export interface ODHelpMenuManagerCategoryIds_DefaultTicketUser {
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:ticket` category in `openticket.helpmenu`!
+ * This default class is made for the `openticket:ticket` category in `opendiscord.helpmenu`!
  */
 export class ODHelpMenuCategory_DefaultTicketUser extends ODHelpMenuCategory {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerCategoryIds_DefaultTicketUser>(id:HelpMenuCategoryId): ODHelpMenuManagerCategoryIds_DefaultTicketUser[HelpMenuCategoryId]
@@ -220,7 +220,7 @@ export interface ODHelpMenuManagerCategoryIds_DefaultAdmin {
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:admin` category in `openticket.helpmenu`!
+ * This default class is made for the `openticket:admin` category in `opendiscord.helpmenu`!
  */
 export class ODHelpMenuCategory_DefaultAdmin extends ODHelpMenuCategory {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerCategoryIds_DefaultAdmin>(id:HelpMenuCategoryId): ODHelpMenuManagerCategoryIds_DefaultAdmin[HelpMenuCategoryId]
@@ -262,7 +262,7 @@ export interface ODHelpMenuManagerCategoryIds_DefaultAdvanced {
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:advanced` category in `openticket.helpmenu`!
+ * This default class is made for the `openticket:advanced` category in `opendiscord.helpmenu`!
  */
 export class ODHelpMenuCategory_DefaultAdvanced extends ODHelpMenuCategory {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerCategoryIds_DefaultAdvanced>(id:HelpMenuCategoryId): ODHelpMenuManagerCategoryIds_DefaultAdvanced[HelpMenuCategoryId]
@@ -297,7 +297,7 @@ export interface ODHelpMenuManagerCategoryIds_DefaultExtra {}
  * This is a special class that adds type definitions & typescript to the ODHelpMenuManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:general` category in `openticket.helpmenu`!
+ * This default class is made for the `openticket:general` category in `opendiscord.helpmenu`!
  */
 export class ODHelpMenuCategory_DefaultExtra extends ODHelpMenuCategory {
     get<HelpMenuCategoryId extends keyof ODHelpMenuManagerCategoryIds_DefaultExtra>(id:HelpMenuCategoryId): ODHelpMenuManagerCategoryIds_DefaultExtra[HelpMenuCategoryId]

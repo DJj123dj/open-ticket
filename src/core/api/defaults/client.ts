@@ -8,7 +8,7 @@ import { ODClientManager, ODSlashCommand, ODTextCommand, ODSlashCommandManager, 
  * This is a special class that adds type definitions & typescript to the ODClientManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.client`!
+ * This default class is made for the global variable `opendiscord.client`!
  */
 export class ODClientManager_Default extends ODClientManager {
     declare slashCommands: ODSlashCommandManager_Default
@@ -45,7 +45,7 @@ export interface ODSlashCommandManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODSlashCommandManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.client.slashCommands`!
+ * This default class is made for the global variable `opendiscord.client.slashCommands`!
  */
 export class ODSlashCommandManager_Default extends ODSlashCommandManager {
     get<SlashCommandId extends keyof ODSlashCommandManagerIds_Default>(id:SlashCommandId): ODSlashCommandManagerIds_Default[SlashCommandId]
@@ -115,7 +115,7 @@ export interface ODTextCommandManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODTextCommandManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.client.textCommands`!
+ * This default class is made for the global variable `opendiscord.client.textCommands`!
  */
 export class ODTextCommandManager_Default extends ODTextCommandManager {
     get<TextCommandId extends keyof ODTextCommandManagerIds_Default>(id:TextCommandId): ODTextCommandManagerIds_Default[TextCommandId]

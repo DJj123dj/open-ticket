@@ -1,12 +1,12 @@
 ///////////////////////////////////////
 //FILE BUILDERS
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const files = openticket.builders.files
-const lang = openticket.languages
-const transcriptConfig = openticket.configs.get("openticket:transcripts")
+const files = opendiscord.builders.files
+const lang = opendiscord.languages
+const transcriptConfig = opendiscord.configs.get("openticket:transcripts")
 
 export const registerAllFiles = async () => {
     transcriptFiles()
@@ -24,7 +24,7 @@ const transcriptFiles = () => {
             const customName = transcriptConfig.data.textTranscriptStyle.customFileName
 
             const creatorId = ticket.get("openticket:opened-by").value ?? "unknown-creator-id"
-            const creator = (await openticket.tickets.getTicketUser(ticket,"creator"))
+            const creator = (await opendiscord.tickets.getTicketUser(ticket,"creator"))
 
             if (fileMode == "custom") instance.setName(customName.split(".")[0]+".txt")
             else if (fileMode == "user-id") instance.setName(creatorId+".txt")

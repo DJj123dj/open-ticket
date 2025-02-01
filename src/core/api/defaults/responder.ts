@@ -9,7 +9,7 @@ import { ODWorkerManager_Default } from "./worker"
  * This is a special class that adds type definitions & typescript to the ODResponderManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.responders`!
+ * This default class is made for the global variable `opendiscord.responders`!
  */
 export class ODResponderManager_Default extends ODResponderManager {
     declare commands: ODCommandResponderManager_Default
@@ -51,7 +51,7 @@ export interface ODCommandResponderManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODCommandResponderManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.responders.commands`!
+ * This default class is made for the global variable `opendiscord.responders.commands`!
  */
 export class ODCommandResponderManager_Default extends ODCommandResponderManager {
     get<CommandResponderId extends keyof ODCommandResponderManagerIds_Default>(id:CommandResponderId): ODCommandResponder_Default<ODCommandResponderManagerIds_Default[CommandResponderId]["source"],ODCommandResponderManagerIds_Default[CommandResponderId]["params"],ODCommandResponderManagerIds_Default[CommandResponderId]["workers"]>
@@ -118,7 +118,7 @@ export interface ODButtonResponderManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODButtonResponderManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.responders.buttons`!
+ * This default class is made for the global variable `opendiscord.responders.buttons`!
  */
 export class ODButtonResponderManager_Default extends ODButtonResponderManager {
     get<ButtonResponderId extends keyof ODButtonResponderManagerIds_Default>(id:ButtonResponderId): ODButtonResponder_Default<ODButtonResponderManagerIds_Default[ButtonResponderId]["source"],ODButtonResponderManagerIds_Default[ButtonResponderId]["params"],ODButtonResponderManagerIds_Default[ButtonResponderId]["workers"]>
@@ -165,7 +165,7 @@ export interface ODDropdownResponderManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODDropdownResponderManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.responders.dropdowns`!
+ * This default class is made for the global variable `opendiscord.responders.dropdowns`!
  */
 export class ODDropdownResponderManager_Default extends ODDropdownResponderManager {
     get<DropdownResponderId extends keyof ODDropdownResponderManagerIds_Default>(id:DropdownResponderId): ODDropdownResponder_Default<ODDropdownResponderManagerIds_Default[DropdownResponderId]["source"],ODDropdownResponderManagerIds_Default[DropdownResponderId]["params"],ODDropdownResponderManagerIds_Default[DropdownResponderId]["workers"]>
@@ -219,7 +219,7 @@ export interface ODModalResponderManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODModalResponderManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.responders.dropdowns`!
+ * This default class is made for the global variable `opendiscord.responders.dropdowns`!
  */
 export class ODModalResponderManager_Default extends ODModalResponderManager {
     get<ModalResponderId extends keyof ODModalResponderManagerIds_Default>(id:ModalResponderId): ODModalResponder_Default<ODModalResponderManagerIds_Default[ModalResponderId]["source"],ODModalResponderManagerIds_Default[ModalResponderId]["params"],ODModalResponderManagerIds_Default[ModalResponderId]["workers"]>

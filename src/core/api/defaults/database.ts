@@ -22,7 +22,7 @@ export interface ODDatabaseManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODDatabaseManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.databases`!
+ * This default class is made for the global variable `opendiscord.databases`!
  */
 export class ODDatabaseManager_Default extends ODDatabaseManager {
     get<DatabaseId extends keyof ODDatabaseManagerIds_Default>(id:DatabaseId): ODDatabaseManagerIds_Default[DatabaseId]

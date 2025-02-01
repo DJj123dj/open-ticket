@@ -1,15 +1,15 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 import * as fjs from "formatted-json-stringify"
 
-const devdatabaseFlag = openticket.flags.get("openticket:dev-database")
+const devdatabaseFlag = opendiscord.flags.get("openticket:dev-database")
 const isDevdatabase = devdatabaseFlag ? devdatabaseFlag.value : false
 
 export const loadAllDatabases = async () => {
-    openticket.databases.add(defaultGlobalDatabase)
-    openticket.databases.add(defaultStatsDatabase)
-    openticket.databases.add(defaultTicketsDatabase)
-    openticket.databases.add(defaultUsersDatabase)
-    openticket.databases.add(defaultOptionsDatabase)
+    opendiscord.databases.add(defaultGlobalDatabase)
+    opendiscord.databases.add(defaultStatsDatabase)
+    opendiscord.databases.add(defaultTicketsDatabase)
+    opendiscord.databases.add(defaultUsersDatabase)
+    opendiscord.databases.add(defaultOptionsDatabase)
 }
 
 const defaultInlineFormatter = new fjs.ArrayFormatter(null,true,new fjs.ObjectFormatter(null,false,[

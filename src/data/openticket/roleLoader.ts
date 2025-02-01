@@ -1,9 +1,9 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 
 export const loadAllRoles = async () => {
-    await openticket.options.loopAll((opt) => {
+    await opendiscord.options.loopAll((opt) => {
         if (opt instanceof api.ODRoleOption){
-            openticket.roles.add(loadRole(opt))
+            opendiscord.roles.add(loadRole(opt))
         }
     })
 }

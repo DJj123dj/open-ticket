@@ -23,7 +23,7 @@ export interface ODConfigManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODConfigManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.configs`!
+ * This default class is made for the global variable `opendiscord.configs`!
  */
 export class ODConfigManager_Default extends ODConfigManager {
     get<ConfigId extends keyof ODConfigManagerIds_Default>(id:ConfigId): ODConfigManagerIds_Default[ConfigId]

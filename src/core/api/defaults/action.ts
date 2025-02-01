@@ -118,7 +118,7 @@ export interface ODActionManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODActionManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.actions`!
+ * This default class is made for the global variable `opendiscord.actions`!
  */
 export class ODActionManager_Default extends ODActionManager {
     get<ActionId extends keyof ODActionManagerIds_Default>(id:ActionId): ODAction_Default<ODActionManagerIds_Default[ActionId]["source"],ODActionManagerIds_Default[ActionId]["params"],ODActionManagerIds_Default[ActionId]["result"],ODActionManagerIds_Default[ActionId]["workers"]>

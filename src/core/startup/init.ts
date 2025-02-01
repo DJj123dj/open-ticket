@@ -38,19 +38,19 @@ import * as api from "../api/api" //import for local use
 export * as api from "../api/api" //export to other parts of bot
 
 
-export const openticket = new api.ODMain()
+export const opendiscord = new api.ODMain()
 console.log("\n--------------------------- OPEN TICKET STARTUP ---------------------------")
-openticket.log("Logging system activated!","system")
-openticket.debug.debug("Using Node.js "+process.version+"!")
+opendiscord.log("Logging system activated!","system")
+opendiscord.debug.debug("Using Node.js "+process.version+"!")
 
 try{
     const packageJson = JSON.parse(fs.readFileSync("./package.json").toString())
-    openticket.debug.debug("Using discord.js "+packageJson.dependencies["discord.js"]+"!")
-    openticket.debug.debug("Using ansis "+packageJson.dependencies["ansis"]+"!")
-    openticket.debug.debug("Using formatted-json-stringify "+packageJson.dependencies["formatted-json-stringify"]+"!")
-    openticket.debug.debug("Using typescript "+packageJson.dependencies["typescript"]+"!")
+    opendiscord.debug.debug("Using discord.js "+packageJson.dependencies["discord.js"]+"!")
+    opendiscord.debug.debug("Using ansis "+packageJson.dependencies["ansis"]+"!")
+    opendiscord.debug.debug("Using formatted-json-stringify "+packageJson.dependencies["formatted-json-stringify"]+"!")
+    opendiscord.debug.debug("Using typescript "+packageJson.dependencies["typescript"]+"!")
 }catch{
-    openticket.debug.debug("Failed to fetch module versions!")
+    opendiscord.debug.debug("Failed to fetch module versions!")
 }
 
 const timer = (ms:number): Promise<void> => {
@@ -83,7 +83,7 @@ export interface ODUtilities {
      */
     timer(ms:number): Promise<void>
     /**## emojiTitle `utility function`
-     * Use this function to create a title with an emoji before/after the text. The style & divider are set in `openticket.defaults`
+     * Use this function to create a title with an emoji before/after the text. The style & divider are set in `opendiscord.defaults`
      * @example utilities.emojiTitle("📎","Links") //create a title with an emoji based on the bot emoji style
      */
     emojiTitle(emoji:string, text:string): string
@@ -149,8 +149,8 @@ export const utilities: ODUtilities = {
     },
     timer,
     emojiTitle(emoji:string, text:string){
-        const style = openticket.defaults.getDefault("emojiTitleStyle")
-        const divider = openticket.defaults.getDefault("emojiTitleDivider")
+        const style = opendiscord.defaults.getDefault("emojiTitleStyle")
+        const divider = opendiscord.defaults.getDefault("emojiTitleDivider")
 
         if (style == "disabled") return text
         else if (style == "before") return emoji+divider+text

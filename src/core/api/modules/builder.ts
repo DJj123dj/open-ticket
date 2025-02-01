@@ -512,7 +512,7 @@ export class ODFileManager extends ODManagerWithSafety<ODFile<string,any>> {
             return new ODFile("openticket:unknown-file",(instance,params,source,cancel) => {
                 instance.setName("openticket_unknown-file.txt")
                 instance.setDescription("❌ <ODError:Unknown File>")
-                instance.setContents("Couldn't find file in registery `openticket.builders.files`")
+                instance.setContents("Couldn't find file in registery `opendiscord.builders.files`")
                 cancel()
             })
         },debug,"file")
@@ -636,7 +636,7 @@ export class ODEmbedManager extends ODManagerWithSafety<ODEmbed<string,any>> {
                 instance.setFooter("openticket:unknown-embed")
                 instance.setColor("#ff0000")
                 instance.setTitle("❌ <ODError:Unknown Embed>")
-                instance.setDescription("Couldn't find embed in registery `openticket.builders.embeds`")
+                instance.setDescription("Couldn't find embed in registery `opendiscord.builders.embeds`")
                 cancel()
             })
         },debug,"embed")
@@ -847,7 +847,7 @@ export class ODMessageManager extends ODManagerWithSafety<ODMessage<string,any>>
     constructor(debug:ODDebugger){
         super(() => {
             return new ODMessage("openticket:unknown-message",(instance,params,source,cancel) => {
-                instance.setContent("**❌ <ODError:Unknown Message>**\nCouldn't find message in registery `openticket.builders.messages`")
+                instance.setContent("**❌ <ODError:Unknown Message>**\nCouldn't find message in registery `opendiscord.builders.messages`")
                 cancel()
             })
         },debug,"message")

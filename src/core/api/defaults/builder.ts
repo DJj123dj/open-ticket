@@ -18,7 +18,7 @@ import { ODRole, ODRoleUpdateResult } from "../openticket/role"
  * This is a special class that adds type definitions & typescript to the ODBuilderManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.builders`!
+ * This default class is made for the global variable `opendiscord.builders`!
  */
 export class ODBuilderManager_Default extends ODBuilderManager {
     declare buttons: ODButtonManager_Default
@@ -69,7 +69,7 @@ export interface ODButtonManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODButtonManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.builders.buttons`!
+ * This default class is made for the global variable `opendiscord.builders.buttons`!
  */
 export class ODButtonManager_Default extends ODButtonManager {
     get<ButtonId extends keyof ODButtonManagerIds_Default>(id:ButtonId): ODButton_Default<ODButtonManagerIds_Default[ButtonId]["source"],ODButtonManagerIds_Default[ButtonId]["params"],ODButtonManagerIds_Default[ButtonId]["workers"]>
@@ -123,7 +123,7 @@ export interface ODDropdownManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODDropdownManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.builders.dropdowns`!
+ * This default class is made for the global variable `opendiscord.builders.dropdowns`!
  */
 export class ODDropdownManager_Default extends ODDropdownManager {
     get<DropdownId extends keyof ODDropdownManagerIds_Default>(id:DropdownId): ODDropdown_Default<ODDropdownManagerIds_Default[DropdownId]["source"],ODDropdownManagerIds_Default[DropdownId]["params"],ODDropdownManagerIds_Default[DropdownId]["workers"]>
@@ -177,7 +177,7 @@ export interface ODFileManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODFileManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.builders.files`!
+ * This default class is made for the global variable `opendiscord.builders.files`!
  */
 export class ODFileManager_Default extends ODFileManager {
     get<FileId extends keyof ODFileManagerIds_Default>(id:FileId): ODFile_Default<ODFileManagerIds_Default[FileId]["source"],ODFileManagerIds_Default[FileId]["params"],ODFileManagerIds_Default[FileId]["workers"]>
@@ -297,7 +297,7 @@ export interface ODEmbedManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODEmbedManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.builders.embeds`!
+ * This default class is made for the global variable `opendiscord.builders.embeds`!
  */
 export class ODEmbedManager_Default extends ODEmbedManager {
     get<EmbedId extends keyof ODEmbedManagerIds_Default>(id:EmbedId): ODEmbed_Default<ODEmbedManagerIds_Default[EmbedId]["source"],ODEmbedManagerIds_Default[EmbedId]["params"],ODEmbedManagerIds_Default[EmbedId]["workers"]>
@@ -428,7 +428,7 @@ export interface ODMessageManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODMessageManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.builders.messages`!
+ * This default class is made for the global variable `opendiscord.builders.messages`!
  */
 export class ODMessageManager_Default extends ODMessageManager {
     get<MessageId extends keyof ODMessageManagerIds_Default>(id:MessageId): ODMessage_Default<ODMessageManagerIds_Default[MessageId]["source"],ODMessageManagerIds_Default[MessageId]["params"],ODMessageManagerIds_Default[MessageId]["workers"]>
@@ -489,7 +489,7 @@ export interface ODModalManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODModalManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.builders.modals`!
+ * This default class is made for the global variable `opendiscord.builders.modals`!
  */
 export class ODModalManager_Default extends ODModalManager {
     get<ModalId extends keyof ODModalManagerIds_Default>(id:ModalId): ODModal_Default<ODModalManagerIds_Default[ModalId]["source"],ODModalManagerIds_Default[ModalId]["params"],ODModalManagerIds_Default[ModalId]["workers"]>

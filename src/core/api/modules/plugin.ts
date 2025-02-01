@@ -20,7 +20,7 @@ export interface ODUnknownCrashedPlugin {
  * 
  * It manages all active plugins in the bot!
  * It also contains all "plugin classes" which are managers registered by plugins.
- * These are accessible via the `openticket.plugins.classes` global.
+ * These are accessible via the `opendiscord.plugins.classes` global.
  * 
  * Use `isPluginLoaded()` to check if a plugin has been loaded. 
  */
@@ -60,7 +60,7 @@ export interface ODPluginData {
     enabled:boolean,
     /**The priority of this plugin. Higher priority will load before lower priority. */
     priority:number,
-    /**A list of events to register to the `openticket.events` global before loading any plugins. This way, plugins with a higher priority are able to use events from this plugin as well! */
+    /**A list of events to register to the `opendiscord.events` global before loading any plugins. This way, plugins with a higher priority are able to use events from this plugin as well! */
     events:string[]
 
     /**Npm dependencies which are required for this plugin to work. */
@@ -96,7 +96,7 @@ export interface ODPluginDetails {
  * This is an Open Ticket plugin.
  * 
  * It represents a single plugin in the `./plugins/` directory.
- * All plugins are accessible via the `openticket.plugins` global.
+ * All plugins are accessible via the `opendiscord.plugins` global.
  * 
  * Don't re-execute plugins which are already enabled! It might break the bot or plugin. 
  */

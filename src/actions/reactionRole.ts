@@ -1,32 +1,32 @@
 ///////////////////////////////////////
 //REACTION ROLE SYSTEM
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
 export const registerActions = async () => {
-    openticket.actions.add(new api.ODAction("openticket:reaction-role"))
-    openticket.actions.get("openticket:reaction-role").workers.add([
+    opendiscord.actions.add(new api.ODAction("openticket:reaction-role"))
+    opendiscord.actions.get("openticket:reaction-role").workers.add([
         new api.ODWorker("openticket:reaction-role",2,async (instance,params,source,cancel) => {
             const {guild,user,option,overwriteMode} = params
-            const role = openticket.roles.get(option.id)
+            const role = opendiscord.roles.get(option.id)
             if (!role) throw new api.ODSystemError("ODAction(ot:reaction-role) => Unknown reaction role (ODRole)")
             instance.role = role
             const mode = (overwriteMode) ? overwriteMode : role.get("openticket:mode").value
             
-            await openticket.events.get("onRoleUpdate").emit([user,role])
+            await opendiscord.events.get("onRoleUpdate").emit([user,role])
 
             //get guild member
-            const member = await openticket.client.fetchGuildMember(guild,user.id)
+            const member = await opendiscord.client.fetchGuildMember(guild,user.id)
             if (!member) throw new api.ODSystemError("ODAction(ot:reaction-role) => User isn't a member of the server!")
 
             //get all roles
             const roleIds = role.get("openticket:roles").value
             const roles: discord.Role[] = []
             for (const id of roleIds){
-                const r = await openticket.client.fetchGuildRole(guild,id)
+                const r = await opendiscord.client.fetchGuildRole(guild,id)
                 if (r) roles.push(r)
-                else openticket.log("Unable to find role in server!","warning",[
+                else opendiscord.log("Unable to find role in server!","warning",[
                     {key:"roleid",value:id}
                 ])
             }
@@ -58,9 +58,9 @@ export const registerActions = async () => {
                 const removeRoleIds = role.get("openticket:remove-roles-on-add").value
                 const removeRoles: discord.Role[] = []
                 for (const id of removeRoleIds){
-                    const r = await openticket.client.fetchGuildRole(guild,id)
+                    const r = await opendiscord.client.fetchGuildRole(guild,id)
                     if (r) removeRoles.push(r)
-                    else openticket.log("Unable to find role in server!","warning",[
+                    else opendiscord.log("Unable to find role in server!","warning",[
                         {key:"roleid",value:id}
                     ])
                 }
@@ -79,11 +79,11 @@ export const registerActions = async () => {
 
             //update instance & finish event
             instance.result = result
-            await openticket.events.get("afterRolesUpdated").emit([user,role])
+            await opendiscord.events.get("afterRolesUpdated").emit([user,role])
         }),
         new api.ODWorker("openticket:logs",0,(instance,params,source,cancel) => {
             const {guild,user,option} = params
-            openticket.log(user.displayName+" updated his roles!","info",[
+            opendiscord.log(user.displayName+" updated his roles!","info",[
                 {key:"user",value:user.username},
                 {key:"userid",value:user.id,hidden:true},
                 {key:"method",value:source},

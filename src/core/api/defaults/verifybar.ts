@@ -35,7 +35,7 @@ export interface ODVerifyBarManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODVerifyBarManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.verifybars`!
+ * This default class is made for the global variable `opendiscord.verifybars`!
  */
 export class ODVerifyBarManager_Default extends ODVerifyBarManager {
     get<VerifyBarId extends keyof ODVerifyBarManagerIds_Default>(id:VerifyBarId): ODVerifyBar_Default<ODVerifyBarManagerIds_Default[VerifyBarId]["successWorkerIds"],ODVerifyBarManagerIds_Default[VerifyBarId]["failureWorkerIds"]>

@@ -16,7 +16,7 @@ export interface ODSessionManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODSessionManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.sessions`!
+ * This default class is made for the global variable `opendiscord.sessions`!
  */
 export class ODSessionManager_Default extends ODSessionManager {
     get<SessionId extends keyof ODSessionManagerIds_Default>(id:SessionId): ODSessionManagerIds_Default[SessionId]

@@ -127,7 +127,7 @@ export interface ODTranscriptCompilerIds {
  * This is a special class that adds type definitions & typescript to the ODTranscriptManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.transcripts`!
+ * This default class is made for the global variable `opendiscord.transcripts`!
  */
 export class ODTranscriptManager_Default extends ODTranscriptManager {
     get<QuestionId extends keyof ODTranscriptCompilerIds>(id:QuestionId): ODTranscriptCompilerIds[QuestionId]

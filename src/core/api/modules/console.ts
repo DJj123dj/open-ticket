@@ -584,7 +584,7 @@ export class ODLiveStatusUrlSource extends ODLiveStatusSource {
  * It manages all LiveStatus sources and has the renderer for all LiveStatus messages.
  * 
  * You can use this to customise or add stuff to the LiveStatus system.
- * Access it in the global `openticket.startscreen.livestatus` variable!
+ * Access it in the global `opendiscord.startscreen.livestatus` variable!
  */
 export class ODLiveStatusManager extends ODManager<ODLiveStatusSource> {
     /**The class responsible for rendering the livestatus messages. */
@@ -616,7 +616,7 @@ export class ODLiveStatusManager extends ODManager<ODLiveStatusSource> {
  * It's responsible for rendering all LiveStatus messages to the console.
  */
 export class ODLiveStatusRenderer {
-    /**A reference to the ODConsoleManager or "openticket.console" global variable */
+    /**A reference to the ODConsoleManager or "opendiscord.console" global variable */
     #console: ODConsoleManager
 
     constructor(console:ODConsoleManager){

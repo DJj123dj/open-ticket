@@ -101,7 +101,7 @@ export interface ODProgressBarRendererManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODProgressBarRendererManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.progressbars.renderers`!
+ * This default class is made for the global variable `opendiscord.progressbars.renderers`!
  */
 export class ODProgressBarRendererManager_Default extends ODProgressBarRendererManager {
     get<ProgressBarId extends keyof ODProgressBarRendererManagerIds_Default>(id:ProgressBarId): ODProgressBarRendererManagerIds_Default[ProgressBarId]
@@ -140,7 +140,7 @@ export interface ODProgressBarManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODProgressBarManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.progressbars`!
+ * This default class is made for the global variable `opendiscord.progressbars`!
  */
 export class ODProgressBarManager_Default extends ODProgressBarManager {
     declare renderers: ODProgressBarRendererManager_Default

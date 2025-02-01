@@ -22,7 +22,7 @@ export interface ODCheckerManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODCheckerManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.checkers`!
+ * This default class is made for the global variable `opendiscord.checkers`!
  */
 export class ODCheckerManager_Default extends ODCheckerManager {
     declare translation: ODCheckerTranslationRegister_Default
@@ -55,7 +55,7 @@ export class ODCheckerManager_Default extends ODCheckerManager {
  * This is a special class that adds type definitions & features to the ODCheckerRenderer class.
  * It contains the code that renders the default config checker.
  * 
- * This default class is made for the global variable `openticket.checkers.renderer`!
+ * This default class is made for the global variable `opendiscord.checkers.renderer`!
  */
 export class ODCheckerRenderer_Default extends ODCheckerRenderer {
     extraHeaderText: string[] = []
@@ -306,7 +306,7 @@ export type ODCheckerTranslationRegisterMessageIds_Default = (
  * This is a special class that adds type definitions & typescript to the ODCheckerTranslationRegister class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.checkers.translation`!
+ * This default class is made for the global variable `opendiscord.checkers.translation`!
  */
 export class ODCheckerTranslationRegister_Default extends ODCheckerTranslationRegister {
     get(type:"other", id:ODCheckerTranslationRegisterOtherIds_Default): string
@@ -355,7 +355,7 @@ export interface ODCheckerFunctionManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODCheckerFunctionManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.checkers.functions`!
+ * This default class is made for the global variable `opendiscord.checkers.functions`!
  */
 export class ODCheckerFunctionManager_Default extends ODCheckerFunctionManager {
     get<CheckerFunctionId extends keyof ODCheckerFunctionManagerIds_Default>(id:CheckerFunctionId): ODCheckerFunctionManagerIds_Default[CheckerFunctionId]

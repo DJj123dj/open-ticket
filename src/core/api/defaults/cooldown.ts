@@ -16,7 +16,7 @@ export interface ODCooldownManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODCooldownManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.cooldowns`!
+ * This default class is made for the global variable `opendiscord.cooldowns`!
  */
 export class ODCooldownManager_Default extends ODCooldownManager {
     get<CooldownId extends keyof ODCooldownManagerIds_Default>(id:CooldownId): ODCooldownManagerIds_Default[CooldownId]

@@ -1,11 +1,11 @@
 ///////////////////////////////////////
 //MODAL BUILDERS
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const modals = openticket.builders.modals
-const lang = openticket.languages
+const modals = opendiscord.builders.modals
+const lang = opendiscord.languages
 
 export const registerAllModals = async () => {
     ticketModals()
@@ -21,7 +21,7 @@ const ticketModals = () => {
             instance.setTitle(option.exists("openticket:name") ? option.get("openticket:name").value : option.id.value)
             const questionIds = option.get("openticket:questions").value
             questionIds.forEach((id) => {
-                const question = openticket.questions.get(id)
+                const question = opendiscord.questions.get(id)
                 if (!question) return
                 if (question instanceof api.ODShortQuestion) instance.addQuestion({
                     customId:question.id.value,

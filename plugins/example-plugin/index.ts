@@ -1,4 +1,4 @@
-import {api, openticket, utilities} from "#opendiscord"
+import {api, opendiscord, utilities} from "#opendiscord"
 import * as discord from "discord.js"
 
 /////////////////////////////////////////////
@@ -19,7 +19,7 @@ declare module "#opendiscord-types" {
 }
 
 //Let's register the example config. This way it's available for all plugins & systems.
-openticket.events.get("onConfigLoad").listen((configManager) => {
+opendiscord.events.get("onConfigLoad").listen((configManager) => {
     configManager.add(new api.ODJsonConfig("example-plugin:config","config.json","./plugins/example-plugin/"))
     /*===== What did we do? =====
     - "example-plugin:config" Is the ID of this config. You can use this id troughout the bot to access this config file. Even in other plugins.
@@ -29,18 +29,18 @@ openticket.events.get("onConfigLoad").listen((configManager) => {
 
     //Let's also log it to the console to let us know it worked!
     const ourConfig = configManager.get("example-plugin:config")
-    openticket.log("The example config loaded successfully!","plugin",[
+    opendiscord.log("The example config loaded successfully!","plugin",[
         {key:"var-1",value:ourConfig.data.testVariable1},
         {key:"var-2",value:ourConfig.data.testVariable2.toString()},
         {key:"var-3",value:ourConfig.data.testVariable3.toString()}
     ])
 })
 
-openticket.events.get("onTicketCreate").listen((creator) => {
+opendiscord.events.get("onTicketCreate").listen((creator) => {
     //This is logged before the ticket is created (after the button is pressed)
-    openticket.log("Ticket is getting created...","plugin")
+    opendiscord.log("Ticket is getting created...","plugin")
 })
-openticket.events.get("afterTicketCreated").listen((ticket,creator,channel) => {
+opendiscord.events.get("afterTicketCreated").listen((ticket,creator,channel) => {
     //This is logged after the ticket is created
-    openticket.log("Ticket ready!","plugin")
+    opendiscord.log("Ticket ready!","plugin")
 })

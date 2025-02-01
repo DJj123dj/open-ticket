@@ -474,7 +474,7 @@ export interface ODLanguageManagerIds_Default {
  * This is a special class that adds type definitions & typescript to the ODLanguageManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the global variable `openticket.languages`!
+ * This default class is made for the global variable `opendiscord.languages`!
  */
 export class ODLanguageManager_Default extends ODLanguageManager {
     get<LanguageId extends keyof ODLanguageManagerIds_Default>(id:LanguageId): ODLanguageManagerIds_Default[LanguageId]

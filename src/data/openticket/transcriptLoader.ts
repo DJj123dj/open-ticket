@@ -1,28 +1,28 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 import * as discord from "discord.js"
 
-const collector = openticket.transcripts.collector
-const messages = openticket.builders.messages
-const transcriptConfig = openticket.configs.get("openticket:transcripts")
+const collector = opendiscord.transcripts.collector
+const messages = opendiscord.builders.messages
+const transcriptConfig = opendiscord.configs.get("openticket:transcripts")
 const textConfig = transcriptConfig.data.textTranscriptStyle
 const htmlVersion = Buffer.from("b3BlbnRpY2tldFRSQU5TQ1JJUFQxMjM0","base64").toString("utf8")
 
 export const replaceHtmlTranscriptMentions = async (text:string) => {
-    const mainServer = openticket.client.mainServer
+    const mainServer = opendiscord.client.mainServer
     if (!mainServer) throw new api.ODSystemError("Unknown mainServer! => Required for mention replacement in Html Transcripts!")
 
     const usertext = await utilities.asyncReplace(text,/<@([0-9]+)>/g,async (match,id) => {
-        const member = await openticket.client.fetchGuildMember(mainServer,id)
+        const member = await opendiscord.client.fetchGuildMember(mainServer,id)
         return (member ? "<@"+(member.user.displayName).replace(/\s/g,"&nbsp;")+"> " : id) //replace with html spaces => BUG: whitespace CSS isn't "pre-wrap"
     })
 
     const channeltext = await utilities.asyncReplace(usertext,/<#([0-9]+)>/g,async (match,id) => {
-        const channel = await openticket.client.fetchGuildChannel(mainServer,id)
+        const channel = await opendiscord.client.fetchGuildChannel(mainServer,id)
         return (channel ? "<#"+channel.name.replace(/\s/g,"&nbsp;")+"> " : id) //replace with html spaces => BUG: whitespace CSS isn't "pre-wrap"
     })
 
     const roletext = await utilities.asyncReplace(channeltext,/<@&([0-9]+)>/g,async (match,id) => {
-        const role = await openticket.client.fetchGuildRole(mainServer,id)
+        const role = await opendiscord.client.fetchGuildRole(mainServer,id)
         let text = role ? role.name.replace(/\s/g,"&nbsp;") : id
         let color = role ? ((role.hexColor == "#000000") ? "regular" : role.hexColor) : "regular" //when hex color is #000000 => render as default
         return "<@&"+text+"::"+color+"> "
@@ -44,7 +44,7 @@ export const loadAllTranscriptCompilers = async () => {
     }
 
     //TEXT COMPILER
-    openticket.transcripts.add(new api.ODTranscriptCompiler<{contents:string}>("openticket:text-compiler",undefined,async (ticket,channel,user) => {
+    opendiscord.transcripts.add(new api.ODTranscriptCompiler<{contents:string}>("openticket:text-compiler",undefined,async (ticket,channel,user) => {
         //COMPILE
         const rawMessages = await collector.collectAllMessages(ticket)
         if (!rawMessages) return {ticket,channel,user,success:false,errorReason:"Unable to collect messages! Channel not found!",messages:null,data:null}
@@ -108,10 +108,10 @@ export const loadAllTranscriptCompilers = async () => {
         const closeDate = ticket.get("openticket:closed-on").value
         const claimDate = ticket.get("openticket:claimed-on").value
         const pinDate = ticket.get("openticket:pinned-on").value
-        const creator = await openticket.tickets.getTicketUser(ticket,"creator")
-        const closer = await openticket.tickets.getTicketUser(ticket,"closer")
-        const claimer = await openticket.tickets.getTicketUser(ticket,"claimer")
-        const pinner = await openticket.tickets.getTicketUser(ticket,"pinner")
+        const creator = await opendiscord.tickets.getTicketUser(ticket,"creator")
+        const closer = await opendiscord.tickets.getTicketUser(ticket,"closer")
+        const claimer = await opendiscord.tickets.getTicketUser(ticket,"claimer")
+        const pinner = await opendiscord.tickets.getTicketUser(ticket,"pinner")
 
         if (textConfig.includeStats){
             //TODO TRANSLATION!!!
@@ -164,21 +164,21 @@ export const loadAllTranscriptCompilers = async () => {
     },async (result) => {
         //READY
         return {
-            channelMessage:await messages.getSafe("openticket:transcript-text-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:text-compiler")}),
-            creatorDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:text-compiler")}),
-            participantDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:text-compiler")}),
-            activeAdminDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:text-compiler")}),
-            everyAdminDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:text-compiler")})
+            channelMessage:await messages.getSafe("openticket:transcript-text-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
+            creatorDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
+            participantDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
+            activeAdminDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
+            everyAdminDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")})
         }
     }))
 
     //HTML COMPILER
-    openticket.transcripts.add(new api.ODTranscriptCompiler<{url:string}>("openticket:html-compiler",async (ticket,channel,user) => {
+    opendiscord.transcripts.add(new api.ODTranscriptCompiler<{url:string}>("openticket:html-compiler",async (ticket,channel,user) => {
         //INIT
         const req = new api.ODHTTPGetRequest("https://apis.dj-dj.be/transcripts/status.json",false)
         const res = await req.run()
         if (!res || res.status != 200 || !res.body){
-            openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+            opendiscord.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
             process.emit("uncaughtException",new api.ODSystemError("HTML Transcripts INIT_COMMUNICATON error! (check otdebug.txt for details)"))
             return {success:false,errorReason:"HTML Transcripts are currently unavailable!",pendingMessage:null}
         }
@@ -186,12 +186,12 @@ export const loadAllTranscriptCompilers = async () => {
             const data = JSON.parse(res.body)
             if (!data || data["v2"] != "online") return {success:false,errorReason:"HTML Transcripts are currently unavailable due to maintenance!",pendingMessage:null}
         }catch{
-            openticket.debugfile.writeNote("HTML Transcripts Error => unable to parse status! body:\n"+res.body)
+            opendiscord.debugfile.writeNote("HTML Transcripts Error => unable to parse status! body:\n"+res.body)
             process.emit("uncaughtException",new api.ODSystemError("HTML Transcripts INIT_STATUS_PARSE error! (check otdebug.txt for details)"))
             return {success:false,errorReason:"HTML Transcripts are currently unavailable due to JSON parse error!",pendingMessage:null}
         }
         
-        return {success:true,errorReason:null,pendingMessage:await messages.getSafe("openticket:transcript-html-progress").build("channel",{guild:channel.guild,channel,user,ticket,compiler:openticket.transcripts.get("openticket:html-compiler"),remaining:16000})}
+        return {success:true,errorReason:null,pendingMessage:await messages.getSafe("openticket:transcript-html-progress").build("channel",{guild:channel.guild,channel,user,ticket,compiler:opendiscord.transcripts.get("openticket:html-compiler"),remaining:16000})}
     },async (ticket,channel,user) => {
         //COMPILE
         const rawMessages = await collector.collectAllMessages(ticket)
@@ -349,19 +349,19 @@ export const loadAllTranscriptCompilers = async () => {
         const dss = transcriptConfig.data.htmlTranscriptStyle.stats
         const dsf = transcriptConfig.data.htmlTranscriptStyle.favicon
 
-        const creator = await openticket.tickets.getTicketUser(ticket,"creator")
-        const claimer = await openticket.tickets.getTicketUser(ticket,"claimer")
-        const closer = await openticket.tickets.getTicketUser(ticket,"closer")
+        const creator = await opendiscord.tickets.getTicketUser(ticket,"creator")
+        const claimer = await opendiscord.tickets.getTicketUser(ticket,"claimer")
+        const closer = await opendiscord.tickets.getTicketUser(ticket,"closer")
 
         const htmlFinal: api.ODTranscriptHtmlV2Data = {
             version:"2",
-            otversion:openticket.versions.get("openticket:version").toString(true),
+            otversion:opendiscord.versions.get("openticket:version").toString(true),
             bot:{
-                name:openticket.client.client.user.displayName,
-                id:openticket.client.client.user.id,
-                pfp:openticket.client.client.user.displayAvatarURL({extension:"png"}),
+                name:opendiscord.client.client.user.displayName,
+                id:opendiscord.client.client.user.id,
+                pfp:opendiscord.client.client.user.displayAvatarURL({extension:"png"}),
             },
-            language:openticket.languages.getLanguageMetadata()?.language ?? "english",
+            language:opendiscord.languages.getLanguageMetadata()?.language ?? "english",
             style:{
                 background:{
                     backgroundData:(dsb.backgroundImage == "") ? dsb.backgroundColor : dsb.backgroundImage,
@@ -426,12 +426,12 @@ export const loadAllTranscriptCompilers = async () => {
                 customCredits:{
                     enable:false,
                     replaceText:"Powered By Open Ticket!",
-                    replaceURL:"https://openticket.dj-dj.be",
+                    replaceURL:"https://opendiscord.dj-dj.be",
                     enableReportBug:true
                 },
                 customHeaderUrl:{
                     enabled:false,
-                    url:"https://openticket.dj-dj.be",
+                    url:"https://opendiscord.dj-dj.be",
                     text:"Hello!"
                 },
                 customTranscriptUrl:{
@@ -454,17 +454,17 @@ export const loadAllTranscriptCompilers = async () => {
             if (res.status == 429) return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (Ratelimit)\nTry again in a few minutes!",messages,data:null}
             
             //unknown status error
-            openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+            opendiscord.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
             return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (Unknown Error)",messages,data:null}
         }
         //check body
         try{
             var data: api.ODTranscriptHtmlV2Response = JSON.parse(res.body)
             if (!data || data["status"] != "success"){
-                openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+                opendiscord.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
                 return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (Server 500 Error)",messages,data:null}}
         }catch{
-            openticket.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
+            opendiscord.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
             return {ticket,channel,user,success:false,errorReason:"Failed to upload HTML Transcripts! (JSON parse error)",messages,data:null}
         }
 
@@ -474,11 +474,11 @@ export const loadAllTranscriptCompilers = async () => {
         //READY
         await utilities.timer(16000) //wait until transcript is ready
         return {
-            channelMessage:await messages.getSafe("openticket:transcript-html-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:html-compiler")}),
-            creatorDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:html-compiler")}),
-            participantDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:html-compiler")}),
-            activeAdminDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:html-compiler")}),
-            everyAdminDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:openticket.transcripts.get("openticket:html-compiler")})
+            channelMessage:await messages.getSafe("openticket:transcript-html-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
+            creatorDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
+            participantDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
+            activeAdminDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
+            everyAdminDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")})
         }
     }))
 }

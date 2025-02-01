@@ -1,8 +1,8 @@
-import {openticket, api, utilities} from "../../index"
+import {opendiscord, api, utilities} from "../../index"
 import * as discord from "discord.js"
 
-const stats = openticket.stats
-const lang = openticket.languages
+const stats = opendiscord.stats
+const lang = opendiscord.languages
 
 export const loadAllStatScopes = async () => {
     stats.add(new api.ODStatGlobalScope("openticket:global",utilities.emojiTitle("📊",lang.getTranslation("stats.scopes.global"))))
@@ -13,7 +13,7 @@ export const loadAllStatScopes = async () => {
 }
 
 export const loadAllStats = async () => {
-    const generalConfig = openticket.configs.get("openticket:general")
+    const generalConfig = opendiscord.configs.get("openticket:general")
     if (!generalConfig) return
 
     const global = stats.get("openticket:global")
@@ -34,10 +34,10 @@ export const loadAllStats = async () => {
     const system = stats.get("openticket:system")
     if (system){
         system.add(new api.ODDynamicStat("openticket:startup-date",1,() => {
-            return lang.getTranslation("params.uppercase.startupDate")+": "+discord.time(openticket.processStartupDate,"f")
+            return lang.getTranslation("params.uppercase.startupDate")+": "+discord.time(opendiscord.processStartupDate,"f")
         }))
         system.add(new api.ODDynamicStat("openticket:version",0,() => {
-            return lang.getTranslation("params.uppercase.version")+": `"+openticket.versions.get("openticket:version").toString()+"`"
+            return lang.getTranslation("params.uppercase.version")+": `"+opendiscord.versions.get("openticket:version").toString()+"`"
         }))
     }
 
@@ -51,7 +51,7 @@ export const loadAllStats = async () => {
                 const scopeMember = await guild.members.fetch(scopeId)
                 if (!scopeMember) return ""
 
-                const permissions = await openticket.permissions.getPermissions(scopeMember.user,channel,guild)
+                const permissions = await opendiscord.permissions.getPermissions(scopeMember.user,channel,guild)
                 if (permissions.type == "developer") return lang.getTranslation("params.uppercase.role")+": 💻 `Developer`" //TODO TRANSLATION!!!
                 if (permissions.type == "owner") return lang.getTranslation("params.uppercase.role")+": 👑 `Server Owner`" //TODO TRANSLATION!!!
                 if (permissions.type == "admin") return lang.getTranslation("params.uppercase.role")+": 💼 `Server Admin`" //TODO TRANSLATION!!!
@@ -79,7 +79,7 @@ export const loadAllStats = async () => {
             return lang.getTranslation("params.uppercase.ticket")+": "+discord.channelMention(scopeId)
         }))
         ticket.add(new api.ODDynamicStat("openticket:status",4,async (scopeId,guild,channel,user) => {
-            const ticket = openticket.tickets.get(scopeId)
+            const ticket = opendiscord.tickets.get(scopeId)
             if (!ticket) return ""
 
             const closed = ticket.exists("openticket:closed") ? ticket.get("openticket:closed").value : false
@@ -87,28 +87,28 @@ export const loadAllStats = async () => {
             return closed ? lang.getTranslation("params.uppercase.status")+": 🔒 `Closed`" : lang.getTranslation("params.uppercase.status")+": 🔓 `Open`" //TODO TRANSLATION!!!
         }))
         ticket.add(new api.ODDynamicStat("openticket:claimed",3,async (scopeId,guild,channel,user) => {
-            const ticket = openticket.tickets.get(scopeId)
+            const ticket = opendiscord.tickets.get(scopeId)
             if (!ticket) return ""
             
             const claimed = ticket.exists("openticket:claimed") ? ticket.get("openticket:claimed").value : false
             return claimed ? lang.getTranslation("params.uppercase.claimed")+": 🟢 `Yes`" : lang.getTranslation("params.uppercase.claimed")+": 🔴 `No`" //TODO TRANSLATION!!!
         }))
         ticket.add(new api.ODDynamicStat("openticket:pinned",2,async (scopeId,guild,channel,user) => {
-            const ticket = openticket.tickets.get(scopeId)
+            const ticket = opendiscord.tickets.get(scopeId)
             if (!ticket) return ""
             
             const pinned = ticket.exists("openticket:pinned") ? ticket.get("openticket:pinned").value : false
             return pinned ? lang.getTranslation("params.uppercase.pinned")+": 🟢 `Yes`" : lang.getTranslation("params.uppercase.pinned")+": 🔴 `No`" //TODO TRANSLATION!!!
         }))
         ticket.add(new api.ODDynamicStat("openticket:creation-date",1,async (scopeId,guild,channel,user) => {
-            const ticket = openticket.tickets.get(scopeId)
+            const ticket = opendiscord.tickets.get(scopeId)
             if (!ticket) return ""
             
             const rawDate = ticket.get("openticket:opened-on").value ?? new Date().getTime()
             return lang.getTranslation("params.uppercase.creationDate")+": "+discord.time(new Date(rawDate),"f")
         }))
         ticket.add(new api.ODDynamicStat("openticket:creator",0,async (scopeId,guild,channel,user) => {
-            const ticket = openticket.tickets.get(scopeId)
+            const ticket = opendiscord.tickets.get(scopeId)
             if (!ticket) return ""
             
             const creator = ticket.get("openticket:opened-by").value
@@ -119,7 +119,7 @@ export const loadAllStats = async () => {
     const participants = stats.get("openticket:participants")
     if (participants){
         participants.add(new api.ODDynamicStat("openticket:participants",0,async (scopeId,guild,channel,user) => {
-            const ticket = openticket.tickets.get(scopeId)
+            const ticket = opendiscord.tickets.get(scopeId)
             if (!ticket) return ""
 
             const participants = ticket.exists("openticket:participants") ? ticket.get("openticket:participants").value : []

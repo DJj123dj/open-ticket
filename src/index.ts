@@ -35,8 +35,8 @@
 */
 
 //initialize API & check npm libraries
-import { api, openticket, utilities } from "./core/startup/init"
-export { api, openticket, utilities } from "./core/startup/init"
+import { api, opendiscord, utilities } from "./core/startup/init"
+export { api, opendiscord, utilities } from "./core/startup/init"
 import ansis from "ansis"
 
 /**The main sequence of Open Ticket. Runs `async` */
@@ -47,27 +47,27 @@ const main = async () => {
     //error handling system
     process.on("uncaughtException",async (error,origin) => {
         try{
-            await openticket.events.get("onErrorHandling").emit([error,origin])
-            if (openticket.defaults.getDefault("errorHandling")){
+            await opendiscord.events.get("onErrorHandling").emit([error,origin])
+            if (opendiscord.defaults.getDefault("errorHandling")){
                 //custom error messages for known errors
                 if (error.message.toLowerCase().includes("used disallowed intents")){
                     //invalid intents
-                    openticket.log("Open Ticket doesn't work without Privileged Gateway Intents enabled!","error")
-                    openticket.log("Enable them in the discord developer portal!","info")
+                    opendiscord.log("Open Ticket doesn't work without Privileged Gateway Intents enabled!","error")
+                    opendiscord.log("Enable them in the discord developer portal!","info")
                     console.log("\n")
                     process.exit(1)
                 }else if (error.message.toLowerCase().includes("invalid discord bot token provided")){
                     //invalid token
-                    openticket.log("An invalid discord auth token was provided!","error")
-                    openticket.log("Check the config if you have inserted the bot token correctly!","info")
+                    opendiscord.log("An invalid discord auth token was provided!","error")
+                    opendiscord.log("Check the config if you have inserted the bot token correctly!","info")
                     console.log("\n")
                     process.exit(1)
                 }else{
                     //unknown error
                     const errmsg = new api.ODError(error,origin)
-                    openticket.log(errmsg)
-                    if (openticket.defaults.getDefault("crashOnError")) process.exit(1)
-                    await openticket.events.get("afterErrorHandling").emit([error,origin,errmsg])
+                    opendiscord.log(errmsg)
+                    if (opendiscord.defaults.getDefault("crashOnError")) process.exit(1)
+                    await opendiscord.events.get("afterErrorHandling").emit([error,origin,errmsg])
                 }
             }
             
@@ -80,215 +80,215 @@ const main = async () => {
     await (await import("./core/startup/manageMigration.js")).loadVersionMigrationSystem()
 
     //load plugins
-    if (openticket.defaults.getDefault("pluginLoading")){
+    if (opendiscord.defaults.getDefault("pluginLoading")){
         await (await import("./core/startup/pluginLauncher.js")).loadAllPlugins()
     }
-    await openticket.events.get("afterPluginsLoaded").emit([openticket.plugins])
+    await opendiscord.events.get("afterPluginsLoaded").emit([opendiscord.plugins])
     
     //load plugin classes
-    openticket.log("Loading plugin classes...","system")
-    if (openticket.defaults.getDefault("pluginClassLoading")){
+    opendiscord.log("Loading plugin classes...","system")
+    if (opendiscord.defaults.getDefault("pluginClassLoading")){
 
     }
-    await openticket.events.get("onPluginClassLoad").emit([openticket.plugins.classes,openticket.plugins])
-    await openticket.events.get("afterPluginClassesLoaded").emit([openticket.plugins.classes,openticket.plugins])
+    await opendiscord.events.get("onPluginClassLoad").emit([opendiscord.plugins.classes,opendiscord.plugins])
+    await opendiscord.events.get("afterPluginClassesLoaded").emit([opendiscord.plugins.classes,opendiscord.plugins])
 
     //load flags
-    openticket.log("Loading flags...","system")
-    if (openticket.defaults.getDefault("flagLoading")){
+    opendiscord.log("Loading flags...","system")
+    if (opendiscord.defaults.getDefault("flagLoading")){
         await (await import("./data/framework/flagLoader.js")).loadAllFlags()
     }
-    await openticket.events.get("onFlagLoad").emit([openticket.flags])
-    await openticket.events.get("afterFlagsLoaded").emit([openticket.flags])
+    await opendiscord.events.get("onFlagLoad").emit([opendiscord.flags])
+    await opendiscord.events.get("afterFlagsLoaded").emit([opendiscord.flags])
 
     //initiate flags
-    await openticket.events.get("onFlagInit").emit([openticket.flags])
-    if (openticket.defaults.getDefault("flagInitiating")){
-        await openticket.flags.init()
-        openticket.debugfile.writeText("\n[ENABLED FLAGS]:\n"+openticket.flags.getFiltered((flag) => (flag.value == true)).map((flag) => flag.id.value).join("\n")+"\n")
-        await openticket.events.get("afterFlagsInitiated").emit([openticket.flags])
+    await opendiscord.events.get("onFlagInit").emit([opendiscord.flags])
+    if (opendiscord.defaults.getDefault("flagInitiating")){
+        await opendiscord.flags.init()
+        opendiscord.debugfile.writeText("\n[ENABLED FLAGS]:\n"+opendiscord.flags.getFiltered((flag) => (flag.value == true)).map((flag) => flag.id.value).join("\n")+"\n")
+        await opendiscord.events.get("afterFlagsInitiated").emit([opendiscord.flags])
     }
 
     //load debug
-    if (openticket.defaults.getDefault("debugLoading")){
-        const debugFlag = openticket.flags.get("openticket:debug")
-        openticket.debug.visible = (debugFlag) ? debugFlag.value : false
+    if (opendiscord.defaults.getDefault("debugLoading")){
+        const debugFlag = opendiscord.flags.get("openticket:debug")
+        opendiscord.debug.visible = (debugFlag) ? debugFlag.value : false
     }
 
     //load progress bar renderers
-    openticket.log("Loading progress bars...","system")
-    if (openticket.defaults.getDefault("progressBarRendererLoading")){
+    opendiscord.log("Loading progress bars...","system")
+    if (opendiscord.defaults.getDefault("progressBarRendererLoading")){
         await (await import("./data/framework/progressBarLoader.js")).loadAllProgressBarRenderers()
     }
-    await openticket.events.get("onProgressBarRendererLoad").emit([openticket.progressbars.renderers])
-    await openticket.events.get("afterProgressBarRenderersLoaded").emit([openticket.progressbars.renderers])
+    await opendiscord.events.get("onProgressBarRendererLoad").emit([opendiscord.progressbars.renderers])
+    await opendiscord.events.get("afterProgressBarRenderersLoaded").emit([opendiscord.progressbars.renderers])
     
     //load progress bars
-    if (openticket.defaults.getDefault("progressBarLoading")){
+    if (opendiscord.defaults.getDefault("progressBarLoading")){
         await (await import("./data/framework/progressBarLoader.js")).loadAllProgressBars()
     }
-    await openticket.events.get("onProgressBarLoad").emit([openticket.progressbars])
-    await openticket.events.get("afterProgressBarsLoaded").emit([openticket.progressbars])
+    await opendiscord.events.get("onProgressBarLoad").emit([opendiscord.progressbars])
+    await opendiscord.events.get("afterProgressBarsLoaded").emit([opendiscord.progressbars])
 
     //load config
-    openticket.log("Loading configs...","system")
-    if (openticket.defaults.getDefault("configLoading")){
+    opendiscord.log("Loading configs...","system")
+    if (opendiscord.defaults.getDefault("configLoading")){
         await (await import("./data/framework/configLoader.js")).loadAllConfigs()
     }
-    await openticket.events.get("onConfigLoad").emit([openticket.configs])
-    await openticket.events.get("afterConfigsLoaded").emit([openticket.configs])
+    await opendiscord.events.get("onConfigLoad").emit([opendiscord.configs])
+    await opendiscord.events.get("afterConfigsLoaded").emit([opendiscord.configs])
 
     //initiate config
-    await openticket.events.get("onConfigInit").emit([openticket.configs])
-    if (openticket.defaults.getDefault("configInitiating")){
-        await openticket.configs.init()
-        await openticket.events.get("afterConfigsInitiated").emit([openticket.configs])
+    await opendiscord.events.get("onConfigInit").emit([opendiscord.configs])
+    if (opendiscord.defaults.getDefault("configInitiating")){
+        await opendiscord.configs.init()
+        await opendiscord.events.get("afterConfigsInitiated").emit([opendiscord.configs])
     }
 
     //UTILITY CONFIG
-    const generalConfig = openticket.configs.get("openticket:general")
+    const generalConfig = opendiscord.configs.get("openticket:general")
 
-    if (openticket.defaults.getDefault("emojiTitleStyleLoading")){
+    if (opendiscord.defaults.getDefault("emojiTitleStyleLoading")){
         //set emoji style based on config
-        openticket.defaults.setDefault("emojiTitleStyle",generalConfig.data.system.emojiStyle)
+        opendiscord.defaults.setDefault("emojiTitleStyle",generalConfig.data.system.emojiStyle)
     }
     
     //load database
-    openticket.log("Loading databases...","system")
-    if (openticket.defaults.getDefault("databaseLoading")){
+    opendiscord.log("Loading databases...","system")
+    if (opendiscord.defaults.getDefault("databaseLoading")){
         await (await import("./data/framework/databaseLoader.js")).loadAllDatabases()
     }
-    await openticket.events.get("onDatabaseLoad").emit([openticket.databases])
-    await openticket.events.get("afterDatabasesLoaded").emit([openticket.databases])
+    await opendiscord.events.get("onDatabaseLoad").emit([opendiscord.databases])
+    await opendiscord.events.get("afterDatabasesLoaded").emit([opendiscord.databases])
 
     //initiate database
-    await openticket.events.get("onDatabaseInit").emit([openticket.databases])
-    if (openticket.defaults.getDefault("databaseInitiating")){
-        await openticket.databases.init()
-        await openticket.events.get("afterDatabasesInitiated").emit([openticket.databases])
+    await opendiscord.events.get("onDatabaseInit").emit([opendiscord.databases])
+    if (opendiscord.defaults.getDefault("databaseInitiating")){
+        await opendiscord.databases.init()
+        await opendiscord.events.get("afterDatabasesInitiated").emit([opendiscord.databases])
     }
 
     //load sessions
-    openticket.log("Loading sessions...","system")
-    if (openticket.defaults.getDefault("sessionLoading")){
+    opendiscord.log("Loading sessions...","system")
+    if (opendiscord.defaults.getDefault("sessionLoading")){
 
     }
-    await openticket.events.get("onSessionLoad").emit([openticket.sessions])
-    await openticket.events.get("afterSessionsLoaded").emit([openticket.sessions])    
+    await opendiscord.events.get("onSessionLoad").emit([opendiscord.sessions])
+    await opendiscord.events.get("afterSessionsLoaded").emit([opendiscord.sessions])    
 
     //load language
-    openticket.log("Loading languages...","system")
-    if (openticket.defaults.getDefault("languageLoading")){
+    opendiscord.log("Loading languages...","system")
+    if (opendiscord.defaults.getDefault("languageLoading")){
         await (await import("./data/framework/languageLoader.js")).loadAllLanguages()
     }
-    await openticket.events.get("onLanguageLoad").emit([openticket.languages])
-    await openticket.events.get("afterLanguagesLoaded").emit([openticket.languages])   
+    await opendiscord.events.get("onLanguageLoad").emit([opendiscord.languages])
+    await opendiscord.events.get("afterLanguagesLoaded").emit([opendiscord.languages])   
     
     //initiate language
-    await openticket.events.get("onLanguageInit").emit([openticket.languages])
-    if (openticket.defaults.getDefault("languageInitiating")){
-        await openticket.languages.init()
-        await openticket.events.get("afterLanguagesInitiated").emit([openticket.languages])
+    await opendiscord.events.get("onLanguageInit").emit([opendiscord.languages])
+    if (opendiscord.defaults.getDefault("languageInitiating")){
+        await opendiscord.languages.init()
+        await opendiscord.events.get("afterLanguagesInitiated").emit([opendiscord.languages])
 
         //add available languages to list for config checker
-        const languageList = openticket.defaults.getDefault("languageList")
-        const languageIds = openticket.languages.getIds().map((id) => {
+        const languageList = opendiscord.defaults.getDefault("languageList")
+        const languageIds = opendiscord.languages.getIds().map((id) => {
             if (id.value.startsWith("openticket:")){
                 //is open ticket language => return without prefix
                 return id.value.split("openticket:")[1]
             }else return id.value
         })
         languageList.push(...languageIds)
-        openticket.defaults.setDefault("languageList",languageList)
+        opendiscord.defaults.setDefault("languageList",languageList)
     }
 
     //select language
-    await openticket.events.get("onLanguageSelect").emit([openticket.languages])
-    if (openticket.defaults.getDefault("languageSelection")){
+    await opendiscord.events.get("onLanguageSelect").emit([opendiscord.languages])
+    if (opendiscord.defaults.getDefault("languageSelection")){
         //set current language
         const languageId = (generalConfig?.data?.language) ? generalConfig.data.language  : "english"
         if (languageId.includes(":")){
-            openticket.languages.setCurrentLanguage(languageId)
+            opendiscord.languages.setCurrentLanguage(languageId)
         }else{
-            openticket.languages.setCurrentLanguage("openticket:"+languageId)
+            opendiscord.languages.setCurrentLanguage("openticket:"+languageId)
         }
 
         //set backup language
-        const backupLanguageId = openticket.defaults.getDefault("backupLanguage")
-        if (openticket.languages.exists(backupLanguageId)){
-            openticket.languages.setBackupLanguage(backupLanguageId)
+        const backupLanguageId = opendiscord.defaults.getDefault("backupLanguage")
+        if (opendiscord.languages.exists(backupLanguageId)){
+            opendiscord.languages.setBackupLanguage(backupLanguageId)
             
         }else throw new api.ODSystemError("Unknown backup language '"+backupLanguageId+"'!")
 
-        await openticket.events.get("afterLanguagesSelected").emit([openticket.languages.get(languageId),openticket.languages.get(backupLanguageId),openticket.languages])    
+        await opendiscord.events.get("afterLanguagesSelected").emit([opendiscord.languages.get(languageId),opendiscord.languages.get(backupLanguageId),opendiscord.languages])    
     }
     
     //load config checker
-    openticket.log("Loading config checker...","system")
-    if (openticket.defaults.getDefault("checkerLoading")){
+    opendiscord.log("Loading config checker...","system")
+    if (opendiscord.defaults.getDefault("checkerLoading")){
         await (await import("./data/framework/checkerLoader.js")).loadAllConfigCheckers()
     }
-    await openticket.events.get("onCheckerLoad").emit([openticket.checkers])
-    await openticket.events.get("afterCheckersLoaded").emit([openticket.checkers])
+    await opendiscord.events.get("onCheckerLoad").emit([opendiscord.checkers])
+    await opendiscord.events.get("afterCheckersLoaded").emit([opendiscord.checkers])
 
     //load config checker functions
-    if (openticket.defaults.getDefault("checkerFunctionLoading")){
+    if (opendiscord.defaults.getDefault("checkerFunctionLoading")){
         await (await import("./data/framework/checkerLoader.js")).loadAllConfigCheckerFunctions()
     }
-    await openticket.events.get("onCheckerFunctionLoad").emit([openticket.checkers.functions,openticket.checkers])
-    await openticket.events.get("afterCheckerFunctionsLoaded").emit([openticket.checkers.functions,openticket.checkers])
+    await opendiscord.events.get("onCheckerFunctionLoad").emit([opendiscord.checkers.functions,opendiscord.checkers])
+    await opendiscord.events.get("afterCheckerFunctionsLoaded").emit([opendiscord.checkers.functions,opendiscord.checkers])
     
     //execute config checker
-    await openticket.events.get("onCheckerExecute").emit([openticket.checkers])
-    if (openticket.defaults.getDefault("checkerExecution")){
-        const result = openticket.checkers.checkAll(true)
-        await openticket.events.get("afterCheckersExecuted").emit([result,openticket.checkers])
+    await opendiscord.events.get("onCheckerExecute").emit([opendiscord.checkers])
+    if (opendiscord.defaults.getDefault("checkerExecution")){
+        const result = opendiscord.checkers.checkAll(true)
+        await opendiscord.events.get("afterCheckersExecuted").emit([result,opendiscord.checkers])
     }
 
     //load config checker translations
-    if (openticket.defaults.getDefault("checkerTranslationLoading")){
+    if (opendiscord.defaults.getDefault("checkerTranslationLoading")){
         await (await import("./data/framework/checkerLoader.js")).loadAllConfigCheckerTranslations()
     }
-    await openticket.events.get("onCheckerTranslationLoad").emit([openticket.checkers.translation,((generalConfig && generalConfig.data.system && generalConfig.data.system.useTranslatedConfigChecker) ? generalConfig.data.system.useTranslatedConfigChecker : false),openticket.checkers])
-    await openticket.events.get("afterCheckerTranslationsLoaded").emit([openticket.checkers.translation,openticket.checkers])
+    await opendiscord.events.get("onCheckerTranslationLoad").emit([opendiscord.checkers.translation,((generalConfig && generalConfig.data.system && generalConfig.data.system.useTranslatedConfigChecker) ? generalConfig.data.system.useTranslatedConfigChecker : false),opendiscord.checkers])
+    await opendiscord.events.get("afterCheckerTranslationsLoaded").emit([opendiscord.checkers.translation,opendiscord.checkers])
 
     //render config checker
-    const advancedCheckerFlag = openticket.flags.get("openticket:checker")
-    const disableCheckerFlag = openticket.flags.get("openticket:no-checker")
+    const advancedCheckerFlag = opendiscord.flags.get("openticket:checker")
+    const disableCheckerFlag = opendiscord.flags.get("openticket:no-checker")
 
-    await openticket.events.get("onCheckerRender").emit([openticket.checkers.renderer,openticket.checkers])
-    if (openticket.defaults.getDefault("checkerRendering") && !(disableCheckerFlag ? disableCheckerFlag.value : false)){
+    await opendiscord.events.get("onCheckerRender").emit([opendiscord.checkers.renderer,opendiscord.checkers])
+    if (opendiscord.defaults.getDefault("checkerRendering") && !(disableCheckerFlag ? disableCheckerFlag.value : false)){
         //check if there is a result (otherwise throw minor error)
-        const result = openticket.checkers.lastResult
-        if (!result) return openticket.log("Failed to render Config Checker! (couldn't fetch result)","error")
+        const result = opendiscord.checkers.lastResult
+        if (!result) return opendiscord.log("Failed to render Config Checker! (couldn't fetch result)","error")
         
         //get components & check if full mode enabled
-        const components = openticket.checkers.renderer.getComponents(!(advancedCheckerFlag ? advancedCheckerFlag.value : false),openticket.defaults.getDefault("checkerRenderEmpty"),openticket.checkers.translation,result)
+        const components = opendiscord.checkers.renderer.getComponents(!(advancedCheckerFlag ? advancedCheckerFlag.value : false),opendiscord.defaults.getDefault("checkerRenderEmpty"),opendiscord.checkers.translation,result)
 
         //render
-        openticket.debugfile.writeText("\n[CONFIG CHECKER RESULT]:\n"+ansis.strip(components.join("\n"))+"\n")
-        openticket.checkers.renderer.render(components)
+        opendiscord.debugfile.writeText("\n[CONFIG CHECKER RESULT]:\n"+ansis.strip(components.join("\n"))+"\n")
+        opendiscord.checkers.renderer.render(components)
 
         //wait 5 seconds when there are warnings (not for errors & info)
         if (result.messages.length > 0 && result.messages.some((msg) => msg.type == "warning") && result.messages.every((msg) => msg.type != "error")) await utilities.timer(5000)
 
-        await openticket.events.get("afterCheckersRendered").emit([openticket.checkers.renderer,openticket.checkers])
+        await opendiscord.events.get("afterCheckersRendered").emit([opendiscord.checkers.renderer,opendiscord.checkers])
     }
 
     //quit config checker (when required)
-    if (openticket.checkers.lastResult && !openticket.checkers.lastResult.valid && !(disableCheckerFlag ? disableCheckerFlag.value : false)){
-        await openticket.events.get("onCheckerQuit").emit([openticket.checkers])
-        if (openticket.defaults.getDefault("checkerQuit")){
+    if (opendiscord.checkers.lastResult && !opendiscord.checkers.lastResult.valid && !(disableCheckerFlag ? disableCheckerFlag.value : false)){
+        await opendiscord.events.get("onCheckerQuit").emit([opendiscord.checkers])
+        if (opendiscord.defaults.getDefault("checkerQuit")){
             process.exit(0)
             //there is no afterCheckerQuitted event :)
         }
     }
 
     //client configuration
-    openticket.log("Loading client...","system")
-    if (openticket.defaults.getDefault("clientLoading")){
+    opendiscord.log("Loading client...","system")
+    if (opendiscord.defaults.getDefault("clientLoading")){
         //add intents (for basic permissions)
-        openticket.client.intents.push(
+        opendiscord.client.intents.push(
             "Guilds",
             "GuildMessages",
             "DirectMessages",
@@ -300,13 +300,13 @@ const main = async () => {
         )
 
         //add privileged intents (required for transcripts)
-        openticket.client.privileges.push("MessageContent","GuildMembers")
+        opendiscord.client.privileges.push("MessageContent","GuildMembers")
 
         //add partials (required for DM messages)
-        openticket.client.partials.push("Channel","Message")
+        opendiscord.client.partials.push("Channel","Message")
 
         //add permissions (not required when Administrator)
-        openticket.client.permissions.push(
+        opendiscord.client.permissions.push(
             "AddReactions",
             "AttachFiles",
             "CreatePrivateThreads",
@@ -330,24 +330,24 @@ const main = async () => {
         )
 
         //get token from config or env
-        const configToken = openticket.configs.get("openticket:general").data.token ? openticket.configs.get("openticket:general").data.token : ""
-        const envToken = openticket.env.getVariable("TOKEN") ? openticket.env.getVariable("TOKEN") : ""
-        const token = openticket.configs.get("openticket:general").data.tokenFromENV ? envToken : configToken
-        openticket.client.token = token
+        const configToken = opendiscord.configs.get("openticket:general").data.token ? opendiscord.configs.get("openticket:general").data.token : ""
+        const envToken = opendiscord.env.getVariable("TOKEN") ? opendiscord.env.getVariable("TOKEN") : ""
+        const token = opendiscord.configs.get("openticket:general").data.tokenFromENV ? envToken : configToken
+        opendiscord.client.token = token
     }
-    await openticket.events.get("onClientLoad").emit([openticket.client])
-    await openticket.events.get("afterClientLoaded").emit([openticket.client])
+    await opendiscord.events.get("onClientLoad").emit([opendiscord.client])
+    await opendiscord.events.get("afterClientLoaded").emit([opendiscord.client])
 
     //client ready
-    openticket.client.readyListener = async () => {
-        openticket.log("Loading client setup...","system")
-        await openticket.events.get("onClientReady").emit([openticket.client])
-        if (openticket.defaults.getDefault("clientReady")){
-            const client = openticket.client
+    opendiscord.client.readyListener = async () => {
+        opendiscord.log("Loading client setup...","system")
+        await opendiscord.events.get("onClientReady").emit([opendiscord.client])
+        if (opendiscord.defaults.getDefault("clientReady")){
+            const client = opendiscord.client
 
             //check if all servers are valid
             const botServers = client.getGuilds()
-            const generalConfig = openticket.configs.get("openticket:general")
+            const generalConfig = opendiscord.configs.get("openticket:general")
             const serverId = generalConfig.data.serverId ? generalConfig.data.serverId : ""
             if (!serverId) throw new api.ODSystemError("Server Id Missing!")
             
@@ -356,223 +356,223 @@ const main = async () => {
             //throw if bot isn't member of main server
             if (!mainServer || !client.checkBotInGuild(mainServer)){
                 console.log("\n")
-                openticket.log("The bot isn't a member of the server provided in the config!","error")
-                openticket.log("Please invite your bot to the server!","info")
+                opendiscord.log("The bot isn't a member of the server provided in the config!","error")
+                opendiscord.log("Please invite your bot to the server!","info")
                 console.log("\n")
                 process.exit(0)
             }
             //throw if bot doesn't have permissions in main server
             if (!client.checkGuildPerms(mainServer)){
                 console.log("\n")
-                openticket.log("The bot doesn't have the correct permissions in the server provided in the config!","error")
-                openticket.log("Please give the bot \"Administrator\" permissions or visit the documentation!","info")
+                opendiscord.log("The bot doesn't have the correct permissions in the server provided in the config!","error")
+                opendiscord.log("Please give the bot \"Administrator\" permissions or visit the documentation!","info")
                 console.log("\n")
                 process.exit(0)
             }
-            if (openticket.defaults.getDefault("clientMultiGuildWarning")){
+            if (opendiscord.defaults.getDefault("clientMultiGuildWarning")){
                 //warn if bot is in multiple servers
                 if (botServers.length > 1){
-                    openticket.log("This bot is part of multiple servers, but Open Ticket doesn't have support for it!","warning")
-                    openticket.log("It may result in the bot crashing & glitching when used in these servers!","info")
+                    opendiscord.log("This bot is part of multiple servers, but Open Ticket doesn't have support for it!","warning")
+                    opendiscord.log("It may result in the bot crashing & glitching when used in these servers!","info")
                 }
                 botServers.forEach((server) => {
                     //warn if bot doesn't have permissions in multiple servers
-                    if (!client.checkGuildPerms(server)) openticket.log(`The bot doesn't have the correct permissions in the server "${server.name}"!`,"warning")
+                    if (!client.checkGuildPerms(server)) opendiscord.log(`The bot doesn't have the correct permissions in the server "${server.name}"!`,"warning")
                 })
             }
 
             //load client activity
-            openticket.log("Loading client activity...","system")
-            if (openticket.defaults.getDefault("clientActivityLoading")){
+            opendiscord.log("Loading client activity...","system")
+            if (opendiscord.defaults.getDefault("clientActivityLoading")){
                 //load config status
-                if (generalConfig.data.status && generalConfig.data.status.enabled) openticket.client.activity.setStatus(generalConfig.data.status.type,generalConfig.data.status.text,generalConfig.data.status.status)
+                if (generalConfig.data.status && generalConfig.data.status.enabled) opendiscord.client.activity.setStatus(generalConfig.data.status.type,generalConfig.data.status.text,generalConfig.data.status.status)
             }
-            await openticket.events.get("onClientActivityLoad").emit([openticket.client.activity,openticket.client])
-            await openticket.events.get("afterClientActivityLoaded").emit([openticket.client.activity,openticket.client])
+            await opendiscord.events.get("onClientActivityLoad").emit([opendiscord.client.activity,opendiscord.client])
+            await opendiscord.events.get("afterClientActivityLoaded").emit([opendiscord.client.activity,opendiscord.client])
 
             //initiate client activity
-            await openticket.events.get("onClientActivityInit").emit([openticket.client.activity,openticket.client])
-            if (openticket.defaults.getDefault("clientActivityInitiating")){
-                openticket.client.activity.initStatus()
-                await openticket.events.get("afterClientActivityInitiated").emit([openticket.client.activity,openticket.client])
+            await opendiscord.events.get("onClientActivityInit").emit([opendiscord.client.activity,opendiscord.client])
+            if (opendiscord.defaults.getDefault("clientActivityInitiating")){
+                opendiscord.client.activity.initStatus()
+                await opendiscord.events.get("afterClientActivityInitiated").emit([opendiscord.client.activity,opendiscord.client])
             }
 
             //load slash commands
-            openticket.log("Loading slash commands...","system")
-            if (openticket.defaults.getDefault("slashCommandLoading")){
+            opendiscord.log("Loading slash commands...","system")
+            if (opendiscord.defaults.getDefault("slashCommandLoading")){
                 await (await import("./data/framework/commandLoader.js")).loadAllSlashCommands()
             }
-            await openticket.events.get("onSlashCommandLoad").emit([openticket.client.slashCommands,openticket.client])
-            await openticket.events.get("afterSlashCommandsLoaded").emit([openticket.client.slashCommands,openticket.client])
+            await opendiscord.events.get("onSlashCommandLoad").emit([opendiscord.client.slashCommands,opendiscord.client])
+            await opendiscord.events.get("afterSlashCommandsLoaded").emit([opendiscord.client.slashCommands,opendiscord.client])
             
             //register slash commands (create, update & remove)
-            if (openticket.defaults.getDefault("forceSlashCommandRegistration")) openticket.log("Forcing all slash commands to be re-registered...","system")
-            openticket.log("Registering slash commands... (this can take up to 2 minutes)","system")
-            await openticket.events.get("onSlashCommandRegister").emit([openticket.client.slashCommands,openticket.client])
-            if (openticket.defaults.getDefault("slashCommandRegistering")){
+            if (opendiscord.defaults.getDefault("forceSlashCommandRegistration")) opendiscord.log("Forcing all slash commands to be re-registered...","system")
+            opendiscord.log("Registering slash commands... (this can take up to 2 minutes)","system")
+            await opendiscord.events.get("onSlashCommandRegister").emit([opendiscord.client.slashCommands,opendiscord.client])
+            if (opendiscord.defaults.getDefault("slashCommandRegistering")){
                 //get all commands that are already registered in the bot
-                const cmds = await openticket.client.slashCommands.getAllRegisteredCommands()
+                const cmds = await opendiscord.client.slashCommands.getAllRegisteredCommands()
                 const removableCmds = cmds.unused.map((cmd) => cmd.cmd)
                 const newCmds = cmds.unregistered.map((cmd) => cmd.instance)
-                const updatableCmds = cmds.registered.filter((cmd) => cmd.requiresUpdate || openticket.defaults.getDefault("forceSlashCommandRegistration")).map((cmd) => cmd.instance)
+                const updatableCmds = cmds.registered.filter((cmd) => cmd.requiresUpdate || opendiscord.defaults.getDefault("forceSlashCommandRegistration")).map((cmd) => cmd.instance)
 
                 //init progress bars
-                const removeProgress = openticket.progressbars.get("openticket:slash-command-remove")
-                const createProgress = openticket.progressbars.get("openticket:slash-command-create")
-                const updateProgress = openticket.progressbars.get("openticket:slash-command-update")
+                const removeProgress = opendiscord.progressbars.get("openticket:slash-command-remove")
+                const createProgress = opendiscord.progressbars.get("openticket:slash-command-create")
+                const updateProgress = opendiscord.progressbars.get("openticket:slash-command-update")
 
                 //remove unused cmds, create new cmds & update existing cmds
-                if (openticket.defaults.getDefault("allowSlashCommandRemoval")) await openticket.client.slashCommands.removeUnusedCommands(removableCmds,undefined,removeProgress)
-                await openticket.client.slashCommands.createNewCommands(newCmds,createProgress)
-                await openticket.client.slashCommands.updateExistingCommands(updatableCmds,updateProgress)
+                if (opendiscord.defaults.getDefault("allowSlashCommandRemoval")) await opendiscord.client.slashCommands.removeUnusedCommands(removableCmds,undefined,removeProgress)
+                await opendiscord.client.slashCommands.createNewCommands(newCmds,createProgress)
+                await opendiscord.client.slashCommands.updateExistingCommands(updatableCmds,updateProgress)
                 
-                await openticket.events.get("afterSlashCommandsRegistered").emit([openticket.client.slashCommands,openticket.client])
+                await opendiscord.events.get("afterSlashCommandsRegistered").emit([opendiscord.client.slashCommands,opendiscord.client])
             }
 
             //load text commands
-            openticket.log("Loading text commands...","system")
-            if (openticket.defaults.getDefault("allowDumpCommand")){
+            opendiscord.log("Loading text commands...","system")
+            if (opendiscord.defaults.getDefault("allowDumpCommand")){
                 (await import("./core/startup/dump.js")).loadDumpCommand()
             }
-            if (openticket.defaults.getDefault("textCommandLoading")){
+            if (opendiscord.defaults.getDefault("textCommandLoading")){
                 await (await import("./data/framework/commandLoader.js")).loadAllTextCommands()
             }
-            await openticket.events.get("onTextCommandLoad").emit([openticket.client.textCommands,openticket.client])
-            await openticket.events.get("afterTextCommandsLoaded").emit([openticket.client.textCommands,openticket.client])
+            await opendiscord.events.get("onTextCommandLoad").emit([opendiscord.client.textCommands,opendiscord.client])
+            await opendiscord.events.get("afterTextCommandsLoaded").emit([opendiscord.client.textCommands,opendiscord.client])
 
             //client ready
-            await openticket.events.get("afterClientReady").emit([openticket.client])
+            await opendiscord.events.get("afterClientReady").emit([opendiscord.client])
         }
     }
 
     //client init (login)
-    openticket.log("Logging in...","system")
-    await openticket.events.get("onClientInit").emit([openticket.client])
-    if (openticket.defaults.getDefault("clientInitiating")){
+    opendiscord.log("Logging in...","system")
+    await opendiscord.events.get("onClientInit").emit([opendiscord.client])
+    if (opendiscord.defaults.getDefault("clientInitiating")){
         //init client
-        openticket.client.initClient()
-        await openticket.events.get("afterClientInitiated").emit([openticket.client])
+        opendiscord.client.initClient()
+        await opendiscord.events.get("afterClientInitiated").emit([opendiscord.client])
 
         //client login
-        await openticket.client.login().catch((reason) => process.emit("uncaughtException",new api.ODSystemError(reason)))
-        openticket.log("discord.js client ready!","info")
+        await opendiscord.client.login().catch((reason) => process.emit("uncaughtException",new api.ODSystemError(reason)))
+        opendiscord.log("discord.js client ready!","info")
     }
 
     //load questions
-    openticket.log("Loading questions...","system")
-    if (openticket.defaults.getDefault("questionLoading")){
+    opendiscord.log("Loading questions...","system")
+    if (opendiscord.defaults.getDefault("questionLoading")){
         await (await import("./data/openticket/questionLoader.js")).loadAllQuestions()
     }
-    await openticket.events.get("onQuestionLoad").emit([openticket.questions])
-    await openticket.events.get("afterQuestionsLoaded").emit([openticket.questions])
+    await opendiscord.events.get("onQuestionLoad").emit([opendiscord.questions])
+    await opendiscord.events.get("afterQuestionsLoaded").emit([opendiscord.questions])
     
     //load options
-    openticket.log("Loading options...","system")
-    if (openticket.defaults.getDefault("optionLoading")){
+    opendiscord.log("Loading options...","system")
+    if (opendiscord.defaults.getDefault("optionLoading")){
         await (await import("./data/openticket/optionLoader.js")).loadAllOptions()
     }
-    await openticket.events.get("onOptionLoad").emit([openticket.options])
-    await openticket.events.get("afterOptionsLoaded").emit([openticket.options])
+    await opendiscord.events.get("onOptionLoad").emit([opendiscord.options])
+    await opendiscord.events.get("afterOptionsLoaded").emit([opendiscord.options])
     
     //load panels
-    openticket.log("Loading panels...","system")
-    if (openticket.defaults.getDefault("panelLoading")){
+    opendiscord.log("Loading panels...","system")
+    if (opendiscord.defaults.getDefault("panelLoading")){
         await (await import("./data/openticket/panelLoader.js")).loadAllPanels()
     }
-    await openticket.events.get("onPanelLoad").emit([openticket.panels])
-    await openticket.events.get("afterPanelsLoaded").emit([openticket.panels])
+    await opendiscord.events.get("onPanelLoad").emit([opendiscord.panels])
+    await opendiscord.events.get("afterPanelsLoaded").emit([opendiscord.panels])
 
     //load tickets
-    openticket.log("Loading tickets...","system")
-    if (openticket.defaults.getDefault("ticketLoading")){
-        openticket.tickets.useGuild(openticket.client.mainServer)
+    opendiscord.log("Loading tickets...","system")
+    if (opendiscord.defaults.getDefault("ticketLoading")){
+        opendiscord.tickets.useGuild(opendiscord.client.mainServer)
         await (await import("./data/openticket/ticketLoader.js")).loadAllTickets()
     }
-    await openticket.events.get("onTicketLoad").emit([openticket.tickets])
-    await openticket.events.get("afterTicketsLoaded").emit([openticket.tickets])
+    await opendiscord.events.get("onTicketLoad").emit([opendiscord.tickets])
+    await opendiscord.events.get("afterTicketsLoaded").emit([opendiscord.tickets])
     
     //load roles
-    openticket.log("Loading roles...","system")
-    if (openticket.defaults.getDefault("roleLoading")){
+    opendiscord.log("Loading roles...","system")
+    if (opendiscord.defaults.getDefault("roleLoading")){
         await (await import("./data/openticket/roleLoader.js")).loadAllRoles()
     }
-    await openticket.events.get("onRoleLoad").emit([openticket.roles])
-    await openticket.events.get("afterRolesLoaded").emit([openticket.roles])
+    await opendiscord.events.get("onRoleLoad").emit([opendiscord.roles])
+    await opendiscord.events.get("afterRolesLoaded").emit([opendiscord.roles])
 
     //load blacklist
-    openticket.log("Loading blacklist...","system")
-    if (openticket.defaults.getDefault("blacklistLoading")){
+    opendiscord.log("Loading blacklist...","system")
+    if (opendiscord.defaults.getDefault("blacklistLoading")){
         await (await import("./data/openticket/blacklistLoader.js")).loadAllBlacklistedUsers()
     }
-    await openticket.events.get("onBlacklistLoad").emit([openticket.blacklist])
-    await openticket.events.get("afterBlacklistLoaded").emit([openticket.blacklist])
+    await opendiscord.events.get("onBlacklistLoad").emit([opendiscord.blacklist])
+    await opendiscord.events.get("afterBlacklistLoaded").emit([opendiscord.blacklist])
 
     //load transcript compilers
-    openticket.log("Loading transcripts...","system")
-    if (openticket.defaults.getDefault("transcriptCompilerLoading")){
+    opendiscord.log("Loading transcripts...","system")
+    if (opendiscord.defaults.getDefault("transcriptCompilerLoading")){
         await (await import("./data/openticket/transcriptLoader.js")).loadAllTranscriptCompilers()
     }
-    await openticket.events.get("onTranscriptCompilerLoad").emit([openticket.transcripts])
-    await openticket.events.get("afterTranscriptCompilersLoaded").emit([openticket.transcripts])
+    await opendiscord.events.get("onTranscriptCompilerLoad").emit([opendiscord.transcripts])
+    await opendiscord.events.get("afterTranscriptCompilersLoaded").emit([opendiscord.transcripts])
 
     //load transcript history
-    if (openticket.defaults.getDefault("transcriptHistoryLoading")){
+    if (opendiscord.defaults.getDefault("transcriptHistoryLoading")){
         await (await import("./data/openticket/transcriptLoader.js")).loadTranscriptHistory()
     }
-    await openticket.events.get("onTranscriptHistoryLoad").emit([openticket.transcripts])
-    await openticket.events.get("afterTranscriptHistoryLoaded").emit([openticket.transcripts])
+    await opendiscord.events.get("onTranscriptHistoryLoad").emit([opendiscord.transcripts])
+    await opendiscord.events.get("afterTranscriptHistoryLoaded").emit([opendiscord.transcripts])
 
     //load button builders
-    openticket.log("Loading buttons...","system")
-    if (openticket.defaults.getDefault("buttonBuildersLoading")){
+    opendiscord.log("Loading buttons...","system")
+    if (opendiscord.defaults.getDefault("buttonBuildersLoading")){
         await (await import("./builders/buttons.js")).registerAllButtons()
     }
-    await openticket.events.get("onButtonBuilderLoad").emit([openticket.builders.buttons,openticket.builders,openticket.actions])
-    await openticket.events.get("afterButtonBuildersLoaded").emit([openticket.builders.buttons,openticket.builders,openticket.actions])
+    await opendiscord.events.get("onButtonBuilderLoad").emit([opendiscord.builders.buttons,opendiscord.builders,opendiscord.actions])
+    await opendiscord.events.get("afterButtonBuildersLoaded").emit([opendiscord.builders.buttons,opendiscord.builders,opendiscord.actions])
 
     //load dropdown builders
-    openticket.log("Loading dropdowns...","system")
-    if (openticket.defaults.getDefault("dropdownBuildersLoading")){
+    opendiscord.log("Loading dropdowns...","system")
+    if (opendiscord.defaults.getDefault("dropdownBuildersLoading")){
         await (await import("./builders/dropdowns.js")).registerAllDropdowns()
     }
-    await openticket.events.get("onDropdownBuilderLoad").emit([openticket.builders.dropdowns,openticket.builders,openticket.actions])
-    await openticket.events.get("afterDropdownBuildersLoaded").emit([openticket.builders.dropdowns,openticket.builders,openticket.actions])
+    await opendiscord.events.get("onDropdownBuilderLoad").emit([opendiscord.builders.dropdowns,opendiscord.builders,opendiscord.actions])
+    await opendiscord.events.get("afterDropdownBuildersLoaded").emit([opendiscord.builders.dropdowns,opendiscord.builders,opendiscord.actions])
 
     //load file builders
-    openticket.log("Loading files...","system")
-    if (openticket.defaults.getDefault("fileBuildersLoading")){
+    opendiscord.log("Loading files...","system")
+    if (opendiscord.defaults.getDefault("fileBuildersLoading")){
         await (await import("./builders/files.js")).registerAllFiles()
     }
-    await openticket.events.get("onFileBuilderLoad").emit([openticket.builders.files,openticket.builders,openticket.actions])
-    await openticket.events.get("afterFileBuildersLoaded").emit([openticket.builders.files,openticket.builders,openticket.actions])
+    await opendiscord.events.get("onFileBuilderLoad").emit([opendiscord.builders.files,opendiscord.builders,opendiscord.actions])
+    await opendiscord.events.get("afterFileBuildersLoaded").emit([opendiscord.builders.files,opendiscord.builders,opendiscord.actions])
 
     //load embed builders
-    openticket.log("Loading embeds...","system")
-    if (openticket.defaults.getDefault("embedBuildersLoading")){
+    opendiscord.log("Loading embeds...","system")
+    if (opendiscord.defaults.getDefault("embedBuildersLoading")){
         await (await import("./builders/embeds.js")).registerAllEmbeds()
     }
-    await openticket.events.get("onEmbedBuilderLoad").emit([openticket.builders.embeds,openticket.builders,openticket.actions])
-    await openticket.events.get("afterEmbedBuildersLoaded").emit([openticket.builders.embeds,openticket.builders,openticket.actions])
+    await opendiscord.events.get("onEmbedBuilderLoad").emit([opendiscord.builders.embeds,opendiscord.builders,opendiscord.actions])
+    await opendiscord.events.get("afterEmbedBuildersLoaded").emit([opendiscord.builders.embeds,opendiscord.builders,opendiscord.actions])
 
     //load message builders
-    openticket.log("Loading messages...","system")
-    if (openticket.defaults.getDefault("messageBuildersLoading")){
+    opendiscord.log("Loading messages...","system")
+    if (opendiscord.defaults.getDefault("messageBuildersLoading")){
         await (await import("./builders/messages.js")).registerAllMessages()
     }
-    await openticket.events.get("onMessageBuilderLoad").emit([openticket.builders.messages,openticket.builders,openticket.actions])
-    await openticket.events.get("afterMessageBuildersLoaded").emit([openticket.builders.messages,openticket.builders,openticket.actions])
+    await opendiscord.events.get("onMessageBuilderLoad").emit([opendiscord.builders.messages,opendiscord.builders,opendiscord.actions])
+    await opendiscord.events.get("afterMessageBuildersLoaded").emit([opendiscord.builders.messages,opendiscord.builders,opendiscord.actions])
 
     //load modal builders
-    openticket.log("Loading modals...","system")
-    if (openticket.defaults.getDefault("modalBuildersLoading")){
+    opendiscord.log("Loading modals...","system")
+    if (opendiscord.defaults.getDefault("modalBuildersLoading")){
         await (await import("./builders/modals.js")).registerAllModals()
     }
-    await openticket.events.get("onModalBuilderLoad").emit([openticket.builders.modals,openticket.builders,openticket.actions])
-    await openticket.events.get("afterModalBuildersLoaded").emit([openticket.builders.modals,openticket.builders,openticket.actions])
+    await opendiscord.events.get("onModalBuilderLoad").emit([opendiscord.builders.modals,opendiscord.builders,opendiscord.actions])
+    await opendiscord.events.get("afterModalBuildersLoaded").emit([opendiscord.builders.modals,opendiscord.builders,opendiscord.actions])
 
     //load command responders
-    openticket.log("Loading command responders...","system")
-    if (openticket.defaults.getDefault("commandRespondersLoading")){
+    opendiscord.log("Loading command responders...","system")
+    if (opendiscord.defaults.getDefault("commandRespondersLoading")){
         await (await import("./commands/help.js")).registerCommandResponders()
         await (await import("./commands/stats.js")).registerCommandResponders()
         await (await import("./commands/panel.js")).registerCommandResponders()
@@ -593,12 +593,12 @@ const main = async () => {
         await (await import("./commands/autoclose.js")).registerCommandResponders()
         await (await import("./commands/autodelete.js")).registerCommandResponders()
     }
-    await openticket.events.get("onCommandResponderLoad").emit([openticket.responders.commands,openticket.responders,openticket.actions])
-    await openticket.events.get("afterCommandRespondersLoaded").emit([openticket.responders.commands,openticket.responders,openticket.actions])
+    await opendiscord.events.get("onCommandResponderLoad").emit([opendiscord.responders.commands,opendiscord.responders,opendiscord.actions])
+    await opendiscord.events.get("afterCommandRespondersLoaded").emit([opendiscord.responders.commands,opendiscord.responders,opendiscord.actions])
 
     //load button responders
-    openticket.log("Loading button responders...","system")
-    if (openticket.defaults.getDefault("buttonRespondersLoading")){
+    opendiscord.log("Loading button responders...","system")
+    if (opendiscord.defaults.getDefault("buttonRespondersLoading")){
         await (await import("./actions/handleVerifyBar.js")).registerButtonResponders()
         await (await import("./actions/handleTranscriptErrors.js")).registerButtonResponders()
         await (await import("./commands/help.js")).registerButtonResponders()
@@ -613,20 +613,20 @@ const main = async () => {
         await (await import("./commands/role.js")).registerButtonResponders()
         await (await import("./commands/clear.js")).registerButtonResponders()
     }
-    await openticket.events.get("onButtonResponderLoad").emit([openticket.responders.buttons,openticket.responders,openticket.actions])
-    await openticket.events.get("afterButtonRespondersLoaded").emit([openticket.responders.buttons,openticket.responders,openticket.actions])
+    await opendiscord.events.get("onButtonResponderLoad").emit([opendiscord.responders.buttons,opendiscord.responders,opendiscord.actions])
+    await opendiscord.events.get("afterButtonRespondersLoaded").emit([opendiscord.responders.buttons,opendiscord.responders,opendiscord.actions])
 
     //load dropdown responders
-    openticket.log("Loading dropdown responders...","system")
-    if (openticket.defaults.getDefault("dropdownRespondersLoading")){
+    opendiscord.log("Loading dropdown responders...","system")
+    if (opendiscord.defaults.getDefault("dropdownRespondersLoading")){
         await (await import("./commands/ticket.js")).registerDropdownResponders()
     }
-    await openticket.events.get("onDropdownResponderLoad").emit([openticket.responders.dropdowns,openticket.responders,openticket.actions])
-    await openticket.events.get("afterDropdownRespondersLoaded").emit([openticket.responders.dropdowns,openticket.responders,openticket.actions])
+    await opendiscord.events.get("onDropdownResponderLoad").emit([opendiscord.responders.dropdowns,opendiscord.responders,opendiscord.actions])
+    await opendiscord.events.get("afterDropdownRespondersLoaded").emit([opendiscord.responders.dropdowns,opendiscord.responders,opendiscord.actions])
 
     //load modal responders
-    openticket.log("Loading modal responders...","system")
-    if (openticket.defaults.getDefault("modalRespondersLoading")){
+    opendiscord.log("Loading modal responders...","system")
+    if (opendiscord.defaults.getDefault("modalRespondersLoading")){
         await (await import("./commands/ticket.js")).registerModalResponders()
         await (await import("./commands/close.js")).registerModalResponders()
         await (await import("./commands/reopen.js")).registerModalResponders()
@@ -636,12 +636,12 @@ const main = async () => {
         await (await import("./commands/pin.js")).registerModalResponders()
         await (await import("./commands/unpin.js")).registerModalResponders()
     }
-    await openticket.events.get("onModalResponderLoad").emit([openticket.responders.modals,openticket.responders,openticket.actions])
-    await openticket.events.get("afterModalRespondersLoaded").emit([openticket.responders.modals,openticket.responders,openticket.actions])
+    await opendiscord.events.get("onModalResponderLoad").emit([opendiscord.responders.modals,opendiscord.responders,opendiscord.actions])
+    await opendiscord.events.get("afterModalRespondersLoaded").emit([opendiscord.responders.modals,opendiscord.responders,opendiscord.actions])
 
     //load actions
-    openticket.log("Loading actions...","system")
-    if (openticket.defaults.getDefault("actionsLoading")){
+    opendiscord.log("Loading actions...","system")
+    if (opendiscord.defaults.getDefault("actionsLoading")){
         await (await import("./actions/createTicketPermissions.js")).registerActions()
         await (await import("./actions/createTranscript.js")).registerActions()
         await (await import("./actions/createTicket.js")).registerActions()
@@ -659,12 +659,12 @@ const main = async () => {
         await (await import("./actions/reactionRole.js")).registerActions()
         await (await import("./actions/clearTickets.js")).registerActions()
     }
-    await openticket.events.get("onActionLoad").emit([openticket.actions])
-    await openticket.events.get("afterActionsLoaded").emit([openticket.actions])
+    await opendiscord.events.get("onActionLoad").emit([opendiscord.actions])
+    await opendiscord.events.get("afterActionsLoaded").emit([opendiscord.actions])
 
     //load verifybars
-    openticket.log("Loading verifybars...","system")
-    if (openticket.defaults.getDefault("verifyBarsLoading")){
+    opendiscord.log("Loading verifybars...","system")
+    if (opendiscord.defaults.getDefault("verifyBarsLoading")){
         await (await import("./actions/closeTicket.js")).registerVerifyBars()
         await (await import("./actions/deleteTicket.js")).registerVerifyBars()
         await (await import("./actions/reopenTicket.js")).registerVerifyBars()
@@ -673,136 +673,136 @@ const main = async () => {
         await (await import("./actions/pinTicket.js")).registerVerifyBars()
         await (await import("./actions/unpinTicket.js")).registerVerifyBars()
     }
-    await openticket.events.get("onVerifyBarLoad").emit([openticket.verifybars])
-    await openticket.events.get("afterVerifyBarsLoaded").emit([openticket.verifybars])
+    await opendiscord.events.get("onVerifyBarLoad").emit([opendiscord.verifybars])
+    await opendiscord.events.get("afterVerifyBarsLoaded").emit([opendiscord.verifybars])
 
     //load permissions
-    openticket.log("Loading permissions...","system")
-    if (openticket.defaults.getDefault("permissionsLoading")){
+    opendiscord.log("Loading permissions...","system")
+    if (opendiscord.defaults.getDefault("permissionsLoading")){
         await (await import("./data/framework/permissionLoader.js")).loadAllPermissions()
     }
-    await openticket.events.get("onPermissionLoad").emit([openticket.permissions])
-    await openticket.events.get("afterPermissionsLoaded").emit([openticket.permissions])
+    await opendiscord.events.get("onPermissionLoad").emit([opendiscord.permissions])
+    await opendiscord.events.get("afterPermissionsLoaded").emit([opendiscord.permissions])
 
     //load posts
-    openticket.log("Loading posts...","system")
-    if (openticket.defaults.getDefault("postsLoading")){
+    opendiscord.log("Loading posts...","system")
+    if (opendiscord.defaults.getDefault("postsLoading")){
         await (await import("./data/framework/postLoader.js")).loadAllPosts()
     }
-    await openticket.events.get("onPostLoad").emit([openticket.posts])
-    await openticket.events.get("afterPostsLoaded").emit([openticket.posts])
+    await opendiscord.events.get("onPostLoad").emit([opendiscord.posts])
+    await opendiscord.events.get("afterPostsLoaded").emit([opendiscord.posts])
 
     //init posts
-    await openticket.events.get("onPostInit").emit([openticket.posts])
-    if (openticket.defaults.getDefault("postsInitiating")){
-        if (openticket.client.mainServer) openticket.posts.init(openticket.client.mainServer)
-        await openticket.events.get("afterPostsInitiated").emit([openticket.posts])
+    await opendiscord.events.get("onPostInit").emit([opendiscord.posts])
+    if (opendiscord.defaults.getDefault("postsInitiating")){
+        if (opendiscord.client.mainServer) opendiscord.posts.init(opendiscord.client.mainServer)
+        await opendiscord.events.get("afterPostsInitiated").emit([opendiscord.posts])
     }
 
     //load cooldowns
-    openticket.log("Loading cooldowns...","system")
-    if (openticket.defaults.getDefault("cooldownsLoading")){
+    opendiscord.log("Loading cooldowns...","system")
+    if (opendiscord.defaults.getDefault("cooldownsLoading")){
         await (await import("./data/framework/cooldownLoader.js")).loadAllCooldowns()
     }
-    await openticket.events.get("onCooldownLoad").emit([openticket.cooldowns])
-    await openticket.events.get("afterCooldownsLoaded").emit([openticket.cooldowns])
+    await opendiscord.events.get("onCooldownLoad").emit([opendiscord.cooldowns])
+    await opendiscord.events.get("afterCooldownsLoaded").emit([opendiscord.cooldowns])
     
     //init cooldowns
-    await openticket.events.get("onCooldownInit").emit([openticket.cooldowns])
-    if (openticket.defaults.getDefault("cooldownsInitiating")){
-        await openticket.cooldowns.init()
-        await openticket.events.get("afterCooldownsInitiated").emit([openticket.cooldowns])
+    await opendiscord.events.get("onCooldownInit").emit([opendiscord.cooldowns])
+    if (opendiscord.defaults.getDefault("cooldownsInitiating")){
+        await opendiscord.cooldowns.init()
+        await opendiscord.events.get("afterCooldownsInitiated").emit([opendiscord.cooldowns])
     }
 
     //load help menu categories
-    openticket.log("Loading help menu...","system")
-    if (openticket.defaults.getDefault("helpMenuCategoryLoading")){
+    opendiscord.log("Loading help menu...","system")
+    if (opendiscord.defaults.getDefault("helpMenuCategoryLoading")){
         await (await import("./data/framework/helpMenuLoader.js")).loadAllHelpMenuCategories()
     }
-    await openticket.events.get("onHelpMenuCategoryLoad").emit([openticket.helpmenu])
-    await openticket.events.get("afterHelpMenuCategoriesLoaded").emit([openticket.helpmenu])
+    await opendiscord.events.get("onHelpMenuCategoryLoad").emit([opendiscord.helpmenu])
+    await opendiscord.events.get("afterHelpMenuCategoriesLoaded").emit([opendiscord.helpmenu])
 
     //load help menu components
-    if (openticket.defaults.getDefault("helpMenuComponentLoading")){
+    if (opendiscord.defaults.getDefault("helpMenuComponentLoading")){
         await (await import("./data/framework/helpMenuLoader.js")).loadAllHelpMenuComponents()
     }
-    await openticket.events.get("onHelpMenuComponentLoad").emit([openticket.helpmenu])
-    await openticket.events.get("afterHelpMenuComponentsLoaded").emit([openticket.helpmenu])
+    await opendiscord.events.get("onHelpMenuComponentLoad").emit([opendiscord.helpmenu])
+    await opendiscord.events.get("afterHelpMenuComponentsLoaded").emit([opendiscord.helpmenu])
 
     //load stat scopes
-    openticket.log("Loading stats...","system")
-    if (openticket.defaults.getDefault("statScopesLoading")){
-        openticket.stats.useDatabase(openticket.databases.get("openticket:stats"))
+    opendiscord.log("Loading stats...","system")
+    if (opendiscord.defaults.getDefault("statScopesLoading")){
+        opendiscord.stats.useDatabase(opendiscord.databases.get("openticket:stats"))
         await (await import("./data/framework/statLoader.js")).loadAllStatScopes()
     }
-    await openticket.events.get("onStatScopeLoad").emit([openticket.stats])
-    await openticket.events.get("afterStatScopesLoaded").emit([openticket.stats])
+    await opendiscord.events.get("onStatScopeLoad").emit([opendiscord.stats])
+    await opendiscord.events.get("afterStatScopesLoaded").emit([opendiscord.stats])
 
     //load stats
-    if (openticket.defaults.getDefault("statLoading")){
+    if (opendiscord.defaults.getDefault("statLoading")){
         await (await import("./data/framework/statLoader.js")).loadAllStats()
     }
-    await openticket.events.get("onStatLoad").emit([openticket.stats])
-    await openticket.events.get("afterStatsLoaded").emit([openticket.stats])
+    await opendiscord.events.get("onStatLoad").emit([opendiscord.stats])
+    await opendiscord.events.get("afterStatsLoaded").emit([opendiscord.stats])
 
     //init stats
-    await openticket.events.get("onStatInit").emit([openticket.stats])
-    if (openticket.defaults.getDefault("statInitiating")){
-        await openticket.stats.init()
-        await openticket.events.get("afterStatsInitiated").emit([openticket.stats])
+    await opendiscord.events.get("onStatInit").emit([opendiscord.stats])
+    if (opendiscord.defaults.getDefault("statInitiating")){
+        await opendiscord.stats.init()
+        await opendiscord.events.get("afterStatsInitiated").emit([opendiscord.stats])
     }
 
     //load code
-    openticket.log("Loading code...","system")
-    if (openticket.defaults.getDefault("codeLoading")){
+    opendiscord.log("Loading code...","system")
+    if (opendiscord.defaults.getDefault("codeLoading")){
         await (await import("./data/framework/codeLoader.js")).loadAllCode()
     }
-    await openticket.events.get("onCodeLoad").emit([openticket.code])
-    await openticket.events.get("afterCodeLoaded").emit([openticket.code])
+    await opendiscord.events.get("onCodeLoad").emit([opendiscord.code])
+    await opendiscord.events.get("afterCodeLoaded").emit([opendiscord.code])
 
     //execute code
-    await openticket.events.get("onCodeExecute").emit([openticket.code])
-    if (openticket.defaults.getDefault("codeExecution")){
-        await openticket.code.execute()
-        await openticket.events.get("afterCodeExecuted").emit([openticket.code])
+    await opendiscord.events.get("onCodeExecute").emit([opendiscord.code])
+    if (opendiscord.defaults.getDefault("codeExecution")){
+        await opendiscord.code.execute()
+        await opendiscord.events.get("afterCodeExecuted").emit([opendiscord.code])
     }
 
     //finish setup
-    openticket.log("Setup complete!","info")
+    opendiscord.log("Setup complete!","info")
 
     //load livestatus sources
-    openticket.log("Loading livestatus...","system")
-    if (openticket.defaults.getDefault("liveStatusLoading")){
+    opendiscord.log("Loading livestatus...","system")
+    if (opendiscord.defaults.getDefault("liveStatusLoading")){
         await (await import("./data/framework/liveStatusLoader.js")).loadAllLiveStatusSources()
     }
-    await openticket.events.get("onLiveStatusSourceLoad").emit([openticket.livestatus])
-    await openticket.events.get("afterLiveStatusSourcesLoaded").emit([openticket.livestatus])
+    await opendiscord.events.get("onLiveStatusSourceLoad").emit([opendiscord.livestatus])
+    await opendiscord.events.get("afterLiveStatusSourcesLoaded").emit([opendiscord.livestatus])
 
     //load startscreen
-    openticket.log("Loading startscreen...","system")
-    if (openticket.defaults.getDefault("startScreenLoading")){
+    opendiscord.log("Loading startscreen...","system")
+    if (opendiscord.defaults.getDefault("startScreenLoading")){
         await (await import("./data/framework/startScreenLoader.js")).loadAllStartScreenComponents()
     }
-    await openticket.events.get("onStartScreenLoad").emit([openticket.startscreen])
-    await openticket.events.get("afterStartScreensLoaded").emit([openticket.startscreen])
+    await opendiscord.events.get("onStartScreenLoad").emit([opendiscord.startscreen])
+    await opendiscord.events.get("afterStartScreensLoaded").emit([opendiscord.startscreen])
 
     //render startscreen
-    await openticket.events.get("onStartScreenRender").emit([openticket.startscreen])
-    if (openticket.defaults.getDefault("startScreenRendering")){
-        await openticket.startscreen.renderAllComponents()
-        if (openticket.languages.getLanguageMetadata(false)?.automated){
+    await opendiscord.events.get("onStartScreenRender").emit([opendiscord.startscreen])
+    if (opendiscord.defaults.getDefault("startScreenRendering")){
+        await opendiscord.startscreen.renderAllComponents()
+        if (opendiscord.languages.getLanguageMetadata(false)?.automated){
             console.log("===================")
-            openticket.log("You are currently using a language which has been translated by Google Translate!","warning")
-            openticket.log("Please help us improve the translation by contributing to our project!","warning")
+            opendiscord.log("You are currently using a language which has been translated by Google Translate!","warning")
+            opendiscord.log("Please help us improve the translation by contributing to our project!","warning")
             console.log("===================")
         }
 
-        await openticket.events.get("afterStartScreensRendered").emit([openticket.startscreen])
+        await opendiscord.events.get("afterStartScreensRendered").emit([opendiscord.startscreen])
     }
 
     //YIPPPIE!!
     //The startup of Open Ticket is completed :)
-    openticket.readyStartupDate = new Date()
-    await openticket.events.get("onReadyForUsage").emit([])
+    opendiscord.readyStartupDate = new Date()
+    await opendiscord.events.get("onReadyForUsage").emit([])
 }
 main()

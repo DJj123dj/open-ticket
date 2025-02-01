@@ -1,13 +1,13 @@
 ///////////////////////////////////////
 //EMBED BUILDERS
 ///////////////////////////////////////
-import {openticket, api, utilities} from "../index"
+import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 import nodepath from "path"
 
-const embeds = openticket.builders.embeds
-const lang = openticket.languages
-const generalConfig = openticket.configs.get("openticket:general")
+const embeds = opendiscord.builders.embeds
+const lang = opendiscord.languages
+const generalConfig = opendiscord.configs.get("openticket:general")
 
 export const registerAllEmbeds = async () => {
     errorEmbeds()
@@ -274,7 +274,7 @@ const errorEmbeds = () => {
         new api.ODWorker("openticket:error-option-unknown",0,async (instance,params,source) => {
             const {user} = params
 
-            const renderedTicketOptions = openticket.options.getAll().map((option) => {
+            const renderedTicketOptions = opendiscord.options.getAll().map((option) => {
                 if (option instanceof api.ODTicketOption && option.exists("openticket:name")){
                     return "- **"+option.get("openticket:name").value+":** `"+option.id.value+"`"
                 }else return "- `"+option.id.value+"`"
@@ -294,7 +294,7 @@ const errorEmbeds = () => {
         new api.ODWorker("openticket:error-panel-unknown",0,async (instance,params,source) => {
             const {user} = params
 
-            const renderedPanels = openticket.panels.getAll().map((panel) => {
+            const renderedPanels = opendiscord.panels.getAll().map((panel) => {
                 if (panel.exists("openticket:name")){
                     return "- **"+panel.get("openticket:name").value+":** `"+panel.id.value+"`"
                 }else return "- `"+panel.id.value+"`"
@@ -370,9 +370,9 @@ const helpMenuEmbeds = () => {
             instance.setColor(generalConfig.data.mainColor)
             instance.setTitle(utilities.emojiTitle("ℹ️",lang.getTranslation("actions.titles.help")))
             instance.setDescription(lang.getTranslation("actions.descriptions.helpExplanation"))
-            instance.setThumbnail(openticket.client.client.user.displayAvatarURL())
+            instance.setThumbnail(opendiscord.client.client.user.displayAvatarURL())
             
-            const data = await openticket.helpmenu.render(mode)
+            const data = await opendiscord.helpmenu.render(mode)
             const currentData = data[page] ?? []
             instance.setFields(currentData)
         })
@@ -386,7 +386,7 @@ const statsEmbeds = () => {
         new api.ODWorker("openticket:stats-global",0,async (instance,params) => {
             const {guild,channel,user} = params
             
-            const scope = openticket.stats.get("openticket:global")
+            const scope = opendiscord.stats.get("openticket:global")
             if (!scope) return
             const data = await scope.render("GLOBAL",guild,channel,user)
             
@@ -394,9 +394,9 @@ const statsEmbeds = () => {
             instance.setTitle(scope.name)
             instance.setDescription(data)
             
-            if (openticket.permissions.hasPermissions("owner",await openticket.permissions.getPermissions(user,channel,guild))){
+            if (opendiscord.permissions.hasPermissions("owner",await opendiscord.permissions.getPermissions(user,channel,guild))){
                 //show system data when owner or developer
-                const systemScope = openticket.stats.get("openticket:system")
+                const systemScope = opendiscord.stats.get("openticket:system")
                 if (!systemScope) return
                 const systemData = await systemScope.render("GLOBAL",guild,channel,user)
                 instance.addFields({name:systemScope.name,value:systemData,inline:false})
@@ -410,8 +410,8 @@ const statsEmbeds = () => {
         new api.ODWorker("openticket:stats-ticket",0,async (instance,params) => {
             const {guild,channel,user,scopeData} = params
             
-            const scope = openticket.stats.get("openticket:ticket")
-            const participantsScope = openticket.stats.get("openticket:participants")
+            const scope = opendiscord.stats.get("openticket:ticket")
+            const participantsScope = opendiscord.stats.get("openticket:participants")
             if (!scope || !participantsScope) return
             const data = await scope.render(scopeData.id.value,guild,channel,user)
             const participantsData = await participantsScope.render(scopeData.id.value,guild,channel,user)
@@ -429,7 +429,7 @@ const statsEmbeds = () => {
         new api.ODWorker("openticket:stats-user",0,async (instance,params) => {
             const {guild,channel,user,scopeData} = params
             
-            const scope = openticket.stats.get("openticket:user")
+            const scope = opendiscord.stats.get("openticket:user")
             if (!scope) return
             const data = await scope.render(scopeData.id,guild,channel,user)
             
@@ -439,8 +439,8 @@ const statsEmbeds = () => {
             instance.setThumbnail(scopeData.displayAvatarURL())
         }),
         new api.ODWorker("openticket:easter-egg",-1,async (instance,params) => {
-            if (!openticket.flags.exists("openticket:no-easter")) return
-            const easterFlag = openticket.flags.get("openticket:no-easter")
+            if (!opendiscord.flags.exists("openticket:no-easter")) return
+            const easterFlag = opendiscord.flags.get("openticket:no-easter")
             if (!easterFlag.value){
                 //🥚 add easter egg 🥚
                 const {user} = params
@@ -563,7 +563,7 @@ const ticketEmbeds = () => {
             const {user,ticket} = params
             
             const method = (source == "panel-button" || source == "panel-dropdown") ? lang.getTranslation("params.uppercase.panel") : (source == "slash" || source == "text") ? lang.getTranslation("params.uppercase.command") : lang.getTranslation("params.uppercase.system")
-            const blacklisted = openticket.blacklist.exists(user.id) ? lang.getTranslation("params.uppercase.true") : lang.getTranslation("params.uppercase.false")
+            const blacklisted = opendiscord.blacklist.exists(user.id) ? lang.getTranslation("params.uppercase.true") : lang.getTranslation("params.uppercase.false")
 
             instance.setColor(generalConfig.data.mainColor)
             instance.setTitle(utilities.emojiTitle("🎫",lang.getTranslation("actions.titles.created")))
@@ -608,7 +608,7 @@ const ticketEmbeds = () => {
             else if (!ticket.get("openticket:closed").value && ticket.get("openticket:autoclose-enabled").value) instance.setFooter("⏱️ "+lang.getTranslationWithParams("actions.descriptions.ticketMessageAutoclose",[ticket.option.get("openticket:autoclose-hours").value.toString()]))
             
             if (ticket.get("openticket:claimed").value){
-                const claimUser = await openticket.tickets.getTicketUser(ticket,"claimer")
+                const claimUser = await opendiscord.tickets.getTicketUser(ticket,"claimer")
                 if (!claimUser) return
                 instance.setAuthor(lang.getTranslationWithParams("params.uppercase.claimedBy",[claimUser.displayName]),claimUser.displayAvatarURL())
             }
@@ -774,7 +774,7 @@ const ticketEmbeds = () => {
     embeds.get("openticket:ticket-action-dm").workers.add(
         new api.ODWorker("openticket:ticket-action-dm",0,async (instance,params,source) => {
             const {user,mode,ticket,reason,additionalData} = params
-            const channel = await openticket.tickets.getTicketChannel(ticket)
+            const channel = await opendiscord.tickets.getTicketChannel(ticket)
             
             instance.setColor(generalConfig.data.mainColor)
             instance.setTimestamp(new Date())
@@ -823,7 +823,7 @@ const ticketEmbeds = () => {
     embeds.get("openticket:ticket-action-logs").workers.add(
         new api.ODWorker("openticket:ticket-action-logs",0,async (instance,params,source) => {
             const {user,mode,ticket,reason,additionalData} = params
-            const channel = await openticket.tickets.getTicketChannel(ticket)
+            const channel = await opendiscord.tickets.getTicketChannel(ticket)
 
             instance.setColor(generalConfig.data.mainColor)
             instance.setThumbnail(user.displayAvatarURL())
@@ -882,7 +882,7 @@ const blacklistEmbeds = () => {
             const {user} = params
 
             const renderedUsers: string[] = []
-            await openticket.blacklist.loopAll((blacklist,id) => {renderedUsers.push(discord.userMention(id.value)+" - "+(blacklist.reason ? blacklist.reason : "/"))})
+            await opendiscord.blacklist.loopAll((blacklist,id) => {renderedUsers.push(discord.userMention(id.value)+" - "+(blacklist.reason ? blacklist.reason : "/"))})
 
             instance.setAuthor(user.displayName,user.displayAvatarURL())
             instance.setColor(generalConfig.data.mainColor)
@@ -900,7 +900,7 @@ const blacklistEmbeds = () => {
     embeds.get("openticket:blacklist-get").workers.add(
         new api.ODWorker("openticket:blacklist-get",0,async (instance,params,source) => {
             const {user,data} = params
-            const blacklist = openticket.blacklist.get(data.id)
+            const blacklist = opendiscord.blacklist.get(data.id)
 
             instance.setAuthor(user.displayName,user.displayAvatarURL())
             instance.setColor(generalConfig.data.mainColor)
@@ -985,7 +985,7 @@ const transcriptEmbeds = () => {
     embeds.get("openticket:transcript-text-ready").workers.add(
         new api.ODWorker("openticket:transcript-text-ready",0,async (instance,params,source) => {
             const {guild,channel,user,ticket,compiler} = params
-            const transcriptConfig = openticket.configs.get("openticket:transcripts")
+            const transcriptConfig = opendiscord.configs.get("openticket:transcripts")
             
             instance.setColor(transcriptConfig.data.embedSettings.customColor ? transcriptConfig.data.embedSettings.customColor : generalConfig.data.mainColor)
             instance.setTitle(utilities.emojiTitle("📄",lang.getTranslation("transcripts.success.ready")))
@@ -1015,7 +1015,7 @@ const transcriptEmbeds = () => {
     embeds.get("openticket:transcript-html-ready").workers.add(
         new api.ODWorker("openticket:transcript-html-ready",0,async (instance,params,source) => {
             const {guild,channel,user,ticket,compiler,result} = params
-            const transcriptConfig = openticket.configs.get("openticket:transcripts")
+            const transcriptConfig = opendiscord.configs.get("openticket:transcripts")
             
             instance.setColor(transcriptConfig.data.embedSettings.customColor ? transcriptConfig.data.embedSettings.customColor : generalConfig.data.mainColor)
             instance.setTitle(utilities.emojiTitle("📄",lang.getTranslation("transcripts.success.ready")))
