@@ -4,12 +4,12 @@
 import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const generalConfig = opendiscord.configs.get("openticket:general")
+const generalConfig = opendiscord.configs.get("opendiscord:general")
 
 export const registerActions = async () => {
-    opendiscord.actions.add(new api.ODAction("openticket:move-ticket"))
-    opendiscord.actions.get("openticket:move-ticket").workers.add([
-        new api.ODWorker("openticket:move-ticket",2,async (instance,params,source,cancel) => {
+    opendiscord.actions.add(new api.ODAction("opendiscord:move-ticket"))
+    opendiscord.actions.get("opendiscord:move-ticket").workers.add([
+        new api.ODWorker("opendiscord:move-ticket",2,async (instance,params,source,cancel) => {
             const {guild,channel,user,ticket,reason,data} = params
             if (channel.isThread()) throw new api.ODSystemError("Unable to move ticket! Open Ticket doesn't support threads!")
 
@@ -17,18 +17,18 @@ export const registerActions = async () => {
             ticket.option = data
 
             //update stats
-            await opendiscord.stats.get("openticket:global").setStat("openticket:tickets-moved",1,"increase")
-            await opendiscord.stats.get("openticket:user").setStat("openticket:tickets-moved",user.id,1,"increase")
+            await opendiscord.stats.get("opendiscord:global").setStat("opendiscord:tickets-moved",1,"increase")
+            await opendiscord.stats.get("opendiscord:user").setStat("opendiscord:tickets-moved",user.id,1,"increase")
 
             //get new channel properties
-            const channelPrefix = ticket.option.get("openticket:channel-prefix").value
-            const channelSuffix = ticket.get("openticket:channel-suffix").value
-            const channelCategory = ticket.option.get("openticket:channel-category").value
-            const channelBackupCategory = ticket.option.get("openticket:channel-category-backup").value
-            const rawClaimCategory = ticket.option.get("openticket:channel-categories-claimed").value.find((c) => c.user == user.id)
+            const channelPrefix = ticket.option.get("opendiscord:channel-prefix").value
+            const channelSuffix = ticket.get("opendiscord:channel-suffix").value
+            const channelCategory = ticket.option.get("opendiscord:channel-category").value
+            const channelBackupCategory = ticket.option.get("opendiscord:channel-category-backup").value
+            const rawClaimCategory = ticket.option.get("opendiscord:channel-categories-claimed").value.find((c) => c.user == user.id)
             const claimCategory = (rawClaimCategory) ? rawClaimCategory.category : null
-            const closeCategory = ticket.option.get("openticket:channel-category-closed").value
-            const channelDescription = ticket.option.get("openticket:channel-description").value
+            const closeCategory = ticket.option.get("opendiscord:channel-category-closed").value
+            const channelDescription = ticket.option.get("opendiscord:channel-description").value
             const channelName = channelPrefix+channelSuffix
 
             //handle category
@@ -38,7 +38,7 @@ export const registerActions = async () => {
                 //use claim category
                 category = claimCategory
                 categoryMode = "claimed"
-            }else if (closeCategory != "" && ticket.get("openticket:closed").value){
+            }else if (closeCategory != "" && ticket.get("opendiscord:closed").value){
                 //use close category
                 category = closeCategory
                 categoryMode = "closed"
@@ -79,8 +79,8 @@ export const registerActions = async () => {
                 if (channel.parentId != category) await utilities.timedAwait(channel.setParent(category,{lockPermissions:false}),2500,(err) => {
                     opendiscord.log("Failed to change channel category on ticket move","error")
                 })
-                ticket.get("openticket:category-mode").value = categoryMode
-                ticket.get("openticket:category").value = category
+                ticket.get("opendiscord:category-mode").value = categoryMode
+                ticket.get("opendiscord:category").value = category
             }catch(e){
                 opendiscord.log("Unable to move ticket to 'moved category'!","error",[
                     {key:"channel",value:"#"+channel.name},
@@ -97,9 +97,9 @@ export const registerActions = async () => {
                 allow:[],
                 deny:["ViewChannel","SendMessages","ReadMessageHistory"]
             }]
-            const globalAdmins = opendiscord.configs.get("openticket:general").data.globalAdmins
-            const optionAdmins = ticket.option.get("openticket:admins").value
-            const readonlyAdmins = ticket.option.get("openticket:admins-readonly").value
+            const globalAdmins = opendiscord.configs.get("opendiscord:general").data.globalAdmins
+            const optionAdmins = ticket.option.get("opendiscord:admins").value
+            const readonlyAdmins = ticket.option.get("opendiscord:admins-readonly").value
 
             globalAdmins.forEach((admin) => {
                 permissions.push({
@@ -129,7 +129,7 @@ export const registerActions = async () => {
                 })
             })
             //transfer all old user-participants over to the new ticket (creator & participants)
-            ticket.get("openticket:participants").value.forEach((p) => {
+            ticket.get("opendiscord:participants").value.forEach((p) => {
                 if (p.type == "user") permissions.push({
                     type:discord.OverwriteType.Member,
                     id:p.id,
@@ -151,8 +151,8 @@ export const registerActions = async () => {
                 const id = permission.id as string
                 participants.push({type,id})
             })
-            ticket.get("openticket:participants").value = participants
-            ticket.get("openticket:participants").refreshDatabase()
+            ticket.get("opendiscord:participants").value = participants
+            ticket.get("opendiscord:participants").refreshDatabase()
 
             //rename channel (and give error when crashed)
             const originalName = channel.name
@@ -161,7 +161,7 @@ export const registerActions = async () => {
                     opendiscord.log("Failed to rename channel on ticket move","error")
                 })
             }catch(err){
-                await channel.send((await opendiscord.builders.messages.getSafe("openticket:error-channel-rename").build("ticket-move",{guild,channel,user,originalName,newName:channelName})).message)
+                await channel.send((await opendiscord.builders.messages.getSafe("opendiscord:error-channel-rename").build("ticket-move",{guild,channel,user,originalName,newName:channelName})).message)
             }
             try{
                 if (channel.type == discord.ChannelType.GuildText) channel.setTopic(channelDescription)
@@ -171,7 +171,7 @@ export const registerActions = async () => {
             const ticketMessage = await opendiscord.tickets.getTicketMessage(ticket)
             if (ticketMessage){
                 try{
-                    ticketMessage.edit((await opendiscord.builders.messages.getSafe("openticket:ticket-message").build("other",{guild,channel,user,ticket})).message)
+                    ticketMessage.edit((await opendiscord.builders.messages.getSafe("opendiscord:ticket-message").build("other",{guild,channel,user,ticket})).message)
                 }catch(e){
                     opendiscord.log("Unable to edit ticket message on ticket renaming!","error",[
                         {key:"channel",value:"#"+channel.name},
@@ -184,24 +184,24 @@ export const registerActions = async () => {
             }
 
             //reply with new message
-            if (params.sendMessage) await channel.send((await opendiscord.builders.messages.getSafe("openticket:move-message").build(source,{guild,channel,user,ticket,reason,data})).message)
-            ticket.get("openticket:busy").value = false
+            if (params.sendMessage) await channel.send((await opendiscord.builders.messages.getSafe("opendiscord:move-message").build(source,{guild,channel,user,ticket,reason,data})).message)
+            ticket.get("opendiscord:busy").value = false
             await opendiscord.events.get("afterTicketMoved").emit([ticket,user,channel,reason])
         }),
-        new api.ODWorker("openticket:discord-logs",1,async (instance,params,source,cancel) => {
+        new api.ODWorker("opendiscord:discord-logs",1,async (instance,params,source,cancel) => {
             const {guild,channel,user,ticket,reason,data} = params
 
             //to logs
             if (generalConfig.data.system.logs.enabled && generalConfig.data.system.messages.moving.logs){
-                const logChannel = opendiscord.posts.get("openticket:logs")
-                if (logChannel) logChannel.send(await opendiscord.builders.messages.getSafe("openticket:ticket-action-logs").build(source,{guild,channel,user,ticket,mode:"move",reason,additionalData:data}))
+                const logChannel = opendiscord.posts.get("opendiscord:logs")
+                if (logChannel) logChannel.send(await opendiscord.builders.messages.getSafe("opendiscord:ticket-action-logs").build(source,{guild,channel,user,ticket,mode:"move",reason,additionalData:data}))
             }
 
             //to dm
             const creator = await opendiscord.tickets.getTicketUser(ticket,"creator")
-            if (creator && generalConfig.data.system.messages.moving.dm) await opendiscord.client.sendUserDm(creator,await opendiscord.builders.messages.getSafe("openticket:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"move",reason,additionalData:data}))
+            if (creator && generalConfig.data.system.messages.moving.dm) await opendiscord.client.sendUserDm(creator,await opendiscord.builders.messages.getSafe("opendiscord:ticket-action-dm").build(source,{guild,channel,user,ticket,mode:"move",reason,additionalData:data}))
         }),
-        new api.ODWorker("openticket:logs",0,(instance,params,source,cancel) => {
+        new api.ODWorker("opendiscord:logs",0,(instance,params,source,cancel) => {
             const {guild,channel,user,ticket} = params
 
             opendiscord.log(user.displayName+" moved a ticket!","info",[
@@ -214,8 +214,8 @@ export const registerActions = async () => {
             ])
         })
     ])
-    opendiscord.actions.get("openticket:move-ticket").workers.backupWorker = new api.ODWorker("openticket:cancel-busy",0,(instance,params) => {
+    opendiscord.actions.get("opendiscord:move-ticket").workers.backupWorker = new api.ODWorker("opendiscord:cancel-busy",0,(instance,params) => {
         //set busy to false in case of crash or cancel
-        params.ticket.get("openticket:busy").value = false
+        params.ticket.get("opendiscord:busy").value = false
     })
 }

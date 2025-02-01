@@ -46,9 +46,6 @@ export type ODInterfaceWithPartialProperty<Interface,Key extends keyof Interface
  * It can only contain the following characters: `a-z`, `A-Z`, `0-9`, `:`, `-` & `_`
  * 
  * You can use this class to assign a unique id when creating configs, databases, languages & more!
- * @example
- * const id = new api.ODId("openticket:test-id") //this is valid
- * const id = new api.ODId("example%id?") //this is invalid
  */
 export class ODId {
     /**The full value of this `ODId` as a `string`. */

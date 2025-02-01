@@ -1,7 +1,7 @@
 import {opendiscord, api, utilities} from "../../index"
 import * as fjs from "formatted-json-stringify"
 
-const devdatabaseFlag = opendiscord.flags.get("openticket:dev-database")
+const devdatabaseFlag = opendiscord.flags.get("opendiscord:dev-database")
 const isDevdatabase = devdatabaseFlag ? devdatabaseFlag.value : false
 
 export const loadAllDatabases = async () => {
@@ -46,8 +46,8 @@ const defaultOptionFormatter = new fjs.ArrayFormatter(null,true,new fjs.ObjectFo
     ])
 ]))
 
-export const defaultGlobalDatabase = new api.ODFormattedJsonDatabase("openticket:global","global.json",defaultInlineFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
-export const defaultStatsDatabase = new api.ODFormattedJsonDatabase("openticket:stats","stats.json",defaultInlineFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
-export const defaultTicketsDatabase = new api.ODFormattedJsonDatabase("openticket:tickets","tickets.json",defaultTicketFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
-export const defaultUsersDatabase = new api.ODFormattedJsonDatabase("openticket:users","users.json",defaultInlineFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
-export const defaultOptionsDatabase = new api.ODFormattedJsonDatabase("openticket:options","options.json",defaultOptionFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
+export const defaultGlobalDatabase = new api.ODFormattedJsonDatabase("opendiscord:global","global.json",defaultInlineFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
+export const defaultStatsDatabase = new api.ODFormattedJsonDatabase("opendiscord:stats","stats.json",defaultInlineFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
+export const defaultTicketsDatabase = new api.ODFormattedJsonDatabase("opendiscord:tickets","tickets.json",defaultTicketFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
+export const defaultUsersDatabase = new api.ODFormattedJsonDatabase("opendiscord:users","users.json",defaultInlineFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")
+export const defaultOptionsDatabase = new api.ODFormattedJsonDatabase("opendiscord:options","options.json",defaultOptionFormatter,(isDevdatabase) ? "./devdatabase/" : "./database/")

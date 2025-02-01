@@ -9,20 +9,20 @@ import { ODFlagManager, ODFlag } from "../modules/flag"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFlagManagerIds_Default {
-    "openticket:no-migration":ODFlag,
-    "openticket:dev-config":ODFlag,
-    "openticket:dev-database":ODFlag,
-    "openticket:debug":ODFlag,
-    "openticket:crash":ODFlag,
-    "openticket:no-transcripts":ODFlag,
-    "openticket:no-checker":ODFlag,
-    "openticket:checker":ODFlag,
-    "openticket:no-easter":ODFlag,
-    "openticket:no-plugins":ODFlag,
-    "openticket:soft-plugins":ODFlag,
-    "openticket:force-slash-update":ODFlag,
-    "openticket:no-compile":ODFlag,
-    "openticket:compile-only":ODFlag,
+    "opendiscord:no-migration":ODFlag,
+    "opendiscord:dev-config":ODFlag,
+    "opendiscord:dev-database":ODFlag,
+    "opendiscord:debug":ODFlag,
+    "opendiscord:crash":ODFlag,
+    "opendiscord:no-transcripts":ODFlag,
+    "opendiscord:no-checker":ODFlag,
+    "opendiscord:checker":ODFlag,
+    "opendiscord:no-easter":ODFlag,
+    "opendiscord:no-plugins":ODFlag,
+    "opendiscord:soft-plugins":ODFlag,
+    "opendiscord:force-slash-update":ODFlag,
+    "opendiscord:no-compile":ODFlag,
+    "opendiscord:compile-only":ODFlag,
 }
 
 /**## ODFlagManager_Default `default_class`

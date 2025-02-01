@@ -442,7 +442,7 @@ export class ODCheckerObjectStructure extends ODCheckerStructure {
 
         //check type & options
         if (typeof value != "object"){
-            checker.createMessage("openticket:invalid-type","error","This property needs to be the type: object!",lt,null,["object"],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: object!",lt,null,["object"],this.id,(this.options.docs ?? null))
             return false
         }
         
@@ -463,9 +463,9 @@ export class ODCheckerObjectStructure extends ODCheckerStructure {
             if (typeof value[child.key] == "undefined"){
                 if (!child.optional){
                     localQuit = true
-                    checker.createMessage("openticket:property-missing","error",`The property "${child.key}" is mising from this object!`,lt,null,[`"${child.key}"`],this.id,(this.options.docs ?? null))
+                    checker.createMessage("opendiscord:property-missing","error",`The property "${child.key}" is mising from this object!`,lt,null,[`"${child.key}"`],this.id,(this.options.docs ?? null))
                 }else{
-                    checker.createMessage("openticket:property-optional","info",`The property "${child.key}" is optional in this object!`,lt,null,[`"${child.key}"`],this.id,(this.options.docs ?? null))
+                    checker.createMessage("opendiscord:property-optional","info",`The property "${child.key}" is optional in this object!`,lt,null,[`"${child.key}"`],this.id,(this.options.docs ?? null))
                 }
             }else if (!child.checker.check(checker,value[child.key],localLt)) localQuit = true
         })
@@ -515,31 +515,31 @@ export class ODCheckerStringStructure extends ODCheckerStructure {
 
         //check type & options
         if (typeof value != "string"){
-            checker.createMessage("openticket:invalid-type","error","This property needs to be the type: string!",lt,null,["string"],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: string!",lt,null,["string"],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.minLength != "undefined" && value.length < this.options.minLength){
-            checker.createMessage("openticket:string-too-short","error",`This string can't be shorter than ${this.options.minLength} characters!`,lt,null,[this.options.minLength.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-too-short","error",`This string can't be shorter than ${this.options.minLength} characters!`,lt,null,[this.options.minLength.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.maxLength != "undefined" && value.length > this.options.maxLength){
-            checker.createMessage("openticket:string-too-long","error",`This string can't be longer than ${this.options.maxLength} characters!`,lt,null,[this.options.maxLength.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-too-long","error",`This string can't be longer than ${this.options.maxLength} characters!`,lt,null,[this.options.maxLength.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.length != "undefined" && value.length !== this.options.length){
-            checker.createMessage("openticket:string-length-invalid","error",`This string needs to be ${this.options.length} characters long!`,lt,null,[this.options.length.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-length-invalid","error",`This string needs to be ${this.options.length} characters long!`,lt,null,[this.options.length.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.startsWith != "undefined" && !value.startsWith(this.options.startsWith)){
-            checker.createMessage("openticket:string-starts-with","error",`This string needs to start with "${this.options.startsWith}"!`,lt,null,[`"${this.options.startsWith}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-starts-with","error",`This string needs to start with "${this.options.startsWith}"!`,lt,null,[`"${this.options.startsWith}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.endsWith != "undefined" && !value.endsWith(this.options.endsWith)){
-            checker.createMessage("openticket:string-ends-with","error",`This string needs to end with "${this.options.endsWith}"!`,lt,null,[`"${this.options.endsWith}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-ends-with","error",`This string needs to end with "${this.options.endsWith}"!`,lt,null,[`"${this.options.endsWith}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.contains != "undefined" && !value.includes(this.options.contains)){
-            checker.createMessage("openticket:string-contains","error",`This string needs to contain "${this.options.contains}"!`,lt,null,[`"${this.options.contains}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-contains","error",`This string needs to contain "${this.options.contains}"!`,lt,null,[`"${this.options.contains}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.choices != "undefined" && !this.options.choices.includes(value)){
-            checker.createMessage("openticket:string-choices","error",`This string can only be one of the following values: "${this.options.choices.join(`", "`)}"!`,lt,null,[`"${this.options.choices.join(`", "`)}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-choices","error",`This string can only be one of the following values: "${this.options.choices.join(`", "`)}"!`,lt,null,[`"${this.options.choices.join(`", "`)}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.regex != "undefined" && !this.options.regex.test(value)){
-            checker.createMessage("openticket:string-regex","error","This string is invalid!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:string-regex","error","This string is invalid!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else return super.check(checker,value,locationTrace)
     }
@@ -603,53 +603,53 @@ export class ODCheckerNumberStructure extends ODCheckerStructure {
 
         //check type & options
         if (typeof value != "number"){
-            checker.createMessage("openticket:invalid-type","error","This property needs to be the type: number!",lt,null,["number"],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: number!",lt,null,["number"],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.minLength != "undefined" && value.toString().length < this.options.minLength){
-            checker.createMessage("openticket:number-too-short","error",`This number can't be shorter than ${this.options.minLength} characters!`,lt,null,[this.options.minLength.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-too-short","error",`This number can't be shorter than ${this.options.minLength} characters!`,lt,null,[this.options.minLength.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.maxLength != "undefined" && value.toString().length > this.options.maxLength){
-            checker.createMessage("openticket:number-too-long","error",`This number can't be longer than ${this.options.maxLength} characters!`,lt,null,[this.options.maxLength.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-too-long","error",`This number can't be longer than ${this.options.maxLength} characters!`,lt,null,[this.options.maxLength.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.length != "undefined" && value.toString().length !== this.options.length){
-            checker.createMessage("openticket:number-length-invalid","error",`This number needs to be ${this.options.length} characters long!`,lt,null,[this.options.length.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-length-invalid","error",`This number needs to be ${this.options.length} characters long!`,lt,null,[this.options.length.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.min != "undefined" && value < this.options.min){
-            checker.createMessage("openticket:number-too-small","error",`This number needs to be at least ${this.options.min}!`,lt,null,[this.options.min.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-too-small","error",`This number needs to be at least ${this.options.min}!`,lt,null,[this.options.min.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.max != "undefined" && value > this.options.max){
-            checker.createMessage("openticket:number-too-large","error",`This number needs to be at most ${this.options.max}!`,lt,null,[this.options.max.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-too-large","error",`This number needs to be at most ${this.options.max}!`,lt,null,[this.options.max.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.is != "undefined" && value == this.options.is){
-            checker.createMessage("openticket:number-not-equal","error",`This number needs to be ${this.options.is}!`,lt,null,[this.options.is.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-not-equal","error",`This number needs to be ${this.options.is}!`,lt,null,[this.options.is.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.step != "undefined" && ((value - stepOffset) % this.options.step) !== 0){
-            if (stepOffset > 0) checker.createMessage("openticket:number-step-offset","error",`This number needs to be a multiple of ${this.options.step} starting with ${stepOffset}!`,lt,null,[this.options.step.toString(),stepOffset.toString()],this.id,(this.options.docs ?? null))
-            else checker.createMessage("openticket:number-step","error",`This number needs to be a multiple of ${this.options.step}!`,lt,null,[this.options.step.toString()],this.id,(this.options.docs ?? null))
+            if (stepOffset > 0) checker.createMessage("opendiscord:number-step-offset","error",`This number needs to be a multiple of ${this.options.step} starting with ${stepOffset}!`,lt,null,[this.options.step.toString(),stepOffset.toString()],this.id,(this.options.docs ?? null))
+            else checker.createMessage("opendiscord:number-step","error",`This number needs to be a multiple of ${this.options.step}!`,lt,null,[this.options.step.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.startsWith != "undefined" && !value.toString().startsWith(this.options.startsWith)){
-            checker.createMessage("openticket:number-starts-with","error",`This number needs to start with "${this.options.startsWith}"!`,lt,null,[`"${this.options.startsWith}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-starts-with","error",`This number needs to start with "${this.options.startsWith}"!`,lt,null,[`"${this.options.startsWith}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.endsWith != "undefined" && !value.toString().endsWith(this.options.endsWith)){
-            checker.createMessage("openticket:number-ends-with","error",`This number needs to end with "${this.options.endsWith}"!`,lt,null,[`"${this.options.endsWith}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-ends-with","error",`This number needs to end with "${this.options.endsWith}"!`,lt,null,[`"${this.options.endsWith}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.contains != "undefined" && !value.toString().includes(this.options.contains)){
-            checker.createMessage("openticket:number-contains","error",`This number needs to contain "${this.options.contains}"!`,lt,null,[`"${this.options.contains}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-contains","error",`This number needs to contain "${this.options.contains}"!`,lt,null,[`"${this.options.contains}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.choices != "undefined" && !this.options.choices.includes(value)){
-            checker.createMessage("openticket:number-choices","error",`This number can only be one of the following values: "${this.options.choices.join(`", "`)}"!`,lt,null,[`"${this.options.choices.join(`", "`)}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-choices","error",`This number can only be one of the following values: "${this.options.choices.join(`", "`)}"!`,lt,null,[`"${this.options.choices.join(`", "`)}"`],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.floatAllowed != "undefined" && !this.options.floatAllowed && (value % 1) !== 0){
-            checker.createMessage("openticket:number-float","error","This number can't be a decimal!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-float","error","This number can't be a decimal!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.negativeAllowed != "undefined" && value < 0){
-            checker.createMessage("openticket:number-negative","error","This number can't be negative!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-negative","error","This number can't be negative!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.positiveAllowed != "undefined" && value > 0){
-            checker.createMessage("openticket:number-positive","error","This number can't be positive!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-positive","error","This number can't be positive!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.zeroAllowed != "undefined" && value === 0){
-            checker.createMessage("openticket:number-zero","error","This number can't be zero!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:number-zero","error","This number can't be zero!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else return super.check(checker,value,locationTrace)
     }
@@ -682,13 +682,13 @@ export class ODCheckerBooleanStructure extends ODCheckerStructure {
 
         //check type & options
         if (typeof value != "boolean"){
-            checker.createMessage("openticket:invalid-type","error","This property needs to be the type: boolean!",lt,null,["boolean"],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: boolean!",lt,null,["boolean"],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.trueAllowed != "undefined" && !this.options.trueAllowed && value == true){
-            checker.createMessage("openticket:boolean-true","error","This boolean can't be true!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:boolean-true","error","This boolean can't be true!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.falseAllowed != "undefined" && !this.options.falseAllowed && value == false){
-            checker.createMessage("openticket:boolean-false","error","This boolean can't be false!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:boolean-false","error","This boolean can't be false!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else return super.check(checker,value,locationTrace)
     }
@@ -732,28 +732,28 @@ export class ODCheckerArrayStructure extends ODCheckerStructure {
         const lt = checker.locationTraceDeref(locationTrace)
         
         if (!Array.isArray(value)){
-            checker.createMessage("openticket:invalid-type","error","This property needs to be the type: array!",lt,null,["array"],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: array!",lt,null,["array"],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.disableEmpty != "undefined" && this.options.disableEmpty && value.length == 0){
-            checker.createMessage("openticket:array-empty-disabled","error","This array isn't allowed to be empty!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:array-empty-disabled","error","This array isn't allowed to be empty!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.emptyRequired != "undefined" && this.options.emptyRequired && value.length != 0){
-            checker.createMessage("openticket:array-empty-required","error","This array is required to be empty!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:array-empty-required","error","This array is required to be empty!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.minLength != "undefined" && value.length < this.options.minLength){
-            checker.createMessage("openticket:array-too-short","error",`This array needs to have a length of at least ${this.options.minLength}!`,lt,null,[this.options.minLength.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:array-too-short","error",`This array needs to have a length of at least ${this.options.minLength}!`,lt,null,[this.options.minLength.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.maxLength != "undefined" && value.length > this.options.maxLength){
-            checker.createMessage("openticket:array-too-long","error",`This array needs to have a length of at most ${this.options.maxLength}!`,lt,null,[this.options.maxLength.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:array-too-long","error",`This array needs to have a length of at most ${this.options.maxLength}!`,lt,null,[this.options.maxLength.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.length != "undefined" && value.length == this.options.length){
-            checker.createMessage("openticket:array-length-invalid","error",`This array needs to have a length of ${this.options.length}!`,lt,null,[this.options.length.toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:array-length-invalid","error",`This array needs to have a length of ${this.options.length}!`,lt,null,[this.options.length.toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.allowedTypes != "undefined" && !this.#arrayAllowedTypesCheck(value,this.options.allowedTypes)){
-            checker.createMessage("openticket:array-invalid-types","error",`This array can only contain the following types: ${this.options.allowedTypes.join(", ")}!`,lt,null,[this.options.allowedTypes.join(", ").toString()],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:array-invalid-types","error",`This array can only contain the following types: ${this.options.allowedTypes.join(", ")}!`,lt,null,[this.options.allowedTypes.join(", ").toString()],this.id,(this.options.docs ?? null))
             return false
         }else if (typeof this.options.allowDoubles != "undefined" && !this.options.allowDoubles && this.#arrayHasDoubles(value)){
-            checker.createMessage("openticket:array-double","error","This array doesn't allow the same value twice!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:array-double","error","This array doesn't allow the same value twice!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else{
             //check all properties
@@ -836,10 +836,10 @@ export class ODCheckerNullStructure extends ODCheckerStructure {
 
         //check type & options
         if (typeof this.options.nullAllowed != "undefined" && !this.options.nullAllowed && value == null){
-            checker.createMessage("openticket:null-invalid","error","This property can't be null!",lt,null,[],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:null-invalid","error","This property can't be null!",lt,null,[],this.id,(this.options.docs ?? null))
             return false
         }else if (value !== null){
-            checker.createMessage("openticket:invalid-type","error","This property needs to be the type: null!",lt,null,["null"],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: null!",lt,null,["null"],this.id,(this.options.docs ?? null))
             return false
         }else return super.check(checker,value,locationTrace)
     }
@@ -909,7 +909,7 @@ export class ODCheckerTypeSwitchStructure extends ODCheckerStructure {
             return this.options.other.check(checker,value,lt)
 
         }else if (this.options.allowedTypes && this.options.allowedTypes.length > 0){
-            checker.createMessage("openticket:switch-invalid-type","error",`This needs to be one of the following types: ${this.options.allowedTypes.join(", ")}!`,lt,null,[this.options.allowedTypes.join(", ")],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:switch-invalid-type","error",`This needs to be one of the following types: ${this.options.allowedTypes.join(", ")}!`,lt,null,[this.options.allowedTypes.join(", ")],this.id,(this.options.docs ?? null))
             return false
         }else return super.check(checker,value,locationTrace)
     }
@@ -950,7 +950,7 @@ export class ODCheckerObjectSwitchStructure extends ODCheckerStructure {
         if (this.options.objects){
             //check type & options
             if (typeof value != "object"){
-                checker.createMessage("openticket:invalid-type","error","This property needs to be the type: object!",lt,null,["object"],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: object!",lt,null,["object"],this.id,(this.options.docs ?? null))
                 return false
             }
             
@@ -974,7 +974,7 @@ export class ODCheckerObjectSwitchStructure extends ODCheckerStructure {
 
             //do local quit or check custom function
             if (!didSelectObject){
-                checker.createMessage("openticket:object-switch-invalid-type","error",`This object needs to be one of the following types: ${this.options.objects.map((obj) => obj.name).join(", ")}!`,lt,null,[this.options.objects.map((obj) => obj.name).join(", ")],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:object-switch-invalid-type","error",`This object needs to be one of the following types: ${this.options.objects.map((obj) => obj.name).join(", ")}!`,lt,null,[this.options.objects.map((obj) => obj.name).join(", ")],this.id,(this.options.docs ?? null))
                 return false
             }else if (localQuit){
                 return false
@@ -1012,12 +1012,12 @@ export class ODCheckerEnabledObjectStructure extends ODCheckerStructure {
         
         if (typeof value != "object"){
             //value isn't an object
-            checker.createMessage("openticket:invalid-type","error","This property needs to be the type: object!",lt,null,["object"],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:invalid-type","error","This property needs to be the type: object!",lt,null,["object"],this.id,(this.options.docs ?? null))
             return false
 
         }else if (this.options.property && typeof value[this.options.property] == "undefined"){
             //property doesn't exist
-            checker.createMessage("openticket:property-missing","error",`The property "${this.options.property}" is mising from this object!`,lt,null,[`"${this.options.property}"`],this.id,(this.options.docs ?? null))
+            checker.createMessage("opendiscord:property-missing","error",`The property "${this.options.property}" is mising from this object!`,lt,null,[`"${this.options.property}"`],this.id,(this.options.docs ?? null))
             return false
 
         }else if (this.options.property && value[this.options.property] === (typeof this.options.enabledValue == "undefined" ? true : this.options.enabledValue)){
@@ -1027,7 +1027,7 @@ export class ODCheckerEnabledObjectStructure extends ODCheckerStructure {
 
         }else{
             //this object is disabled
-            if (this.options.property) checker.createMessage("openticket:object-disabled","info",`This object is disabled, enable it using "${this.options.property}"!`,lt,null,[`"${this.options.property}"`],this.id,(this.options.docs ?? null))
+            if (this.options.property) checker.createMessage("opendiscord:object-disabled","info",`This object is disabled, enable it using "${this.options.property}"!`,lt,null,[`"${this.options.property}"`],this.id,(this.options.docs ?? null))
             return super.check(checker,value,locationTrace)
         }
     }
@@ -1059,8 +1059,8 @@ export class ODCheckerCustomStructure_DiscordId extends ODCheckerStringStructure
             else if ((!emptyAllowed && value.length < 15) || value.length > 50 || !/^[0-9]*$/.test(value)){
                 if (!(extraOptions.length > 0 && extraOptions.some((opt) => opt == value))){
                     //value is not an id & not one of the extra options
-                    if (extraOptions.length > 0) checker.createMessage("openticket:discord-invalid-id-options","error",`This is an invalid discord ${type} id! You can also use one of these: ${extraOptions.join(", ")}!`,lt,null,[type,extraOptions.join(", ")],this.id,(this.options.docs ?? null))
-                    else checker.createMessage("openticket:discord-invalid-id","error",`This is an invalid discord ${type} id!`,lt,null,[type],this.id,(this.options.docs ?? null))
+                    if (extraOptions.length > 0) checker.createMessage("opendiscord:discord-invalid-id-options","error",`This is an invalid discord ${type} id! You can also use one of these: ${extraOptions.join(", ")}!`,lt,null,[type,extraOptions.join(", ")],this.id,(this.options.docs ?? null))
+                    else checker.createMessage("opendiscord:discord-invalid-id","error",`This is an invalid discord ${type} id!`,lt,null,[type],this.id,(this.options.docs ?? null))
                 return false
                 }else return true
             }
@@ -1113,7 +1113,7 @@ export class ODCheckerCustomStructure_DiscordToken extends ODCheckerStringStruct
             const lt = checker.locationTraceDeref(locationTrace)
 
             if (typeof value != "string" || !/^[A-Za-z0-9-_\.]+$/.test(value)){
-                checker.createMessage("openticket:discord-invalid-token","error","This is an invalid discord token (syntactically)!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:discord-invalid-token","error","This is an invalid discord token (syntactically)!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }
             return true
@@ -1146,7 +1146,7 @@ export class ODCheckerCustomStructure_HexColor extends ODCheckerStringStructure 
             else if (emptyAllowed && value.length == 0){
                 return true
             }else if ((!allowShortForm && !/^#[a-fA-F0-9]{6}$/.test(value)) || (allowShortForm && !/^#[a-fA-F0-9]{6}$/.test(value) && !/^#[a-fA-F0-9]{3}$/.test(value))){
-                checker.createMessage("openticket:color-invalid","error","This is an invalid hex color!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:color-invalid","error","This is an invalid hex color!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else return true
         }
@@ -1186,16 +1186,16 @@ export class ODCheckerCustomStructure_EmojiString extends ODCheckerStringStructu
             const emojiAmount = discordEmojiAmount+unicodeEmojiAmount
 
             if (emojiAmount < minLength){
-                checker.createMessage("openticket:emoji-too-short","error",`This string needs to have at least ${minLength} emoji's!`,lt,null,[maxLength.toString()],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:emoji-too-short","error",`This string needs to have at least ${minLength} emoji's!`,lt,null,[maxLength.toString()],this.id,(this.options.docs ?? null))
                 return false
             }else if (emojiAmount > maxLength){
-                checker.createMessage("openticket:emoji-too-long","error",`This string needs to have at most ${maxLength} emoji's!`,lt,null,[maxLength.toString()],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:emoji-too-long","error",`This string needs to have at most ${maxLength} emoji's!`,lt,null,[maxLength.toString()],this.id,(this.options.docs ?? null))
                 return false
             }else if (!allowCustomDiscordEmoji && /<a?:[^:]*:[0-9]+>/.test(value)){
-                checker.createMessage("openticket:emoji-custom","error",`This emoji can't be a custom discord emoji!`,lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:emoji-custom","error",`This emoji can't be a custom discord emoji!`,lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else if (!/^(?:\p{Emoji}|\p{Emoji_Component}|(?:<a?:[^:]*:[0-9]+>))*$/u.test(value)){
-                checker.createMessage("openticket:emoji-invalid","error","This is an invalid emoji!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:emoji-invalid","error","This is an invalid emoji!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }
             return true
@@ -1247,25 +1247,25 @@ export class ODCheckerCustomStructure_UrlString extends ODCheckerStringStructure
             else if (emptyAllowed && value.length == 0){
                 return true
             }else if (!this.#urlIsValid(value)){
-                checker.createMessage("openticket:url-invalid","error","This url is invalid!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:url-invalid","error","This url is invalid!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else if (typeof this.urlSettings.allowHttp != "undefined" && !this.urlSettings.allowHttp && !/^(https:\/\/)/.test(value)){
-                checker.createMessage("openticket:url-invalid-http","error","This url can only use the https:// protocol!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:url-invalid-http","error","This url can only use the https:// protocol!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else if (!/^(http(s)?:\/\/)/.test(value)){
-                checker.createMessage("openticket:url-invalid-protocol","error","This url can only use the http:// & https:// protocols!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:url-invalid-protocol","error","This url can only use the http:// & https:// protocols!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else if (typeof this.urlSettings.allowedHostnames != "undefined" && !this.#urlHasValidHostname(value,this.urlSettings.allowedHostnames)){
-                checker.createMessage("openticket:url-invalid-hostname","error","This url has a disallowed hostname!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:url-invalid-hostname","error","This url has a disallowed hostname!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else if (typeof this.urlSettings.allowedExtensions != "undefined" && !this.#urlHasValidExtension(value,this.urlSettings.allowedExtensions)){
-                checker.createMessage("openticket:url-invalid-extension","error",`This url has an invalid extension! Choose between: ${this.urlSettings.allowedExtensions.join(", ")}!"`,lt,null,[this.urlSettings.allowedExtensions.join(", ")],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:url-invalid-extension","error",`This url has an invalid extension! Choose between: ${this.urlSettings.allowedExtensions.join(", ")}!"`,lt,null,[this.urlSettings.allowedExtensions.join(", ")],this.id,(this.options.docs ?? null))
                 return false
             }else if (typeof this.urlSettings.allowedPaths != "undefined" && !this.#urlHasValidPath(value,this.urlSettings.allowedPaths)){
-                checker.createMessage("openticket:url-invalid-path","error","This url has an invalid path!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:url-invalid-path","error","This url has an invalid path!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else if (typeof this.urlSettings.regex != "undefined" && !this.urlSettings.regex.test(value)){
-                checker.createMessage("openticket:url-invalid","error","This url is invalid!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:url-invalid","error","This url is invalid!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else return true
         }
@@ -1351,7 +1351,7 @@ export class ODCheckerCustomStructure_UniqueId extends ODCheckerStringStructure 
             const uniqueArray: string[] = (checker.storage.get(source,scope) === null) ? [] : checker.storage.get(source,scope)
             if (uniqueArray.includes(value)){
                 //unique id already exists => throw error
-                checker.createMessage("openticket:id-not-unique","error","This id isn't unique, use another id instead!",lt,null,[],this.id,(this.options.docs ?? null))
+                checker.createMessage("opendiscord:id-not-unique","error","This id isn't unique, use another id instead!",lt,null,[],this.id,(this.options.docs ?? null))
                 return false
             }else{
                 //unique id doesn't exists => add to list
@@ -1405,7 +1405,7 @@ export class ODCheckerCustomStructure_UniqueIdArray extends ODCheckerArrayStruct
                     }
                 }else{
                     //doesn't exist
-                    checker.createMessage("openticket:id-non-existent","error",`The id "${id}" doesn't exist!`,localLt,null,[`"${id}"`],this.id,(this.options.docs ?? null))
+                    checker.createMessage("opendiscord:id-non-existent","error",`The id "${id}" doesn't exist!`,localLt,null,[`"${id}"`],this.id,(this.options.docs ?? null))
                     localQuit = true
                 }
             })

@@ -1,7 +1,7 @@
 import {opendiscord, api, utilities} from "../../index"
 
 export const loadAllQuestions = async () => {
-    const questionConfig = opendiscord.configs.get("openticket:questions")
+    const questionConfig = opendiscord.configs.get("opendiscord:questions")
     if (!questionConfig) return
     
     questionConfig.data.forEach((question) => {
@@ -30,24 +30,24 @@ export const loadAllQuestions = async () => {
 
 export const loadShortQuestion = (option:api.ODJsonConfig_DefaultShortQuestionType) => {
     return new api.ODShortQuestion(option.id,[
-        new api.ODQuestionData("openticket:name",option.name),
-        new api.ODQuestionData("openticket:required",option.required),
-        new api.ODQuestionData("openticket:placeholder",option.placeholder),
+        new api.ODQuestionData("opendiscord:name",option.name),
+        new api.ODQuestionData("opendiscord:required",option.required),
+        new api.ODQuestionData("opendiscord:placeholder",option.placeholder),
 
-        new api.ODQuestionData("openticket:length-enabled",option.length.enabled),
-        new api.ODQuestionData("openticket:length-min",option.length.min),
-        new api.ODQuestionData("openticket:length-max",option.length.max),
+        new api.ODQuestionData("opendiscord:length-enabled",option.length.enabled),
+        new api.ODQuestionData("opendiscord:length-min",option.length.min),
+        new api.ODQuestionData("opendiscord:length-max",option.length.max),
     ])
 }
 
 export const loadParagraphQuestion = (option:api.ODJsonConfig_DefaultParagraphQuestionType) => {
     return new api.ODParagraphQuestion(option.id,[
-        new api.ODQuestionData("openticket:name",option.name),
-        new api.ODQuestionData("openticket:required",option.required),
-        new api.ODQuestionData("openticket:placeholder",option.placeholder),
+        new api.ODQuestionData("opendiscord:name",option.name),
+        new api.ODQuestionData("opendiscord:required",option.required),
+        new api.ODQuestionData("opendiscord:placeholder",option.placeholder),
 
-        new api.ODQuestionData("openticket:length-enabled",option.length.enabled),
-        new api.ODQuestionData("openticket:length-min",option.length.min),
-        new api.ODQuestionData("openticket:length-max",option.length.max),
+        new api.ODQuestionData("opendiscord:length-enabled",option.length.enabled),
+        new api.ODQuestionData("opendiscord:length-min",option.length.min),
+        new api.ODQuestionData("opendiscord:length-max",option.length.max),
     ])
 }

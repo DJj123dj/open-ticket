@@ -5,14 +5,14 @@ import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
 export const registerActions = async () => {
-    opendiscord.actions.add(new api.ODAction("openticket:reaction-role"))
-    opendiscord.actions.get("openticket:reaction-role").workers.add([
-        new api.ODWorker("openticket:reaction-role",2,async (instance,params,source,cancel) => {
+    opendiscord.actions.add(new api.ODAction("opendiscord:reaction-role"))
+    opendiscord.actions.get("opendiscord:reaction-role").workers.add([
+        new api.ODWorker("opendiscord:reaction-role",2,async (instance,params,source,cancel) => {
             const {guild,user,option,overwriteMode} = params
             const role = opendiscord.roles.get(option.id)
             if (!role) throw new api.ODSystemError("ODAction(ot:reaction-role) => Unknown reaction role (ODRole)")
             instance.role = role
-            const mode = (overwriteMode) ? overwriteMode : role.get("openticket:mode").value
+            const mode = (overwriteMode) ? overwriteMode : role.get("opendiscord:mode").value
             
             await opendiscord.events.get("onRoleUpdate").emit([user,role])
 
@@ -21,7 +21,7 @@ export const registerActions = async () => {
             if (!member) throw new api.ODSystemError("ODAction(ot:reaction-role) => User isn't a member of the server!")
 
             //get all roles
-            const roleIds = role.get("openticket:roles").value
+            const roleIds = role.get("opendiscord:roles").value
             const roles: discord.Role[] = []
             for (const id of roleIds){
                 const r = await opendiscord.client.fetchGuildRole(guild,id)
@@ -55,7 +55,7 @@ export const registerActions = async () => {
             //get roles to remove on add
             if (result.find((r) => r.action == "added")){
                 //get all remove roles
-                const removeRoleIds = role.get("openticket:remove-roles-on-add").value
+                const removeRoleIds = role.get("opendiscord:remove-roles-on-add").value
                 const removeRoles: discord.Role[] = []
                 for (const id of removeRoleIds){
                     const r = await opendiscord.client.fetchGuildRole(guild,id)
@@ -81,7 +81,7 @@ export const registerActions = async () => {
             instance.result = result
             await opendiscord.events.get("afterRolesUpdated").emit([user,role])
         }),
-        new api.ODWorker("openticket:logs",0,(instance,params,source,cancel) => {
+        new api.ODWorker("opendiscord:logs",0,(instance,params,source,cancel) => {
             const {guild,user,option} = params
             opendiscord.log(user.displayName+" updated his roles!","info",[
                 {key:"user",value:user.username},

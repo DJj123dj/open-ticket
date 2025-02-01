@@ -60,7 +60,7 @@ export interface ODQuestionJson {
 export class ODQuestion extends ODManager<ODQuestionData<ODValidJsonType>> {
     /**The id of this question. (from the config) */
     id:ODId
-    /**The type of this question (e.g. `openticket:short` or `openticket:paragraph`) */
+    /**The type of this question (e.g. `opendiscord:short` or `opendiscord:paragraph`) */
     type: string
 
     constructor(id:ODValidId, type:string, data:ODQuestionData<ODValidJsonType>[]){
@@ -130,13 +130,13 @@ export class ODQuestionData<DataType extends ODValidJsonType> extends ODManagerD
  * It's used to generate typescript declarations for this class.
  */
 export interface ODShortQuestionIds {
-    "openticket:name":ODQuestionData<string>,
-    "openticket:required":ODQuestionData<boolean>,
-    "openticket:placeholder":ODQuestionData<string>,
+    "opendiscord:name":ODQuestionData<string>,
+    "opendiscord:required":ODQuestionData<boolean>,
+    "opendiscord:placeholder":ODQuestionData<string>,
     
-    "openticket:length-enabled":ODQuestionData<boolean>,
-    "openticket:length-min":ODQuestionData<number>,
-    "openticket:length-max":ODQuestionData<number>
+    "opendiscord:length-enabled":ODQuestionData<boolean>,
+    "opendiscord:length-min":ODQuestionData<number>,
+    "opendiscord:length-max":ODQuestionData<number>
 }
 
 /**## ODShortQuestion `class`
@@ -147,10 +147,10 @@ export interface ODShortQuestionIds {
  * Use this question in an option to add a short text field to the modal!
  */
 export class ODShortQuestion extends ODQuestion {
-    type: "openticket:short" = "openticket:short"
+    type: "opendiscord:short" = "opendiscord:short"
 
     constructor(id:ODValidId, data:ODQuestionData<ODValidJsonType>[]){
-        super(id,"openticket:short",data)
+        super(id,"opendiscord:short",data)
     }
 
     get<QuestionId extends keyof ODShortQuestionIds>(id:QuestionId): ODShortQuestionIds[QuestionId]
@@ -184,13 +184,13 @@ export class ODShortQuestion extends ODQuestion {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODParagraphQuestionIds {
-    "openticket:name":ODQuestionData<string>,
-    "openticket:required":ODQuestionData<boolean>,
-    "openticket:placeholder":ODQuestionData<string>,
+    "opendiscord:name":ODQuestionData<string>,
+    "opendiscord:required":ODQuestionData<boolean>,
+    "opendiscord:placeholder":ODQuestionData<string>,
     
-    "openticket:length-enabled":ODQuestionData<boolean>,
-    "openticket:length-min":ODQuestionData<number>,
-    "openticket:length-max":ODQuestionData<number>
+    "opendiscord:length-enabled":ODQuestionData<boolean>,
+    "opendiscord:length-min":ODQuestionData<number>,
+    "opendiscord:length-max":ODQuestionData<number>
 }
 
 /**## ODParagraphQuestion `class`
@@ -201,10 +201,10 @@ export interface ODParagraphQuestionIds {
  * Use this question in an option to add a paragraph text field to the modal!
  */
 export class ODParagraphQuestion extends ODQuestion {
-    type: "openticket:paragraph" = "openticket:paragraph"
+    type: "opendiscord:paragraph" = "opendiscord:paragraph"
 
     constructor(id:ODValidId, data:ODQuestionData<ODValidJsonType>[]){
-        super(id,"openticket:paragraph",data)
+        super(id,"opendiscord:paragraph",data)
     }
 
     get<QuestionId extends keyof ODParagraphQuestionIds>(id:QuestionId): ODParagraphQuestionIds[QuestionId]

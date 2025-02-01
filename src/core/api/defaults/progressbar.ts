@@ -89,12 +89,12 @@ export class ODProgressBarRenderer_Default extends ODProgressBarRenderer<ODProgr
  * It's used to generate typescript declarations for this class.
  */
 export interface ODProgressBarRendererManagerIds_Default {
-    "openticket:value-renderer":ODProgressBarRenderer_Default,
-    "openticket:fraction-renderer":ODProgressBarRenderer_Default,
-    "openticket:percentage-renderer":ODProgressBarRenderer_Default,
-    "openticket:time-ms-renderer":ODProgressBarRenderer_Default,
-    "openticket:time-sec-renderer":ODProgressBarRenderer_Default,
-    "openticket:time-min-renderer":ODProgressBarRenderer_Default,
+    "opendiscord:value-renderer":ODProgressBarRenderer_Default,
+    "opendiscord:fraction-renderer":ODProgressBarRenderer_Default,
+    "opendiscord:percentage-renderer":ODProgressBarRenderer_Default,
+    "opendiscord:time-ms-renderer":ODProgressBarRenderer_Default,
+    "opendiscord:time-sec-renderer":ODProgressBarRenderer_Default,
+    "opendiscord:time-min-renderer":ODProgressBarRenderer_Default,
 }
 
 /**## ODProgressBarRendererManager_Default `default_class`
@@ -131,9 +131,9 @@ export class ODProgressBarRendererManager_Default extends ODProgressBarRendererM
  * It's used to generate typescript declarations for this class.
  */
 export interface ODProgressBarManagerIds_Default {
-    "openticket:slash-command-remove":ODManualProgressBar,
-    "openticket:slash-command-create":ODManualProgressBar,
-    "openticket:slash-command-update":ODManualProgressBar,
+    "opendiscord:slash-command-remove":ODManualProgressBar,
+    "opendiscord:slash-command-create":ODManualProgressBar,
+    "opendiscord:slash-command-update":ODManualProgressBar,
 }
 
 /**## ODProgressBarManager_Default `default_class`

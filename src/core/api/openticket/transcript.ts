@@ -13,7 +13,7 @@ import * as discord from "discord.js"
  * 
  * This class manages all transcript generators in the bot.
  * 
- * The 2 default built-in transcript generators are: `openticket:html-compiler` & `openticket:text-compiler`.
+ * The 2 default built-in transcript generators are: `opendiscord:html-compiler` & `opendiscord:text-compiler`.
  */
 export class ODTranscriptManager extends ODManager<ODTranscriptCompiler<any>> {
     /**The manager responsible for collecting all messages in a channel. */
@@ -119,8 +119,8 @@ export class ODTranscriptCompiler<Data extends object> extends ODManagerData {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTranscriptCompilerIds {
-    "openticket:html-compiler":ODTranscriptCompiler<{url:string}>,
-    "openticket:text-compiler":ODTranscriptCompiler<{contents:string}>,
+    "opendiscord:html-compiler":ODTranscriptCompiler<{url:string}>,
+    "opendiscord:text-compiler":ODTranscriptCompiler<{contents:string}>,
 }
 
 /**## ODTranscriptManager_Default `default_class`

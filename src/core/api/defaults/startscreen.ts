@@ -9,13 +9,13 @@ import { ODStartScreenCategoryComponent, ODStartScreenComponent, ODStartScreenFl
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStartScreenManagerIds_Default {
-    "openticket:logo":ODStartScreenLogoComponent,
-    "openticket:header":ODStartScreenHeaderComponent,
-    "openticket:flags":ODStartScreenFlagsCategoryComponent,
-    "openticket:plugins":ODStartScreenPluginsCategoryComponent,
-    "openticket:stats":ODStartScreenPropertiesCategoryComponent,
-    "openticket:livestatus":ODStartScreenLiveStatusCategoryComponent,
-    "openticket:logs":ODStartScreenCategoryComponent
+    "opendiscord:logo":ODStartScreenLogoComponent,
+    "opendiscord:header":ODStartScreenHeaderComponent,
+    "opendiscord:flags":ODStartScreenFlagsCategoryComponent,
+    "opendiscord:plugins":ODStartScreenPluginsCategoryComponent,
+    "opendiscord:stats":ODStartScreenPropertiesCategoryComponent,
+    "opendiscord:livestatus":ODStartScreenLiveStatusCategoryComponent,
+    "opendiscord:logs":ODStartScreenCategoryComponent
 }
 
 /**## ODStartScreenManager_Default `default_class`

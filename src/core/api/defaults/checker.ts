@@ -11,11 +11,11 @@ import ansis from "ansis"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCheckerManagerIds_Default {
-    "openticket:general":ODChecker,
-    "openticket:questions":ODChecker,
-    "openticket:options":ODChecker,
-    "openticket:panels":ODChecker,
-    "openticket:transcripts":ODChecker
+    "opendiscord:general":ODChecker,
+    "opendiscord:questions":ODChecker,
+    "opendiscord:options":ODChecker,
+    "opendiscord:panels":ODChecker,
+    "opendiscord:transcripts":ODChecker
 }
 
 /**## ODCheckerManager_Default `default_class`
@@ -75,19 +75,19 @@ export class ODCheckerRenderer_Default extends ODCheckerRenderer {
     getComponents(compact:boolean, renderEmpty:boolean, translation:ODCheckerTranslationRegister_Default, data:ODCheckerResult): string[] {
         const tm = translation
         const t = {
-            headerOpenticket:tm.get("other","openticket:header-openticket") ?? "OPEN TICKET",
-            headerConfigchecker:tm.get("other","openticket:header-configchecker") ?? "CONFIG CHECKER",
-            headerDescription:tm.get("other","openticket:header-description") ?? "check for errors in your config files!",
-            footerError:tm.get("other","openticket:footer-error") ?? "the bot won't start until all {0}'s are fixed!",
-            footerWarning:tm.get("other","openticket:footer-warning") ?? "it's recommended to fix all {0}'s before starting!",
-            footerSupport:tm.get("other","openticket:footer-support") ?? "SUPPORT: {0} - DOCS: {1}",
-            error:tm.get("other","openticket:type-error") ?? "[ERROR]",
-            warning:tm.get("other","openticket:type-warning") ?? "[WARNING]",
-            info:tm.get("other","openticket:type-info") ?? "[INFO]",
-            compactInfo:tm.get("other","openticket:compact-information") ?? "use {0} for more information!",
-            dataPath:tm.get("other","openticket:data-path") ?? "path",
-            dataDocs:tm.get("other","openticket:data-docs") ?? "docs",
-            dataMessage:tm.get("other","openticket:data-message") ?? "message"
+            headerOpenticket:tm.get("other","opendiscord:header-openticket") ?? "OPEN TICKET",
+            headerConfigchecker:tm.get("other","opendiscord:header-configchecker") ?? "CONFIG CHECKER",
+            headerDescription:tm.get("other","opendiscord:header-description") ?? "check for errors in your config files!",
+            footerError:tm.get("other","opendiscord:footer-error") ?? "the bot won't start until all {0}'s are fixed!",
+            footerWarning:tm.get("other","opendiscord:footer-warning") ?? "it's recommended to fix all {0}'s before starting!",
+            footerSupport:tm.get("other","opendiscord:footer-support") ?? "SUPPORT: {0} - DOCS: {1}",
+            error:tm.get("other","opendiscord:type-error") ?? "[ERROR]",
+            warning:tm.get("other","opendiscord:type-warning") ?? "[WARNING]",
+            info:tm.get("other","opendiscord:type-info") ?? "[INFO]",
+            compactInfo:tm.get("other","opendiscord:compact-information") ?? "use {0} for more information!",
+            dataPath:tm.get("other","opendiscord:data-path") ?? "path",
+            dataDocs:tm.get("other","opendiscord:data-docs") ?? "docs",
+            dataMessage:tm.get("other","opendiscord:data-message") ?? "message"
         }
         const hasErrors = data.messages.filter((m) => m.type == "error").length > 0
         const hasWarnings = data.messages.filter((m) => m.type == "warning").length > 0
@@ -213,19 +213,19 @@ export class ODCheckerRenderer_Default extends ODCheckerRenderer {
  * It's used to generate typescript declarations for this class.
  */
 export type ODCheckerTranslationRegisterOtherIds_Default = (
-    "openticket:header-openticket"|
-    "openticket:header-configchecker"|
-    "openticket:header-description"|
-    "openticket:type-error"|
-    "openticket:type-warning"|
-    "openticket:type-info"|
-    "openticket:data-path"|
-    "openticket:data-docs"|
-    "openticket:data-message"|
-    "openticket:compact-information"|
-    "openticket:footer-error"|
-    "openticket:footer-warning"|
-    "openticket:footer-support"
+    "opendiscord:header-openticket"|
+    "opendiscord:header-configchecker"|
+    "opendiscord:header-description"|
+    "opendiscord:type-error"|
+    "opendiscord:type-warning"|
+    "opendiscord:type-info"|
+    "opendiscord:data-path"|
+    "opendiscord:data-docs"|
+    "opendiscord:data-message"|
+    "opendiscord:compact-information"|
+    "opendiscord:footer-error"|
+    "opendiscord:footer-warning"|
+    "opendiscord:footer-support"
 )
 
 /**## ODCheckerTranslationRegisterMessageIds_Default `interface`
@@ -233,73 +233,73 @@ export type ODCheckerTranslationRegisterOtherIds_Default = (
  * It's used to generate typescript declarations for this class.
  */
 export type ODCheckerTranslationRegisterMessageIds_Default = (
-    "openticket:invalid-type"|
-    "openticket:property-missing"|
-    "openticket:property-optional"|
-    "openticket:object-disabled"|
-    "openticket:null-invalid"|
-    "openticket:switch-invalid-type"|
-    "openticket:object-switch-invalid-type"|
+    "opendiscord:invalid-type"|
+    "opendiscord:property-missing"|
+    "opendiscord:property-optional"|
+    "opendiscord:object-disabled"|
+    "opendiscord:null-invalid"|
+    "opendiscord:switch-invalid-type"|
+    "opendiscord:object-switch-invalid-type"|
 
-    "openticket:string-too-short"|
-    "openticket:string-too-long"|
-    "openticket:string-length-invalid"|
-    "openticket:string-starts-with"|
-    "openticket:string-ends-with"|
-    "openticket:string-contains"|
-    "openticket:string-choices"|
-    "openticket:string-regex"|
+    "opendiscord:string-too-short"|
+    "opendiscord:string-too-long"|
+    "opendiscord:string-length-invalid"|
+    "opendiscord:string-starts-with"|
+    "opendiscord:string-ends-with"|
+    "opendiscord:string-contains"|
+    "opendiscord:string-choices"|
+    "opendiscord:string-regex"|
 
-    "openticket:number-too-short"|
-    "openticket:number-too-long"|
-    "openticket:number-length-invalid"|
-    "openticket:number-too-small"|
-    "openticket:number-too-large"|
-    "openticket:number-not-equal"|
-    "openticket:number-step"|
-    "openticket:number-step-offset"|
-    "openticket:number-starts-with"|
-    "openticket:number-ends-with"|
-    "openticket:number-contains"|
-    "openticket:number-choices"|
-    "openticket:number-float"|
-    "openticket:number-negative"|
-    "openticket:number-positive"|
-    "openticket:number-zero"|
+    "opendiscord:number-too-short"|
+    "opendiscord:number-too-long"|
+    "opendiscord:number-length-invalid"|
+    "opendiscord:number-too-small"|
+    "opendiscord:number-too-large"|
+    "opendiscord:number-not-equal"|
+    "opendiscord:number-step"|
+    "opendiscord:number-step-offset"|
+    "opendiscord:number-starts-with"|
+    "opendiscord:number-ends-with"|
+    "opendiscord:number-contains"|
+    "opendiscord:number-choices"|
+    "opendiscord:number-float"|
+    "opendiscord:number-negative"|
+    "opendiscord:number-positive"|
+    "opendiscord:number-zero"|
 
-    "openticket:boolean-true"|
-    "openticket:boolean-false"|
+    "opendiscord:boolean-true"|
+    "opendiscord:boolean-false"|
 
-    "openticket:array-empty-disabled"|
-    "openticket:array-empty-required"|
-    "openticket:array-too-short"|
-    "openticket:array-too-long"|
-    "openticket:array-length-invalid"|
-    "openticket:array-invalid-types"|
-    "openticket:array-double"|
+    "opendiscord:array-empty-disabled"|
+    "opendiscord:array-empty-required"|
+    "opendiscord:array-too-short"|
+    "opendiscord:array-too-long"|
+    "opendiscord:array-length-invalid"|
+    "opendiscord:array-invalid-types"|
+    "opendiscord:array-double"|
 
-    "openticket:discord-invalid-id"|
-    "openticket:discord-invalid-id-options"|
-    "openticket:discord-invalid-token"|
-    "openticket:color-invalid"|
-    "openticket:emoji-too-short"|
-    "openticket:emoji-too-long"|
-    "openticket:emoji-custom"|
-    "openticket:emoji-invalid"|
-    "openticket:url-invalid"|
-    "openticket:url-invalid-http"|
-    "openticket:url-invalid-protocol"|
-    "openticket:url-invalid-hostname"|
-    "openticket:url-invalid-extension"|
-    "openticket:url-invalid-path"|
-    "openticket:id-not-unique"|
-    "openticket:id-non-existent"|
+    "opendiscord:discord-invalid-id"|
+    "opendiscord:discord-invalid-id-options"|
+    "opendiscord:discord-invalid-token"|
+    "opendiscord:color-invalid"|
+    "opendiscord:emoji-too-short"|
+    "opendiscord:emoji-too-long"|
+    "opendiscord:emoji-custom"|
+    "opendiscord:emoji-invalid"|
+    "opendiscord:url-invalid"|
+    "opendiscord:url-invalid-http"|
+    "opendiscord:url-invalid-protocol"|
+    "opendiscord:url-invalid-hostname"|
+    "opendiscord:url-invalid-extension"|
+    "opendiscord:url-invalid-path"|
+    "opendiscord:id-not-unique"|
+    "opendiscord:id-non-existent"|
 
-    "openticket:invalid-language"|
-    "openticket:invalid-button"|
-    "openticket:unused-option"|
-    "openticket:unused-question"|
-    "openticket:dropdown-option"
+    "opendiscord:invalid-language"|
+    "opendiscord:invalid-button"|
+    "opendiscord:unused-option"|
+    "opendiscord:unused-question"|
+    "opendiscord:dropdown-option"
 )
 
 /**## ODCheckerTranslationRegister_Default `default_class`
@@ -346,9 +346,9 @@ export class ODCheckerTranslationRegister_Default extends ODCheckerTranslationRe
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCheckerFunctionManagerIds_Default {
-    "openticket:unused-options":ODCheckerFunction,
-    "openticket:unused-questions":ODCheckerFunction,
-    "openticket:dropdown-options":ODCheckerFunction
+    "opendiscord:unused-options":ODCheckerFunction,
+    "opendiscord:unused-questions":ODCheckerFunction,
+    "opendiscord:dropdown-options":ODCheckerFunction
 }
 
 /**## ODCheckerFunctionManager_Default `default_class`

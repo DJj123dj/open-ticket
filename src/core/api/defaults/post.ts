@@ -10,8 +10,8 @@ import * as discord from "discord.js"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODPostManagerIds_Default {
-    "openticket:logs":ODPost<discord.GuildTextBasedChannel>|null,
-    "openticket:transcripts":ODPost<discord.GuildTextBasedChannel>|null
+    "opendiscord:logs":ODPost<discord.GuildTextBasedChannel>|null,
+    "opendiscord:transcripts":ODPost<discord.GuildTextBasedChannel>|null
 }
 
 /**## ODPostManager_Default `default_class`

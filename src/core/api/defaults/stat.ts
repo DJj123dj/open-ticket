@@ -10,11 +10,11 @@ import { ODStatScope, ODStatGlobalScope, ODStatsManager, ODStat, ODBasicStat, OD
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatsManagerIds_Default {
-    "openticket:global":ODStatGlobalScope_DefaultGlobal,
-    "openticket:system":ODStatGlobalScope_DefaultSystem,
-    "openticket:user":ODStatScope_DefaultUser,
-    "openticket:ticket":ODStatScope_DefaultTicket,
-    "openticket:participants":ODStatScope_DefaultParticipants
+    "opendiscord:global":ODStatGlobalScope_DefaultGlobal,
+    "opendiscord:system":ODStatGlobalScope_DefaultSystem,
+    "opendiscord:user":ODStatScope_DefaultUser,
+    "opendiscord:ticket":ODStatScope_DefaultTicket,
+    "opendiscord:participants":ODStatScope_DefaultParticipants
 }
 
 /**## ODStatsManager_Default `default_class`
@@ -51,24 +51,24 @@ export class ODStatsManager_Default extends ODStatsManager {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatGlobalScopeIds_DefaultGlobal {
-    "openticket:tickets-created":ODBasicStat,
-    "openticket:tickets-closed":ODBasicStat,
-    "openticket:tickets-deleted":ODBasicStat,
-    "openticket:tickets-reopened":ODBasicStat,
-    "openticket:tickets-autoclosed":ODBasicStat,
-    "openticket:tickets-autodeleted":ODBasicStat,
-    "openticket:tickets-claimed":ODBasicStat,
-    "openticket:tickets-pinned":ODBasicStat,
-    "openticket:tickets-moved":ODBasicStat,
-    "openticket:users-blacklisted":ODBasicStat,
-    "openticket:transcripts-created":ODBasicStat
+    "opendiscord:tickets-created":ODBasicStat,
+    "opendiscord:tickets-closed":ODBasicStat,
+    "opendiscord:tickets-deleted":ODBasicStat,
+    "opendiscord:tickets-reopened":ODBasicStat,
+    "opendiscord:tickets-autoclosed":ODBasicStat,
+    "opendiscord:tickets-autodeleted":ODBasicStat,
+    "opendiscord:tickets-claimed":ODBasicStat,
+    "opendiscord:tickets-pinned":ODBasicStat,
+    "opendiscord:tickets-moved":ODBasicStat,
+    "opendiscord:users-blacklisted":ODBasicStat,
+    "opendiscord:transcripts-created":ODBasicStat
 }
 
 /**## ODStatGlobalScope_DefaultGlobal `default_class`
  * This is a special class that adds type definitions & typescript to the ODStatsManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:global` category in `opendiscord.stats`!
+ * This default class is made for the `opendiscord:global` category in `opendiscord.stats`!
  */
 export class ODStatGlobalScope_DefaultGlobal extends ODStatGlobalScope {
     get<StatsId extends keyof ODStatGlobalScopeIds_DefaultGlobal>(id:StatsId): ODStatGlobalScopeIds_DefaultGlobal[StatsId]
@@ -119,15 +119,15 @@ export class ODStatGlobalScope_DefaultGlobal extends ODStatGlobalScope {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatGlobalScopeIds_DefaultSystem {
-    "openticket:startup-date":ODDynamicStat,
-    "openticket:version":ODDynamicStat
+    "opendiscord:startup-date":ODDynamicStat,
+    "opendiscord:version":ODDynamicStat
 }
 
 /**## ODStatGlobalScope_DefaultSystem `default_class`
  * This is a special class that adds type definitions & typescript to the ODStatsManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:system` category in `opendiscord.stats`!
+ * This default class is made for the `opendiscord:system` category in `opendiscord.stats`!
  */
 export class ODStatGlobalScope_DefaultSystem extends ODStatGlobalScope {
     get<StatsId extends keyof ODStatGlobalScopeIds_DefaultSystem>(id:StatsId): ODStatGlobalScopeIds_DefaultSystem[StatsId]
@@ -178,24 +178,24 @@ export class ODStatGlobalScope_DefaultSystem extends ODStatGlobalScope {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatScopeIds_DefaultUser {
-    "openticket:name":ODDynamicStat,
-    "openticket:role":ODDynamicStat,
-    "openticket:tickets-created":ODBasicStat,
-    "openticket:tickets-closed":ODBasicStat,
-    "openticket:tickets-deleted":ODBasicStat,
-    "openticket:tickets-reopened":ODBasicStat,
-    "openticket:tickets-claimed":ODBasicStat,
-    "openticket:tickets-pinned":ODBasicStat,
-    "openticket:tickets-moved":ODBasicStat,
-    "openticket:users-blacklisted":ODBasicStat,
-    "openticket:transcripts-created":ODBasicStat
+    "opendiscord:name":ODDynamicStat,
+    "opendiscord:role":ODDynamicStat,
+    "opendiscord:tickets-created":ODBasicStat,
+    "opendiscord:tickets-closed":ODBasicStat,
+    "opendiscord:tickets-deleted":ODBasicStat,
+    "opendiscord:tickets-reopened":ODBasicStat,
+    "opendiscord:tickets-claimed":ODBasicStat,
+    "opendiscord:tickets-pinned":ODBasicStat,
+    "opendiscord:tickets-moved":ODBasicStat,
+    "opendiscord:users-blacklisted":ODBasicStat,
+    "opendiscord:transcripts-created":ODBasicStat
 }
 
 /**## ODStatScope_DefaultUser `default_class`
  * This is a special class that adds type definitions & typescript to the ODStatsManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:user` category in `opendiscord.stats`!
+ * This default class is made for the `opendiscord:user` category in `opendiscord.stats`!
  */
 export class ODStatScope_DefaultUser extends ODStatScope {
     get<StatsId extends keyof ODStatScopeIds_DefaultUser>(id:StatsId): ODStatScopeIds_DefaultUser[StatsId]
@@ -246,19 +246,19 @@ export class ODStatScope_DefaultUser extends ODStatScope {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatScopeIds_DefaultTicket {
-    "openticket:name":ODDynamicStat,
-    "openticket:status":ODDynamicStat,
-    "openticket:claimed":ODDynamicStat,
-    "openticket:pinned":ODDynamicStat,
-    "openticket:creation-date":ODDynamicStat,
-    "openticket:creator":ODDynamicStat
+    "opendiscord:name":ODDynamicStat,
+    "opendiscord:status":ODDynamicStat,
+    "opendiscord:claimed":ODDynamicStat,
+    "opendiscord:pinned":ODDynamicStat,
+    "opendiscord:creation-date":ODDynamicStat,
+    "opendiscord:creator":ODDynamicStat
 }
 
 /**## ODStatScope_DefaultTicket `default_class`
  * This is a special class that adds type definitions & typescript to the ODStatsManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:ticket` category in `opendiscord.stats`!
+ * This default class is made for the `opendiscord:ticket` category in `opendiscord.stats`!
  */
 export class ODStatScope_DefaultTicket extends ODStatScope {
     get<StatsId extends keyof ODStatScopeIds_DefaultTicket>(id:StatsId): ODStatScopeIds_DefaultTicket[StatsId]
@@ -309,14 +309,14 @@ export class ODStatScope_DefaultTicket extends ODStatScope {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODStatScopeIds_DefaultParticipants {
-    "openticket:participants":ODDynamicStat
+    "opendiscord:participants":ODDynamicStat
 }
 
 /**## ODStatScope_DefaultParticipants `default_class`
  * This is a special class that adds type definitions & typescript to the ODStatsManager class.
  * It doesn't add any extra features!
  * 
- * This default class is made for the `openticket:participants` category in `opendiscord.stats`!
+ * This default class is made for the `opendiscord:participants` category in `opendiscord.stats`!
  */
 export class ODStatScope_DefaultParticipants extends ODStatScope {
     get<StatsId extends keyof ODStatScopeIds_DefaultParticipants>(id:StatsId): ODStatScopeIds_DefaultParticipants[StatsId]

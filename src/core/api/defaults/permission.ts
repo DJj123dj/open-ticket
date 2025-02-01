@@ -17,7 +17,7 @@ export class ODPermissionManager_Default extends ODPermissionManager {
 }
 
 /**## ODPermissionEmbedType `type`
- * This type contains all types available in the `openticket:no-permissions` embed.
+ * This type contains all types available in the `opendiscord:no-permissions` embed.
  */
 export type ODPermissionEmbedType = (
     "developer"|

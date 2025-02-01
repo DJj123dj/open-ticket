@@ -4,19 +4,19 @@
 import {opendiscord, api, utilities} from "../index"
 import * as discord from "discord.js"
 
-const generalConfig = opendiscord.configs.get("openticket:general")
+const generalConfig = opendiscord.configs.get("opendiscord:general")
 
 export const registerCommandResponders = async () => {
     //STATS COMMAND RESPONDER
-    opendiscord.responders.commands.add(new api.ODCommandResponder("openticket:stats",generalConfig.data.prefix,/^stats/))
-    opendiscord.responders.commands.get("openticket:stats").workers.add([
-        new api.ODWorker("openticket:permissions",1,async (instance,params,source,cancel) => {
+    opendiscord.responders.commands.add(new api.ODCommandResponder("opendiscord:stats",generalConfig.data.prefix,/^stats/))
+    opendiscord.responders.commands.get("opendiscord:stats").workers.add([
+        new api.ODWorker("opendiscord:permissions",1,async (instance,params,source,cancel) => {
             const permissionMode = generalConfig.data.system.permissions.stats
             
             //command is disabled
             if (permissionMode == "none"){
                 //no permissions
-                instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-no-permissions").build("button",{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:[]}))
+                instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-no-permissions").build("button",{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:[]}))
                 return cancel()
             }
 
@@ -24,7 +24,7 @@ export const registerCommandResponders = async () => {
             if (instance.options.getSubCommand() == "reset"){
                 if (!opendiscord.permissions.hasPermissions("owner",await opendiscord.permissions.getPermissions(instance.user,instance.channel,instance.guild))){
                     //no permissions
-                    instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-no-permissions").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:["owner","developer"]}))
+                    instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-no-permissions").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:["owner","developer"]}))
                     return cancel()
                 }else return
             }
@@ -34,60 +34,60 @@ export const registerCommandResponders = async () => {
             else if (permissionMode == "admin"){
                 if (!opendiscord.permissions.hasPermissions("support",await opendiscord.permissions.getPermissions(instance.user,instance.channel,instance.guild))){
                     //no permissions
-                    instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-no-permissions").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:["support"]}))
+                    instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-no-permissions").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:["support"]}))
                     return cancel()
                 }else return
             }else{
                 if (!instance.guild || !instance.member){
                     //error
-                    instance.reply(await opendiscord.builders.messages.getSafe("openticket:error").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,error:"Permission Error: Not in Server #1",layout:"advanced"}))
+                    instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,error:"Permission Error: Not in Server #1",layout:"advanced"}))
                     return cancel()
                 }
                 const role = await opendiscord.client.fetchGuildRole(instance.guild,permissionMode)
                 if (!role){
                     //error
-                    instance.reply(await opendiscord.builders.messages.getSafe("openticket:error").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,error:"Permission Error: Not in Server #2",layout:"advanced"}))
+                    instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,error:"Permission Error: Not in Server #2",layout:"advanced"}))
                     return cancel()
                 }
                 if (!role.members.has(instance.member.id)){
                     //no permissions
-                    instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-no-permissions").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:[]}))
+                    instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-no-permissions").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user,permissions:[]}))
                     return cancel()
                 }else return
             }
         }),
-        new api.ODWorker("openticket:stats",0,async (instance,params,source,cancel) => {
+        new api.ODWorker("opendiscord:stats",0,async (instance,params,source,cancel) => {
             const {guild,channel,user} = instance
             if (!guild){
                 //error
-                instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-not-in-guild").build(source,{channel:instance.channel,user:instance.user}))
+                instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-not-in-guild").build(source,{channel:instance.channel,user:instance.user}))
                 return cancel()
             }
             const scope = instance.options.getSubCommand()
             if (!scope || (scope != "global" && scope != "ticket" && scope != "user" && scope != "reset")) return
 
             if (scope == "global"){
-                await instance.reply(await opendiscord.builders.messages.getSafe("openticket:stats-global").build(source,{guild,channel,user}))
+                await instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:stats-global").build(source,{guild,channel,user}))
             
             }else if (scope == "ticket"){
                 const id = instance.options.getChannel("ticket",false)?.id ?? channel.id
                 const ticket = opendiscord.tickets.get(id)
                 
-                if (ticket) await instance.reply(await opendiscord.builders.messages.getSafe("openticket:stats-ticket").build(source,{guild,channel,user,scopeData:ticket}))
-                else await instance.reply(await opendiscord.builders.messages.getSafe("openticket:stats-ticket-unknown").build(source,{guild,channel,user,id}))
+                if (ticket) await instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:stats-ticket").build(source,{guild,channel,user,scopeData:ticket}))
+                else await instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:stats-ticket-unknown").build(source,{guild,channel,user,id}))
 
             }else if (scope == "user"){
                 const statsUser = instance.options.getUser("user",false) ?? user
-                await instance.reply(await opendiscord.builders.messages.getSafe("openticket:stats-user").build(source,{guild,channel,user,scopeData:statsUser}))
+                await instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:stats-user").build(source,{guild,channel,user,scopeData:statsUser}))
 
             }else if (scope == "reset"){
                 const reason = instance.options.getString("reason",false)
                 opendiscord.stats.reset()
-                await instance.reply(await opendiscord.builders.messages.getSafe("openticket:stats-reset").build(source,{guild,channel,user,reason}))
+                await instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:stats-reset").build(source,{guild,channel,user,reason}))
 
             }
         }),
-        new api.ODWorker("openticket:logs",-1,(instance,params,source,cancel) => {
+        new api.ODWorker("opendiscord:logs",-1,(instance,params,source,cancel) => {
             const scope = instance.options.getSubCommand()
             let data: string
             if (scope == "ticket"){

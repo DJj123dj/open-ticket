@@ -1,7 +1,7 @@
 import {opendiscord, api, utilities} from "../../index"
 
 export const loadAllOptions = async () => {
-    const optionConfig = opendiscord.configs.get("openticket:options")
+    const optionConfig = opendiscord.configs.get("opendiscord:options")
     if (!optionConfig) return
     
     optionConfig.data.forEach((option) => {
@@ -56,85 +56,85 @@ export const loadAllOptions = async () => {
 
 export const loadTicketOption = (option:api.ODJsonConfig_DefaultOptionTicketType): api.ODTicketOption => {
     return new api.ODTicketOption(option.id,[
-        new api.ODOptionData("openticket:name",option.name),
-        new api.ODOptionData("openticket:description",option.description),
+        new api.ODOptionData("opendiscord:name",option.name),
+        new api.ODOptionData("opendiscord:description",option.description),
 
-        new api.ODOptionData("openticket:button-emoji",option.button.emoji),
-        new api.ODOptionData("openticket:button-label",option.button.label),
-        new api.ODOptionData("openticket:button-color",option.button.color),
+        new api.ODOptionData("opendiscord:button-emoji",option.button.emoji),
+        new api.ODOptionData("opendiscord:button-label",option.button.label),
+        new api.ODOptionData("opendiscord:button-color",option.button.color),
         
-        new api.ODOptionData("openticket:admins",option.ticketAdmins),
-        new api.ODOptionData("openticket:admins-readonly",option.readonlyAdmins),
-        new api.ODOptionData("openticket:allow-blacklisted-users",option.allowCreationByBlacklistedUsers),
-        new api.ODOptionData("openticket:questions",option.questions),
+        new api.ODOptionData("opendiscord:admins",option.ticketAdmins),
+        new api.ODOptionData("opendiscord:admins-readonly",option.readonlyAdmins),
+        new api.ODOptionData("opendiscord:allow-blacklisted-users",option.allowCreationByBlacklistedUsers),
+        new api.ODOptionData("opendiscord:questions",option.questions),
 
-        new api.ODOptionData("openticket:channel-prefix",option.channel.prefix),
-        new api.ODOptionData("openticket:channel-suffix",option.channel.suffix),
-        new api.ODOptionData("openticket:channel-category",option.channel.category),
-        new api.ODOptionData("openticket:channel-category-closed",option.channel.closedCategory),
-        new api.ODOptionData("openticket:channel-category-backup",option.channel.backupCategory),
-        new api.ODOptionData("openticket:channel-categories-claimed",option.channel.claimedCategory),
-        new api.ODOptionData("openticket:channel-description",option.channel.description),
+        new api.ODOptionData("opendiscord:channel-prefix",option.channel.prefix),
+        new api.ODOptionData("opendiscord:channel-suffix",option.channel.suffix),
+        new api.ODOptionData("opendiscord:channel-category",option.channel.category),
+        new api.ODOptionData("opendiscord:channel-category-closed",option.channel.closedCategory),
+        new api.ODOptionData("opendiscord:channel-category-backup",option.channel.backupCategory),
+        new api.ODOptionData("opendiscord:channel-categories-claimed",option.channel.claimedCategory),
+        new api.ODOptionData("opendiscord:channel-description",option.channel.description),
         
-        new api.ODOptionData("openticket:dm-message-enabled",option.dmMessage.enabled),
-        new api.ODOptionData("openticket:dm-message-text",option.dmMessage.text),
-        new api.ODOptionData("openticket:dm-message-embed",option.dmMessage.embed),
+        new api.ODOptionData("opendiscord:dm-message-enabled",option.dmMessage.enabled),
+        new api.ODOptionData("opendiscord:dm-message-text",option.dmMessage.text),
+        new api.ODOptionData("opendiscord:dm-message-embed",option.dmMessage.embed),
 
-        new api.ODOptionData("openticket:ticket-message-enabled",option.ticketMessage.enabled),
-        new api.ODOptionData("openticket:ticket-message-text",option.ticketMessage.text),
-        new api.ODOptionData("openticket:ticket-message-embed",option.ticketMessage.embed),
-        new api.ODOptionData("openticket:ticket-message-ping",option.ticketMessage.ping),
+        new api.ODOptionData("opendiscord:ticket-message-enabled",option.ticketMessage.enabled),
+        new api.ODOptionData("opendiscord:ticket-message-text",option.ticketMessage.text),
+        new api.ODOptionData("opendiscord:ticket-message-embed",option.ticketMessage.embed),
+        new api.ODOptionData("opendiscord:ticket-message-ping",option.ticketMessage.ping),
 
-        new api.ODOptionData("openticket:autoclose-enable-hours",option.autoclose.enableInactiveHours),
-        new api.ODOptionData("openticket:autoclose-enable-leave",option.autoclose.enableUserLeave),
-        new api.ODOptionData("openticket:autoclose-disable-claim",option.autoclose.disableOnClaim),
-        new api.ODOptionData("openticket:autoclose-hours",option.autoclose.inactiveHours),
+        new api.ODOptionData("opendiscord:autoclose-enable-hours",option.autoclose.enableInactiveHours),
+        new api.ODOptionData("opendiscord:autoclose-enable-leave",option.autoclose.enableUserLeave),
+        new api.ODOptionData("opendiscord:autoclose-disable-claim",option.autoclose.disableOnClaim),
+        new api.ODOptionData("opendiscord:autoclose-hours",option.autoclose.inactiveHours),
 
-        new api.ODOptionData("openticket:autodelete-enable-days",option.autodelete.enableInactiveDays),
-        new api.ODOptionData("openticket:autodelete-enable-leave",option.autodelete.enableUserLeave),
-        new api.ODOptionData("openticket:autodelete-disable-claim",option.autodelete.disableOnClaim),
-        new api.ODOptionData("openticket:autodelete-days",option.autodelete.inactiveDays),
+        new api.ODOptionData("opendiscord:autodelete-enable-days",option.autodelete.enableInactiveDays),
+        new api.ODOptionData("opendiscord:autodelete-enable-leave",option.autodelete.enableUserLeave),
+        new api.ODOptionData("opendiscord:autodelete-disable-claim",option.autodelete.disableOnClaim),
+        new api.ODOptionData("opendiscord:autodelete-days",option.autodelete.inactiveDays),
 
-        new api.ODOptionData("openticket:cooldown-enabled",option.cooldown.enabled),
-        new api.ODOptionData("openticket:cooldown-minutes",option.cooldown.cooldownMinutes),
+        new api.ODOptionData("opendiscord:cooldown-enabled",option.cooldown.enabled),
+        new api.ODOptionData("opendiscord:cooldown-minutes",option.cooldown.cooldownMinutes),
 
-        new api.ODOptionData("openticket:limits-enabled",option.limits.enabled),
-        new api.ODOptionData("openticket:limits-maximum-global",option.limits.globalMaximum),
-        new api.ODOptionData("openticket:limits-maximum-user",option.limits.userMaximum)
+        new api.ODOptionData("opendiscord:limits-enabled",option.limits.enabled),
+        new api.ODOptionData("opendiscord:limits-maximum-global",option.limits.globalMaximum),
+        new api.ODOptionData("opendiscord:limits-maximum-user",option.limits.userMaximum)
     ])
 }
 
 export const loadWebsiteOption = (opt:api.ODJsonConfig_DefaultOptionWebsiteType): api.ODWebsiteOption => {
     return new api.ODWebsiteOption(opt.id,[
-        new api.ODOptionData("openticket:name",opt.name),
-        new api.ODOptionData("openticket:description",opt.description),
+        new api.ODOptionData("opendiscord:name",opt.name),
+        new api.ODOptionData("opendiscord:description",opt.description),
 
-        new api.ODOptionData("openticket:button-emoji",opt.button.emoji),
-        new api.ODOptionData("openticket:button-label",opt.button.label),
+        new api.ODOptionData("opendiscord:button-emoji",opt.button.emoji),
+        new api.ODOptionData("opendiscord:button-label",opt.button.label),
 
-        new api.ODOptionData("openticket:url",opt.url)
+        new api.ODOptionData("opendiscord:url",opt.url)
     ])
 }
 
 export const loadRoleOption = (opt:api.ODJsonConfig_DefaultOptionRoleType): api.ODRoleOption => {
     return new api.ODRoleOption(opt.id,[
-        new api.ODOptionData("openticket:name",opt.name),
-        new api.ODOptionData("openticket:description",opt.description),
+        new api.ODOptionData("opendiscord:name",opt.name),
+        new api.ODOptionData("opendiscord:description",opt.description),
 
-        new api.ODOptionData("openticket:button-emoji",opt.button.emoji),
-        new api.ODOptionData("openticket:button-label",opt.button.label),
-        new api.ODOptionData("openticket:button-color",opt.button.color),
+        new api.ODOptionData("opendiscord:button-emoji",opt.button.emoji),
+        new api.ODOptionData("opendiscord:button-label",opt.button.label),
+        new api.ODOptionData("opendiscord:button-color",opt.button.color),
 
-        new api.ODOptionData("openticket:roles",opt.roles),
-        new api.ODOptionData("openticket:mode",opt.mode),
-        new api.ODOptionData("openticket:remove-roles-on-add",opt.removeRolesOnAdd),
-        new api.ODOptionData("openticket:add-on-join",opt.addOnMemberJoin)
+        new api.ODOptionData("opendiscord:roles",opt.roles),
+        new api.ODOptionData("opendiscord:mode",opt.mode),
+        new api.ODOptionData("opendiscord:remove-roles-on-add",opt.removeRolesOnAdd),
+        new api.ODOptionData("opendiscord:add-on-join",opt.addOnMemberJoin)
     ])
 }
 
 export const loadTicketOptionSuffix = (option:api.ODTicketOption): api.ODOptionSuffix => {
-    const mode = option.get("openticket:channel-suffix").value
-    const globalDatabase = opendiscord.databases.get("openticket:global")
+    const mode = option.get("opendiscord:channel-suffix").value
+    const globalDatabase = opendiscord.databases.get("opendiscord:global")
     if (mode == "user-name") return new api.ODOptionUserNameSuffix(option.id.value,option)
     else if (mode == "random-number") return new api.ODOptionRandomNumberSuffix(option.id.value,option,globalDatabase)
     else if (mode == "random-hex") return new api.ODOptionRandomHexSuffix(option.id.value,option,globalDatabase)

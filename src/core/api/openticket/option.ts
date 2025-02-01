@@ -50,7 +50,7 @@ export interface ODOptionDataJson {
 export interface ODOptionJson {
     /**The id of this option. */
     id:string,
-    /**The type of this option. (e.g. `openticket:ticket`, `openticket:website`, `openticket:role`) */
+    /**The type of this option. (e.g. `opendiscord:ticket`, `opendiscord:website`, `opendiscord:role`) */
     type:string,
     /**The version of Open Ticket used to create this option & store it in the database. */
     version:string,
@@ -68,7 +68,7 @@ export interface ODOptionJson {
 export class ODOption extends ODManager<ODOptionData<ODValidJsonType>> {
     /**The id of this option. (from the config) */
     id:ODId
-    /**The type of this option. (e.g. `openticket:ticket`, `openticket:website`, `openticket:role`) */
+    /**The type of this option. (e.g. `opendiscord:ticket`, `opendiscord:website`, `opendiscord:role`) */
     type: string
 
     constructor(id:ODValidId, type:string, data:ODOptionData<ODValidJsonType>[]){
@@ -138,51 +138,51 @@ export class ODOptionData<DataType extends ODValidJsonType> extends ODManagerDat
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTicketOptionIds {
-    "openticket:name":ODOptionData<string>,
-    "openticket:description":ODOptionData<string>,
+    "opendiscord:name":ODOptionData<string>,
+    "opendiscord:description":ODOptionData<string>,
     
-    "openticket:button-emoji":ODOptionData<string>,
-    "openticket:button-label":ODOptionData<string>,
-    "openticket:button-color":ODOptionData<ODValidButtonColor>,
+    "opendiscord:button-emoji":ODOptionData<string>,
+    "opendiscord:button-label":ODOptionData<string>,
+    "opendiscord:button-color":ODOptionData<ODValidButtonColor>,
     
-    "openticket:admins":ODOptionData<string[]>,
-    "openticket:admins-readonly":ODOptionData<string[]>,
-    "openticket:allow-blacklisted-users":ODOptionData<boolean>,
-    "openticket:questions":ODOptionData<string[]>,
+    "opendiscord:admins":ODOptionData<string[]>,
+    "opendiscord:admins-readonly":ODOptionData<string[]>,
+    "opendiscord:allow-blacklisted-users":ODOptionData<boolean>,
+    "opendiscord:questions":ODOptionData<string[]>,
     
-    "openticket:channel-prefix":ODOptionData<string>,
-    "openticket:channel-suffix":ODOptionData<"user-name"|"user-id"|"random-number"|"random-hex"|"counter-dynamic"|"counter-fixed">,
-    "openticket:channel-category":ODOptionData<string>,
-    "openticket:channel-category-closed":ODOptionData<string>,
-    "openticket:channel-category-backup":ODOptionData<string>,
-    "openticket:channel-categories-claimed":ODOptionData<{user:string,category:string}[]>,
-    "openticket:channel-description":ODOptionData<string>,
+    "opendiscord:channel-prefix":ODOptionData<string>,
+    "opendiscord:channel-suffix":ODOptionData<"user-name"|"user-id"|"random-number"|"random-hex"|"counter-dynamic"|"counter-fixed">,
+    "opendiscord:channel-category":ODOptionData<string>,
+    "opendiscord:channel-category-closed":ODOptionData<string>,
+    "opendiscord:channel-category-backup":ODOptionData<string>,
+    "opendiscord:channel-categories-claimed":ODOptionData<{user:string,category:string}[]>,
+    "opendiscord:channel-description":ODOptionData<string>,
     
-    "openticket:dm-message-enabled":ODOptionData<boolean>,
-    "openticket:dm-message-text":ODOptionData<string>,
-    "openticket:dm-message-embed":ODOptionData<ODJsonConfig_DefaultOptionEmbedSettingsType>,
+    "opendiscord:dm-message-enabled":ODOptionData<boolean>,
+    "opendiscord:dm-message-text":ODOptionData<string>,
+    "opendiscord:dm-message-embed":ODOptionData<ODJsonConfig_DefaultOptionEmbedSettingsType>,
 
-    "openticket:ticket-message-enabled":ODOptionData<boolean>,
-    "openticket:ticket-message-text":ODOptionData<string>,
-    "openticket:ticket-message-embed":ODOptionData<ODJsonConfig_DefaultOptionEmbedSettingsType>,
-    "openticket:ticket-message-ping":ODOptionData<ODJsonConfig_DefaultOptionPingSettingsType>,
+    "opendiscord:ticket-message-enabled":ODOptionData<boolean>,
+    "opendiscord:ticket-message-text":ODOptionData<string>,
+    "opendiscord:ticket-message-embed":ODOptionData<ODJsonConfig_DefaultOptionEmbedSettingsType>,
+    "opendiscord:ticket-message-ping":ODOptionData<ODJsonConfig_DefaultOptionPingSettingsType>,
 
-    "openticket:autoclose-enable-hours":ODOptionData<boolean>,
-    "openticket:autoclose-enable-leave":ODOptionData<boolean>,
-    "openticket:autoclose-disable-claim":ODOptionData<boolean>,
-    "openticket:autoclose-hours":ODOptionData<number>,
+    "opendiscord:autoclose-enable-hours":ODOptionData<boolean>,
+    "opendiscord:autoclose-enable-leave":ODOptionData<boolean>,
+    "opendiscord:autoclose-disable-claim":ODOptionData<boolean>,
+    "opendiscord:autoclose-hours":ODOptionData<number>,
 
-    "openticket:autodelete-enable-days":ODOptionData<boolean>,
-    "openticket:autodelete-enable-leave":ODOptionData<boolean>,
-    "openticket:autodelete-disable-claim":ODOptionData<boolean>,
-    "openticket:autodelete-days":ODOptionData<number>,
+    "opendiscord:autodelete-enable-days":ODOptionData<boolean>,
+    "opendiscord:autodelete-enable-leave":ODOptionData<boolean>,
+    "opendiscord:autodelete-disable-claim":ODOptionData<boolean>,
+    "opendiscord:autodelete-days":ODOptionData<number>,
     
-    "openticket:cooldown-enabled":ODOptionData<boolean>,
-    "openticket:cooldown-minutes":ODOptionData<number>,
+    "opendiscord:cooldown-enabled":ODOptionData<boolean>,
+    "opendiscord:cooldown-minutes":ODOptionData<number>,
 
-    "openticket:limits-enabled":ODOptionData<boolean>,
-    "openticket:limits-maximum-global":ODOptionData<number>,
-    "openticket:limits-maximum-user":ODOptionData<number>
+    "opendiscord:limits-enabled":ODOptionData<boolean>,
+    "opendiscord:limits-maximum-global":ODOptionData<number>,
+    "opendiscord:limits-maximum-user":ODOptionData<number>
 }
 
 /**## ODTicketOption `class`
@@ -193,10 +193,10 @@ export interface ODTicketOptionIds {
  * Use this option to create a new ticket!
  */
 export class ODTicketOption extends ODOption {
-    type: "openticket:ticket" = "openticket:ticket"
+    type: "opendiscord:ticket" = "opendiscord:ticket"
 
     constructor(id:ODValidId, data:ODOptionData<ODValidJsonType>[]){
-        super(id,"openticket:ticket",data)
+        super(id,"opendiscord:ticket",data)
     }
 
     get<OptionId extends keyof ODTicketOptionIds>(id:OptionId): ODTicketOptionIds[OptionId]
@@ -230,13 +230,13 @@ export class ODTicketOption extends ODOption {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODWebsiteOptionIds {
-    "openticket:name":ODOptionData<string>,
-    "openticket:description":ODOptionData<string>,
+    "opendiscord:name":ODOptionData<string>,
+    "opendiscord:description":ODOptionData<string>,
     
-    "openticket:button-emoji":ODOptionData<string>,
-    "openticket:button-label":ODOptionData<string>,
+    "opendiscord:button-emoji":ODOptionData<string>,
+    "opendiscord:button-label":ODOptionData<string>,
     
-    "openticket:url":ODOptionData<string>,
+    "opendiscord:url":ODOptionData<string>,
 }
 
 /**## ODWebsiteOption `class`
@@ -247,10 +247,10 @@ export interface ODWebsiteOptionIds {
  * Use this option to create a button which links to a website!
  */
 export class ODWebsiteOption extends ODOption {
-    type: "openticket:website" = "openticket:website"
+    type: "opendiscord:website" = "opendiscord:website"
 
     constructor(id:ODValidId, data:ODOptionData<ODValidJsonType>[]){
-        super(id,"openticket:website",data)
+        super(id,"opendiscord:website",data)
     }
 
     get<OptionId extends keyof ODWebsiteOptionIds>(id:OptionId): ODWebsiteOptionIds[OptionId]
@@ -284,17 +284,17 @@ export class ODWebsiteOption extends ODOption {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODRoleOptionIds {
-    "openticket:name":ODOptionData<string>,
-    "openticket:description":ODOptionData<string>,
+    "opendiscord:name":ODOptionData<string>,
+    "opendiscord:description":ODOptionData<string>,
     
-    "openticket:button-emoji":ODOptionData<string>,
-    "openticket:button-label":ODOptionData<string>,
-    "openticket:button-color":ODOptionData<ODValidButtonColor>,
+    "opendiscord:button-emoji":ODOptionData<string>,
+    "opendiscord:button-label":ODOptionData<string>,
+    "opendiscord:button-color":ODOptionData<ODValidButtonColor>,
     
-    "openticket:roles":ODOptionData<string[]>,
-    "openticket:mode":ODOptionData<ODRoleUpdateMode>,
-    "openticket:remove-roles-on-add":ODOptionData<string[]>,
-    "openticket:add-on-join":ODOptionData<boolean>
+    "opendiscord:roles":ODOptionData<string[]>,
+    "opendiscord:mode":ODOptionData<ODRoleUpdateMode>,
+    "opendiscord:remove-roles-on-add":ODOptionData<string[]>,
+    "opendiscord:add-on-join":ODOptionData<boolean>
 }
 
 /**## ODRoleOption `class`
@@ -305,10 +305,10 @@ export interface ODRoleOptionIds {
  * Use this option to create a button for reaction roles!
  */
 export class ODRoleOption extends ODOption {
-    type: "openticket:role" = "openticket:role"
+    type: "opendiscord:role" = "opendiscord:role"
 
     constructor(id:ODValidId, data:ODOptionData<ODValidJsonType>[]){
-        super(id,"openticket:role",data)
+        super(id,"opendiscord:role",data)
     }
 
     get<OptionId extends keyof ODRoleOptionIds>(id:OptionId): ODRoleOptionIds[OptionId]
@@ -424,13 +424,13 @@ export class ODOptionCounterDynamicSuffix extends ODOptionSuffix {
 
     /**Initialize the database for this suffix. */
     async #init(){
-        if (!await this.database.exists("openticket:option-suffix-counter",this.option.id.value)) await this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
+        if (!await this.database.exists("opendiscord:option-suffix-counter",this.option.id.value)) await this.database.set("opendiscord:option-suffix-counter",this.option.id.value,0)
     }
     getSuffix(user:discord.User): string {
-        const rawCurrentValue = this.database.get("openticket:option-suffix-counter",this.option.id.value)
+        const rawCurrentValue = this.database.get("opendiscord:option-suffix-counter",this.option.id.value)
         const currentValue = (typeof rawCurrentValue != "number") ? 0 : rawCurrentValue
         const newValue = currentValue+1
-        this.database.set("openticket:option-suffix-counter",this.option.id.value,newValue)
+        this.database.set("opendiscord:option-suffix-counter",this.option.id.value,newValue)
         return newValue.toString()
     }
 }
@@ -454,14 +454,14 @@ export class ODOptionCounterFixedSuffix extends ODOptionSuffix {
     
     /**Initialize the database for this suffix. */
     async #init(){
-        if (!await this.database.exists("openticket:option-suffix-counter",this.option.id.value)) await this.database.set("openticket:option-suffix-counter",this.option.id.value,0)
+        if (!await this.database.exists("opendiscord:option-suffix-counter",this.option.id.value)) await this.database.set("opendiscord:option-suffix-counter",this.option.id.value,0)
     }
     getSuffix(user:discord.User): string {
-        const rawCurrentValue = this.database.get("openticket:option-suffix-counter",this.option.id.value)
+        const rawCurrentValue = this.database.get("opendiscord:option-suffix-counter",this.option.id.value)
         const currentValue = (typeof rawCurrentValue != "number") ? 0 : rawCurrentValue
         const newValue = (currentValue >= 9999) ? 0 : currentValue+1
         
-        this.database.set("openticket:option-suffix-counter",this.option.id.value,newValue)
+        this.database.set("opendiscord:option-suffix-counter",this.option.id.value,newValue)
         if (newValue.toString().length == 1) return "000"+newValue.toString()
         else if (newValue.toString().length == 2) return "00"+newValue.toString()
         else if (newValue.toString().length == 3) return "0"+newValue.toString()
@@ -488,7 +488,7 @@ export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
 
     /**Initialize the database for this suffix. */
     async #init(){
-        if (!await this.database.exists("openticket:option-suffix-history",this.option.id.value)) await this.database.set("openticket:option-suffix-history",this.option.id.value,[])
+        if (!await this.database.exists("opendiscord:option-suffix-history",this.option.id.value)) await this.database.set("opendiscord:option-suffix-history",this.option.id.value,[])
     }
     /**Get a unique number for this suffix. */
     #generateUniqueValue(history:string[]): string {
@@ -502,12 +502,12 @@ export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
         else return number
     }
     getSuffix(user:discord.User): string {
-        const rawCurrentValues = this.database.get("openticket:option-suffix-history",this.option.id.value)
+        const rawCurrentValues = this.database.get("opendiscord:option-suffix-history",this.option.id.value)
         const currentValues = ((Array.isArray(rawCurrentValues)) ? rawCurrentValues : []) as string[]
         const newValue = this.#generateUniqueValue(currentValues)
         currentValues.push(newValue)
         if (currentValues.length > 50) currentValues.shift()
-        this.database.set("openticket:option-suffix-history",this.option.id.value,currentValues)
+        this.database.set("opendiscord:option-suffix-history",this.option.id.value,currentValues)
         return newValue
     }
 }
@@ -531,7 +531,7 @@ export class ODOptionRandomHexSuffix extends ODOptionSuffix {
 
     /**Initialize the database for this suffix. */
     async #init(){
-        if (!await this.database.exists("openticket:option-suffix-history",this.option.id.value)) await this.database.set("openticket:option-suffix-history",this.option.id.value,[])
+        if (!await this.database.exists("opendiscord:option-suffix-history",this.option.id.value)) await this.database.set("opendiscord:option-suffix-history",this.option.id.value,[])
     }
     /**Get a unique hex-string for this suffix. */
     #generateUniqueValue(history:string[]): string {
@@ -540,12 +540,12 @@ export class ODOptionRandomHexSuffix extends ODOptionSuffix {
         else return hex
     }
     getSuffix(user:discord.User): string {
-        const rawCurrentValues = this.database.get("openticket:option-suffix-history",this.option.id.value)
+        const rawCurrentValues = this.database.get("opendiscord:option-suffix-history",this.option.id.value)
         const currentValues = ((Array.isArray(rawCurrentValues)) ? rawCurrentValues : []) as string[]
         const newValue = this.#generateUniqueValue(currentValues)
         currentValues.push(newValue)
         if (currentValues.length > 50) currentValues.shift()
-        this.database.set("openticket:option-suffix-history",this.option.id.value,currentValues)
+        this.database.set("opendiscord:option-suffix-history",this.option.id.value,currentValues)
         return newValue
     }
 }

@@ -22,7 +22,7 @@ const disableDumpCommand = false
 
 export const loadDumpCommand = () => {
     if (disableDumpCommand) return
-    opendiscord.client.textCommands.add(new api.ODTextCommand("openticket:dump",{
+    opendiscord.client.textCommands.add(new api.ODTextCommand("opendiscord:dump",{
         allowBots:false,
         guildPermission:true,
         dmPermission:true,

@@ -501,8 +501,8 @@ export class ODLiveStatusSource extends ODManagerData {
         const validMessages: ODLiveStatusSourceData[] = []
 
         //parse data from ODMain
-        const currentVersion: string = main.versions.get("openticket:version").toString(true)
-        const usingSlashCommands: boolean = main.configs.get("openticket:general").data.slashCommands
+        const currentVersion: string = main.versions.get("opendiscord:version").toString(true)
+        const usingSlashCommands: boolean = main.configs.get("opendiscord:general").data.slashCommands
         const usingTranscripts: false|"text"|"html" = false as false|"text"|"html" //TODO
         const currentLanguage: string = main.languages.getCurrentLanguageId()
         const usingPlugins: boolean = (main.plugins.getLength() > 0)

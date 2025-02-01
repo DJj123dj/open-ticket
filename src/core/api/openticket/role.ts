@@ -54,10 +54,10 @@ export interface ODRoleJson {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODRoleIds {
-    "openticket:roles":ODRoleData<string[]>,
-    "openticket:mode":ODRoleData<ODRoleUpdateMode>,
-    "openticket:remove-roles-on-add":ODRoleData<string[]>,
-    "openticket:add-on-join":ODRoleData<boolean>
+    "opendiscord:roles":ODRoleData<string[]>,
+    "opendiscord:mode":ODRoleData<ODRoleUpdateMode>,
+    "opendiscord:remove-roles-on-add":ODRoleData<string[]>,
+    "opendiscord:add-on-join":ODRoleData<boolean>
 }
 
 /**## ODRole `class`

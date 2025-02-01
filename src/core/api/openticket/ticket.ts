@@ -49,7 +49,7 @@ export class ODTicketManager extends ODManager<ODTicket> {
     }
     /**Get the main ticket message of a ticket channel when found. */
     async getTicketMessage(ticket:ODTicket): Promise<discord.Message<true>|null> {
-        const msgId = ticket.get("openticket:ticket-message").value
+        const msgId = ticket.get("opendiscord:ticket-message").value
         if (!this.#guild || !msgId) return null
         try {
             const channel = await this.getTicketChannel(ticket)
@@ -64,22 +64,22 @@ export class ODTicketManager extends ODManager<ODTicket> {
         if (!this.#guild) return null
         try {
             if (user == "creator"){
-                const creatorId = ticket.get("openticket:opened-by").value
+                const creatorId = ticket.get("opendiscord:opened-by").value
                 if (!creatorId) return null
                 else return (await this.#guild.client.users.fetch(creatorId))
 
             }else if (user == "closer"){
-                const closerId = ticket.get("openticket:closed-by").value
+                const closerId = ticket.get("opendiscord:closed-by").value
                 if (!closerId) return null
                 else return (await this.#guild.client.users.fetch(closerId))
 
             }else if (user == "claimer"){
-                const claimerId = ticket.get("openticket:claimed-by").value
+                const claimerId = ticket.get("opendiscord:claimed-by").value
                 if (!claimerId) return null
                 else return (await this.#guild.client.users.fetch(claimerId))
                 
             }else if (user == "pinner"){
-                const pinnerId = ticket.get("openticket:pinned-by").value
+                const pinnerId = ticket.get("opendiscord:pinned-by").value
                 if (!pinnerId) return null
                 else return (await this.#guild.client.users.fetch(pinnerId))
                 
@@ -94,14 +94,14 @@ export class ODTicketManager extends ODManager<ODTicket> {
         if (!channel) return null
 
         //add creator
-        const creatorId = ticket.get("openticket:opened-by").value
+        const creatorId = ticket.get("opendiscord:opened-by").value
         if (creatorId){
             const creator = await this.#client.fetchUser(creatorId)
             if (creator) final.push({user:creator,role:"creator"})
         }
 
         //add participants
-        const participants = ticket.get("openticket:participants").value.filter((p) => p.type == "user")
+        const participants = ticket.get("opendiscord:participants").value.filter((p) => p.type == "user")
         for (const p of participants){
             if (!final.find((u) => u.user.id == p.id)){
                 const participant = await this.#client.fetchUser(p.id)
@@ -110,7 +110,7 @@ export class ODTicketManager extends ODManager<ODTicket> {
         }
 
         //add admin roles
-        const roles = ticket.get("openticket:participants").value.filter((p) => p.type == "role")
+        const roles = ticket.get("opendiscord:participants").value.filter((p) => p.type == "role")
         for (const r of roles){
             const role = await this.#client.fetchGuildRole(channel.guild,r.id)
             if (role){
@@ -154,35 +154,35 @@ export interface ODTicketJson {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTicketIds {
-    "openticket:busy":ODTicketData<boolean>,
-    "openticket:ticket-message":ODTicketData<string|null>,
-    "openticket:participants":ODTicketData<{type:"role"|"user",id:string}[]>,
-    "openticket:channel-suffix":ODTicketData<string>,
+    "opendiscord:busy":ODTicketData<boolean>,
+    "opendiscord:ticket-message":ODTicketData<string|null>,
+    "opendiscord:participants":ODTicketData<{type:"role"|"user",id:string}[]>,
+    "opendiscord:channel-suffix":ODTicketData<string>,
     
-    "openticket:open":ODTicketData<boolean>,
-    "openticket:opened-by":ODTicketData<string|null>,
-    "openticket:opened-on":ODTicketData<number|null>,
-    "openticket:closed":ODTicketData<boolean>,
-    "openticket:closed-by":ODTicketData<string|null>,
-    "openticket:closed-on":ODTicketData<number|null>,
-    "openticket:claimed":ODTicketData<boolean>,
-    "openticket:claimed-by":ODTicketData<string|null>,
-    "openticket:claimed-on":ODTicketData<number|null>,
-    "openticket:pinned":ODTicketData<boolean>,
-    "openticket:pinned-by":ODTicketData<string|null>,
-    "openticket:pinned-on":ODTicketData<number|null>,
-    "openticket:for-deletion":ODTicketData<boolean>,
+    "opendiscord:open":ODTicketData<boolean>,
+    "opendiscord:opened-by":ODTicketData<string|null>,
+    "opendiscord:opened-on":ODTicketData<number|null>,
+    "opendiscord:closed":ODTicketData<boolean>,
+    "opendiscord:closed-by":ODTicketData<string|null>,
+    "opendiscord:closed-on":ODTicketData<number|null>,
+    "opendiscord:claimed":ODTicketData<boolean>,
+    "opendiscord:claimed-by":ODTicketData<string|null>,
+    "opendiscord:claimed-on":ODTicketData<number|null>,
+    "opendiscord:pinned":ODTicketData<boolean>,
+    "opendiscord:pinned-by":ODTicketData<string|null>,
+    "opendiscord:pinned-on":ODTicketData<number|null>,
+    "opendiscord:for-deletion":ODTicketData<boolean>,
 
-    "openticket:category":ODTicketData<string|null>,
-    "openticket:category-mode":ODTicketData<null|"normal"|"closed"|"backup"|"claimed">,
+    "opendiscord:category":ODTicketData<string|null>,
+    "opendiscord:category-mode":ODTicketData<null|"normal"|"closed"|"backup"|"claimed">,
     
-    "openticket:autoclose-enabled":ODTicketData<boolean>,
-    "openticket:autoclose-hours":ODTicketData<number>,
-    "openticket:autoclosed":ODTicketData<boolean>,
-    "openticket:autodelete-enabled":ODTicketData<boolean>,
-    "openticket:autodelete-days":ODTicketData<number>,
+    "opendiscord:autoclose-enabled":ODTicketData<boolean>,
+    "opendiscord:autoclose-hours":ODTicketData<number>,
+    "opendiscord:autoclosed":ODTicketData<boolean>,
+    "opendiscord:autodelete-enabled":ODTicketData<boolean>,
+    "opendiscord:autodelete-days":ODTicketData<number>,
 
-    "openticket:answers":ODTicketData<{id:string,name:string,type:"short"|"paragraph",value:string|null}[]>,
+    "opendiscord:answers":ODTicketData<{id:string,name:string,type:"short"|"paragraph",value:string|null}[]>,
 }
 
 /**## ODTicket `class`

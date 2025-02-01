@@ -9,22 +9,22 @@ import { ODCode, ODCodeManager } from "../modules/code"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODCodeManagerIds_Default {
-    "openticket:command-error-handling":ODCode,
-    "openticket:start-listening-interactions":ODCode,
-    "openticket:panel-database-cleaner":ODCode,
-    "openticket:suffix-database-cleaner":ODCode,
-    "openticket:option-database-cleaner":ODCode,
-    "openticket:user-database-cleaner":ODCode,
-    "openticket:ticket-database-cleaner":ODCode,
-    "openticket:panel-auto-update":ODCode,
-    "openticket:ticket-saver":ODCode,
-    "openticket:blacklist-saver":ODCode,
-    "openticket:auto-role-on-join":ODCode,
-    "openticket:autoclose-timeout":ODCode,
-    "openticket:autoclose-leave":ODCode,
-    "openticket:autodelete-timeout":ODCode,
-    "openticket:autodelete-leave":ODCode,
-    "openticket:ticket-anti-busy":ODCode,
+    "opendiscord:command-error-handling":ODCode,
+    "opendiscord:start-listening-interactions":ODCode,
+    "opendiscord:panel-database-cleaner":ODCode,
+    "opendiscord:suffix-database-cleaner":ODCode,
+    "opendiscord:option-database-cleaner":ODCode,
+    "opendiscord:user-database-cleaner":ODCode,
+    "opendiscord:ticket-database-cleaner":ODCode,
+    "opendiscord:panel-auto-update":ODCode,
+    "opendiscord:ticket-saver":ODCode,
+    "opendiscord:blacklist-saver":ODCode,
+    "opendiscord:auto-role-on-join":ODCode,
+    "opendiscord:autoclose-timeout":ODCode,
+    "opendiscord:autoclose-leave":ODCode,
+    "opendiscord:autodelete-timeout":ODCode,
+    "opendiscord:autodelete-leave":ODCode,
+    "opendiscord:ticket-anti-busy":ODCode,
 }
 
 /**## ODCodeManager_Default `default_class`

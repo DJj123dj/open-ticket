@@ -6,7 +6,7 @@ import * as discord from "discord.js"
 
 const buttons = opendiscord.builders.buttons
 const lang = opendiscord.languages
-const generalConfig = opendiscord.configs.get("openticket:general")
+const generalConfig = opendiscord.configs.get("opendiscord:general")
 
 export const registerAllButtons = async () => {
     verifybarButtons()
@@ -20,12 +20,12 @@ export const registerAllButtons = async () => {
 
 const verifybarButtons = () => {
     //VERIFYBAR SUCCESS
-    buttons.add(new api.ODButton("openticket:verifybar-success"))
-    buttons.get("openticket:verifybar-success").workers.add(
-        new api.ODWorker("openticket:verifybar-success",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:verifybar-success"))
+    buttons.get("opendiscord:verifybar-success").workers.add(
+        new api.ODWorker("opendiscord:verifybar-success",0,async (instance,params) => {
             const {verifybar,customData,customColor,customLabel,customEmoji} = params
 
-            if (customData && customData.length > 40) throw new api.ODSystemError("ODButton:openticket:verifybar-success => customData exceeds 40 characters limit!")
+            if (customData && customData.length > 40) throw new api.ODSystemError("ODButton:opendiscord:verifybar-success => customData exceeds 40 characters limit!")
 
             const newData = (customData) ? "_"+customData : ""
             const newColor = customColor ?? "gray"
@@ -41,12 +41,12 @@ const verifybarButtons = () => {
     )
 
     //VERIFYBAR FAILURE
-    buttons.add(new api.ODButton("openticket:verifybar-failure"))
-    buttons.get("openticket:verifybar-failure").workers.add(
-        new api.ODWorker("openticket:verifybar-failure",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:verifybar-failure"))
+    buttons.get("opendiscord:verifybar-failure").workers.add(
+        new api.ODWorker("opendiscord:verifybar-failure",0,async (instance,params) => {
             const {verifybar,customData,customColor,customLabel,customEmoji} = params
 
-            if (customData && customData.length > 40) throw new api.ODSystemError("ODButton:openticket:verifybar-success => customData exceeds 40 characters limit!")
+            if (customData && customData.length > 40) throw new api.ODSystemError("ODButton:opendiscord:verifybar-success => customData exceeds 40 characters limit!")
 
             const newData = (customData) ? "_"+customData : ""
             const newColor = customColor ?? "gray"
@@ -64,9 +64,9 @@ const verifybarButtons = () => {
 
 const errorButtons = () => {
     //ERROR TICKET DEPRECATED TRANSCRIPT
-    buttons.add(new api.ODButton("openticket:error-ticket-deprecated-transcript"))
-    buttons.get("openticket:error-ticket-deprecated-transcript").workers.add(
-        new api.ODWorker("openticket:error-ticket-deprecated-transcript",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:error-ticket-deprecated-transcript"))
+    buttons.get("opendiscord:error-ticket-deprecated-transcript").workers.add(
+        new api.ODWorker("opendiscord:error-ticket-deprecated-transcript",0,async (instance,params) => {
             
             instance.setCustomId("od:error-ticket-deprecated-transcript")
             instance.setMode("button")
@@ -79,9 +79,9 @@ const errorButtons = () => {
 
 const helpMenuButtons = () => {
     //HELP MENU PAGE
-    buttons.add(new api.ODButton("openticket:help-menu-page"))
-    buttons.get("openticket:help-menu-page").workers.add(
-        new api.ODWorker("openticket:help-menu-page",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:help-menu-page"))
+    buttons.get("opendiscord:help-menu-page").workers.add(
+        new api.ODWorker("opendiscord:help-menu-page",0,async (instance,params) => {
             const {mode,page} = params
             const totalPages = (await opendiscord.helpmenu.render(mode)).length
             const pageText = (page+1).toString()+"/"+totalPages.toString()
@@ -95,9 +95,9 @@ const helpMenuButtons = () => {
     )
 
     //HELP MENU SWITCH
-    buttons.add(new api.ODButton("openticket:help-menu-switch"))
-    buttons.get("openticket:help-menu-switch").workers.add(
-        new api.ODWorker("openticket:help-menu-switch",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:help-menu-switch"))
+    buttons.get("opendiscord:help-menu-switch").workers.add(
+        new api.ODWorker("opendiscord:help-menu-switch",0,async (instance,params) => {
             const {mode} = params
 
             instance.setCustomId("od:help-menu-switch_"+mode)
@@ -109,9 +109,9 @@ const helpMenuButtons = () => {
     )
 
     //HELP MENU PREVIOUS
-    buttons.add(new api.ODButton("openticket:help-menu-previous"))
-    buttons.get("openticket:help-menu-previous").workers.add(
-        new api.ODWorker("openticket:help-menu-previous",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:help-menu-previous"))
+    buttons.get("opendiscord:help-menu-previous").workers.add(
+        new api.ODWorker("opendiscord:help-menu-previous",0,async (instance,params) => {
             const {page} = params
             
             instance.setCustomId("od:help-menu-previous")
@@ -123,9 +123,9 @@ const helpMenuButtons = () => {
     )
 
     //HELP MENU NEXT
-    buttons.add(new api.ODButton("openticket:help-menu-next"))
-    buttons.get("openticket:help-menu-next").workers.add(
-        new api.ODWorker("openticket:help-menu-next",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:help-menu-next"))
+    buttons.get("opendiscord:help-menu-next").workers.add(
+        new api.ODWorker("opendiscord:help-menu-next",0,async (instance,params) => {
             const {mode,page} = params
             const totalPages = (await opendiscord.helpmenu.render(mode)).length
             
@@ -140,55 +140,55 @@ const helpMenuButtons = () => {
 
 const panelButtons = () => {
     //TICKET OPTION
-    buttons.add(new api.ODButton("openticket:ticket-option"))
-    buttons.get("openticket:ticket-option").workers.add(
-        new api.ODWorker("openticket:ticket-option",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:ticket-option"))
+    buttons.get("opendiscord:ticket-option").workers.add(
+        new api.ODWorker("opendiscord:ticket-option",0,async (instance,params) => {
             const {panel,option} = params
             
             instance.setCustomId("od:ticket-option_"+panel.id.value+"_"+option.id.value)
             instance.setMode("button")
-            instance.setColor(option.get("openticket:button-color").value)
-            if (option.get("openticket:button-emoji").value) instance.setEmoji(option.get("openticket:button-emoji").value)
-            if (option.get("openticket:button-label").value) instance.setLabel(option.get("openticket:button-label").value)
-            if (!option.get("openticket:button-emoji").value && !option.get("openticket:button-label").value) instance.setLabel("<"+option.id.value+">")
+            instance.setColor(option.get("opendiscord:button-color").value)
+            if (option.get("opendiscord:button-emoji").value) instance.setEmoji(option.get("opendiscord:button-emoji").value)
+            if (option.get("opendiscord:button-label").value) instance.setLabel(option.get("opendiscord:button-label").value)
+            if (!option.get("opendiscord:button-emoji").value && !option.get("opendiscord:button-label").value) instance.setLabel("<"+option.id.value+">")
         })
     )
 
     //WEBSITE OPTION
-    buttons.add(new api.ODButton("openticket:website-option"))
-    buttons.get("openticket:website-option").workers.add(
-        new api.ODWorker("openticket:website-option",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:website-option"))
+    buttons.get("opendiscord:website-option").workers.add(
+        new api.ODWorker("opendiscord:website-option",0,async (instance,params) => {
             const {panel,option} = params
             
             instance.setMode("url")
-            instance.setUrl(option.get("openticket:url").value)
-            if (option.get("openticket:button-emoji").value) instance.setEmoji(option.get("openticket:button-emoji").value)
-            if (option.get("openticket:button-label").value) instance.setLabel(option.get("openticket:button-label").value)
-            if (!option.get("openticket:button-emoji").value && !option.get("openticket:button-label").value) instance.setLabel("<"+option.id.value+">")
+            instance.setUrl(option.get("opendiscord:url").value)
+            if (option.get("opendiscord:button-emoji").value) instance.setEmoji(option.get("opendiscord:button-emoji").value)
+            if (option.get("opendiscord:button-label").value) instance.setLabel(option.get("opendiscord:button-label").value)
+            if (!option.get("opendiscord:button-emoji").value && !option.get("opendiscord:button-label").value) instance.setLabel("<"+option.id.value+">")
         })
     )
 
     //ROLE OPTION
-    buttons.add(new api.ODButton("openticket:role-option"))
-    buttons.get("openticket:role-option").workers.add(
-        new api.ODWorker("openticket:role-option",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:role-option"))
+    buttons.get("opendiscord:role-option").workers.add(
+        new api.ODWorker("opendiscord:role-option",0,async (instance,params) => {
             const {panel,option} = params
             
             instance.setCustomId("od:role-option_"+panel.id.value+"_"+option.id.value)
             instance.setMode("button")
-            instance.setColor(option.get("openticket:button-color").value)
-            if (option.get("openticket:button-emoji").value) instance.setEmoji(option.get("openticket:button-emoji").value)
-            if (option.get("openticket:button-label").value) instance.setLabel(option.get("openticket:button-label").value)
-            if (!option.get("openticket:button-emoji").value && !option.get("openticket:button-label").value) instance.setLabel("<"+option.id.value+">")
+            instance.setColor(option.get("opendiscord:button-color").value)
+            if (option.get("opendiscord:button-emoji").value) instance.setEmoji(option.get("opendiscord:button-emoji").value)
+            if (option.get("opendiscord:button-label").value) instance.setLabel(option.get("opendiscord:button-label").value)
+            if (!option.get("opendiscord:button-emoji").value && !option.get("opendiscord:button-label").value) instance.setLabel("<"+option.id.value+">")
         })
     )
 }
 
 const ticketButtons = () => {
     //VISIT TICKET
-    buttons.add(new api.ODButton("openticket:visit-ticket"))
-    buttons.get("openticket:visit-ticket").workers.add(
-        new api.ODWorker("openticket:visit-ticket",0,async (instance,params) => {
+    buttons.add(new api.ODButton("opendiscord:visit-ticket"))
+    buttons.get("opendiscord:visit-ticket").workers.add(
+        new api.ODWorker("opendiscord:visit-ticket",0,async (instance,params) => {
             const {guild,channel,ticket} = params
             
             instance.setMode("url")
@@ -199,9 +199,9 @@ const ticketButtons = () => {
     )
 
     //CLOSE TICKET
-    buttons.add(new api.ODButton("openticket:close-ticket"))
-    buttons.get("openticket:close-ticket").workers.add(
-        new api.ODWorker("openticket:close-ticket",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:close-ticket"))
+    buttons.get("opendiscord:close-ticket").workers.add(
+        new api.ODWorker("opendiscord:close-ticket",0,async (instance,params,source) => {
             const {guild,channel,ticket} = params
 
             instance.setMode("button")
@@ -213,9 +213,9 @@ const ticketButtons = () => {
     )
 
     //DELETE TICKET
-    buttons.add(new api.ODButton("openticket:delete-ticket"))
-    buttons.get("openticket:delete-ticket").workers.add(
-        new api.ODWorker("openticket:delete-ticket",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:delete-ticket"))
+    buttons.get("opendiscord:delete-ticket").workers.add(
+        new api.ODWorker("opendiscord:delete-ticket",0,async (instance,params,source) => {
             const {guild,channel,ticket} = params
 
             instance.setMode("button")
@@ -227,9 +227,9 @@ const ticketButtons = () => {
     )
 
     //REOPEN TICKET
-    buttons.add(new api.ODButton("openticket:reopen-ticket"))
-    buttons.get("openticket:reopen-ticket").workers.add(
-        new api.ODWorker("openticket:reopen-ticket",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:reopen-ticket"))
+    buttons.get("opendiscord:reopen-ticket").workers.add(
+        new api.ODWorker("opendiscord:reopen-ticket",0,async (instance,params,source) => {
             const {guild,channel,ticket} = params
 
             instance.setMode("button")
@@ -241,9 +241,9 @@ const ticketButtons = () => {
     )
 
     //CLAIM TICKET
-    buttons.add(new api.ODButton("openticket:claim-ticket"))
-    buttons.get("openticket:claim-ticket").workers.add(
-        new api.ODWorker("openticket:claim-ticket",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:claim-ticket"))
+    buttons.get("opendiscord:claim-ticket").workers.add(
+        new api.ODWorker("opendiscord:claim-ticket",0,async (instance,params,source) => {
             const {guild,channel,ticket} = params
 
             instance.setMode("button")
@@ -255,9 +255,9 @@ const ticketButtons = () => {
     )
 
     //UNCLAIM TICKET
-    buttons.add(new api.ODButton("openticket:unclaim-ticket"))
-    buttons.get("openticket:unclaim-ticket").workers.add(
-        new api.ODWorker("openticket:unclaim-ticket",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:unclaim-ticket"))
+    buttons.get("opendiscord:unclaim-ticket").workers.add(
+        new api.ODWorker("opendiscord:unclaim-ticket",0,async (instance,params,source) => {
             const {guild,channel,ticket} = params
 
             instance.setMode("button")
@@ -269,9 +269,9 @@ const ticketButtons = () => {
     )
 
     //PIN TICKET
-    buttons.add(new api.ODButton("openticket:pin-ticket"))
-    buttons.get("openticket:pin-ticket").workers.add(
-        new api.ODWorker("openticket:pin-ticket",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:pin-ticket"))
+    buttons.get("opendiscord:pin-ticket").workers.add(
+        new api.ODWorker("opendiscord:pin-ticket",0,async (instance,params,source) => {
             const {guild,channel,ticket} = params
 
             instance.setMode("button")
@@ -283,9 +283,9 @@ const ticketButtons = () => {
     )
 
     //UNPIN TICKET
-    buttons.add(new api.ODButton("openticket:unpin-ticket"))
-    buttons.get("openticket:unpin-ticket").workers.add(
-        new api.ODWorker("openticket:unpin-ticket",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:unpin-ticket"))
+    buttons.get("opendiscord:unpin-ticket").workers.add(
+        new api.ODWorker("opendiscord:unpin-ticket",0,async (instance,params,source) => {
             const {guild,channel,ticket} = params
 
             instance.setMode("button")
@@ -299,22 +299,22 @@ const ticketButtons = () => {
 
 const transcriptButtons = () => {
     //TRANSCRIPT HTML VISIT
-    buttons.add(new api.ODButton("openticket:transcript-html-visit"))
-    buttons.get("openticket:transcript-html-visit").workers.add(
-        new api.ODWorker("openticket:transcript-html-visit",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:transcript-html-visit"))
+    buttons.get("opendiscord:transcript-html-visit").workers.add(
+        new api.ODWorker("opendiscord:transcript-html-visit",0,async (instance,params,source) => {
             const {result} = params
             instance.setMode("url")
             if (result.data) instance.setUrl(result.data.url)
-            else throw new api.ODSystemError("ODButton:openticket:transcript-html-visit => Missing Transcript Result Data!")
+            else throw new api.ODSystemError("ODButton:opendiscord:transcript-html-visit => Missing Transcript Result Data!")
             instance.setEmoji("📄")
             instance.setLabel(lang.getTranslation("transcripts.success.visit"))
         })
     )
 
     //TRANSCRIPT ERROR RETRY
-    buttons.add(new api.ODButton("openticket:transcript-error-retry"))
-    buttons.get("openticket:transcript-error-retry").workers.add(
-        new api.ODWorker("openticket:transcript-error-retry",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:transcript-error-retry"))
+    buttons.get("opendiscord:transcript-error-retry").workers.add(
+        new api.ODWorker("opendiscord:transcript-error-retry",0,async (instance,params,source) => {
             instance.setMode("button")
             instance.setCustomId("od:transcript-error-retry_"+source)
             instance.setColor("gray")
@@ -324,9 +324,9 @@ const transcriptButtons = () => {
     )
 
     //TRANSCRIPT ERROR CONTINUE
-    buttons.add(new api.ODButton("openticket:transcript-error-continue"))
-    buttons.get("openticket:transcript-error-continue").workers.add(
-        new api.ODWorker("openticket:transcript-error-continue",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:transcript-error-continue"))
+    buttons.get("opendiscord:transcript-error-continue").workers.add(
+        new api.ODWorker("opendiscord:transcript-error-continue",0,async (instance,params,source) => {
             instance.setMode("button")
             instance.setCustomId("od:transcript-error-continue_"+source)
             instance.setColor("red")
@@ -338,9 +338,9 @@ const transcriptButtons = () => {
 
 const clearButtons = () => {
     //CLEAR CONTINUE
-    buttons.add(new api.ODButton("openticket:clear-continue"))
-    buttons.get("openticket:clear-continue").workers.add(
-        new api.ODWorker("openticket:clear-continue",0,async (instance,params,source) => {
+    buttons.add(new api.ODButton("opendiscord:clear-continue"))
+    buttons.get("opendiscord:clear-continue").workers.add(
+        new api.ODWorker("opendiscord:clear-continue",0,async (instance,params,source) => {
             instance.setMode("button")
             instance.setCustomId("od:clear-continue_"+source+"_"+params.filter)
             instance.setColor("red")

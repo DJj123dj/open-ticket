@@ -130,12 +130,12 @@ export class ODMain {
 
     constructor(){
         this.versions = new ODVersionManager_Default()
-        this.versions.add(ODVersion.fromString("openticket:version","v4.0.0"))
-        this.versions.add(ODVersion.fromString("openticket:api","v1.0.0"))
-        this.versions.add(ODVersion.fromString("openticket:transcripts","v2.0.0"))
-        this.versions.add(ODVersion.fromString("openticket:livestatus","v2.0.0"))
+        this.versions.add(ODVersion.fromString("opendiscord:version","v4.0.0"))
+        this.versions.add(ODVersion.fromString("opendiscord:api","v1.0.0"))
+        this.versions.add(ODVersion.fromString("opendiscord:transcripts","v2.0.0"))
+        this.versions.add(ODVersion.fromString("opendiscord:livestatus","v2.0.0"))
 
-        this.debugfile = new ODDebugFileManager("./","otdebug.txt",5000,this.versions.get("openticket:version"))
+        this.debugfile = new ODDebugFileManager("./","otdebug.txt",5000,this.versions.get("opendiscord:version"))
         this.console = new ODConsoleManager(100,this.debugfile)
         this.debug = new ODDebugger(this.console)
         this.events  = new ODEventManager_Default(this.debug)

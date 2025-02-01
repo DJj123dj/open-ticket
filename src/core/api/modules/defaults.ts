@@ -252,7 +252,7 @@ export class ODDefaultsManager {
             languageLoading:true,
             languageInitiating:true,
             languageSelection:true,
-            backupLanguage:"openticket:english",
+            backupLanguage:"opendiscord:english",
             languageList:[],
 
             checkerLoading:true,

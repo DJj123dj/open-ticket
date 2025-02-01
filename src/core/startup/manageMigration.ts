@@ -5,8 +5,8 @@ export const loadVersionMigrationSystem = async () => {
     await preloadMigrationContext()
 
     const lastVersion = await isMigrationRequired()
-    opendiscord.versions.add(lastVersion ? lastVersion : api.ODVersion.fromString("openticket:last-version",opendiscord.versions.get("openticket:version").toString()))
-    if (lastVersion && !opendiscord.flags.get("openticket:no-migration").value){
+    opendiscord.versions.add(lastVersion ? lastVersion : api.ODVersion.fromString("opendiscord:last-version",opendiscord.versions.get("opendiscord:version").toString()))
+    if (lastVersion && !opendiscord.flags.get("opendiscord:no-migration").value){
         //MIGRATION IS REQUIRED
         opendiscord.log("Detected old data!","info")
         opendiscord.log("Starting closed API context...","debug")
@@ -22,10 +22,10 @@ export const loadVersionMigrationSystem = async () => {
     saveAllVersionsToDatabase()
 
     //DEFAULT FLAGS
-    if (opendiscord.flags.exists("openticket:no-plugins") && opendiscord.flags.get("openticket:no-plugins").value) opendiscord.defaults.setDefault("pluginLoading",false)
-    if (opendiscord.flags.exists("openticket:soft-plugins") && opendiscord.flags.get("openticket:soft-plugins").value) opendiscord.defaults.setDefault("softPluginLoading",true)
-    if (opendiscord.flags.exists("openticket:crash") && opendiscord.flags.get("openticket:crash").value) opendiscord.defaults.setDefault("crashOnError",true)
-    if (opendiscord.flags.exists("openticket:force-slash-update") && opendiscord.flags.get("openticket:force-slash-update").value) opendiscord.defaults.setDefault("forceSlashCommandRegistration",true)
+    if (opendiscord.flags.exists("opendiscord:no-plugins") && opendiscord.flags.get("opendiscord:no-plugins").value) opendiscord.defaults.setDefault("pluginLoading",false)
+    if (opendiscord.flags.exists("opendiscord:soft-plugins") && opendiscord.flags.get("opendiscord:soft-plugins").value) opendiscord.defaults.setDefault("softPluginLoading",true)
+    if (opendiscord.flags.exists("opendiscord:crash") && opendiscord.flags.get("opendiscord:crash").value) opendiscord.defaults.setDefault("crashOnError",true)
+    if (opendiscord.flags.exists("opendiscord:force-slash-update") && opendiscord.flags.get("opendiscord:force-slash-update").value) opendiscord.defaults.setDefault("forceSlashCommandRegistration",true)
 
     //LEAVE MIGRATION CONTEXT
     await unloadMigrationContext()
@@ -51,10 +51,10 @@ const unloadMigrationContext = async () => {
 }
 
 const isMigrationRequired = async (): Promise<false|api.ODVersion> => {
-    const rawVersion = await opendiscord.databases.get("openticket:global").get("openticket:last-version","openticket:version")
+    const rawVersion = await opendiscord.databases.get("opendiscord:global").get("opendiscord:last-version","opendiscord:version")
     if (!rawVersion) return false
-    const version = api.ODVersion.fromString("openticket:last-version",rawVersion)
-    if (opendiscord.versions.get("openticket:version").compare(version) == "higher"){
+    const version = api.ODVersion.fromString("opendiscord:last-version",rawVersion)
+    if (opendiscord.versions.get("opendiscord:version").compare(version) == "higher"){
         return version
     }else return false
 }
@@ -78,9 +78,9 @@ const loadAllVersionMigrations = async (lastVersion:api.ODVersion) => {
 }
 
 const saveAllVersionsToDatabase = async () => {
-    const globalDatabase = opendiscord.databases.get("openticket:global")
+    const globalDatabase = opendiscord.databases.get("opendiscord:global")
 
     await opendiscord.versions.loopAll(async (version,id) => {
-        await globalDatabase.set("openticket:last-version",id.value,version.toString())    
+        await globalDatabase.set("opendiscord:last-version",id.value,version.toString())    
     })
 }

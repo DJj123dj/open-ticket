@@ -8,10 +8,10 @@ export const loadAllCooldowns = async () => {
 }
 
 export const loadTicketOptionCooldown = (option:api.ODTicketOption) => {
-    if (option.get("openticket:cooldown-enabled").value){
+    if (option.get("opendiscord:cooldown-enabled").value){
         //option has cooldown
-        const minutes = option.get("openticket:cooldown-minutes").value
+        const minutes = option.get("opendiscord:cooldown-minutes").value
         const milliseconds = minutes*60000
-        opendiscord.cooldowns.add(new api.ODTimeoutCooldown("openticket:option-cooldown_"+option.id.value,milliseconds))
+        opendiscord.cooldowns.add(new api.ODTimeoutCooldown("opendiscord:option-cooldown_"+option.id.value,milliseconds))
     }
 }

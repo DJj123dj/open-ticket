@@ -5,7 +5,7 @@ const lang = opendiscord.languages
 
 export const loadAllSlashCommands = async () => {
     const commands = opendiscord.client.slashCommands
-    const generalConfig = opendiscord.configs.get("openticket:general")
+    const generalConfig = opendiscord.configs.get("opendiscord:general")
     if (!generalConfig) return
 
     const act = discord.ApplicationCommandType
@@ -15,13 +15,13 @@ export const loadAllSlashCommands = async () => {
 
     //create panel choices
     const panelChoices : {name:string, value:string}[] = []
-    opendiscord.configs.get("openticket:panels").data.forEach((panel) => {
+    opendiscord.configs.get("opendiscord:panels").data.forEach((panel) => {
         panelChoices.push({name:panel.name, value:panel.id})
     })
 
     //create ticket choices
     const ticketChoices : {name:string, value:string}[] = []
-    opendiscord.configs.get("openticket:options").data.forEach((option) => {
+    opendiscord.configs.get("opendiscord:options").data.forEach((option) => {
         if (option.type != "ticket") return
         ticketChoices.push({name:option.name, value:option.id})
     })
@@ -32,7 +32,7 @@ export const loadAllSlashCommands = async () => {
     }
 
     //HELP
-    if (allowedCommands.includes("help")) commands.add(new api.ODSlashCommand("openticket:help",{
+    if (allowedCommands.includes("help")) commands.add(new api.ODSlashCommand("opendiscord:help",{
         type:act.ChatInput,
         name:"help",
         description:lang.getTranslation("commands.help"),
@@ -41,7 +41,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //PANEL
-    if (allowedCommands.includes("panel")) commands.add(new api.ODSlashCommand("openticket:panel",{
+    if (allowedCommands.includes("panel")) commands.add(new api.ODSlashCommand("opendiscord:panel",{
         type:act.ChatInput,
         name:"panel",
         description:lang.getTranslation("commands.panel"),
@@ -73,7 +73,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //TICKET (when enabled)
-    if (allowedCommands.includes("ticket")) commands.add(new api.ODSlashCommand("openticket:ticket",{
+    if (allowedCommands.includes("ticket")) commands.add(new api.ODSlashCommand("opendiscord:ticket",{
         type:act.ChatInput,
         name:"ticket",
         description:lang.getTranslation("commands.ticket"),
@@ -99,7 +99,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //CLOSE
-    if (allowedCommands.includes("close")) commands.add(new api.ODSlashCommand("openticket:close",{
+    if (allowedCommands.includes("close")) commands.add(new api.ODSlashCommand("opendiscord:close",{
         type:act.ChatInput,
         name:"close",
         description:lang.getTranslation("commands.close"),
@@ -116,7 +116,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //DELETE
-    if (allowedCommands.includes("delete") && generalConfig.data.system.enableDeleteWithoutTranscript) commands.add(new api.ODSlashCommand("openticket:delete",{
+    if (allowedCommands.includes("delete") && generalConfig.data.system.enableDeleteWithoutTranscript) commands.add(new api.ODSlashCommand("opendiscord:delete",{
         type:act.ChatInput,
         name:"delete",
         description:lang.getTranslation("commands.delete"),
@@ -137,7 +137,7 @@ export const loadAllSlashCommands = async () => {
             }
         ]
     }))
-    else if (allowedCommands.includes("delete")) commands.add(new api.ODSlashCommand("openticket:delete",{
+    else if (allowedCommands.includes("delete")) commands.add(new api.ODSlashCommand("opendiscord:delete",{
         type:act.ChatInput,
         name:"delete",
         description:lang.getTranslation("commands.delete"),
@@ -154,7 +154,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //REOPEN
-    if (allowedCommands.includes("reopen")) commands.add(new api.ODSlashCommand("openticket:reopen",{
+    if (allowedCommands.includes("reopen")) commands.add(new api.ODSlashCommand("opendiscord:reopen",{
         type:act.ChatInput,
         name:"reopen",
         description:lang.getTranslation("commands.reopen"),
@@ -171,7 +171,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //CLAIM
-    if (allowedCommands.includes("claim")) commands.add(new api.ODSlashCommand("openticket:claim",{
+    if (allowedCommands.includes("claim")) commands.add(new api.ODSlashCommand("opendiscord:claim",{
         type:act.ChatInput,
         name:"claim",
         description:lang.getTranslation("commands.claim"),
@@ -194,7 +194,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //UNCLAIM
-    if (allowedCommands.includes("unclaim")) commands.add(new api.ODSlashCommand("openticket:unclaim",{
+    if (allowedCommands.includes("unclaim")) commands.add(new api.ODSlashCommand("opendiscord:unclaim",{
         type:act.ChatInput,
         name:"unclaim",
         description:lang.getTranslation("commands.unclaim"),
@@ -211,7 +211,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //PIN
-    if (allowedCommands.includes("pin")) commands.add(new api.ODSlashCommand("openticket:pin",{
+    if (allowedCommands.includes("pin")) commands.add(new api.ODSlashCommand("opendiscord:pin",{
         type:act.ChatInput,
         name:"pin",
         description:lang.getTranslation("commands.pin"),
@@ -228,7 +228,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //UNPIN
-    if (allowedCommands.includes("unpin")) commands.add(new api.ODSlashCommand("openticket:unpin",{
+    if (allowedCommands.includes("unpin")) commands.add(new api.ODSlashCommand("opendiscord:unpin",{
         type:act.ChatInput,
         name:"unpin",
         description:lang.getTranslation("commands.unpin"),
@@ -245,7 +245,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //MOVE
-    if (allowedCommands.includes("move")) commands.add(new api.ODSlashCommand("openticket:move",{
+    if (allowedCommands.includes("move")) commands.add(new api.ODSlashCommand("opendiscord:move",{
         type:act.ChatInput,
         name:"move",
         description:lang.getTranslation("commands.move"),
@@ -277,7 +277,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //RENAME
-    if (allowedCommands.includes("rename")) commands.add(new api.ODSlashCommand("openticket:rename",{
+    if (allowedCommands.includes("rename")) commands.add(new api.ODSlashCommand("opendiscord:rename",{
         type:act.ChatInput,
         name:"rename",
         description:lang.getTranslation("commands.rename"),
@@ -301,7 +301,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //ADD
-    if (allowedCommands.includes("add")) commands.add(new api.ODSlashCommand("openticket:add",{
+    if (allowedCommands.includes("add")) commands.add(new api.ODSlashCommand("opendiscord:add",{
         type:act.ChatInput,
         name:"add",
         description:lang.getTranslation("commands.add"),
@@ -324,7 +324,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //REMOVE
-    if (allowedCommands.includes("remove")) commands.add(new api.ODSlashCommand("openticket:remove",{
+    if (allowedCommands.includes("remove")) commands.add(new api.ODSlashCommand("opendiscord:remove",{
         type:act.ChatInput,
         name:"remove",
         description:lang.getTranslation("commands.remove"),
@@ -347,7 +347,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //BLACKLIST
-    if (allowedCommands.includes("blacklist")) commands.add(new api.ODSlashCommand("openticket:blacklist",{
+    if (allowedCommands.includes("blacklist")) commands.add(new api.ODSlashCommand("opendiscord:blacklist",{
         type:act.ChatInput,
         name:"blacklist",
         description:lang.getTranslation("commands.blacklist"),
@@ -414,7 +414,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //STATS
-    if (allowedCommands.includes("stats")) commands.add(new api.ODSlashCommand("openticket:stats",{
+    if (allowedCommands.includes("stats")) commands.add(new api.ODSlashCommand("opendiscord:stats",{
         type:act.ChatInput,
         name:"stats",
         description:lang.getTranslation("commands.stats"),
@@ -469,7 +469,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //CLEAR
-    if (allowedCommands.includes("clear")) commands.add(new api.ODSlashCommand("openticket:clear",{
+    if (allowedCommands.includes("clear")) commands.add(new api.ODSlashCommand("opendiscord:clear",{
         type:act.ChatInput,
         name:"clear",
         description:lang.getTranslation("commands.clear"),
@@ -496,7 +496,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //AUTOCLOSE
-    if (allowedCommands.includes("autoclose")) commands.add(new api.ODSlashCommand("openticket:autoclose",{
+    if (allowedCommands.includes("autoclose")) commands.add(new api.ODSlashCommand("opendiscord:autoclose",{
         type:act.ChatInput,
         name:"autoclose",
         description:lang.getTranslation("commands.autoclose"),
@@ -540,7 +540,7 @@ export const loadAllSlashCommands = async () => {
     }))
 
     //AUTODELETE
-    if (allowedCommands.includes("autodelete")) commands.add(new api.ODSlashCommand("openticket:autodelete",{
+    if (allowedCommands.includes("autodelete")) commands.add(new api.ODSlashCommand("opendiscord:autodelete",{
         type:act.ChatInput,
         name:"autodelete",
         description:lang.getTranslation("commands.autodelete"),
@@ -586,7 +586,7 @@ export const loadAllSlashCommands = async () => {
 
 export const loadAllTextCommands = async () => {
     const commands = opendiscord.client.textCommands
-    const generalConfig = opendiscord.configs.get("openticket:general")
+    const generalConfig = opendiscord.configs.get("opendiscord:general")
     if (!generalConfig) return
 
     if (!generalConfig.data.textCommands) return
@@ -594,13 +594,13 @@ export const loadAllTextCommands = async () => {
     
     //create panel choices
     const panelChoices : string[] = []
-    opendiscord.configs.get("openticket:panels").data.forEach((panel) => {
+    opendiscord.configs.get("opendiscord:panels").data.forEach((panel) => {
         panelChoices.push(panel.id)
     })
 
     //create ticket choices
     const ticketChoices : string[] = []
-    opendiscord.configs.get("openticket:options").data.forEach((option) => {
+    opendiscord.configs.get("opendiscord:options").data.forEach((option) => {
         if (option.type != "ticket") return
         ticketChoices.push(option.id)
     })
@@ -611,7 +611,7 @@ export const loadAllTextCommands = async () => {
     }
 
     //HELP
-    if (allowedCommands.includes("help")) commands.add(new api.ODTextCommand("openticket:help",{
+    if (allowedCommands.includes("help")) commands.add(new api.ODTextCommand("opendiscord:help",{
         name:"help",
         prefix,
         dmPermission:true,
@@ -620,7 +620,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //PANEL
-    if (allowedCommands.includes("panel")) commands.add(new api.ODTextCommand("openticket:panel",{
+    if (allowedCommands.includes("panel")) commands.add(new api.ODTextCommand("opendiscord:panel",{
         name:"panel",
         prefix,
         dmPermission:false,
@@ -641,7 +641,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //CLOSE
-    if (allowedCommands.includes("close")) commands.add(new api.ODTextCommand("openticket:close",{
+    if (allowedCommands.includes("close")) commands.add(new api.ODTextCommand("opendiscord:close",{
         name:"close",
         prefix,
         dmPermission:false,
@@ -658,7 +658,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //DELETE
-    if (allowedCommands.includes("delete")) commands.add(new api.ODTextCommand("openticket:delete",{
+    if (allowedCommands.includes("delete")) commands.add(new api.ODTextCommand("opendiscord:delete",{
         name:"delete",
         prefix,
         dmPermission:false,
@@ -675,7 +675,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //REOPEN
-    if (allowedCommands.includes("reopen")) commands.add(new api.ODTextCommand("openticket:reopen",{
+    if (allowedCommands.includes("reopen")) commands.add(new api.ODTextCommand("opendiscord:reopen",{
         name:"reopen",
         prefix,
         dmPermission:false,
@@ -692,7 +692,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //CLAIM
-    if (allowedCommands.includes("claim")) commands.add(new api.ODTextCommand("openticket:claim",{
+    if (allowedCommands.includes("claim")) commands.add(new api.ODTextCommand("opendiscord:claim",{
         name:"claim",
         prefix,
         dmPermission:false,
@@ -714,7 +714,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //UNCLAIM
-    if (allowedCommands.includes("unclaim")) commands.add(new api.ODTextCommand("openticket:unclaim",{
+    if (allowedCommands.includes("unclaim")) commands.add(new api.ODTextCommand("opendiscord:unclaim",{
         name:"unclaim",
         prefix,
         dmPermission:false,
@@ -731,7 +731,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //PIN
-    if (allowedCommands.includes("pin")) commands.add(new api.ODTextCommand("openticket:pin",{
+    if (allowedCommands.includes("pin")) commands.add(new api.ODTextCommand("opendiscord:pin",{
         name:"pin",
         prefix,
         dmPermission:false,
@@ -748,7 +748,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //UNPIN
-    if (allowedCommands.includes("unpin")) commands.add(new api.ODTextCommand("openticket:unpin",{
+    if (allowedCommands.includes("unpin")) commands.add(new api.ODTextCommand("opendiscord:unpin",{
         name:"unpin",
         prefix,
         dmPermission:false,
@@ -765,7 +765,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //MOVE
-    if (allowedCommands.includes("move")) commands.add(new api.ODTextCommand("openticket:move",{
+    if (allowedCommands.includes("move")) commands.add(new api.ODTextCommand("opendiscord:move",{
         name:"move",
         prefix,
         dmPermission:false,
@@ -788,7 +788,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //RENAME
-    if (allowedCommands.includes("rename")) commands.add(new api.ODTextCommand("openticket:rename",{
+    if (allowedCommands.includes("rename")) commands.add(new api.ODTextCommand("opendiscord:rename",{
         name:"rename",
         prefix,
         dmPermission:false,
@@ -811,7 +811,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //ADD
-    if (allowedCommands.includes("add")) commands.add(new api.ODTextCommand("openticket:add",{
+    if (allowedCommands.includes("add")) commands.add(new api.ODTextCommand("opendiscord:add",{
         name:"add",
         prefix,
         dmPermission:false,
@@ -833,7 +833,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //REMOVE
-    if (allowedCommands.includes("remove")) commands.add(new api.ODTextCommand("openticket:remove",{
+    if (allowedCommands.includes("remove")) commands.add(new api.ODTextCommand("opendiscord:remove",{
         name:"remove",
         prefix,
         dmPermission:false,
@@ -855,7 +855,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //BLACKLIST
-    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("openticket:blacklist-view",{
+    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("opendiscord:blacklist-view",{
         name:"blacklist view",
         prefix,
         dmPermission:false,
@@ -863,7 +863,7 @@ export const loadAllTextCommands = async () => {
         allowBots:false
     }))
 
-    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("openticket:blacklist-add",{
+    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("opendiscord:blacklist-add",{
         name:"blacklist add",
         prefix,
         dmPermission:false,
@@ -884,7 +884,7 @@ export const loadAllTextCommands = async () => {
         ]
     }))
 
-    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("openticket:blacklist-remove",{
+    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("opendiscord:blacklist-remove",{
         name:"blacklist remove",
         prefix,
         dmPermission:false,
@@ -905,7 +905,7 @@ export const loadAllTextCommands = async () => {
         ]
     }))
 
-    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("openticket:blacklist-get",{
+    if (allowedCommands.includes("blacklist")) commands.add(new api.ODTextCommand("opendiscord:blacklist-get",{
         name:"blacklist get",
         prefix,
         dmPermission:false,
@@ -921,7 +921,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //STATS
-    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("openticket:stats-global",{
+    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("opendiscord:stats-global",{
         name:"stats global",
         prefix,
         dmPermission:false,
@@ -929,7 +929,7 @@ export const loadAllTextCommands = async () => {
         allowBots:false
     }))
 
-    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("openticket:stats-reset",{
+    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("opendiscord:stats-reset",{
         name:"stats reset",
         prefix,
         dmPermission:false,
@@ -945,7 +945,7 @@ export const loadAllTextCommands = async () => {
         ]
     }))
 
-    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("openticket:stats-user",{
+    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("opendiscord:stats-user",{
         name:"stats user",
         prefix,
         dmPermission:false,
@@ -960,7 +960,7 @@ export const loadAllTextCommands = async () => {
         ]
     }))
 
-    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("openticket:stats-ticket",{
+    if (allowedCommands.includes("stats")) commands.add(new api.ODTextCommand("opendiscord:stats-ticket",{
         name:"stats ticket",
         prefix,
         dmPermission:false,
@@ -977,7 +977,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //CLEAR
-    if (allowedCommands.includes("clear")) commands.add(new api.ODTextCommand("openticket:clear",{
+    if (allowedCommands.includes("clear")) commands.add(new api.ODTextCommand("opendiscord:clear",{
         name:"clear",
         prefix,
         dmPermission:false,
@@ -1004,7 +1004,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //AUTOCLOSE
-    if (allowedCommands.includes("autoclose")) commands.add(new api.ODTextCommand("openticket:autoclose-disable",{
+    if (allowedCommands.includes("autoclose")) commands.add(new api.ODTextCommand("opendiscord:autoclose-disable",{
         name:"autoclose disable",
         prefix,
         dmPermission:false,
@@ -1020,7 +1020,7 @@ export const loadAllTextCommands = async () => {
         ]
     }))
 
-    if (allowedCommands.includes("autoclose")) commands.add(new api.ODTextCommand("openticket:autoclose-enable",{
+    if (allowedCommands.includes("autoclose")) commands.add(new api.ODTextCommand("opendiscord:autoclose-enable",{
         name:"autoclose enable",
         prefix,
         dmPermission:false,
@@ -1045,7 +1045,7 @@ export const loadAllTextCommands = async () => {
     }))
 
     //AUTODELETE
-    if (allowedCommands.includes("autodelete")) commands.add(new api.ODTextCommand("openticket:autodelete-disable",{
+    if (allowedCommands.includes("autodelete")) commands.add(new api.ODTextCommand("opendiscord:autodelete-disable",{
         name:"autodelete disable",
         prefix,
         dmPermission:false,
@@ -1061,7 +1061,7 @@ export const loadAllTextCommands = async () => {
         ]
     }))
 
-    if (allowedCommands.includes("autodelete")) commands.add(new api.ODTextCommand("openticket:autodelete-enable",{
+    if (allowedCommands.includes("autodelete")) commands.add(new api.ODTextCommand("opendiscord:autodelete-enable",{
         name:"autodelete enable",
         prefix,
         dmPermission:false,

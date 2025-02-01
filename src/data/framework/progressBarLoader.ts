@@ -25,43 +25,43 @@ export const loadAllProgressBarRenderers = async () => {
     //VALUE RENDERER
     const valueRendererSettings: api.ODProgressBarRenderer_DefaultSettings = {...defaultSettings}
     valueRendererSettings.labelType = "value"
-    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("openticket:value-renderer",valueRendererSettings))
+    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("opendiscord:value-renderer",valueRendererSettings))
 
     //FRACTION RENDERER
     const fractionRendererSettings: api.ODProgressBarRenderer_DefaultSettings = {...defaultSettings}
     fractionRendererSettings.labelType = "fraction"
-    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("openticket:fraction-renderer",fractionRendererSettings))
+    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("opendiscord:fraction-renderer",fractionRendererSettings))
 
     //PERCENTAGE RENDERER
     const percentageRendererSettings: api.ODProgressBarRenderer_DefaultSettings = {...defaultSettings}
     percentageRendererSettings.labelType = "percentage"
-    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("openticket:percentage-renderer",percentageRendererSettings))
+    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("opendiscord:percentage-renderer",percentageRendererSettings))
 
     //TIME MS RENDERER
     const timeMsRendererSettings: api.ODProgressBarRenderer_DefaultSettings = {...defaultSettings}
     timeMsRendererSettings.labelType = "time-ms"
-    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("openticket:time-ms-renderer",timeMsRendererSettings))
+    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("opendiscord:time-ms-renderer",timeMsRendererSettings))
 
     //TIME SEC RENDERER
     const timeSecRendererSettings: api.ODProgressBarRenderer_DefaultSettings = {...defaultSettings}
     timeSecRendererSettings.labelType = "time-sec"
-    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("openticket:time-sec-renderer",timeSecRendererSettings))
+    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("opendiscord:time-sec-renderer",timeSecRendererSettings))
 
     //TIME MIN RENDERER
     const timeMinRendererSettings: api.ODProgressBarRenderer_DefaultSettings = {...defaultSettings}
     timeMinRendererSettings.labelType = "time-min"
-    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("openticket:time-min-renderer",timeMinRendererSettings))
+    opendiscord.progressbars.renderers.add(new api.ODProgressBarRenderer_Default("opendiscord:time-min-renderer",timeMinRendererSettings))
 }
 
 export const loadAllProgressBars = async () => {
-    const fractRenderer = opendiscord.progressbars.renderers.get("openticket:fraction-renderer")
+    const fractRenderer = opendiscord.progressbars.renderers.get("opendiscord:fraction-renderer")
 
     //SLASH COMMAND REMOVE (doesn't have correct amount yet)
-    opendiscord.progressbars.add(new api.ODManualProgressBar("openticket:slash-command-remove",fractRenderer.withAdditionalSettings({filledBarColor:"red"}),0,"max",null,"Commands Removed"))
+    opendiscord.progressbars.add(new api.ODManualProgressBar("opendiscord:slash-command-remove",fractRenderer.withAdditionalSettings({filledBarColor:"red"}),0,"max",null,"Commands Removed"))
 
     //SLASH COMMAND CREATE (doesn't have correct amount yet)
-    opendiscord.progressbars.add(new api.ODManualProgressBar("openticket:slash-command-create",fractRenderer.withAdditionalSettings({filledBarColor:"green"}),0,"max",null,"Commands Created"))
+    opendiscord.progressbars.add(new api.ODManualProgressBar("opendiscord:slash-command-create",fractRenderer.withAdditionalSettings({filledBarColor:"green"}),0,"max",null,"Commands Created"))
 
     //SLASH COMMAND UPDATE (doesn't have correct amount yet)
-    opendiscord.progressbars.add(new api.ODManualProgressBar("openticket:slash-command-update",fractRenderer.withAdditionalSettings({filledBarColor:"openticket"}),0,"max",null,"Commands Updated"))
+    opendiscord.progressbars.add(new api.ODManualProgressBar("opendiscord:slash-command-update",fractRenderer.withAdditionalSettings({filledBarColor:"openticket"}),0,"max",null,"Commands Updated"))
 }

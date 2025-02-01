@@ -8,11 +8,11 @@ import { ODVersion, ODVersionManager, ODValidId } from "../modules/base"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODVersionManagerIds_Default {
-    "openticket:version":ODVersion,
-    "openticket:last-version":ODVersion,
-    "openticket:api":ODVersion,
-    "openticket:transcripts":ODVersion,
-    "openticket:livestatus":ODVersion
+    "opendiscord:version":ODVersion,
+    "opendiscord:last-version":ODVersion,
+    "opendiscord:api":ODVersion,
+    "opendiscord:transcripts":ODVersion,
+    "opendiscord:livestatus":ODVersion
 }
 
 /**## ODFlagManager_Default `default_class`

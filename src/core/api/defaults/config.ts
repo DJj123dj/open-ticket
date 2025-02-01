@@ -12,11 +12,11 @@ import { ODRoleUpdateMode } from "../openticket/role"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODConfigManagerIds_Default {
-    "openticket:general":ODJsonConfig_DefaultGeneral,
-    "openticket:options":ODJsonConfig_DefaultOptions,
-    "openticket:panels":ODJsonConfig_DefaultPanels,
-    "openticket:questions":ODJsonConfig_DefaultQuestions,
-    "openticket:transcripts":ODJsonConfig_DefaultTranscripts
+    "opendiscord:general":ODJsonConfig_DefaultGeneral,
+    "opendiscord:options":ODJsonConfig_DefaultOptions,
+    "opendiscord:panels":ODJsonConfig_DefaultPanels,
+    "opendiscord:questions":ODJsonConfig_DefaultQuestions,
+    "opendiscord:transcripts":ODJsonConfig_DefaultTranscripts
 }
 
 /**## ODConfigManager_Default `default_class`
@@ -102,7 +102,7 @@ export class ODJsonConfig_DefaultGeneral extends ODJsonConfig {
     
         /**The main (hex) color used in almost every embed in the bot. */
         mainColor:discord.ColorResolvable,
-        /**The language to use. Can be the id of the language or the id without the prefix when using `openticket:...`. */
+        /**The language to use. Can be the id of the language or the id without the prefix when using `opendiscord:...`. */
         language:string,
         /**The prefix used in all text-commands. */
         prefix:string,

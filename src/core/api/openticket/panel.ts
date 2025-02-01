@@ -54,23 +54,23 @@ export interface ODPanelJson {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODPanelIds {
-    "openticket:name":ODPanelData<string>,
-    "openticket:options":ODPanelData<string[]>,
-    "openticket:dropdown":ODPanelData<boolean>,
+    "opendiscord:name":ODPanelData<string>,
+    "opendiscord:options":ODPanelData<string[]>,
+    "opendiscord:dropdown":ODPanelData<boolean>,
 
-    "openticket:text":ODPanelData<string>,
-    "openticket:embed":ODPanelData<ODJsonConfig_DefaultPanelEmbedSettingsType>,
+    "opendiscord:text":ODPanelData<string>,
+    "opendiscord:embed":ODPanelData<ODJsonConfig_DefaultPanelEmbedSettingsType>,
 
-    "openticket:dropdown-placeholder":ODPanelData<string>,
+    "opendiscord:dropdown-placeholder":ODPanelData<string>,
     
-    "openticket:enable-max-tickets-warning-text":ODPanelData<boolean>,
-    "openticket:enable-max-tickets-warning-embed":ODPanelData<boolean>,
+    "opendiscord:enable-max-tickets-warning-text":ODPanelData<boolean>,
+    "opendiscord:enable-max-tickets-warning-embed":ODPanelData<boolean>,
     
-    "openticket:describe-options-layout":ODPanelData<"simple"|"normal"|"detailed">,
-    "openticket:describe-options-custom-title":ODPanelData<string>,
-    "openticket:describe-options-in-text":ODPanelData<boolean>,
-    "openticket:describe-options-in-embed-fields":ODPanelData<boolean>,
-    "openticket:describe-options-in-embed-description":ODPanelData<boolean>
+    "opendiscord:describe-options-layout":ODPanelData<"simple"|"normal"|"detailed">,
+    "opendiscord:describe-options-custom-title":ODPanelData<string>,
+    "opendiscord:describe-options-in-text":ODPanelData<boolean>,
+    "opendiscord:describe-options-in-embed-fields":ODPanelData<boolean>,
+    "opendiscord:describe-options-in-embed-description":ODPanelData<boolean>
 }
 
 /**## ODPanel `class`

@@ -6,7 +6,7 @@ import * as discord from "discord.js"
 
 const files = opendiscord.builders.files
 const lang = opendiscord.languages
-const transcriptConfig = opendiscord.configs.get("openticket:transcripts")
+const transcriptConfig = opendiscord.configs.get("opendiscord:transcripts")
 
 export const registerAllFiles = async () => {
     transcriptFiles()
@@ -15,15 +15,15 @@ export const registerAllFiles = async () => {
 
 const transcriptFiles = () => {
     //TEXT TRANSCRIPT
-    files.add(new api.ODFile("openticket:text-transcript"))
-    files.get("openticket:text-transcript").workers.add(
-        new api.ODWorker("openticket:text-transcript",0,async (instance,params,source) => {
+    files.add(new api.ODFile("opendiscord:text-transcript"))
+    files.get("opendiscord:text-transcript").workers.add(
+        new api.ODWorker("opendiscord:text-transcript",0,async (instance,params,source) => {
             const {guild,channel,user,ticket,compiler,result} = params
             
             const fileMode = transcriptConfig.data.textTranscriptStyle.fileMode
             const customName = transcriptConfig.data.textTranscriptStyle.customFileName
 
-            const creatorId = ticket.get("openticket:opened-by").value ?? "unknown-creator-id"
+            const creatorId = ticket.get("opendiscord:opened-by").value ?? "unknown-creator-id"
             const creator = (await opendiscord.tickets.getTicketUser(ticket,"creator"))
 
             if (fileMode == "custom") instance.setName(customName.split(".")[0]+".txt")
@@ -35,7 +35,7 @@ const transcriptFiles = () => {
 
             instance.setDescription(lang.getTranslation("transcripts.success.textFileDescription"))
             
-            if (compiler.id.value != "openticket:text-compiler" || !result.data || typeof result.data.contents != "string"){
+            if (compiler.id.value != "opendiscord:text-compiler" || !result.data || typeof result.data.contents != "string"){
                 instance.setContents("<invalid-transcript-compiler>")
                 return
             }

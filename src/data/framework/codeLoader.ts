@@ -1,12 +1,12 @@
 import {opendiscord, api, utilities} from "../../index"
 import * as discord from "discord.js"
 
-const generalConfig = opendiscord.configs.get("openticket:general")
-const globalDatabase = opendiscord.databases.get("openticket:global")
-const userDatabase = opendiscord.databases.get("openticket:users")
-const ticketDatabase = opendiscord.databases.get("openticket:tickets")
-const statsDatabase = opendiscord.databases.get("openticket:stats")
-const optionDatabase = opendiscord.databases.get("openticket:options")
+const generalConfig = opendiscord.configs.get("opendiscord:general")
+const globalDatabase = opendiscord.databases.get("opendiscord:global")
+const userDatabase = opendiscord.databases.get("opendiscord:users")
+const ticketDatabase = opendiscord.databases.get("opendiscord:tickets")
+const statsDatabase = opendiscord.databases.get("opendiscord:stats")
+const optionDatabase = opendiscord.databases.get("opendiscord:options")
 const mainServer = opendiscord.client.mainServer
 
 export const loadAllCode = async () => {
@@ -22,28 +22,28 @@ export const loadAllCode = async () => {
 
 export const loadCommandErrorHandlingCode = async () => {
     //COMMAND ERROR HANDLING
-    opendiscord.code.add(new api.ODCode("openticket:command-error-handling",14,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:command-error-handling",14,() => {
         //invalid/missing options
         opendiscord.client.textCommands.onError(async (error) => {
             if (error.msg.channel.type == discord.ChannelType.GroupDM) return
             if (error.type == "invalid_option"){
-                error.msg.channel.send((await opendiscord.builders.messages.getSafe("openticket:error-option-invalid").build("text",{guild:error.msg.guild,channel:error.msg.channel,user:error.msg.author,error})).message)
+                error.msg.channel.send((await opendiscord.builders.messages.getSafe("opendiscord:error-option-invalid").build("text",{guild:error.msg.guild,channel:error.msg.channel,user:error.msg.author,error})).message)
             }else if (error.type == "missing_option"){
-                error.msg.channel.send((await opendiscord.builders.messages.getSafe("openticket:error-option-missing").build("text",{guild:error.msg.guild,channel:error.msg.channel,user:error.msg.author,error})).message)
+                error.msg.channel.send((await opendiscord.builders.messages.getSafe("opendiscord:error-option-missing").build("text",{guild:error.msg.guild,channel:error.msg.channel,user:error.msg.author,error})).message)
             }else if (error.type == "unknown_command" && generalConfig.data.system.sendErrorOnUnknownCommand){
-                error.msg.channel.send((await opendiscord.builders.messages.getSafe("openticket:error-unknown-command").build("text",{guild:error.msg.guild,channel:error.msg.channel,user:error.msg.author,error})).message)
+                error.msg.channel.send((await opendiscord.builders.messages.getSafe("opendiscord:error-unknown-command").build("text",{guild:error.msg.guild,channel:error.msg.channel,user:error.msg.author,error})).message)
             }
         })
 
         //responder timeout
         opendiscord.responders.commands.setTimeoutErrorCallback(async (instance,source) => {
-            instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
+            instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
         },null)
         opendiscord.responders.buttons.setTimeoutErrorCallback(async (instance,source) => {
-            instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
+            instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
         },null)
         opendiscord.responders.dropdowns.setTimeoutErrorCallback(async (instance,source) => {
-            instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
+            instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
         },null)
         opendiscord.responders.modals.setTimeoutErrorCallback(async (instance,source) => {
             if (!instance.channel){
@@ -52,14 +52,14 @@ export const loadCommandErrorHandlingCode = async () => {
                 }})
                 return
             }
-            instance.reply(await opendiscord.builders.messages.getSafe("openticket:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
+            instance.reply(await opendiscord.builders.messages.getSafe("opendiscord:error-responder-timeout").build(source,{guild:instance.guild,channel:instance.channel,user:instance.user}))
         },null)
     }))
 }
 
 export const loadStartListeningInteractionsCode = async () => {
     //START LISTENING TO INTERACTIONS
-    opendiscord.code.add(new api.ODCode("openticket:start-listening-interactions",13,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:start-listening-interactions",13,() => {
         opendiscord.client.slashCommands.startListeningToInteractions()
         opendiscord.client.textCommands.startListeningToInteractions()
     }))
@@ -69,11 +69,11 @@ export const loadDatabaseCleanersCode = async () => {
     if (!mainServer) return
 
     //PANEL DATABASE CLEANER
-    opendiscord.code.add(new api.ODCode("openticket:panel-database-cleaner",12,async () => {
+    opendiscord.code.add(new api.ODCode("opendiscord:panel-database-cleaner",12,async () => {
         const validPanels: string[] = []
 
         //check global database for valid panel embeds
-        for (const panel of (await globalDatabase.getCategory("openticket:panel-update") ?? [])){
+        for (const panel of (await globalDatabase.getCategory("opendiscord:panel-update") ?? [])){
             if (!validPanels.includes(panel.key)){
                 try{
                     const splittedId = panel.key.split("_")
@@ -84,70 +84,70 @@ export const loadDatabaseCleanersCode = async () => {
         }
 
         //remove all unused panels
-        for (const panel of (await globalDatabase.getCategory("openticket:panel-update") ?? [])){
+        for (const panel of (await globalDatabase.getCategory("opendiscord:panel-update") ?? [])){
             if (!validPanels.includes(panel.key)){
-                await globalDatabase.delete("openticket:panel-update",panel.key)
+                await globalDatabase.delete("opendiscord:panel-update",panel.key)
             }
         }
 
         //delete panel from database on delete
         opendiscord.client.client.on("messageDelete",async (msg) => {
-            if (await globalDatabase.exists("openticket:panel-update",msg.channel.id+"_"+msg.id)){
-                await globalDatabase.delete("openticket:panel-update",msg.channel.id+"_"+msg.id)
+            if (await globalDatabase.exists("opendiscord:panel-update",msg.channel.id+"_"+msg.id)){
+                await globalDatabase.delete("opendiscord:panel-update",msg.channel.id+"_"+msg.id)
             }
         })
     }))
 
     //SUFFIX DATABASE CLEANER
-    opendiscord.code.add(new api.ODCode("openticket:suffix-database-cleaner",11,async () => {
+    opendiscord.code.add(new api.ODCode("opendiscord:suffix-database-cleaner",11,async () => {
         const validSuffixCounters: string[] = []
         const validSuffixHistories: string[] = []
 
         //check global database for valid option suffix counters
-        for (const counter of (await globalDatabase.getCategory("openticket:option-suffix-counter") ?? [])){
+        for (const counter of (await globalDatabase.getCategory("opendiscord:option-suffix-counter") ?? [])){
             if (!validSuffixCounters.includes(counter.key)){
                 if (opendiscord.options.exists(counter.key)) validSuffixCounters.push(counter.key)
             }
         }
 
         //check global database for valid option suffix histories
-        for (const history of (await globalDatabase.getCategory("openticket:option-suffix-history") ?? [])){
+        for (const history of (await globalDatabase.getCategory("opendiscord:option-suffix-history") ?? [])){
             if (!validSuffixHistories.includes(history.key)){
                 if (opendiscord.options.exists(history.key)) validSuffixHistories.push(history.key)
             }
         }
 
         //remove all unused suffix counters
-        for (const counter of (await globalDatabase.getCategory("openticket:option-suffix-counter") ?? [])){
+        for (const counter of (await globalDatabase.getCategory("opendiscord:option-suffix-counter") ?? [])){
             if (!validSuffixCounters.includes(counter.key)){
-                await globalDatabase.delete("openticket:option-suffix-counter",counter.key)
+                await globalDatabase.delete("opendiscord:option-suffix-counter",counter.key)
             }
         }
 
         //remove all unused suffix histories
-        for (const history of (await globalDatabase.getCategory("openticket:option-suffix-history") ?? [])){
+        for (const history of (await globalDatabase.getCategory("opendiscord:option-suffix-history") ?? [])){
             if (!validSuffixHistories.includes(history.key)){
-                await globalDatabase.delete("openticket:option-suffix-history",history.key)
+                await globalDatabase.delete("opendiscord:option-suffix-history",history.key)
             }
         }
     }))
 
     //OPTION DATABASE CLEANER
-    opendiscord.code.add(new api.ODCode("openticket:option-database-cleaner",10,async () => {
+    opendiscord.code.add(new api.ODCode("opendiscord:option-database-cleaner",10,async () => {
         //delete all unused options (async)
-        for (const option of (await optionDatabase.getCategory("openticket:used-option") ?? [])){
+        for (const option of (await optionDatabase.getCategory("opendiscord:used-option") ?? [])){
             if (!opendiscord.options.exists(option.key)){
                 //remove because option isn't loaded into memory (0 tickets require it)
-                await optionDatabase.delete("openticket:used-option",option.key)
+                await optionDatabase.delete("opendiscord:used-option",option.key)
             }else if (!opendiscord.tickets.getAll().some((ticket) => ticket.option.id.value == option.key)){
                 //remove when loaded into memory (0 tickets require it)
-                await optionDatabase.delete("openticket:used-option",option.key)
+                await optionDatabase.delete("opendiscord:used-option",option.key)
             }
         }
     }))
 
     //USER DATABASE CLEANER (full async/parallel because it takes a lot of time)
-    opendiscord.code.add(new api.ODCode("openticket:user-database-cleaner",9,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:user-database-cleaner",9,() => {
         utilities.runAsync(async () => {  
             const validUsers: string[] = []
 
@@ -163,7 +163,7 @@ export const loadDatabaseCleanersCode = async () => {
 
             //check stats database for valid users
             for (const stat of (await statsDatabase.getAll())){
-                if (stat.category.startsWith("openticket:user_")){
+                if (stat.category.startsWith("opendiscord:user_")){
                     if (!validUsers.includes(stat.key)){
                         try{
                             const member = await mainServer.members.fetch(stat.key)
@@ -182,7 +182,7 @@ export const loadDatabaseCleanersCode = async () => {
 
             //remove all unused stats
             for (const stat of (await statsDatabase.getAll())){
-                if (stat.category.startsWith("openticket:user_")){
+                if (stat.category.startsWith("opendiscord:user_")){
                     if (!validUsers.includes(stat.key)){
                         await statsDatabase.delete(stat.category,stat.key)
                     }
@@ -203,7 +203,7 @@ export const loadDatabaseCleanersCode = async () => {
 
             //remove unused stats
             for (const stat of (await statsDatabase.getAll())){
-                if (stat.category.startsWith("openticket:user_")){
+                if (stat.category.startsWith("opendiscord:user_")){
                     if (stat.key == member.id){
                         await statsDatabase.delete(stat.category,stat.key)
                     }
@@ -213,7 +213,7 @@ export const loadDatabaseCleanersCode = async () => {
     }))
 
     //TICKET DATABASE CLEANER
-    opendiscord.code.add(new api.ODCode("openticket:ticket-database-cleaner",8,async () => {
+    opendiscord.code.add(new api.ODCode("opendiscord:ticket-database-cleaner",8,async () => {
         const validTickets: string[] = []
 
         //check ticket database for valid tickets
@@ -228,7 +228,7 @@ export const loadDatabaseCleanersCode = async () => {
 
         //check stats database for valid tickets
         for (const stat of (await statsDatabase.getAll())){
-            if (stat.category.startsWith("openticket:ticket_")){
+            if (stat.category.startsWith("opendiscord:ticket_")){
                 if (!validTickets.includes(stat.key)){
                     try{
                         const channel = await opendiscord.client.fetchGuildTextChannel(mainServer,stat.key)
@@ -248,7 +248,7 @@ export const loadDatabaseCleanersCode = async () => {
 
         //remove all unused stats
         for (const stat of (await statsDatabase.getAll())){
-            if (stat.category.startsWith("openticket:ticket_")){
+            if (stat.category.startsWith("opendiscord:ticket_")){
                 if (!validTickets.includes(stat.key)){
                     await statsDatabase.delete(stat.category,stat.key)
                 }
@@ -269,7 +269,7 @@ export const loadDatabaseCleanersCode = async () => {
 
             //remove unused stats
             for (const stat of (await statsDatabase.getAll())){
-                if (stat.category.startsWith("openticket:ticket_")){
+                if (stat.category.startsWith("opendiscord:ticket_")){
                     if (stat.key == channel.id){
                         await statsDatabase.delete(stat.category,stat.key)
                     }
@@ -281,9 +281,9 @@ export const loadDatabaseCleanersCode = async () => {
 
 export const loadPanelAutoUpdateCode = async () => {
     //PANEL AUTO UPDATE
-    opendiscord.code.add(new api.ODCode("openticket:panel-auto-update",7,async () => {
-        const globalDatabase = opendiscord.databases.get("openticket:global")
-        const panelIds = await globalDatabase.getCategory("openticket:panel-update") ?? []
+    opendiscord.code.add(new api.ODCode("opendiscord:panel-auto-update",7,async () => {
+        const globalDatabase = opendiscord.databases.get("opendiscord:global")
+        const panelIds = await globalDatabase.getCategory("opendiscord:panel-update") ?? []
         if (!mainServer) return
 
         for (const panelId of panelIds){
@@ -291,7 +291,7 @@ export const loadPanelAutoUpdateCode = async () => {
 
             //panel doesn't exist anymore in config and needs to be removed
             if (!panel){
-                globalDatabase.delete("openticket:panel-update",panelId.key)
+                globalDatabase.delete("opendiscord:panel-update",panelId.key)
                 return
             }
 
@@ -302,7 +302,7 @@ export const loadPanelAutoUpdateCode = async () => {
                 const message = await opendiscord.client.fetchGuildChannelMessage(mainServer,channel,splittedId[1])
                 if (!message || !message.editable) return
                 
-                message.edit((await opendiscord.builders.messages.getSafe("openticket:panel").build("auto-update",{guild:mainServer,channel,user:opendiscord.client.client.user,panel})).message)
+                message.edit((await opendiscord.builders.messages.getSafe("opendiscord:panel").build("auto-update",{guild:mainServer,channel,user:opendiscord.client.client.user,panel})).message)
                 opendiscord.log("Panel in server got auto-updated!","info",[
                     {key:"channelid",value:splittedId[0]},
                     {key:"messageid",value:splittedId[1]},
@@ -315,62 +315,62 @@ export const loadPanelAutoUpdateCode = async () => {
 
 export const loadDatabaseSaversCode = async () => {
     //TICKET SAVER
-    opendiscord.code.add(new api.ODCode("openticket:ticket-saver",6,() => {
-        const mainVersion = opendiscord.versions.get("openticket:version")
+    opendiscord.code.add(new api.ODCode("opendiscord:ticket-saver",6,() => {
+        const mainVersion = opendiscord.versions.get("opendiscord:version")
 
         opendiscord.tickets.onAdd(async (ticket) => {
-            await ticketDatabase.set("openticket:ticket",ticket.id.value,ticket.toJson(mainVersion))
+            await ticketDatabase.set("opendiscord:ticket",ticket.id.value,ticket.toJson(mainVersion))
 
             //add option to database if non-existent
-            if (!(await optionDatabase.exists("openticket:used-option",ticket.option.id.value))){
-                await optionDatabase.set("openticket:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
+            if (!(await optionDatabase.exists("opendiscord:used-option",ticket.option.id.value))){
+                await optionDatabase.set("opendiscord:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
             }
         })
         opendiscord.tickets.onChange(async (ticket) => {
-            await ticketDatabase.set("openticket:ticket",ticket.id.value,ticket.toJson(mainVersion))
+            await ticketDatabase.set("opendiscord:ticket",ticket.id.value,ticket.toJson(mainVersion))
 
             //add option to database if non-existent
-            if (!(await optionDatabase.exists("openticket:used-option",ticket.option.id.value))){
-                await optionDatabase.set("openticket:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
+            if (!(await optionDatabase.exists("opendiscord:used-option",ticket.option.id.value))){
+                await optionDatabase.set("opendiscord:used-option",ticket.option.id.value,ticket.option.toJson(mainVersion))
             }
 
             //delete all unused options on ticket move
             for (const option of opendiscord.options.getAll()){
-                if (await optionDatabase.exists("openticket:used-option",option.id.value) && !opendiscord.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
-                    await optionDatabase.delete("openticket:used-option",option.id.value)
+                if (await optionDatabase.exists("opendiscord:used-option",option.id.value) && !opendiscord.tickets.getAll().some((ticket) => ticket.option.id.value == option.id.value)){
+                    await optionDatabase.delete("opendiscord:used-option",option.id.value)
                 }
             }
         })
         opendiscord.tickets.onRemove(async (ticket) => {
-            await ticketDatabase.delete("openticket:ticket",ticket.id.value)
+            await ticketDatabase.delete("opendiscord:ticket",ticket.id.value)
 
             //remove option from database if unused
             if (!opendiscord.tickets.getAll().some((ticket) => ticket.option.id.value == ticket.option.id.value)){
-                await optionDatabase.delete("openticket:used-option",ticket.option.id.value)
+                await optionDatabase.delete("opendiscord:used-option",ticket.option.id.value)
             }
         })
     }))
 
     //BLACKLIST SAVER
-    opendiscord.code.add(new api.ODCode("openticket:blacklist-saver",5,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:blacklist-saver",5,() => {
         opendiscord.blacklist.onAdd(async (blacklist) => {
-            await userDatabase.set("openticket:blacklist",blacklist.id.value,blacklist.reason)
+            await userDatabase.set("opendiscord:blacklist",blacklist.id.value,blacklist.reason)
         })
         opendiscord.blacklist.onChange(async (blacklist) => {
-            await userDatabase.set("openticket:blacklist",blacklist.id.value,blacklist.reason)
+            await userDatabase.set("opendiscord:blacklist",blacklist.id.value,blacklist.reason)
         })
         opendiscord.blacklist.onRemove(async (blacklist) => {
-            await userDatabase.delete("openticket:blacklist",blacklist.id.value)
+            await userDatabase.delete("opendiscord:blacklist",blacklist.id.value)
         })
     }))
 
     //AUTO ROLE ON JOIN
-    opendiscord.code.add(new api.ODCode("openticket:auto-role-on-join",4,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:auto-role-on-join",4,() => {
         opendiscord.client.client.on("guildMemberAdd",async (member) => {
             for (const option of opendiscord.options.getAll()){
-                if (option instanceof api.ODRoleOption && option.get("openticket:add-on-join").value){
+                if (option instanceof api.ODRoleOption && option.get("opendiscord:add-on-join").value){
                     //add these roles on user join
-                    await opendiscord.actions.get("openticket:reaction-role").run("panel-button",{guild:member.guild,user:member.user,option,overwriteMode:"add"})
+                    await opendiscord.actions.get("opendiscord:reaction-role").run("panel-button",{guild:member.guild,user:member.user,option,overwriteMode:"add"})
                 }
             }
         })
@@ -379,26 +379,26 @@ export const loadDatabaseSaversCode = async () => {
 
 const loadAutoCode = () => {
     //AUTOCLOSE TIMEOUT
-    opendiscord.code.add(new api.ODCode("openticket:autoclose-timeout",3,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:autoclose-timeout",3,() => {
         setInterval(async () => {
             let count = 0
             for (const ticket of opendiscord.tickets.getAll()){
                 const channel = await opendiscord.tickets.getTicketChannel(ticket)
                 if (!channel) return
                 const lastMessage = (await channel.messages.fetch({limit:5})).first()
-                if (lastMessage && !ticket.get("openticket:closed").value){
+                if (lastMessage && !ticket.get("opendiscord:closed").value){
                     //ticket has last message
-                    const disableOnClaim = ticket.option.get("openticket:autoclose-disable-claim").value && ticket.get("openticket:claimed").value
-                    const enabled = (disableOnClaim) ? false : ticket.get("openticket:autoclose-enabled").value
-                    const hours = ticket.get("openticket:autoclose-hours").value
+                    const disableOnClaim = ticket.option.get("opendiscord:autoclose-disable-claim").value && ticket.get("opendiscord:claimed").value
+                    const enabled = (disableOnClaim) ? false : ticket.get("opendiscord:autoclose-enabled").value
+                    const hours = ticket.get("opendiscord:autoclose-hours").value
 
                     const time = hours*60*60*1000 //hours in milliseconds
                     if (enabled && (new Date().getTime() - lastMessage.createdTimestamp) >= time){
                         //autoclose ticket
-                        await opendiscord.actions.get("openticket:close-ticket").run("autoclose",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autoclose",sendMessage:false})
-                        await channel.send((await opendiscord.builders.messages.getSafe("openticket:autoclose-message").build("timeout",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
+                        await opendiscord.actions.get("opendiscord:close-ticket").run("autoclose",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autoclose",sendMessage:false})
+                        await channel.send((await opendiscord.builders.messages.getSafe("opendiscord:autoclose-message").build("timeout",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
                         count++
-                        await opendiscord.stats.get("openticket:global").setStat("openticket:tickets-autoclosed",1,"increase")
+                        await opendiscord.stats.get("opendiscord:global").setStat("opendiscord:tickets-autoclosed",1,"increase")
                     }
                 }
             }
@@ -410,21 +410,21 @@ const loadAutoCode = () => {
     }))
 
     //AUTOCLOSE LEAVE
-    opendiscord.code.add(new api.ODCode("openticket:autoclose-leave",2,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:autoclose-leave",2,() => {
         opendiscord.client.client.on("guildMemberRemove",async (member) => {
             for (const ticket of opendiscord.tickets.getAll()){
-                if (ticket.get("openticket:opened-by").value == member.id){
+                if (ticket.get("opendiscord:opened-by").value == member.id){
                     const channel = await opendiscord.tickets.getTicketChannel(ticket)
                     if (!channel) return
                     //ticket has been created by this user
-                    const disableOnClaim = ticket.option.get("openticket:autoclose-disable-claim").value && ticket.get("openticket:claimed").value
-                    const enabled = (disableOnClaim || !ticket.get("openticket:autoclose-enabled").value) ? false : ticket.option.get("openticket:autoclose-enable-leave")
+                    const disableOnClaim = ticket.option.get("opendiscord:autoclose-disable-claim").value && ticket.get("opendiscord:claimed").value
+                    const enabled = (disableOnClaim || !ticket.get("opendiscord:autoclose-enabled").value) ? false : ticket.option.get("opendiscord:autoclose-enable-leave")
 
                     if (enabled){
                         //autoclose ticket
-                        await opendiscord.actions.get("openticket:close-ticket").run("autoclose",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autoclose",sendMessage:false})
-                        await channel.send((await opendiscord.builders.messages.getSafe("openticket:autoclose-message").build("leave",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
-                        await opendiscord.stats.get("openticket:global").setStat("openticket:tickets-autoclosed",1,"increase")
+                        await opendiscord.actions.get("opendiscord:close-ticket").run("autoclose",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autoclose",sendMessage:false})
+                        await channel.send((await opendiscord.builders.messages.getSafe("opendiscord:autoclose-message").build("leave",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
+                        await opendiscord.stats.get("opendiscord:global").setStat("opendiscord:tickets-autoclosed",1,"increase")
                     }
                 }
             }
@@ -432,7 +432,7 @@ const loadAutoCode = () => {
     }))
 
     //AUTODELETE TIMEOUT
-    opendiscord.code.add(new api.ODCode("openticket:autodelete-timeout",1,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:autodelete-timeout",1,() => {
         setInterval(async () => {
             let count = 0
             for (const ticket of opendiscord.tickets.getAll()){
@@ -441,17 +441,17 @@ const loadAutoCode = () => {
                 const lastMessage = (await channel.messages.fetch({limit:5})).first()
                 if (lastMessage){
                     //ticket has last message
-                    const disableOnClaim = ticket.option.get("openticket:autodelete-disable-claim").value && ticket.get("openticket:claimed").value
-                    const enabled = (disableOnClaim) ? false : ticket.get("openticket:autodelete-enabled").value
-                    const days = ticket.get("openticket:autodelete-days").value
+                    const disableOnClaim = ticket.option.get("opendiscord:autodelete-disable-claim").value && ticket.get("opendiscord:claimed").value
+                    const enabled = (disableOnClaim) ? false : ticket.get("opendiscord:autodelete-enabled").value
+                    const days = ticket.get("opendiscord:autodelete-days").value
 
                     const time = days*24*60*60*1000 //days in milliseconds
                     if (enabled && (new Date().getTime() - lastMessage.createdTimestamp) >= time){
                         //autodelete ticket
-                        await channel.send((await opendiscord.builders.messages.getSafe("openticket:autodelete-message").build("timeout",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
-                        await opendiscord.actions.get("openticket:delete-ticket").run("autodelete",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autodelete",sendMessage:false,withoutTranscript:false})
+                        await channel.send((await opendiscord.builders.messages.getSafe("opendiscord:autodelete-message").build("timeout",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
+                        await opendiscord.actions.get("opendiscord:delete-ticket").run("autodelete",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autodelete",sendMessage:false,withoutTranscript:false})
                         count++
-                        await opendiscord.stats.get("openticket:global").setStat("openticket:tickets-autodeleted",1,"increase")
+                        await opendiscord.stats.get("opendiscord:global").setStat("opendiscord:tickets-autodeleted",1,"increase")
                     }
                 }
             }
@@ -463,21 +463,21 @@ const loadAutoCode = () => {
     }))
 
     //AUTODELETE LEAVE
-    opendiscord.code.add(new api.ODCode("openticket:autodelete-leave",0,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:autodelete-leave",0,() => {
         opendiscord.client.client.on("guildMemberRemove",async (member) => {
             for (const ticket of opendiscord.tickets.getAll()){
-                if (ticket.get("openticket:opened-by").value == member.id){
+                if (ticket.get("opendiscord:opened-by").value == member.id){
                     const channel = await opendiscord.tickets.getTicketChannel(ticket)
                     if (!channel) return
                     //ticket has been created by this user
-                    const disableOnClaim = ticket.option.get("openticket:autodelete-disable-claim").value && ticket.get("openticket:claimed").value
-                    const enabled = (disableOnClaim || !ticket.get("openticket:autodelete-enabled").value) ? false : ticket.option.get("openticket:autodelete-enable-leave")
+                    const disableOnClaim = ticket.option.get("opendiscord:autodelete-disable-claim").value && ticket.get("opendiscord:claimed").value
+                    const enabled = (disableOnClaim || !ticket.get("opendiscord:autodelete-enabled").value) ? false : ticket.option.get("opendiscord:autodelete-enable-leave")
 
                     if (enabled){
                         //autodelete ticket
-                        await channel.send((await opendiscord.builders.messages.getSafe("openticket:autodelete-message").build("leave",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
-                        await opendiscord.actions.get("openticket:delete-ticket").run("autodelete",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autodelete",sendMessage:false,withoutTranscript:false})
-                        await opendiscord.stats.get("openticket:global").setStat("openticket:tickets-autodeleted",1,"increase")
+                        await channel.send((await opendiscord.builders.messages.getSafe("opendiscord:autodelete-message").build("leave",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket})).message)
+                        await opendiscord.actions.get("opendiscord:delete-ticket").run("autodelete",{guild:channel.guild,channel,user:opendiscord.client.client.user,ticket,reason:"Autodelete",sendMessage:false,withoutTranscript:false})
+                        await opendiscord.stats.get("opendiscord:global").setStat("opendiscord:tickets-autodeleted",1,"increase")
                     }
                 }
             }
@@ -485,10 +485,10 @@ const loadAutoCode = () => {
     }))
 
     //TICKET ANTI BUSY
-    opendiscord.code.add(new api.ODCode("openticket:ticket-anti-busy",-1,() => {
+    opendiscord.code.add(new api.ODCode("opendiscord:ticket-anti-busy",-1,() => {
         for (const ticket of opendiscord.tickets.getAll()){
-            //free tickets from corruption due to openticket:busy variable
-            ticket.get("openticket:busy").value = false
+            //free tickets from corruption due to opendiscord:busy variable
+            ticket.get("opendiscord:busy").value = false
         }
     }))
 }

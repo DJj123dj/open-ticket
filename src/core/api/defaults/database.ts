@@ -11,11 +11,11 @@ import { ODOptionJson } from "../openticket/option"
  * It's used to generate typescript declarations for this class.
  */
 export interface ODDatabaseManagerIds_Default {
-    "openticket:global":ODFormattedJsonDatabase_DefaultGlobal,
-    "openticket:stats":ODFormattedJsonDatabase,
-    "openticket:tickets":ODFormattedJsonDatabase_DefaultTickets,
-    "openticket:users":ODFormattedJsonDatabase_DefaultUsers,
-    "openticket:options":ODFormattedJsonDatabase_DefaultOptions,
+    "opendiscord:global":ODFormattedJsonDatabase_DefaultGlobal,
+    "opendiscord:stats":ODFormattedJsonDatabase,
+    "opendiscord:tickets":ODFormattedJsonDatabase_DefaultTickets,
+    "opendiscord:users":ODFormattedJsonDatabase_DefaultUsers,
+    "opendiscord:options":ODFormattedJsonDatabase_DefaultOptions,
 }
 
 /**## ODDatabaseManager_Default `default_class`
@@ -52,10 +52,10 @@ export class ODDatabaseManager_Default extends ODDatabaseManager {
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultGlobal {
-    "openticket:panel-update":string,
-    "openticket:option-suffix-counter":number,
-    "openticket:option-suffix-history":string[],
-    "openticket:last-version":string
+    "opendiscord:panel-update":string,
+    "opendiscord:option-suffix-counter":number,
+    "opendiscord:option-suffix-history":string[],
+    "opendiscord:last-version":string
 }
 
 /**## ODFormattedJsonDatabase_DefaultGlobal `default_class`
@@ -106,7 +106,7 @@ export class ODFormattedJsonDatabase_DefaultGlobal extends ODFormattedJsonDataba
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultTickets {
-    "openticket:ticket":ODTicketJson
+    "opendiscord:ticket":ODTicketJson
 }
 
 /**## ODFormattedJsonDatabase_DefaultTickets `default_class`
@@ -157,7 +157,7 @@ export class ODFormattedJsonDatabase_DefaultTickets extends ODFormattedJsonDatab
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultUsers {
-    "openticket:blacklist":ODTicketJson
+    "opendiscord:blacklist":ODTicketJson
 }
 
 /**## ODFormattedJsonDatabase_DefaultUsers `default_class`
@@ -209,7 +209,7 @@ export class ODFormattedJsonDatabase_DefaultUsers extends ODFormattedJsonDatabas
  * It's used to generate typescript declarations for this class.
  */
 export interface ODFormattedJsonDatabaseIds_DefaultOptions {
-    "openticket:used-option":ODOptionJson
+    "opendiscord:used-option":ODOptionJson
 }
 
 /**## ODFormattedJsonDatabase_DefaultOptions `default_class`

@@ -105,7 +105,7 @@ export interface ODComponentBuildResult {
 export class ODButtonManager extends ODManagerWithSafety<ODButton<string,any>> {
     constructor(debug:ODDebugger){
         super(() => {
-            return new ODButton("openticket:unknown-button",(instance,params,source,cancel) => {
+            return new ODButton("opendiscord:unknown-button",(instance,params,source,cancel) => {
                 instance.setCustomId("od:unknown-button")
                 instance.setMode("button")
                 instance.setColor("red")
@@ -255,7 +255,7 @@ export class ODButton<Source extends string,Params> extends ODBuilderImplementat
 export class ODDropdownManager extends ODManagerWithSafety<ODDropdown<string,any>> {
     constructor(debug:ODDebugger){
         super(() => {
-            return new ODDropdown("openticket:unknown-dropdown",(instance,params,source,cancel) => {
+            return new ODDropdown("opendiscord:unknown-dropdown",(instance,params,source,cancel) => {
                 instance.setCustomId("od:unknown-dropdown")
                 instance.setType("string")
                 instance.setPlaceholder("❌ <ODError:Unknown Dropdown>")
@@ -509,7 +509,7 @@ export class ODDropdown<Source extends string,Params> extends ODBuilderImplement
 export class ODFileManager extends ODManagerWithSafety<ODFile<string,any>> {
     constructor(debug:ODDebugger){
         super(() => {
-            return new ODFile("openticket:unknown-file",(instance,params,source,cancel) => {
+            return new ODFile("opendiscord:unknown-file",(instance,params,source,cancel) => {
                 instance.setName("openticket_unknown-file.txt")
                 instance.setDescription("❌ <ODError:Unknown File>")
                 instance.setContents("Couldn't find file in registery `opendiscord.builders.files`")
@@ -632,8 +632,8 @@ export class ODFile<Source extends string,Params> extends ODBuilderImplementatio
 export class ODEmbedManager extends ODManagerWithSafety<ODEmbed<string,any>> {
     constructor(debug:ODDebugger){
         super(() => {
-            return new ODEmbed("openticket:unknown-embed",(instance,params,source,cancel) => {
-                instance.setFooter("openticket:unknown-embed")
+            return new ODEmbed("opendiscord:unknown-embed",(instance,params,source,cancel) => {
+                instance.setFooter("opendiscord:unknown-embed")
                 instance.setColor("#ff0000")
                 instance.setTitle("❌ <ODError:Unknown Embed>")
                 instance.setDescription("Couldn't find embed in registery `opendiscord.builders.embeds`")
@@ -846,7 +846,7 @@ export class ODEmbed<Source extends string,Params> extends ODBuilderImplementati
 export class ODMessageManager extends ODManagerWithSafety<ODMessage<string,any>> {
     constructor(debug:ODDebugger){
         super(() => {
-            return new ODMessage("openticket:unknown-message",(instance,params,source,cancel) => {
+            return new ODMessage("opendiscord:unknown-message",(instance,params,source,cancel) => {
                 instance.setContent("**❌ <ODError:Unknown Message>**\nCouldn't find message in registery `opendiscord.builders.messages`")
                 cancel()
             })
@@ -1087,7 +1087,7 @@ export class ODMessage<Source extends string,Params> extends ODBuilderImplementa
 export class ODModalManager extends ODManagerWithSafety<ODModal<string,any>> {
     constructor(debug:ODDebugger){
         super(() => {
-            return new ODModal("openticket:unknown-modal",(instance,params,source,cancel) => {
+            return new ODModal("opendiscord:unknown-modal",(instance,params,source,cancel) => {
                 instance.setCustomId("od:unknown-modal")
                 instance.setTitle("❌ <ODError:Unknown Modal>")
                 instance.setQuestions(

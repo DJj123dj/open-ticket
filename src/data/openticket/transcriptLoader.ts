@@ -3,7 +3,7 @@ import * as discord from "discord.js"
 
 const collector = opendiscord.transcripts.collector
 const messages = opendiscord.builders.messages
-const transcriptConfig = opendiscord.configs.get("openticket:transcripts")
+const transcriptConfig = opendiscord.configs.get("opendiscord:transcripts")
 const textConfig = transcriptConfig.data.textTranscriptStyle
 const htmlVersion = Buffer.from("b3BlbnRpY2tldFRSQU5TQ1JJUFQxMjM0","base64").toString("utf8")
 
@@ -44,7 +44,7 @@ export const loadAllTranscriptCompilers = async () => {
     }
 
     //TEXT COMPILER
-    opendiscord.transcripts.add(new api.ODTranscriptCompiler<{contents:string}>("openticket:text-compiler",undefined,async (ticket,channel,user) => {
+    opendiscord.transcripts.add(new api.ODTranscriptCompiler<{contents:string}>("opendiscord:text-compiler",undefined,async (ticket,channel,user) => {
         //COMPILE
         const rawMessages = await collector.collectAllMessages(ticket)
         if (!rawMessages) return {ticket,channel,user,success:false,errorReason:"Unable to collect messages! Channel not found!",messages:null,data:null}
@@ -104,10 +104,10 @@ export const loadAllTranscriptCompilers = async () => {
 
         const finalStats: string[] = []
 
-        const creationDate = ticket.get("openticket:opened-on").value
-        const closeDate = ticket.get("openticket:closed-on").value
-        const claimDate = ticket.get("openticket:claimed-on").value
-        const pinDate = ticket.get("openticket:pinned-on").value
+        const creationDate = ticket.get("opendiscord:opened-on").value
+        const closeDate = ticket.get("opendiscord:closed-on").value
+        const claimDate = ticket.get("opendiscord:claimed-on").value
+        const pinDate = ticket.get("opendiscord:pinned-on").value
         const creator = await opendiscord.tickets.getTicketUser(ticket,"creator")
         const closer = await opendiscord.tickets.getTicketUser(ticket,"closer")
         const claimer = await opendiscord.tickets.getTicketUser(ticket,"claimer")
@@ -164,16 +164,16 @@ export const loadAllTranscriptCompilers = async () => {
     },async (result) => {
         //READY
         return {
-            channelMessage:await messages.getSafe("openticket:transcript-text-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
-            creatorDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
-            participantDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
-            activeAdminDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")}),
-            everyAdminDmMessage:await messages.getSafe("openticket:transcript-text-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:text-compiler")})
+            channelMessage:await messages.getSafe("opendiscord:transcript-text-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:text-compiler")}),
+            creatorDmMessage:await messages.getSafe("opendiscord:transcript-text-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:text-compiler")}),
+            participantDmMessage:await messages.getSafe("opendiscord:transcript-text-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:text-compiler")}),
+            activeAdminDmMessage:await messages.getSafe("opendiscord:transcript-text-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:text-compiler")}),
+            everyAdminDmMessage:await messages.getSafe("opendiscord:transcript-text-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:text-compiler")})
         }
     }))
 
     //HTML COMPILER
-    opendiscord.transcripts.add(new api.ODTranscriptCompiler<{url:string}>("openticket:html-compiler",async (ticket,channel,user) => {
+    opendiscord.transcripts.add(new api.ODTranscriptCompiler<{url:string}>("opendiscord:html-compiler",async (ticket,channel,user) => {
         //INIT
         const req = new api.ODHTTPGetRequest("https://apis.dj-dj.be/transcripts/status.json",false)
         const res = await req.run()
@@ -191,7 +191,7 @@ export const loadAllTranscriptCompilers = async () => {
             return {success:false,errorReason:"HTML Transcripts are currently unavailable due to JSON parse error!",pendingMessage:null}
         }
         
-        return {success:true,errorReason:null,pendingMessage:await messages.getSafe("openticket:transcript-html-progress").build("channel",{guild:channel.guild,channel,user,ticket,compiler:opendiscord.transcripts.get("openticket:html-compiler"),remaining:16000})}
+        return {success:true,errorReason:null,pendingMessage:await messages.getSafe("opendiscord:transcript-html-progress").build("channel",{guild:channel.guild,channel,user,ticket,compiler:opendiscord.transcripts.get("opendiscord:html-compiler"),remaining:16000})}
     },async (ticket,channel,user) => {
         //COMPILE
         const rawMessages = await collector.collectAllMessages(ticket)
@@ -355,7 +355,7 @@ export const loadAllTranscriptCompilers = async () => {
 
         const htmlFinal: api.ODTranscriptHtmlV2Data = {
             version:"2",
-            otversion:opendiscord.versions.get("openticket:version").toString(true),
+            otversion:opendiscord.versions.get("opendiscord:version").toString(true),
             bot:{
                 name:opendiscord.client.client.user.displayName,
                 id:opendiscord.client.client.user.id,
@@ -410,7 +410,7 @@ export const loadAllTranscriptCompilers = async () => {
                 claimedpfp:(claimer ? claimer.displayAvatarURL() : "https://transcripts.dj-dj.be/favicon.png"),
                 
                 closedtime:new Date().getTime(),
-                openedtime:ticket.get("openticket:opened-on").value ?? new Date().getTime(),
+                openedtime:ticket.get("opendiscord:opened-on").value ?? new Date().getTime(),
                 
                 //role colors are currently unused
                 roleColors:[],
@@ -474,11 +474,11 @@ export const loadAllTranscriptCompilers = async () => {
         //READY
         await utilities.timer(16000) //wait until transcript is ready
         return {
-            channelMessage:await messages.getSafe("openticket:transcript-html-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
-            creatorDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
-            participantDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
-            activeAdminDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")}),
-            everyAdminDmMessage:await messages.getSafe("openticket:transcript-html-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("openticket:html-compiler")})
+            channelMessage:await messages.getSafe("opendiscord:transcript-html-ready").build("channel",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:html-compiler")}),
+            creatorDmMessage:await messages.getSafe("opendiscord:transcript-html-ready").build("creator-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:html-compiler")}),
+            participantDmMessage:await messages.getSafe("opendiscord:transcript-html-ready").build("participant-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:html-compiler")}),
+            activeAdminDmMessage:await messages.getSafe("opendiscord:transcript-html-ready").build("active-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:html-compiler")}),
+            everyAdminDmMessage:await messages.getSafe("opendiscord:transcript-html-ready").build("every-admin-dm",{guild:result.channel.guild,channel:result.channel,user:result.user,ticket:result.ticket,result,compiler:opendiscord.transcripts.get("opendiscord:html-compiler")})
         }
     }))
 }

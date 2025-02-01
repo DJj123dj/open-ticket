@@ -111,7 +111,7 @@ const main = async () => {
 
     //load debug
     if (opendiscord.defaults.getDefault("debugLoading")){
-        const debugFlag = opendiscord.flags.get("openticket:debug")
+        const debugFlag = opendiscord.flags.get("opendiscord:debug")
         opendiscord.debug.visible = (debugFlag) ? debugFlag.value : false
     }
 
@@ -146,7 +146,7 @@ const main = async () => {
     }
 
     //UTILITY CONFIG
-    const generalConfig = opendiscord.configs.get("openticket:general")
+    const generalConfig = opendiscord.configs.get("opendiscord:general")
 
     if (opendiscord.defaults.getDefault("emojiTitleStyleLoading")){
         //set emoji style based on config
@@ -193,9 +193,9 @@ const main = async () => {
         //add available languages to list for config checker
         const languageList = opendiscord.defaults.getDefault("languageList")
         const languageIds = opendiscord.languages.getIds().map((id) => {
-            if (id.value.startsWith("openticket:")){
+            if (id.value.startsWith("opendiscord:")){
                 //is open ticket language => return without prefix
-                return id.value.split("openticket:")[1]
+                return id.value.split("opendiscord:")[1]
             }else return id.value
         })
         languageList.push(...languageIds)
@@ -210,7 +210,7 @@ const main = async () => {
         if (languageId.includes(":")){
             opendiscord.languages.setCurrentLanguage(languageId)
         }else{
-            opendiscord.languages.setCurrentLanguage("openticket:"+languageId)
+            opendiscord.languages.setCurrentLanguage("opendiscord:"+languageId)
         }
 
         //set backup language
@@ -253,8 +253,8 @@ const main = async () => {
     await opendiscord.events.get("afterCheckerTranslationsLoaded").emit([opendiscord.checkers.translation,opendiscord.checkers])
 
     //render config checker
-    const advancedCheckerFlag = opendiscord.flags.get("openticket:checker")
-    const disableCheckerFlag = opendiscord.flags.get("openticket:no-checker")
+    const advancedCheckerFlag = opendiscord.flags.get("opendiscord:checker")
+    const disableCheckerFlag = opendiscord.flags.get("opendiscord:no-checker")
 
     await opendiscord.events.get("onCheckerRender").emit([opendiscord.checkers.renderer,opendiscord.checkers])
     if (opendiscord.defaults.getDefault("checkerRendering") && !(disableCheckerFlag ? disableCheckerFlag.value : false)){
@@ -330,9 +330,9 @@ const main = async () => {
         )
 
         //get token from config or env
-        const configToken = opendiscord.configs.get("openticket:general").data.token ? opendiscord.configs.get("openticket:general").data.token : ""
+        const configToken = opendiscord.configs.get("opendiscord:general").data.token ? opendiscord.configs.get("opendiscord:general").data.token : ""
         const envToken = opendiscord.env.getVariable("TOKEN") ? opendiscord.env.getVariable("TOKEN") : ""
-        const token = opendiscord.configs.get("openticket:general").data.tokenFromENV ? envToken : configToken
+        const token = opendiscord.configs.get("opendiscord:general").data.tokenFromENV ? envToken : configToken
         opendiscord.client.token = token
     }
     await opendiscord.events.get("onClientLoad").emit([opendiscord.client])
@@ -347,7 +347,7 @@ const main = async () => {
 
             //check if all servers are valid
             const botServers = client.getGuilds()
-            const generalConfig = opendiscord.configs.get("openticket:general")
+            const generalConfig = opendiscord.configs.get("opendiscord:general")
             const serverId = generalConfig.data.serverId ? generalConfig.data.serverId : ""
             if (!serverId) throw new api.ODSystemError("Server Id Missing!")
             
@@ -417,9 +417,9 @@ const main = async () => {
                 const updatableCmds = cmds.registered.filter((cmd) => cmd.requiresUpdate || opendiscord.defaults.getDefault("forceSlashCommandRegistration")).map((cmd) => cmd.instance)
 
                 //init progress bars
-                const removeProgress = opendiscord.progressbars.get("openticket:slash-command-remove")
-                const createProgress = opendiscord.progressbars.get("openticket:slash-command-create")
-                const updateProgress = opendiscord.progressbars.get("openticket:slash-command-update")
+                const removeProgress = opendiscord.progressbars.get("opendiscord:slash-command-remove")
+                const createProgress = opendiscord.progressbars.get("opendiscord:slash-command-create")
+                const updateProgress = opendiscord.progressbars.get("opendiscord:slash-command-update")
 
                 //remove unused cmds, create new cmds & update existing cmds
                 if (opendiscord.defaults.getDefault("allowSlashCommandRemoval")) await opendiscord.client.slashCommands.removeUnusedCommands(removableCmds,undefined,removeProgress)
@@ -732,7 +732,7 @@ const main = async () => {
     //load stat scopes
     opendiscord.log("Loading stats...","system")
     if (opendiscord.defaults.getDefault("statScopesLoading")){
-        opendiscord.stats.useDatabase(opendiscord.databases.get("openticket:stats"))
+        opendiscord.stats.useDatabase(opendiscord.databases.get("opendiscord:stats"))
         await (await import("./data/framework/statLoader.js")).loadAllStatScopes()
     }
     await opendiscord.events.get("onStatScopeLoad").emit([opendiscord.stats])

@@ -16,101 +16,101 @@ import { ODRole, ODRoleUpdateMode, ODRoleUpdateResult } from "../openticket/role
  * It's used to generate typescript declarations for this class.
  */
 export interface ODActionManagerIds_Default {
-    "openticket:create-ticket-permissions":{
+    "opendiscord:create-ticket-permissions":{
         source:"panel-button"|"panel-dropdown"|"slash"|"text"|"other",
         params:{guild:discord.Guild,user:discord.User,option:ODTicketOption},
         result:{valid:boolean,reason:"blacklist"|"cooldown"|"global-limit"|"global-user-limit"|"option-limit"|"option-user-limit"|null,cooldownUntil?:Date},
-        workers:"openticket:check-blacklist"|"openticket:check-cooldown"|"openticket:check-global-limits"|"openticket:check-option-limits"|"openticket:valid"
+        workers:"opendiscord:check-blacklist"|"opendiscord:check-cooldown"|"opendiscord:check-global-limits"|"opendiscord:check-option-limits"|"opendiscord:valid"
     },
-    "openticket:create-transcript":{
+    "opendiscord:create-transcript":{
         source:"slash"|"text"|"ticket-message"|"reopen-message"|"close-message"|"autoclose-message"|"autodelete"|"clear"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket},
         result:{compiler:ODTranscriptCompiler<any>, success:boolean, result:ODTranscriptCompilerCompileResult<any>, errorReason:string|null, pendingMessage:ODMessageBuildSentResult<true>|null, participants:{user:discord.User,role:"creator"|"participant"|"admin"}[]},
-        workers:"openticket:select-compiler"|"openticket:init-transcript"|"openticket:compile-transcript"|"openticket:ready-transcript"|"openticket:logs"
+        workers:"opendiscord:select-compiler"|"opendiscord:init-transcript"|"opendiscord:compile-transcript"|"opendiscord:ready-transcript"|"opendiscord:logs"
     },
-    "openticket:create-ticket":{
+    "opendiscord:create-ticket":{
         source:"panel-button"|"panel-dropdown"|"slash"|"text"|"other",
         params:{guild:discord.Guild,user:discord.User,option:ODTicketOption,answers:{id:string,name:string,type:"short"|"paragraph",value:string|null}[]},
         result:{channel:discord.GuildTextBasedChannel,ticket:ODTicket},
-        workers:"openticket:create-ticket"|"openticket:send-ticket-message"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:create-ticket"|"opendiscord:send-ticket-message"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:close-ticket":{
+    "opendiscord:close-ticket":{
         source:"slash"|"text"|"ticket-message"|"reopen-message"|"autoclose"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean},
         result:{},
-        workers:"openticket:close-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:close-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:delete-ticket":{
+    "opendiscord:delete-ticket":{
         source:"slash"|"text"|"ticket-message"|"reopen-message"|"close-message"|"autoclose-message"|"autodelete"|"clear"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean,withoutTranscript:boolean},
         result:{},
-        workers:"openticket:delete-ticket"|"openticket:discord-logs"|"openticket:delete-channel"|"openticket:logs"
+        workers:"opendiscord:delete-ticket"|"opendiscord:discord-logs"|"opendiscord:delete-channel"|"opendiscord:logs"
     },
-    "openticket:reopen-ticket":{
+    "opendiscord:reopen-ticket":{
         source:"slash"|"text"|"ticket-message"|"close-message"|"autoclose-message"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean},
         result:{},
-        workers:"openticket:reopen-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:reopen-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:claim-ticket":{
+    "opendiscord:claim-ticket":{
         source:"slash"|"text"|"ticket-message"|"unclaim-message"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean},
         result:{},
-        workers:"openticket:claim-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:claim-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:unclaim-ticket":{
+    "opendiscord:unclaim-ticket":{
         source:"slash"|"text"|"ticket-message"|"claim-message"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean},
         result:{},
-        workers:"openticket:unclaim-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:unclaim-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:pin-ticket":{
+    "opendiscord:pin-ticket":{
         source:"slash"|"text"|"ticket-message"|"unpin-message"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean},
         result:{},
-        workers:"openticket:pin-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:pin-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:unpin-ticket":{
+    "opendiscord:unpin-ticket":{
         source:"slash"|"text"|"ticket-message"|"pin-message"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean},
         result:{},
-        workers:"openticket:unpin-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:unpin-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:rename-ticket":{
+    "opendiscord:rename-ticket":{
         source:"slash"|"text"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean,data:string},
         result:{},
-        workers:"openticket:rename-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:rename-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:move-ticket":{
+    "opendiscord:move-ticket":{
         source:"slash"|"text"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean,data:ODTicketOption},
         result:{},
-        workers:"openticket:move-ticket"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:move-ticket"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:add-ticket-user":{
+    "opendiscord:add-ticket-user":{
         source:"slash"|"text"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean,data:discord.User},
         result:{},
-        workers:"openticket:add-ticket-user"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:add-ticket-user"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:remove-ticket-user":{
+    "opendiscord:remove-ticket-user":{
         source:"slash"|"text"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,ticket:ODTicket,reason:string|null,sendMessage:boolean,data:discord.User},
         result:{},
-        workers:"openticket:remove-ticket-user"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:remove-ticket-user"|"opendiscord:discord-logs"|"opendiscord:logs"
     },
-    "openticket:reaction-role":{
+    "opendiscord:reaction-role":{
         source:"panel-button"|"other",
         params:{guild:discord.Guild,user:discord.User,option:ODRoleOption,overwriteMode:ODRoleUpdateMode|null},
         result:{result:ODRoleUpdateResult[],role:ODRole},
-        workers:"openticket:reaction-role"|"openticket:logs"
+        workers:"opendiscord:reaction-role"|"opendiscord:logs"
     },
-    "openticket:clear-tickets":{
+    "opendiscord:clear-tickets":{
         source:"slash"|"text"|"other",
         params:{guild:discord.Guild,channel:discord.GuildTextBasedChannel,user:discord.User,filter:ODTicketClearFilter,list:ODTicket[]},
         result:{list:string[]},
-        workers:"openticket:clear-tickets"|"openticket:discord-logs"|"openticket:logs"
+        workers:"opendiscord:clear-tickets"|"opendiscord:discord-logs"|"opendiscord:logs"
     }
 }
 

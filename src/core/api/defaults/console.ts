@@ -9,7 +9,7 @@ import { ODLiveStatusUrlSource, ODLiveStatusManager, ODLiveStatusSource } from "
  * It's used to generate typescript declarations for this class.
  */
 export interface ODLiveStatusManagerIds_Default {
-    "openticket:default-djdj-dev":ODLiveStatusUrlSource
+    "opendiscord:default-djdj-dev":ODLiveStatusUrlSource
 }
 
 /**## ODLiveStatusManager_Default `default_class`
