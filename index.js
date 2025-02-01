@@ -45,7 +45,7 @@ function computeSourceHash(dir,upperHash){
     
     for (const file of info) {
         const fullPath = nodepath.join(dir,file.name)
-        if (file.isFile()){
+        if (file.isFile() && [".js",".ts",".jsx",".tsx"].some((ext) => file.name.endsWith(ext))){
             const statInfo = fs.statSync(fullPath)
             //compute hash using file metadata
             const fileInfo = `${fullPath}:${statInfo.size}:${statInfo.mtimeMs}`
