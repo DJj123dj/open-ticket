@@ -7,6 +7,30 @@ import nodepath from "path"
 import { ODDebugger } from "./console"
 import * as fjs from "formatted-json-stringify"
 
+/////////////////////////////////////////////////////////
+//TEMPORARY OPENTICKET => OPENDISCORD MIGRATION UTILITIES
+/////////////////////////////////////////////////////////
+
+/** ## ❌ Temporary function. Will be removed on full OTv4 release! */
+export function TEMP_migrateDatabaseIdPrefix(id:string): string {
+    if (!id.startsWith("openticket:")) return id
+    return id.replace("openticket:","opendiscord:")
+}
+/** ## ❌ Temporary function. Will be removed on full OTv4 release! */
+export function TEMP_migrateDatabaseValuePrefix(value:string): string {
+    return value.replaceAll('"openticket:','"opendiscord:')
+}
+/** ## ❌ Temporary function. Will be removed on full OTv4 release! */
+export function TEMP_migrateDatabaseStructurePrefix(structure:ODJsonDatabaseStructure): ODJsonDatabaseStructure {
+    return structure.map((data) => {
+        return {
+            category:TEMP_migrateDatabaseIdPrefix(data.category),
+            key:TEMP_migrateDatabaseIdPrefix(data.key),
+            value:JSON.parse(TEMP_migrateDatabaseValuePrefix(JSON.stringify(data.value)))
+        }
+    })
+}
+
 /**## ODDatabaseManager `class`
  * This is an Open Ticket database manager.
  * 
@@ -94,7 +118,10 @@ export class ODJsonDatabase extends ODDatabase {
 
     /**Init the database. */
     init(): ODPromiseVoid {
-        this.#system.getData()
+        //this.#system.getData()
+        //TEMPORARY!!!
+        const newData = TEMP_migrateDatabaseStructurePrefix(this.#system.getData())
+        this.#system.setData(newData)
     }
     /**Set/overwrite the value of `category` & `key`. Returns `true` when overwritten!
      * @example
@@ -199,7 +226,10 @@ export class ODFormattedJsonDatabase extends ODDatabase {
 
     /**Init the database. */
     init(): ODPromiseVoid {
-        this.#system.getData()
+        //this.#system.getData()
+        //TEMPORARY!!!
+        const newData = TEMP_migrateDatabaseStructurePrefix(this.#system.getData())
+        this.#system.setData(newData)
     }
     /**Set/overwrite the value of `category` & `key`. Returns `true` when overwritten!
      * @example
