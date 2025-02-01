@@ -99,10 +99,11 @@ for (const file of result.children){
     const typeIds = file.groups?.find((g) => g.title == "Type Aliases")?.children ?? []
     const enumIds = file.groups?.find((g) => g.title == "Enumerations")?.children ?? []
     const varIds = file.groups?.find((g) => g.title == "Variables")?.children ?? []
+    const funcIds = file.groups?.find((g) => g.title == "Functions")?.children ?? []
 
     for (const declaration of file.children){
         const declarationName = declaration.name
-        const declarationType = classIds.includes(declaration.id) ? "class" : interfaceIds.includes(declaration.id) ? "interface" : typeIds.includes(declaration.id) ? "type" : enumIds.includes(declaration.id) ? "enum" : varIds.includes(declaration.id) ? "variable" : "other"
+        const declarationType = classIds.includes(declaration.id) ? "class" : interfaceIds.includes(declaration.id) ? "interface" : typeIds.includes(declaration.id) ? "type" : enumIds.includes(declaration.id) ? "enum" : varIds.includes(declaration.id) ? "variable" : funcIds.includes(declaration.id) ? "function" : "other"
         availableElements.push({name:declarationName,type:declarationType})
     }
 }
@@ -114,12 +115,13 @@ for (const file of result.children){
     const typeIds = file.groups?.find((g) => g.title == "Type Aliases")?.children ?? []
     const enumIds = file.groups?.find((g) => g.title == "Enumerations")?.children ?? []
     const varIds = file.groups?.find((g) => g.title == "Variables")?.children ?? []
+    const funcIds = file.groups?.find((g) => g.title == "Functions")?.children ?? []
 
     for (const declaration of (file.children ?? [])){
         const declarationName = declaration.name
         if (skipElementNames.includes(declarationName)) continue
 
-        const declarationType = classIds.includes(declaration.id) ? "class" : interfaceIds.includes(declaration.id) ? "interface" : typeIds.includes(declaration.id) ? "type" : enumIds.includes(declaration.id) ? "enum" : varIds.includes(declaration.id) ? "variable" : "other"
+        const declarationType = classIds.includes(declaration.id) ? "class" : interfaceIds.includes(declaration.id) ? "interface" : typeIds.includes(declaration.id) ? "type" : enumIds.includes(declaration.id) ? "enum" : varIds.includes(declaration.id) ? "variable" : funcIds.includes(declaration.id) ? "function" : "other"
         const declarationTypeParams = (declaration.typeParameters) ? declaration.typeParameters.map((tp) => {
             return {name:tp.name,type:handleType(tp.type)}
         }) : null
@@ -232,6 +234,10 @@ for (const file of result.children){
             //VARIABLE
             declarationChildren.push(handleType(declaration.type))
 
+        }else if (declarationType == "function"){
+            //FUNCTION
+            declarationChildren.push(handleFunction(declaration))
+            
         }
 
         exported.push({
