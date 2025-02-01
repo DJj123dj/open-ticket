@@ -129,6 +129,7 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |[`ot-ticket-forms`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-ticket-forms/)                  |guillee.3                   |💼 Management               |An advanced forms plugin for Open Ticket. |
 |[`ot-feedback`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-feedback/)                          |an_developer                |💼 Management               |A plugin to gather feedback of your support service. |
 |[`ot-assign-role`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-assign-role/)                    |rapid.fast                  |💼 Management               |This plugin assigns a predefined role to a user upon creating a ticket. |
+|[`ot-volume-warning`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-volume-warning/)              |guillee.3                   |💼 Management               |Alerts ticket creators when too many tickets are open, indicating possible response delays. |
 |[`ot-translate-cmds`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-translate-cmds/)              |guillee.3                   |🤖 Client                  |Translate all built-in command names, descriptions & options. |
 
 ### 📢 Categories
