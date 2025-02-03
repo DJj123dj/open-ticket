@@ -181,7 +181,7 @@ export const utilities: ODUtilities = {
         }) as ReturnValue
     },
     dateString(date): string {
-        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
     },
     async asyncReplace(text,regex,func): Promise<string> {
         const promises: Promise<string>[] = []
