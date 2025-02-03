@@ -18,10 +18,12 @@ const panelDropdowns = () => {
             const {panel,options} = params
             
             const parsedOptions: api.ODDropdownData["options"] = options.map((option) => {
+                const label = option.get("opendiscord:button-label").value.substring(0,100)
                 const desc = option.get("opendiscord:description").value.substring(0,100)
                 const emoji = option.get("opendiscord:button-emoji").value
+                
                 return {
-                    label:option.get("opendiscord:button-label").value.substring(0,100),
+                    label:(label.length > 0) ? label : "<no-label-provided>",
                     value:"od:ticket-option_"+panel.id.value+"_"+option.id.value,
                     emoji:(emoji.length > 0) ? emoji : undefined,
                     description:(desc.length > 0) ? desc : undefined,
