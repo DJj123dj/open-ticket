@@ -51,6 +51,41 @@ const handleFunction = (memberType) => {
     return {type:"function",inherited:signatureInherited,comment:signatureComment,parameters:signatureParameters,returns:signatureReturns}
 }
 
+const handleObject = (memberType) => {
+    if (!memberType || !memberType.children || !Array.isArray(memberType.children)) return {type:"unknown"}
+    const propertyIds = memberType.groups?.find((g) => g.title == "Properties")?.children ?? []
+    const methodIds = memberType.groups?.find((g) => g.title == "Methods")?.children ?? []
+
+    const objectChildren = []
+    for (const member of (memberType.children ?? [])){
+        const memberName = member.name
+        const memberType = propertyIds.includes(member.id) ? "property" : methodIds.includes(member.id) ? "method" : "other"
+        let memberComment = member.comment?.summary?.map((c) => c.text).join("") ?? null
+        
+        const rawMemberSource = member.sources ? (member.sources[0] ?? null) : null
+        let memberSource = rawMemberSource ? rawMemberSource.fileName+":"+rawMemberSource.line+":"+rawMemberSource.character : null
+
+        let memberDetails = null
+        if (memberType == "property"){
+            //INTERFACE => PROPERTY
+            memberDetails = handleType(member.type)
+        }else if (memberType == "method"){
+            //INTERFACE => METHOD
+            memberDetails = handleFunction(member)
+            memberComment = memberDetails.comment
+        }
+
+        objectChildren.push({
+            type:memberType,
+            name:memberName,
+            comment:memberComment,
+            source:memberSource,
+            details:memberDetails
+        })
+    }
+    return {type:"object",children:objectChildren}
+}
+
 const handleType = (memberType) => {
     if (!memberType || !memberType.type) return {type:"unknown"}
     else if (memberType.type == "intrinsic") return {type:"primitive",name:memberType.name}
@@ -72,9 +107,7 @@ const handleType = (memberType) => {
         }else return {type:"unknown"}
     }
     else if (memberType.type == "literal") return {type:"literal",name:(typeof memberType.value == "string") ? JSON.stringify(memberType.value) : String(memberType.value)}
-    else if (memberType.type == "reflection" && memberType.declaration && memberType.declaration.signatures && memberType.declaration.signatures[0]){
-        return handleFunction(memberType.declaration)
-    }else if (memberType.type == "typeOperator"){
+    else if (memberType.type == "typeOperator"){
         if (memberType.operator == "keyof") return {type:"keyof",child:handleType(memberType.target)}
         else if (memberType.operator == "readonly") return {type:"readonly",child:handleType(memberType.target)}
         else if (memberType.operator == "unique") return {type:"unique",child:handleType(memberType.target)}
@@ -90,6 +123,12 @@ const handleType = (memberType) => {
     else if (memberType.type == "templateLiteral") return {type:"template",head:memberType.head,tails:memberType.tail.map((t) => {
         return {element:handleType(t[0]),text:t[1]}
     })}
+    else if (memberType.type == "reflection" && memberType.declaration && memberType.declaration.signatures && memberType.declaration.signatures[0]){
+        return handleFunction(memberType.declaration)
+    }
+    else if (memberType.type == "reflection"){
+        return handleObject(memberType.declaration)
+    }
     else return {type:"unknown"}
 }
 
