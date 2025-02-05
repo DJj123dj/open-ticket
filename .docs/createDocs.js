@@ -185,6 +185,12 @@ for (const file of result.children){
                 const rawMemberSource = member.sources ? (member.sources[0] ?? null) : null
                 let memberSource = rawMemberSource ? rawMemberSource.fileName+":"+rawMemberSource.line+":"+rawMemberSource.character : null
 
+                const memberInherited = member.flags.isInherited ? true : false
+                const memberStatic = member.flags.isStatic ? true : false
+                const memberProtected = member.flags.isProtected ? true : false
+                const memberOptional = member.flags.isOptional ? true : false
+                const memberReadonly = member.flags.isReadonly ? true : false
+
                 let memberDetails = null
                 if (memberType == "property"){
                     //CLASS => PROPERTY
@@ -206,7 +212,12 @@ for (const file of result.children){
                     name:memberName,
                     comment:memberComment,
                     source:memberSource,
-                    details:memberDetails
+                    details:memberDetails,
+                    inherited:memberInherited,
+                    static:memberStatic,
+                    protected:memberProtected,
+                    optional:memberOptional,
+                    readonly:memberReadonly
                 })
             }
         }else if (declarationType == "interface"){
@@ -221,6 +232,12 @@ for (const file of result.children){
                 
                 const rawMemberSource = member.sources ? (member.sources[0] ?? null) : null
                 let memberSource = rawMemberSource ? rawMemberSource.fileName+":"+rawMemberSource.line+":"+rawMemberSource.character : null
+
+                const memberInherited = member.flags.isInherited ? true : false
+                const memberStatic = member.flags.isStatic ? true : false
+                const memberProtected = member.flags.isProtected ? true : false
+                const memberOptional = member.flags.isOptional ? true : false
+                const memberReadonly = member.flags.isReadonly ? true : false
 
                 let memberDetails = null
                 if (memberType == "property"){
@@ -237,7 +254,12 @@ for (const file of result.children){
                     name:memberName,
                     comment:memberComment,
                     source:memberSource,
-                    details:memberDetails
+                    details:memberDetails,
+                    inherited:memberInherited,
+                    static:memberStatic,
+                    protected:memberProtected,
+                    optional:memberOptional,
+                    readonly:memberReadonly
                 })
             }
         }else if (declarationType == "type"){
@@ -261,12 +283,23 @@ for (const file of result.children){
                     memberDetails = handleType(member.type)
                 }
 
+                const memberInherited = member.flags.isInherited ? true : false
+                const memberStatic = member.flags.isStatic ? true : false
+                const memberProtected = member.flags.isProtected ? true : false
+                const memberOptional = member.flags.isOptional ? true : false
+                const memberReadonly = member.flags.isReadonly ? true : false
+
                 declarationChildren.push({
                     type:memberType,
                     name:memberName,
                     comment:memberComment,
                     source:memberSource,
-                    details:memberDetails
+                    details:memberDetails,
+                    inherited:memberInherited,
+                    static:memberStatic,
+                    protected:memberProtected,
+                    optional:memberOptional,
+                    readonly:memberReadonly
                 })
             }
         }else if (declarationType == "variable"){
