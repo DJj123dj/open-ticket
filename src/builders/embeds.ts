@@ -449,7 +449,7 @@ const statsEmbeds = () => {
                 }else if (utilities.easterEggs.translators.includes(user.id)){
                     instance.setFooter("💬 Open Ticket Translator")
                 }
-            }            
+            }
         })
     ])
 

@@ -183,19 +183,19 @@ This is the main team working on Open Ticket. Don't forget to check their profil
 |🇵🇱 Polish             |danoglez                  |🟢 Up To Date                |
 |🇪🇪 Estonian           |iamnotmega                |🔵 Up To Date (ChatGPT)      |
 |🇫🇮 Finnish            |iamnotmega                |🔵 Up To Date (ChatGPT)      |
-|🇷🇺 Russian            |apexo & ander             |🟠 Temporary Outdated (beta) |
-|🇳🇴 Norwegian          |noonenook                 |🟠 Temporary Outdated (beta) |
-|❓ Kurdish            |raze.hama                 |🟠 Temporary Outdated (beta) |
-|❓ Persian            |sasanwm                   |🟠 Temporary Outdated (beta) |
-|🇱🇻 Latvian            |ronalds1398               |🟠 Temporary Outdated (beta) |
-|🇯🇵 Japanese           |iamnotmega                |🟠 Temporary Outdated (beta) |
-|🇰🇷 Korean             |iamnotmega                |🟠 Temporary Outdated (beta) |
-|🇨🇳 Simplified Chinese |iamnotmega                |🟠 Temporary Outdated (beta) |
-|🇨🇳 Traditional Chinese|iamnotmega                |🟠 Temporary Outdated (beta) |
-|🇸🇪 Swedish            |iamnotmega                |🟠 Temporary Outdated (beta) |
-|🇻🇳 Vietnamese         |iamnotmega                |🟠 Temporary Outdated (beta) |
-|🇸🇮 Slovenian          |n1kkec                    |🔴 Outdated                  |
-|🇬🇷 Greek              |stefanos                  |🔴 Outdated                  |
+|🇷🇺 Russian            |/                         |🔴 Missing                   |
+|🇳🇴 Norwegian          |/                         |🔴 Missing                   |
+|🇱🇻 Latvian            |/                         |🔴 Missing                   |
+|🇯🇵 Japanese           |/                         |🔴 Missing                   |
+|🇰🇷 Korean             |/                         |🔴 Missing                   |
+|🇨🇳 Simplified Chinese |/                         |🔴 Missing                   |
+|🇨🇳 Traditional Chinese|/                         |🔴 Missing                   |
+|🇸🇪 Swedish            |/                         |🔴 Missing                   |
+|🇻🇳 Vietnamese         |/                         |🔴 Missing                   |
+|🇸🇮 Slovenian          |/                         |🔴 Missing                   |
+|🇬🇷 Greek              |/                         |🔴 Missing                   |
+|❓ Kurdish            |/                         |🔴 Missing                   |
+|❓ Persian            |/                         |🔴 Missing                   |
 
 ## ⭐️ Star History
 Please help us grow by giving a star! It would help us a lot!
