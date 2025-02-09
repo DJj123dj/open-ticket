@@ -53,6 +53,7 @@ You're also able to customise every little aspect of the bot! From embeds to tra
   - **🔄 rotating status** - Create a rotating bot status & use dynamic variables from the bot!
   - **💾 sqlite database** - Use an `sqlite` database for increased performances!
   - **🎉 custom embeds** - Create your own embeds and use them in your server!
+  - **⏰ reminders** - Create & manage customisable reminders in your server!
   - **🎨 customisation** - Yep, you heard it right! Even more customisation!
   - **😁 And so much more...**
 
@@ -130,6 +131,7 @@ A big thanks to all our sponsors! Without them, it wouldn't be possible to creat
 |[`ot-feedback`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-feedback/)                          |an_developer                |💼 Management               |A plugin to gather feedback of your support service. |
 |[`ot-assign-role`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-assign-role/)                    |rapid.fast                  |💼 Management               |This plugin assigns a predefined role to a user upon creating a ticket. |
 |[`ot-volume-warning`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-volume-warning/)              |guillee.3                   |💼 Management               |Alerts ticket creators when too many tickets are open, indicating possible response delays. |
+|[`od-reminders`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/od-reminders/)                        |guillee.3                   |💼 Management               |Set reminders that will be sent to a channel every specified time. |
 |[`ot-translate-cmds`](https://github.com/DJj123dj/open-discord-plugins/tree/main/open-ticket/ot-translate-cmds/)              |guillee.3                   |🤖 Client                  |Translate all built-in command names, descriptions & options. |
 
 ### 📢 Categories
