@@ -284,6 +284,10 @@ const main = async () => {
         }
     }
 
+    //plugin loading before client
+    await opendiscord.events.get("onPluginBeforeClientLoad").emit([])
+    await opendiscord.events.get("afterPluginBeforeClientLoaded").emit([])
+
     //client configuration
     opendiscord.log("Loading client...","system")
     if (opendiscord.defaults.getDefault("clientLoading")){
@@ -458,6 +462,10 @@ const main = async () => {
         opendiscord.log("discord.js client ready!","info")
     }
 
+    //plugin loading before managers
+    await opendiscord.events.get("onPluginBeforeManagerLoad").emit([])
+    await opendiscord.events.get("afterPluginBeforeManagerLoaded").emit([])
+
     //load questions
     opendiscord.log("Loading questions...","system")
     if (opendiscord.defaults.getDefault("questionLoading")){
@@ -522,6 +530,10 @@ const main = async () => {
     await opendiscord.events.get("onTranscriptHistoryLoad").emit([opendiscord.transcripts])
     await opendiscord.events.get("afterTranscriptHistoryLoaded").emit([opendiscord.transcripts])
 
+    //plugin loading before builders
+    await opendiscord.events.get("onPluginBeforeBuilderLoad").emit([])
+    await opendiscord.events.get("afterPluginBeforeBuilderLoaded").emit([])
+
     //load button builders
     opendiscord.log("Loading buttons...","system")
     if (opendiscord.defaults.getDefault("buttonBuildersLoading")){
@@ -569,6 +581,10 @@ const main = async () => {
     }
     await opendiscord.events.get("onModalBuilderLoad").emit([opendiscord.builders.modals,opendiscord.builders,opendiscord.actions])
     await opendiscord.events.get("afterModalBuildersLoaded").emit([opendiscord.builders.modals,opendiscord.builders,opendiscord.actions])
+
+    //plugin loading before responders
+    await opendiscord.events.get("onPluginBeforeResponderLoad").emit([])
+    await opendiscord.events.get("afterPluginBeforeResponderLoaded").emit([])
 
     //load command responders
     opendiscord.log("Loading command responders...","system")
@@ -638,6 +654,10 @@ const main = async () => {
     }
     await opendiscord.events.get("onModalResponderLoad").emit([opendiscord.responders.modals,opendiscord.responders,opendiscord.actions])
     await opendiscord.events.get("afterModalRespondersLoaded").emit([opendiscord.responders.modals,opendiscord.responders,opendiscord.actions])
+
+    //plugin loading before finalizations
+    await opendiscord.events.get("onPluginBeforeFinalizationLoad").emit([])
+    await opendiscord.events.get("afterPluginBeforeFinalizationLoaded").emit([])
 
     //load actions
     opendiscord.log("Loading actions...","system")
@@ -752,6 +772,10 @@ const main = async () => {
         await opendiscord.events.get("afterStatsInitiated").emit([opendiscord.stats])
     }
 
+    //plugin loading before code
+    await opendiscord.events.get("onPluginBeforeCodeLoad").emit([])
+    await opendiscord.events.get("afterPluginBeforeCodeLoaded").emit([])
+
     //load code
     opendiscord.log("Loading code...","system")
     if (opendiscord.defaults.getDefault("codeLoading")){
@@ -802,6 +826,7 @@ const main = async () => {
 
     //YIPPPIE!!
     //The startup of Open Ticket is completed :)
+    await opendiscord.events.get("beforeReadyForUsage").emit([])
     opendiscord.readyStartupDate = new Date()
     await opendiscord.events.get("onReadyForUsage").emit([])
 }

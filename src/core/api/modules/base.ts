@@ -104,6 +104,7 @@ export class ODId {
 export class ODManagerChangeHelper {
     #change: (() => void)|null = null
 
+    /**Trigger an `onChange()` event in the parent `ODManager` of this class. */
     protected _change(){
         if (this.#change){
             try{

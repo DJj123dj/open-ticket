@@ -60,6 +60,10 @@ export const loadAllEvents = () => {
         "afterCheckersRendered",
         "onCheckerQuit",
 
+        //plugin loading before client
+        "onPluginBeforeClientLoad",
+        "afterPluginBeforeClientLoaded",
+
         //client configuration
         "onClientLoad",
         "afterClientLoaded",
@@ -81,6 +85,10 @@ export const loadAllEvents = () => {
         //client text commands
         "onTextCommandLoad",
         "afterTextCommandsLoaded",
+
+        //plugin loading before managers
+        "onPluginBeforeManagerLoad",
+        "afterPluginBeforeManagerLoaded",
 
         //questions
         "onQuestionLoad",
@@ -164,6 +172,10 @@ export const loadAllEvents = () => {
         "onTranscriptReady",
         "afterTranscriptReady",
 
+        //plugin loading before builders
+        "onPluginBeforeBuilderLoad",
+        "afterPluginBeforeBuilderLoaded",
+
         //builders
         "onButtonBuilderLoad",
         "afterButtonBuildersLoaded",
@@ -178,6 +190,10 @@ export const loadAllEvents = () => {
         "onModalBuilderLoad",
         "afterModalBuildersLoaded",
 
+        //plugin loading before responders
+        "onPluginBeforeResponderLoad",
+        "afterPluginBeforeResponderLoaded",
+
         //responders
         "onCommandResponderLoad",
         "afterCommandRespondersLoaded",
@@ -187,6 +203,10 @@ export const loadAllEvents = () => {
         "afterDropdownRespondersLoaded",
         "onModalResponderLoad",
         "afterModalRespondersLoaded",
+
+        //plugin loading before finalizations
+        "onPluginBeforeFinalizationLoad",
+        "afterPluginBeforeFinalizationLoaded",
 
         //actions
         "onActionLoad",
@@ -226,6 +246,10 @@ export const loadAllEvents = () => {
         "onStatInit",
         "afterStatsInitiated",
 
+        //plugin loading before code
+        "onPluginBeforeCodeLoad",
+        "afterPluginBeforeCodeLoaded",
+
         //code
         "onCodeLoad",
         "afterCodeLoaded",
@@ -243,6 +267,7 @@ export const loadAllEvents = () => {
         "afterStartScreensRendered",
 
         //ready
+        "beforeReadyForUsage",
         "onReadyForUsage"
     ]
     eventList.forEach((event) => opendiscord.events.add(new api.ODEvent(event)))

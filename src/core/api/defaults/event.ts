@@ -63,7 +63,7 @@ export interface ODEventIds_Default {
     "onFlagInit": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
     "afterFlagsInitiated": ODEvent_Default<(flags:ODFlagManager_Default) => ODPromiseVoid>
 
-    //progres bars
+    //progress bars
     "onProgressBarRendererLoad": ODEvent_Default<(renderers:ODProgressBarRendererManager_Default) => ODPromiseVoid>
     "afterProgressBarRenderersLoaded": ODEvent_Default<(renderers:ODProgressBarRendererManager_Default) => ODPromiseVoid>
     "onProgressBarLoad": ODEvent_Default<(progressbars:ODProgressBarManager_Default) => ODPromiseVoid>
@@ -106,6 +106,10 @@ export interface ODEventIds_Default {
     "afterCheckersRendered": ODEvent_Default<(renderer:ODCheckerRenderer_Default, checkers:ODCheckerManager_Default) => ODPromiseVoid>
     "onCheckerQuit": ODEvent_Default<(checkers:ODCheckerManager_Default) => ODPromiseVoid>
 
+    //plugin loading before client
+    "onPluginBeforeClientLoad": ODEvent_Default<() => ODPromiseVoid>,
+    "afterPluginBeforeClientLoaded": ODEvent_Default<() => ODPromiseVoid>,
+
     //client configuration
     "onClientLoad": ODEvent_Default<(client:ODClientManager_Default) => ODPromiseVoid>
     "afterClientLoaded": ODEvent_Default<(client:ODClientManager_Default) => ODPromiseVoid>
@@ -127,6 +131,10 @@ export interface ODEventIds_Default {
     //client text commands
     "onTextCommandLoad": ODEvent_Default<(text:ODTextCommandManager_Default, client:ODClientManager_Default,) => ODPromiseVoid>
     "afterTextCommandsLoaded": ODEvent_Default<(text:ODTextCommandManager_Default, client:ODClientManager_Default) => ODPromiseVoid>
+
+    //plugin loading before managers
+    "onPluginBeforeManagerLoad": ODEvent_Default<() => ODPromiseVoid>,
+    "afterPluginBeforeManagerLoaded": ODEvent_Default<() => ODPromiseVoid>,
 
     //questions
     "onQuestionLoad": ODEvent_Default<(questions:ODQuestionManager) => ODPromiseVoid>
@@ -210,6 +218,10 @@ export interface ODEventIds_Default {
     "onTranscriptReady": ODEvent_Default<(transcripts:ODTranscriptManager_Default,ticket:ODTicket,channel:discord.TextChannel,user:discord.User) => ODPromiseVoid>
     "afterTranscriptReady": ODEvent_Default<(transcripts:ODTranscriptManager_Default,ticket:ODTicket,channel:discord.TextChannel,user:discord.User) => ODPromiseVoid>
 
+    //plugin loading before builders
+    "onPluginBeforeBuilderLoad": ODEvent_Default<() => ODPromiseVoid>,
+    "afterPluginBeforeBuilderLoaded": ODEvent_Default<() => ODPromiseVoid>,
+
     //builders
     "onButtonBuilderLoad": ODEvent_Default<(buttons:ODButtonManager_Default, builders:ODBuilderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
     "afterButtonBuildersLoaded": ODEvent_Default<(buttons:ODButtonManager_Default, builders:ODBuilderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
@@ -224,6 +236,10 @@ export interface ODEventIds_Default {
     "onModalBuilderLoad": ODEvent_Default<(modals:ODModalManager_Default, builders:ODBuilderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
     "afterModalBuildersLoaded": ODEvent_Default<(modals:ODModalManager_Default, builders:ODBuilderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
 
+    //plugin loading before responders
+    "onPluginBeforeResponderLoad": ODEvent_Default<() => ODPromiseVoid>,
+    "afterPluginBeforeResponderLoaded": ODEvent_Default<() => ODPromiseVoid>,
+
     //responders
     "onCommandResponderLoad": ODEvent_Default<(commands:ODCommandResponderManager_Default, responders:ODResponderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
     "afterCommandRespondersLoaded": ODEvent_Default<(commands:ODCommandResponderManager_Default, responders:ODResponderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
@@ -233,6 +249,10 @@ export interface ODEventIds_Default {
     "afterDropdownRespondersLoaded": ODEvent_Default<(dropdowns:ODDropdownResponderManager_Default, responders:ODResponderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
     "onModalResponderLoad": ODEvent_Default<(modals:ODModalResponderManager_Default, responders:ODResponderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
     "afterModalRespondersLoaded": ODEvent_Default<(modals:ODModalResponderManager_Default, responders:ODResponderManager_Default, actions:ODActionManager_Default) => ODPromiseVoid>
+
+    //plugin loading before finalizations
+    "onPluginBeforeFinalizationLoad": ODEvent_Default<() => ODPromiseVoid>,
+    "afterPluginBeforeFinalizationLoaded": ODEvent_Default<() => ODPromiseVoid>,
 
     //actions
     "onActionLoad": ODEvent_Default<(actions:ODActionManager_Default) => ODPromiseVoid>
@@ -272,6 +292,10 @@ export interface ODEventIds_Default {
     "onStatInit": ODEvent_Default<(stats:ODStatsManager_Default) => ODPromiseVoid>
     "afterStatsInitiated": ODEvent_Default<(stats:ODStatsManager_Default) => ODPromiseVoid>
 
+    //plugin loading before code
+    "onPluginBeforeCodeLoad": ODEvent_Default<() => ODPromiseVoid>,
+    "afterPluginBeforeCodeLoaded": ODEvent_Default<() => ODPromiseVoid>,
+
     //code
     "onCodeLoad": ODEvent_Default<(code:ODCodeManager_Default) => ODPromiseVoid>
     "afterCodeLoaded": ODEvent_Default<(code:ODCodeManager_Default) => ODPromiseVoid>
@@ -289,6 +313,7 @@ export interface ODEventIds_Default {
     "afterStartScreensRendered": ODEvent_Default<(startscreen:ODStartScreenManager_Default) => ODPromiseVoid>
 
     //ready
+    "beforeReadyForUsage": ODEvent_Default<() => ODPromiseVoid>
     "onReadyForUsage": ODEvent_Default<() => ODPromiseVoid>
 }
 
