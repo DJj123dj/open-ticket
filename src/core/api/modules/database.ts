@@ -14,7 +14,7 @@ import * as fjs from "formatted-json-stringify"
 /** ## ❌ Temporary function. Will be removed on full OTv4 release! */
 export function TEMP_migrateDatabaseIdPrefix(id:string): string {
     if (!id.startsWith("openticket:")) return id
-    return id.replace("openticket:","opendiscord:")
+    return id.replaceAll("openticket:","opendiscord:")
 }
 /** ## ❌ Temporary function. Will be removed on full OTv4 release! */
 export function TEMP_migrateDatabaseValuePrefix(value:string): string {
