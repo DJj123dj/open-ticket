@@ -102,8 +102,9 @@ export const migrations = [
                     }
                 }
 
-                await generalConfig.save()
-                await optionConfig.save()
+                //save without formatter because it doesn't match the most recent config scheme anymore.
+                await generalConfig.save(true)
+                await optionConfig.save(true)
             }
 
             //migrate database
@@ -331,11 +332,11 @@ export const migrations = [
                     }
                 )
 
-                await generalConfig.save()
-                await questionConfig.save()
-                await optionConfig.save()
-                await panelConfig.save()
-                await transcriptConfig.save()
+                await generalConfig.save(true)
+                await questionConfig.save(true)
+                await optionConfig.save(true)
+                await panelConfig.save(true)
+                await transcriptConfig.save(true)
             }
 
             //migrate database
@@ -420,5 +421,38 @@ export const migrations = [
     }),
 
     //MIGRATE TO v4.2.1
-    new api.ODVersionMigration(api.ODVersion.fromString("opendiscord:version","v4.2.1"),{}),
+    new api.ODVersionMigration(api.ODVersion.fromString("opendiscord:version","v4.2.1"),{
+        afterStartupMigrate:async () => {
+            //migrate config version
+            const generalConfig = opendiscord.configs.get("opendiscord:general")
+            
+            if (!generalConfig.data["_CONFIG_VERSION"]) throw new api.ODSystemError("Couldn't find general.jsonc '_CONFIG_VERSION' property.")
+            generalConfig.data["_CONFIG_VERSION"] = "open-ticket-v4.2.1"
+            await generalConfig.save(true)
+        },
+    }),
+
+    //MIGRATE TO v4.2.2
+    new api.ODVersionMigration(api.ODVersion.fromString("opendiscord:version","v4.2.2"),{
+        afterStartupMigrate:async () => {
+            //migrate config version
+            const generalConfig = opendiscord.configs.get("opendiscord:general")
+            
+            if (!generalConfig.data["_CONFIG_VERSION"]) throw new api.ODSystemError("Couldn't find general.jsonc '_CONFIG_VERSION' property.")
+            generalConfig.data["_CONFIG_VERSION"] = "open-ticket-v4.2.2"
+            await generalConfig.save()
+        },
+    }),
+
+
+
+    /** =========== WARNING! ===========
+     * When a new version contains config changes/migrations,
+     * ALL previous versions should be saved 'withoutFormatter'.
+     * 
+     * --> Otherwise migration might crash on multi-version migrations
+     * --> because it doesn't match the most recent config scheme anymore.
+     * 
+     * EXAMPLE: await generalConfig.save(true)
+     */
 ]

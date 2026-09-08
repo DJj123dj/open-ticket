@@ -4,7 +4,7 @@
 <sub align="center">Related Projects:</sub><br>
 <a href="https://odplugins.dj-dj.be"><img src="https://apis.dj-dj.be/cdn/opendiscord/logo.png" alt="Open Discord" height="55px"></a><br><br>
 <a href="https://discord.com/invite/26vT9wt3n3"><img alt="Discord Invite Link" src="https://img.shields.io/badge/discord-support%20server-5865F2.svg?style=flat-square&logo=discord"></img></a>
-<a href="https://github.com/open-discord-bots/open-ticket/releases/tag/v4.2.1"><img alt="Open Ticket Version" src="https://img.shields.io/badge/version-4.2.1-brightgreen.svg?style=flat-square"></img></a>
+<a href="https://github.com/open-discord-bots/open-ticket/releases/tag/v4.2.2"><img alt="Open Ticket Version" src="https://img.shields.io/badge/version-4.2.2-brightgreen.svg?style=flat-square"></img></a>
 <a href="https://otdocs.dj-dj.be"><img alt="Open Ticket Documentation" src="https://img.shields.io/badge/discord.js-v14-CB3837.svg?style=flat-square&logo=npm"></img></a>
 <a href="https://github.com/open-discord-bots/open-ticket/blob/main/LICENSE"><img alt="Open Ticket License" src="https://img.shields.io/badge/license-GPL%203.0-important.svg?style=flat-square"></img></a>
 <a href="https://otdocs.dj-dj.be"><img alt="Open Ticket Stars" src="https://img.shields.io/github/stars/djj123dj/open-ticket?color=yellow&label=stars&logo=github&style=flat-square"></img></a>
@@ -70,10 +70,10 @@ The bot is fully translated into <b>38+ languages</b> and has been battle-tested
 - <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/deployment-quick.svg"></img> **Quick Setup** - Easy **5-minute configuration** using the Interactive Setup CLI.
 - <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/deployment-scale.svg"></img> **Scalable & Reliable** - Battle-tested in servers with **100k+ members**.
 - <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/deployment-secure.svg"></img> **Private & Secure** - Used by thousands of servers with respect for security & privacy.
-- <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/deployment-pterodactyl.svg"></img> **Pterodactyl Support** - 100% compatible with Pterodactyl panels. [(Download official eggs)](.eggs/README.md)
+- <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/deployment-pterodactyl.svg"></img> **Pterodactyl Support** - 100% compatible with Pterodactyl panels. [(Download official eggs)](.github/pterodactyl-eggs/README.md)
 - <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/deployment-docker.svg"></img> **Docker Support** - Deploy Open Ticket in minutes with Docker containers.
 
-#### Extend functionality even more with our [pre-made community plugins](#-plugins)!
+#### Extend functionality even more with our [pre-made community plugins](https://github.com/open-discord-bots/plugins)!
 > - <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/plugin-reviews.svg"></img> **Reviews** - Create and manage a support review system for tickets.
 > - <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/plugin-tags.svg"></img> **Tags** - Define keywords that automatically trigger predefined responses.
 > - <img align="top" src="https://apis.dj-dj.be/cdn/openticket/readme-icons/plugin-reminders.svg"></img> **Reminders** - Create and manage custom reminders for users or staff.
@@ -168,17 +168,9 @@ With the amazing support of our translators, we've been able to translate Open T
 ## 😎 Hall Of Fame
 <img alt="The full list of contributors for Open Ticket and Open Discord." src="https://raw.githubusercontent.com/open-discord-bots/hall-of-fame/refs/heads/main/svg/CONTRIBUTORS.svg">
 
-## ⭐️ Star History
+## ⭐️ Starring
 If you enjoy using Open ticket, **consider starring** our repository.  
 This will help us grow and reach even more people!
-
-<a href="https://star-history.com/#open-discord-bots/open-ticket&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=open-discord-bots/open-ticket&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=open-discord-bots/open-ticket&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=open-discord-bots/open-ticket&type=Date" />
- </picture>
-</a>
 
 ---
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket Logo" width="170px">

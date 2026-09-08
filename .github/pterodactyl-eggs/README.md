@@ -2,9 +2,9 @@
 <img src="https://apis.dj-dj.be/cdn/openticket/logo.png" alt="Open Ticket Logo" width="500px">
 
 [![discord](https://img.shields.io/badge/discord-support%20server-5865F2.svg?style=flat-square&logo=discord)](https://discord.com/invite/26vT9wt3n3)
-[![version](https://img.shields.io/badge/version-4.2.1-brightgreen.svg?style=flat-square)](https://github.com/open-discord-bots/open-ticket/releases/tag/v4.2.1)
+[![version](https://img.shields.io/badge/version-4.2.2-brightgreen.svg?style=flat-square)](https://github.com/open-discord-bots/open-ticket/releases/tag/v4.2.2)
 [![Sponsor DJj123dj](https://img.shields.io/badge/sponsor-DJj123dj-ea4aaa?style=flat-square&logo=githubsponsors)](https://github.com/sponsors/DJj123dj)
-[![Open Ticket supports Pterodactyl Eggs!](https://img.shields.io/badge/pterodactyl-supported-10539F?style=flat-square&logo=pterodactyl)](.eggs/README.md)
+[![Open Ticket supports Pterodactyl Eggs!](https://img.shields.io/badge/pterodactyl-supported-10539F?style=flat-square&logo=pterodactyl)](README.md)
 
 
 Hi there! Open Ticket provides **official eggs** for the Pterodactyl & Pelican panels!<br>

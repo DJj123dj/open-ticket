@@ -60,7 +60,7 @@ export class ODOpenTicketMain extends api.ODMain {
     priorities: api.ODMappedPriorityManager
 
     constructor(){
-        const version = api.ODVersion.fromString("opendiscord:version","v4.2.1")
+        const version = api.ODVersion.fromString("opendiscord:version","v4.2.2")
         const debugfile = new api.ODDebugFileManager("./","otdebug.txt",5000,version)
         const console = new api.ODConsoleManager(100,debugfile)
         const debug = new api.ODDebugger(console)

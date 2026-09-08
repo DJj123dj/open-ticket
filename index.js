@@ -13,7 +13,7 @@ const flags = [
 ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║       ██║   ██║██║     ██╔═██╗ ██╔══╝     ██║     
 ╚██████╔╝██║     ███████╗██║ ╚████║       ██║   ██║╚██████╗██║  ██╗███████╗   ██║     
  ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝       ╚═╝   ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝   ╚═╝     
- v4.2.1 - Made by DJj123dj & Contributors
+ v4.2.2 - Made by DJj123dj & Contributors
 
  Discord: https://discord.dj-dj.be
  Docs: https://otdocs.dj-dj.be

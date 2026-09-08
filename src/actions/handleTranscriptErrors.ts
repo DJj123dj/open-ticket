@@ -12,6 +12,7 @@ export async function registerButtonResponders(){
     opendiscord.responders.buttons.get("opendiscord:transcript-error-retry").workers.add([
         new api.ODWorker("opendiscord:delete-ticket",0,async (instance,params,origin,cancel) => {
             const {guild,channel,user,member} = instance
+            await instance.defer("update",false)
             
             //responder checks
             const hasPerms = await openticketUtils.replyHasPermissions(instance,origin,"delete")
@@ -30,7 +31,6 @@ export async function registerButtonResponders(){
             const originalOrigin = instance.interaction.customId.split("_")[1] as api.ODActionManagerIdMappings["opendiscord:delete-ticket"]["origin"]
             
             //start deleting ticket (without reason)
-            await instance.defer("update",false)
             //don't await DELETE action => else it will update the message after the channel has been deleted
             opendiscord.actions.get("opendiscord:delete-ticket").run(originalOrigin,{guild,channel,user,ticket,reason:"Transcript Error (Retried)",sendMessage:false,withoutTranscript:false})
             
@@ -55,6 +55,7 @@ export async function registerButtonResponders(){
     opendiscord.responders.buttons.get("opendiscord:transcript-error-continue").workers.add([
         new api.ODWorker("opendiscord:delete-ticket",0,async (instance,params,origin,cancel) => {
             const {guild,channel,user} = instance
+            await instance.defer("update",false)
             
             //responder checks
             const hasPerms = await openticketUtils.replyHasPermissions(instance,origin,"delete")
@@ -73,7 +74,6 @@ export async function registerButtonResponders(){
             const originalOrigin = instance.interaction.customId.split("_")[1] as api.ODActionManagerIdMappings["opendiscord:delete-ticket"]["origin"]
 
             //start deleting ticket (without reason & without transcript)
-            await instance.defer("update",false)
             //don't await DELETE action => else it will update the message after the channel has been deleted
             opendiscord.actions.get("opendiscord:delete-ticket").run(originalOrigin,{guild,channel,user,ticket,reason:"Transcript Error (Continued)",sendMessage:false,withoutTranscript:true})
 

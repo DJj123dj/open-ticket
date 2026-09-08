@@ -20,7 +20,7 @@
 
     INFORMATION:
     ============
-    Open Ticket v4.2.1 - © DJdj Development
+    Open Ticket v4.2.2 - © DJdj Development
 
     support us: https://github.com/sponsors/DJj123dj
     discord: https://discord.dj-dj.be

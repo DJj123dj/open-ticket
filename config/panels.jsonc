@@ -31,7 +31,7 @@
             "image":"", //Image URL. Leave empty to disable
             "thumbnail":"", //Image URL. Leave empty to disable
             
-            "footer":"Open Ticket v4.2.1", //Leave empty to disable
+            "footer":"Open Ticket v4.2.2", //Leave empty to disable
             /* Embed fields. Set to empty list [] to disable. */
             "fields":[
                 {"name":"Field name","value":"Field value","inline":false}

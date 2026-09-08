@@ -18,7 +18,7 @@
  * Good luck! DJj123dj & contributors
  */
 {
-    "_CONFIG_VERSION":"open-ticket-v4.2.1",
+    "_CONFIG_VERSION":"open-ticket-v4.2.2",
     
     /* Load the bot token from .env or the "token" field below. Leave "token" empty if using "tokenFromENV". */
     "token":"INSERT_BOT_TOKEN",

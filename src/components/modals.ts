@@ -66,8 +66,8 @@ export async function registerModalComponents(){
                         maxValues:1,
                         options:question.get("opendiscord:choices").value.map((choice) => ({
                             label:choice.title,
-                            emoji:choice.emoji,
-                            description:choice.description,
+                            emoji:(choice.emoji.length > 0) ? choice.emoji : undefined,
+                            description:(choice.description.length > 0) ? choice.description : undefined,
                             value:choice.title
                         }))
                     }))
@@ -84,7 +84,7 @@ export async function registerModalComponents(){
                         options:question.get("opendiscord:choices").value.map((choice) => ({
                             label:choice.title,
                             default:choice.selectedByDefault,
-                            description:choice.description,
+                            description:(choice.description.length > 0) ? choice.description : undefined,
                             value:choice.title
                         }))
                     }))
@@ -103,7 +103,7 @@ export async function registerModalComponents(){
                         options:question.get("opendiscord:choices").value.map((choice) => ({
                             label:choice.title,
                             default:choice.selectedByDefault,
-                            description:choice.description,
+                            description:(choice.description.length > 0) ? choice.description : undefined,
                             value:choice.title
                         }))
                     }))

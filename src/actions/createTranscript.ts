@@ -36,6 +36,7 @@ export async function registerActions(){
             if (!transcriptConfig.data.general.enabled) return cancel()
             if (!instance.compiler){
                 instance.success = false
+                instance.errorReason = "Unable to find transcript compiler! (#0)"
                 cancel()
                 throw new api.ODSystemError("ODAction(ot:create-transcript):ODWorker(ot:init-transcript) => Instance is missing transcript compiler!")
             }
@@ -62,6 +63,7 @@ export async function registerActions(){
                     }
                 }catch(err){
                     instance.success = false
+                    instance.errorReason = "Failed to initialize transcript compiler!"
                     cancel()
                     process.emit("uncaughtException",err)
                     throw new api.ODSystemError("ODAction(ot:create-transcript) => Failed transcript compiler init()! (see error above)")
@@ -97,6 +99,7 @@ export async function registerActions(){
                     }
                 }catch(err){
                     instance.success = false
+                    instance.errorReason = "Failed to execute transcript compiler!"
                     cancel()
                     process.emit("uncaughtException",err)
                     throw new api.ODSystemError("ODAction(ot:create-transcript) => Failed transcript compiler compile()! (see error above)")
@@ -107,11 +110,13 @@ export async function registerActions(){
         new api.ODWorker("opendiscord:ready-transcript",1,async (instance,params,origin,cancel) => {
             if (!instance.compiler){
                 instance.success = false
+                instance.errorReason = "Unable to find transcript compiler! (#1)"
                 cancel()
                 throw new api.ODSystemError("ODAction(ot:create-transcript):ODWorker(ot:ready-transcript) => Instance is missing transcript compiler! (1)")
             }
             if (!instance.result){
                 instance.success = false
+                instance.errorReason = "Unable to find transcript result file or URL! (#1)"
                 cancel()
                 throw new api.ODSystemError("ODAction(ot:create-transcript):ODWorker(ot:ready-transcript) => Instance is missing transcript result! (1)")
             }
@@ -120,11 +125,13 @@ export async function registerActions(){
             utilities.runAsync(async () => {
                 if (!instance.compiler){
                     instance.success = false
+                    instance.errorReason = "Unable to find transcript compiler! (#2)"
                     cancel()
                     throw new api.ODSystemError("ODAction(ot:create-transcript):ODWorker(ot:ready-transcript) => Instance is missing transcript compiler! (2)")
                 }
                 if (!instance.result){
                     instance.success = false
+                    instance.errorReason = "Unable to find transcript result file or URL! (#2)"
                     cancel()
                     throw new api.ODSystemError("ODAction(ot:create-transcript):ODWorker(ot:ready-transcript) => Instance is missing transcript result! (2)")
                 }

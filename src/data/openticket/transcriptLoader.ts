@@ -493,7 +493,7 @@ export async function loadAllTranscriptCompilers(){
             if (!data || data["status"] != "success"){
                 opendiscord.debugfile.writeNote("HTML Transcripts Error => status: "+res.status+", body:\n"+res.body)
                 process.emit("uncaughtException",new api.ODSystemError("HTML Transcripts COMPILE_JSON_STATUS error! (check otdebug.txt for details)"))
-                return {ticket,channel,user,success:false,errorReason:"TFailed to read the response of the HTML Transcripts server.",messages:null,data:null}
+                return {ticket,channel,user,success:false,errorReason:"Failed to read the response of the HTML Transcripts server.",messages:null,data:null}
             }
 
             return {
