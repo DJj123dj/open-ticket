@@ -10,7 +10,7 @@ const panelMsgState = opendiscord.states.get("opendiscord:panel-message")
 
 export async function registerCommandResponders(){
     //TICKET COMMAND RESPONDER
-    opendiscord.responders.commands.add(new api.ODCommandResponder("opendiscord:ticket",generalConfig.data.prefix,/^ticket/))
+    opendiscord.responders.commands.add(new api.ODCommandResponder("opendiscord:ticket",generalConfig.data.prefix,"ticket"))
     opendiscord.responders.commands.get("opendiscord:ticket").workers.add([
         new api.ODWorker("opendiscord:ticket",0,async (instance,params,origin,cancel) => {
             const {user,member,channel,guild} = instance
