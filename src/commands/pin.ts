@@ -214,12 +214,12 @@ export async function registerModalResponders() {
 
             if (originalMsgType === "ticket-message"){
                 //ticket message
-                await opendiscord.actions.get("opendiscord:pin-ticket").run(originalMsgType, {guild, channel, user, ticket, reason:null, sendMessage:true})
+                await opendiscord.actions.get("opendiscord:pin-ticket").run(originalMsgType, {guild, channel, user, ticket, reason, sendMessage:true})
                 await instance.update(await opendiscord.builders.messages.getSafe("opendiscord:ticket-message").build("other", {guild, channel, user, ticket}))
 
             }else if (originalMsgType === "unpin-message"){
                 //converted to pin message
-                await opendiscord.actions.get("opendiscord:pin-ticket").run(originalMsgType, {guild, channel, user, ticket, reason:null, sendMessage:false})
+                await opendiscord.actions.get("opendiscord:pin-ticket").run(originalMsgType, {guild, channel, user, ticket, reason, sendMessage:false})
                 const sentMsg = await instance.update(await opendiscord.builders.messages.getSafe("opendiscord:pin-message").build(originalMsgType, {guild, channel, user, ticket, reason}))
                 if (sentMsg.success) await interactiveMsgState.setMsgState({channel, message:sentMsg.message}, {
                     messageType:"pin-message",

@@ -141,10 +141,10 @@ export interface ODEventManagerIdMappings extends api.ODEventManagerIdConstraint
     "afterTextCommandsLoaded":api.ODEvent<(text:ODMappedTextCommandManager, client:ODMappedClientManager) => api.ODPromiseVoid>
 
     //states
-    "onStateLoad":api.ODEvent<(posts:ODMappedStateManager) => api.ODPromiseVoid>
-    "afterStatesLoaded":api.ODEvent<(posts:ODMappedStateManager) => api.ODPromiseVoid>
-    "onStateInit":api.ODEvent<(posts:ODMappedStateManager) => api.ODPromiseVoid>
-    "afterStatesInitiated":api.ODEvent<(posts:ODMappedStateManager) => api.ODPromiseVoid>
+    "onStateLoad":api.ODEvent<(states:ODMappedStateManager) => api.ODPromiseVoid>
+    "afterStatesLoaded":api.ODEvent<(states:ODMappedStateManager) => api.ODPromiseVoid>
+    "onStateInit":api.ODEvent<(states:ODMappedStateManager) => api.ODPromiseVoid>
+    "afterStatesInitiated":api.ODEvent<(states:ODMappedStateManager) => api.ODPromiseVoid>
 
     //plugin loading before managers
     "onPluginBeforeManagerLoad":api.ODEvent<() => api.ODPromiseVoid>,
