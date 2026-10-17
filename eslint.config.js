@@ -95,7 +95,7 @@ export default defineConfig({ignores:["node_modules/**", "dist/**", "build/**"]}
         //typescript stuff
         "@typescript-eslint/consistent-type-imports":"off",
         "@typescript-eslint/explicit-function-return-type":"off",
-        "@typescript-eslint/no-explicit-any":"warn",
+        "@typescript-eslint/no-explicit-any":"off",
         "@typescript-eslint/prefer-as-const":"off"
     }
 })
