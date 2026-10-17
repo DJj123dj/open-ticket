@@ -33,8 +33,6 @@ export async function registerButtonResponders() {
             //start deleting ticket (without reason)
             //don't await DELETE action => else it will update the message after the channel has been deleted
             opendiscord.actions.get("opendiscord:delete-ticket").run(originalOrigin, {guild, channel, user, ticket, reason:"Transcript Error (Retried)", sendMessage:false, withoutTranscript:false})
-
-            ticket.get("opendiscord:for-deletion").value = true //disable ticket message buttons
             await instance.update(await opendiscord.builders.messages.getSafe("opendiscord:delete-message").build("other", {guild, channel, user, ticket, reason:"Transcript Error (Retried)"}))
         }),
         new api.ODWorker("opendiscord:logs", -1, async (instance, params, origin, cancel) => {
@@ -76,8 +74,6 @@ export async function registerButtonResponders() {
             //start deleting ticket (without reason & without transcript)
             //don't await DELETE action => else it will update the message after the channel has been deleted
             opendiscord.actions.get("opendiscord:delete-ticket").run(originalOrigin, {guild, channel, user, ticket, reason:"Transcript Error (Continued)", sendMessage:false, withoutTranscript:true})
-
-            ticket.get("opendiscord:for-deletion").value = true //disable ticket message buttons
             await instance.update(await opendiscord.builders.messages.getSafe("opendiscord:delete-message").build("other", {guild, channel, user, ticket, reason:"Transcript Error (Continued)"}))
 
         }),

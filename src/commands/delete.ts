@@ -179,7 +179,6 @@ export async function registerVerifyBars() {
                 if (originalMsgType === "ticket-message"){
                     //ticket message
                     opendiscord.actions.get("opendiscord:delete-ticket").run(originalMsgType, {guild, channel, user, ticket, reason:null, sendMessage:true, withoutTranscript})
-                    ticket.get("opendiscord:for-deletion").value = true //disable ticket message buttons
                     await instance.update(await opendiscord.builders.messages.getSafe("opendiscord:ticket-message").build("other", {guild, channel, user, ticket}))
 
                 }else if (originalMsgType === "close-message"){
@@ -246,7 +245,6 @@ export async function registerModalResponders() {
             if (originalMsgType === "ticket-message"){
                 //ticket message
                 opendiscord.actions.get("opendiscord:delete-ticket").run(originalMsgType, {guild, channel, user, ticket, reason, sendMessage:true, withoutTranscript:false})
-                ticket.get("opendiscord:for-deletion").value = true //disable ticket message buttons
                 await instance.update(await opendiscord.builders.messages.getSafe("opendiscord:ticket-message").build("other", {guild, channel, user, ticket}))
 
             }else if (originalMsgType === "close-message"){

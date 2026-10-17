@@ -14,10 +14,12 @@ export async function registerActions() {
             const {guild, channel, user, ticket, reason} = params
             if (channel.isThread()) throw new api.ODSystemError("Unable to delete ticket! Open Ticket doesn't support threads!")
 
+            //set for deletion
+            ticket.get("opendiscord:for-deletion").value = true
+
             await opendiscord.events.get("onTicketDelete").emit([ticket, user, channel, reason])
 
             //update ticket
-            ticket.get("opendiscord:for-deletion").value = true
             ticket.get("opendiscord:busy").value = true
 
             //update ticket message (no await)
