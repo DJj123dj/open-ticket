@@ -18,8 +18,8 @@ export interface ODConfigManagerIdMappings extends api.ODConfigManagerIdConstrai
 }
 
 ///////////////////////////////////////
-// CONFIG STRUCTURES, VALUES & TYPES
-// --> general.jsonc
+//CONFIG STRUCTURES, VALUES & TYPES
+//--> general.jsonc
 ///////////////////////////////////////
 
 /**## ODGeneralJsonConfig_Status `interface`
@@ -29,7 +29,7 @@ export interface ODGeneralJsonConfig_Status {
     /**Is the status enabled? */
     enabled:boolean,
     /**The type of status (e.g. playing, listening, custom, ...) */
-    type:Exclude<api.ODClientActivityType,false>,
+    type:Exclude<api.ODClientActivityType, false>,
     /**The mode/status of the bot (e.g. online, invisible, idle, do not disturb) */
     mode:api.ODClientActivityMode
     /**The text for the status. */
@@ -177,7 +177,7 @@ export interface ODGeneralJsonConfig_TicketSystem {
     pinEmoji:string,
     /**The emoji used when closing tickets. This is '🔒' by default. */
     closeEmoji:string,
-    
+
     /**Reply with an ephemeral message when a ticket is created. */
     replyOnTicketCreation:boolean,
     /**Reply with an ephemeral message when reaction roles are changed. */
@@ -200,7 +200,7 @@ export interface ODGeneralJsonConfig_TicketSystem {
     useTranslatedConfigChecker:boolean,
     /**Pin the (first) ticket message in the channel. This simulates old behaviour like Open Ticket v1, v2 & v3. */
     pinFirstTicketMessage:boolean,
-    
+
     /**Enable/disable the ticket claim & unclaim button in the ticket message. */
     enableTicketClaimButtons:boolean,
     /**Enable/disable the ticket close & re-open button in the ticket message. */
@@ -215,7 +215,7 @@ export interface ODGeneralJsonConfig_TicketSystem {
     enableDeleteWithoutTranscript:boolean,
     /**Enable/disable creating tickets for other users with /ticket <user>. (ADMIN ONLY) */
     enableCreateTicketForOtherUser:boolean,
-    
+
     /**All settings related to global ticket limits. */
     limits:ODGeneralJsonConfig_SystemLimits,
 
@@ -247,7 +247,7 @@ export interface ODGeneralJsonConfig_TicketSystem {
 export interface ODGeneralJsonConfig_GeneralData {
     /**This object contains a few URLs and metadata for the config. */
     _CONFIG_VERSION:string,
-    
+
     /**The token of the bot. (Empty when using `tokenFromENV`) */
     token:string,
     /**Use the token from the `.env` file as `TOKEN=xxxxx`. */
@@ -271,10 +271,10 @@ export interface ODGeneralJsonConfig_GeneralData {
 
     /**All settings related to the status of the bot. */
     status:ODGeneralJsonConfig_Status,
-    
+
     /**All settings related to the ticket system. */
     ticketSystem:ODGeneralJsonConfig_TicketSystem,
-    
+
     /**Configure permissions for all Open Ticket commands & actions. */
     permissions:ODGeneralJsonConfig_SystemPermissions,
 
@@ -283,8 +283,8 @@ export interface ODGeneralJsonConfig_GeneralData {
 }
 
 ///////////////////////////////////////
-// CONFIG STRUCTURES, VALUES & TYPES
-// --> options.jsonc
+//CONFIG STRUCTURES, VALUES & TYPES
+//--> options.jsonc
 ///////////////////////////////////////
 
 /**## ODOptionsJsonConfig_BaseOption `interface`
@@ -499,8 +499,8 @@ export interface ODOptionsJsonConfig_SubPanelOption extends ODOptionsJsonConfig_
 export type ODOptionsJsonConfig_OptionsData = (ODOptionsJsonConfig_TicketOption|ODOptionsJsonConfig_WebsiteOption|ODOptionsJsonConfig_RoleOption|ODOptionsJsonConfig_SubPanelOption)[]
 
 ///////////////////////////////////////
-// CONFIG STRUCTURES, VALUES & TYPES
-// --> panels.jsonc
+//CONFIG STRUCTURES, VALUES & TYPES
+//--> panels.jsonc
 ///////////////////////////////////////
 
 /**## ODPanelsJsonConfig_PanelEmbedSettings `interface`
@@ -513,7 +513,7 @@ export interface ODPanelsJsonConfig_PanelEmbedSettings {
     title:string,
     /**The description of this embed. */
     description:string,
-    
+
     /**A custom color for this embed. (The default bot color is used when empty) */
     customColor:discord.ColorResolvable|string,
     /**An optional URL used in the title of the embed. */
@@ -523,7 +523,7 @@ export interface ODPanelsJsonConfig_PanelEmbedSettings {
     image:string,
     /**A URL to a thumbnail displayed in the embed. */
     thumbnail:string,
-    
+
     /**The footer of this embed. */
     footer:string,
     /**A list of fields displayed in the embed. (except when using "describeOptionsInEmbedFields") */
@@ -591,8 +591,8 @@ export interface ODPanelsJsonConfig_Panel {
 export type ODPanelsJsonConfig_PanelsData = ODPanelsJsonConfig_Panel[]
 
 ///////////////////////////////////////
-// CONFIG STRUCTURES, VALUES & TYPES
-// --> questions.jsonc
+//CONFIG STRUCTURES, VALUES & TYPES
+//--> questions.jsonc
 ///////////////////////////////////////
 
 /**## ODQuestionsJsonConfig_TextLengthLimits `interface`
@@ -674,7 +674,7 @@ export interface ODQuestionsJsonConfig_BaseQuestion {
 /**## ODQuestionsJsonConfig_TextDisplayQuestion `interface`
  * All properties for a text-display in the `questions.jsonc` config!
  */
-export interface ODQuestionsJsonConfig_TextDisplayQuestion extends Omit<ODQuestionsJsonConfig_BaseQuestion,"name"|"description"|"required"> {
+export interface ODQuestionsJsonConfig_TextDisplayQuestion extends Omit<ODQuestionsJsonConfig_BaseQuestion, "name"|"description"|"required"> {
     /**The type of this question. */
     type:"text-display",
     /**The text contents to show in the modal. */
@@ -747,18 +747,18 @@ export interface ODQuestionsJsonConfig_FileUploadQuestion extends ODQuestionsJso
  * All contents of the `questions.jsonc` config file.
  */
 export type ODQuestionsJsonConfig_QuestionsData = (
-    ODQuestionsJsonConfig_ShortQuestion|
-    ODQuestionsJsonConfig_ParagraphQuestion|
-    ODQuestionsJsonConfig_TextDisplayQuestion|
-    ODQuestionsJsonConfig_DropdownQuestion|
-    ODQuestionsJsonConfig_RadioSelectQuestion|
-    ODQuestionsJsonConfig_CheckboxSelectQuestion|
-    ODQuestionsJsonConfig_FileUploadQuestion
+    ODQuestionsJsonConfig_ShortQuestion
+    |ODQuestionsJsonConfig_ParagraphQuestion
+    |ODQuestionsJsonConfig_TextDisplayQuestion
+    |ODQuestionsJsonConfig_DropdownQuestion
+    |ODQuestionsJsonConfig_RadioSelectQuestion
+    |ODQuestionsJsonConfig_CheckboxSelectQuestion
+    |ODQuestionsJsonConfig_FileUploadQuestion
 )[]
 
 ///////////////////////////////////////
-// CONFIG STRUCTURES, VALUES & TYPES
-// --> transcripts.jsonc
+//CONFIG STRUCTURES, VALUES & TYPES
+//--> transcripts.jsonc
 ///////////////////////////////////////
 
 /**## ODTranscriptsJsonConfig_TranscriptsTextLayout `interface`

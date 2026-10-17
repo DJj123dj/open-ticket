@@ -1,4 +1,4 @@
-import {opendiscord, api, utilities} from "../../index.js"
+import { opendiscord, api, utilities } from "../../index.js"
 
 export const loadAllEvents = () => {
     const eventList: (keyof api.ODNoGeneric<api.ODEventManagerIdMappings>)[] = [
@@ -79,7 +79,7 @@ export const loadAllEvents = () => {
         //priority levels
         "onPriorityLoad",
         "afterPrioritiesLoaded",
-        
+
         //client slash commands
         "onSlashCommandLoad",
         "afterSlashCommandsLoaded",
@@ -173,7 +173,7 @@ export const loadAllEvents = () => {
         "afterRolesLoaded",
         "onRoleUpdate",
         "afterRolesUpdated",
-        
+
         //blacklist
         "onBlacklistLoad",
         "afterBlacklistLoaded",

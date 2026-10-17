@@ -26,7 +26,7 @@ export interface ODPluginClassManagerIdMappings extends api.ODPluginClassManager
 /**## ODMappedPluginManager `class
  * A special class with types for the Open Ticket `ODPluginManager` class.
  */
-export class ODMappedPluginManager extends api.ODPluginManager<ODPluginManagerIdMappings,ODPluginClassManagerIdMappings> {}
+export class ODMappedPluginManager extends api.ODPluginManager<ODPluginManagerIdMappings, ODPluginClassManagerIdMappings> {}
 
 /**## ODMappedPluginClassManager `class
  * A special class with types for the Open Ticket `ODPluginClassManager` class.

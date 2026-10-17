@@ -38,9 +38,9 @@ export class ODInteractiveMessageState extends api.ODState<{
     messageAuthor?:string,
     /**Additional data of this interactive message. */
     messageExtraData?:any,
-},false,false> {
-    constructor(id:api.ODValidId,client:api.ODClientManager,database:api.ODDatabase){
-        super(id,client,database,{})
+}, false, false> {
+    constructor(id:api.ODValidId, client:api.ODClientManager, database:api.ODDatabase) {
+        super(id, client, database, {})
     }
 }
 
@@ -54,9 +54,9 @@ export class ODClearMessageState extends api.ODState<{
     clearFilter:ODTicketClearFilter,
     /**The list of ticket channel names (e.g. `#ticket-1`) to be cleared. */
     clearChannelNameList:string[]
-},false,true> {
-    constructor(id:api.ODValidId,client:api.ODClientManager,database:api.ODDatabase){
-        super(id,client,database,{
+}, false, true> {
+    constructor(id:api.ODValidId, client:api.ODClientManager, database:api.ODDatabase) {
+        super(id, client, database, {
             autodeleteOnRestart:true
         })
     }
@@ -76,8 +76,8 @@ export class ODPanelMessageState extends api.ODState<{
     panelAutoUpdate:boolean,
     /**Is this panel a sub-panel? */
     isSubPanel:boolean
-},false,false> {
-    constructor(id:api.ODValidId,client:api.ODClientManager,database:api.ODDatabase){
-        super(id,client,database,{})
+}, false, false> {
+    constructor(id:api.ODValidId, client:api.ODClientManager, database:api.ODDatabase) {
+        super(id, client, database, {})
     }
 }

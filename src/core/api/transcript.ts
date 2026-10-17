@@ -8,53 +8,53 @@ import * as discord from "discord.js"
 /**## ODTranscriptManagerIdConstraint `type`
  * The constraint/layout for id mappings/interfaces of the `ODTranscriptManager` class.
  */
-export type ODTranscriptManagerIdConstraint = Record<string,ODTranscriptCompiler<any,null|object>>
+export type ODTranscriptManagerIdConstraint = Record<string, ODTranscriptCompiler<any, null|object>>
 
 /**## ODTranscriptManagerIdMappings `interface`
  * A list of all available IDs in the default `ODTranscriptManager` class in `opendiscord`.
  * It's used to generate typescript declarations for this class.
  */
 export interface ODTranscriptManagerIdMappings extends ODTranscriptManagerIdConstraint {
-    "opendiscord:html-compiler":ODTranscriptCompiler<{url:string,availableUntil:Date},{auth:string}>,
-    "opendiscord:text-compiler":ODTranscriptCompiler<{contents:string},null>,
+    "opendiscord:html-compiler":ODTranscriptCompiler<{url:string, availableUntil:Date}, {auth:string}>,
+    "opendiscord:text-compiler":ODTranscriptCompiler<{contents:string}, null>,
 }
 
 /**## ODTranscriptManager `class`
  * This is an Open Ticket transcript manager.
- * 
+ *
  * This class manages all transcript generators in the bot.
- * 
+ *
  * The 2 default built-in transcript generators are: `opendiscord:html-compiler` & `opendiscord:text-compiler`.
  */
-export class ODTranscriptManager<IdList extends ODTranscriptManagerIdConstraint = ODTranscriptManagerIdConstraint> extends api.ODManager<ODTranscriptCompiler<any,null|object>> {
+export class ODTranscriptManager<IdList extends ODTranscriptManagerIdConstraint = ODTranscriptManagerIdConstraint>extends api.ODManager<ODTranscriptCompiler<any, null|object>> {
     /**The manager responsible for collecting all messages in a channel. */
-    collector: ODTranscriptCollector
+    collector:ODTranscriptCollector
     /**Alias for the client manager. */
-    private client: api.ODClientManager
+    private client:api.ODClientManager
 
-    constructor(debug:api.ODDebugger, tickets:ODTicketManager, client:api.ODClientManager, permissions:api.ODPermissionManager){
-        super(debug,"transcript compiler")
+    constructor(debug:api.ODDebugger, tickets:ODTicketManager, client:api.ODClientManager, permissions:api.ODPermissionManager) {
+        super(debug, "transcript compiler")
         this.client = client
-        this.collector = new ODTranscriptCollector(tickets,client,permissions)
+        this.collector = new ODTranscriptCollector(tickets, client, permissions)
     }
 
     get<CompilerId extends keyof api.ODNoGeneric<IdList>>(id:CompilerId): IdList[CompilerId]
-    get(id:api.ODValidId): ODTranscriptCompiler<any,null|object>|null
-    
-    get(id:api.ODValidId): ODTranscriptCompiler<any,null|object>|null {
+    get(id:api.ODValidId): ODTranscriptCompiler<any, null|object>|null
+
+    get(id:api.ODValidId): ODTranscriptCompiler<any, null|object>|null {
         return super.get(id)
     }
 
     remove<CompilerId extends keyof api.ODNoGeneric<IdList>>(id:CompilerId): IdList[CompilerId]
-    remove(id:api.ODValidId): ODTranscriptCompiler<any,null|object>|null
-    
-    remove(id:api.ODValidId): ODTranscriptCompiler<any,null|object>|null {
+    remove(id:api.ODValidId): ODTranscriptCompiler<any, null|object>|null
+
+    remove(id:api.ODValidId): ODTranscriptCompiler<any, null|object>|null {
         return super.remove(id)
     }
 
     exists(id:keyof api.ODNoGeneric<IdList>): boolean
     exists(id:api.ODValidId): boolean
-    
+
     exists(id:api.ODValidId): boolean {
         return super.exists(id)
     }
@@ -87,7 +87,7 @@ export type ODTranscriptCompilerInitFunction<InitData extends object|null> = (ti
 /**## ODTranscriptCompilerCompileFunction `type`
  * This function will generate/compile the transcript itself.
  */
-export type ODTranscriptCompilerCompileFunction<Data extends object,InitData extends object|null> = (ticket:ODTicket, channel:discord.TextChannel, user:discord.User, initData:InitData) => ODTranscriptCompilerCompileResult<Data>|Promise<ODTranscriptCompilerCompileResult<Data>>
+export type ODTranscriptCompilerCompileFunction<Data extends object, InitData extends object|null> = (ticket:ODTicket, channel:discord.TextChannel, user:discord.User, initData:InitData) => ODTranscriptCompilerCompileResult<Data>|Promise<ODTranscriptCompilerCompileResult<Data>>
 
 /**## ODTicketClearFilter `type`
  * This function will finish, clear-up & shut-down the transcript system. This will also initiate the sending of the messages to all recipients.
@@ -146,20 +146,20 @@ export interface ODTranscriptCompilerReadyResult {
 
 /**## ODTranscriptCompiler `class`
  * This is an Open Ticket transcript compiler.
- * 
+ *
  * This class manages all functions to generate a transcript.
- * 
+ *
  * These functions should be defined when creating this compiler. Existing compilers already exist for html & text transcripts.
  */
-export class ODTranscriptCompiler<Data extends object,InitData extends (object|null)> extends api.ODManagerData {
+export class ODTranscriptCompiler<Data extends object, InitData extends (object|null)>extends api.ODManagerData {
     /*Initialise the system every time a transcript is created. Returns optional "pending" message to display while the transcript is being compiled. */
-    init: ODTranscriptCompilerInitFunction<InitData>|null
+    init:ODTranscriptCompilerInitFunction<InitData>|null
     /*Compile or create the transcript. Returns data to give to the ready() function for message creation. */
-    compile: ODTranscriptCompilerCompileFunction<Data,InitData>|null
+    compile:ODTranscriptCompilerCompileFunction<Data, InitData>|null
     /*Unload the system & create the final transcript message that will be sent. */
-    ready: ODTranscriptCompilerReadyFunction<Data>|null
+    ready:ODTranscriptCompilerReadyFunction<Data>|null
 
-    constructor(id:api.ODValidId, init?:ODTranscriptCompilerInitFunction<InitData>, compile?:ODTranscriptCompilerCompileFunction<Data,InitData>, ready?:ODTranscriptCompilerReadyFunction<Data>|null){
+    constructor(id:api.ODValidId, init?:ODTranscriptCompilerInitFunction<InitData>, compile?:ODTranscriptCompilerCompileFunction<Data, InitData>, ready?:ODTranscriptCompilerReadyFunction<Data>|null) {
         super(id)
         this.init = init ?? null
         this.compile = compile ?? null
@@ -169,74 +169,76 @@ export class ODTranscriptCompiler<Data extends object,InitData extends (object|n
 
 /**## ODTranscriptCollector `class`
  * This is an Open Ticket transcript collector.
- * 
+ *
  * The only goal of this class is to collect & parse all messages from a ticket channel.
- * 
+ *
  * It also contains utility functions for counting all messages, calculating file sizes & more!
  */
 export class ODTranscriptCollector {
     /**Alias for the ticket manager. */
-    private tickets: ODTicketManager
+    private tickets:ODTicketManager
     /**Alias for the client manager. */
-    private client: api.ODClientManager
+    private client:api.ODClientManager
     /**Alias for the permissions manager. */
-    private permissions: api.ODPermissionManager
+    private permissions:api.ODPermissionManager
 
-    constructor(tickets:ODTicketManager,client:api.ODClientManager,permissions:api.ODPermissionManager){
+    constructor(tickets:ODTicketManager, client:api.ODClientManager, permissions:api.ODPermissionManager) {
         this.tickets = tickets
         this.client = client
         this.permissions = permissions
     }
-    
+
     /**Collect all messages from a given ticket channel. It may not include all messages depending on the ratelimit. */
     async collectAllMessages(ticket:ODTicket, include?:ODTranscriptCollectorIncludeSettings): Promise<discord.Message<true>[]|null> {
-        const newInclude: ODTranscriptCollectorIncludeSettings = include ?? {users:true,bots:true,client:true}
+        const newInclude: ODTranscriptCollectorIncludeSettings = include ?? {users:true, bots:true, client:true}
         const channel = await this.tickets.getTicketChannel(ticket)
         if (!channel) return null
-        
+
         const final: discord.Message<true>[] = []
         const limit: number = 2000
         let lastId: string = ""
         while (true){
             const options: discord.FetchMessagesOptions = {limit:100}
             if (lastId) options.before = lastId
-    
+
             const messages = await channel.messages.fetch(options)
-            messages.forEach(msg => {
-                if (msg.author.id == msg.client.user.id && newInclude.client) final.push(msg)
+            messages.forEach((msg) => {
+                if (msg.author.id === msg.client.user.id && newInclude.client) final.push(msg)
                 else if ((msg.author.bot || msg.author.system) && newInclude.bots) final.push(msg)
                 else if (newInclude.users) final.push(msg)
             })
-            
+
             const lastMessage = messages.last()
-            if (messages.size != 100 || final.length >= limit || !lastMessage) break
+            if (messages.size !== 100 || final.length >= limit || !lastMessage)break
             else lastId = lastMessage.id
         }
         return final.reverse()
     }
+
     /**Count all messages from a given ticket channel. It may not include all messages depending on the ratelimit. */
-    async countAllMessages(ticket:ODTicket, include?:ODTranscriptCollectorIncludeSettings){
-        const messages = await this.collectAllMessages(ticket,include)
+    async countAllMessages(ticket:ODTicket, include?:ODTranscriptCollectorIncludeSettings) {
+        const messages = await this.collectAllMessages(ticket, include)
         if (!messages) return null
         return messages.length
     }
+
     /**Convert an array of discord messages to an array of `ODTranscriptMessageData`'s. This is used to simplify the process of the transcript compilers. */
     async convertMessagesToTranscriptData(messages:discord.Message<true>[]): Promise<ODTranscriptMessageData[]> {
         const final: ODTranscriptMessageData[] = []
         for (const msg of messages){
-            const {guild,channel,id,createdTimestamp} = msg
+            const {guild, channel, id, createdTimestamp} = msg
 
             //create message author
-            const author = this.handleUserData(msg.author,msg.member)
+            const author = this.handleUserData(msg.author, msg.member)
 
             //create message type
             let type: ODTranscriptMessageType = "default"
             if (msg.mentions.everyone || msg.content.includes("@here")) type = "important"
             else if (msg.flags.has("Ephemeral")) type = "ephemeral"
-            else if (msg.type == discord.MessageType.UserJoin) type = "welcome.message"
-            else if (msg.type == discord.MessageType.ChannelPinnedMessage) type = "pinned.message"
-            else if (msg.type == discord.MessageType.GuildBoost || msg.type == discord.MessageType.GuildBoostTier1 || msg.type == discord.MessageType.GuildBoostTier2 || msg.type == discord.MessageType.GuildBoostTier3) type = "boost.message"
-            else if (msg.type == discord.MessageType.ThreadCreated) type = "thread.message"
+            else if (msg.type === discord.MessageType.UserJoin) type = "welcome.message"
+            else if (msg.type === discord.MessageType.ChannelPinnedMessage) type = "pinned.message"
+            else if (msg.type === discord.MessageType.GuildBoost || msg.type === discord.MessageType.GuildBoostTier1 || msg.type === discord.MessageType.GuildBoostTier2 || msg.type === discord.MessageType.GuildBoostTier3) type = "boost.message"
+            else if (msg.type === discord.MessageType.ThreadCreated) type = "thread.message"
 
             //create message embeds
             const embeds: ODTranscriptEmbedData[] = []
@@ -252,14 +254,14 @@ export class ODTranscriptCollector {
                     image:(embed.image) ? embed.image.url : null,
                     thumbnail:(embed.thumbnail) ? embed.thumbnail.url : null,
                     url:embed.url,
-                    fields:embed.fields.map((field) => {return {name:field.name,value:field.value,inline:field.inline ?? false}})
+                    fields:embed.fields.map((field) => {return {name:field.name, value:field.value, inline:field.inline ?? false}})
                 })
             })
 
             //create message files
             const files: ODTranscriptFileData[] = []
             msg.attachments.forEach((attachment) => {
-                const {size,unit} = this.calculateFileSize(attachment.size)
+                const {size, unit} = this.calculateFileSize(attachment.size)
                 files.push({
                     type:attachment.contentType ?? "unknown",
                     size,
@@ -275,20 +277,20 @@ export class ODTranscriptCollector {
             const rows: ODTranscriptComponentRowData[] = []
             msg.components.forEach((row) => {
                 const components: ODTranscriptComponentRowData["components"] = []
-                if (row.type != discord.ComponentType.ActionRow) return
+                if (row.type !== discord.ComponentType.ActionRow) return
                 row.components.forEach((component) => {
-                    if (component.type == discord.ComponentType.Button){
+                    if (component.type === discord.ComponentType.Button){
                         components.push({
                             id:component.customId,
                             disabled:component.disabled,
                             type:"button",
                             label:component.label,
-                            emoji:this.handleComponentEmoji(msg,component.emoji),
+                            emoji:this.handleComponentEmoji(msg, component.emoji),
                             color:this.handleButtonComponentStyle(component.style),
-                            mode:(component.style == discord.ButtonStyle.Link) ? "url" : "button",
+                            mode:(component.style === discord.ButtonStyle.Link) ? "url" : "button",
                             url:component.url
                         })
-                    }else if (component.type == discord.ComponentType.StringSelect){
+                    }else if (component.type === discord.ComponentType.StringSelect){
                         components.push({
                             id:component.customId,
                             disabled:component.disabled,
@@ -299,7 +301,7 @@ export class ODTranscriptCollector {
                                     id:option.value,
                                     label:option.label,
                                     description:option.description ?? null,
-                                    emoji:this.handleComponentEmoji(msg,option.emoji ?? null)
+                                    emoji:this.handleComponentEmoji(msg, option.emoji ?? null)
                                 }
                             })
                         })
@@ -312,49 +314,49 @@ export class ODTranscriptCollector {
             let reply: ODTranscriptMessageReplyData|ODTranscriptInteractionReplyData|null = null
             if (msg.reference && msg.reference.messageId && msg.reference.guildId){
                 //normal message reply
-                try{
+                try {
                     const replyChannel = await msg.client.channels.fetch(msg.reference.channelId)
                     if (replyChannel && !replyChannel.isDMBased() && replyChannel.isTextBased()){
                         const replyMessage = await replyChannel.messages.fetch(msg.reference.messageId)
                         if (replyMessage){
-                            const replyUser = this.handleUserData(replyMessage.author,replyMessage.member)
-                            
+                            const replyUser = this.handleUserData(replyMessage.author, replyMessage.member)
+
                             reply = {
                                 type:"message",
                                 guild:msg.reference.guildId,
                                 channel:msg.reference.channelId,
                                 id:msg.reference.messageId,
                                 user:replyUser,
-                                content:(replyMessage.content != "") ? replyMessage.content : null
+                                content:(replyMessage.content !== "") ? replyMessage.content : null
                             }
                         }
                     }
-                }catch{}
-            
+                }catch {}
+
             }else if (msg.interactionMetadata){
-                try{
+                try {
                     //get slash command name from undocumented property in discord REST API
-                    const restMsg = await this.client.rest.get(discord.Routes.channelMessage(msg.channelId,msg.id)) as discord.APIMessage & {interaction_metadata:{name:string}}
+                    const restMsg = await this.client.rest.get(discord.Routes.channelMessage(msg.channelId, msg.id)) as discord.APIMessage & {interaction_metadata:{name:string}}
                     const commandName = restMsg.interaction_metadata.name ?? "unknown-command"
                     //slash command reply
                     let member: discord.GuildMember|null = null
-                    try{
+                    try {
                         member = await msg.guild.members.fetch(msg.interactionMetadata.user.id)
-                    }catch{} //member not found (user left the server)
+                    }catch {} //member not found (user left the server)
                     reply = {
                         type:"interaction",
                         name:commandName,
-                        user:this.handleUserData(msg.interactionMetadata.user,member)
+                        user:this.handleUserData(msg.interactionMetadata.user, member)
                     }
                 }catch(err){
-                    process.emit("uncaughtException",err)
+                    process.emit("uncaughtException", err)
                 }
             }
 
             //create message reactions
             const reactions: ODTranscriptReactionData[] = []
             msg.reactions.cache.forEach((reaction) => {
-                const {count,emoji} = reaction
+                const {count, emoji} = reaction
 
                 if (emoji instanceof discord.ReactionEmoji && !emoji.id && emoji.name){
                     //build-in emoji
@@ -390,7 +392,7 @@ export class ODTranscriptCollector {
                 edited:(msg.editedAt) ? true : false,
                 timestamp:createdTimestamp,
                 type,
-                content:(msg.content != "") ? msg.content : null,
+                content:(msg.content !== "") ? msg.content : null,
                 embeds,
                 files,
                 components:rows,
@@ -400,14 +402,16 @@ export class ODTranscriptCollector {
         }
         return final
     }
+
     /**Calculate a human-readable file size. Used in transcripts. */
     calculateFileSize(bytes:number): {size:number, unit:"B"|"KB"|"MB"|"GB"|"TB"} {
-        if (bytes < 1024) return {size:Math.round(bytes),unit:"B"}
-        else if (bytes < 1024*1024) return {size:Math.round(bytes/1024),unit:"KB"}
-        else if (bytes < 1024*1024*1024) return {size:Math.round(bytes/(1024*1024)),unit:"MB"}
-        else if (bytes < 1024*1024*1024*1024) return {size:Math.round(bytes/(1024*1024*1024)),unit:"GB"}
-        else return {size:Math.round(bytes/(1024*1024*1024*1024)),unit:"TB"}
+        if (bytes < 1024) return {size:Math.round(bytes), unit:"B"}
+        else if (bytes < 1024 * 1024) return {size:Math.round(bytes / 1024), unit:"KB"}
+        else if (bytes < 1024 * 1024 * 1024) return {size:Math.round(bytes / (1024 * 1024)), unit:"MB"}
+        else if (bytes < 1024 * 1024 * 1024 * 1024) return {size:Math.round(bytes / (1024 * 1024 * 1024)), unit:"GB"}
+        else return {size:Math.round(bytes / (1024 * 1024 * 1024 * 1024)), unit:"TB"}
     }
+
     /**Get the `ODTranscriptEmojiData` from a discord.js component emoji. */
     private handleComponentEmoji(message:discord.Message<true>, rawEmoji:discord.APIMessageComponentEmoji|null): ODTranscriptEmojiData|null {
         if (!rawEmoji) return null
@@ -431,13 +435,15 @@ export class ODTranscriptCollector {
             emoji:(emoji.animated ? emoji.imageURL({extension:"gif"}) : emoji.imageURL({extension:"png"}))
         }
     }
+
     /**Create the `ODValidButtonColor` from the discord.js button style. */
     private handleButtonComponentStyle(style:discord.ButtonStyle): api.ODValidButtonColor {
-        if (style == discord.ButtonStyle.Danger) return "red"
-        else if (style == discord.ButtonStyle.Success) return "green"
-        else if (style == discord.ButtonStyle.Primary) return "blue"
+        if (style === discord.ButtonStyle.Danger) return "red"
+        else if (style === discord.ButtonStyle.Success) return "green"
+        else if (style === discord.ButtonStyle.Primary) return "blue"
         else return "gray"
     }
+
     /**Create the `ODTranscriptUserData` from a discord.js user. */
     private handleUserData(user:discord.User, member?:discord.GuildMember|null): ODTranscriptUserData {
         const userData: ODTranscriptUserData = {
@@ -451,28 +457,29 @@ export class ODTranscriptCollector {
         if (user.flags && user.flags.has("VerifiedBot")) userData.tag = "verified"
         else if (user.system) userData.tag = "system"
         else if (user.bot) userData.tag = "app"
-        if (member) userData.color = member.roles.highest.hexColor.replace("#000000","#ffffff") as discord.HexColorString
+        if (member) userData.color = member.roles.highest.hexColor.replace("#000000", "#ffffff") as discord.HexColorString
 
         return userData
     }
+
     /**Analyse the ticket for the amount of messages users & admins have sent in the ticket. */
-    async ticketUserMessagesAnalysis(ticket:ODTicket,guild:discord.Guild,channel:discord.GuildTextBasedChannel){
-        const messages = await this.collectAllMessages(ticket,{bots:true,client:true,users:true})
+    async ticketUserMessagesAnalysis(ticket:ODTicket, guild:discord.Guild, channel:discord.GuildTextBasedChannel) {
+        const messages = await this.collectAllMessages(ticket, {bots:true, client:true, users:true})
         if (!messages) return null
         const parsedMessages = await this.convertMessagesToTranscriptData(messages)
         let userMessages = 0
         let adminMessages = 0
 
         for (const msg of parsedMessages){
-            if (msg.author.tag || msg.author.id == this.client.client.user.id) continue
+            if (msg.author.tag || msg.author.id === this.client.client.user.id) continue
             const user = await this.client.fetchUser(msg.author.id)
             if (!user) continue
-            const isAdmin = this.permissions.hasPermissions("support",await this.permissions.getPermissions(user,channel,guild))
+            const isAdmin = this.permissions.hasPermissions("support", await this.permissions.getPermissions(user, channel, guild))
             if (isAdmin) adminMessages++
             else userMessages++
         }
 
-        return {userMessages,adminMessages,totalMessages:userMessages+adminMessages}
+        return {userMessages, adminMessages, totalMessages:userMessages + adminMessages}
     }
 }
 
@@ -481,43 +488,43 @@ export class ODTranscriptCollector {
  */
 export interface ODTranscriptCollectorIncludeSettings {
     /**Collect messages from normal discord users. */
-    users: boolean,
+    users:boolean,
     /**Collect messages from bots & system users. */
-    bots: boolean,
+    bots:boolean,
     /**Collect messages from this bot. */
-    client: boolean
+    client:boolean
 }
 
 /**## ODTranscriptMessageData `interface`
- * A universal representatation of a discord message for transcripts. 
+ * A universal representatation of a discord message for transcripts.
  */
 export interface ODTranscriptMessageData {
     /**The message author. */
-    author: ODTranscriptUserData,
+    author:ODTranscriptUserData,
     /**The server this message originated from. */
-    guild: string,
+    guild:string,
     /**The channel this message originated from. */
-    channel: string,
+    channel:string,
     /**The id of this message. */
-    id: string,
+    id:string,
     /**Is this message edited? */
-    edited: boolean,
+    edited:boolean,
     /**The unix timestamp of the creation of this message. */
-    timestamp: number,
+    timestamp:number,
     /**The type of message. */
-    type: ODTranscriptMessageType,
+    type:ODTranscriptMessageType,
     /**The contents of this message. */
-    content: string|null,
+    content:string|null,
     /**The embeds of this message. */
-    embeds: ODTranscriptEmbedData[],
+    embeds:ODTranscriptEmbedData[],
     /**The files of this message. */
-    files: ODTranscriptFileData[],
+    files:ODTranscriptFileData[],
     /**The components (buttons & dropdowns) of this message. */
-    components: ODTranscriptComponentRowData[],
+    components:ODTranscriptComponentRowData[],
     /**When this message is a reply to something, the data will be here. */
-    reply: (ODTranscriptMessageReplyData|ODTranscriptInteractionReplyData|null),
+    reply:(ODTranscriptMessageReplyData|ODTranscriptInteractionReplyData|null),
     /**All reactions of htis message. */
-    reactions: ODTranscriptReactionData[]
+    reactions:ODTranscriptReactionData[]
 }
 
 /**## ODTranscriptMessageType `type`
@@ -526,183 +533,183 @@ export interface ODTranscriptMessageData {
 export type ODTranscriptMessageType = "default"|"important"|"ephemeral"|"pinned.message"|"welcome.message"|"boost.message"|"thread.message"
 
 /**## ODTranscriptUserData `interface`
- * A universal representatation of a discord user for transcripts. 
+ * A universal representatation of a discord user for transcripts.
  */
 export interface ODTranscriptUserData {
     /**The id of this user. */
-    id: string,
+    id:string,
     /**The username of this user. */
-    username: string,
+    username:string,
     /**The display name of this user. */
-    displayname: string,
+    displayname:string,
     /**The profile picture url of this user. */
-    pfp: string,
+    pfp:string,
     /**The additional tag of this user. */
-    tag: "app"|"verified"|"system"|null,
+    tag:"app"|"verified"|"system"|null,
     /**When in a server, this is the color of the highest role. */
-    color: discord.HexColorString
+    color:discord.HexColorString
 }
 
 /**## ODTranscriptEmbedData `interface`
- * A universal representatation of a discord embed for transcripts. 
+ * A universal representatation of a discord embed for transcripts.
  */
 export interface ODTranscriptEmbedData {
     /**The title of this embed. */
-    title: string|null,
+    title:string|null,
     /**The description of this embed. */
-    description: string|null,
+    description:string|null,
     /**The author image of this embed. */
-    authorimg: string|null,
+    authorimg:string|null,
     /**The author text of this embed. */
-    authortext: string|null,
+    authortext:string|null,
     /**The footer image of this embed. */
-    footerimg: string|null
+    footerimg:string|null
     /**The footer text of this embed. */
-    footertext: string|null,
+    footertext:string|null,
     /**The color of this embed (hex color). */
-    color: discord.HexColorString,
+    color:discord.HexColorString,
     /**The image of this embed. */
-    image: string|null,
+    image:string|null,
     /**The thumbnail of this embed. */
-    thumbnail: string|null,
+    thumbnail:string|null,
     /**The url in the title of this embed. */
-    url: string|null,
+    url:string|null,
     /**All fields available in this embed. */
-    fields: ODTranscriptEmbedFieldData[]
+    fields:ODTranscriptEmbedFieldData[]
 }
 
 /**## ODTranscriptEmbedFieldData `interface`
- * A universal representatation of a discord embed field for transcripts. 
+ * A universal representatation of a discord embed field for transcripts.
  */
 export interface ODTranscriptEmbedFieldData {
     /**The name of this embed field. */
-    name: string,
+    name:string,
     /**The value or contents of this embed field. */
-    value: string,
+    value:string,
     /**Is this field rendered inline? */
-    inline: boolean
+    inline:boolean
 }
 
 /**## ODTranscriptFileData `interface`
- * A universal representatation of a discord message attachment for transcripts. 
+ * A universal representatation of a discord message attachment for transcripts.
  */
 export interface ODTranscriptFileData {
     /**The file type or extension. */
-    type: string,
+    type:string,
     /**The size of this file. */
-    size: number,
+    size:number,
     /**The unit used for the size of this file. */
-    unit: "B"|"KB"|"MB"|"GB"|"TB",
+    unit:"B"|"KB"|"MB"|"GB"|"TB",
     /**The name of this file. */
-    name: string,
+    name:string,
     /**The url of this file. */
-    url: string,
+    url:string,
     /**Is this file a spoiler? */
-    spoiler: boolean,
+    spoiler:boolean,
     /**The alternative text for this file. */
-    alt: string|null
+    alt:string|null
 }
 
 /**## ODTranscriptComponentRowData `interface`
- * A universal representatation of a discord message action row for transcripts. 
+ * A universal representatation of a discord message action row for transcripts.
  */
 export interface ODTranscriptComponentRowData {
     /**All components (buttons & dropdowns) present in this action row. */
-    components: (ODTranscriptButtonComponentData|ODTranscriptDropdownComponentData)[]
+    components:(ODTranscriptButtonComponentData|ODTranscriptDropdownComponentData)[]
 }
 
 /**## ODTranscriptComponentData `interface`
- * A universal representatation of a discord message action row component for transcripts. 
+ * A universal representatation of a discord message action row component for transcripts.
  */
 export interface ODTranscriptComponentData {
     /**The custom id of this component. */
-    id: string|null,
+    id:string|null,
     /**Is this component disabled? */
-    disabled: boolean
+    disabled:boolean
     /**The type of this component. */
-    type: "button"|"dropdown"
+    type:"button"|"dropdown"
 }
 
 /**## ODTranscriptButtonComponentData `interface`
- * A universal representatation of a discord message button for transcripts. 
+ * A universal representatation of a discord message button for transcripts.
  */
 export interface ODTranscriptButtonComponentData extends ODTranscriptComponentData {
     /**The type of this component. */
-    type: "button"
+    type:"button"
     /**The label of this button. */
-    label: string|null,
+    label:string|null,
     /**The emoji of this button. */
-    emoji: ODTranscriptEmojiData|null,
+    emoji:ODTranscriptEmojiData|null,
     /**The color of this button. */
-    color: api.ODValidButtonColor,
+    color:api.ODValidButtonColor,
     /**Is this button a url or button? */
-    mode: "url"|"button",
+    mode:"url"|"button",
     /**The url of this button. */
-    url: string|null
+    url:string|null
 }
 
 /**## ODTranscriptDropdownComponentData `interface`
- * A universal representatation of a discord message dropdown for transcripts. 
+ * A universal representatation of a discord message dropdown for transcripts.
  */
 export interface ODTranscriptDropdownComponentData extends ODTranscriptComponentData {
     /**The type of this component. */
-    type: "dropdown"
+    type:"dropdown"
     /**The placeholder in this dropdown. */
-    placeholder: string|null,
+    placeholder:string|null,
     /**All options available in this dropdown. */
-    options: ODTranscriptDropdownComponentOptionData[]
+    options:ODTranscriptDropdownComponentOptionData[]
 }
 
 /**## ODTranscriptDropdownComponentOptionData `interface`
- * A universal representatation of a discord message dropdown option for transcripts. 
+ * A universal representatation of a discord message dropdown option for transcripts.
  */
 export interface ODTranscriptDropdownComponentOptionData {
     /**The custom id of this dropdown option. */
-    id: string,
+    id:string,
     /**The label of this dropdown option. */
-    label: string|null,
+    label:string|null,
     /**The description of this dropdown option. */
-    description: string|null,
+    description:string|null,
     /**The emoji of this dropdown option. */
-    emoji: ODTranscriptEmojiData|null
+    emoji:ODTranscriptEmojiData|null
 }
 
 /**## ODTranscriptReplyData `interface`
- * A universal representatation of a discord reply/interaction for transcripts. 
+ * A universal representatation of a discord reply/interaction for transcripts.
  */
 export interface ODTranscriptReplyData {
     /**The type of reply. */
-    type: "interaction"|"message",
+    type:"interaction"|"message",
 }
 
 /**## ODTranscriptReplyData `interface`
- * A universal representatation of a discord interaction reply for transcripts. 
+ * A universal representatation of a discord interaction reply for transcripts.
  */
 export interface ODTranscriptInteractionReplyData extends ODTranscriptReplyData {
     /**The type of reply. */
-    type: "interaction",
+    type:"interaction",
     /**The bot used for this interaction. */
-    user: ODTranscriptUserData,
+    user:ODTranscriptUserData,
     /**The name of the slash command used. */
-    name: string
+    name:string
 }
 
 /**## ODTranscriptReplyData `interface`
- * A universal representatation of a discord message reply for transcripts. 
+ * A universal representatation of a discord message reply for transcripts.
  */
 export interface ODTranscriptMessageReplyData extends ODTranscriptReplyData {
     /**The type of reply. */
-    type: "message",
+    type:"message",
     /**The server this message originated from. */
-    guild: string,
+    guild:string,
     /**The channel this message originated from. */
-    channel: string,
+    channel:string,
     /**The id of this message. */
-    id: string,
+    id:string,
     /**The author of this message. */
-    user: ODTranscriptUserData,
+    user:ODTranscriptUserData,
     /**The content of this message. */
-    content: string|null
+    content:string|null
 }
 
 /**## ODTranscriptEmojiData `interface`
@@ -710,15 +717,15 @@ export interface ODTranscriptMessageReplyData extends ODTranscriptReplyData {
  */
 export interface ODTranscriptEmojiData {
     /**The id of this emoji. */
-    id: string|null,
+    id:string|null,
     /**The name of this emoji. */
-    name: string|null,
+    name:string|null,
     /**Is this emoji animated? */
-    animated: boolean,
+    animated:boolean,
     /**Is this a custom emoji (img/gif)? */
-    custom: boolean,
+    custom:boolean,
     /**The url or emoji. */
-    emoji: string,
+    emoji:string,
 }
 
 /**## ODTranscriptReactionData `interface`
@@ -726,9 +733,9 @@ export interface ODTranscriptEmojiData {
  */
 export interface ODTranscriptReactionData extends ODTranscriptEmojiData {
     /**The amount of emojis for this reaction.  */
-    amount: number,
+    amount:number,
     /**Is this a super (nitro) reaction? */
-    super: boolean
+    super:boolean
 }
 
 /**## ODTranscriptHtmlV2Data `interface`
@@ -816,7 +823,7 @@ export interface ODTranscriptHtmlV2Data {
                 stickers:number
             }
         },
-        roleColors:{id:string,color:string}[]
+        roleColors:{id:string, color:string}[]
     },
     messages:{
         author:{
@@ -844,7 +851,7 @@ export interface ODTranscriptHtmlV2Data {
             image:string|false,
             thumbnail:string|false,
             url:string|false,
-            fields:{name:string,value:string,inline:boolean}[]
+            fields:{name:string, value:string, inline:boolean}[]
         }[],
         attachments:(
             {
@@ -863,8 +870,8 @@ export interface ODTranscriptHtmlV2Data {
                 type:"URL:invite",
                 guildId:string,
                 guildName:string,
-                guildSize:Number,
-                guildOnline:Number,
+                guildSize:number,
+                guildOnline:number,
                 image:string,
                 url:string
             }|{
@@ -913,9 +920,9 @@ export interface ODTranscriptHtmlV2Data {
                 id:string,
                 color:string,
                 pfp:string,
-                bot:Boolean,
-                verifiedBot:Boolean,
-                system:Boolean
+                bot:boolean,
+                verifiedBot:boolean,
+                system:boolean
             },
             replyOptions?:{
                 content:string,

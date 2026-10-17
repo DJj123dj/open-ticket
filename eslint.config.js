@@ -62,7 +62,8 @@ export default defineConfig({ignores:["node_modules/**", "dist/**", "build/**"]}
                 "from":{before:true, after:true},
                 "as":{before:true, after:true},
                 "throw":{before:true, after:true},
-                "return":{before:true, after:true}
+                "return":{before:true, after:true},
+                "await":{before:true, after:true}
             }
         }],
         "@stylistic/space-infix-ops":["error", {
@@ -91,11 +92,13 @@ export default defineConfig({ignores:["node_modules/**", "dist/**", "build/**"]}
         }],
         "eqeqeq":["error", "smart"],
         "no-empty":"off",
+        "no-async-promise-executor":"off",
 
         //typescript stuff
         "@typescript-eslint/consistent-type-imports":"off",
         "@typescript-eslint/explicit-function-return-type":"off",
         "@typescript-eslint/no-explicit-any":"off",
-        "@typescript-eslint/prefer-as-const":"off"
+        "@typescript-eslint/prefer-as-const":"off",
+        "@typescript-eslint/no-empty-object-type":"off"
     }
 })

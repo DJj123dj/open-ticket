@@ -1,20 +1,20 @@
-import {opendiscord, api, utilities} from "../../index.js"
+import { opendiscord, api, utilities } from "../../index.js"
 
 const lang = opendiscord.languages
 
-export async function loadAllHelpMenuCategories(){
+export async function loadAllHelpMenuCategories() {
     const helpmenu = opendiscord.helpmenu
 
-    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:general",5,utilities.emojiTitle("📎",lang.getTranslation("helpMenu.categories.general"))))
-    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:ticket-basic",4,utilities.emojiTitle("🎫",lang.getTranslation("helpMenu.categories.basicTicket"))))
-    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:ticket-advanced",4,utilities.emojiTitle("💡",lang.getTranslation("helpMenu.categories.advancedTicket"))))
-    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:ticket-user",3,utilities.emojiTitle("👤",lang.getTranslation("helpMenu.categories.userTicket"))))
-    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:admin",2,utilities.emojiTitle("🚨",lang.getTranslation("helpMenu.categories.admin"))))
-    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:advanced",1,utilities.emojiTitle("🚧",lang.getTranslation("helpMenu.categories.advanced"))))
-    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:extra",0,utilities.emojiTitle("✨",lang.getTranslation("helpMenu.categories.extra"))))
+    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:general", 5, utilities.emojiTitle("📎", lang.getTranslation("helpMenu.categories.general"))))
+    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:ticket-basic", 4, utilities.emojiTitle("🎫", lang.getTranslation("helpMenu.categories.basicTicket"))))
+    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:ticket-advanced", 4, utilities.emojiTitle("💡", lang.getTranslation("helpMenu.categories.advancedTicket"))))
+    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:ticket-user", 3, utilities.emojiTitle("👤", lang.getTranslation("helpMenu.categories.userTicket"))))
+    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:admin", 2, utilities.emojiTitle("🚨", lang.getTranslation("helpMenu.categories.admin"))))
+    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:advanced", 1, utilities.emojiTitle("🚧", lang.getTranslation("helpMenu.categories.advanced"))))
+    helpmenu.add(new api.ODHelpMenuCategory("opendiscord:extra", 0, utilities.emojiTitle("✨", lang.getTranslation("helpMenu.categories.extra"))))
 }
 
-export async function loadAllHelpMenuComponents(){
+export async function loadAllHelpMenuComponents() {
     const helpmenu = opendiscord.helpmenu
     const generalConfig = opendiscord.configs.get("opendiscord:general")
     if (!generalConfig) return
@@ -24,272 +24,272 @@ export async function loadAllHelpMenuComponents(){
 
     const allowedCommands: string[] = []
     for (const key in generalConfig.data.permissions){
-        if (generalConfig.data.permissions[key] != "none") allowedCommands.push(key)
+        if (generalConfig.data.permissions[key] !== "none") allowedCommands.push(key)
     }
 
     const general = helpmenu.get("opendiscord:general")
     if (general){
-        if (allowedCommands.includes("help")) general.add(new api.ODHelpMenuCommandComponent("opendiscord:help",1,{
-            textName:prefix+"help",
+        if (allowedCommands.includes("help")) general.add(new api.ODHelpMenuCommandComponent("opendiscord:help", 1, {
+            textName:prefix + "help",
             textDescription:lang.getTranslation("helpMenu.help"),
             slashName:"/help",
             slashDescription:lang.getTranslation("helpMenu.help")
         }))
-        if (allowedCommands.includes("ticket")) general.add(new api.ODHelpMenuCommandComponent("opendiscord:ticket",0,{
+        if (allowedCommands.includes("ticket")) general.add(new api.ODHelpMenuCommandComponent("opendiscord:ticket", 0, {
             slashName:"/ticket",
             slashDescription:lang.getTranslation("commands.ticket"),
-            slashOptions:[{name:"id",optional:false}]
+            slashOptions:[{name:"id", optional:false}]
         }))
     }
 
     const ticketBasic = helpmenu.get("opendiscord:ticket-basic")
     if (ticketBasic){
-        if (allowedCommands.includes("close")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:close",10,{
-            textName:prefix+"close",
+        if (allowedCommands.includes("close")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:close", 10, {
+            textName:prefix + "close",
             textDescription:lang.getTranslation("helpMenu.close"),
             slashName:"/close",
             slashDescription:lang.getTranslation("helpMenu.close"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
         if (enableDeleteWithoutTranscript){
-            if (allowedCommands.includes("delete")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:delete",9,{
-                textName:prefix+"delete",
+            if (allowedCommands.includes("delete")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:delete", 9, {
+                textName:prefix + "delete",
                 textDescription:lang.getTranslation("helpMenu.delete"),
                 slashName:"/delete",
                 slashDescription:lang.getTranslation("helpMenu.delete"),
-                textOptions:[{name:"reason",optional:true}],
-                slashOptions:[{name:"notranscript",optional:true},{name:"reason",optional:true}]
+                textOptions:[{name:"reason", optional:true}],
+                slashOptions:[{name:"notranscript", optional:true}, {name:"reason", optional:true}]
             }))
         }else{
-            if (allowedCommands.includes("delete")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:delete",9,{
-                textName:prefix+"delete",
+            if (allowedCommands.includes("delete")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:delete", 9, {
+                textName:prefix + "delete",
                 textDescription:lang.getTranslation("helpMenu.delete"),
                 slashName:"/delete",
                 slashDescription:lang.getTranslation("helpMenu.delete"),
-                textOptions:[{name:"reason",optional:true}],
-                slashOptions:[{name:"reason",optional:true}]
+                textOptions:[{name:"reason", optional:true}],
+                slashOptions:[{name:"reason", optional:true}]
             }))
         }
-        if (allowedCommands.includes("reopen")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:reopen",8,{
-            textName:prefix+"reopen",
+        if (allowedCommands.includes("reopen")) ticketBasic.add(new api.ODHelpMenuCommandComponent("opendiscord:reopen", 8, {
+            textName:prefix + "reopen",
             textDescription:lang.getTranslation("helpMenu.reopen"),
             slashName:"/reopen",
             slashDescription:lang.getTranslation("helpMenu.reopen"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
     }
 
     const ticketAdvanced = helpmenu.get("opendiscord:ticket-advanced")
     if (ticketAdvanced){
-        if (allowedCommands.includes("pin")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:pin",5,{
-            textName:prefix+"pin",
+        if (allowedCommands.includes("pin")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:pin", 5, {
+            textName:prefix + "pin",
             textDescription:lang.getTranslation("helpMenu.pin"),
             slashName:"/pin",
             slashDescription:lang.getTranslation("helpMenu.pin"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("unpin")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:unpin",4,{
-            textName:prefix+"unpin",
+        if (allowedCommands.includes("unpin")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:unpin", 4, {
+            textName:prefix + "unpin",
             textDescription:lang.getTranslation("helpMenu.unpin"),
             slashName:"/unpin",
             slashDescription:lang.getTranslation("helpMenu.unpin"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("move")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:move",3,{
-            textName:prefix+"move",
+        if (allowedCommands.includes("move")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:move", 3, {
+            textName:prefix + "move",
             textDescription:lang.getTranslation("helpMenu.move"),
             slashName:"/move",
             slashDescription:lang.getTranslation("helpMenu.move"),
-            textOptions:[{name:"id",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"id",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"id", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"id", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("rename")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:rename",2,{
-            textName:prefix+"rename",
+        if (allowedCommands.includes("rename")) ticketAdvanced.add(new api.ODHelpMenuCommandComponent("opendiscord:rename", 2, {
+            textName:prefix + "rename",
             textDescription:lang.getTranslation("helpMenu.rename"),
             slashName:"/rename",
             slashDescription:lang.getTranslation("helpMenu.rename"),
-            textOptions:[{name:"name",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"name",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"name", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"name", optional:false}, {name:"reason", optional:true}]
         }))
     }
 
     const ticketUser = helpmenu.get("opendiscord:ticket-user")
     if (ticketUser){
-        if (allowedCommands.includes("claim")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:claim",7,{
-            textName:prefix+"claim",
+        if (allowedCommands.includes("claim")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:claim", 7, {
+            textName:prefix + "claim",
             textDescription:lang.getTranslation("helpMenu.claim"),
             slashName:"/claim",
             slashDescription:lang.getTranslation("helpMenu.claim"),
-            textOptions:[{name:"user",optional:true},{name:"reason",optional:true}],
-            slashOptions:[{name:"user",optional:true},{name:"reason",optional:true}]
+            textOptions:[{name:"user", optional:true}, {name:"reason", optional:true}],
+            slashOptions:[{name:"user", optional:true}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("unclaim")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:unclaim",6,{
-            textName:prefix+"unclaim",
+        if (allowedCommands.includes("unclaim")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:unclaim", 6, {
+            textName:prefix + "unclaim",
             textDescription:lang.getTranslation("helpMenu.unclaim"),
             slashName:"/unclaim",
             slashDescription:lang.getTranslation("helpMenu.unclaim"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("add")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:add",1,{
-            textName:prefix+"add",
+        if (allowedCommands.includes("add")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:add", 1, {
+            textName:prefix + "add",
             textDescription:lang.getTranslation("helpMenu.add"),
             slashName:"/add",
             slashDescription:lang.getTranslation("helpMenu.add"),
-            textOptions:[{name:"user",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"user",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"user", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"user", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("remove")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:remove",0,{
-            textName:prefix+"remove",
+        if (allowedCommands.includes("remove")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:remove", 0, {
+            textName:prefix + "remove",
             textDescription:lang.getTranslation("helpMenu.remove"),
             slashName:"/remove",
             slashDescription:lang.getTranslation("helpMenu.remove"),
-            textOptions:[{name:"user",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"user",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"user", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"user", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("transfer")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:transfer",-1,{
-            textName:prefix+"transfer",
+        if (allowedCommands.includes("transfer")) ticketUser.add(new api.ODHelpMenuCommandComponent("opendiscord:transfer", -1, {
+            textName:prefix + "transfer",
             textDescription:lang.getTranslation("commands.transfer"),
             slashName:"/transfer",
             slashDescription:lang.getTranslation("commands.transfer"),
-            textOptions:[{name:"user",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"user",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"user", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"user", optional:false}, {name:"reason", optional:true}]
         }))
     }
 
     const admin = helpmenu.get("opendiscord:admin")
     if (admin){
-        if (allowedCommands.includes("panel")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:panel",4,{
-            textName:prefix+"panel",
+        if (allowedCommands.includes("panel")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:panel", 4, {
+            textName:prefix + "panel",
             textDescription:lang.getTranslation("helpMenu.panel"),
             slashName:"/panel",
             slashDescription:lang.getTranslation("helpMenu.panel"),
-            textOptions:[{name:"id",optional:false}],
-            slashOptions:[{name:"id",optional:false}]
+            textOptions:[{name:"id", optional:false}],
+            slashOptions:[{name:"id", optional:false}]
         }))
-        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-view",3,{
-            textName:prefix+"blacklist view",
+        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-view", 3, {
+            textName:prefix + "blacklist view",
             textDescription:lang.getTranslation("commands.blacklistView"),
             slashName:"/blacklist view",
             slashDescription:lang.getTranslation("commands.blacklistView")
         }))
-        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-add",2,{
-            textName:prefix+"blacklist add",
+        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-add", 2, {
+            textName:prefix + "blacklist add",
             textDescription:lang.getTranslation("commands.blacklistAdd"),
             slashName:"/blacklist add",
             slashDescription:lang.getTranslation("commands.blacklistAdd"),
-            textOptions:[{name:"user",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"user",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"user", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"user", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-remove",1,{
-            textName:prefix+"blacklist remove",
+        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-remove", 1, {
+            textName:prefix + "blacklist remove",
             textDescription:lang.getTranslation("commands.blacklistRemove"),
             slashName:"/blacklist remove",
             slashDescription:lang.getTranslation("commands.blacklistRemove"),
-            textOptions:[{name:"user",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"user",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"user", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"user", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-get",0,{
-            textName:prefix+"blacklist get",
+        if (allowedCommands.includes("blacklist")) admin.add(new api.ODHelpMenuCommandComponent("opendiscord:blacklist-get", 0, {
+            textName:prefix + "blacklist get",
             textDescription:lang.getTranslation("commands.blacklistGet"),
             slashName:"/blacklist get",
             slashDescription:lang.getTranslation("commands.blacklistGet"),
-            textOptions:[{name:"user",optional:false}],
-            slashOptions:[{name:"user",optional:false}]
+            textOptions:[{name:"user", optional:false}],
+            slashOptions:[{name:"user", optional:false}]
         }))
     }
 
     const advanced = helpmenu.get("opendiscord:advanced")
     if (advanced){
-        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-global",9,{
-            textName:prefix+"stats global",
+        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-global", 9, {
+            textName:prefix + "stats global",
             textDescription:lang.getTranslation("commands.statsGlobal"),
             slashName:"/stats global",
             slashDescription:lang.getTranslation("commands.statsGlobal")
         }))
-        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-ticket",8,{
-            textName:prefix+"stats ticket",
+        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-ticket", 8, {
+            textName:prefix + "stats ticket",
             textDescription:lang.getTranslation("commands.statsTicket"),
             slashName:"/stats ticket",
             slashDescription:lang.getTranslation("commands.statsTicket"),
-            textOptions:[{name:"ticket",optional:false}],
-            slashOptions:[{name:"ticket",optional:false}]
+            textOptions:[{name:"ticket", optional:false}],
+            slashOptions:[{name:"ticket", optional:false}]
         }))
-        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-user",7,{
-            textName:prefix+"stats user",
+        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-user", 7, {
+            textName:prefix + "stats user",
             textDescription:lang.getTranslation("commands.statsUser"),
             slashName:"/stats user",
             slashDescription:lang.getTranslation("commands.statsUser"),
-            textOptions:[{name:"user",optional:false}],
-            slashOptions:[{name:"user",optional:false}]
+            textOptions:[{name:"user", optional:false}],
+            slashOptions:[{name:"user", optional:false}]
         }))
-        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-reset",6,{
-            textName:prefix+"stats reset",
+        if (allowedCommands.includes("stats")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:stats-reset", 6, {
+            textName:prefix + "stats reset",
             textDescription:lang.getTranslation("commands.statsReset"),
             slashName:"/stats reset",
             slashDescription:lang.getTranslation("commands.statsReset"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("autoclose")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autoclose-disable",5,{
-            textName:prefix+"autoclose disable",
+        if (allowedCommands.includes("autoclose")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autoclose-disable", 5, {
+            textName:prefix + "autoclose disable",
             textDescription:lang.getTranslation("commands.autocloseDisable"),
             slashName:"/autoclose disable",
             slashDescription:lang.getTranslation("commands.autocloseDisable"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("autoclose")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autoclose-enable",4,{
-            textName:prefix+"autoclose enable",
+        if (allowedCommands.includes("autoclose")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autoclose-enable", 4, {
+            textName:prefix + "autoclose enable",
             textDescription:lang.getTranslation("commands.autocloseEnable"),
             slashName:"/autoclose enable",
             slashDescription:lang.getTranslation("commands.autocloseEnable"),
-            textOptions:[{name:"time",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"time",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"time", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"time", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("autodelete")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autodelete-disable",3,{
-            textName:prefix+"autodelete disable",
+        if (allowedCommands.includes("autodelete")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autodelete-disable", 3, {
+            textName:prefix + "autodelete disable",
             textDescription:lang.getTranslation("commands.autodeleteDisable"),
             slashName:"/autodelete disable",
             slashDescription:lang.getTranslation("commands.autodeleteDisable"),
-            textOptions:[{name:"reason",optional:true}],
-            slashOptions:[{name:"reason",optional:true}]
+            textOptions:[{name:"reason", optional:true}],
+            slashOptions:[{name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("autodelete")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autodelete-enable",2,{
-            textName:prefix+"autodelete enable",
+        if (allowedCommands.includes("autodelete")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:autodelete-enable", 2, {
+            textName:prefix + "autodelete enable",
             textDescription:lang.getTranslation("commands.autodeleteEnable"),
             slashName:"/autodelete enable",
             slashDescription:lang.getTranslation("commands.autodeleteEnable"),
-            textOptions:[{name:"time",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"time",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"time", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"time", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("topic")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:topic-set",1,{
-            textName:prefix+"topic set",
+        if (allowedCommands.includes("topic")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:topic-set", 1, {
+            textName:prefix + "topic set",
             textDescription:lang.getTranslation("commands.topicSet"),
             slashName:"/topic set",
             slashDescription:lang.getTranslation("commands.topicSet"),
-            textOptions:[{name:"topic",optional:false}],
-            slashOptions:[{name:"topic",optional:false}]
+            textOptions:[{name:"topic", optional:false}],
+            slashOptions:[{name:"topic", optional:false}]
         }))
-        if (allowedCommands.includes("priority")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:priority-set",0,{
-            textName:prefix+"priority set",
+        if (allowedCommands.includes("priority")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:priority-set", 0, {
+            textName:prefix + "priority set",
             textDescription:lang.getTranslation("commands.prioritySet"),
             slashName:"/priority set",
             slashDescription:lang.getTranslation("commands.prioritySet"),
-            textOptions:[{name:"priority",optional:false},{name:"reason",optional:true}],
-            slashOptions:[{name:"priority",optional:false},{name:"reason",optional:true}]
+            textOptions:[{name:"priority", optional:false}, {name:"reason", optional:true}],
+            slashOptions:[{name:"priority", optional:false}, {name:"reason", optional:true}]
         }))
-        if (allowedCommands.includes("transcripts")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:transcripts",0,{
-            textName:prefix+"transcripts",
+        if (allowedCommands.includes("transcripts")) advanced.add(new api.ODHelpMenuCommandComponent("opendiscord:transcripts", 0, {
+            textName:prefix + "transcripts",
             textDescription:lang.getTranslation("commands.transcripts"),
             slashName:"/transcripts",
             slashDescription:lang.getTranslation("commands.transcripts"),
-            textOptions:[{name:"user",optional:false}],
-            slashOptions:[{name:"user",optional:false}]
+            textOptions:[{name:"user", optional:false}],
+            slashOptions:[{name:"user", optional:false}]
         }))
     }
 }

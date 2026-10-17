@@ -21,7 +21,7 @@ export interface ODDatabaseManagerIdMappings extends api.ODDatabaseManagerIdCons
 }
 
 /////////////////////////////////////////
-// DATABASE MAPPINGS, CATEGORIES & TYPES
+//DATABASE MAPPINGS, CATEGORIES & TYPES
 /////////////////////////////////////////
 
 /**## ODGlobalDatabaseIdMappings `interface`

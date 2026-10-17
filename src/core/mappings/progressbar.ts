@@ -36,7 +36,7 @@ export interface ODProgressBarRendererManagerIdMappings extends api.ODProgressBa
 /**## ODMappedProgressBarManager `class
  * A special class with types for the Open Ticket `ODProgressBarManager` class.
  */
-export class ODMappedProgressBarManager extends api.ODProgressBarManager<ODProgressBarManagerIdMappings,ODProgressBarRendererManagerIdMappings> {}
+export class ODMappedProgressBarManager extends api.ODProgressBarManager<ODProgressBarManagerIdMappings, ODProgressBarRendererManagerIdMappings> {}
 
 /**## ODMappedProgressBarRendererManager `class
  * A special class with types for the Open Ticket `ODProgressBarRendererManager` class.

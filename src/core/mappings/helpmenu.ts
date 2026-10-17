@@ -18,7 +18,7 @@ export interface ODHelpMenuManagerIdMappings extends api.ODHelpMenuManagerIdCons
 }
 
 /////////////////////////////////////////
-// HELP MENU MAPPINGS, CATEGORIES & TYPES
+//HELP MENU MAPPINGS, CATEGORIES & TYPES
 /////////////////////////////////////////
 
 /**## ODGeneralHelpMenuCategoryIdMappings `interface`

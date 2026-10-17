@@ -1,8 +1,8 @@
-import {opendiscord, api, utilities} from "../../index.js"
+import { opendiscord, api, utilities } from "../../index.js"
 
 const optionDatabase = opendiscord.databases.get("opendiscord:options")
 
-export async function loadAllTickets(){
+export async function loadAllTickets() {
     const ticketDatabase = opendiscord.databases.get("opendiscord:tickets")
     if (!ticketDatabase) return
 
@@ -11,29 +11,28 @@ export async function loadAllTickets(){
     for (const ticket of tickets){
         try {
             opendiscord.tickets.add(await loadTicket(ticket.value))
-        }catch (err:any){
-            process.emit("uncaughtException",err)
-            process.emit("uncaughtException",new api.ODSystemError("Failed to load ticket from database! => id: "+ticket.key+"\n ===> "+err))
+        }catch(err:any){
+            process.emit("uncaughtException", err)
+            process.emit("uncaughtException", new api.ODSystemError("Failed to load ticket from database! => id: " + ticket.key + "\n ===> " + err))
         }
     }
 }
 
 export const loadTicket = async (ticket:api.ODTicketJson) => {
-    const backupOption = (await optionDatabase.exists("opendiscord:used-option",ticket.option)) ? api.ODTicketOption.fromJson(await optionDatabase.get("opendiscord:used-option",ticket.option) as api.ODOptionJson) : null
+    const backupOption = (await optionDatabase.exists("opendiscord:used-option", ticket.option)) ? api.ODTicketOption.fromJson(await optionDatabase.get("opendiscord:used-option", ticket.option) as api.ODOptionJson) : null
     const configOption = opendiscord.options.get(ticket.option)
-    
+
     //check if option is of type "ticket"
     if (configOption && !(configOption instanceof api.ODTicketOption)) throw new api.ODSystemError("Unable to load ticket because option is not of 'ticket' type!")
 
     //manage backup option (+ sync version of options with latest OT version in database)
-    if (configOption) await optionDatabase.set("opendiscord:used-option",configOption.id.value,configOption.toJson(opendiscord.versions.get("opendiscord:version")))
+    if (configOption) await optionDatabase.set("opendiscord:used-option", configOption.id.value, configOption.toJson(opendiscord.versions.get("opendiscord:version")))
     else if (backupOption){
         opendiscord.options.add(backupOption)
-        await optionDatabase.set("opendiscord:used-option",backupOption.id.value,backupOption.toJson(opendiscord.versions.get("opendiscord:version")))
-    }
-    else throw new api.ODSystemError("Unable to use backup option! Normal option not found in config!")
+        await optionDatabase.set("opendiscord:used-option", backupOption.id.value, backupOption.toJson(opendiscord.versions.get("opendiscord:version")))
+    }else throw new api.ODSystemError("Unable to use backup option! Normal option not found in config!")
 
     //load ticket & option
     const option = (configOption ?? backupOption) as api.ODTicketOption
-    return api.ODTicket.fromJson(ticket,option)
+    return api.ODTicket.fromJson(ticket, option)
 }

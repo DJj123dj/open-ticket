@@ -87,7 +87,7 @@ export interface ODContextMenuManagerIdMappings extends api.ODContextMenuManager
 /**## ODMappedClientManager `class
  * A special class with types for the Open Ticket `ODClientManager` class.
  */
-export class ODMappedClientManager extends api.ODClientManager<ODSlashCommandManagerIdMappings,ODTextCommandManagerIdMappings,ODContextMenuManagerIdMappings> {}
+export class ODMappedClientManager extends api.ODClientManager<ODSlashCommandManagerIdMappings, ODTextCommandManagerIdMappings, ODContextMenuManagerIdMappings> {}
 
 /**## ODMappedSlashCommandManager `class
  * A special class with types for the Open Ticket `ODSlashCommandManager` class.

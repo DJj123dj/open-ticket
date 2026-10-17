@@ -7,7 +7,7 @@ import * as discord from "discord.js"
 /**## ODRoleIdConstraint `type`
  * The constraint/layout for id mappings/interfaces of the `ODRole` class.
  */
-export type ODRoleIdConstraint = Record<string,ODRoleData<api.ODValidJsonType>>
+export type ODRoleIdConstraint = Record<string, ODRoleData<api.ODValidJsonType>>
 
 /**## ODRoleIdMappings `interface`
  * A list of all available IDs in the default `ODRole` class in `opendiscord`.
@@ -22,19 +22,19 @@ export interface ODRoleIdMappings extends ODRoleIdConstraint {
 
 /**## ODRoleManager `class`
  * This is an Open Ticket role manager.
- * 
+ *
  * This class manages all registered reaction roles in the bot.
- * 
+ *
  * Roles are not stored in the database and will be parsed from the config every startup.
  */
 export class ODRoleManager extends api.ODManager<ODRole> {
-    constructor(debug:api.ODDebugger){
-        super(debug,"role")
+    constructor(debug:api.ODDebugger) {
+        super(debug, "role")
     }
-    
+
     add(data:ODRole, overwrite?:boolean): boolean {
-        data.useDebug(this.debug,"role data")
-        return super.add(data,overwrite)
+        data.useDebug(this.debug, "role data")
+        return super.add(data, overwrite)
     }
 }
 
@@ -62,16 +62,16 @@ export interface ODRoleJson {
 
 /**## ODRole `class`
  * This is an Open Ticket role.
- * 
+ *
  * This class contains all data related to this role (parsed from the config).
- * 
+ *
  * These properties will be used to handle reaction role options.
  */
 export class ODRole extends api.ODManager<ODRoleData<api.ODValidJsonType>> {
     /**The id of this role. (from the config) */
     id:api.ODId
 
-    constructor(id:api.ODValidId, data:ODRoleData<api.ODValidJsonType>[]){
+    constructor(id:api.ODValidId, data:ODRoleData<api.ODValidJsonType>[]) {
         super()
         this.id = new api.ODId(id)
         data.forEach((data) => {
@@ -87,7 +87,7 @@ export class ODRole extends api.ODManager<ODRoleData<api.ODValidJsonType>> {
                 value:data.value
             }
         })
-        
+
         return {
             id:this.id.toString(),
             version:version.toString(),
@@ -97,26 +97,26 @@ export class ODRole extends api.ODManager<ODRoleData<api.ODValidJsonType>> {
 
     /**Create a role from a JSON object in the database. */
     static fromJson(json:ODRoleJson): ODRole {
-        return new ODRole(json.id,json.data.map((data) => new ODRoleData(data.id,data.value)))
+        return new ODRole(json.id, json.data.map((data) => new ODRoleData(data.id, data.value)))
     }
 
     get<OptionId extends keyof api.ODNoGeneric<ODRoleIdMappings>>(id:OptionId): ODRoleIdMappings[OptionId]
     get(id:api.ODValidId): ODRoleData<api.ODValidJsonType>|null
-    
+
     get(id:api.ODValidId): ODRoleData<api.ODValidJsonType>|null {
         return super.get(id)
     }
 
     remove<OptionId extends keyof api.ODNoGeneric<ODRoleIdMappings>>(id:OptionId): ODRoleIdMappings[OptionId]
     remove(id:api.ODValidId): ODRoleData<api.ODValidJsonType>|null
-    
+
     remove(id:api.ODValidId): ODRoleData<api.ODValidJsonType>|null {
         return super.remove(id)
     }
 
     exists(id:keyof api.ODNoGeneric<ODRoleIdMappings>): boolean
     exists(id:api.ODValidId): boolean
-    
+
     exists(id:api.ODValidId): boolean {
         return super.exists(id)
     }
@@ -124,30 +124,32 @@ export class ODRole extends api.ODManager<ODRoleData<api.ODValidJsonType>> {
 
 /**## ODRoleData `class`
  * This is Open Ticket role data.
- * 
+ *
  * This class contains a single property for a role. (string, number, boolean, object, array, null)
- * 
+ *
  * When this property is edited, the database will be updated automatically.
  */
-export class ODRoleData<DataType extends api.ODValidJsonType> extends api.ODManagerData {
+export class ODRoleData<DataType extends api.ODValidJsonType>extends api.ODManagerData {
     /**The value of this property. */
-    private rawValue: DataType
+    private rawValue:DataType
 
-    constructor(id:api.ODValidId, value:DataType){
+    constructor(id:api.ODValidId, value:DataType) {
         super(id)
         this.rawValue = value
     }
 
     /**The value of this property. */
-    set value(value:DataType){
+    set value(value:DataType) {
         this.rawValue = value
         this._change()
     }
+
     get value(): DataType {
         return this.rawValue
     }
+
     /**Refresh the database. Is only required to be used when updating `ODRoleData` with an object/array as value. */
-    refreshDatabase(){
+    refreshDatabase() {
         this._change()
     }
 }

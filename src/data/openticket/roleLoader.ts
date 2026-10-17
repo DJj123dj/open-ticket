@@ -1,6 +1,6 @@
-import {opendiscord, api, utilities} from "../../index.js"
+import { opendiscord, api, utilities } from "../../index.js"
 
-export async function loadAllRoles(){
+export async function loadAllRoles() {
     await opendiscord.options.loopAll((opt) => {
         if (opt instanceof api.ODRoleOption){
             opendiscord.roles.add(loadRole(opt))
@@ -9,10 +9,10 @@ export async function loadAllRoles(){
 }
 
 export const loadRole = (option:api.ODRoleOption) => {
-    return new api.ODRole(option.id,[
-        new api.ODRoleData("opendiscord:roles",option.get("opendiscord:roles").value),
-        new api.ODRoleData("opendiscord:mode",option.get("opendiscord:mode").value),
-        new api.ODRoleData("opendiscord:remove-roles-on-add",option.get("opendiscord:remove-roles-on-add").value),
-        new api.ODRoleData("opendiscord:add-on-join",option.get("opendiscord:add-on-join").value)
+    return new api.ODRole(option.id, [
+        new api.ODRoleData("opendiscord:roles", option.get("opendiscord:roles").value),
+        new api.ODRoleData("opendiscord:mode", option.get("opendiscord:mode").value),
+        new api.ODRoleData("opendiscord:remove-roles-on-add", option.get("opendiscord:remove-roles-on-add").value),
+        new api.ODRoleData("opendiscord:add-on-join", option.get("opendiscord:add-on-join").value)
     ])
 }

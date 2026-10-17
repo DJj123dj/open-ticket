@@ -40,4 +40,4 @@ export * from "./api/ticket.js"
 export * from "./api/transcript.js"
 
 //EXPORT MAIN MODULE
-export { ODOpenTicketMain } from "./main.js"
+export {ODOpenTicketMain} from "./main.js"

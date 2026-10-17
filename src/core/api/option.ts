@@ -10,7 +10,7 @@ import { ODRoleUpdateMode } from "./role.js"
 /**## ODOptionIdConstraint `type`
  * The constraint/layout for id mappings/interfaces of the `ODOption` class.
  */
-export type ODOptionIdConstraint = Record<string,ODOptionData<api.ODValidJsonType>>
+export type ODOptionIdConstraint = Record<string, ODOptionData<api.ODValidJsonType>>
 
 /**## ODTicketOptionIdMappings `interface`
  * A list of all available IDs in the default `ODTicketOption` class in `opendiscord`.
@@ -19,21 +19,21 @@ export type ODOptionIdConstraint = Record<string,ODOptionData<api.ODValidJsonTyp
 export interface ODTicketOptionIdMappings extends ODOptionIdConstraint {
     "opendiscord:name":ODOptionData<string>,
     "opendiscord:description":ODOptionData<string>,
-    
+
     "opendiscord:button-emoji":ODOptionData<string>,
     "opendiscord:button-label":ODOptionData<string>,
     "opendiscord:button-color":ODOptionData<api.ODValidButtonColor>,
-    
+
     "opendiscord:admins":ODOptionData<string[]>,
     "opendiscord:admins-readonly":ODOptionData<string[]>,
     "opendiscord:allow-blacklisted-users":ODOptionData<boolean>,
     "opendiscord:questions":ODOptionData<string[]>,
-    
+
     "opendiscord:channel-prefix":ODOptionData<string>,
     "opendiscord:channel-suffix":ODOptionData<"user-name"|"user-nickname"|"user-id"|"random-number"|"random-hex"|"counter-dynamic"|"counter-fixed">,
     "opendiscord:channel-category":ODOptionData<string>,
     "opendiscord:channel-topic":ODOptionData<string>,
-    
+
     "opendiscord:dm-message-enabled":ODOptionData<boolean>,
     "opendiscord:dm-message-text":ODOptionData<string>,
     "opendiscord:dm-message-embed":ODOptionData<ODOptionsJsonConfig_TicketOptionEmbedSettings>,
@@ -52,7 +52,7 @@ export interface ODTicketOptionIdMappings extends ODOptionIdConstraint {
     "opendiscord:autodelete-enable-leave":ODOptionData<boolean>,
     "opendiscord:autodelete-disable-claim":ODOptionData<boolean>,
     "opendiscord:autodelete-days":ODOptionData<number>,
-    
+
     "opendiscord:cooldown-enabled":ODOptionData<boolean>,
     "opendiscord:cooldown-minutes":ODOptionData<number>,
 
@@ -71,10 +71,10 @@ export interface ODTicketOptionIdMappings extends ODOptionIdConstraint {
 export interface ODWebsiteOptionIdMappings extends ODOptionIdConstraint {
     "opendiscord:name":ODOptionData<string>,
     "opendiscord:description":ODOptionData<string>,
-    
+
     "opendiscord:button-emoji":ODOptionData<string>,
     "opendiscord:button-label":ODOptionData<string>,
-    
+
     "opendiscord:url":ODOptionData<string>,
 }
 
@@ -85,11 +85,11 @@ export interface ODWebsiteOptionIdMappings extends ODOptionIdConstraint {
 export interface ODRoleOptionIdMappings extends ODOptionIdConstraint {
     "opendiscord:name":ODOptionData<string>,
     "opendiscord:description":ODOptionData<string>,
-    
+
     "opendiscord:button-emoji":ODOptionData<string>,
     "opendiscord:button-label":ODOptionData<string>,
     "opendiscord:button-color":ODOptionData<api.ODValidButtonColor>,
-    
+
     "opendiscord:roles":ODOptionData<string[]>,
     "opendiscord:mode":ODOptionData<ODRoleUpdateMode>,
     "opendiscord:remove-roles-on-add":ODOptionData<string[]>,
@@ -103,33 +103,33 @@ export interface ODRoleOptionIdMappings extends ODOptionIdConstraint {
 export interface ODSubPanelOptionIdMappings extends ODOptionIdConstraint {
     "opendiscord:name":ODOptionData<string>,
     "opendiscord:description":ODOptionData<string>,
-    
+
     "opendiscord:button-emoji":ODOptionData<string>,
     "opendiscord:button-label":ODOptionData<string>,
     "opendiscord:button-color":ODOptionData<api.ODValidButtonColor>,
-    
+
     "opendiscord:panel-id":ODOptionData<string>
 }
 
 /**## ODOptionManager `class`
  * This is an Open Ticket option manager.
- * 
+ *
  * This class manages all registered options in the bot. This also includes temporary options generated from tickets where the original option got deleted.
- * 
+ *
  * All option types including: tickets, websites & reaction roles are stored here.
  */
 export class ODOptionManager extends api.ODManager<ODOption> {
     /**The option suffix manager used to generate channel suffixes for ticket names. */
-    suffix: ODOptionSuffixManager
+    suffix:ODOptionSuffixManager
 
-    constructor(debug:api.ODDebugger){
-        super(debug,"option")
+    constructor(debug:api.ODDebugger) {
+        super(debug, "option")
         this.suffix = new ODOptionSuffixManager(debug)
     }
-    
+
     add(data:ODOption, overwrite?:boolean): boolean {
-        data.useDebug(this.debug,"option data")
-        return super.add(data,overwrite)
+        data.useDebug(this.debug, "option data")
+        return super.add(data, overwrite)
     }
 }
 
@@ -159,18 +159,18 @@ export interface ODOptionJson {
 
 /**## ODOption `class`
  * This is an Open Ticket option.
- * 
+ *
  * This class contains all data related to this option (parsed from the config).
- * 
+ *
  * It's recommended to use `ODTicketOption`, `ODWebsiteOption` or `ODRoleOption` instead!
  */
-export abstract class ODOption<IdList extends ODOptionIdConstraint = ODOptionIdConstraint> extends api.ODManager<ODOptionData<api.ODValidJsonType>> {
+export abstract class ODOption<IdList extends ODOptionIdConstraint = ODOptionIdConstraint>extends api.ODManager<ODOptionData<api.ODValidJsonType>> {
     /**The id of this option. (from the config) */
     id:api.ODId
     /**The type of this option. (e.g. `opendiscord:ticket`, `opendiscord:website`, `opendiscord:role`) */
     abstract readonly type: string
 
-    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]){
+    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]) {
         super()
         this.id = new api.ODId(id)
         data.forEach((data) => {
@@ -180,21 +180,21 @@ export abstract class ODOption<IdList extends ODOptionIdConstraint = ODOptionIdC
 
     get<OptionId extends keyof api.ODNoGeneric<IdList>>(id:OptionId): IdList[OptionId]
     get(id:api.ODValidId): ODOptionData<api.ODValidJsonType>|null
-    
+
     get(id:api.ODValidId): ODOptionData<api.ODValidJsonType>|null {
         return super.get(id)
     }
 
     remove<OptionId extends keyof api.ODNoGeneric<IdList>>(id:OptionId): IdList[OptionId]
     remove(id:api.ODValidId): ODOptionData<api.ODValidJsonType>|null
-    
+
     remove(id:api.ODValidId): ODOptionData<api.ODValidJsonType>|null {
         return super.remove(id)
     }
 
     exists(id:keyof api.ODNoGeneric<IdList>): boolean
     exists(id:api.ODValidId): boolean
-    
+
     exists(id:api.ODValidId): boolean {
         return super.exists(id)
     }
@@ -207,7 +207,7 @@ export abstract class ODOption<IdList extends ODOptionIdConstraint = ODOptionIdC
                 value:data.value
             }
         })
-        
+
         return {
             id:this.id.toString(),
             type:this.type,
@@ -219,139 +219,142 @@ export abstract class ODOption<IdList extends ODOptionIdConstraint = ODOptionIdC
 
 /**## ODOptionData `class`
  * This is Open Ticket option data.
- * 
+ *
  * This class contains a single property for an option. (string, number, boolean, object, array, null)
- * 
+ *
  * When this property is edited, the database will be updated automatically.
  */
-export class ODOptionData<DataType extends api.ODValidJsonType> extends api.ODManagerData {
+export class ODOptionData<DataType extends api.ODValidJsonType>extends api.ODManagerData {
     /**The value of this property. */
-    private rawValue: DataType
+    private rawValue:DataType
 
-    constructor(id:api.ODValidId, value:DataType){
+    constructor(id:api.ODValidId, value:DataType) {
         super(id)
         this.rawValue = value
     }
 
     /**The value of this property. */
-    set value(value:DataType){
+    set value(value:DataType) {
         this.rawValue = value
         this._change()
     }
+
     get value(): DataType {
         return this.rawValue
     }
+
     /**Refresh the database. Is only required to be used when updating `ODOptionData` with an object/array as value. */
-    refreshDatabase(){
+    refreshDatabase() {
         this._change()
     }
 }
 
 /**## ODTicketOption `class`
  * This is an Open Ticket ticket option.
- * 
+ *
  * This class contains all data related to an Open Ticket ticket option (parsed from the config).
- * 
+ *
  * Use this option to create a new ticket!
  */
 export class ODTicketOption extends ODOption<ODTicketOptionIdMappings> {
-    readonly type: "opendiscord:ticket" = "opendiscord:ticket"
+    readonly type:"opendiscord:ticket" = "opendiscord:ticket"
 
-    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]){
-        super(id,data)
+    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]) {
+        super(id, data)
     }
 
     static fromJson(json: ODOptionJson): ODTicketOption {
-        return new ODTicketOption(json.id,json.data.map((data) => new ODOptionData(data.id,data.value)))
+        return new ODTicketOption(json.id, json.data.map((data) => new ODOptionData(data.id, data.value)))
     }
 }
 
 /**## ODWebsiteOption `class`
  * This is an Open Ticket website option.
- * 
+ *
  * This class contains all data related to an Open Ticket website option (parsed from the config).
- * 
+ *
  * Use this option to create a button which links to a website!
  */
 export class ODWebsiteOption extends ODOption<ODWebsiteOptionIdMappings> {
-    readonly type: "opendiscord:website" = "opendiscord:website"
+    readonly type:"opendiscord:website" = "opendiscord:website"
 
-    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]){
-        super(id,data)
+    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]) {
+        super(id, data)
     }
 
     static fromJson(json: ODOptionJson): ODWebsiteOption {
-        return new ODWebsiteOption(json.id,json.data.map((data) => new ODOptionData(data.id,data.value)))
+        return new ODWebsiteOption(json.id, json.data.map((data) => new ODOptionData(data.id, data.value)))
     }
 }
 
 /**## ODRoleOption `class`
  * This is an Open Ticket role option.
- * 
+ *
  * This class contains all data related to an Open Ticket role option (parsed from the config).
- * 
+ *
  * Use this option to create a button for reaction roles!
  */
 export class ODRoleOption extends ODOption<ODRoleOptionIdMappings> {
-    readonly type: "opendiscord:role" = "opendiscord:role"
+    readonly type:"opendiscord:role" = "opendiscord:role"
 
-    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]){
-        super(id,data)
+    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]) {
+        super(id, data)
     }
 
     static fromJson(json:ODOptionJson): ODRoleOption {
-        return new ODRoleOption(json.id,json.data.map((data) => new ODOptionData(data.id,data.value)))
+        return new ODRoleOption(json.id, json.data.map((data) => new ODOptionData(data.id, data.value)))
     }
 }
 
 /**## ODSubPanelOption `class`
  * This is an Open Ticket sub-panel option.
- * 
+ *
  * This class contains all data related to an Open Ticket sub-panel option (parsed from the config).
- * 
+ *
  * Use this option to create a button for sub-panels!
  */
 export class ODSubPanelOption extends ODOption<ODSubPanelOptionIdMappings> {
-    readonly type: "opendiscord:sub-panel" = "opendiscord:sub-panel"
+    readonly type:"opendiscord:sub-panel" = "opendiscord:sub-panel"
 
-    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]){
-        super(id,data)
+    constructor(id:api.ODValidId, data:ODOptionData<api.ODValidJsonType>[]) {
+        super(id, data)
     }
 
     static fromJson(json:ODOptionJson): ODSubPanelOption {
-        return new ODSubPanelOption(json.id,json.data.map((data) => new ODOptionData(data.id,data.value)))
+        return new ODSubPanelOption(json.id, json.data.map((data) => new ODOptionData(data.id, data.value)))
     }
 }
 
 /**## ODOptionSuffixManager `class`
  * This is an Open Ticket option suffix manager.
- * 
+ *
  * This class manages all suffixes from option in the bot. The id of an option suffix is the same as the option id.
- * 
+ *
  * All ticket options should have a corresponding option suffix class.
  */
 export class ODOptionSuffixManager extends api.ODManager<ODOptionSuffix> {
-    constructor(debug:api.ODDebugger){
-        super(debug,"ticket suffix")
+    constructor(debug:api.ODDebugger) {
+        super(debug, "ticket suffix")
     }
 
     /**Instantly get the suffix from an `ODTicketOption`. */
-    async getSuffixFromOption(option:ODTicketOption,user:discord.User,guild:discord.Guild): Promise<string|null> {
-        const suffix = this.getAll().find((suffix) => suffix.option.id.value == option.id.value)
+    async getSuffixFromOption(option:ODTicketOption, user:discord.User, guild:discord.Guild): Promise<string|null> {
+        const suffix = this.getAll().find((suffix) => suffix.option.id.value === option.id.value)
         if (!suffix) return null
-        try{
-            const member = await this.getMember(guild,user)
+        try {
+            const member = await this.getMember(guild, user)
             if (!member) return null
             return await suffix.getSuffix(member)
         }catch(err){
-            process.emit("uncaughtException",err)
+            process.emit("uncaughtException", err)
             return null
         }
     }
-    private async getMember(guild:discord.Guild,user:discord.User){
-        try{
+
+    private async getMember(guild:discord.Guild, user:discord.User) {
+        try {
             return await guild.members.fetch(user.id)
-        }catch{
+        }catch {
             return null
         }
     }
@@ -359,16 +362,16 @@ export class ODOptionSuffixManager extends api.ODManager<ODOptionSuffix> {
 
 /**## ODOptionSuffix `class`
  * This is an Open Ticket option suffix.
- * 
+ *
  * This class can generate a suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export abstract class ODOptionSuffix extends api.ODManagerData {
     /**The option of this suffix. */
-    option: ODTicketOption
-    
-    constructor(id:api.ODValidId, option:ODTicketOption){
+    option:ODTicketOption
+
+    constructor(id:api.ODValidId, option:ODTicketOption) {
         super(id)
         this.option = option
     }
@@ -379,9 +382,9 @@ export abstract class ODOptionSuffix extends api.ODManagerData {
 
 /**## ODOptionUserNameSuffix `class`
  * This is an Open Ticket user-name option suffix.
- * 
+ *
  * This class can generate a user-name suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export class ODOptionUserNameSuffix extends ODOptionSuffix {
@@ -392,9 +395,9 @@ export class ODOptionUserNameSuffix extends ODOptionSuffix {
 
 /**## ODOptionUserNicknameSuffix `class`
  * This is an Open Ticket user-nickname option suffix.
- * 
+ *
  * This class can generate a user-nickname suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export class ODOptionUserNicknameSuffix extends ODOptionSuffix {
@@ -405,9 +408,9 @@ export class ODOptionUserNicknameSuffix extends ODOptionSuffix {
 
 /**## ODOptionUserIdSuffix `class`
  * This is an Open Ticket user-id option suffix.
- * 
+ *
  * This class can generate a user-id suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export class ODOptionUserIdSuffix extends ODOptionSuffix {
@@ -418,145 +421,151 @@ export class ODOptionUserIdSuffix extends ODOptionSuffix {
 
 /**## ODOptionCounterDynamicSuffix `class`
  * This is an Open Ticket counter-dynamic option suffix.
- * 
+ *
  * This class can generate a counter-dynamic suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export class ODOptionCounterDynamicSuffix extends ODOptionSuffix {
     /**The database where the value of this counter is stored. */
-    database: api.ODDatabase
+    database:api.ODDatabase
 
-    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase){
-        super(id,option)
+    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase) {
+        super(id, option)
         this.database = database
         this.init()
     }
 
     /**Initialize the database for this suffix. */
-    private async init(){
-        if (!await this.database.exists("opendiscord:option-suffix-counter",this.option.id.value)) await this.database.set("opendiscord:option-suffix-counter",this.option.id.value,0)
+    private async init() {
+        if (!await this.database.exists("opendiscord:option-suffix-counter", this.option.id.value)) await this.database.set("opendiscord:option-suffix-counter", this.option.id.value, 0)
     }
+
     async getSuffix(member:discord.GuildMember): Promise<string> {
-        const rawCurrentValue = await this.database.get("opendiscord:option-suffix-counter",this.option.id.value)
-        const currentValue = (typeof rawCurrentValue != "number") ? 0 : rawCurrentValue
-        const newValue = currentValue+1
-        await this.database.set("opendiscord:option-suffix-counter",this.option.id.value,newValue)
+        const rawCurrentValue = await this.database.get("opendiscord:option-suffix-counter", this.option.id.value)
+        const currentValue = (typeof rawCurrentValue !== "number") ? 0 : rawCurrentValue
+        const newValue = currentValue + 1
+        await this.database.set("opendiscord:option-suffix-counter", this.option.id.value, newValue)
         return newValue.toString()
     }
 }
 
 /**## ODOptionCounterFixedSuffix `class`
  * This is an Open Ticket counter-fixed option suffix.
- * 
+ *
  * This class can generate a counter-fixed suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export class ODOptionCounterFixedSuffix extends ODOptionSuffix {
     /**The database where the value of this counter is stored. */
-    database: api.ODDatabase
+    database:api.ODDatabase
 
-    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase){
-        super(id,option)
+    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase) {
+        super(id, option)
         this.database = database
         this.init()
     }
-    
+
     /**Initialize the database for this suffix. */
-    private async init(){
-        if (!await this.database.exists("opendiscord:option-suffix-counter",this.option.id.value)) await this.database.set("opendiscord:option-suffix-counter",this.option.id.value,0)
+    private async init() {
+        if (!await this.database.exists("opendiscord:option-suffix-counter", this.option.id.value)) await this.database.set("opendiscord:option-suffix-counter", this.option.id.value, 0)
     }
+
     async getSuffix(member:discord.GuildMember): Promise<string> {
-        const rawCurrentValue = await this.database.get("opendiscord:option-suffix-counter",this.option.id.value)
-        const currentValue = (typeof rawCurrentValue != "number") ? 0 : rawCurrentValue
-        const newValue = (currentValue >= 9999) ? 0 : currentValue+1
-        
-        await this.database.set("opendiscord:option-suffix-counter",this.option.id.value,newValue)
-        if (newValue.toString().length == 1) return "000"+newValue.toString()
-        else if (newValue.toString().length == 2) return "00"+newValue.toString()
-        else if (newValue.toString().length == 3) return "0"+newValue.toString()
+        const rawCurrentValue = await this.database.get("opendiscord:option-suffix-counter", this.option.id.value)
+        const currentValue = (typeof rawCurrentValue !== "number") ? 0 : rawCurrentValue
+        const newValue = (currentValue >= 9999) ? 0 : currentValue + 1
+
+        await this.database.set("opendiscord:option-suffix-counter", this.option.id.value, newValue)
+        if (newValue.toString().length === 1) return "000" + newValue.toString()
+        else if (newValue.toString().length === 2) return "00" + newValue.toString()
+        else if (newValue.toString().length === 3) return "0" + newValue.toString()
         else return newValue.toString()
     }
 }
 
 /**## ODOptionRandomNumberSuffix `class`
  * This is an Open Ticket random-number option suffix.
- * 
+ *
  * This class can generate a random-number suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export class ODOptionRandomNumberSuffix extends ODOptionSuffix {
     /**The database where previous random numbers are stored. */
-    database: api.ODDatabase
+    database:api.ODDatabase
 
-    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase){
-        super(id,option)
+    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase) {
+        super(id, option)
         this.database = database
         this.init()
     }
 
     /**Initialize the database for this suffix. */
-    private async init(){
-        if (!await this.database.exists("opendiscord:option-suffix-history",this.option.id.value)) await this.database.set("opendiscord:option-suffix-history",this.option.id.value,[])
+    private async init() {
+        if (!await this.database.exists("opendiscord:option-suffix-history", this.option.id.value)) await this.database.set("opendiscord:option-suffix-history", this.option.id.value, [])
     }
+
     /**Get a unique number for this suffix. */
     protected generateUniqueValue(history:string[]): string {
-        const rawNumber = Math.round(Math.random()*1000).toString()
+        const rawNumber = Math.round(Math.random() * 1000).toString()
         let number = rawNumber
-        if (rawNumber.length == 1) number = "000"+rawNumber
-        else if (rawNumber.length == 2) number = "00"+rawNumber
-        else if (rawNumber.length == 3) number = "0"+rawNumber
-        
+        if (rawNumber.length === 1) number = "000" + rawNumber
+        else if (rawNumber.length === 2) number = "00" + rawNumber
+        else if (rawNumber.length === 3) number = "0" + rawNumber
+
         if (history.includes(number)) return this.generateUniqueValue(history)
         else return number
     }
+
     async getSuffix(member:discord.GuildMember): Promise<string> {
-        const rawCurrentValues = await this.database.get("opendiscord:option-suffix-history",this.option.id.value)
+        const rawCurrentValues = await this.database.get("opendiscord:option-suffix-history", this.option.id.value)
         const currentValues = ((Array.isArray(rawCurrentValues)) ? rawCurrentValues : []) as string[]
         const newValue = this.generateUniqueValue(currentValues)
         currentValues.push(newValue)
         if (currentValues.length > 50) currentValues.shift()
-        await this.database.set("opendiscord:option-suffix-history",this.option.id.value,currentValues)
+        await this.database.set("opendiscord:option-suffix-history", this.option.id.value, currentValues)
         return newValue
     }
 }
 
 /**## ODOptionRandomHexSuffix `class`
  * This is an Open Ticket random-hex option suffix.
- * 
+ *
  * This class can generate a random-hex suffix for a discord channel name from a specific option.
- * 
+ *
  * Use `getSuffix()` to get the new suffix!
  */
 export class ODOptionRandomHexSuffix extends ODOptionSuffix {
     /**The database where previous random hexes are stored. */
-    database: api.ODDatabase
+    database:api.ODDatabase
 
-    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase){
-        super(id,option)
+    constructor(id:api.ODValidId, option:ODTicketOption, database:api.ODDatabase) {
+        super(id, option)
         this.database = database
         this.init()
     }
 
     /**Initialize the database for this suffix. */
-    private async init(){
-        if (!await this.database.exists("opendiscord:option-suffix-history",this.option.id.value)) await this.database.set("opendiscord:option-suffix-history",this.option.id.value,[])
+    private async init() {
+        if (!await this.database.exists("opendiscord:option-suffix-history", this.option.id.value)) await this.database.set("opendiscord:option-suffix-history", this.option.id.value, [])
     }
+
     /**Get a unique hex-string for this suffix. */
     protected generateUniqueValue(history:string[]): string {
         const hex = crypto.randomBytes(2).toString("hex")
         if (history.includes(hex)) return this.generateUniqueValue(history)
         else return hex
     }
+
     async getSuffix(member:discord.GuildMember): Promise<string> {
-        const rawCurrentValues = await this.database.get("opendiscord:option-suffix-history",this.option.id.value)
+        const rawCurrentValues = await this.database.get("opendiscord:option-suffix-history", this.option.id.value)
         const currentValues = ((Array.isArray(rawCurrentValues)) ? rawCurrentValues : []) as string[]
         const newValue = this.generateUniqueValue(currentValues)
         currentValues.push(newValue)
         if (currentValues.length > 50) currentValues.shift()
-        await this.database.set("opendiscord:option-suffix-history",this.option.id.value,currentValues)
+        await this.database.set("opendiscord:option-suffix-history", this.option.id.value, currentValues)
         return newValue
     }
 }

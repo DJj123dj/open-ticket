@@ -8,7 +8,7 @@ import { ODPanelsJsonConfig_PanelEmbedSettings } from "../mappings/config.js"
 /**## ODPanelIdConstraint `type`
  * The constraint/layout for id mappings/interfaces of the `ODPanel` class.
  */
-export type ODPanelIdConstraint = Record<string,ODPanelData<api.ODValidJsonType>>
+export type ODPanelIdConstraint = Record<string, ODPanelData<api.ODValidJsonType>>
 
 /**## ODPanelIdMappings `interface`
  * A list of all available IDs in the default `ODPanel` class in `opendiscord`.
@@ -24,10 +24,10 @@ export interface ODPanelIdMappings extends ODPanelIdConstraint {
 
     "opendiscord:dropdown-placeholder":ODPanelData<string>,
     "opendiscord:maximum-buttons-per-row":ODPanelData<number>,
-    
+
     "opendiscord:enable-max-tickets-warning-text":ODPanelData<boolean>,
     "opendiscord:enable-max-tickets-warning-embed":ODPanelData<boolean>,
-    
+
     "opendiscord:describe-options-layout":ODPanelData<"simple"|"normal"|"detailed">,
     "opendiscord:describe-options-custom-title":ODPanelData<string>,
     "opendiscord:describe-options-in-text":ODPanelData<boolean>,
@@ -37,19 +37,19 @@ export interface ODPanelIdMappings extends ODPanelIdConstraint {
 
 /**## ODPanelManager `class`
  * This is an Open Ticket panel manager.
- * 
+ *
  * This class manages all registered panels in the bot. Only panels which are available in this manager can be auto-updated.
- * 
+ *
  * Panels are not stored in the database and will be parsed from the config every startup.
  */
 export class ODPanelManager extends api.ODManager<ODPanel> {
-    constructor(debug:api.ODDebugger){
-        super(debug,"option")
+    constructor(debug:api.ODDebugger) {
+        super(debug, "option")
     }
-    
+
     add(data:ODPanel, overwrite?:boolean): boolean {
-        data.useDebug(this.debug,"option data")
-        return super.add(data,overwrite)
+        data.useDebug(this.debug, "option data")
+        return super.add(data, overwrite)
     }
 }
 
@@ -77,14 +77,14 @@ export interface ODPanelJson {
 
 /**## ODPanel `class`
  * This is an Open Ticket panel.
- * 
+ *
  * This class contains all data related to this panel (parsed from the config).
  */
 export class ODPanel extends api.ODManager<ODPanelData<api.ODValidJsonType>> {
     /**The id of this panel. (from the config) */
     id:api.ODId
 
-    constructor(id:api.ODValidId, data:ODPanelData<api.ODValidJsonType>[]){
+    constructor(id:api.ODValidId, data:ODPanelData<api.ODValidJsonType>[]) {
         super()
         this.id = new api.ODId(id)
         data.forEach((data) => {
@@ -100,7 +100,7 @@ export class ODPanel extends api.ODManager<ODPanelData<api.ODValidJsonType>> {
                 value:data.value
             }
         })
-        
+
         return {
             id:this.id.toString(),
             version:version.toString(),
@@ -110,26 +110,26 @@ export class ODPanel extends api.ODManager<ODPanelData<api.ODValidJsonType>> {
 
     /**Create a panel from a JSON object in the database. */
     static fromJson(json:ODPanelJson): ODPanel {
-        return new ODPanel(json.id,json.data.map((data) => new ODPanelData(data.id,data.value)))
+        return new ODPanel(json.id, json.data.map((data) => new ODPanelData(data.id, data.value)))
     }
 
     get<PanelId extends keyof api.ODNoGeneric<ODPanelIdMappings>>(id:PanelId): ODPanelIdMappings[PanelId]
     get(id:api.ODValidId): ODPanelData<api.ODValidJsonType>|null
-    
+
     get(id:api.ODValidId): ODPanelData<api.ODValidJsonType>|null {
         return super.get(id)
     }
 
     remove<PanelId extends keyof api.ODNoGeneric<ODPanelIdMappings>>(id:PanelId): ODPanelIdMappings[PanelId]
     remove(id:api.ODValidId): ODPanelData<api.ODValidJsonType>|null
-    
+
     remove(id:api.ODValidId): ODPanelData<api.ODValidJsonType>|null {
         return super.remove(id)
     }
 
     exists(id:keyof api.ODNoGeneric<ODPanelIdMappings>): boolean
     exists(id:api.ODValidId): boolean
-    
+
     exists(id:api.ODValidId): boolean {
         return super.exists(id)
     }
@@ -137,30 +137,32 @@ export class ODPanel extends api.ODManager<ODPanelData<api.ODValidJsonType>> {
 
 /**## ODPanelData `class`
  * This is Open Ticket panel data.
- * 
+ *
  * This class contains a single property for a panel. (string, number, boolean, object, array, null)
- * 
+ *
  * When this property is edited, the database will be updated automatically.
  */
-export class ODPanelData<DataType extends api.ODValidJsonType> extends api.ODManagerData {
+export class ODPanelData<DataType extends api.ODValidJsonType>extends api.ODManagerData {
     /**The value of this property. */
-    private rawValue: DataType
+    private rawValue:DataType
 
-    constructor(id:api.ODValidId, value:DataType){
+    constructor(id:api.ODValidId, value:DataType) {
         super(id)
         this.rawValue = value
     }
 
     /**The value of this property. */
-    set value(value:DataType){
+    set value(value:DataType) {
         this.rawValue = value
         this._change()
     }
+
     get value(): DataType {
         return this.rawValue
     }
+
     /**Refresh the database. Is only required to be used when updating `ODPanelData` with an object/array as value. */
-    refreshDatabase(){
+    refreshDatabase() {
         this._change()
     }
 }

@@ -15,13 +15,13 @@ export interface ODPermissionManagerIdMappings extends api.ODPermissionManagerId
  * A collection of all types available in the `opendiscord:no-permissions` embed.
  */
 export type ODPermissionEmbedType = (
-    "developer"|
-    "owner"|
-    "admin"|
-    "moderator"|
-    "support"|
-    "member"|
-    "discord-administrator"
+    "developer"
+    |"owner"
+    |"admin"
+    |"moderator"
+    |"support"
+    |"member"
+    |"discord-administrator"
 )
 
 /////////////////////////////

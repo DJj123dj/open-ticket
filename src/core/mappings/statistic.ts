@@ -17,7 +17,7 @@ export interface ODStatisticManagerIdMappings extends api.ODStatisticManagerIdCo
 }
 
 /////////////////////////////////////////
-// STATISTICS MAPPINGS, CATEGORIES & TYPES
+//STATISTICS MAPPINGS, CATEGORIES & TYPES
 /////////////////////////////////////////
 
 /**## ODGlobalStatisticScopeIdMappings `interface`
