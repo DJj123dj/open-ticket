@@ -20,7 +20,9 @@
         "testsetup": "node index.js --cli --dev-config --dev-database --soft-plugins",
         "testnc": "node index.js --no-compile --dev-config --dev-database --soft-plugins",
         "tools:mergelang": "bun run .tools/mergeTranslations.js",
-        "docker:build": ".tools/build-docker.sh djj123dj/open-ticket --no-push"
+        "docker:build": ".tools/build-docker.sh djj123dj/open-ticket --no-push",
+        "lint:plugins":"npx eslint -c=./eslint.config.js ./plugins/ --fix",
+        "lint:code":"npx eslint -c=./eslint.config.js ./src/ --fix"
     },
     "type": "module",
     "license": "GPL-3.0-only",
@@ -51,5 +53,12 @@
     "funding": {
         "type": "individual",
         "url": "https://github.com/sponsors/DJj123dj"
+    },
+    "devDependencies": {
+        "@eslint/js": "^10.0.1",
+        "@stylistic/eslint-plugin": "^5.10.0",
+        "eslint": "^10.13.0",
+        "globals": "^17.13.0",
+        "typescript-eslint": "^8.71.2"
     }
 }
