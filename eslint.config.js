@@ -93,6 +93,7 @@ export default defineConfig({ignores:["node_modules/**", "dist/**", "build/**"]}
         "eqeqeq":["error", "smart"],
         "no-empty":"off",
         "no-async-promise-executor":"off",
+        "no-useless-assignment":"off",
 
         //typescript stuff
         "@typescript-eslint/consistent-type-imports":"off",
