@@ -84,9 +84,11 @@ export async function registerActions() {
                 })
             })
             try {
-                await channel.permissionOverwrites.set(permissions)
+                await utilities.timedAwait(channel.permissionOverwrites.set(permissions), 2500, (err) => {
+                    opendiscord.log("Failed to update channel permissions on ticket transfer", "error")
+                })
             }catch {
-                opendiscord.log("Failed to reset channel permissions on ticket transfer!", "error")
+                opendiscord.log("Unable to update channel permissions while transferring ticket! Waiting until ratelimit expires...", "warning")
             }
 
             //calculate channel name

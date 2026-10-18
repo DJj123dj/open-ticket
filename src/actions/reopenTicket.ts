@@ -131,7 +131,13 @@ export async function registerActions() {
                     })
                 }
             })
-            channel.permissionOverwrites.set(permissions)
+            try {
+                await utilities.timedAwait(channel.permissionOverwrites.set(permissions), 2500, (err) => {
+                    opendiscord.log("Failed to update channel permissions on ticket reopen", "error")
+                })
+            }catch {
+                opendiscord.log("Unable to update channel permissions while reopening ticket! Waiting until ratelimit expires...", "warning")
+            }
 
             //update ticket message (no await)
             openticketUtils.updateTicketMessage(guild, channel, user, ticket)
